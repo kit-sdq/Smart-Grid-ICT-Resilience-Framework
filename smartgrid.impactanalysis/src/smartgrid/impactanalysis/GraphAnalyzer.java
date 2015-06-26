@@ -12,13 +12,15 @@ import java.util.Map;
 //import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 
+
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.FileSystem;
+import smartgrid.simcontrol.baselib.launchconfig.Constants;
 import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
 import smartgrid.simcontrol.interfaces.IImpactAnalysis;
-import smartgrid.simcontroller.baselibary.Constants;
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
@@ -171,8 +173,8 @@ public class GraphAnalyzer implements IImpactAnalysis {
 				logicalAdjacentMatrix[i][j] = 0;
 			}
 		}
-		// Es werden insgesamt 2 mal Cluster gebildet. Einmal über die
-		// physikalischen Verbindungen, dann über die logischen
+		// Es werden insgesamt 2 mal Cluster gebildet. Einmal ï¿½ber die
+		// physikalischen Verbindungen, dann ï¿½ber die logischen
 		readPhysicalConnections(smartGridTopo, impactAnalysisInput);
 
 		// Run only if Not Ignore LogicalConnection ^= I want logical
@@ -422,7 +424,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 		}
 
 		for (int nodeID : logicalNodes) { // externalToInternalID.keySet()
-			// Fürr jeden Knoten wird jetzt der Output erzeugt
+			// Fï¿½rr jeden Knoten wird jetzt der Output erzeugt
 			// Je nach Verbindungsstatus wird der SmartMeter entsprechend
 			// instanziiert
 			smartgridoutput.EntityState state = null;
@@ -477,8 +479,8 @@ public class GraphAnalyzer implements IImpactAnalysis {
 	 */
 	private void clusterCleaning(SmartgridoutputFactory factory,
 			ScenarioResult result, List<List<Integer>> clusterToClean) {
-		// Wir haben nun die Ergebnisse des Clusters für logische Verbindungen.
-		// Hier gibt es allerdings noch Knoten, die für uns nicht weiter
+		// Wir haben nun die Ergebnisse des Clusters fï¿½r logische Verbindungen.
+		// Hier gibt es allerdings noch Knoten, die fï¿½r uns nicht weiter
 		// interessant sind.
 		// Deshalb wird jeder Cluster durchsucht und alle Elemente entfernt, die
 		// kein ControlCenter oder SmartMeter sind.

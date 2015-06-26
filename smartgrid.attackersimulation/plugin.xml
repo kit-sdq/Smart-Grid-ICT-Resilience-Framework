@@ -4,7 +4,7 @@
    <extension
          point="smartgrid.simcontrol.extensionpoints.attackerSimulation">
       <AttackerSimulation
-            class="smartgrid.simcontrol.attackersimulation.LocalHacker">
+            class="smartgrid.attackersimulation.LocalHacker">
       </AttackerSimulation>
    </extension>
 

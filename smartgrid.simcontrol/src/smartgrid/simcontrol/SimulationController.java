@@ -10,14 +10,14 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import smartgrid.simcontrol.baselib.inputgenerator.GenerationStyle;
+import smartgrid.simcontrol.baselib.launchconfig.Constants;
 import smartgrid.simcontrol.interfaces.*;
 import smartgrid.helper.ScenarioHelper;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.Scenario;
 import smartgrid.simcontrol.ui.*;
-import smartgrid.simcontroller.baselibary.Constants;
-import smartgrid.simcontroller.baselibary.GenerationStyle;
 
 public enum SimulationController {
 	;

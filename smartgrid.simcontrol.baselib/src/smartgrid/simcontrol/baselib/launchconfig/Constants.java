@@ -1,7 +1,7 @@
 /**
  * 
  */
-package smartgrid.simcontroller.baselibary;
+package smartgrid.simcontrol.baselib.launchconfig;
 
 /**
  * Defines the Constants used as Keys in the {@link org.eclipse.debug.core#ILaunchConfiguration} Dict

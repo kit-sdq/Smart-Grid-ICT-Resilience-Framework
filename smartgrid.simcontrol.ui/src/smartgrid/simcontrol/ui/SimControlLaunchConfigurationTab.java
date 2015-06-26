@@ -29,9 +29,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.widgets.Combo;
 
-import smartgrid.simcontroller.baselibary.Constants;
-import smartgrid.simcontroller.baselibary.GenerationStyle;
-import smartgrid.simcontroller.baselibary.HackingStyle;
+import smartgrid.simcontrol.baselib.attackersimulation.HackingStyle;
+import smartgrid.simcontrol.baselib.inputgenerator.GenerationStyle;
+import smartgrid.simcontrol.baselib.launchconfig.Constants;
 
 /**
  * This Class provides the SimController Configuration Tab

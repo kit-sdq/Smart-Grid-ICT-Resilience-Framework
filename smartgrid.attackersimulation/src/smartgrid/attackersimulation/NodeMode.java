@@ -1,7 +1,7 @@
 /**
  * 
  */
-package smartgrid.simcontrol.attackersimulation;
+package smartgrid.attackersimulation;
 
 /**
  * Tells which Constructor and so whether ID or Nodes were given

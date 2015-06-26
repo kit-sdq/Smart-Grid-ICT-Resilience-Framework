@@ -4,7 +4,7 @@ Bundle-Name: Attackersimulation
 Bundle-SymbolicName: smartgrid.attackersimulation;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: smartgrid.simcontrol.attackersimulation
+Export-Package: smartgrid.attackersimulation
 Require-Bundle: org.eclipse.debug.core;bundle-version="3.9.1",
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.model.output;bundle-version="1.0.0",

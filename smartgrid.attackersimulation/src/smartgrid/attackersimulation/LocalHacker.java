@@ -1,7 +1,7 @@
 /**
  * 
  */
-package smartgrid.simcontrol.attackersimulation;
+package smartgrid.attackersimulation;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -10,13 +10,16 @@ import java.util.Map;
 import java.util.Random;
 
 import smartgrid.helper.ScenarioHelper;
+import smartgrid.simcontrol.baselib.attackersimulation.HackingStyle;
+import smartgrid.simcontrol.baselib.launchconfig.Constants;
 import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
 import smartgrid.simcontrol.interfaces.IAttackerSimulation;
-import smartgrid.simcontroller.baselibary.Constants;
-import smartgrid.simcontroller.baselibary.HackingStyle;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+
+
+
 
 
 

@@ -3,7 +3,7 @@
  */
 package smartgrid.simcontrol.interfaces;
 
-import smartgrid.simcontroller.baselibary.GenerationStyle;
+import smartgrid.simcontrol.baselib.inputgenerator.GenerationStyle;
 
 /**
  * This Interface is used for Input Model Generation for the Simcontrol Approach
@@ -22,7 +22,7 @@ public interface IInputGenerator {
 	 *  Generates a Input Model according the given Parameters
 	 * 
 	 * 
-	 * @param desiredStyle sets the "shape" of the Input @see {@link smartgrid.simcontroller.baselibary.GenerationStyle}
+	 * @param desiredStyle sets the "shape" of the Input @see {@link smartgrid.simcontrol.baselib.inputgenerator.GenerationStyle}
 	 * @param SmartMeterCount How many Smart Meters are in the generated Input
 	 * @param ControlCenterCount How many Control Centers are in the generated Input
 	 * @return Returns a @see {@link InputModelDTO} with the generated Input Model

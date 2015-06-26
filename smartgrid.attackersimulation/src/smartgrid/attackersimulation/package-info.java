@@ -5,4 +5,4 @@
  * @author Christian
  *
  */
-package smartgrid.simcontrol.attackersimulation;
+package smartgrid.attackersimulation;

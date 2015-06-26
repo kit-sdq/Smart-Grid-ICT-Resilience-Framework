@@ -4,4 +4,7 @@ Bundle-Name: Baselibary
 Bundle-SymbolicName: smartgrid.simcontrol.baselib
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: smartgrid.simcontroller.baselibary
+Export-Package: smartgrid.simcontrol.baselib,
+ smartgrid.simcontrol.baselib.attackersimulation,
+ smartgrid.simcontrol.baselib.inputgenerator,
+ smartgrid.simcontrol.baselib.launchconfig
