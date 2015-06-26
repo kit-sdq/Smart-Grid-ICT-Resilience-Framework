@@ -1,7 +1,7 @@
 /**
  * 
  */
-package smartgrid.simcontrol.attackersimulation;
+package smartgrid.attackersimulation;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,10 +12,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ScenarioHelper;
+import smartgrid.simcontrol.baselib.Constants;
+import smartgrid.simcontrol.baselib.HackingStyle;
 import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
 import smartgrid.simcontrol.interfaces.IAttackerSimulation;
-import smartgrid.simcontroller.baselibary.Constants;
-import smartgrid.simcontroller.baselibary.HackingStyle;
 import smartgridoutput.Cluster;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
@@ -80,7 +80,7 @@ public class ViralHacker implements IAttackerSimulation {
      * {@inheritDoc}
      * <p>
      * 
-     * Remark Root NodeIDs {@link smartgrid.simcontroller.baselibary.Constants} have to be List of
+     * Remark Root NodeIDs {@link smartgrid.simcontrol.baselib.Constants} have to be List of
      * String !
      * 
      * 

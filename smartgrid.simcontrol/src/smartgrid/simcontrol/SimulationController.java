@@ -10,6 +10,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ReceiveAnalysesHelper;
 import smartgrid.helper.ScenarioHelper;
+import smartgrid.simcontrol.baselib.Constants;
+import smartgrid.simcontrol.baselib.GenerationStyle;
 import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
 import smartgrid.simcontrol.interfaces.IAttackerSimulation;
 import smartgrid.simcontrol.interfaces.IImpactAnalysis;
@@ -17,8 +19,6 @@ import smartgrid.simcontrol.interfaces.IInputGenerator;
 import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
 import smartgrid.simcontrol.interfaces.ITerminationCondition;
 import smartgrid.simcontrol.interfaces.ITimeProgressor;
-import smartgrid.simcontroller.baselibary.Constants;
-import smartgrid.simcontroller.baselibary.GenerationStyle;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.Scenario;

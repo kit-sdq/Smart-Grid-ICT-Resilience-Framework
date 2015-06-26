@@ -5,9 +5,9 @@ package smartgrid.inputgenerator;
 
 
 
+import smartgrid.simcontrol.baselib.GenerationStyle;
 import smartgrid.simcontrol.interfaces.IInputGenerator;
 import smartgrid.simcontrol.interfaces.InputModelDTO;
-import smartgrid.simcontroller.baselibary.GenerationStyle;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputFactory;
 import smartgridinput.impl.SmartgridinputPackageImpl;

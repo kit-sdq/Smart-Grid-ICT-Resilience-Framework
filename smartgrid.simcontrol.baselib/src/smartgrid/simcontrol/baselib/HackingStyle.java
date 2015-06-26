@@ -1,7 +1,7 @@
 /**
  * 
  */
-package smartgrid.simcontroller.baselibary;
+package smartgrid.simcontrol.baselib;
 
 /**
  * @author Christian

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+
 // import org.eclipse.emf.common.util.URI;
 // import org.eclipse.emf.ecore.resource.Resource;
 // import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -18,9 +19,9 @@ import org.eclipse.ui.PlatformUI;
 
 import smartgrid.helper.FileSystem;
 import smartgrid.model.helper.input.LoadInputModelConformityHelper;
+import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
 import smartgrid.simcontrol.interfaces.IImpactAnalysis;
-import smartgrid.simcontroller.baselibary.Constants;
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;

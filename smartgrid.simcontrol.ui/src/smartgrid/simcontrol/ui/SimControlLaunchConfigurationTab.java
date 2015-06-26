@@ -32,14 +32,14 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import smartgrid.helper.ReceiveAnalysesHelper;
+import smartgrid.simcontrol.baselib.Constants;
+import smartgrid.simcontrol.baselib.GenerationStyle;
+import smartgrid.simcontrol.baselib.HackingStyle;
 import smartgrid.simcontrol.interfaces.IAttackerSimulation;
 import smartgrid.simcontrol.interfaces.IImpactAnalysis;
 import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
 import smartgrid.simcontrol.interfaces.ITerminationCondition;
 import smartgrid.simcontrol.interfaces.ITimeProgressor;
-import smartgrid.simcontroller.baselibary.Constants;
-import smartgrid.simcontroller.baselibary.GenerationStyle;
-import smartgrid.simcontroller.baselibary.HackingStyle;
 
 /**
  * This Class provides the SimController Configuration Tab

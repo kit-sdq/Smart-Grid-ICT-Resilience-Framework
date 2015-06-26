@@ -8,12 +8,12 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.RegistryFactory;
 
+import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.interfaces.IAttackerSimulation;
 import smartgrid.simcontrol.interfaces.IImpactAnalysis;
 import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
 import smartgrid.simcontrol.interfaces.ITerminationCondition;
 import smartgrid.simcontrol.interfaces.ITimeProgressor;
-import smartgrid.simcontroller.baselibary.Constants;
 
 public class ReceiveAnalysesHelper {
 
