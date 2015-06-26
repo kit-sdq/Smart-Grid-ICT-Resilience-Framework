@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="smartgrid.impactanalysis.LaunchConfigurationDelegate1"
+            delegateDescription="D"
+            delegateName="MyDelegate"
+            id="smartgrid.impactanalysis.launchConfigurationType1"
+            modes="run,debug"
+            name="Impact Analyse">
+            delegate= "org.eclipse.jdt.internal.launching.JavaLocalApplicationLaunchConfigurationDelegate" 
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="smartgrid.simcontrol.extensionpoints.impactAnalysis">
+      <impactAnalysis
+            class="smartgrid.impactanalysis.GraphAnalyzer">
+      </impactAnalysis>
+   </extension>
+
+   
+
+
+
+</plugin>

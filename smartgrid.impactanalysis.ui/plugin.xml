@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="smartgrid.impactanalysis.ui.AbstractLaunchConfigurationTabGroup1"
+            id="smartgrid.impactanalysis.ui.launchConfigurationTabGroup1"
+            type="smartgrid.impactanalysis.launchConfigurationType1">
+            
+            <launchMode 
+                  mode="debug"
+                  perspective="org.eclipse.debug.ui.DebugPerspective"
+                  description="">
+            </launchMode>
+            <launchMode
+                  mode="run"
+                  description="">
+            </launchMode>
+      </launchConfigurationTabGroup>
+   </extension>
+   
+   
+
+
+
+</plugin>

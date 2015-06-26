@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SimcontrolInterfaces
+Bundle-SymbolicName: smartgrid.simcontrol.interfaces;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ smartgrid.model.output;bundle-version="1.0.0",
+ smartgrid.model.input;bundle-version="1.0.0",
+ smartgrid.simcontroller.baselibary,
+ org.eclipse.debug.ui;bundle-version="3.10.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Export-Package: smartgrid.simcontrol.interfaces
