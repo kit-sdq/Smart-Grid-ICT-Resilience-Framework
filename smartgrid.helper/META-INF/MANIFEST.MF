@@ -11,5 +11,5 @@ Require-Bundle: org.eclipse.emf.ecore,
  smartgrid.model.topo,
  smartgrid.simcontrol.interfaces,
  org.eclipse.equinox.registry,
- smartgrid.simcontroller.baselibary
+ smartgrid.simcontrol.baselib
 Import-Package: smartgrid.helper

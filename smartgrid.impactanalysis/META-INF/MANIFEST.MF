@@ -10,7 +10,7 @@ Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  org.eclipse.debug.ui,
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.helper;bundle-version="1.0.0",
- smartgrid.simcontroller.baselibary,
+ smartgrid.simcontrol.baselib,
  smartgrid.model.helper,
  smartgrid.simcontrol.interfaces;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
