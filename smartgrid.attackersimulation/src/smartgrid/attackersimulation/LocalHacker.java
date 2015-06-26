@@ -167,7 +167,7 @@ public class LocalHacker implements IAttackerSimulation {
 
             hackingSpeed = Integer.parseInt(hackingSpeedString);
 
-            errorCode = ErrorCodeEnum.SUCESS;
+            errorCode = ErrorCodeEnum.SUCCESS;
         }
 
         // Adding extracted Parameters

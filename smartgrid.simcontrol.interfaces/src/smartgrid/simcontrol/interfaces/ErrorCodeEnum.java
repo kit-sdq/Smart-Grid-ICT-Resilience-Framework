@@ -9,7 +9,7 @@ package smartgrid.simcontrol.interfaces;
  */
 public enum ErrorCodeEnum {
 	
-	SUCESS,
+	SUCCESS,
 	
 	DEFAULT_VALUES_USED,
 	

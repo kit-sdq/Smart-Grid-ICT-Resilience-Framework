@@ -54,7 +54,7 @@ public class ImpactAnalysisMock implements IImpactAnalysis {
 
 		//TODO Implement
 		
-		return ErrorCodeEnum.SUCESS;
+		return ErrorCodeEnum.SUCCESS;
 	}
 
     @Override

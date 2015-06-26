@@ -51,7 +51,7 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulation {
     @Override
     public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
         // Nothing to do here..
-        return ErrorCodeEnum.SUCESS;
+        return ErrorCodeEnum.SUCCESS;
     }
 
     @Override
