@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: simcontrol.UI
+Bundle-SymbolicName: smartgrid.simcontrol.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: smartgrid.simcontrol.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ smartgrid.simcontroller.baselibary
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.debug.core,
+ org.eclipse.debug.core.model,
+ org.eclipse.debug.ui
+Export-Package: smartgrid.simcontrol.ui

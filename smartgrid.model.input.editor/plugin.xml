@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated smartgridinput -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="smartgridinput.presentation.SmartgridinputModelWizardID"
+            name="%_UI_SmartgridinputModelWizard_label"
+            class="smartgridinput.presentation.SmartgridinputModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SmartgridinputModelFile.gif">
+         <description>%_UI_SmartgridinputModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated smartgridinput -->
+      <editor
+            id="smartgridinput.presentation.SmartgridinputEditorID"
+            name="%_UI_SmartgridinputEditor_label"
+            icon="icons/full/obj16/SmartgridinputModelFile.gif"
+            extensions="smartgridinput"
+            class="smartgridinput.presentation.SmartgridinputEditor"
+            contributorClass="smartgridinput.presentation.SmartgridinputActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

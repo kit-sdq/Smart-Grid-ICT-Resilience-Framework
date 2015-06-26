@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="smartgridsecurity.graphiti.extension.contextbutton">
+      <resListener
+            class="smartgrid.graphiti.extensionpoint.contribution.ContextButtonContributor"></resListener>
+   </extension>
+   <extension
+         point="smartgridsecurity.graphiti.extension.toolbaraction">
+      <toolbarButton
+            class="smartgrid.graphiti.extensionpoint.contribution.ToolbarActionContributor">
+      </toolbarButton>
+   </extension>
+   <extension
+         point="smartgridsecurity.graphiti.extension.domain.changed">
+      <resListener
+            class="smartgrid.graphiti.extensionpoint.contribution.ResourceListenerContributor">
+      </resListener>
+   </extension>
+
+</plugin>

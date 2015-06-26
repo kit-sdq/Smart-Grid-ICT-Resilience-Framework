@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="smartgridsecurity.graphiti.extension.toolbaraction" name="ToolbarActionExtensionPoint" schema="schema/smartgridsecurity.graphiti.extension.toolbaraction.exsd"/>
+   <extension-point id="smartgridsecurity.graphiti.extension.contextbutton" name="ContextButtonExtensionPoint" schema="schema/smartgridsecurity.graphiti.extension.contextbutton.exsd"/>
+   <extension-point id="smartgridsecurity.graphiti.extension.resizefeature" name="ResizeFeatureExtensionPoint" schema="schema/smartgridsecurity.graphiti.extension.contextbutton.exsd"/>
+   <extension-point id="smartgridsecurity.graphiti.extension.domain.changed" name="ResourceListenerExtensionPoint" schema="schema/smartgridsecurity.graphiti.extension.contextbutton.exsd"/>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypes">
+      <diagramType
+            id="SmartGridSecurity.SmartGridSecurityDiagramType"
+            name="Smart Grid Security Diagram Type"
+            type="SmartGridSecurityDiagramType">
+      </diagramType>
+   </extension>
+   
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+      <diagramTypeProvider
+            class="smartgridsecurity.graphiti.SGSDiagramTypeProvider"
+            context="org.eclipse.graphiti.ui.diagramEditor"
+            id="SmartGridSecurity.SmartGridSecurityDiagramTypeProvider"
+            name="Smart Grid Security Diagram Type Provider">
+         <diagramType
+               id="SmartGridSecurity.SmartGridSecurityDiagramType">
+         </diagramType>
+         <imageProvider
+            id="smartgridsecurity.graphiti.SGSImageProvider.id">
+      </imageProvider>
+      </diagramTypeProvider>
+   </extension>
+   
+   <extension
+      point="org.eclipse.graphiti.ui.imageProviders">
+   <imageProvider
+         class="smartgridsecurity.graphiti.SGSImageProvider"
+         id="smartgridsecurity.graphiti.SGSImageProvider.id">
+   </imageProvider>
+</extension> 
+   
+   <extension point="org.eclipse.ui.editors">
+     <editor
+           class="smartgridsecurity.graphiti.SGSDiagramEditor"
+           contributorClass="smartgridsecurity.graphiti.SGSActionBarContributor"
+           name="SGSEditor"
+           id="SGSEditorId"
+           default="true"
+           extensions="sgdiagram"
+           matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorMatchingStrategy">
+      </editor>
+   </extension>   
+         <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            file-extensions="sgdiagram"
+            id="org.eclipse.graphiti.content.diagram" 
+            name="%_contenttype_diagram">
+      </content-type>
+  </extension>   
+   
+      <extension
+      point="org.eclipse.ui.newWizards">
+      <category
+         name="Smartgrid Diagram"
+         id="edu.kit.ipd.sdq.smartgrid.wizard">
+         </category>
+   <wizard
+         category="edu.kit.ipd.sdq.smartgrid.wizard"
+         class="smartgridsecurity.graphiti.wizard.SmartgridDiagramWizard"
+         id="edu.kit.ipd.sdq.smartgrid.wizard.new.diagram"
+         name="New Smartgrid Security Diagram"
+         project="false">
+   </wizard>
+   </extension>
+   
+   <extension
+        point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+        <propertyContributor
+              contributorId="SmartGridSecurityDiagramType.PropertyContributor">
+            <propertyCategory category="Smartgrid property contributor">
+            </propertyCategory>
+        </propertyContributor>
+    </extension>
+           
+    <extension
+          point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+       <propertyTabs
+              contributorId="SmartGridSecurityDiagramType.PropertyContributor">
+       <propertyTab
+             category="Smartgrid property contributor"
+             id="smartgrid.property.tab"
+             label="General">
+        </propertyTab>
+       </propertyTabs>
+    </extension>
+    
+    <extension
+          point="org.eclipse.ui.views.properties.tabbed.propertySections">
+        <propertySections
+              contributorId="SmartGridSecurityDiagramType.PropertyContributor">
+            <propertySection
+                  class="smartgridsecurity.graphiti.propertysheet.IdentifierPropertiesSheet"
+                  filter="smartgridsecurity.graphiti.propertysheet.IdentifierPropertyFilter"
+                  id="smartgrid.property.section.identifier"
+                  tab="smartgrid.property.tab">
+            </propertySection>
+        </propertySections>
+    </extension>
+    
+ <extension
+          point="org.eclipse.ui.views.properties.tabbed.propertySections">
+        <propertySections
+              contributorId="SmartGridSecurityDiagramType.PropertyContributor">
+            <propertySection
+                  class="smartgridsecurity.graphiti.propertysheet.NamedEntityPropertiesSheet"
+                  filter="smartgridsecurity.graphiti.propertysheet.NamedEntityPropertyFilter"
+                  id="smartgrid.property.section.named.entity"
+                  tab="smartgrid.property.tab">
+            </propertySection>
+        </propertySections>
+    </extension>
+
+</plugin>

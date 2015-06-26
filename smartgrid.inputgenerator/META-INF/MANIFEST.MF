@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Inputgenerator
+Bundle-SymbolicName: smartgrid.inputgenerator
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: smartgrid.simcontrol.interfaces;bundle-version="1.0.0",
+ smartgrid.simcontroller.baselibary;bundle-version="1.0.0",
+ org.eclipse.core.runtime,
+ smartgrid.simcontrol.ui,
+ smartgrid.model.topo,
+ smartgrid.model.input
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
