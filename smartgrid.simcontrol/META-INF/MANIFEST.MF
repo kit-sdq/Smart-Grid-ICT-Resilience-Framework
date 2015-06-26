@@ -12,7 +12,7 @@ Require-Bundle: smartgrid.simcontrol.interfaces;bundle-version="1.0.0",
  smartgrid.model.output;bundle-version="1.0.0",
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.helper;bundle-version="1.0.0",
- smartgrid.simcontroller.baselibary
+ smartgrid.simcontrol.baselib
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,

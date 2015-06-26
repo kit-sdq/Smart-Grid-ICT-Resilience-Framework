@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.ui,
  com.ibm.icu,
  org.eclipse.equinox.registry,
  smartgrid.simcontrol.ui,
- smartgrid.simcontroller.baselibary
+ smartgrid.simcontrol.baselib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: smartgrid.simcontrol.interfaces

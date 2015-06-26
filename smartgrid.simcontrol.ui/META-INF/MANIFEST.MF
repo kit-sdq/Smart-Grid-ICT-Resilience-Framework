@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: smartgrid.simcontrol.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- smartgrid.simcontroller.baselibary
+ smartgrid.simcontrol.baselib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.debug.core,
