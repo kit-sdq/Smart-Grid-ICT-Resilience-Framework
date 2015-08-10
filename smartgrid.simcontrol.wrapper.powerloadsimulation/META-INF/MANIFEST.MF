@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Powerloadsimulation
+Bundle-SymbolicName: smartgrid.simcontrol.wrapper.powerloadsimulation;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: smartgrid.simcontrol.wrapper.powerloadsimulation.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ smartgrid.simcontrol.interfaces,
+ smartgrid.model.input,
+ smartgrid.model.topo,
+ smartgrid.model.output,
+ org.eclipse.debug.core,
+ smartgrid.simcontrol.baselib;bundle-version="1.0.0",
+ smartgrid.simcontrol;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
