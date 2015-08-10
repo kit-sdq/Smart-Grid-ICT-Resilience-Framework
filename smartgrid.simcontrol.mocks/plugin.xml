@@ -20,5 +20,11 @@
             class="smartgrid.simcontrol.mocks.TimeProgressorMock">
       </timeProgressor>
    </extension>
+   <extension
+         point="smartgrid.simucontrol.extensionpoints.kritisSimulation">
+      <KritisSimulation
+            class="smartgrid.simcontrol.mocks.KritisSimulationMock">
+      </KritisSimulation>
+   </extension>
 
 </plugin>
