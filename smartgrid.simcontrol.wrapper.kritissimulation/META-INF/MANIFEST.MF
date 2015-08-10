@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kritissimulation
+Bundle-SymbolicName: smartgrid.simcontrol.wrapper.kritissimulation;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: smartgrid.simcontrol.wrapper.kritissimulation.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ smartgrid.simcontrol;bundle-version="1.0.0",
+ smartgrid.simcontrol.baselib,
+ smartgrid.simcontrol.interfaces,
+ smartgrid.model.output,
+ smartgrid.model.topo,
+ smartgrid.model.input,
+ org.eclipse.debug.core
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
