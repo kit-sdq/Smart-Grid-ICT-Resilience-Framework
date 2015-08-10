@@ -4,5 +4,6 @@ Bundle-Name: Baselibary
 Bundle-SymbolicName: smartgrid.simcontrol.baselib
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: smartgrid.simcontrol.baselib
+Export-Package: smartgrid.simcontrol.baselib,
+ smartgrid.simcontrol.baselib.coupling
 Require-Bundle: smartgrid.model.output

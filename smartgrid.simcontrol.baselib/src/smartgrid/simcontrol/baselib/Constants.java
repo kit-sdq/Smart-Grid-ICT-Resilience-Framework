@@ -208,6 +208,7 @@ public final class Constants {
     public static final String TIME_PROGRESSOR_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.timeProgressor";
     public static final String POWER_LOAD_SIMULATION_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.powerLoadSimulation";
     public static final String INPUT_GERNATOR_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.inputGenerator";
+    public static final String KRITIS_SIMULATION_EXTENSION_POINT = "smartgrid.simucontrol.extensionpoints.kritisSimulation";
 
     public static final String POWER_LOAD_SIMULATION_CONFIG = "powerLoadConfiguration";
     public static final String ATTACKER_SIMULATION_CONFIG = "attackerSimulationConfiguration";
@@ -215,5 +216,6 @@ public final class Constants {
     public static final String TERMINATION_CONDITION_SIMULATION_CONFIG = "terminationConditionConfiguration";
     public static final String TIME_PROGRESSOR_SIMULATION_CONFIG = "timeProgressorConfiguration";
     public static final String INPUT_GENERATOR_SIMULATION_CONFIG = "inputGeneratorConfiguration";
+    public static final String KRITIS_SIMULATION_CONFIG = "kritisSimulationConfiguration";
 
 }
