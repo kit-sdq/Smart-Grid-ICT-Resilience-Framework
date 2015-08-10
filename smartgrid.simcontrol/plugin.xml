@@ -7,6 +7,7 @@
    <extension-point id="smartgrid.simcontrol.extensionpoints.impactAnalysis" name="impactAnalysis" schema="schema/smartgrid.simcontrol.extensionpoints.impactAnalysis.exsd"/>
    <extension-point id="smartgrid.simcontrol.extensionpoints.attackerSimulation" name="attackerSimulation" schema="schema/smartgrid.simcontrol.extensionpoints.attackerSimulation.exsd"/>
    <extension-point id="smartgrid.simcontrol.extensionpoints.inputGenerator" name="inputGenerator" schema="schema/smartgrid.simcontrol.extensionpoints.inputGenerator.exsd"/>
+   <extension-point id="smartgrid.simucontrol.extensionpoints.kritisSimulation" name="kritisSimulation" schema="schema/smartgrid.simucontrol.extensionpoints.kritissimulation.exsd"/>
    
    <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
