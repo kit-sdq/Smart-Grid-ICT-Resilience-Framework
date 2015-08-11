@@ -43,7 +43,7 @@ public class AttackerSimulationMock implements IAttackerSimulation {
     @Override
     public String getName() {
         // TODO Implement
-        return "";
+        return "No Attack Simulation";
     }
 
 }

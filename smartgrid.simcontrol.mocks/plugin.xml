@@ -26,5 +26,17 @@
             class="smartgrid.simcontrol.mocks.KritisSimulationMock">
       </KritisSimulation>
    </extension>
+   <extension
+         point="smartgrid.simcontrol.extensionpoints.impactAnalysis">
+      <impactAnalysis
+            class="smartgrid.simcontrol.mocks.ImpactAnalysisMock">
+      </impactAnalysis>
+   </extension>
+   <extension
+         point="smartgrid.simcontrol.extensionpoints.attackerSimulation">
+      <AttackerSimulation
+            class="smartgrid.simcontrol.mocks.AttackerSimulationMock">
+      </AttackerSimulation>
+   </extension>
 
 </plugin>
