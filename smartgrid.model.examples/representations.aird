@@ -25,6 +25,42 @@
   <models xmi:type="smartgridtopo:Scenario" href="example8_paper/exmple8.smartgridtopo#/"/>
   <models xmi:type="pi:Diagram" href="example7/logical/example7.sgdiagram#/"/>
   <models xmi:type="smartgridtopo:Scenario" href="example7/logical/example7.smartgridtopo#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/example7.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%200/AttackerSimulationResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%200/Iteration%201/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%200/Iteration%201/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%200/Iteration%202/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%200/Iteration%202/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%200/Iteration%203/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%200/Iteration%203/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%201/AttackerSimulationResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%201/Iteration%201/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%201/Iteration%201/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%201/Iteration%202/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%201/Iteration%202/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%201/Iteration%203/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%201/Iteration%203/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%202/AttackerSimulationResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%202/Iteration%201/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%202/Iteration%201/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%202/Iteration%202/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%202/Iteration%202/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%202/Iteration%203/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%202/Iteration%203/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%203/AttackerSimulationResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%203/Iteration%201/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%203/Iteration%201/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%203/Iteration%202/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%203/Iteration%202/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%203/Iteration%203/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%203/Iteration%203/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%204/AttackerSimulationResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%204/Iteration%201/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%204/Iteration%201/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%204/Iteration%202/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%204/Iteration%202/PowerLoadResult.smartgridinput#/"/>
+  <models xmi:type="smartgridoutput:ScenarioResult" href="example7/Zeitschritt%204/Iteration%203/ImpactResult.smartgridoutput#/"/>
+  <models xmi:type="smartgridinput:ScenarioState" href="example7/Zeitschritt%204/Iteration%203/PowerLoadResult.smartgridinput#/"/>
   <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_39GVEARPEeWe0b2ukf1EMQ" initialized="true">
     <ownedRepresentations xmi:type="diagram:DSemanticDiagram" xmi:id="_7rOzsARPEeWe0b2ukf1EMQ" name="example3 topo">
       <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_7uPrcARPEeWe0b2ukf1EMQ" source="GMF_DIAGRAMS">

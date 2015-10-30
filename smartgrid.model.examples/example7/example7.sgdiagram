@@ -225,7 +225,7 @@
     <link>
       <businessObjects href="example7.smartgridtopo#1913814644"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.50 //@connections.51"/>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.50 //@connections.51 //@connections.243 //@connections.245"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.8" foreground="//@colors.2" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="436" y="244">
@@ -291,7 +291,7 @@
     <link>
       <businessObjects href="example7.smartgridtopo#529283499"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.53 //@connections.219"/>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.53 //@connections.219 //@connections.244"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.8" foreground="//@colors.2" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="346" y="696">
@@ -531,7 +531,7 @@
     <link>
       <businessObjects href="example7.smartgridtopo#1339902790"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.139 //@connections.141"/>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.139 //@connections.141 //@connections.245"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.13" foreground="//@colors.12" lineWidth="3" transparency="0.0" width="20" height="20" x="1040" y="700"/>
@@ -874,14 +874,14 @@
     <link>
       <businessObjects href="example7.smartgridtopo#1756949529"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.142"/>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.142 //@connections.244"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="450" y="490"/>
     <link>
       <businessObjects href="example7.smartgridtopo#1712781361"/>
     </link>
-    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.140"/>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.140 //@connections.243"/>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="1210" y="990"/>
@@ -3232,6 +3232,39 @@
       </graphicsAlgorithm>
     </connectionDecorators>
   </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.116/@anchors.0" end="//@children.28/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.115/@anchors.0" end="//@children.34/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.66/@anchors.0" end="//@children.28/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
   <colors red="227" green="238" blue="249"/>
   <colors red="255" green="255" blue="255"/>
   <colors/>
@@ -3249,4 +3282,5 @@
   <colors green="127"/>
   <colors red="220" green="220" blue="220"/>
   <colors red="225" green="200" blue="200"/>
+  <colors red="199" green="212" blue="139"/>
 </pi:Diagram>

@@ -51,7 +51,7 @@
   <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="473066530" ConnectedTo="671204472" LinkedBy="//@ContainsC.61 //@ContainsC.93"/>
   <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="1689790292" ConnectedTo="872058855" LinkedBy="//@ContainsC.54 //@ContainsC.109 //@ContainsC.110"/>
   <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="892647290" ConnectedTo="601776658 872058855" LinkedBy="//@ContainsC.55 //@ContainsC.107 //@ContainsC.108"/>
-  <ContainsNE xsi:type="smartgridtopo:InterCom" id="1339902790" LinkedBy="//@ContainsC.102 //@ContainsC.104"/>
+  <ContainsNE xsi:type="smartgridtopo:InterCom" id="1339902790" ConnectedTo="1913814644" LinkedBy="//@ContainsC.102 //@ContainsC.104"/>
   <ContainsNE xsi:type="smartgridtopo:InterCom" id="1358641055" ConnectedTo="466350279 1893048589" LinkedBy="//@ContainsC.63"/>
   <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="1210837217" ConnectedTo="123612116" LinkedBy="//@ContainsC.57 //@ContainsC.58 //@ContainsC.59 //@ContainsC.94"/>
   <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="928995039" ConnectedTo="1205715877 1563005854 587086201" LinkedBy="//@ContainsC.59 //@ContainsC.60 //@ContainsC.95 //@ContainsC.96 //@ContainsC.97"/>
@@ -84,7 +84,7 @@
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="710964268" ConnectedTo="812812016" LinkedBy="//@ContainsC.90"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="601091385" ConnectedTo="671204472" LinkedBy="//@ContainsC.91"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="109962898" ConnectedTo="671204472" LinkedBy="//@ContainsC.92"/>
-  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1303261153" ConnectedTo="671204472" LinkedBy="//@ContainsC.93"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1303261153" name="Infection Root" ConnectedTo="671204472" LinkedBy="//@ContainsC.93"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="682278675" ConnectedTo="1822759236" LinkedBy="//@ContainsC.73"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="356125215" ConnectedTo="505335617" LinkedBy="//@ContainsC.76"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="885946206" ConnectedTo="741577903" LinkedBy="//@ContainsC.79"/>
@@ -100,8 +100,8 @@
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1192825139" ConnectedTo="872058855" LinkedBy="//@ContainsC.106"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1621901843" ConnectedTo="601776658" LinkedBy="//@ContainsC.107"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1929482359" ConnectedTo="601776658" LinkedBy="//@ContainsC.108"/>
-  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1756949529" LinkedBy="//@ContainsC.105"/>
-  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1712781361" LinkedBy="//@ContainsC.103"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1756949529" ConnectedTo="529283499" LinkedBy="//@ContainsC.105"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1712781361" ConnectedTo="1913814644" LinkedBy="//@ContainsC.103"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="577143557" ConnectedTo="1559750613" LinkedBy="//@ContainsC.118"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1492308925" ConnectedTo="99361523" LinkedBy="//@ContainsC.113"/>
   <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="2013512656" ConnectedTo="627629333" LinkedBy="//@ContainsC.115"/>
