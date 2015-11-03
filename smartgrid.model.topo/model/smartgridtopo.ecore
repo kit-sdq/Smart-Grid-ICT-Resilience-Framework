@@ -2,12 +2,12 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smartgridtopo" nsURI="http://sdq.ipd.uka.de/smartgridtopo/1.1"
     nsPrefix="smartgridtopo">
-  <eClassifiers xsi:type="ecore:EClass" name="Scenario" eSuperTypes="#//NamedIdentifier">
+  <eClassifiers xsi:type="ecore:EClass" name="SmartGridTopology" eSuperTypes="#//NamedIdentifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ContainsNE" upperBound="-1"
         eType="#//NetworkEntity" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ContainsPGN" upperBound="-1"
         eType="#//PowerGridNode" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ContainsC" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ContainsPC" upperBound="-1"
         eType="#//PhysicalConnection" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ContainsLC" upperBound="-1"
         eType="#//LogicalCommunication" containment="true"/>
@@ -31,6 +31,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="PowerGridNode" eSuperTypes="#//NamedIdentifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="SmartMeter" eSuperTypes="#//CommunicatingEntity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="IsA" eType="#//SmartMeterType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Aggregation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SmartMeterType" eSuperTypes="#//NamedIdentifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="PhysicalConnection" eSuperTypes="#//NamedEntity">

@@ -13,7 +13,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_gsKm43epEeObi7FkojVWxQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_grClgXepEeObi7FkojVWxQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="smartgridtopo.ecore#//Scenario"/>
+    <element xmi:type="ecore:EClass" href="smartgridtopo.ecore#//SmartGridTopology"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_grClgnepEeObi7FkojVWxQ" x="145" y="360" width="158" height="98"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_i8JsgHepEeObi7FkojVWxQ" visible="false" type="1001">
@@ -495,7 +495,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_MnzEMXeqEeObi7FkojVWxQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_MnzEMneqEeObi7FkojVWxQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="smartgridtopo.ecore#//Scenario/ContainsNE"/>
+    <element xmi:type="ecore:EReference" href="smartgridtopo.ecore#//SmartGridTopology/ContainsNE"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MnzEM3eqEeObi7FkojVWxQ" points="[52, 6, -227, -40]$[247, 8, -32, -38]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Mn5K0HeqEeObi7FkojVWxQ" id="(0.9936708860759493,0.3877551020408163)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_74o7EHewEeObi7FkojVWxQ" id="(0.03361344537815126,0.32051282051282054)"/>
@@ -674,7 +674,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Q5CZcXe2EeObi7FkojVWxQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Q5CZcne2EeObi7FkojVWxQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="smartgridtopo.ecore#//Scenario/ContainsPGN"/>
+    <element xmi:type="ecore:EReference" href="smartgridtopo.ecore#//SmartGridTopology/ContainsPGN"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Q5CZc3e2EeObi7FkojVWxQ" points="[18, -18, -230, 244]$[250, -268, 2, -6]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Q5HR8He2EeObi7FkojVWxQ" id="(0.8227848101265823,0.19387755102040816)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Q5HR8Xe2EeObi7FkojVWxQ" id="(0.6503496503496503,0.08974358974358974)"/>
@@ -688,7 +688,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_nyoAUXe2EeObi7FkojVWxQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_nyoAUne2EeObi7FkojVWxQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="smartgridtopo.ecore#//Scenario/ContainsC"/>
+    <element xmi:type="ecore:EReference" href="smartgridtopo.ecore#//SmartGridTopology/ContainsPC"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_nyoAU3e2EeObi7FkojVWxQ" points="[46, 83, -177, -312]$[224, 382, 1, -13]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nys40He2EeObi7FkojVWxQ" id="(0.33544303797468356,0.14285714285714285)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nys40Xe2EeObi7FkojVWxQ" id="(0.16666666666666666,0.1111111111111111)"/>
@@ -777,7 +777,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_txktsZi1EeO_uOTucd_B9g" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_txktspi1EeO_uOTucd_B9g" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="smartgridtopo.ecore#//Scenario/ContainsLC"/>
+    <element xmi:type="ecore:EReference" href="smartgridtopo.ecore#//SmartGridTopology/ContainsLC"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_txkts5i1EeO_uOTucd_B9g" points="[13, -20, -566, 220]$[209, -335, -370, -95]$[509, -335, -70, -95]$[556, -270, -23, -30]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tx0lUJi1EeO_uOTucd_B9g" id="(0.0759493670886076,0.21428571428571427)"/>
   </edges>

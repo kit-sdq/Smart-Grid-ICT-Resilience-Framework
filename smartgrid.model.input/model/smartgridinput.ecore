@@ -7,7 +7,7 @@
         eType="#//EntityState" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="PowerStates" upperBound="-1"
         eType="#//PowerState" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="Scenario" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//Scenario"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Scenario" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//SmartGridTopology"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EntityState">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="IsDestroyed" lowerBound="1"

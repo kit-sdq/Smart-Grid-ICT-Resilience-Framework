@@ -61,7 +61,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_dr0js_txEeOTx76KoGAO8A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_dryugftxEeOTx76KoGAO8A" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="smartgridoutput.ecore#//Destroyed"/>
+    <element xmi:type="ecore:EClass" href="smartgridoutput.ecore#//Defect"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dryugvtxEeOTx76KoGAO8A" x="650" y="460"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_fJe0gPtxEeOTx76KoGAO8A" type="1001">
@@ -234,7 +234,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_P6pWQfrWEeOTx76KoGAO8A" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_P6pWQvrWEeOTx76KoGAO8A" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="smartgridoutput.ecore#//ScenarioResult/EntityStates"/>
+    <element xmi:type="ecore:EReference" href="smartgridoutput.ecore#//ScenarioResult/States"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_P6pWQ_rWEeOTx76KoGAO8A" points="[61, 10, -267, -41]$[256, 52, -72, 1]"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_-yvhQPtxEeOTx76KoGAO8A" type="3003" source="__kPLIDUCEeSHE5mnVh3E7g" target="_RovFMPrVEeOTx76KoGAO8A">

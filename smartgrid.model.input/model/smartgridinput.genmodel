@@ -10,6 +10,7 @@
     <genClasses ecoreClass="smartgridinput.ecore#//ScenarioState">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridinput.ecore#//ScenarioState/EntityStates"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridinput.ecore#//ScenarioState/PowerStates"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridinput.ecore#//ScenarioState/Scenario"/>
     </genClasses>
     <genClasses ecoreClass="smartgridinput.ecore#//EntityState">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartgridinput.ecore#//EntityState/IsDestroyed"/>
@@ -17,8 +18,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridinput.ecore#//EntityState/Owner"/>
     </genClasses>
     <genClasses ecoreClass="smartgridinput.ecore#//PowerState">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartgridinput.ecore#//PowerState/PowerOutage"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridinput.ecore#//PowerState/Owner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartgridinput.ecore#//PowerState/PowerOutage"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

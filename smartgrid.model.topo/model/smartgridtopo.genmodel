@@ -6,11 +6,11 @@
     operationReflection="true" importOrganizing="true">
   <foreignModel>smartgridtopo.ecore</foreignModel>
   <genPackages prefix="Smartgridtopo" disposableProviderFactory="true" ecorePackage="smartgridtopo.ecore#/">
-    <genClasses ecoreClass="smartgridtopo.ecore#//Scenario">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//Scenario/ContainsNE"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//Scenario/ContainsPGN"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//Scenario/ContainsC"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//Scenario/ContainsLC"/>
+    <genClasses ecoreClass="smartgridtopo.ecore#//SmartGridTopology">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//SmartGridTopology/ContainsNE"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//SmartGridTopology/ContainsPGN"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//SmartGridTopology/ContainsPC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//SmartGridTopology/ContainsLC"/>
     </genClasses>
     <genClasses image="false" ecoreClass="smartgridtopo.ecore#//NamedEntity">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartgridtopo.ecore#//NamedEntity/name"/>
