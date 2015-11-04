@@ -86,7 +86,7 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
                         currentShape.setVisible(true);
                         manager.manageGraphicalPatternRepresentation((ContainerShape) currentShape, true);
                         Object bo = manager.resolveBOfromNetworkEntity((NetworkEntity) currentShape.getLink()
-                                .getBusinessObjects().get(0), result.getEntityStates());
+                                .getBusinessObjects().get(0), result.getStates());
 
                         if (bo != null
                                 && (bo instanceof NoUplink || (bo instanceof Online && ((Online) bo).isIsHacked()))) {
