@@ -21,7 +21,7 @@ import smartgrid.simcontrol.interfaces.ITerminationCondition;
 import smartgrid.simcontrol.interfaces.ITimeProgressor;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 
 public final class SimulationController {
 
@@ -69,8 +69,7 @@ public final class SimulationController {
         return evalutionDone;
     }
 
-    // misc
-    private static Scenario topo;
+    private static SmartGridTopology topo;
     private static ScenarioState initialState;
 
     // Private Constructor
@@ -139,7 +138,7 @@ public final class SimulationController {
                     impactResult, impactResultOld));
 
             // modify the scenario between time steps
-            usedTimeProgressor.progress(); // TODO: parameters
+            usedTimeProgressor.progress();
         }// End 1 TimeStep
     }
 

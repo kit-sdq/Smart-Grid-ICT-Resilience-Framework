@@ -19,14 +19,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 //import smartgrid.simcontrol.interfaces.ITerminationCondition;
 //import smartgrid.simcontrol.interfaces.ITimeProgressor;
 
-
 import smartgridinput.ScenarioState;
 import smartgridinput.impl.SmartgridinputPackageImpl;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
-
-//import Contants from UI 
-import smartgrid.simcontrol.ui.*;
 
 /**
  * This class provides the Delegate for the SimControl Approach of the Smartgrid
@@ -37,8 +33,7 @@ import smartgrid.simcontrol.ui.*;
  * @implements ILaunchConfigurationDelegate
  *
  */
-public class SimcontrolLaunchConfigurationDelegate implements
-		ILaunchConfigurationDelegate {
+public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
 
 	/*
 	 * Private Member
@@ -51,29 +46,17 @@ public class SimcontrolLaunchConfigurationDelegate implements
 	 * 
 	 * Launches an SimController Analysis with the given Launch Configuration
 	 */
-	public void launch(ILaunchConfiguration configuration, String mode,
-			ILaunch launch, IProgressMonitor monitor) throws CoreException { 
+	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
+			throws CoreException {
 
-		
-		//Code from Interface Hook In Removed -Christian
-		
-		//this.SimController = new SimulationController(configuration);
-		
-
-		
 		SimulationController.init(configuration);
-		
+
 		SimulationController.run();
-
-		
-		// RUN Simulation
-		//this.SimController.run();
-
 	}
 
 	@Deprecated
-	private Scenario loadScenario(String path) {
-		Scenario s = null;
+	private SmartGridTopology loadScenario(String path) {
+		SmartGridTopology s = null;
 		SmartgridtopoPackageImpl.init();
 
 		// Code Removed - Christian
@@ -84,7 +67,7 @@ public class SimcontrolLaunchConfigurationDelegate implements
 		try {
 			EObject r = resource.getContents().get(0);
 			System.out.println("Klasse: " + r.getClass());
-			s = (Scenario) resource.getContents().get(0);
+			s = (SmartGridTopology) resource.getContents().get(0);
 
 			// for (PhysicalCo)
 
@@ -94,7 +77,7 @@ public class SimcontrolLaunchConfigurationDelegate implements
 		return s;
 	}
 
-	@Deprecated 
+	@Deprecated
 	private ScenarioState loadInput(String path) {
 		ScenarioState input = null;
 		SmartgridinputPackageImpl.init();
