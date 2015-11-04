@@ -12,7 +12,7 @@ import smartgridinput.ScenarioState;
 import smartgridoutput.EntityState;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 
 /**
  * @author Christian
@@ -20,44 +20,36 @@ import smartgridtopo.Scenario;
  */
 public class PowerLoadSimulationMock implements IPowerLoadSimulation {
 
-    /**
-     * {@inheritDoc}
-     * <P>
-     * 
-     * 
-     * Runs a mocked Power Load Simulation. This Mock does not change anything.
-     * 
-     */
-    @Override
-    public ScenarioState run(Scenario smartGridTopo, ScenarioState impactAnalysisInput,
-            ScenarioResult impactAnalysisOutput) {
-
-        for (EntityState state : impactAnalysisOutput.getEntityStates()) {
-            if (state instanceof On && ((On) state).isIsHacked()) {
-                for (smartgridinput.EntityState input : impactAnalysisInput.getEntityStates()) {
-                    if (input.getOwner().equals(state.getOwner())) {
-                        input.setIsHacked(true);
-                    }
-                }
-            }
-        }
-
-        return impactAnalysisInput;
-    }
-
-    /**
-	 * 
+	/**
+	 * {@inheritDoc}
+	 * <P>
+	 * Runs a mocked Power Load Simulation. This Mock does not change anything.
 	 */
-    @Override
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-        // Nothing to do here..
-        return ErrorCodeEnum.SUCCESS;
-    }
+	@Override
+	public ScenarioState run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput,
+			ScenarioResult impactAnalysisOutput) {
 
-    @Override
-    public String getName() {
+		for (EntityState state : impactAnalysisOutput.getStates()) {
+			if (state instanceof On && ((On) state).isIsHacked()) {
+				for (smartgridinput.EntityState input : impactAnalysisInput.getEntityStates()) {
+					if (input.getOwner().equals(state.getOwner())) {
+						input.setIsHacked(true);
+					}
+				}
+			}
+		}
 
-        return "Powerload Simulation Mock";
-    }
+		return impactAnalysisInput;
+	}
+
+	@Override
+	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+		return ErrorCodeEnum.SUCCESS;
+	}
+
+	@Override
+	public String getName() {
+		return "Powerload Simulation Mock";
+	}
 
 }

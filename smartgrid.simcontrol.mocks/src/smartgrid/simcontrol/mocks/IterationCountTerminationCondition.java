@@ -3,7 +3,6 @@
  */
 package smartgrid.simcontrol.mocks;
 
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
@@ -17,60 +16,48 @@ import smartgrid.simcontrol.interfaces.*;
  * @author Christian
  *
  */
-public class TerminationConditionMock implements ITerminationCondition {
+public class IterationCountTerminationCondition implements ITerminationCondition {
 
 	private final int _breakafterIterationCount;
-	
-	
-	
-	public TerminationConditionMock() {
-		
-		//TODO  TerminationConditionMock Debug Parameter set here
+
+	public IterationCountTerminationCondition() {
 		_breakafterIterationCount = 2;
 	}
-	
-	
-	
+
 	/**
-	 * 
 	 * Constructs a new Instance of TerminationConditionMock
 	 * 
-	 * 
-	 * @param breakafterIterationCount Set the number of Iterations
+	 * @param breakafterIterationCount
+	 *            Set the number of Iterations
 	 */
-	public TerminationConditionMock(int breakafterIterationCount){
-		
+	public IterationCountTerminationCondition(int breakafterIterationCount) {
+
 		_breakafterIterationCount = breakafterIterationCount;
-		
+
 	}
-	
-	
+
 	/**
-	 * {@inheritDoc} <p>
+	 * {@inheritDoc}
+	 * <p>
 	 * 
 	 * Simply breaks after specified IterationCount from the Contructor
 	 * 
 	 */
 	@Override
-	public boolean evaluate(int iterationCount, ScenarioState impactInput,
-			ScenarioState impactInputOld, ScenarioResult impactResult,
-			ScenarioResult impactResultOld) {
-		
-		
+	public boolean evaluate(int iterationCount, ScenarioState impactInput, ScenarioState impactInputOld,
+			ScenarioResult impactResult, ScenarioResult impactResultOld) {
+
 		boolean run;
-		
-		if (iterationCount > _breakafterIterationCount){
-			
+
+		if (iterationCount > _breakafterIterationCount) {
+
 			run = false;
 		} else {
 			run = true;
 		}
-		
-		
-		
+
 		return run;
 	}
-
 
 	@Override
 	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
@@ -78,11 +65,9 @@ public class TerminationConditionMock implements ITerminationCondition {
 		return ErrorCodeEnum.SUCCESS;
 	}
 
-
-
-    @Override
-    public String getName() {
-        return "Termination Condition Mock";
-    }
+	@Override
+	public String getName() {
+		return "Iteration Count";
+	}
 
 }

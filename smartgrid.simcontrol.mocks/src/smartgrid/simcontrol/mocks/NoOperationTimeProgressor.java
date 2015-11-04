@@ -7,38 +7,34 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
-import smartgrid.simcontrol.interfaces.IAttackerSimulation;
-import smartgridoutput.ScenarioResult;
-import smartgridtopo.SmartGridTopology;
+import smartgrid.simcontrol.interfaces.ITimeProgressor;
 
 /**
+ * Mocks the TimeProgressor
+ * 
  * @author Christian
  *
  */
-public class AttackerSimulationMock implements IAttackerSimulation {
+public class NoOperationTimeProgressor implements ITimeProgressor {
 
 	/**
 	 * {@inheritDoc}
 	 * <p>
-	 * 
-	 * Mocks a Atacker who doesn't atack
-	 * 
+	 * This mock does nothing at all
 	 */
 	@Override
-	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioResult impactAnalysisOutput) {
-
-		return impactAnalysisOutput;
+	public void progress() {
 	}
 
 	@Override
 	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-		// Nothing to do here
+		// Nothing to do here..
 		return ErrorCodeEnum.SUCCESS;
 	}
 
 	@Override
 	public String getName() {
-		return "No Attack Simulation";
+		return "No Operation";
 	}
 
 }

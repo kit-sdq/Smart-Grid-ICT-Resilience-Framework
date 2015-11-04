@@ -11,13 +11,13 @@
    <extension
          point="smartgrid.simcontrol.extensionpoints.terminationCondition">
       <terminationCondition
-            class="smartgrid.simcontrol.mocks.TerminationConditionMock">
+            class="smartgrid.simcontrol.mocks.IterationCountTerminationCondition">
       </terminationCondition>
    </extension>
    <extension
          point="smartgrid.simcontrol.extensionpoints.timeProgressor">
       <timeProgressor
-            class="smartgrid.simcontrol.mocks.TimeProgressorMock">
+            class="smartgrid.simcontrol.mocks.NoOperationTimeProgressor">
       </timeProgressor>
    </extension>
    <extension

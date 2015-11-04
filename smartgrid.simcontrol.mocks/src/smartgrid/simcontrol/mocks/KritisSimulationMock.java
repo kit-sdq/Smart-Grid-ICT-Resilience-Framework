@@ -7,12 +7,12 @@ import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
 import smartgrid.simcontrol.interfaces.IKritisSimulation;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 
 public class KritisSimulationMock implements IKritisSimulation {
 
 	@Override
-	public ScenarioResult run(Scenario smartGridTopo, ScenarioState kritisInput) {
+	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState kritisInput) {
 		return null;
 	}
 

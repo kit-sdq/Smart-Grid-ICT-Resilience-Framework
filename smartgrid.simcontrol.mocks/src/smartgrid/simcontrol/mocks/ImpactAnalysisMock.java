@@ -15,7 +15,7 @@ import smartgridoutput.ScenarioResult;
 import smartgridoutput.SmartgridoutputFactory;
 import smartgridoutput.impl.SmartgridoutputPackageImpl;
 import smartgridtopo.ControlCenter;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 
 /**
@@ -39,7 +39,7 @@ public class ImpactAnalysisMock implements IImpactAnalysis {
 	 * 
 	 */
 	@Override
-	public ScenarioResult run(Scenario smartGridTopo, ScenarioState impactAnalysisInput) {
+	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput) {
 		SmartgridoutputPackageImpl.init();
 		SmartgridoutputFactory factory = SmartgridoutputFactory.eINSTANCE;
 		ScenarioResult result = factory.createScenarioResult();
@@ -55,7 +55,7 @@ public class ImpactAnalysisMock implements IImpactAnalysis {
 			on.setOwner(entity.getOwner());
 			on.setBelongsToCluster(cl);
 
-			result.getEntityStates().add(on);
+			result.getStates().add(on);
 
 			// Count smartMeters and controlCenters
 			if (entity.getOwner() instanceof SmartMeter) {
@@ -77,15 +77,9 @@ public class ImpactAnalysisMock implements IImpactAnalysis {
 	 * {@inheritDoc}
 	 * <p>
 	 * 
-	 * 
-	 * NOT yet implemented!
-	 * 
 	 */
 	@Override
 	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-
-		// TODO Implement
-
 		return ErrorCodeEnum.SUCCESS;
 	}
 
