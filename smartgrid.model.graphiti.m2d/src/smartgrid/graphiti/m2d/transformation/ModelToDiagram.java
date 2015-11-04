@@ -44,285 +44,293 @@ import smartgridtopo.LogicalCommunication;
 import smartgridtopo.NetworkEntity;
 import smartgridtopo.PhysicalConnection;
 import smartgridtopo.PowerGridNode;
-import smartgridtopo.impl.ScenarioImpl;
+import smartgridtopo.SmartGridTopology;
 
 public final class ModelToDiagram {
 
-    private static final String F_DIAGRAM = ".sgdiagram";
+	private static final String F_DIAGRAM = ".sgdiagram";
 
-    private String pathToModel;
-    private IProject project;
-    private IFile diagramPathFile;
-    private SGSDiagramEditor part;
+	private String pathToModel;
+	private IProject project;
+	private IFile diagramPathFile;
+	private SGSDiagramEditor part;
 
-    private TransactionalEditingDomain editingDomain;
+	private TransactionalEditingDomain editingDomain;
 
-    public ModelToDiagram(String pathToModel, IProject project) {
-        this.pathToModel = pathToModel;
-        this.project = project;
+	public ModelToDiagram(String pathToModel, IProject project) {
+		this.pathToModel = pathToModel;
+		this.project = project;
 
-        if (pathToModel.contains(File.separator)) {
-            this.pathToModel = pathToModel.replaceAll(File.separator, "/");
-        }
-    }
+		if (pathToModel.contains(File.separator)) {
+			this.pathToModel = pathToModel.replaceAll(File.separator, "/");
+		}
+	}
 
-    /**
-     * Creates a diagram for the given business object
-     * 
-     * @param scenario
-     *            the business object which contents should be added to a new diagram
-     */
-    public void initializeDiagram(final ScenarioImpl scenario) {
-        String diagramPath = pathToModel.substring(0, pathToModel.lastIndexOf("/") + 1);
-        String diagramName = pathToModel.substring(pathToModel.lastIndexOf("/") + 1, pathToModel.lastIndexOf("."));
-        final Resource diagramRes = createDiagram(diagramPath, diagramName, scenario);
+	/**
+	 * Creates a diagram for the given business object
+	 * 
+	 * @param scenario
+	 *            the business object which contents should be added to a new
+	 *            diagram
+	 */
+	public void initializeDiagram(final SmartGridTopology scenario) {
+		String diagramPath = pathToModel.substring(0, pathToModel.lastIndexOf("/") + 1);
+		String diagramName = pathToModel.substring(pathToModel.lastIndexOf("/") + 1, pathToModel.lastIndexOf("."));
+		final Resource diagramRes = createDiagram(diagramPath, diagramName, scenario);
 
-        // First, start with reading and adding the nodes to the diagram
-        final List<PowerGridNode> pge = new ArrayList<PowerGridNode>();
-        final List<NetworkEntity> ne = new ArrayList<NetworkEntity>();
-        final List<LogicalCommunication> lc = new ArrayList<LogicalCommunication>();
-        final List<PhysicalConnection> pc = new ArrayList<PhysicalConnection>();
+		// First, start with reading and adding the nodes to the diagram
+		final List<PowerGridNode> pge = new ArrayList<PowerGridNode>();
+		final List<NetworkEntity> ne = new ArrayList<NetworkEntity>();
+		final List<LogicalCommunication> lc = new ArrayList<LogicalCommunication>();
+		final List<PhysicalConnection> pc = new ArrayList<PhysicalConnection>();
 
-        pge.addAll(scenario.getContainsPGN());
-        ne.addAll(scenario.getContainsNE());
-        lc.addAll(scenario.getContainsLC());
-        pc.addAll(scenario.getContainsC());
+		pge.addAll(scenario.getContainsPGN());
+		ne.addAll(scenario.getContainsNE());
+		lc.addAll(scenario.getContainsLC());
+		pc.addAll(scenario.getContainsPC());
 
-        // Convert PGE's to pictogram elements
-        CommandStack commandStack = editingDomain.getCommandStack();
-        commandStack.execute(new RecordingCommand(editingDomain) {
+		// Convert PGE's to pictogram elements
+		CommandStack commandStack = editingDomain.getCommandStack();
+		commandStack.execute(new RecordingCommand(editingDomain) {
 
-            @Override
-            protected void doExecute() {
+			@Override
+			protected void doExecute() {
 
-                addPEs((Diagram) diagramRes.getContents().get(0), scenario);
-                ZestLayoutDiagramFeature layout = new ZestLayoutDiagramFeature(GraphitiHelper.getInstance().getFeatureProvider());
-                layout.execute(null);
-                try {
-                    diagramRes.save(createSaveOptions());
+				addPEs((Diagram) diagramRes.getContents().get(0), scenario);
+				ZestLayoutDiagramFeature layout = new ZestLayoutDiagramFeature(
+						GraphitiHelper.getInstance().getFeatureProvider());
+				layout.execute(null);
+				try {
+					diagramRes.save(createSaveOptions());
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
-                PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor((IEditorPart) part, false);
-            }
-        });
-    }
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor((IEditorPart) part,
+						false);
+			}
+		});
+	}
 
-    private Resource createDiagram(final String diagramPath, final String diagramName, final ScenarioImpl scenario) {
-        final URI diagramURI = URI.createPlatformResourceURI(project.getFullPath().toString() + "/" + diagramPath
-                + diagramName + F_DIAGRAM, true);
-        IFile diagramFile = project.getFile(diagramPath + diagramName + F_DIAGRAM);
+	private Resource createDiagram(final String diagramPath, final String diagramName,
+			final SmartGridTopology scenario) {
+		final URI diagramURI = URI.createPlatformResourceURI(
+				project.getFullPath().toString() + "/" + diagramPath + diagramName + F_DIAGRAM, true);
+		IFile diagramFile = project.getFile(diagramPath + diagramName + F_DIAGRAM);
 
-        try {
-            if (diagramFile.exists()) {
-                diagramFile.delete(true, null);
-            }
+		try {
+			if (diagramFile.exists()) {
+				diagramFile.delete(true, null);
+			}
 
-        } catch (CoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 
-        editingDomain = GraphitiUi.getEmfService().createResourceSetAndEditingDomain();
-        ResourceSet resourceSet = editingDomain.getResourceSet();
-        CommandStack commandStack = editingDomain.getCommandStack();
+		editingDomain = GraphitiUi.getEmfService().createResourceSetAndEditingDomain();
+		ResourceSet resourceSet = editingDomain.getResourceSet();
+		CommandStack commandStack = editingDomain.getCommandStack();
 
-        final Resource diagramResource = resourceSet.createResource(diagramURI);
+		final Resource diagramResource = resourceSet.createResource(diagramURI);
 
-        commandStack.execute(new RecordingCommand(editingDomain) {
-            @Override
-            protected void doExecute() {
-                // create resources for the diagram and domain model files
+		commandStack.execute(new RecordingCommand(editingDomain) {
+			@Override
+			protected void doExecute() {
+				// create resources for the diagram and domain model files
 
-                diagramResource.setTrackingModification(true);
-                final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + hashCode(),
-                        diagramName, 10, true);
-                diagram.setDiagramTypeId("SmartGridSecurityDiagramType");
-                // link model and diagram
-                PictogramLink link = PictogramsFactory.eINSTANCE.createPictogramLink();
-                link.setPictogramElement(diagram);
-                link.getBusinessObjects().add(scenario);
-                diagramResource.getContents().add(diagram);
+				diagramResource.setTrackingModification(true);
+				final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + hashCode(),
+						diagramName, 10, true);
+				diagram.setDiagramTypeId("SmartGridSecurityDiagramType");
+				// link model and diagram
+				PictogramLink link = PictogramsFactory.eINSTANCE.createPictogramLink();
+				link.setPictogramElement(diagram);
+				link.getBusinessObjects().add(scenario);
+				diagramResource.getContents().add(diagram);
 
-            }
-        });
+			}
+		});
 
-        try {
-            diagramResource.save(createSaveOptions());
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-        GraphitiHelper.getInstance().setDiagram((Diagram) diagramResource.getContents().get((0)));
-        Diagram diagram = GraphitiHelper.getInstance().getDiagram();
-        diagramPathFile = ResourcesPlugin.getWorkspace().getRoot()
-                .getFile(new Path(diagramResource.getURI().toPlatformString(true)));
+		try {
+			diagramResource.save(createSaveOptions());
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+		GraphitiHelper.getInstance().setDiagram((Diagram) diagramResource.getContents().get((0)));
+		Diagram diagram = GraphitiHelper.getInstance().getDiagram();
+		diagramPathFile = ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(diagramResource.getURI().toPlatformString(true)));
 
-        // Adding relevant objects to the graphiti helper
-        SGSDiagramTypeProvider provider = new SGSDiagramTypeProvider();
+		// Adding relevant objects to the graphiti helper
+		SGSDiagramTypeProvider provider = new SGSDiagramTypeProvider();
 
-        try {
-            BasicNewResourceWizard.selectAndReveal(diagramPathFile, PlatformUI.getWorkbench()
-                    .getActiveWorkbenchWindow());
-            part = (SGSDiagramEditor) IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-                    .getActivePage(), diagramPathFile);
+		try {
+			BasicNewResourceWizard.selectAndReveal(diagramPathFile,
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow());
+			part = (SGSDiagramEditor) IDE
+					.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), diagramPathFile);
 
-            provider.init(diagram, part.getDiagramBehavior());
+			provider.init(diagram, part.getDiagramBehavior());
 
-            GraphitiHelper.getInstance().setFeatureProvider(provider.getFeatureProvider());
-            GraphitiHelper.getInstance().setDiagramContainer(part);
+			GraphitiHelper.getInstance().setFeatureProvider(provider.getFeatureProvider());
+			GraphitiHelper.getInstance().setDiagramContainer(part);
 
-        } catch (PartInitException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+		} catch (PartInitException e1) {
+			e1.printStackTrace();
+		}
 
-        return diagramResource;
-    }
+		return diagramResource;
+	}
 
-    /**
-     * Create save options.
-     * 
-     * @return the save options
-     */
-    private Map<?, ?> createSaveOptions() {
-        HashMap<String, Object> saveOptions = new HashMap<String, Object>();
-        saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
-        saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
-        return saveOptions;
-    }
+	/**
+	 * Create save options.
+	 * 
+	 * @return the save options
+	 */
+	private Map<?, ?> createSaveOptions() {
+		HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
+		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		return saveOptions;
+	}
 
-    private void addPEs(final Diagram diagram, ScenarioImpl scenario) {
-        for (PowerGridNode power : scenario.getContainsPGN()) {
-            addElements(diagram, power);
-        }
-        for (NetworkEntity network : scenario.getContainsNE()) {
-            addElements(diagram, network);
-            if (!network.getConnectedTo().isEmpty()) {
-                addNetworkEntityWithPowerConnections(diagram, getPeFromBusiness(diagram, network),
-                        network.getConnectedTo());
-            }
-        }
-        for (PhysicalConnection connection : scenario.getContainsC()) {
-            addConnection(diagram, connection);
+	private void addPEs(final Diagram diagram, SmartGridTopology scenario) {
+		for (PowerGridNode power : scenario.getContainsPGN()) {
+			addElements(diagram, power);
+		}
+		for (NetworkEntity network : scenario.getContainsNE()) {
+			addElements(diagram, network);
+			if (!network.getConnectedTo().isEmpty()) {
+				addNetworkEntityWithPowerConnections(diagram, getPeFromBusiness(diagram, network),
+						network.getConnectedTo());
+			}
+		}
+		for (PhysicalConnection connection : scenario.getContainsPC()) {
+			addConnection(diagram, connection);
 
-        }
-        for (LogicalCommunication communication : scenario.getContainsLC()) {
-            addConnection(diagram, communication);
-        }
-    }
+		}
+		for (LogicalCommunication communication : scenario.getContainsLC()) {
+			addConnection(diagram, communication);
+		}
+	}
 
-    private void addNetworkEntityWithPowerConnections(final Diagram diagram, final Shape entity,
-            final List<PowerGridNode> connections) {
+	private void addNetworkEntityWithPowerConnections(final Diagram diagram, final Shape entity,
+			final List<PowerGridNode> connections) {
 
-        CommandStack commandStack = editingDomain.getCommandStack();
-        commandStack.execute(new RecordingCommand(editingDomain) {
+		CommandStack commandStack = editingDomain.getCommandStack();
+		commandStack.execute(new RecordingCommand(editingDomain) {
 
-            @Override
-            protected void doExecute() {
+			@Override
+			protected void doExecute() {
 
-                for (Shape shape : diagram.getChildren()) {
-                    if (shape.getLink().getBusinessObjects().get(0) instanceof PowerGridNode) {
-                        PowerGridNode power = (PowerGridNode) shape.getLink().getBusinessObjects().get(0);
-                        for (PowerGridNode compare : connections) {
-                            if (power.getId() == compare.getId()) {
+				for (Shape shape : diagram.getChildren()) {
+					if (shape.getLink().getBusinessObjects().get(0) instanceof PowerGridNode) {
+						PowerGridNode power = (PowerGridNode) shape.getLink().getBusinessObjects().get(0);
+						for (PowerGridNode compare : connections) {
+							if (power.getId() == compare.getId()) {
 
-                                AddConnectionContext connContext = new AddConnectionContext(entity.getAnchors().get(0),
-                                        shape.getAnchors().get(0));
+								AddConnectionContext connContext = new AddConnectionContext(entity.getAnchors().get(0),
+										shape.getAnchors().get(0));
 
-                                // In this case the AddPowerConnectionFeature has to be used to
-                                // directly add a power connection to the diagram since
-                                // addIfPossible(context) cannot now the businessObject
-                                // "PowerConnection"
-                                AddPowerConnectionFeature feature = new AddPowerConnectionFeature(GraphitiHelper
-                                        .getInstance().getFeatureProvider());
-                                feature.add(connContext).setVisible(true);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
+								// In this case the AddPowerConnectionFeature
+								// has to be used to
+								// directly add a power connection to the
+								// diagram since
+								// addIfPossible(context) cannot now the
+								// businessObject
+								// "PowerConnection"
+								AddPowerConnectionFeature feature = new AddPowerConnectionFeature(
+										GraphitiHelper.getInstance().getFeatureProvider());
+								feature.add(connContext).setVisible(true);
+								break;
+							}
+						}
+					}
+				}
+			}
 
-        });
-    }
+		});
+	}
 
-    private void addElements(final Diagram diagram, Object newObject) {
-        AreaContext area = createAreaContext();
-        final AddContext add = new AddContext(area, newObject);
-        add.setTargetContainer(diagram);
-        add.setNewObject(newObject);
+	private void addElements(final Diagram diagram, Object newObject) {
+		AreaContext area = createAreaContext();
+		final AddContext add = new AddContext(area, newObject);
+		add.setTargetContainer(diagram);
+		add.setNewObject(newObject);
 
-        CommandStack commandStack = editingDomain.getCommandStack();
-        commandStack.execute(new RecordingCommand(editingDomain) {
+		CommandStack commandStack = editingDomain.getCommandStack();
+		commandStack.execute(new RecordingCommand(editingDomain) {
 
-            @Override
-            protected void doExecute() {
-                GraphitiHelper.getInstance().getFeatureProvider().addIfPossible(add);
-            }
+			@Override
+			protected void doExecute() {
+				GraphitiHelper.getInstance().getFeatureProvider().addIfPossible(add);
+			}
 
-        });
-    }
+		});
+	}
 
-    /*
-     * Only call this method with connect either instance of PhysicalConnection or
-     * LogicalCommunication
-     */
-    private void addConnection(final Diagram diagram, final Object connect) {
-        Shape first = null;
-        Shape second = null;
+	/*
+	 * Only call this method with connect either instance of PhysicalConnection
+	 * or LogicalCommunication
+	 */
+	private void addConnection(final Diagram diagram, final Object connect) {
+		Shape first = null;
+		Shape second = null;
 
-        // PhysicalConnection and LogicalCommunication don't have a common basis, getLinks() returns
-        // either a NetworkEntity or a CommunicationEntity. In our case the outcome doesn't matter
-        // but the cast is still necessary
-        if (connect instanceof PhysicalConnection) {
-            first = getPeFromBusiness(diagram, ((PhysicalConnection) connect).getLinks().get(0));
-            second = getPeFromBusiness(diagram, ((PhysicalConnection) connect).getLinks().get(1));
-        } else {
-            first = getPeFromBusiness(diagram, ((LogicalCommunication) connect).getLinks().get(0));
-            second = getPeFromBusiness(diagram, ((LogicalCommunication) connect).getLinks().get(1));
-        }
-        final Anchor firstAnchor = first.getAnchors().get(0);
-        final Anchor secondAnchor = second.getAnchors().get(0);
+		// PhysicalConnection and LogicalCommunication don't have a common
+		// basis, getLinks() returns
+		// either a NetworkEntity or a CommunicationEntity. In our case the
+		// outcome doesn't matter
+		// but the cast is still necessary
+		if (connect instanceof PhysicalConnection) {
+			first = getPeFromBusiness(diagram, ((PhysicalConnection) connect).getLinks().get(0));
+			second = getPeFromBusiness(diagram, ((PhysicalConnection) connect).getLinks().get(1));
+		} else {
+			first = getPeFromBusiness(diagram, ((LogicalCommunication) connect).getLinks().get(0));
+			second = getPeFromBusiness(diagram, ((LogicalCommunication) connect).getLinks().get(1));
+		}
+		final Anchor firstAnchor = first.getAnchors().get(0);
+		final Anchor secondAnchor = second.getAnchors().get(0);
 
-        CommandStack commandStack = editingDomain.getCommandStack();
-        commandStack.execute(new RecordingCommand(editingDomain) {
+		CommandStack commandStack = editingDomain.getCommandStack();
+		commandStack.execute(new RecordingCommand(editingDomain) {
 
-            @Override
-            protected void doExecute() {
-                AddConnectionContext conn = new AddConnectionContext(firstAnchor, secondAnchor);
-                conn.setNewObject(connect);
-                conn.setTargetContainer(diagram);
-                GraphitiHelper.getInstance().getFeatureProvider().addIfPossible(conn);
-            }
-        });
+			@Override
+			protected void doExecute() {
+				AddConnectionContext conn = new AddConnectionContext(firstAnchor, secondAnchor);
+				conn.setNewObject(connect);
+				conn.setTargetContainer(diagram);
+				GraphitiHelper.getInstance().getFeatureProvider().addIfPossible(conn);
+			}
+		});
 
-    }
+	}
 
-    /*
-     * Returns the shape corresponding to the given business object
-     */
-    private Shape getPeFromBusiness(Diagram d, Object business) {
-        Shape result = null;
-        for (Shape shape : d.getChildren()) {
-            if (shape.getLink().getBusinessObjects().get(0).equals(business)) {
-                result = shape;
-                break;
-            }
-        }
+	/*
+	 * Returns the shape corresponding to the given business object
+	 */
+	private Shape getPeFromBusiness(Diagram d, Object business) {
+		Shape result = null;
+		for (Shape shape : d.getChildren()) {
+			if (shape.getLink().getBusinessObjects().get(0).equals(business)) {
+				result = shape;
+				break;
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /*
-     * Creates a simple AreaContext. In further development, a graphic algorithm could be plugged in
-     */
-    private AreaContext createAreaContext() {
+	/*
+	 * Creates a simple AreaContext. In further development, a graphic algorithm
+	 * could be plugged in
+	 */
+	private AreaContext createAreaContext() {
 
-        AreaContext area = new AreaContext();
-        area.setLocation(100, 50);
+		AreaContext area = new AreaContext();
+		area.setLocation(100, 50);
 
-        return area;
-    }
+		return area;
+	}
 }

@@ -12,26 +12,26 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import smartgrid.graphiti.m2d.transformation.ModelToDiagram;
-import smartgridtopo.impl.ScenarioImpl;
+import smartgridtopo.SmartGridTopology;
 
 @SuppressWarnings("restriction")
 public class CreateDiagramHandler extends AbstractHandler {
 
-    public CreateDiagramHandler() {
-      //  this.setBaseEnabled(false);
-    }
-    
-    @Override
-    public Object execute(ExecutionEvent event) throws ExecutionException {
-        TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-        File emfFile = (File) selection.getFirstElement();
-        ResourceSet impl = new ResourceSetImpl();
+	public CreateDiagramHandler() {
+		// this.setBaseEnabled(false);
+	}
 
-        Resource resource = impl.getResource(URI.createFileURI(emfFile.getFullPath().toString()), true);
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
+		File emfFile = (File) selection.getFirstElement();
+		ResourceSet impl = new ResourceSetImpl();
 
-        new ModelToDiagram(emfFile.getProjectRelativePath().toString(), emfFile.getProject())
-                .initializeDiagram((ScenarioImpl) resource.getContents().get(0));
-        return null;
-    }
+		Resource resource = impl.getResource(URI.createFileURI(emfFile.getFullPath().toString()), true);
+
+		new ModelToDiagram(emfFile.getProjectRelativePath().toString(), emfFile.getProject())
+				.initializeDiagram((SmartGridTopology) resource.getContents().get(0));
+		return null;
+	}
 
 }
