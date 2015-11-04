@@ -3,15 +3,13 @@
  */
 package smartgrid.inputgenerator;
 
-
-
 import smartgrid.simcontrol.baselib.GenerationStyle;
 import smartgrid.simcontrol.interfaces.IInputGenerator;
 import smartgrid.simcontrol.interfaces.InputModelDTO;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputFactory;
 import smartgridinput.impl.SmartgridinputPackageImpl;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartgridtopoFactory;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
 
@@ -25,7 +23,6 @@ public class InputGenerator implements IInputGenerator {
 	 * 
 	 */
 	public InputGenerator() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/*
@@ -35,55 +32,23 @@ public class InputGenerator implements IInputGenerator {
 	 */
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public InputModelDTO generate(GenerationStyle desiredStyle,
-			int SmartMeterCount, int ControlCenterCount) {
+	public InputModelDTO generate(GenerationStyle desiredStyle, int SmartMeterCount, int ControlCenterCount) {
 
 		// Init Scenario State
 		SmartgridinputPackageImpl.init();
 		SmartgridinputFactory scenarioStateFactory = SmartgridinputFactory.eINSTANCE;
-		ScenarioState myScenarioStates = scenarioStateFactory
-				.createScenarioState();
+		ScenarioState myScenarioStates = scenarioStateFactory.createScenarioState();
 
 		// Init Scenario Topo
 		SmartgridtopoPackageImpl.init();
 		SmartgridtopoFactory scenarioTopoFactore = SmartgridtopoFactory.eINSTANCE;
-		Scenario myScenarioTopo = scenarioTopoFactore.createScenario();
+		SmartGridTopology myScenarioTopo = scenarioTopoFactore.createSmartGridTopology();
 
-		switch (desiredStyle) {
-
-		case BIG_CLUSTERS:
-
-			break;
-
-		case D3_TORUS_CLUSTER:
-
-			break;
-
-		case HYPERCUBE:
-
-			break;
-
-		case MANY_CLSUTERS:
-
-			break;
-
-		case RANDOM:
-
-			break;
-
-		}
-
-		InputModelDTO myDTO = new InputModelDTO(myScenarioTopo,
-				myScenarioStates);
+		InputModelDTO myDTO = new InputModelDTO(myScenarioTopo, myScenarioStates);
 
 		return myDTO;
 	}
-
-
-
 }
