@@ -19,10 +19,12 @@ import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputFactory;
 import smartgridtopo.NetworkEntity;
 import smartgridtopo.PowerGridNode;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 
 /**
- * This listener checks if the ScenarioModel is changed. If there is an input model, the listener will create a new input model bo for every new topo bo..
+ * This listener checks if the ScenarioModel is changed. If there is an input
+ * model, the listener will create a new input model bo for every new topo bo..
+ * 
  * @author mario
  *
  */
@@ -38,12 +40,13 @@ public class ScenarioModelChangedListener implements ResourceSetListener {
 		List<Notification> notifications = event.getNotifications();
 		for (final Notification notification : notifications) {
 			Object notifier = notification.getNotifier();
-			if (notifier instanceof Scenario && notification.getEventType() == Notification.ADD) {
-				for (final EObject obj : behavior.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+			if (notifier instanceof SmartGridTopology && notification.getEventType() == Notification.ADD) {
+				for (final EObject obj : behavior.getDiagramTypeProvider().getDiagram().getLink()
+						.getBusinessObjects()) {
 					if (obj instanceof ScenarioState) {
-						Runnable myRunnable = new Runnable(){
+						Runnable myRunnable = new Runnable() {
 
-							public void run(){
+							public void run() {
 								final TransactionalEditingDomain domain = behavior.getEditingDomain();
 								RecordingCommand c = new RecordingCommand(domain) {
 									@Override
@@ -66,7 +69,7 @@ public class ScenarioModelChangedListener implements ResourceSetListener {
 							}
 						};
 						Thread thread = new Thread(myRunnable);
-						thread.start();						
+						thread.start();
 					}
 				}
 			}
@@ -79,8 +82,7 @@ public class ScenarioModelChangedListener implements ResourceSetListener {
 	}
 
 	@Override
-	public Command transactionAboutToCommit(ResourceSetChangeEvent event)
-			throws RollbackException {
+	public Command transactionAboutToCommit(ResourceSetChangeEvent event) throws RollbackException {
 		return null;
 	}
 
@@ -98,7 +100,5 @@ public class ScenarioModelChangedListener implements ResourceSetListener {
 	public boolean isPostcommitOnly() {
 		return false;
 	}
-	
-	
 
 }

@@ -28,7 +28,7 @@ import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputFactory;
 import smartgridtopo.NetworkEntity;
 import smartgridtopo.PowerGridNode;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 
 /**
  * This class creates a new inputmodel instance.
@@ -39,143 +39,144 @@ import smartgridtopo.Scenario;
 
 public class InputModelCreator {
 
-    private IDiagramContainerUI diagramContainer;
+	private IDiagramContainerUI diagramContainer;
 
-    public InputModelCreator(IDiagramContainerUI dc) {
-        diagramContainer = dc;
-    }
+	public InputModelCreator(IDiagramContainerUI dc) {
+		diagramContainer = dc;
+	}
 
-    /**
-     * Creates a new input model instance.
-     * 
-     * @param isDefault
-     *            if parameter is true: a default model will becreated
-     * @return return code which button was selected
-     */
-    public int createNewInputModel(boolean isDefault) {
-        final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
-        final EList<EObject> boList = diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects();
+	/**
+	 * Creates a new input model instance.
+	 * 
+	 * @param isDefault
+	 *            if parameter is true: a default model will becreated
+	 * @return return code which button was selected
+	 */
+	public int createNewInputModel(boolean isDefault) {
+		final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
+		final EList<EObject> boList = diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
+				.getBusinessObjects();
 
-        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-        URI uri = null;
-        if (!isDefault) {
-            InputDialog dialog = new InputDialog(shell, "Create new scenario state model", "Type your model name", "",
-                    null);
-            int returnCode = dialog.open();
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		URI uri = null;
+		if (!isDefault) {
+			InputDialog dialog = new InputDialog(shell, "Create new scenario state model", "Type your model name", "",
+					null);
+			int returnCode = dialog.open();
 
-            if (returnCode == Window.CANCEL) {
-                return Window.CANCEL;
-            }
+			if (returnCode == Window.CANCEL) {
+				return Window.CANCEL;
+			}
 
-            uri = getCurrentUri().appendSegment(dialog.getValue() + ".smartgridinput");
-        } else {
-            // TODO clear button muss enabled werden -> schwierig -> deshalb custom actions disabled
-            // solange kein input modell geladen ist
-            uri = getCurrentUri().appendSegment("default.smartgridinput");
-            if (doesFileExist(uri.path(), shell)) {
-                return Window.CANCEL;
-            }
-        }
+			uri = getCurrentUri().appendSegment(dialog.getValue() + ".smartgridinput");
+		} else {
+			// TODO clear button muss enabled werden -> schwierig -> deshalb
+			// custom actions disabled
+			// solange kein input modell geladen ist
+			uri = getCurrentUri().appendSegment("default.smartgridinput");
+			if (doesFileExist(uri.path(), shell)) {
+				return Window.CANCEL;
+			}
+		}
 
-        // Remove current input model
-        for (int i = 0; i < boList.size(); i++) {
-            if (boList.get(i) instanceof ScenarioState) {
-                final int toremove = i;
-                RecordingCommand c = new RecordingCommand(domain) {
-                    @Override
-                    protected void doExecute() {
-                        boList.remove(toremove);
-                    }
-                };
-                domain.getCommandStack().execute(c);
-            }
-        }
+		// Remove current input model
+		for (int i = 0; i < boList.size(); i++) {
+			if (boList.get(i) instanceof ScenarioState) {
+				final int toremove = i;
+				RecordingCommand c = new RecordingCommand(domain) {
+					@Override
+					protected void doExecute() {
+						boList.remove(toremove);
+					}
+				};
+				domain.getCommandStack().execute(c);
+			}
+		}
 
-        // creates new input model depending on the current pictogram elements
-        final ResourceSet set = domain.getResourceSet();
+		// creates new input model depending on the current pictogram elements
+		final ResourceSet set = domain.getResourceSet();
 
-        final URI currentUri = uri;
-        RecordingCommand c = new RecordingCommand(domain) {
+		final URI currentUri = uri;
+		RecordingCommand c = new RecordingCommand(domain) {
 
-            @Override
-            protected void doExecute() {
-                Resource rs = set.createResource(currentUri);
-                rs.setTrackingModification(true);
-                ScenarioState domainModel = SmartgridinputFactory.eINSTANCE.createScenarioState();
+			@Override
+			protected void doExecute() {
+				Resource rs = set.createResource(currentUri);
+				rs.setTrackingModification(true);
+				ScenarioState domainModel = SmartgridinputFactory.eINSTANCE.createScenarioState();
 
-                for (EObject tmp : boList) {
-                    if (tmp instanceof Scenario) {
-                        domainModel.setScenario((Scenario) tmp);
-                    }
-                }
+				for (EObject tmp : boList) {
+					if (tmp instanceof SmartGridTopology) {
+						domainModel.setScenario((SmartGridTopology) tmp);
+					}
+				}
 
-                EList<Shape> shapes = diagramContainer.getDiagramTypeProvider().getDiagram().getChildren();
-                for (Shape shape : shapes) {
-                    EObject obj = shape.getLink().getBusinessObjects().get(0);
-                    if (obj instanceof NetworkEntity) {
-                        EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
-                        state.setOwner((NetworkEntity) obj);
-                        domainModel.getEntityStates().add(state);
-                    }
-                    if (obj instanceof PowerGridNode) {
-                        PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
-                        state.setOwner((PowerGridNode) obj);
-                        domainModel.getPowerStates().add(state);
-                    }
-                }
+				EList<Shape> shapes = diagramContainer.getDiagramTypeProvider().getDiagram().getChildren();
+				for (Shape shape : shapes) {
+					EObject obj = shape.getLink().getBusinessObjects().get(0);
+					if (obj instanceof NetworkEntity) {
+						EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
+						state.setOwner((NetworkEntity) obj);
+						domainModel.getEntityStates().add(state);
+					}
+					if (obj instanceof PowerGridNode) {
+						PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
+						state.setOwner((PowerGridNode) obj);
+						domainModel.getPowerStates().add(state);
+					}
+				}
 
-                rs.getContents().add(domainModel);
-                diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().add(domainModel);
-                try {
-                    rs.save(createSaveOptions());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        domain.getCommandStack().execute(c);
-        return Window.OK;
-    }
+				rs.getContents().add(domainModel);
+				diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().add(domainModel);
+				try {
+					rs.save(createSaveOptions());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		domain.getCommandStack().execute(c);
+		return Window.OK;
+	}
 
-    /**
-     * Retrieves the current uri of the project.
-     * 
-     * @return the current uri
-     */
-    private URI getCurrentUri() {
-        return diagramContainer.getDiagramEditorInput().getUri().trimSegments(1);
-    }
+	/**
+	 * Retrieves the current uri of the project.
+	 * 
+	 * @return the current uri
+	 */
+	private URI getCurrentUri() {
+		return diagramContainer.getDiagramEditorInput().getUri().trimSegments(1);
+	}
 
-    /**
-     * Create save options.
-     * 
-     * @return the save options
-     */
-    private Map<?, ?> createSaveOptions() {
-        HashMap<String, Object> saveOptions = new HashMap<String, Object>();
-        saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
-        saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
-        return saveOptions;
-    }
+	/**
+	 * Create save options.
+	 * 
+	 * @return the save options
+	 */
+	private Map<?, ?> createSaveOptions() {
+		HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
+		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		return saveOptions;
+	}
 
-    /**
-     * Checks if a a default input model already exist.
-     * 
-     * @param filePath
-     *            the current file path
-     * @param shell
-     *            the current swt shell
-     * @return true if a default model exists
-     */
-    private boolean doesFileExist(String filePath, Shell shell) {
-        File f = new File(filePath);
-        if (f.exists()) {
-            MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
-            messageBox.setMessage("Default input model already exists. Create a custom input model.");
-            messageBox.open();
-        }
-        return f.exists();
-    }
+	/**
+	 * Checks if a a default input model already exist.
+	 * 
+	 * @param filePath
+	 *            the current file path
+	 * @param shell
+	 *            the current swt shell
+	 * @return true if a default model exists
+	 */
+	private boolean doesFileExist(String filePath, Shell shell) {
+		File f = new File(filePath);
+		if (f.exists()) {
+			MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
+			messageBox.setMessage("Default input model already exists. Create a custom input model.");
+			messageBox.open();
+		}
+		return f.exists();
+	}
 
 }
