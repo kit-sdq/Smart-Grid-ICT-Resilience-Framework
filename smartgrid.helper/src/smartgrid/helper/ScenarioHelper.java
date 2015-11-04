@@ -20,7 +20,7 @@ import smartgridoutput.Cluster;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.LogicalCommunication;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
 
 /**
@@ -29,12 +29,9 @@ import smartgridtopo.impl.SmartgridtopoPackageImpl;
  */
 public final class ScenarioHelper {
 
-	
-	public static Scenario loadScenario(String path) {
-		Scenario s = null;
+	public static SmartGridTopology loadScenario(String path) {
+		SmartGridTopology s = null;
 		SmartgridtopoPackageImpl.init();
-
-		// Code Removed - Christian
 
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createFileURI(path), true);
@@ -42,9 +39,7 @@ public final class ScenarioHelper {
 		try {
 			EObject r = resource.getContents().get(0);
 			System.out.println("Klasse: " + r.getClass());
-			s = (Scenario) resource.getContents().get(0);
-
-			// for (PhysicalCo)
+			s = (SmartGridTopology) resource.getContents().get(0);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,20 +65,11 @@ public final class ScenarioHelper {
 		}
 		return input;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/**
-	 * Generates a Map the Keys are one certain NodeId and the
-	 * LinkedList<Integer> Element are all Nodes to which Key has a logical
-	 * Connection in the Scenario (Topology) Model @see
-	 * {@link smartgridtopo.Scenario}
+	 * Generates a Map the Keys are one certain NodeId and the LinkedList
+	 * <Integer> Element are all Nodes to which Key has a logical Connection in
+	 * the Scenario (Topology) Model @see {@link smartgridtopo.Scenario}
 	 * 
 	 * Attention these are the hardwired Connections ! the current EntityState
 	 * of the Network Entity is respected !!
@@ -94,8 +80,7 @@ public final class ScenarioHelper {
 	 * @return a Map with NodeID as Key and LinkedList<"NodeID"> of Keys logical
 	 *         Neighbor as Value
 	 */
-	public static Map<Integer, LinkedList<Integer>> genNeighborMapbyID(
-			Scenario mySmartGridTopo) {
+	public static Map<Integer, LinkedList<Integer>> genNeighborMapbyID(SmartGridTopology mySmartGridTopo) {
 		/*
 		 * Maps one Node (by ID) to his List of neighbor Nodes (also by ID)
 		 */
@@ -132,35 +117,26 @@ public final class ScenarioHelper {
 	 *            In that "Container" are the States to search for
 	 * @return the On State with given ID
 	 */
-	public static On findEntityOnStateFromID(int entityID,
-			ScenarioResult myScenarioResult) {
+	public static On findEntityOnStateFromID(int entityID, ScenarioResult myScenarioResult) {
 
 		boolean foundNodeID = false;
 
 		On foundEntity = null;
 
-		for (smartgridoutput.EntityState currentNode : myScenarioResult
-				.getEntityStates()) { // Alternative with foreach Cluster
-										// foreach On Entities ?? (Double
-										// foreach Loop! )
-
-			if (currentNode.getOwner().getId() == entityID
-					&& currentNode instanceof On) // Using only Entities that is
-													// On
-
-			{
+		// Alternative with foreach Cluster foreach On Entities ?? (Double
+		// foreach Loop!)
+		for (smartgridoutput.EntityState currentNode : myScenarioResult.getStates()) {
+			// Using only Entities that is On
+			if (currentNode.getOwner().getId() == entityID && currentNode instanceof On) {
 				foundEntity = (On) currentNode;
 				foundNodeID = true;
 
 				break;
 			}
-
 		}
-
 		// ID don't exists or found Entity has no On State
 		if (!foundNodeID) {
-			System.out
-					.println("[LocalHacker] provided ID not found or found Entity has no On State");
+			System.out.println("[LocalHacker] provided ID not found or found Entity has no On State");
 		}
 
 		return foundEntity;
@@ -187,12 +163,15 @@ public final class ScenarioHelper {
 	 * 
 	 * 
 	 * 
-	 * @param clusterToHack the Target Cluster in which are all Nodes located that have a (transitive) Connection between them
-	 * @param neighborIDList the hardwired Logical Connections List
-	 * @return Nodes that are in the intersection of the above Container --> These are my direct alive Neighbors
+	 * @param clusterToHack
+	 *            the Target Cluster in which are all Nodes located that have a
+	 *            (transitive) Connection between them
+	 * @param neighborIDList
+	 *            the hardwired Logical Connections List
+	 * @return Nodes that are in the intersection of the above Container -->
+	 *         These are my direct alive Neighbors
 	 */
-	public static LinkedList<On> getNeighborsFromCluster(Cluster clusterToHack,
-			LinkedList<Integer> neighborIDList) {
+	public static LinkedList<On> getNeighborsFromCluster(Cluster clusterToHack, LinkedList<Integer> neighborIDList) {
 
 		LinkedList<On> neighborOnList = new LinkedList<On>();
 
@@ -201,8 +180,7 @@ public final class ScenarioHelper {
 
 			// Are my Neighbors at my Cluster ? Otherwise they are gone
 			// (Destroyed or something)
-			if (neighborIDList.contains(ScenarioHelper
-					.getIDfromEntityOnState(clusterNode))) {
+			if (neighborIDList.contains(ScenarioHelper.getIDfromEntityOnState(clusterNode))) {
 
 				neighborOnList.add(clusterNode);
 			}
@@ -222,8 +200,7 @@ public final class ScenarioHelper {
 	 * 
 	 * @param value the Neighbor from "Key" Node
 	 */
-	private static void addNeighbors(Map<Integer, LinkedList<Integer>> IDLinks,
-			int key, int value) {
+	private static void addNeighbors(Map<Integer, LinkedList<Integer>> IDLinks, int key, int value) {
 		// Search "Key" --> Neighbor List "Values"
 		LinkedList<Integer> myNeighbor = IDLinks.get(key);
 
