@@ -11,21 +11,22 @@ import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
 import smartgrid.simcontrol.wrapper.powerloadsimulation.simulation.PowerLoadSimulation;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulation {
 
 	@Override
-	public ScenarioState run(Scenario smartGridTopo, ScenarioState impactAnalysisInput,
+	public ScenarioState run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput,
 			ScenarioResult impactAnalysisOutput) {
 		PowerLoadSimulation simulation = new PowerLoadSimulation();
-		
-		//TODO: Get smartMeterStates and cost functions for the "doSimulation"-method
-		
+
+		// TODO: Get smartMeterStates and cost functions for the
+		// "doSimulation"-method
+
 		List<PowerPerNode> list = simulation.doSimuation(null, null);
-		
-		//TODO: Convert PowerPerNode list to ScenarioState
-		
+
+		// TODO: Convert PowerPerNode list to ScenarioState
+
 		return null;
 	}
 
