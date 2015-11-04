@@ -5,20 +5,20 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 
 public interface IKritisSimulation {
 
-		/**
-		 * Runs the Kritis simulation
-		 * 
-		 * @param smartGridTopo
-		 * @param kritisInput
-		 * @return
-		 */
-	    public ScenarioResult run(Scenario smartGridTopo, ScenarioState kritisInput);
-	    
-		public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
-		
-		public String getName();
+	/**
+	 * Runs the Kritis simulation
+	 * 
+	 * @param smartGridTopo
+	 * @param kritisInput
+	 * @return
+	 */
+	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState kritisInput);
+
+	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
+
+	public String getName();
 }
