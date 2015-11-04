@@ -7,36 +7,37 @@ import org.eclipse.graphiti.util.ColorConstant;
 
 import smartgridsecurity.graphiti.helper.FeatureRepresentationHelper;
 import smartgridsecurity.graphiti.helper.UIDHelper;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Pattern to create smart meters.
+ * 
  * @author mario
  *
  */
 public class SmartMeterPattern extends AbstractFormPattern {
 
-    @Override
-    public boolean isMainBusinessObjectApplicable(final Object mainBusinessObject) {
-        return mainBusinessObject instanceof SmartMeter;
-    }
+	@Override
+	public boolean isMainBusinessObjectApplicable(final Object mainBusinessObject) {
+		return mainBusinessObject instanceof SmartMeter;
+	}
 
-    @Override
-    public Object[] create(final ICreateContext context) {
-    	addScenario();
-    	Scenario container = (Scenario) getBusinessObjectForPictogramElement(getDiagram());
-        final SmartMeter node = SmartgridtopoFactory.eINSTANCE.createSmartMeter();
-        node.setId(UIDHelper.generateUID());
+	@Override
+	public Object[] create(final ICreateContext context) {
+		addScenario();
+		SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
+		final SmartMeter node = SmartgridtopoFactory.eINSTANCE.createSmartMeter();
+		node.setId(UIDHelper.generateUID());
 
-    	container.getContainsNE().add(node);
+		container.getContainsNE().add(node);
 
-    	this.addGraphicalRepresentation(context, node);
+		this.addGraphicalRepresentation(context, node);
 
-    	// return newly created business object(s)
-    	return new Object[] { node };
-    }
+		// return newly created business object(s)
+		return new Object[] { node };
+	}
 
 	@Override
 	protected String getName() {
@@ -44,22 +45,21 @@ public class SmartMeterPattern extends AbstractFormPattern {
 	}
 
 	@Override
-	protected GraphicsAlgorithm getGraphicalPatternRepresentation(
-			ContainerShape containerShape) {
-        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(255, 0, 0)));
+	protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
+		return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(140, 0, 0)),
+				this.manageColor(new ColorConstant(255, 0, 0)));
 	}
 
 	@Override
-	protected void linkObjects(ContainerShape containerShape,
-			Object businessObject) {
-		 SmartMeter addedNode = (SmartMeter) businessObject;
-		 if (addedNode.eResource() == null) {
-	            // getDiagram().eResource().getContents().add(addedNode);
-	            throw new RuntimeException("BO not in Resource! (unecpectedly)");
-	        }
+	protected void linkObjects(ContainerShape containerShape, Object businessObject) {
+		SmartMeter addedNode = (SmartMeter) businessObject;
+		if (addedNode.eResource() == null) {
+			// getDiagram().eResource().getContents().add(addedNode);
+			throw new RuntimeException("BO not in Resource! (unecpectedly)");
+		}
 
-	        // create link and wire it
-	        this.link(containerShape, addedNode);
-		
+		// create link and wire it
+		this.link(containerShape, addedNode);
+
 	}
 }

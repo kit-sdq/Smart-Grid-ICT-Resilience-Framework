@@ -54,7 +54,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 	private final String editorId;
 	private final IWorkspace workspace;
 	private final CreateNewSmartgridDiagramPage newDiagramPage;
-	private final IWorkbench  workbench;
+	private final IWorkbench workbench;
 
 	public SmartgridDiagramWizard() {
 		newDiagramPage = new CreateNewSmartgridDiagramPage();
@@ -62,16 +62,16 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 		editorId = "SmartGridSecurityDiagramType";
 		workbench = PlatformUI.getWorkbench();
 	}
-	
+
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		this.selection = selection; 
-        setNeedsProgressMonitor(true);
-	}	
+		this.selection = selection;
+		setNeedsProgressMonitor(true);
+	}
 
 	@Override
 	public void addPages() {
-		super.addPages();	 
+		super.addPages();
 		addPage(newDiagramPage);
 	}
 
@@ -79,17 +79,15 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 	public boolean performFinish() {
 		final String fileName = newDiagramPage.getFileName();
 		final URI uri = URI.createPlatformResourceURI(getCurrentProjectPath() + "/" + fileName + ".sgdiagram", true);
-        final URI modelUri = URI.createPlatformResourceURI(getCurrentProjectPath() + "/" + fileName + ".smartgridtopo",
-                true);
-		
+		final URI modelUri = URI.createPlatformResourceURI(getCurrentProjectPath() + "/" + fileName + ".smartgridtopo",
+				true);
+
 		// create diagram and open it
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 
 			@Override
-			protected void execute(final IProgressMonitor monitor) throws CoreException,
-			InterruptedException {
-				Resource diagramResource = createDiagram(uri, fileName,
-						modelUri, monitor);
+			protected void execute(final IProgressMonitor monitor) throws CoreException, InterruptedException {
+				Resource diagramResource = createDiagram(uri, fileName, modelUri, monitor);
 				if (diagramResource != null && editorId != null) {
 					try {
 						openDiagram(diagramResource);
@@ -99,7 +97,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 				}
 			}
 		};
-		
+
 		try {
 			getContainer().run(false, true, op);
 		} catch (InterruptedException exception) {
@@ -114,17 +112,21 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 
 	/**
 	 * Creates the diagram
-	 * @param diagramURI the diagram uri
-	 * @param name the diagram name
-	 * @param modelURI the model uri
-	 * @param progressMonitor the process monitor
+	 * 
+	 * @param diagramURI
+	 *            the diagram uri
+	 * @param name
+	 *            the diagram name
+	 * @param modelURI
+	 *            the model uri
+	 * @param progressMonitor
+	 *            the process monitor
 	 * @return the created diagram
 	 */
 	private Resource createDiagram(final URI diagramURI, final String name, final URI modelURI,
 			final IProgressMonitor progressMonitor) {
 		progressMonitor.beginTask("Creating diagram and model files", 2);
-		TransactionalEditingDomain editingDomain = GraphitiUi.getEmfService()
-				.createResourceSetAndEditingDomain();
+		TransactionalEditingDomain editingDomain = GraphitiUi.getEmfService().createResourceSetAndEditingDomain();
 		ResourceSet resourceSet = editingDomain.getResourceSet();
 		CommandStack commandStack = editingDomain.getCommandStack();
 		// create resources for the diagram and domain model files
@@ -135,14 +137,13 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 				@Override
 				protected void doExecute() {
 					// create diagram and business models
-					createModel(diagramResource, name, modelResource,
-							modelURI.lastSegment());
+					createModel(diagramResource, name, modelResource, modelURI.lastSegment());
 				}
 			});
 		}
 		progressMonitor.worked(1);
 		try {
-			//save models
+			// save models
 			modelResource.save(createSaveOptions());
 			diagramResource.save(createSaveOptions());
 		} catch (IOException exception) {
@@ -154,21 +155,24 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 
 	/**
 	 * Create save options.
+	 * 
 	 * @return the save options
 	 */
 	public static Map<?, ?> createSaveOptions() {
 		HashMap<String, Object> saveOptions = new HashMap<String, Object>();
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
-		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-				Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		return saveOptions;
 	}
 
-/**
- * Opens the created diagram
- * @param diagramResource the diagram resource
- * @throws PartInitException if diagram could not be opened
- */
+	/**
+	 * Opens the created diagram
+	 * 
+	 * @param diagramResource
+	 *            the diagram resource
+	 * @throws PartInitException
+	 *             if diagram could not be opened
+	 */
 	private void openDiagram(final Resource diagramResource) throws PartInitException {
 		IFile file = workspace.getRoot().getFile(new Path(diagramResource.getURI().toPlatformString(true)));
 		selectAndReveal(file);
@@ -177,33 +181,39 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 
 	/**
 	 * Creates diagram and business models
-	 * @param diagramResource the diagram resource
-	 * @param diagramName the diagram file name
-	 * @param modelResource the model resource
-	 * @param modelName the model name
+	 * 
+	 * @param diagramResource
+	 *            the diagram resource
+	 * @param diagramName
+	 *            the diagram file name
+	 * @param modelResource
+	 *            the model resource
+	 * @param modelName
+	 *            the model name
 	 */
-	private void createModel(final Resource diagramResource, final String diagramName,
-			final Resource modelResource, final String modelName) {
-        // create model resource
+	private void createModel(final Resource diagramResource, final String diagramName, final Resource modelResource,
+			final String modelName) {
+		// create model resource
 		modelResource.setTrackingModification(true);
-        EObject domainModel = SmartgridtopoFactory.eINSTANCE.createScenario();
-        modelResource.getContents().add(domainModel);
-        
-        //create diagram resource
-        diagramResource.setTrackingModification(true);
-        Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + hashCode(), diagramName,
-                10, true);
-        diagram.setDiagramTypeId(editorId);
-        
-        //link model and diagram
-        PictogramLink link = PictogramsFactory.eINSTANCE.createPictogramLink();
-        link.setPictogramElement(diagram);
-        link.getBusinessObjects().add(domainModel);
-        diagramResource.getContents().add(diagram);
+		EObject domainModel = SmartgridtopoFactory.eINSTANCE.createSmartGridTopology();
+		modelResource.getContents().add(domainModel);
+
+		// create diagram resource
+		diagramResource.setTrackingModification(true);
+		Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + hashCode(), diagramName, 10, true);
+		diagram.setDiagramTypeId(editorId);
+
+		// link model and diagram
+		PictogramLink link = PictogramsFactory.eINSTANCE.createPictogramLink();
+		link.setPictogramElement(diagram);
+		link.getBusinessObjects().add(domainModel);
+		diagramResource.getContents().add(diagram);
 	}
 
 	/**
-	 * Returns the the path of the current selected project. This code was taken from NewDiagramPage class of spray.
+	 * Returns the the path of the current selected project. This code was taken
+	 * from NewDiagramPage class of spray.
+	 * 
 	 * @return the path
 	 */
 	private String getCurrentProjectPath() {
@@ -225,30 +235,29 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 			container = resource.getParent();
 		return container.getFullPath().toString();
 	}
-	
-    public void selectAndReveal(IFile file) {
-        BasicNewResourceWizard.selectAndReveal(file, workbench.getActiveWorkbenchWindow());
-    }
 
-    /**
-     * @param shell
-     *            the parent shell. May not be <code>null</code>
-     * @param file
-     *            that should be selected. May not be <code>null</code>.
-     */
-    public void openFileToEdit(final Shell shell, final IFile file) {
-        shell.getDisplay().asyncExec(new Runnable() {
-            @Override
-            public void run() {
-                final IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
-                try {
-                    IDE.openEditor(page, file, true);
-                } catch (final PartInitException e) {
-                	System.out.println("Throws exception");
-                }
-            }
-        });
-    }
+	public void selectAndReveal(IFile file) {
+		BasicNewResourceWizard.selectAndReveal(file, workbench.getActiveWorkbenchWindow());
+	}
 
+	/**
+	 * @param shell
+	 *            the parent shell. May not be <code>null</code>
+	 * @param file
+	 *            that should be selected. May not be <code>null</code>.
+	 */
+	public void openFileToEdit(final Shell shell, final IFile file) {
+		shell.getDisplay().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				final IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
+				try {
+					IDE.openEditor(page, file, true);
+				} catch (final PartInitException e) {
+					System.out.println("Throws exception");
+				}
+			}
+		});
+	}
 
 }

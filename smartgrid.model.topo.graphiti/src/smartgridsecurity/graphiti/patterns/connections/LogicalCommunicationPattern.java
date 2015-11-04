@@ -11,20 +11,22 @@ import org.eclipse.graphiti.util.IColorConstant;
 
 import smartgridtopo.CommunicatingEntity;
 import smartgridtopo.LogicalCommunication;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Connection pattern to create a logical connection.
+ * 
  * @author mario
  *
  */
 public class LogicalCommunicationPattern extends AbstractConnection {
 
-	
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.graphiti.pattern.AbstractBasePattern#canAdd(org.eclipse.graphiti.features.context.IAddContext)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.graphiti.pattern.AbstractBasePattern#canAdd(org.eclipse.
+	 * graphiti.features.context.IAddContext)
 	 */
 	@Override
 	public boolean canAdd(IAddContext context) {
@@ -34,57 +36,64 @@ public class LogicalCommunicationPattern extends AbstractConnection {
 		IAddConnectionContext acc = (IAddConnectionContext) context;
 		return null != acc.getNewObject() && acc.getNewObject() instanceof LogicalCommunication;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.graphiti.pattern.AbstractConnectionPattern#create(org.eclipse.graphiti.features.context.ICreateConnectionContext)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.graphiti.pattern.AbstractConnectionPattern#create(org.eclipse
+	 * .graphiti.features.context.ICreateConnectionContext)
 	 */
 	@Override
 	public Connection create(ICreateConnectionContext context) {
 		// Get source and target nodes
-		
+
 		// Create new role and add to contents
-        LogicalCommunication newRole = SmartgridtopoFactory.eINSTANCE.createLogicalCommunication();
+		LogicalCommunication newRole = SmartgridtopoFactory.eINSTANCE.createLogicalCommunication();
 
 		// add to resources
-        Scenario scenario = (Scenario) getBusinessObjectForPictogramElement(getDiagram());
-        scenario.getContainsLC().add(newRole);
+		SmartGridTopology scenario = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
+		scenario.getContainsLC().add(newRole);
 
 		// Get anchors
 		Anchor sourceAnchor = context.getSourceAnchor();
 		Anchor targetAnchor = context.getTargetAnchor();
-		
+
 		newRole.getLinks().add((CommunicatingEntity) getBoFromAnchor(sourceAnchor));
 		newRole.getLinks().add((CommunicatingEntity) getBoFromAnchor(targetAnchor));
-		AddConnectionContext addContext = new AddConnectionContext(
-				sourceAnchor, targetAnchor);
+		AddConnectionContext addContext = new AddConnectionContext(sourceAnchor, targetAnchor);
 		addContext.setNewObject(newRole);
 
-		Connection connection = (Connection) getFeatureProvider()
-				.addIfPossible(addContext);
-		
+		Connection connection = (Connection) getFeatureProvider().addIfPossible(addContext);
+
 		return connection;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.graphiti.pattern.AbstractConnectionPattern#canStartConnection(org.eclipse.graphiti.features.context.ICreateConnectionContext)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.graphiti.pattern.AbstractConnectionPattern#canStartConnection
+	 * (org.eclipse.graphiti.features.context.ICreateConnectionContext)
 	 */
 	@Override
 	public boolean canStartConnection(ICreateConnectionContext context) {
-		Object sourceElement = getBusinessObjectForPictogramElement(context
-				.getSourcePictogramElement());
+		Object sourceElement = getBusinessObjectForPictogramElement(context.getSourcePictogramElement());
 		return sourceElement instanceof CommunicatingEntity;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.graphiti.pattern.AbstractConnectionPattern#canCreate(org.eclipse.graphiti.features.context.ICreateConnectionContext)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.graphiti.pattern.AbstractConnectionPattern#canCreate(org.
+	 * eclipse.graphiti.features.context.ICreateConnectionContext)
 	 */
 	@Override
 	public boolean canCreate(ICreateConnectionContext context) {
 		// Get source and target picto elements
-		PictogramElement sourcePictogramElement = context
-				.getSourcePictogramElement();
-		PictogramElement targetPictogramElement = context
-				.getTargetPictogramElement();
+		PictogramElement sourcePictogramElement = context.getSourcePictogramElement();
+		PictogramElement targetPictogramElement = context.getTargetPictogramElement();
 
 		// False if one is null
 		if (sourcePictogramElement == null || targetPictogramElement == null) {
@@ -103,8 +112,11 @@ public class LogicalCommunicationPattern extends AbstractConnection {
 		return sourceIsCorrect && targetIsCorrect;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.graphiti.pattern.AbstractConnectionPattern#getCreateName()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.graphiti.pattern.AbstractConnectionPattern#getCreateName()
 	 */
 	@Override
 	public String getCreateName() {
@@ -113,7 +125,7 @@ public class LogicalCommunicationPattern extends AbstractConnection {
 
 	@Override
 	protected IColorConstant getConnectionColor() {
-        return IColorConstant.DARK_GREEN;
+		return IColorConstant.DARK_GREEN;
 	}
 
 }
