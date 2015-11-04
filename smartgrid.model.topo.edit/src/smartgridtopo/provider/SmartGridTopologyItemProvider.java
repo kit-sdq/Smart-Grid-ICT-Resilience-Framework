@@ -11,6 +11,8 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,16 +24,17 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import smartgridtopo.NetworkNodeType;
+import smartgridtopo.SmartGridTopology;
+import smartgridtopo.SmartgridtopoFactory;
 import smartgridtopo.SmartgridtopoPackage;
 
 /**
- * This is the item provider adapter for a {@link smartgridtopo.NetworkNodeType} object.
+ * This is the item provider adapter for a {@link smartgridtopo.SmartGridTopology} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NetworkNodeTypeItemProvider 
+public class SmartGridTopologyItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -45,7 +48,7 @@ public class NetworkNodeTypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NetworkNodeTypeItemProvider(AdapterFactory adapterFactory) {
+	public SmartGridTopologyItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,7 +65,6 @@ public class NetworkNodeTypeItemProvider
 
 			addIdPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
-			addIsAPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -112,36 +114,47 @@ public class NetworkNodeTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Is A feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIsAPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_NetworkNodeType_IsA_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NetworkNodeType_IsA_feature", "_UI_NetworkNodeType_type"),
-				 SmartgridtopoPackage.Literals.NETWORK_NODE_TYPE__IS_A,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_NE);
+			childrenFeatures.add(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_PGN);
+			childrenFeatures.add(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_PC);
+			childrenFeatures.add(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_LC);
+		}
+		return childrenFeatures;
 	}
 
 	/**
-	 * This returns NetworkNodeType.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * This returns SmartGridTopology.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/NetworkNodeType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SmartGridTopology"));
 	}
 
 	/**
@@ -152,10 +165,10 @@ public class NetworkNodeTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((NetworkNodeType)object).getName();
+		String label = ((SmartGridTopology)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_NetworkNodeType_type") :
-			getString("_UI_NetworkNodeType_type") + " " + label;
+			getString("_UI_SmartGridTopology_type") :
+			getString("_UI_SmartGridTopology_type") + " " + label;
 	}
 	
 
@@ -170,10 +183,16 @@ public class NetworkNodeTypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(NetworkNodeType.class)) {
-			case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
-			case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
+		switch (notification.getFeatureID(SmartGridTopology.class)) {
+			case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__ID:
+			case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_NE:
+			case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_PGN:
+			case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_PC:
+			case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_LC:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -189,6 +208,46 @@ public class NetworkNodeTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_NE,
+				 SmartgridtopoFactory.eINSTANCE.createSmartMeter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_NE,
+				 SmartgridtopoFactory.eINSTANCE.createNetworkNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_NE,
+				 SmartgridtopoFactory.eINSTANCE.createControlCenter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_NE,
+				 SmartgridtopoFactory.eINSTANCE.createGenericController()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_NE,
+				 SmartgridtopoFactory.eINSTANCE.createInterCom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_PGN,
+				 SmartgridtopoFactory.eINSTANCE.createPowerGridNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_PC,
+				 SmartgridtopoFactory.eINSTANCE.createPhysicalConnection()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SmartgridtopoPackage.Literals.SMART_GRID_TOPOLOGY__CONTAINS_LC,
+				 SmartgridtopoFactory.eINSTANCE.createLogicalCommunication()));
 	}
 
 	/**
