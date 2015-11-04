@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="SmartGridSecurityDiagramType" name="example4" snapToGrid="true" pictogramLinks="//@children.0/@link //@children.1/@link //@children.2/@link //@children.3/@link //@children.4/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@children.5/@link" version="0.10.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="SmartGridSecurityDiagramType" name="example4" snapToGrid="true" pictogramLinks="//@children.0/@link //@children.1/@link //@children.2/@link //@children.3/@link //@children.4/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@children.5/@link" version="0.12.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
     <businessObjects href="example4.smartgridtopo#/"/>
@@ -19,7 +19,7 @@
     </link>
     <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2 //@connections.3 //@connections.5"/>
   </children>
-  <children xsi:type="pi:ContainerShape" active="true">
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="560" y="260"/>
     <link>
       <businessObjects href="example4.smartgridtopo#682240795"/>
@@ -129,4 +129,5 @@
   <colors red="255" green="255"/>
   <colors blue="255"/>
   <colors green="127"/>
+  <colors red="225" green="200" blue="200"/>
 </pi:Diagram>
