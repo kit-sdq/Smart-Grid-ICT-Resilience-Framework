@@ -13,15 +13,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import smartgridinput.ScenarioState;
 import smartgridinput.impl.SmartgridinputPackageImpl;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
 //import smartgrid.simcontrol.*; //Imports the SimControl Package to use the Interface based hook --to be changed (eventually) to Extension Point based 
 //SimControl Approach was outsourced --see smartgrid.simcontrol
-
-
-
-
-
 
 /**
  * This Class is the Delegate that launches an Impact Analysis.
@@ -32,89 +27,61 @@ import smartgridtopo.impl.SmartgridtopoPackageImpl;
  * @author Christian (modified)
  *
  */
-public class LaunchConfigurationDelegate1 implements
-		ILaunchConfigurationDelegate {
-
-	
-
-	
+public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegate {
 
 	/**
-	 * {@inheritDoc}<p>
+	 * {@inheritDoc}
+	 * <p>
 	 * 
-	 * Launches an Impact Analysis with the given Launch Configuration
-	 * See {@link GraphAnalyzer} for Details about the Analysis
+	 * Launches an Impact Analysis with the given Launch Configuration See
+	 * {@link GraphAnalyzer} for Details about the Analysis
 	 */
-	public void launch(ILaunchConfiguration configuration, String mode,
-			ILaunch launch, IProgressMonitor monitor) throws CoreException {
-		
+	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
+			throws CoreException {
+
 		System.out.println("GELADEN");
 		System.out.println("Finde Parameter");
-		
+
 		String inputPath = configuration.getAttribute("inputPath", "");
 		String outputPath = configuration.getAttribute("outputPath", "");
 		String topoPath = configuration.getAttribute("topologyPath", "");
 		System.out.println("Input : " + inputPath);
 		System.out.println("Topology : " + topoPath);
-		
 
 		ScenarioState initialState = loadInput(inputPath);
-		Scenario topo = loadScenario(topoPath);
-        
-		
-		
+		SmartGridTopology topo = loadScenario(topoPath);
+
 		GraphAnalyzer ana = new GraphAnalyzer(outputPath);
-        ana.analyze(topo, initialState);
-        
-        
-  
-    
-  //Code Removed Christian
-  
-       
+		ana.analyze(topo, initialState);
 	}
-	
-	// http://www.vogella.com/tutorials/EclipseEMFPersistence/article.html#javacode_load
 
-	//Code Removed - Christian
-	
-	
-	
-	/*
-	 * Private Methods
-	 */
-	
-	
-	private Scenario loadScenario(String path) {
-		Scenario s = null;
+	private SmartGridTopology loadScenario(String path) {
+		SmartGridTopology s = null;
 		SmartgridtopoPackageImpl.init();
-		
-		//Code Removed - Christian
-	    
-	    ResourceSet resSet =  new ResourceSetImpl();
-	    Resource resource = resSet.getResource(URI.createFileURI(path), true);
-	    
-	    try {
-	    	EObject r =  resource.getContents().get(0);
-	        System.out.println("Klasse: " + r.getClass());
-	        s = (Scenario) resource.getContents().get(0);
 
-	        //for (PhysicalCo)
+		// Code Removed - Christian
 
-	    } catch (Exception e) {
-	    	e.printStackTrace();
-	    }
-	    return s;
+		ResourceSet resSet = new ResourceSetImpl();
+		Resource resource = resSet.getResource(URI.createFileURI(path), true);
+
+		try {
+			EObject r = resource.getContents().get(0);
+			System.out.println("Klasse: " + r.getClass());
+			s = (SmartGridTopology) resource.getContents().get(0);
+
+			// for (PhysicalCo)
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return s;
 	}
-	
-	
 
 	private ScenarioState loadInput(String path) {
 		ScenarioState input = null;
 		SmartgridinputPackageImpl.init();
 
-		//Code Removed - Christian
-
+		// Code Removed - Christian
 
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createFileURI(path), true);
@@ -128,7 +95,6 @@ public class LaunchConfigurationDelegate1 implements
 		}
 		return input;
 	}
-	
-	
-// Code Removed Christian
+
+	// Code Removed Christian
 }
