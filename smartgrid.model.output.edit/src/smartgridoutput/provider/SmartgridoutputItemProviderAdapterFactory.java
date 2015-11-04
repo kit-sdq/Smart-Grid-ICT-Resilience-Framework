@@ -33,287 +33,287 @@ import smartgridoutput.util.SmartgridoutputAdapterFactory;
  * @generated
  */
 public class SmartgridoutputItemProviderAdapterFactory extends SmartgridoutputAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
-    /**
-     * This keeps track of the root adapter factory that delegates to this adapter factory.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected ComposedAdapterFactory parentAdapterFactory;
+	/**
+	 * This keeps track of the root adapter factory that delegates to this adapter factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComposedAdapterFactory parentAdapterFactory;
 
-    /**
-     * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	/**
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
-    /**
-     * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	/**
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
-    /**
-     * This constructs an instance.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public SmartgridoutputItemProviderAdapterFactory() {
-        supportedTypes.add(IEditingDomainItemProvider.class);
-        supportedTypes.add(IStructuredItemContentProvider.class);
-        supportedTypes.add(ITreeItemContentProvider.class);
-        supportedTypes.add(IItemLabelProvider.class);
-        supportedTypes.add(IItemPropertySource.class);
-    }
+	/**
+	 * This constructs an instance.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SmartgridoutputItemProviderAdapterFactory() {
+		supportedTypes.add(IEditingDomainItemProvider.class);
+		supportedTypes.add(IStructuredItemContentProvider.class);
+		supportedTypes.add(ITreeItemContentProvider.class);
+		supportedTypes.add(IItemLabelProvider.class);
+		supportedTypes.add(IItemPropertySource.class);
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link smartgridoutput.ScenarioResult} instances.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected ScenarioResultItemProvider scenarioResultItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link smartgridoutput.ScenarioResult} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScenarioResultItemProvider scenarioResultItemProvider;
 
-    /**
-     * This creates an adapter for a {@link smartgridoutput.ScenarioResult}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createScenarioResultAdapter() {
-        if (scenarioResultItemProvider == null) {
-            scenarioResultItemProvider = new ScenarioResultItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link smartgridoutput.ScenarioResult}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScenarioResultAdapter() {
+		if (scenarioResultItemProvider == null) {
+			scenarioResultItemProvider = new ScenarioResultItemProvider(this);
+		}
 
-        return scenarioResultItemProvider;
-    }
+		return scenarioResultItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link smartgridoutput.Online} instances.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected OnlineItemProvider onlineItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link smartgridoutput.Online} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OnlineItemProvider onlineItemProvider;
 
-    /**
-     * This creates an adapter for a {@link smartgridoutput.Online}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createOnlineAdapter() {
-        if (onlineItemProvider == null) {
-            onlineItemProvider = new OnlineItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link smartgridoutput.Online}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOnlineAdapter() {
+		if (onlineItemProvider == null) {
+			onlineItemProvider = new OnlineItemProvider(this);
+		}
 
-        return onlineItemProvider;
-    }
+		return onlineItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link smartgridoutput.Destroyed} instances.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected DestroyedItemProvider destroyedItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link smartgridoutput.Defect} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DefectItemProvider defectItemProvider;
 
-    /**
-     * This creates an adapter for a {@link smartgridoutput.Destroyed}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createDestroyedAdapter() {
-        if (destroyedItemProvider == null) {
-            destroyedItemProvider = new DestroyedItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link smartgridoutput.Defect}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDefectAdapter() {
+		if (defectItemProvider == null) {
+			defectItemProvider = new DefectItemProvider(this);
+		}
 
-        return destroyedItemProvider;
-    }
+		return defectItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link smartgridoutput.NoPower} instances.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected NoPowerItemProvider noPowerItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link smartgridoutput.NoPower} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NoPowerItemProvider noPowerItemProvider;
 
-    /**
-     * This creates an adapter for a {@link smartgridoutput.NoPower}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createNoPowerAdapter() {
-        if (noPowerItemProvider == null) {
-            noPowerItemProvider = new NoPowerItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link smartgridoutput.NoPower}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNoPowerAdapter() {
+		if (noPowerItemProvider == null) {
+			noPowerItemProvider = new NoPowerItemProvider(this);
+		}
 
-        return noPowerItemProvider;
-    }
+		return noPowerItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link smartgridoutput.NoUplink} instances.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected NoUplinkItemProvider noUplinkItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link smartgridoutput.NoUplink} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NoUplinkItemProvider noUplinkItemProvider;
 
-    /**
-     * This creates an adapter for a {@link smartgridoutput.NoUplink}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createNoUplinkAdapter() {
-        if (noUplinkItemProvider == null) {
-            noUplinkItemProvider = new NoUplinkItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link smartgridoutput.NoUplink}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNoUplinkAdapter() {
+		if (noUplinkItemProvider == null) {
+			noUplinkItemProvider = new NoUplinkItemProvider(this);
+		}
 
-        return noUplinkItemProvider;
-    }
+		return noUplinkItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link smartgridoutput.Cluster} instances.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected ClusterItemProvider clusterItemProvider;
+	/**
+	 * This keeps track of the one adapter used for all {@link smartgridoutput.Cluster} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ClusterItemProvider clusterItemProvider;
 
-    /**
-     * This creates an adapter for a {@link smartgridoutput.Cluster}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter createClusterAdapter() {
-        if (clusterItemProvider == null) {
-            clusterItemProvider = new ClusterItemProvider(this);
-        }
+	/**
+	 * This creates an adapter for a {@link smartgridoutput.Cluster}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createClusterAdapter() {
+		if (clusterItemProvider == null) {
+			clusterItemProvider = new ClusterItemProvider(this);
+		}
 
-        return clusterItemProvider;
-    }
+		return clusterItemProvider;
+	}
 
-    /**
-     * This returns the root adapter factory that contains this factory.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public ComposeableAdapterFactory getRootAdapterFactory() {
-        return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-    }
+	/**
+	 * This returns the root adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComposeableAdapterFactory getRootAdapterFactory() {
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+	}
 
-    /**
-     * This sets the composed adapter factory that contains this factory.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-        this.parentAdapterFactory = parentAdapterFactory;
-    }
+	/**
+	 * This sets the composed adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+		this.parentAdapterFactory = parentAdapterFactory;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public boolean isFactoryForType(Object type) {
-        return supportedTypes.contains(type) || super.isFactoryForType(type);
-    }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isFactoryForType(Object type) {
+		return supportedTypes.contains(type) || super.isFactoryForType(type);
+	}
 
-    /**
-     * This implementation substitutes the factory itself as the key for the adapter.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Adapter adapt(Notifier notifier, Object type) {
-        return super.adapt(notifier, this);
-    }
+	/**
+	 * This implementation substitutes the factory itself as the key for the adapter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter adapt(Notifier notifier, Object type) {
+		return super.adapt(notifier, this);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Object adapt(Object object, Object type) {
-        if (isFactoryForType(type)) {
-            Object adapter = super.adapt(object, type);
-            if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-                return adapter;
-            }
-        }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object adapt(Object object, Object type) {
+		if (isFactoryForType(type)) {
+			Object adapter = super.adapt(object, type);
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
+				return adapter;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * This adds a listener.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public void addListener(INotifyChangedListener notifyChangedListener) {
-        changeNotifier.addListener(notifyChangedListener);
-    }
+	/**
+	 * This adds a listener.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void addListener(INotifyChangedListener notifyChangedListener) {
+		changeNotifier.addListener(notifyChangedListener);
+	}
 
-    /**
-     * This removes a listener.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public void removeListener(INotifyChangedListener notifyChangedListener) {
-        changeNotifier.removeListener(notifyChangedListener);
-    }
+	/**
+	 * This removes a listener.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void removeListener(INotifyChangedListener notifyChangedListener) {
+		changeNotifier.removeListener(notifyChangedListener);
+	}
 
-    /**
-     * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public void fireNotifyChanged(Notification notification) {
-        changeNotifier.fireNotifyChanged(notification);
+	/**
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void fireNotifyChanged(Notification notification) {
+		changeNotifier.fireNotifyChanged(notification);
 
-        if (parentAdapterFactory != null) {
-            parentAdapterFactory.fireNotifyChanged(notification);
-        }
-    }
+		if (parentAdapterFactory != null) {
+			parentAdapterFactory.fireNotifyChanged(notification);
+		}
+	}
 
-    /**
-     * This disposes all of the item providers created by this factory. 
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public void dispose() {
-        if (scenarioResultItemProvider != null) scenarioResultItemProvider.dispose();
-        if (onlineItemProvider != null) onlineItemProvider.dispose();
-        if (destroyedItemProvider != null) destroyedItemProvider.dispose();
-        if (noPowerItemProvider != null) noPowerItemProvider.dispose();
-        if (noUplinkItemProvider != null) noUplinkItemProvider.dispose();
-        if (clusterItemProvider != null) clusterItemProvider.dispose();
-    }
+	/**
+	 * This disposes all of the item providers created by this factory. 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void dispose() {
+		if (scenarioResultItemProvider != null) scenarioResultItemProvider.dispose();
+		if (onlineItemProvider != null) onlineItemProvider.dispose();
+		if (defectItemProvider != null) defectItemProvider.dispose();
+		if (noPowerItemProvider != null) noPowerItemProvider.dispose();
+		if (noUplinkItemProvider != null) noUplinkItemProvider.dispose();
+		if (clusterItemProvider != null) clusterItemProvider.dispose();
+	}
 
 }

@@ -12,19 +12,19 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link smartgridoutput.NoPower} object.
+ * This is the item provider adapter for a {@link smartgridoutput.Defect} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NoPowerItemProvider extends EntityStateItemProvider {
+public class DefectItemProvider extends EntityStateItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NoPowerItemProvider(AdapterFactory adapterFactory) {
+	public DefectItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -44,14 +44,14 @@ public class NoPowerItemProvider extends EntityStateItemProvider {
 	}
 
 	/**
-	 * This returns NoPower.gif.
+	 * This returns Defect.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/NoPower"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Defect"));
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class NoPowerItemProvider extends EntityStateItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_NoPower_type");
+		return getString("_UI_Defect_type");
 	}
 	
 
