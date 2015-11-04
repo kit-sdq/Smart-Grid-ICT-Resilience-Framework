@@ -14,5 +14,4 @@ package smartgridoutput;
  * @generated
  */
 public interface Online extends On {
-
 } // Online

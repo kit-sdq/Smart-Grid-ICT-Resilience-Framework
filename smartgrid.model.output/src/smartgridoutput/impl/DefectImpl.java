@@ -4,25 +4,23 @@ package smartgridoutput.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import smartgridoutput.Offline;
+import smartgridoutput.Defect;
 import smartgridoutput.SmartgridoutputPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Offline</b></em>'.
+ * An implementation of the model object '<em><b>Defect</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class OfflineImpl extends MinimalEObjectImpl.Container implements Offline {
+public class DefectImpl extends EntityStateImpl implements Defect {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OfflineImpl() {
+	protected DefectImpl() {
 		super();
 	}
 
@@ -33,7 +31,7 @@ public abstract class OfflineImpl extends MinimalEObjectImpl.Container implement
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SmartgridoutputPackage.Literals.OFFLINE;
+		return SmartgridoutputPackage.Literals.DEFECT;
 	}
 
-} //OfflineImpl
+} //DefectImpl

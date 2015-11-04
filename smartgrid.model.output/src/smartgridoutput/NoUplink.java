@@ -14,5 +14,4 @@ package smartgridoutput;
  * @generated
  */
 public interface NoUplink extends Offline, On {
-
 } // NoUplink
