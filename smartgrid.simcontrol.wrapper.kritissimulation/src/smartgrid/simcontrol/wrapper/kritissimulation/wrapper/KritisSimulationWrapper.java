@@ -11,12 +11,12 @@ import smartgrid.simcontrol.interfaces.IKritisSimulation;
 import smartgrid.simcontrol.wrapper.kritissimulation.simulation.KritisSimulation;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
-import smartgridtopo.Scenario;
+import smartgridtopo.SmartGridTopology;
 
 public class KritisSimulationWrapper implements IKritisSimulation {
 
 	@Override
-	public ScenarioResult run(Scenario smartGridTopo, ScenarioState kritisInput) {
+	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState kritisInput) {
 		KritisSimulation simulation = new KritisSimulation();
 
 		// TODO: Get power per state from given parameters as parameter for
