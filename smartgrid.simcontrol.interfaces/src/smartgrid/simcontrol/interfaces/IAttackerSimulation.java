@@ -40,4 +40,12 @@ public interface IAttackerSimulation {
 	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
 
 	public String getName();
+
+	/**
+	 * Should return true if other attributes such as root node id should be
+	 * considered during the attack simulation
+	 * 
+	 * @return true if other attributes should be considered
+	 */
+	public boolean enableFurtherAttributes();
 }
