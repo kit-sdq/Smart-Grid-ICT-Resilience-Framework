@@ -10,6 +10,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
@@ -347,6 +349,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 		hackingStyleCombo.addModifyListener(e -> propertyChanged());
 		grpAnalyses.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
 				.getString("SimControlLaunchConfigurationTab.grpAnalyses.text")); //$NON-NLS-1$
+
 		FormData fd_grpAnalyses = new FormData();
 		fd_grpAnalyses.bottom = new FormAttachment(grpOutputFiles, 209, SWT.BOTTOM);
 		fd_grpAnalyses.top = new FormAttachment(grpOutputFiles, 6);
@@ -398,7 +401,37 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
 		comboAttackSimulation = new Combo(grpAnalyses, SWT.READ_ONLY);
 		comboAttackSimulation.setBounds(213, 108, 202, 23);
-		comboAttackSimulation.addModifyListener(e -> propertyChanged());
+		comboAttackSimulation.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent e) {
+				ReceiveAnalysesHelper helper = new ReceiveAnalysesHelper();
+
+				try {
+					List<IAttackerSimulation> list = helper.getAttackerSimulationElements();
+					IAttackerSimulation sim = null;
+					for (IAttackerSimulation attack : list) {
+						if (attack.getName()
+								.equals(comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()))) {
+							sim = attack;
+							break;
+						}
+					}
+					if (sim.enableFurtherAttributes()) {
+						grpCyberAttackSimulation.setEnabled(true);
+						rootNodeTextbox.setEnabled(true);
+						hackingSpeedText.setEnabled(true);
+					} else {
+						grpCyberAttackSimulation.setEnabled(false);
+						rootNodeTextbox.setEnabled(false);
+						hackingSpeedText.setEnabled(false);
+					}
+				} catch (CoreException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 
 		comboTerminationCondition = new Combo(grpAnalyses, SWT.READ_ONLY);
 		comboTerminationCondition.setBounds(213, 137, 202, 23);
@@ -558,8 +591,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 			}
 			String impactAnalysisString = configuration.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, "");
 			for (int i = 0; i < comboImpactAnalysis.getItems().length; i++) {
-				if (comboPowerLoadSimulation.getItem(i).equals(impactAnalysisString)) {
-					comboPowerLoadSimulation.select(i);
+				if (comboImpactAnalysis.getItem(i).equals(impactAnalysisString)) {
+					comboImpactAnalysis.select(i);
 					break;
 				}
 			}
@@ -589,6 +622,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	/**
