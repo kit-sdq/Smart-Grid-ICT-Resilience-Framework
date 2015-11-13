@@ -41,4 +41,9 @@ public class AttackerSimulationMock implements IAttackerSimulation {
 		return "No Attack Simulation";
 	}
 
+	@Override
+	public boolean enableFurtherAttributes() {
+		return false;
+	}
+
 }
