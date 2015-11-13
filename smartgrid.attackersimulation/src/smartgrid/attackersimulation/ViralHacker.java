@@ -643,4 +643,9 @@ public class ViralHacker implements IAttackerSimulation {
 		return "Viral Hacker";
 	}
 
+	@Override
+	public boolean enableFurtherAttributes() {
+		return true;
+	}
+
 }

@@ -543,4 +543,9 @@ public class LocalHacker implements IAttackerSimulation {
 		return "Local Hacker";
 	}
 
+	@Override
+	public boolean enableFurtherAttributes() {
+		return true;
+	}
+
 }
