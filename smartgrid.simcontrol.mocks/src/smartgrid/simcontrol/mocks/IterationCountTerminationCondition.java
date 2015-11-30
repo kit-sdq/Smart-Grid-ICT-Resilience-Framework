@@ -49,11 +49,11 @@ public class IterationCountTerminationCondition implements ITerminationCondition
 
 		boolean run;
 
-		if (iterationCount > _breakafterIterationCount) {
+		if (iterationCount < _breakafterIterationCount) { 
 
-			run = false;
-		} else {
 			run = true;
+		} else {
+			run = false;
 		}
 
 		return run;
