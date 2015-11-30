@@ -59,7 +59,12 @@ public final class Constants {
      * Defines the TIMESTEPS_KEY
      */
     public static final String TIMESTEPS_KEY = "timeSteps"; //$NON-NLS-1$
-
+    
+    /**
+     * Defines Iteration Count key
+     */
+    public static final String ITERATION_COUNT_KEY = "iterationCount";
+    
     /**
      * Defines the IGNORE_LOC_CON_KEY
      */
@@ -93,6 +98,10 @@ public final class Constants {
      * Defines the DEFAULT_TIME_STEPS
      */
     public static final String DEFAULT_TIME_STEPS = "1";
+    /**
+     * Default number of iterations per time step
+     */
+    public static final String DEFAULT_ITERATION_COUNT = "2";
 
     /*
      * Constants for valid Extensions
