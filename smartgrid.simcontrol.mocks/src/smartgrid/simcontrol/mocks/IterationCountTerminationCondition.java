@@ -8,6 +8,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
+import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.interfaces.*;
 
 /**
@@ -18,7 +19,7 @@ import smartgrid.simcontrol.interfaces.*;
  */
 public class IterationCountTerminationCondition implements ITerminationCondition {
 
-	private final int _breakafterIterationCount;
+	private int _breakafterIterationCount;
 
 	public IterationCountTerminationCondition() {
 		_breakafterIterationCount = 2;
@@ -49,7 +50,7 @@ public class IterationCountTerminationCondition implements ITerminationCondition
 
 		boolean run;
 
-		if (iterationCount < _breakafterIterationCount) { 
+		if (iterationCount < _breakafterIterationCount) {
 
 			run = true;
 		} else {
@@ -61,7 +62,9 @@ public class IterationCountTerminationCondition implements ITerminationCondition
 
 	@Override
 	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-		// Nothing to do here ...
+		_breakafterIterationCount = Integer
+				.parseInt(config.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
+
 		return ErrorCodeEnum.SUCCESS;
 	}
 
