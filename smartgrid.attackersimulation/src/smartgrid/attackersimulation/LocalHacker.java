@@ -9,8 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 
 import smartgrid.helper.ScenarioHelper;
 import smartgrid.simcontrol.baselib.Constants;
@@ -35,6 +42,8 @@ public class LocalHacker implements IAttackerSimulation {
 
 	// private Fields
 	private HackingStyle usedHackingStyle;
+
+	private boolean rootNodeValid = true;
 
 	/*
 	 * From this Node the Hacker operates. So he can only attack Nodes that have
@@ -185,8 +194,8 @@ public class LocalHacker implements IAttackerSimulation {
 		setHackingSpeed(hackingSpeed - 1);
 
 		this.rootNodeID = -1; // Means No Root provided
-
 		this.initDone = true;
+		this.rootNodeValid = true;
 	}
 
 	/**
@@ -210,7 +219,7 @@ public class LocalHacker implements IAttackerSimulation {
 		this.rootNodeID = rootNodeID;
 
 		this.initDone = true;
-
+		this.rootNodeValid = true;
 	}
 
 	/*
@@ -235,9 +244,8 @@ public class LocalHacker implements IAttackerSimulation {
 			// case) or if not chooses Random Node
 			setHackingRootOnEntityState();
 			firstRun = false;
-		}
-		// Find Root On Entity using ID I already know
-		else {
+		} else {
+			// Find Root On Entity using ID I already know
 			this.rootNode = ScenarioHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
 		}
 
@@ -252,7 +260,12 @@ public class LocalHacker implements IAttackerSimulation {
 			// Starting hacking according to the desired hacking Style
 			hackNext(this.rootNode.getBelongsToCluster());
 		}
-		myScenarioResult.setScenario(smartGridTopo);
+		if (rootNodeValid) {
+			myScenarioResult.setScenario(smartGridTopo);
+		} else {
+			myScenarioResult = null;
+			rootNodeValid = true;
+		}
 		return myScenarioResult;
 	}
 
@@ -479,63 +492,69 @@ public class LocalHacker implements IAttackerSimulation {
 
 	}
 
+	private void chooseRootIDByRandom() {
+		Cluster myCluster;
+		Random myRandom = new Random();
+
+		int clusterCount = this.myScenarioResult.getClusters().size();
+
+		// Choose Random Cluster with Entries
+
+		do {
+			// [0 - clusterCount) Exclusive upper bound
+			int myClusterNumber = myRandom.nextInt(clusterCount);
+			myCluster = this.myScenarioResult.getClusters().get(myClusterNumber);
+
+		} while (myCluster.getHasEntities().isEmpty()); // Or threshold of
+														// Entities in
+														// Cluster ?
+
+		// Get the Count of ON EntityStates in choosen Cluster
+		int entityCount = myCluster.getHasEntities().size();
+
+		// Choose one by Random and make it the hacking Root Node
+
+		int myEntityNumber = myRandom.nextInt(entityCount); // [0 -
+															// entityCount)
+
+		this.rootNode = myCluster.getHasEntities().get(myEntityNumber);
+		this.rootNodeID = rootNode.getOwner().getId();
+
+		/*
+		 * Do while until found Root that is really Online ?? (Random Root case)
+		 */
+	}
+
 	/*
 		 * 
 		 */
 	private void setHackingRootOnEntityState() {
 
-		Cluster myCluster;
-
 		switch (this.rootNodeID) {
 
 		// Choose Root - Root ID not set
 		case -1:
-
-			Random myRandom = new Random();
-
-			int clusterCount = this.myScenarioResult.getClusters().size();
-
-			// Choose Random Cluster with Entries
-
-			do {
-				int myClusterNumber = myRandom.nextInt(clusterCount); // [0 -
-																		// clusterCount)
-																		// Exclusive
-																		// upper
-																		// bound
-				myCluster = this.myScenarioResult.getClusters().get(myClusterNumber);
-
-			} while (myCluster.getHasEntities().isEmpty()); // Or threshold of
-															// Entities in
-															// Cluster ?
-
-			// Get the Count of ON EntityStates in choosen Cluster
-			int entityCount = myCluster.getHasEntities().size();
-
-			// Choose one by Random and make it the hacking Root Node
-
-			int myEntityNumber = myRandom.nextInt(entityCount); // [0 -
-																// entityCount)
-
-			this.rootNode = myCluster.getHasEntities().get(myEntityNumber);
-			this.rootNodeID = rootNode.getOwner().getId();
-
-			/*
-			 * Do while until found Root that is really Online ?? (Random Root
-			 * case)
-			 */
-
+			chooseRootIDByRandom();
 			break;
 
-		// Know already Root Node by ID but On EntityState Missing
 		default:
-
 			this.rootNode = ScenarioHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
-
+			if (rootNode == null) {
+				invalidRootNodeIdDialog();
+				rootNodeValid = false;
+			}
 			break;
 
 		}// End Swtich
 
+		if (rootNodeValid && !rootNode.isIsHacked()) {
+			rootNode.setIsHacked(true);
+		}
+	}
+
+	private void invalidRootNodeIdDialog() {
+		// TODO: Find better solution than swing Dialog
+		JOptionPane.showMessageDialog(null, "The root node ID you've entered is not valid. Simulation will be aborted");
 	}
 
 	@Override
