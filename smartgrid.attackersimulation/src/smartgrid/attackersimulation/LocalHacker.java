@@ -13,11 +13,6 @@ import javax.swing.JOptionPane;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
 
 import smartgrid.helper.ScenarioHelper;
 import smartgrid.simcontrol.baselib.Constants;
@@ -27,6 +22,7 @@ import smartgrid.simcontrol.interfaces.IAttackerSimulation;
 import smartgridoutput.Cluster;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
+import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartGridTopology;
 
 /**
@@ -63,8 +59,8 @@ public class LocalHacker implements IAttackerSimulation {
 	/*
 	 * Temp Vairables
 	 */
-	SmartGridTopology mySmartGridTopo;
-	ScenarioResult myScenarioResult;
+	private SmartGridTopology mySmartGridTopo;
+	private ScenarioResult myScenarioResult;
 
 	/**
 	 * @return the usedHackingStyle
@@ -255,7 +251,7 @@ public class LocalHacker implements IAttackerSimulation {
 			/* ** At this Point we have valid RootNodeID and rootNode !! ** */
 			assert (this.rootNode.getOwner().getId() == this.rootNodeID) : "Root Node Not Valid !";
 			// Hack Root just in case its not hacked
-			this.rootNode.setIsHacked(true);
+			//this.rootNode.setIsHacked(true);
 
 			// Starting hacking according to the desired hacking Style
 			hackNext(this.rootNode.getBelongsToCluster());
@@ -272,7 +268,6 @@ public class LocalHacker implements IAttackerSimulation {
 	// Private Methods
 
 	private void hackNext(Cluster clusterToHack) {
-
 		// Debug
 		// usedHackingStyle = HackingStyle.BFS_HACKING;
 		// usedHackingStyle = HackingStyle.DFS_HACKING;
@@ -282,17 +277,13 @@ public class LocalHacker implements IAttackerSimulation {
 		case BFS_HACKING:
 			bfsHacking(clusterToHack);
 			break;
-
 		case DFS_HACKING:
 			dfsHacking(clusterToHack);
 			break;
-
 		case FULLY_MESHED_HACKING:
 			fullMeshedHacking(clusterToHack);
 			break;
-
 		}
-
 	}
 
 	/*
@@ -372,7 +363,7 @@ public class LocalHacker implements IAttackerSimulation {
 					 */
 					for (On neighbor : neighborOnList) {
 
-						if (!neighbor.isIsHacked()) {
+						if (!(neighbor.getOwner() instanceof NetworkNode) && !neighbor.isIsHacked()) {
 
 							neighbor.setIsHacked(true);
 							hackedNodesCount++;
@@ -460,7 +451,9 @@ public class LocalHacker implements IAttackerSimulation {
 				else if (neighbor.isIsHacked()) {
 					dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, ++hackCount);
 				} else {
-					neighbor.setIsHacked(true);
+					if (!(neighbor.getOwner() instanceof NetworkNode)) {
+						neighbor.setIsHacked(true);
+					}
 					hackCount++;
 					dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, hackCount);
 				}
@@ -482,9 +475,8 @@ public class LocalHacker implements IAttackerSimulation {
 
 			On currentNode = myIter.next();
 
-			if (!currentNode.isIsHacked()) {
+			if (!(currentNode.getOwner() instanceof NetworkNode) && !currentNode.isIsHacked()) {
 				currentNode.setIsHacked(true);
-
 				hackedNodesCount++;
 			}
 
@@ -519,17 +511,9 @@ public class LocalHacker implements IAttackerSimulation {
 
 		this.rootNode = myCluster.getHasEntities().get(myEntityNumber);
 		this.rootNodeID = rootNode.getOwner().getId();
-
-		/*
-		 * Do while until found Root that is really Online ?? (Random Root case)
-		 */
 	}
 
-	/*
-		 * 
-		 */
 	private void setHackingRootOnEntityState() {
-
 		switch (this.rootNodeID) {
 
 		// Choose Root - Root ID not set
