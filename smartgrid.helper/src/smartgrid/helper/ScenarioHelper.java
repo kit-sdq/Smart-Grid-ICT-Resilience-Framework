@@ -20,6 +20,7 @@ import smartgridoutput.Cluster;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.LogicalCommunication;
+import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
 
@@ -127,7 +128,7 @@ public final class ScenarioHelper {
 		// foreach Loop!)
 		for (smartgridoutput.EntityState currentNode : myScenarioResult.getStates()) {
 			// Using only Entities that is On
-			if (currentNode.getOwner().getId() == entityID && currentNode instanceof On) {
+			if (currentNode.getOwner().getId() == entityID && currentNode instanceof On && !(currentNode.getOwner() instanceof NetworkNode)) {
 				foundEntity = (On) currentNode;
 				foundNodeID = true;
 

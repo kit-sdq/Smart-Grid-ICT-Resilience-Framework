@@ -44,12 +44,8 @@ public final class FileSystem {
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
-		/*
-		 * End Save..
-		 */
 	}
 
 	/**
