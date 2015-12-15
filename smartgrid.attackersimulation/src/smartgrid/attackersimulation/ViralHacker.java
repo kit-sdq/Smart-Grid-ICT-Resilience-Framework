@@ -644,8 +644,17 @@ public class ViralHacker implements IAttackerSimulation {
 	}
 
 	@Override
-	public boolean enableFurtherAttributes() {
+	public boolean enableHackingSpeed() {
 		return true;
 	}
 
+	@Override
+	public boolean enableRootNode() {
+		return false;
+	}
+
+	@Override
+	public boolean enableLogicalConnections() {
+		return true;
+	}
 }

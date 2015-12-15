@@ -251,7 +251,7 @@ public class LocalHacker implements IAttackerSimulation {
 			/* ** At this Point we have valid RootNodeID and rootNode !! ** */
 			assert (this.rootNode.getOwner().getId() == this.rootNodeID) : "Root Node Not Valid !";
 			// Hack Root just in case its not hacked
-			//this.rootNode.setIsHacked(true);
+			// this.rootNode.setIsHacked(true);
 
 			// Starting hacking according to the desired hacking Style
 			hackNext(this.rootNode.getBelongsToCluster());
@@ -511,6 +511,9 @@ public class LocalHacker implements IAttackerSimulation {
 
 		this.rootNode = myCluster.getHasEntities().get(myEntityNumber);
 		this.rootNodeID = rootNode.getOwner().getId();
+		if (rootNode.getOwner() instanceof NetworkNode) {
+			chooseRootIDByRandom();
+		}
 	}
 
 	private void setHackingRootOnEntityState() {
@@ -538,7 +541,8 @@ public class LocalHacker implements IAttackerSimulation {
 
 	private void invalidRootNodeIdDialog() {
 		// TODO: Find better solution than swing Dialog
-		JOptionPane.showMessageDialog(null, "The root node ID you've entered is not valid. Simulation will be aborted");
+		JOptionPane.showMessageDialog(null,
+				"The root node ID you've entered is not valid. Remember not to use NetworkNodes as root node. Simulation will be aborted");
 	}
 
 	@Override
@@ -547,8 +551,17 @@ public class LocalHacker implements IAttackerSimulation {
 	}
 
 	@Override
-	public boolean enableFurtherAttributes() {
+	public boolean enableHackingSpeed() {
 		return true;
 	}
 
+	@Override
+	public boolean enableRootNode() {
+		return true;
+	}
+
+	@Override
+	public boolean enableLogicalConnections() {
+		return true;
+	}
 }
