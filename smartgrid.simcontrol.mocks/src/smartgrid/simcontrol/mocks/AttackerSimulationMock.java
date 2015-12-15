@@ -42,7 +42,17 @@ public class AttackerSimulationMock implements IAttackerSimulation {
 	}
 
 	@Override
-	public boolean enableFurtherAttributes() {
+	public boolean enableHackingSpeed() {
+		return false;
+	}
+
+	@Override
+	public boolean enableRootNode() {
+		return false;
+	}
+
+	@Override
+	public boolean enableLogicalConnections() {
 		return false;
 	}
 
