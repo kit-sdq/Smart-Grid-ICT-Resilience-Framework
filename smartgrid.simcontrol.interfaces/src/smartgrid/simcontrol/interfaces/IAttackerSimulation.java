@@ -42,10 +42,26 @@ public interface IAttackerSimulation {
 	public String getName();
 
 	/**
-	 * Should return true if other attributes such as root node id should be
-	 * considered during the attack simulation
+	 * Should return true if hacking speed should be considered during the
+	 * attack simulation
 	 * 
-	 * @return true if other attributes should be considered
+	 * @return true if hacking speed should be considered
 	 */
-	public boolean enableFurtherAttributes();
+	public boolean enableHackingSpeed();
+
+	/**
+	 * Should return true if root node id should be considered during the attack
+	 * simulation
+	 * 
+	 * @return true if root node should be considered
+	 */
+	public boolean enableRootNode();
+
+	/**
+	 * Should return true if logical connections may or may not be considered
+	 * during the attack simulation
+	 * 
+	 * @return true if logical connections should be considered
+	 */
+	public boolean enableLogicalConnections();
 }
