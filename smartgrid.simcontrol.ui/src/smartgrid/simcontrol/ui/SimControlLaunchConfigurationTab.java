@@ -406,19 +406,27 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 							break;
 						}
 					}
-					if (sim.enableFurtherAttributes()) {
+					if (sim.enableLogicalConnections()) {
 						grpCyberAttackSimulation.setEnabled(true);
-						rootNodeTextbox.setEnabled(true);
-						hackingSpeedText.setEnabled(true);
+						ignoreLogicalConButton.setEnabled(true);
 					} else {
 						grpCyberAttackSimulation.setEnabled(false);
+						ignoreLogicalConButton.setEnabled(false);
+					}
+					if (sim.enableRootNode()) {
+						rootNodeTextbox.setEnabled(true);
+					} else {
 						rootNodeTextbox.setEnabled(false);
+					}
+					if (sim.enableHackingSpeed()) {
+						hackingSpeedText.setEnabled(true);
+					} else {
 						hackingSpeedText.setEnabled(false);
 					}
 				} catch (CoreException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				propertyChanged();
 			}
 		});
 
@@ -636,11 +644,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 					break;
 				}
 			}
-
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -650,7 +656,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 
 		// Text Box reading
-
 		String topoPath = topologyTextbox.getText();
 		String inPath = inputTextbox.getText();
 		String outPath = outputTextbox.getText();
@@ -660,7 +665,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 		String controlCount = controlCenterCountTextBox.getText();
 
 		// Check Box Parsing
-
 		String logiCon;
 		if (ignoreLogicalConButton.getSelection()) {
 			logiCon = Constants.TRUE;
@@ -779,16 +783,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 				.getString("SimControlLaunchConfigurationTab.Tab.RegisterText"); //$NON-NLS-1$
 	}
 
-	/*
-	 * Private Methods
-	 */
-
-	// @Override
-	// public Image getImage() {
-	// // TODO Insert small SimController Icon here
-	// return null;
-	// }
-
 	/**
 	 * property Changed
 	 */
@@ -880,12 +874,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 		// controlCountWrong;
 		return false;
 	}
-
-	// @Override
-	// public Image getImage() {
-	// // TODO Insert small SimController Icon here
-	// return null;
-	// }
 
 	/*
 	 * 
