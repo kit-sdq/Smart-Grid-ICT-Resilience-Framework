@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -24,6 +25,8 @@ import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
 
 public final class SimulationController {
+
+	private static final Logger LOG = Logger.getLogger(SimulationController.class);
 
 	/* Generator Fields */
 
@@ -163,14 +166,8 @@ public final class SimulationController {
 
 		// Read ILaunchConfiguration
 		try {
-
-			/*
-			 * Read from @see ILaunchConfiguration
-			 */
-
-			// TODO Change to in case of Debug Only executing/compiling ?
-			System.out.println("GELADEN");
-			System.out.println("Finde Parameter");
+			LOG.debug("[SimulationController]: Loaded");
+			LOG.debug("[SimulationController]: Find parameters");
 
 			String inputPath = myConfiguration.getAttribute(Constants.INPUT_PATH_KEY, ""); // smartgrid.simcontrol.ui.Constants
 
@@ -183,28 +180,11 @@ public final class SimulationController {
 			SimulationController.timeSteps = Integer
 					.parseUnsignedInt(myConfiguration.getAttribute(Constants.TIMESTEPS_KEY, ""));
 
-			System.out.println("Input : " + inputPath);
-			System.out.println("Topology : " + topoPath);
-
-			// TODO Activate Generator here
-
-			// if (generateInput) { // Generate Input
-			//
-			// SimulationController.inputGenerator.init();
-			//
-			// InputModelDTO myDTO =
-			// SimulationController.inputGenerator.generate(
-			// desiredStyle, SmartMeterCount, ControlCenterCount);
-			//
-			// initialState = myDTO.getMyScenarioStates();
-			// topo = myDTO.getMyScenarioTopo();
-			//
-			// } else {// Read Input from FileSystem
+			LOG.info("[SimulationController]: Input : " + inputPath);
+			LOG.info("[SimulationController]: Topology : " + topoPath);
 
 			initialState = ScenarioHelper.loadInput(inputPath);
 			topo = ScenarioHelper.loadScenario(topoPath);
-
-			// }
 
 			tempPath = myConfiguration.getAttribute(Constants.OUTPUT_PATH_KEY, "");
 			// Gets String from Config and compares whether it is the same
@@ -220,9 +200,8 @@ public final class SimulationController {
 			}
 
 		} catch (CoreException e) {
-
+			LOG.error("[SimulationController] LaunchConfig not valid, using Path: C:\\Temp\\");
 			e.printStackTrace();
-			System.out.println("[SimController] LaunchConfig not valid; using Path: C:\\Temp\\");
 		}
 
 		// Init needed Variables
@@ -243,7 +222,7 @@ public final class SimulationController {
 		try {
 			loadCustomUserAnalysis();
 		} catch (CoreException e1) {
-			// TODO Auto-generated catch block
+			LOG.error("[SimulationController]: Exception occured while loading custom user analysis");
 			e1.printStackTrace();
 		}
 		//
@@ -261,12 +240,13 @@ public final class SimulationController {
 
 			final String newline = System.getProperty("line.separator");
 
-			String printError = "[SimController] init failed with these Errors " + newline + "powerLoad Simulation: "
-					+ powerError.toString() + newline + "impactAnalysis: " + impactError.toString() + newline
-					+ "attacker Simulation: " + attackerError.toString() + newline + "terminationCondition: "
-					+ terminationError.toString() + newline + "timeProgressor: " + timeError.toString();
+			String printError = "[SimulationController] init failed with these Errors " + newline
+					+ "powerLoad Simulation: " + powerError.toString() + newline + "impactAnalysis: "
+					+ impactError.toString() + newline + "attacker Simulation: " + attackerError.toString() + newline
+					+ "terminationCondition: " + terminationError.toString() + newline + "timeProgressor: "
+					+ timeError.toString();
 
-			System.out.println(printError);
+			LOG.error(printError);
 
 		}
 
@@ -285,7 +265,6 @@ public final class SimulationController {
 			if (myConfiguration.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "").equals(e.getName())) {
 				usedAttackerSimulation = e;
 			}
-
 		}
 
 		List<IPowerLoadSimulation> power = helper.getPowerLoadElements();
@@ -348,7 +327,7 @@ public final class SimulationController {
 		if (genStyleString.equals(Constants.FAIL)) {
 
 			genStyleString = Constants.DEFAULT_GEN_SYNTHETIC_INPUT;
-			System.out.println("[Simcontroller] Default Generation Style used");
+			LOG.info("[Simulationcontroller] Default Generation Style used");
 		}
 
 		SimulationController.desiredStyle = GenerationStyle.valueOf(genStyleString);
@@ -357,7 +336,7 @@ public final class SimulationController {
 
 		if (smartString.equals(Constants.FAIL)) {
 			smartString = Constants.DEFAULT_SMART_METER_COUNT;
-			System.out.println("[Simcontroller] Default SmartMeterCount used");
+			LOG.info("[SimulationController] Default SmartMeterCount used");
 
 		}
 
@@ -367,11 +346,9 @@ public final class SimulationController {
 
 		if (controlCenterString.equals(Constants.FAIL)) {
 			controlCenterString = Constants.DEFAULT_CONTROL_CENTER_COUNT;
-			System.out.println("[Simcontroller] Default ControlCenterCount used");
+			LOG.info("[SimulationController] Default ControlCenterCount used");
 
 		}
-
 		SimulationController.ControlCenterCount = Integer.parseInt(controlCenterString);
-
 	}
 }

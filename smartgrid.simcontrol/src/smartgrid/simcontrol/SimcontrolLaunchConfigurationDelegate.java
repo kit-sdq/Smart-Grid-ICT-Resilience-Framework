@@ -1,5 +1,6 @@
 package smartgrid.simcontrol;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
@@ -35,10 +36,7 @@ import smartgridtopo.impl.SmartgridtopoPackageImpl;
  */
 public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
 
-	/*
-	 * Private Member
-	 */
-	SimulationController SimController;
+	private static final Logger LOG = Logger.getLogger(SimcontrolLaunchConfigurationDelegate.class);
 
 	/**
 	 * {@inheritDoc}
@@ -64,16 +62,10 @@ public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurati
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createFileURI(path), true);
 
-		try {
-			EObject r = resource.getContents().get(0);
-			System.out.println("Klasse: " + r.getClass());
-			s = (SmartGridTopology) resource.getContents().get(0);
+		EObject r = resource.getContents().get(0);
+		LOG.debug("[SimcontrolLaunchConfigurationDelegate]: Class: " + r.getClass());
+		s = (SmartGridTopology) resource.getContents().get(0);
 
-			// for (PhysicalCo)
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return s;
 	}
 
@@ -86,14 +78,11 @@ public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurati
 
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createFileURI(path), true);
-		try {
-			EObject r = resource.getContents().get(0);
-			System.out.println("Klasse: " + r.getClass());
-			input = (ScenarioState) resource.getContents().get(0);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		EObject r = resource.getContents().get(0);
+		LOG.debug("[SimcontrolLaunchConfigurationDelegate]: Class: " + r.getClass());
+		input = (ScenarioState) resource.getContents().get(0);
+
 		return input;
 	}
 

@@ -12,7 +12,8 @@ Require-Bundle: smartgrid.simcontrol.interfaces;bundle-version="1.0.0",
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.helper;bundle-version="1.0.0",
  smartgrid.simcontrol.baselib,
- smartgrid.simcontrol.ui
+ smartgrid.simcontrol.ui,
+ org.apache.log4j;bundle-version="1.2.15"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
