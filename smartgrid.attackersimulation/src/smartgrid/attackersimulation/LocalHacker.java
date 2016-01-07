@@ -11,6 +11,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
@@ -35,6 +36,8 @@ import smartgridtopo.SmartGridTopology;
  *
  */
 public class LocalHacker implements IAttackerSimulation {
+
+	private static final Logger LOG = Logger.getLogger(LocalHacker.class);
 
 	// private Fields
 	private HackingStyle usedHackingStyle;
@@ -63,108 +66,10 @@ public class LocalHacker implements IAttackerSimulation {
 	private ScenarioResult myScenarioResult;
 
 	/**
-	 * @return the usedHackingStyle
-	 */
-	public HackingStyle getUsedHackingStyle() {
-		return usedHackingStyle;
-	}
-
-	/**
-	 * @param usedHackingStyle
-	 *            the usedHackingStyle to set
-	 */
-	public void setUsedHackingStyle(HackingStyle usedHackingStyle) {
-		this.usedHackingStyle = usedHackingStyle;
-	}
-
-	/**
-	 * @return the rootNodeID
-	 */
-	public int getRootNodeID() {
-		return rootNodeID;
-	}
-
-	/**
-	 * @param rootNodeID
-	 *            the rootNodeID to set
-	 */
-	public void setRootNodeID(int rootNodeID) {
-		this.rootNodeID = rootNodeID;
-	}
-
-	/**
-	 * @return the hackingSpeed
-	 */
-	public int getHackingSpeed() {
-		return hackingSpeed;
-	}
-
-	/**
-	 * @param hackingSpeed
-	 *            the hackingSpeed to set
-	 */
-	public void setHackingSpeed(int hackingSpeed) {
-		this.hackingSpeed = hackingSpeed;
-	}
-
-	/**
 	 * For ExtensionPoints .. use this together with the init() Method
 	 */
 	public LocalHacker() {
 
-	}
-
-	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-
-		// They are used in relevant branches perhaps compiler doesn't notice?
-
-		HackingStyle desiredHackingStyle = null;
-		int rootNodeID = -1;
-
-		ErrorCodeEnum errorCode = ErrorCodeEnum.NOT_SET;
-
-		String desiredHackingStyleString;
-		String rootNodeIDString;
-		String hackingSpeedString;
-
-		// Extracting Parameters from Config
-
-		desiredHackingStyleString = config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.FAIL);
-
-		rootNodeIDString = config.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.FAIL);
-
-		hackingSpeedString = config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.FAIL);
-
-		if (desiredHackingStyleString.equals(Constants.FAIL) || rootNodeIDString.equals(Constants.FAIL)) {
-
-			errorCode = ErrorCodeEnum.DEFAULT_VALUES_USED;
-
-			if (desiredHackingStyleString.equals(Constants.FAIL)) {
-				desiredHackingStyle = HackingStyle.valueOf(Constants.DEFAULT_HACKING_STYLE);
-			}
-			if (rootNodeIDString.equals(Constants.FAIL)) {
-				rootNodeID = Integer.parseInt(Constants.DEFAULT_ROOT_NODE_ID);
-			}
-			if (hackingSpeedString.equals(Constants.FAIL)) {
-				hackingSpeed = Integer.parseInt(Constants.DEFAULT_HACKING_SPEED);
-			}
-		} else {
-			desiredHackingStyle = HackingStyle.valueOf(desiredHackingStyleString);
-
-			rootNodeID = Integer.parseInt(rootNodeIDString);
-
-			hackingSpeed = Integer.parseInt(hackingSpeedString);
-
-			errorCode = ErrorCodeEnum.SUCCESS;
-		}
-
-		// Adding extracted Parameters
-		this.rootNodeID = rootNodeID;
-		this.usedHackingStyle = desiredHackingStyle;
-		this.initDone = true;
-
-		return errorCode;
 	}
 
 	/**
@@ -218,6 +123,61 @@ public class LocalHacker implements IAttackerSimulation {
 		this.rootNodeValid = true;
 	}
 
+	@Override
+	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+
+		// They are used in relevant branches perhaps compiler doesn't notice?
+
+		HackingStyle desiredHackingStyle = null;
+		int rootNodeID = -1;
+
+		ErrorCodeEnum errorCode = ErrorCodeEnum.NOT_SET;
+
+		String desiredHackingStyleString;
+		String rootNodeIDString;
+		String hackingSpeedString;
+
+		// Extracting Parameters from Config
+
+		desiredHackingStyleString = config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.FAIL);
+
+		rootNodeIDString = config.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.FAIL);
+
+		hackingSpeedString = config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.FAIL);
+
+		if (desiredHackingStyleString.equals(Constants.FAIL) || rootNodeIDString.equals(Constants.FAIL)) {
+
+			errorCode = ErrorCodeEnum.DEFAULT_VALUES_USED;
+
+			if (desiredHackingStyleString.equals(Constants.FAIL)) {
+				desiredHackingStyle = HackingStyle.valueOf(Constants.DEFAULT_HACKING_STYLE);
+			}
+			if (rootNodeIDString.equals(Constants.FAIL)) {
+				rootNodeID = Integer.parseInt(Constants.DEFAULT_ROOT_NODE_ID);
+			}
+			if (hackingSpeedString.equals(Constants.FAIL)) {
+				hackingSpeed = Integer.parseInt(Constants.DEFAULT_HACKING_SPEED);
+			}
+		} else {
+			desiredHackingStyle = HackingStyle.valueOf(desiredHackingStyleString);
+
+			rootNodeID = Integer.parseInt(rootNodeIDString);
+
+			hackingSpeed = Integer.parseInt(hackingSpeedString);
+
+			errorCode = ErrorCodeEnum.SUCCESS;
+		}
+
+		// Adding extracted Parameters
+		this.rootNodeID = rootNodeID;
+		this.usedHackingStyle = desiredHackingStyle;
+		this.initDone = true;
+
+		LOG.info("[Local Hacker]: Init done");
+
+		return errorCode;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -262,6 +222,7 @@ public class LocalHacker implements IAttackerSimulation {
 			myScenarioResult = null;
 			rootNodeValid = true;
 		}
+		LOG.info("[Local Hacker]: Hacking done");
 		return myScenarioResult;
 	}
 
@@ -364,7 +325,7 @@ public class LocalHacker implements IAttackerSimulation {
 					for (On neighbor : neighborOnList) {
 
 						if (!(neighbor.getOwner() instanceof NetworkNode) && !neighbor.isIsHacked()) {
-
+							LOG.debug("Hacked with BFS node " + neighbor.getOwner().getId());
 							neighbor.setIsHacked(true);
 							hackedNodesCount++;
 
@@ -389,7 +350,7 @@ public class LocalHacker implements IAttackerSimulation {
 			currentLayer = nextLayer;
 			nextLayer = new LinkedList<On>();
 		} // Layer Loop most outer
-		System.out.println("[Local Hacker]: Done hacking with BFS");
+		LOG.info("[Local Hacker]: Done hacking with BFS");
 	}// End Method
 
 	/*
@@ -452,6 +413,7 @@ public class LocalHacker implements IAttackerSimulation {
 					dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, ++hackCount);
 				} else {
 					if (!(neighbor.getOwner() instanceof NetworkNode)) {
+						LOG.debug("Hacked with BFS node " + neighbor.getOwner().getId());
 						neighbor.setIsHacked(true);
 					}
 					hackCount++;
@@ -460,6 +422,7 @@ public class LocalHacker implements IAttackerSimulation {
 
 			}
 		}
+		LOG.info("[Local Hacker] Done hacking with DFS");
 	}
 
 	/*
@@ -476,6 +439,7 @@ public class LocalHacker implements IAttackerSimulation {
 			On currentNode = myIter.next();
 
 			if (!(currentNode.getOwner() instanceof NetworkNode) && !currentNode.isIsHacked()) {
+				LOG.debug("Hacked with Full Meshed Hacking node " + currentNode.getOwner().getId());
 				currentNode.setIsHacked(true);
 				hackedNodesCount++;
 			}
@@ -540,6 +504,7 @@ public class LocalHacker implements IAttackerSimulation {
 	}
 
 	private void invalidRootNodeIdDialog() {
+		LOG.warn("[Local Hacker]: Root node with ID " + rootNode.getOwner().getId() + " is invalid");
 		// TODO: Find better solution than swing Dialog
 		JOptionPane.showMessageDialog(null,
 				"The root node ID you've entered is not valid. Remember not to use NetworkNodes as root node. Simulation will be aborted");
@@ -563,5 +528,50 @@ public class LocalHacker implements IAttackerSimulation {
 	@Override
 	public boolean enableLogicalConnections() {
 		return true;
+	}
+
+	/**
+	 * @return the usedHackingStyle
+	 */
+	public HackingStyle getUsedHackingStyle() {
+		return usedHackingStyle;
+	}
+
+	/**
+	 * @param usedHackingStyle
+	 *            the usedHackingStyle to set
+	 */
+	public void setUsedHackingStyle(HackingStyle usedHackingStyle) {
+		this.usedHackingStyle = usedHackingStyle;
+	}
+
+	/**
+	 * @return the rootNodeID
+	 */
+	public int getRootNodeID() {
+		return rootNodeID;
+	}
+
+	/**
+	 * @param rootNodeID
+	 *            the rootNodeID to set
+	 */
+	public void setRootNodeID(int rootNodeID) {
+		this.rootNodeID = rootNodeID;
+	}
+
+	/**
+	 * @return the hackingSpeed
+	 */
+	public int getHackingSpeed() {
+		return hackingSpeed;
+	}
+
+	/**
+	 * @param hackingSpeed
+	 *            the hackingSpeed to set
+	 */
+	public void setHackingSpeed(int hackingSpeed) {
+		this.hackingSpeed = hackingSpeed;
 	}
 }

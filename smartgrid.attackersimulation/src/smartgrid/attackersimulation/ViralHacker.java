@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
@@ -33,6 +34,8 @@ import smartgridtopo.SmartGridTopology;
  */
 public class ViralHacker implements IAttackerSimulation {
 
+	private static final Logger LOGGER = Logger.getLogger(ViralHacker.class);
+	
 	// Private Fields
 	private boolean firstRun = true;
 	private boolean initDone = false;
@@ -133,11 +136,8 @@ public class ViralHacker implements IAttackerSimulation {
 
 		switch (this.mode) {
 		case RandomNode:
-
 			// Nothing else to do here ...
-
 			break;
-
 		case NodeIDs:
 
 			final List<String> fail = new LinkedList<String>();
@@ -181,6 +181,8 @@ public class ViralHacker implements IAttackerSimulation {
 			myError = ErrorCodeEnum.DEFAULT_VALUES_USED;
 		}
 
+		LOGGER.info("[Viral Hacker]: Init done");
+		
 		initDone = true;
 		return myError;
 	}
@@ -249,7 +251,7 @@ public class ViralHacker implements IAttackerSimulation {
 	 */
 	private void startHacking() {
 		// Switch Hacking Modes here
-
+		LOGGER.info("Start Hacking with Viral Hacker");
 		switch (this.usedHackingStyle) {
 		case BFS_HACKING:
 			bfsHacking();
@@ -291,6 +293,7 @@ public class ViralHacker implements IAttackerSimulation {
 
 		} // End for hacked seed nodes
 		this.seedNodes.addAll(freshHackedNodes); // Attention during if parallel
+		LOGGER.info("[Viral Hacker] Done Hacking with DFS");
 	}
 
 	/*
@@ -333,6 +336,7 @@ public class ViralHacker implements IAttackerSimulation {
 			} else if (neighbor.getOwner() instanceof NetworkNode) {
 				return dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount, freshHackedNodes);
 			} else {
+				LOGGER.debug("Hacked with DFS node " + neighbor.getOwner().getId());
 				neighbor.setIsHacked(true);
 				// Add fresh hacked node
 				freshHackedNodes.add(neighbor);
@@ -399,6 +403,7 @@ public class ViralHacker implements IAttackerSimulation {
 					 */
 					for (On neighbor : neighborOnList) {
 						if (!neighbor.isIsHacked() && !(neighbor.getOwner() instanceof NetworkNode)) {
+							LOGGER.debug("Hacked with BFS node " + neighbor.getOwner().getId());
 							neighbor.setIsHacked(true);
 
 							// Add new hacked one to seed Nodes
@@ -426,7 +431,7 @@ public class ViralHacker implements IAttackerSimulation {
 
 			} // Layer Loop most outer
 
-			System.out.println("[Viral Hacker]: Done hacking with BFS");
+			LOGGER.info("[Viral Hacker]: Done hacking with BFS");
 
 		} // End For hacked seedNodes
 
@@ -476,9 +481,7 @@ public class ViralHacker implements IAttackerSimulation {
 				// Check if Node is already hacked --> So he is able to hack
 				if (myNode.isIsHacked()) {
 					hackedNodesinCluster++;
-				}
-				// Build not Hacked List
-				else {
+				} else {
 					notHackedNodes.add(myNode);
 				}
 
@@ -489,6 +492,7 @@ public class ViralHacker implements IAttackerSimulation {
 
 			for (On toHack : notHackedNodes) {
 				if (howManyToHack > 0 && !(toHack.getOwner() instanceof NetworkNode)) {
+					LOGGER.debug("Hacked with Full Meshed Hacking node " + toHack.getOwner().getId());
 					toHack.setIsHacked(true);
 					howManyToHack--;
 				} else if (howManyToHack <= 0) {
@@ -496,6 +500,7 @@ public class ViralHacker implements IAttackerSimulation {
 				}
 			}
 		}
+		LOGGER.info("[Viral Hacker]: Done hacking with Full Meshed Hacking");
 	}
 
 	/*

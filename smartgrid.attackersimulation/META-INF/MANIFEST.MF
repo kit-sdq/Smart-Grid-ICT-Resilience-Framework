@@ -13,4 +13,5 @@ Require-Bundle: org.eclipse.debug.core;bundle-version="3.9.1",
  smartgrid.simcontrol.baselib,
  org.eclipse.swt,
  org.eclipse.ui.workbench,
- smartgrid.simcontrol
+ smartgrid.simcontrol,
+ org.apache.log4j;bundle-version="1.2.15"
