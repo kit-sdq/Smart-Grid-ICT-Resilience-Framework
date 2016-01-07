@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,6 +22,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
  *
  */
 public final class FileSystem {
+	
+	private static final Logger LOG = Logger.getLogger(FileSystem.class);
 
 	/**
 	 * This Method saves a Scenario Result on the File System at the given Path
@@ -44,6 +47,7 @@ public final class FileSystem {
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
+			LOG.error("IOException occured when performing method \"FileSystem.saveToFileSystem\"");
 			e.printStackTrace();
 		}
 	}
@@ -64,37 +68,27 @@ public final class FileSystem {
 		/*
 		 * Save Data as Smartgridoutput on HDD under "path" location
 		 */
-		
-		
-		
-		
 		ResourceSet resSet = new ResourceSetImpl();
 
 		Resource resourceResult = resSet.createResource(URI.createFileURI(dirPath + "result"));
 		resourceResult.getContents().add(result);
-		
 		
 		resSet = new ResourceSetImpl();
 
 		Resource resourceTopo = resSet.createResource(URI.createFileURI(dirPath + "toto"));
 		resourceTopo.getContents().add(topo);
 		
-		
 		resSet = new ResourceSetImpl();
 
 		Resource resourceInput = resSet.createResource(URI.createFileURI(dirPath + "Input"));
 		resourceInput.getContents().add(input);
 		
-		
-		
-		//EcoreUtil.resolveAll(resSet);
-
 		try {
 			resourceResult.save(Collections.EMPTY_MAP);
 			resourceTopo.save(Collections.EMPTY_MAP);
 			resourceInput.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
-
+			LOG.error("IOException occured when performing method \"FileSystem.saveToFileSystemAll\"");
 			e.printStackTrace();
 		}
 		/*
@@ -163,32 +157,4 @@ public final class FileSystem {
 		}
 
 	}
-
-	// /**
-	// * This Method saves a Scenario Result on the File System at the given
-	// Path
-	// *
-	// *
-	// * @param result Scenario Result to be written on File System
-	// * @param path Path there the File will be written to
-	// */
-	// public static void saveToFileSystem(ScenarioResult result, String path) {
-	// /*
-	// * Save Data as Smartgridoutput on HDD under "path" location
-	// */
-	// ResourceSet resSet = new ResourceSetImpl();
-	//
-	// Resource resource = resSet.createResource(URI.createFileURI(path));
-	// resource.getContents().add(result);
-	// try {
-	// resource.save(Collections.EMPTY_MAP);
-	// } catch (IOException e) {
-	//
-	// e.printStackTrace();
-	// }
-	// /*
-	// * End Save..
-	// */
-	// }
-
 }

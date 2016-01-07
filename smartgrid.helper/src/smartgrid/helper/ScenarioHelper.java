@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,6 +31,8 @@ import smartgridtopo.impl.SmartgridtopoPackageImpl;
  */
 public final class ScenarioHelper {
 
+	private static Logger LOG = Logger.getLogger(ScenarioHelper.class);
+
 	public static SmartGridTopology loadScenario(String path) {
 		SmartGridTopology s = null;
 		SmartgridtopoPackageImpl.init();
@@ -37,14 +40,9 @@ public final class ScenarioHelper {
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createFileURI(path), true);
 
-		try {
-			EObject r = resource.getContents().get(0);
-			System.out.println("Klasse: " + r.getClass());
-			s = (SmartGridTopology) resource.getContents().get(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		EObject r = resource.getContents().get(0);
+		LOG.debug("Class: " + r.getClass());
+		s = (SmartGridTopology) resource.getContents().get(0);
 		return s;
 	}
 
@@ -56,14 +54,11 @@ public final class ScenarioHelper {
 
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createFileURI(path), true);
-		try {
-			EObject r = resource.getContents().get(0);
-			System.out.println("Klasse: " + r.getClass());
-			input = (ScenarioState) resource.getContents().get(0);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		EObject r = resource.getContents().get(0);
+		LOG.debug("Class: " + r.getClass());
+		input = (ScenarioState) resource.getContents().get(0);
+
 		return input;
 	}
 
@@ -128,7 +123,8 @@ public final class ScenarioHelper {
 		// foreach Loop!)
 		for (smartgridoutput.EntityState currentNode : myScenarioResult.getStates()) {
 			// Using only Entities that is On
-			if (currentNode.getOwner().getId() == entityID && currentNode instanceof On && !(currentNode.getOwner() instanceof NetworkNode)) {
+			if (currentNode.getOwner().getId() == entityID && currentNode instanceof On
+					&& !(currentNode.getOwner() instanceof NetworkNode)) {
 				foundEntity = (On) currentNode;
 				foundNodeID = true;
 
@@ -137,7 +133,7 @@ public final class ScenarioHelper {
 		}
 		// ID don't exists or found Entity has no On State
 		if (!foundNodeID) {
-			System.out.println("[LocalHacker] provided ID not found or found Entity has no On State");
+			LOG.info("[Hacker] provided ID not found or found Entity has no On State");
 		}
 
 		return foundEntity;

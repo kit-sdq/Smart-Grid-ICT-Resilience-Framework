@@ -11,5 +11,6 @@ Require-Bundle: org.eclipse.emf.ecore,
  smartgrid.model.topo,
  smartgrid.simcontrol.interfaces,
  org.eclipse.equinox.registry,
- smartgrid.simcontrol.baselib
+ smartgrid.simcontrol.baselib,
+ org.apache.log4j;bundle-version="1.2.15"
 Import-Package: smartgrid.helper
