@@ -18,7 +18,6 @@ import smartgridtopo.SmartGridTopology;
 public class CreateDiagramHandler extends AbstractHandler {
 
 	public CreateDiagramHandler() {
-		// this.setBaseEnabled(false);
 	}
 
 	@Override

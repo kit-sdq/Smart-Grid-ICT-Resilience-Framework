@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -47,6 +48,8 @@ import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
 
 public final class ModelToDiagram {
+
+	private static final Logger LOG = Logger.getLogger(ModelToDiagram.class);
 
 	private static final String F_DIAGRAM = ".sgdiagram";
 
@@ -104,6 +107,8 @@ public final class ModelToDiagram {
 					diagramRes.save(createSaveOptions());
 
 				} catch (IOException e) {
+					LOG.error("[ModelToDiagram]: Saving new diagram went wrong, see StackTrace");
+					LOG.error(e.getMessage());
 					e.printStackTrace();
 				}
 
@@ -125,6 +130,8 @@ public final class ModelToDiagram {
 			}
 
 		} catch (CoreException e) {
+			LOG.error("[ModelToDiagram]: Failed to delete old diagram. Path is "
+					+ diagramFile.getFullPath().toOSString());
 			e.printStackTrace();
 		}
 
@@ -154,8 +161,10 @@ public final class ModelToDiagram {
 
 		try {
 			diagramResource.save(createSaveOptions());
-		} catch (IOException exception) {
-			exception.printStackTrace();
+		} catch (IOException e) {
+			LOG.error("[ModelToDiagram]: Saving new diagram went wrong, see StackTrace");
+			LOG.error(e.getMessage());
+			e.printStackTrace();
 		}
 		GraphitiHelper.getInstance().setDiagram((Diagram) diagramResource.getContents().get((0)));
 		Diagram diagram = GraphitiHelper.getInstance().getDiagram();
