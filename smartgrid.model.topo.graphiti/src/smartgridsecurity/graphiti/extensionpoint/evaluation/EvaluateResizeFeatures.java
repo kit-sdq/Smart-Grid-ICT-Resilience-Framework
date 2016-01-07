@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -22,6 +23,8 @@ import smartgridsecurity.graphiti.extensionpoint.definition.IResizeFeatureResolv
  *
  */
 public class EvaluateResizeFeatures {
+	private static final Logger LOG = Logger.getLogger(EvaluateResizeFeatures.class);
+	
 	private static final String RESIZE_FEATURES_ID = "smartgridsecurity.graphiti.extension.resizefeature";
 	private IFeatureProvider fp;
 	
@@ -54,7 +57,7 @@ public class EvaluateResizeFeatures {
 		
 		try {
 			for (IConfigurationElement e : config) {
-				System.out.println("Evaluating resize shape extension");
+				LOG.info("Evaluating resize shape extension");
 				final Object o = e.createExecutableExtension("class");
 				if (o instanceof IResizeFeatureResolver) {
 					//Executes the evaluation in a thread an returns the result in the future 
@@ -77,7 +80,7 @@ public class EvaluateResizeFeatures {
 				}
 			}
 		} catch (CoreException ex) {
-			System.out.println(ex.getMessage());
+			LOG.error("[EvaluateResizeFeatures]: CoreException occured, message is: " + ex.getMessage());
 		}
 		return resizeShapeFeatureList;
 	}

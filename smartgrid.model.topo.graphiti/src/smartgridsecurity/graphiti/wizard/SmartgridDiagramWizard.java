@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -49,6 +50,7 @@ import smartgridtopo.SmartgridtopoFactory;
  *
  */
 public class SmartgridDiagramWizard extends Wizard implements INewWizard {
+	private static final Logger LOG = Logger.getLogger(SmartgridDiagramWizard.class);
 
 	private ISelection selection;
 	private final String editorId;
@@ -254,7 +256,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 				try {
 					IDE.openEditor(page, file, true);
 				} catch (final PartInitException e) {
-					System.out.println("Throws exception");
+					LOG.error("[SmartgridDiagramWizard]: Throws PartInitException, message is: " + e.getMessage());
 				}
 			}
 		});

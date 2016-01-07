@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -16,16 +17,22 @@ import smartgridsecurity.graphiti.actions.ToolbarButtonAction;
 import smartgridsecurity.graphiti.extensionpoint.definition.IToolbarButtonActionResolver;
 
 /**
- * This class evaluates the toolbar action extension point and adds all toolbar action instances to a list.
+ * This class evaluates the toolbar action extension point and adds all toolbar
+ * action instances to a list.
+ * 
  * @author mario
  *
  */
 public class EvaluateToolbarActions {
+	private static final Logger LOG = Logger.getLogger(EvaluateToolbarActions.class);
+
 	private static final String TOOLBAR_ACTION_ID = "smartgridsecurity.graphiti.extension.toolbaraction";
-	
+
 	/**
 	 * Evaluates all feature extensions.
-	 * @param registry the extension registry of the current platform
+	 * 
+	 * @param registry
+	 *            the extension registry of the current platform
 	 * @return all found feature extensions
 	 */
 	public List<ToolbarButtonAction> evaluateFeatureExtension(IExtensionRegistry registry) {
@@ -34,27 +41,30 @@ public class EvaluateToolbarActions {
 
 	/**
 	 * Private method to evaluate all feature extensions.
-	 * @param registry the extension registry of the current platform
+	 * 
+	 * @param registry
+	 *            the extension registry of the current platform
 	 * @return all found feature extensions
 	 */
 	private List<ToolbarButtonAction> evaluate(IExtensionRegistry registry) {
-		IConfigurationElement[] config = registry
-				.getConfigurationElementsFor(TOOLBAR_ACTION_ID);
-		
-		//define the thread pool
+		IConfigurationElement[] config = registry.getConfigurationElementsFor(TOOLBAR_ACTION_ID);
+
+		// define the thread pool
 		ExecutorService pool = Executors.newCachedThreadPool();
-	    List<Future<List<ToolbarButtonAction>>> list = new LinkedList<Future<List<ToolbarButtonAction>>>();
+		List<Future<List<ToolbarButtonAction>>> list = new LinkedList<Future<List<ToolbarButtonAction>>>();
 		List<ToolbarButtonAction> toolbarButtonActionList = new LinkedList<ToolbarButtonAction>();
-		
+
 		try {
 			for (IConfigurationElement e : config) {
-				System.out.println("Evaluating extension");
+				LOG.info("Evaluating extension");
 				final Object o = e.createExecutableExtension("class");
 				if (o instanceof IToolbarButtonActionResolver) {
-					//Executes the evaluation in a thread an returns the result in the future 
-				      Callable<List<ToolbarButtonAction>> callable = new EvaluateAbstractPattern((IToolbarButtonActionResolver) o);
-				      Future<List<ToolbarButtonAction>> future = pool.submit(callable);
-				      list.add(future);
+					// Executes the evaluation in a thread an returns the result
+					// in the future
+					Callable<List<ToolbarButtonAction>> callable = new EvaluateAbstractPattern(
+							(IToolbarButtonActionResolver) o);
+					Future<List<ToolbarButtonAction>> future = pool.submit(callable);
+					list.add(future);
 				}
 			}
 
@@ -71,7 +81,7 @@ public class EvaluateToolbarActions {
 				}
 			}
 		} catch (CoreException ex) {
-			System.out.println(ex.getMessage());
+			LOG.error("[EvaluateToolbarActions]: CoreException occured, message is: " + ex.getMessage());
 		}
 		return toolbarButtonActionList;
 	}
@@ -81,9 +91,9 @@ public class EvaluateToolbarActions {
 	 *
 	 */
 	private class EvaluateAbstractPattern implements Callable<List<ToolbarButtonAction>> {
-		
+
 		private IToolbarButtonActionResolver buttons;
-		
+
 		public EvaluateAbstractPattern(IToolbarButtonActionResolver f) {
 			this.buttons = f;
 		}
@@ -92,7 +102,7 @@ public class EvaluateToolbarActions {
 		public List<ToolbarButtonAction> call() throws Exception {
 			return buttons.getToolbarButtons();
 		}
-		
+
 	}
 
 }
