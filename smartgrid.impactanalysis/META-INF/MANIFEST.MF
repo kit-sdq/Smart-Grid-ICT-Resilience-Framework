@@ -13,7 +13,8 @@ Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  smartgrid.simcontrol.baselib,
  smartgrid.model.helper,
  smartgrid.simcontrol.interfaces;bundle-version="1.0.0",
- smartgrid.simcontrol;bundle-version="1.0.0"
+ smartgrid.simcontrol;bundle-version="1.0.0",
+ org.apache.log4j;bundle-version="1.2.15"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .

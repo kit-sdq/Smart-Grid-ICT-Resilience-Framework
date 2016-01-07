@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 // import org.eclipse.emf.common.util.URI;
 // import org.eclipse.emf.ecore.resource.Resource;
 // import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -50,6 +51,8 @@ import smartgridtopo.SmartGridTopology;
  */
 public class GraphAnalyzer implements IImpactAnalysis {
 
+	private static final Logger LOG = Logger.getLogger(GraphAnalyzer.class);
+
 	private Map<Integer, PowerState> powerStates;
 	private Map<Integer, EntityState> entityStates;
 
@@ -77,43 +80,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
 	 * For ExtensionPoints .. use this together with the init() Method
 	 */
 	public GraphAnalyzer() {
-
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-
-		ErrorCodeEnum myError = ErrorCodeEnum.NOT_SET;
-
-		internalMaxID = 0;
-		powerStates = new HashMap<Integer, PowerState>();
-		entityStates = new HashMap<Integer, EntityState>();
-		controlCenters = new LinkedList<Integer>();
-		internalToExternalID = new HashMap<Integer, Integer>();
-		externalToInternalID = new HashMap<Integer, Integer>();
-		internalToCluster = new HashMap<Integer, Cluster>();
-		logicalNodes = new LinkedList<Integer>();
-		controlCenterConnectivity = new HashMap<Integer, Double[]>();
-
-		String ignoreLogicalConnectionsString = config.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.FAIL);
-
-		if (ignoreLogicalConnectionsString.equals(Constants.FAIL)) {
-			myError = ErrorCodeEnum.DEFAULT_VALUES_USED;
-
-			// Checks whether DEFAULT_IGNORE_LOC_CON_KEY is true and assigns it
-			this.ignoreLogicalConnections = (Constants.TRUE).equals(Constants.DEFAULT_IGNORE_LOC_CON);
-		} else {
-			// checks whether ignoreLogicalConnectionsString is true and assigns
-			// it
-			this.ignoreLogicalConnections = (Constants.TRUE).equals(ignoreLogicalConnectionsString);
-		}
-
-		this.initDone = true;
-
-		return myError;
 	}
 
 	/**
@@ -147,6 +113,43 @@ public class GraphAnalyzer implements IImpactAnalysis {
 	}
 
 	/**
+	 * 
+	 */
+	@Override
+	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+
+		ErrorCodeEnum myError = ErrorCodeEnum.NOT_SET;
+
+		internalMaxID = 0;
+		powerStates = new HashMap<Integer, PowerState>();
+		entityStates = new HashMap<Integer, EntityState>();
+		controlCenters = new LinkedList<Integer>();
+		internalToExternalID = new HashMap<Integer, Integer>();
+		externalToInternalID = new HashMap<Integer, Integer>();
+		internalToCluster = new HashMap<Integer, Cluster>();
+		logicalNodes = new LinkedList<Integer>();
+		controlCenterConnectivity = new HashMap<Integer, Double[]>();
+
+		String ignoreLogicalConnectionsString = config.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.FAIL);
+
+		if (ignoreLogicalConnectionsString.equals(Constants.FAIL)) {
+			myError = ErrorCodeEnum.DEFAULT_VALUES_USED;
+
+			// Checks whether DEFAULT_IGNORE_LOC_CON_KEY is true and assigns it
+			this.ignoreLogicalConnections = (Constants.TRUE).equals(Constants.DEFAULT_IGNORE_LOC_CON);
+		} else {
+			// checks whether ignoreLogicalConnectionsString is true and assigns
+			// it
+			this.ignoreLogicalConnections = (Constants.TRUE).equals(ignoreLogicalConnectionsString);
+		}
+
+		LOG.info("[GraphAnalyzer]: Init done");
+		this.initDone = true;
+
+		return myError;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * <p>
 	 * 
@@ -157,6 +160,8 @@ public class GraphAnalyzer implements IImpactAnalysis {
 	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput) {
 
 		assert (initDone) : "Init wasn't run! Run init() first !";
+
+		LOG.debug("[GraphAnalyzer]: Start impact analysis");
 
 		clearAll();
 
@@ -203,8 +208,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 		// FileSystem.saveToFileSystem(result, this.outputPath); //TODO For
 		// Debug purposes only can/should? be removed for SimController later
 
-		// System.out.println("Working Directory = " +
-		// System.getProperty("user.dir"));
+		LOG.debug("Working Directory = " + System.getProperty("user.dir"));
 
 		return result;
 	}
@@ -225,9 +229,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
 		if (result != null) {
 			// Saves to File System
 			FileSystem.saveToFileSystem(result, this.outputPath);
-
-			// System.out.println("Working Directory = " +
-			// System.getProperty("user.dir"));
 		}
 	}
 
@@ -242,12 +243,13 @@ public class GraphAnalyzer implements IImpactAnalysis {
 	}
 
 	private void readStates(SmartGridTopology scenario, ScenarioState state) {
+		LOG.debug("[Graph Analyzer]: Start readStates");
 
 		for (EntityState s : state.getEntityStates()) {
-			// System.out.println("Klasse " + s.getOwner().getClass() + " ID " +
-			// s.getOwner().getId() + " destroyed? "
-			// + s.isIsDestroyed() + " powersource " +
-			// s.getOwner().getConnectedTo().toString());
+
+			LOG.debug("Class " + s.getOwner().getClass() + " ID " + s.getOwner().getId() + " destroyed? "
+					+ s.isIsDestroyed() + " powersource " + s.getOwner().getConnectedTo().toString());
+
 			entityStates.put(s.getOwner().getId(), s);
 			// if ((s.getOwner() instanceof ControlCenter) || (s.getOwner()
 			// instanceof SmartMeter))
@@ -262,20 +264,21 @@ public class GraphAnalyzer implements IImpactAnalysis {
 				maxID = s.getOwner().getId();
 			if (s.getOwner() instanceof ControlCenter) {
 				controlCenters.add(s.getOwner().getId());
-				// System.out.println("ControlCenter found: " +
-				// s.getOwner().getId());
+
+				LOG.debug("ControlCenter found: " + s.getOwner().getId());
 			}
 		}
 		for (PowerState p : state.getPowerStates()) {
-			// System.out.println("Entity " + p.getOwner().getName() + " ID " +
-			// p.getOwner().getId()
-			// + " powerOutage? "
-			// + p.isPowerOutage());
+			LOG.debug("Entity " + p.getOwner().getName() + " ID " + p.getOwner().getId() + " powerOutage? "
+					+ p.isPowerOutage());
 			powerStates.put(p.getOwner().getId(), p);
 		}
+		LOG.debug("[Graph Analyzer]: End readStates");
 	}
 
 	private void readPhysicalConnections(SmartGridTopology scenario, ScenarioState state) {
+
+		LOG.debug("[Graph Analyzer]: Start readPhysicalConnections");
 
 		List<PhysicalConnection> pConns = scenario.getContainsPC();
 
@@ -285,21 +288,23 @@ public class GraphAnalyzer implements IImpactAnalysis {
 			if (externalNodeIsWorking(e1.getId()) && externalNodeIsWorking(e2.getId())) {
 				int internal1 = externalToInternalID.get(e1.getId());
 				int internal2 = externalToInternalID.get(e2.getId());
-				// adjacentMatrix[e1.getId()][e2.getId()] = 1;
-				// adjacentMatrix[e2.getId()][e1.getId()] = 1;
+
 				adjacentMatrix[internal1][internal2] = 1;
 				adjacentMatrix[internal2][internal1] = 1;
 			}
 		}
 
 		// Building physical Cluster
-		// System.out.println(Matrix.toString(adjacentMatrix));
-		// System.out.println("Validate clusteralgorithm");
+		LOG.debug(Matrix.toString(adjacentMatrix));
+		LOG.debug("Validate clusteralgorithm");
 		physicalClusters = Tarjan.getClusters(adjacentMatrix, internalToExternalID);
 
+		LOG.debug("[Graph Analyzer]: End readPhysicalConnections");
 	}
 
 	private void readLogicalConnections(SmartGridTopology scenario, ScenarioState state) {
+
+		LOG.debug("[Graph Analyzer]: Start readLogicalConnections");
 
 		// set logical adjacent
 		List<LogicalCommunication> lConns = scenario.getContainsLC();
@@ -325,10 +330,8 @@ public class GraphAnalyzer implements IImpactAnalysis {
 		// remove nodes that are not logical
 		List<List<Integer>> newClusters = new LinkedList<List<Integer>>();
 
-		for (List<Integer> cluster : logicalClusters) { // Not every time
-														// "logical" Clusters
-														// see
-														// above
+		// Not every time "logical" Clusters see above
+		for (List<Integer> cluster : logicalClusters) {
 			List<Integer> newCluster = new LinkedList<Integer>();
 			for (Integer i : cluster) {
 				if (logicalNodes.contains(internalToExternalID.get(i)))
@@ -355,6 +358,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 			}
 			controlCenterConnectivity.put(controlID, connectionAvailable);
 		}
+		LOG.debug("[Graph Analyzer]: End readLogicalConnections");
 	}
 
 	private ScenarioResult genOutputResult() {
@@ -372,12 +376,11 @@ public class GraphAnalyzer implements IImpactAnalysis {
 			clusterCleaning(factory, result, logicalClusters);
 		}
 
-		for (int nodeID : logicalNodes) { // externalToInternalID.keySet()
-			// F�rr jeden Knoten wird jetzt der Output erzeugt
-			// Je nach Verbindungsstatus wird der SmartMeter entsprechend
-			// instanziiert
+		// Generate output for every node depending on connection status
+		for (int nodeID : logicalNodes) {
+			LOG.debug("[Graph Analyzer]: Generate output for node with id " + nodeID);
 			smartgridoutput.EntityState state = null;
-			// System.out.println("Betrachte output von " + nodeID);
+
 			int internalNode = externalToInternalID.get(nodeID);
 
 			List<Integer> connectedCCs = new LinkedList<Integer>();
@@ -428,13 +431,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 	 */
 	private void clusterCleaning(SmartgridoutputFactory factory, ScenarioResult result,
 			List<List<Integer>> clusterToClean) {
-		// Wir haben nun die Ergebnisse des Clusters f�r logische
-		// Verbindungen.
-		// Hier gibt es allerdings noch Knoten, die f�r uns nicht weiter
-		// interessant sind.
-		// Deshalb wird jeder Cluster durchsucht und alle Elemente entfernt, die
-		// kein ControlCenter oder SmartMeter sind.
-		// Cluster die danach keine Elemente mehr haben werden gelöscht
+
 		for (List<Integer> c : clusterToClean) {
 			Cluster cluster = factory.createCluster();
 			// cluster.setSmartMeterCount(c.size());
@@ -462,8 +459,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
 		}
 	}
 
-	// Code Removed
-
 	private boolean externalNodeIsWorking(int id) {
 		return externalNodeHasPower(id) && !externalNodeIsDestroyed(id);
 	}
@@ -476,7 +471,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 					connected = true;
 			}
 		} catch (NullPointerException e) {
-			System.out.println(
+			LOG.error(
 					"Your input model may be not conform to the current topo model but hasn't set its Scenario attribute to a valid value");
 		}
 		return connected;

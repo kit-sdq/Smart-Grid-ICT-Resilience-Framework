@@ -1,5 +1,6 @@
 package smartgrid.impactanalysis;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
@@ -15,8 +16,6 @@ import smartgridinput.ScenarioState;
 import smartgridinput.impl.SmartgridinputPackageImpl;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
-//import smartgrid.simcontrol.*; //Imports the SimControl Package to use the Interface based hook --to be changed (eventually) to Extension Point based 
-//SimControl Approach was outsourced --see smartgrid.simcontrol
 
 /**
  * This Class is the Delegate that launches an Impact Analysis.
@@ -29,6 +28,8 @@ import smartgridtopo.impl.SmartgridtopoPackageImpl;
  */
 public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegate {
 
+	private static final Logger LOG = Logger.getLogger(LaunchConfigurationDelegate1.class);
+
 	/**
 	 * {@inheritDoc}
 	 * <p>
@@ -39,18 +40,19 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 
-		System.out.println("GELADEN");
-		System.out.println("Finde Parameter");
+		LOG.debug("[LaunchConfiguration]: Loaded");
+		LOG.debug("[LaunchConfiguration]: Find parameters");
 
 		String inputPath = configuration.getAttribute("inputPath", "");
 		String outputPath = configuration.getAttribute("outputPath", "");
 		String topoPath = configuration.getAttribute("topologyPath", "");
-		System.out.println("Input : " + inputPath);
-		System.out.println("Topology : " + topoPath);
+		LOG.debug("[LaunchConfiguration]: Input : " + inputPath);
+		LOG.debug("[LaunchConfiguration]: Topology : " + topoPath);
 
 		ScenarioState initialState = loadInput(inputPath);
 		SmartGridTopology topo = loadScenario(topoPath);
 
+		@SuppressWarnings("deprecation")
 		GraphAnalyzer ana = new GraphAnalyzer(outputPath);
 		ana.analyze(topo, initialState);
 	}
@@ -59,17 +61,13 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
 		SmartGridTopology s = null;
 		SmartgridtopoPackageImpl.init();
 
-		// Code Removed - Christian
-
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createFileURI(path), true);
 
 		try {
 			EObject r = resource.getContents().get(0);
-			System.out.println("Klasse: " + r.getClass());
+			LOG.debug("[LaunchConfiguration]: class: " + r.getClass());
 			s = (SmartGridTopology) resource.getContents().get(0);
-
-			// for (PhysicalCo)
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,20 +79,13 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
 		ScenarioState input = null;
 		SmartgridinputPackageImpl.init();
 
-		// Code Removed - Christian
-
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(URI.createFileURI(path), true);
-		try {
-			EObject r = resource.getContents().get(0);
-			System.out.println("Klasse: " + r.getClass());
-			input = (ScenarioState) resource.getContents().get(0);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		EObject r = resource.getContents().get(0);
+		LOG.debug("[LaunchConfiguration]: class: " + r.getClass());
+		input = (ScenarioState) resource.getContents().get(0);
+
 		return input;
 	}
-
-	// Code Removed Christian
 }
