@@ -3,6 +3,7 @@ package smartgrid.graphiti.actions;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -41,6 +42,8 @@ import smartgridtopo.SmartGridTopology;
  *
  */
 public class LoadToolbarButtonAction extends ToolbarButtonAction {
+
+	private static final Logger LOG = Logger.getLogger(LoadToolbarButtonAction.class);
 
 	private boolean loadSuccessful = true;
 
@@ -85,7 +88,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 			return;
 		} else {
 			// Perform Action, like save the file.
-			System.out.println("Selected file: " + fileSelected);
+			LOG.info("Selected file: " + fileSelected);
 			final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
 
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
@@ -183,6 +186,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 				};
 				domain.getCommandStack().execute(cmd);
 			} catch (IOException e) {
+				LOG.error("[smartgrid.model.input.graphiti.LoadToolbarButtonAction]: IOException occured");
 				e.printStackTrace();
 			}
 		}
