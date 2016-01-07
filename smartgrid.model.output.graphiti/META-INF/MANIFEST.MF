@@ -12,4 +12,5 @@ Require-Bundle: org.eclipse.graphiti;bundle-version="0.11.1",
  org.eclipse.ui;bundle-version="3.106.0",
  smartgrid.model.topo.graphiti;bundle-version="1.0.0",
  org.eclipse.emf.ecore.xmi,
- smartgrid.model.helper
+ smartgrid.model.helper,
+ org.apache.log4j;bundle-version="1.2.15"
