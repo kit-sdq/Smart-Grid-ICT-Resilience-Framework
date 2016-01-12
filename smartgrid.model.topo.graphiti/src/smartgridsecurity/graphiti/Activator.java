@@ -3,6 +3,8 @@ package smartgridsecurity.graphiti;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import smartgrid.log4j.InitializeLogger;
+
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -28,6 +30,7 @@ public class Activator extends AbstractUIPlugin {
     @Override
     public void start(final BundleContext context) throws Exception {
         super.start(context);
+        InitializeLogger.initialize();
         plugin = this;
     }
     
