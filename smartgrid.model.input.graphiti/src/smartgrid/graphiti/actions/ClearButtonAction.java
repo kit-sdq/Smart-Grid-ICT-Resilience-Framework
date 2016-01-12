@@ -2,6 +2,7 @@ package smartgrid.graphiti.actions;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -31,6 +32,8 @@ import smartgridtopo.SmartGridTopology;
  *
  */
 public class ClearButtonAction extends ToolbarButtonAction implements IPropertyChangeListener {
+
+	private static final Logger LOG = Logger.getLogger(ClearButtonAction.class);
 
 	public ClearButtonAction() {
 		super(AS_CHECK_BOX);
@@ -68,12 +71,14 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
 	 */
 	@Override
 	public void run() {
+		LOG.info("[ClearButtonAction]: Start clearing input model from diagram");
 		for (EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
 			if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
 				MessageBox messageBox = new MessageBox(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 						SWT.ICON_ERROR);
 				messageBox.setMessage("Cannot clear input model while output model is loaded");
 				messageBox.open();
+				LOG.info("[ClearButtonAction]: End clearing due to failure");
 				return;
 			}
 		}
@@ -84,9 +89,9 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
 				ManageNodeAppearances manager = new ManageNodeAppearances(diagramContainer);
 				// copy list to array -> otherwise you'll get a concurrency
 				// exception
-				// TODO array statt iterator
 				Shape[] shapes = (Shape[]) diagramContainer.getDiagramTypeProvider().getDiagram().getChildren()
 						.toArray();
+				LOG.debug("[ClearButtonAction]: Clearing all nodes");
 				for (int i = 0; i < shapes.length; i++) {
 					Shape currentShape = shapes[i];
 					if (currentShape.getLink().getBusinessObjects().get(0) instanceof PowerGridNode) {
@@ -100,13 +105,14 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
 							manager.removeChildren((ContainerShape) currentShape);
 						}
 					}
-
 				}
 				// remove input model from boList so that node destroyed and
 				// power enabled buttons
 				// are disabled again
 				EList<EObject> boList = diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
 						.getBusinessObjects();
+				LOG.debug(
+						"[ClearButtonAction]: Remove link between SmartGridTopology and ScenarioState in the diagram");
 				for (final EObject tmp : boList) {
 					if (tmp instanceof ScenarioState) {
 						TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
@@ -125,6 +131,7 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
 		};
 		domain.getCommandStack().execute(c);
 		setEnabled(false);
+		LOG.info("[ClearButtonAction]: Clearing successfully finished");
 	}
 
 	@Override

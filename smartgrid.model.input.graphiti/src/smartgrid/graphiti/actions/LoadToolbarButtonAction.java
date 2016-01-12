@@ -64,7 +64,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 
 	@Override
 	public void run() {
-
+		LOG.info("[LoadToolbarButtonAction]: Start loading input model into diagram");
 		// Retrieve the shell
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
@@ -74,6 +74,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 				MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
 				messageBox.setMessage("Cannot open new input model while output model is loaded");
 				messageBox.open();
+				LOG.info("[LoadToolbarButtonAction]: Loading failed due to already loaded output model");
 				return;
 			}
 		}
@@ -95,7 +96,6 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 					.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 
 			// load the resource and resolve the proxies
-			// TODO use resource set of diagram
 			File source = new File(fileSelected);
 			ResourceSet rs = new ResourceSetImpl();
 
@@ -121,6 +121,8 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 									MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
 									messageBox.setMessage("Input model is not conform to the current topo model");
 									messageBox.open();
+									LOG.info(
+											"[LoadToolbarButtonAction]: Loading failed since input model is not conform to topo model");
 									loadSuccessful = false;
 									return;
 								}
@@ -147,6 +149,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 								.toArray();
 
 						ManageNodeAppearances manager = new ManageNodeAppearances(diagramContainer);
+						LOG.info("[LoadToolbarButtonAction]: Applying input model to topo model");
 						for (int i = 0; i < shapes.length; i++) {
 							Shape containerShape = shapes[i];
 
@@ -194,6 +197,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 			firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
 		}
 		loadSuccessful = true;
+		LOG.info("[LoadToolbarButtonAction]: Successfully loaded input model");
 	}
 
 	/**
