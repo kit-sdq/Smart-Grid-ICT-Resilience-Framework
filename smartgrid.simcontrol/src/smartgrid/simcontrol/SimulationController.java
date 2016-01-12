@@ -11,6 +11,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ReceiveAnalysesHelper;
 import smartgrid.helper.ScenarioHelper;
+import smartgrid.log4j.InitializeLogger;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.GenerationStyle;
 import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
@@ -158,7 +159,8 @@ public final class SimulationController {
 	 * Does: # Generates Output Path String # Inits the Simulations
 	 */
 	public static void init(ILaunchConfiguration myConfig) {
-
+		InitializeLogger.initialize();
+		
 		// Do Contructor things
 		SimulationController.myConfiguration = myConfig;
 
