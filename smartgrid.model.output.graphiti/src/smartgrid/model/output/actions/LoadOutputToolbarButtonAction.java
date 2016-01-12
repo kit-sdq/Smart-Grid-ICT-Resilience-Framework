@@ -44,7 +44,7 @@ import smartgridtopo.SmartGridTopology;
 public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
 
 	private static final Logger LOG = Logger.getLogger(LoadOutputToolbarButtonAction.class);
-	
+
 	private boolean loadSuccessful = true;
 
 	public LoadOutputToolbarButtonAction(IPropertyChangeListener listener) {
@@ -63,6 +63,7 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
 
 	@Override
 	public void run() {
+		LOG.info("[LoadOutputToolbarButtonAction]: Start loading output model");
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
 		for (EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
@@ -72,6 +73,8 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
 				MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
 				messageBox.setMessage("Cannot load output model without input model");
 				messageBox.open();
+				LOG.info(
+						"[LoadOutputToolbarButtonAction]: Loading output model failed due to non existent input model");
 				return;
 			}
 		}
@@ -118,6 +121,8 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
 									messageBox.setMessage("Output model is not conform to the current topo model");
 									messageBox.open();
 									loadSuccessful = false;
+									LOG.info(
+											"[LoadOutputToolbarButtonAction]: Loading output model failed since it is not conform to the topo model");
 									return;
 								}
 							}
@@ -134,6 +139,7 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
 
 						Shape[] shapes = (Shape[]) diagramContainer.getDiagramTypeProvider().getDiagram().getChildren()
 								.toArray();
+						LOG.debug("[LoadOutputToolbarButtonAction]: Applying output elements to the diagram");
 						if (hasOutput) {
 							// Clear all output Elements
 							for (int i = 0; i < shapes.length; i++) {
@@ -193,5 +199,6 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
 			firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
 		}
 		loadSuccessful = true;
+		LOG.info("[LoadOutputToolbarButtonAction]: Successfully finished loading output model");
 	}
 }
