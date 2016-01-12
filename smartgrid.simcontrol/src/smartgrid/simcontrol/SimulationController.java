@@ -1,9 +1,13 @@
 package smartgrid.simcontrol;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Appender;
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -99,6 +103,17 @@ public final class SimulationController {
 		if (impactResult == null) {
 			return;
 		}
+		
+		//add fileappender for local logs
+		Logger rootLogger = Logger.getRootLogger();
+		FileAppender fileAppender = null;
+		try {
+            Layout layout = ((Appender)rootLogger.getAllAppenders().nextElement()).getLayout();
+            fileAppender = new FileAppender(layout, fileSystemPath.toString()+"\\log.log");
+            rootLogger.addAppender(fileAppender);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 		// one iteration computes one timestep
 		for (int i = 0; i < timeSteps; i++) {
@@ -149,6 +164,9 @@ public final class SimulationController {
 			// modify the scenario between time steps
 			usedTimeProgressor.progress();
 		} // End 1 TimeStep
+		
+		//remove file appender of this run
+		rootLogger.removeAppender(fileAppender);
 	}
 
 	// Private Methods
