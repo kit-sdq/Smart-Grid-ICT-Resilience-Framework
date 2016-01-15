@@ -35,7 +35,7 @@ import smartgridtopo.SmartGridTopology;
 public class ViralHacker implements IAttackerSimulation {
 
 	private static final Logger LOGGER = Logger.getLogger(ViralHacker.class);
-	
+
 	// Private Fields
 	private boolean firstRun = true;
 	private boolean initDone = false;
@@ -182,7 +182,7 @@ public class ViralHacker implements IAttackerSimulation {
 		}
 
 		LOGGER.info("[Viral Hacker]: Init done");
-		
+
 		initDone = true;
 		return myError;
 	}
@@ -221,9 +221,16 @@ public class ViralHacker implements IAttackerSimulation {
 		if (firstRun) {
 			switch (this.mode) {
 			case RandomNode:
+				List<On> hackedNodes = ScenarioHelper.getHackedNodes(this.myResult.getStates());
 
-				chooseRandomSeedNodes();// -> Does the buildSeedNodesList during
-										// Method
+				// In case there are no hacked nodes, choose one randomly,
+				// otherwise build seed node list
+				if (hackedNodes.isEmpty()) {
+					chooseRandomSeedNodes();
+				} else {
+					this.seedNodes = hackedNodes;
+					buildSeedNodeIDsList();
+				}
 				break;
 			case NodeIDs: // --> Get Nodes
 				buildSeedNodesList();
@@ -481,7 +488,7 @@ public class ViralHacker implements IAttackerSimulation {
 				// Check if Node is already hacked --> So he is able to hack
 				if (myNode.isIsHacked()) {
 					hackedNodesinCluster++;
-				} else {
+				} else if (!(myNode.getOwner() instanceof NetworkNode)) {
 					notHackedNodes.add(myNode);
 				}
 
@@ -489,15 +496,14 @@ public class ViralHacker implements IAttackerSimulation {
 
 			// Each Hacked Nodes in the Cluster hacks "hackingSpeed" other Nodes
 			int howManyToHack = hackedNodesinCluster * hackingSpeed;
+			Random rand = new Random();
 
-			for (On toHack : notHackedNodes) {
-				if (howManyToHack > 0 && !(toHack.getOwner() instanceof NetworkNode)) {
-					LOGGER.debug("Hacked with Full Meshed Hacking node " + toHack.getOwner().getId());
-					toHack.setIsHacked(true);
-					howManyToHack--;
-				} else if (howManyToHack <= 0) {
-					break;
-				}
+			while (howManyToHack > 0 && !notHackedNodes.isEmpty()) {
+				int nextID = rand.nextInt(notHackedNodes.size());
+				notHackedNodes.get(nextID).setIsHacked(true);
+				LOGGER.debug("Hacked with Full Meshed Hacking node " + notHackedNodes.get(nextID).getOwner().getId());
+				notHackedNodes.remove(nextID);
+				howManyToHack--;
 			}
 		}
 		LOGGER.info("[Viral Hacker]: Done hacking with Full Meshed Hacking");
@@ -531,6 +537,8 @@ public class ViralHacker implements IAttackerSimulation {
 	 * Lists !
 	 */
 	private void chooseRandomSeedNodes() {
+		seedNodes.clear();
+		seedNodeIDs.clear();
 		Cluster myCluster[] = new Cluster[this.hackingSpeed];
 		int myClusterNumber;
 
@@ -556,7 +564,7 @@ public class ViralHacker implements IAttackerSimulation {
 
 			On node = myCluster[i].getHasEntities().get(myEntityNumber);
 
-			if (!(node instanceof NetworkNode)) {
+			if (!(node.getOwner() instanceof NetworkNode)) {
 				this.seedNodes.add(node);
 
 				this.seedNodeIDs.add(node.getOwner().getId());
