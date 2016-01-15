@@ -243,10 +243,6 @@ public class ViralHacker implements IAttackerSimulation {
 			// Hack Seed Nodes
 			assert (!this.seedNodes.isEmpty());
 
-			for (On node : this.seedNodes) {
-				node.setIsHacked(true);
-			}
-
 			// Done First Run operations
 			firstRun = false;
 
@@ -565,6 +561,7 @@ public class ViralHacker implements IAttackerSimulation {
 			On node = myCluster[i].getHasEntities().get(myEntityNumber);
 
 			if (!(node.getOwner() instanceof NetworkNode)) {
+				node.setIsHacked(true);
 				this.seedNodes.add(node);
 
 				this.seedNodeIDs.add(node.getOwner().getId());
