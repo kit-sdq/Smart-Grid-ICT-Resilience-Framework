@@ -3,6 +3,7 @@
  */
 package smartgrid.helper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import smartgridinput.ScenarioState;
 import smartgridinput.impl.SmartgridinputPackageImpl;
 import smartgridoutput.Cluster;
+import smartgridoutput.EntityState;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.LogicalCommunication;
@@ -222,9 +224,14 @@ public final class ScenarioHelper {
 		}
 	}
 
-	public static List<On> loadNodes(String nodePath) {
-		// TODO Implement
-		return null;
+	public static List<On> getHackedNodes(List<EntityState> states) {
+		List<On> on = new ArrayList<On>();
+		for (EntityState state: states) {
+			if (state instanceof On && ((On) state).isIsHacked()) {
+				on.add((On) state);
+			}
+		}
+		return on;
 	}
 
 }
