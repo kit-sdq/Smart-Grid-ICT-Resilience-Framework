@@ -47,7 +47,8 @@ public class InputDeleteFeature implements IDeleteFeatureResolver {
         }
     }
 
-    private void removeElement(boolean networkEntity, ScenarioState state, int position, TransactionalEditingDomain domain) {
+    private void removeElement(boolean networkEntity, ScenarioState state, int position,
+            TransactionalEditingDomain domain) {
         domain.getCommandStack().execute(new RecordingCommand(domain) {
             @Override
             protected void doExecute() {
@@ -59,5 +60,5 @@ public class InputDeleteFeature implements IDeleteFeatureResolver {
             }
         });
     }
-    
+
 }

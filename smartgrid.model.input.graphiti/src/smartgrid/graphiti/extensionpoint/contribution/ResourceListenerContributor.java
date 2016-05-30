@@ -11,16 +11,16 @@ import smartgridsecurity.graphiti.extensionpoint.definition.IDomainModelChangeLi
 
 /**
  * Contributor class to contribute all resource listeners to the main editor.
+ * 
  * @author mario
  *
  */
-public class ResourceListenerContributor implements IDomainModelChangeListenerResolver{
+public class ResourceListenerContributor implements IDomainModelChangeListenerResolver {
 
-	@Override
-	public List<ResourceSetListener> getDomainModelChangeListener(
-			DiagramBehavior behavior) {
-		ResourceSetListener[] listeners = {new ScenarioModelChangedListener(behavior)};
-		return Arrays.asList(listeners);
-	}
+    @Override
+    public List<ResourceSetListener> getDomainModelChangeListener(DiagramBehavior behavior) {
+        ResourceSetListener[] listeners = { new ScenarioModelChangedListener(behavior) };
+        return Arrays.asList(listeners);
+    }
 
 }

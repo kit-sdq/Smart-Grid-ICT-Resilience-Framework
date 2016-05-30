@@ -12,6 +12,7 @@ import smartgridtopo.PowerGridNode;
 
 /**
  * Feature to create a power connection. That means that a business object will be created.
+ * 
  * @author mario
  *
  */
@@ -29,7 +30,8 @@ public class CreatePowerConnectionFeature extends AbstractCreateConnectionFeatur
             final Object target = this.getBoFromAnchor(targetAnchor);
             final Object source = this.getBoFromAnchor(sourceAnchor);
 
-            if (source != null && target != null && source instanceof NetworkEntity && target instanceof PowerGridNode) {
+            if (source != null && target != null && source instanceof NetworkEntity
+                    && target instanceof PowerGridNode) {
                 final NetworkEntity sourceNetworkEntity = (NetworkEntity) source;
                 if (!sourceNetworkEntity.getConnectedTo().contains(target)) {
                     return true;

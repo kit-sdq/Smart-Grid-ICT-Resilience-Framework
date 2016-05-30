@@ -13,46 +13,49 @@ import smartgridsecurity.graphiti.helper.ExtensionPointRegistry;
 
 /**
  * Specific action bar contributor implementation.
+ * 
  * @author mario
  *
  */
 public class SGSActionBarContributor extends DiagramEditorActionBarContributor {
-	
-	public SGSActionBarContributor() {
-		super();
-		addToolbarButtonActions();
-	}
-	
+
+    public SGSActionBarContributor() {
+        super();
+        addToolbarButtonActions();
+    }
+
     /**
-     * Retrieves all AbstractPattern, which were found by EvaluateToolbarActions extension point and adds them to ExtensionPointRegistry.
+     * Retrieves all AbstractPattern, which were found by EvaluateToolbarActions extension point and
+     * adds them to ExtensionPointRegistry.
      */
     private void addToolbarButtonActions() {
-    	if (ExtensionPointRegistry.getInstance().getButtonActionsSize() == 0) { 
-    		List<ToolbarButtonAction> extensionToolbarActions = (new EvaluateToolbarActions()).evaluateFeatureExtension(Platform.getExtensionRegistry());
-    		for (ToolbarButtonAction t : extensionToolbarActions) {
-    			ExtensionPointRegistry.getInstance().addActionToRegistry(t);
-    		}
-    	}
+        if (ExtensionPointRegistry.getInstance().getButtonActionsSize() == 0) {
+            List<ToolbarButtonAction> extensionToolbarActions = (new EvaluateToolbarActions())
+                    .evaluateFeatureExtension(Platform.getExtensionRegistry());
+            for (ToolbarButtonAction t : extensionToolbarActions) {
+                ExtensionPointRegistry.getInstance().addActionToRegistry(t);
+            }
+        }
     }
-	
-	@Override
-	protected void buildActions() {
-		super.buildActions();
-		for (ToolbarButtonAction toolbarAction : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
-			RetargetAction action = new RetargetAction(toolbarAction.ACTION_ID, toolbarAction.TOOL_TIP);
-			action.setImageDescriptor(toolbarAction.getImageDescriptor());
-			addRetargetAction(action);
-		}
-	}
 
-	@Override
-	public void contributeToToolBar(IToolBarManager tbm) {
-		super.contributeToToolBar(tbm);
+    @Override
+    protected void buildActions() {
+        super.buildActions();
+        for (ToolbarButtonAction toolbarAction : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
+            RetargetAction action = new RetargetAction(toolbarAction.ACTION_ID, toolbarAction.TOOL_TIP);
+            action.setImageDescriptor(toolbarAction.getImageDescriptor());
+            addRetargetAction(action);
+        }
+    }
 
-		for (ToolbarButtonAction toolbarAction : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
-			tbm.add(getAction(toolbarAction.ACTION_ID));
-		}
+    @Override
+    public void contributeToToolBar(IToolBarManager tbm) {
+        super.contributeToToolBar(tbm);
 
-	}
+        for (ToolbarButtonAction toolbarAction : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
+            tbm.add(getAction(toolbarAction.ACTION_ID));
+        }
+
+    }
 
 }

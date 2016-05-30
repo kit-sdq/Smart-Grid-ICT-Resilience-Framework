@@ -13,21 +13,24 @@ import smartgrid.simcontrol.baselib.GenerationStyle;
  */
 public interface IInputGenerator {
 
-	/**
-	 * Inits the Generator
-	 */
-	public void init(); // TODO Parameters needed ?
+    /**
+     * Inits the Generator
+     */
+    public void init(); // TODO Parameters needed ?
 
-	/**
-	 *  Generates a Input Model according the given Parameters
-	 * 
-	 * 
-	 * @param desiredStyle sets the "shape" of the Input @see {@link smartgrid.simcontrol.baselib.GenerationStyle}
-	 * @param SmartMeterCount How many Smart Meters are in the generated Input
-	 * @param ControlCenterCount How many Control Centers are in the generated Input
-	 * @return Returns a @see {@link InputModelDTO} with the generated Input Model
-	 */
-	public InputModelDTO generate(GenerationStyle desiredStyle,
-			int SmartMeterCount, int ControlCenterCount);
+    /**
+     * Generates a Input Model according the given Parameters
+     * 
+     * 
+     * @param desiredStyle
+     *            sets the "shape" of the Input @see
+     *            {@link smartgrid.simcontrol.baselib.GenerationStyle}
+     * @param SmartMeterCount
+     *            How many Smart Meters are in the generated Input
+     * @param ControlCenterCount
+     *            How many Control Centers are in the generated Input
+     * @return Returns a @see {@link InputModelDTO} with the generated Input Model
+     */
+    public InputModelDTO generate(GenerationStyle desiredStyle, int SmartMeterCount, int ControlCenterCount);
 
 }

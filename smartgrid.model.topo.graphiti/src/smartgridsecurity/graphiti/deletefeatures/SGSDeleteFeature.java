@@ -32,9 +32,9 @@ public class SGSDeleteFeature extends DefaultDeleteFeature {
                 final Object o = ele.createExecutableExtension("deleteFeature");
                 if (o instanceof IDeleteFeatureResolver) {
                     Diagram diagram = (Diagram) context.getPictogramElement().eContainer();
-                    ((IDeleteFeatureResolver) o).deleteBusinessObjects(diagram.getLink().getBusinessObjects(), context
-                            .getPictogramElement().getLink().getBusinessObjects().get(0), this.getDiagramBehavior()
-                            .getEditingDomain());
+                    ((IDeleteFeatureResolver) o).deleteBusinessObjects(diagram.getLink().getBusinessObjects(),
+                            context.getPictogramElement().getLink().getBusinessObjects().get(0),
+                            this.getDiagramBehavior().getEditingDomain());
                 }
             } catch (CoreException e) {
                 e.printStackTrace();

@@ -15,52 +15,58 @@ import org.osgi.framework.Bundle;
 
 /**
  * Abstract class which has to be implemented by all toolbar actions of SGS editor.
+ * 
  * @author mario
  *
  */
 @SuppressWarnings("restriction")
 public abstract class ToolbarButtonAction extends Action {
-	public String TOOL_TIP="";	
-	public String TEXT="";	
-	public String ACTION_ID=""; 
-	protected IDiagramContainerUI diagramContainer;
-	
-	public ToolbarButtonAction(){}
-	public ToolbarButtonAction(int style) {
-		super("", style);
-	}
-	
-	/**
-	 * Sets the current diagram container.
-	 * @param container the current container
-	 */
-	public abstract void setDiagramContainer(IDiagramContainerUI container);
-	
-	/**
-	 * Create save options.
-	 * @return the save options
-	 */
-	public static Map<?, ?> createSaveOptions() {
-		HashMap<String, Object> saveOptions = new HashMap<String, Object>();
-		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
-		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-				Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
-		return saveOptions;
-	}
-	
-	
-	/**
-	 * Creates an ImageDescriptor for a toolbar action.
-	 * @param filename filename of the image
-	 * @param bundleid the current osgi plugin id
-	 * @return new ImageDescriptor
-	 */
-	protected ImageDescriptor createImage(String filename, String bundleid) {
-		Bundle bundle = Platform.getBundle(bundleid);
-		URL fullPathString = BundleUtility.find(bundle, filename);
-		ImageDescriptor imageDcr = ImageDescriptor.createFromURL(fullPathString);
-		return imageDcr;
-	}
-	
-	
+    public String TOOL_TIP = "";
+    public String TEXT = "";
+    public String ACTION_ID = "";
+    protected IDiagramContainerUI diagramContainer;
+
+    public ToolbarButtonAction() {
+    }
+
+    public ToolbarButtonAction(int style) {
+        super("", style);
+    }
+
+    /**
+     * Sets the current diagram container.
+     * 
+     * @param container
+     *            the current container
+     */
+    public abstract void setDiagramContainer(IDiagramContainerUI container);
+
+    /**
+     * Create save options.
+     * 
+     * @return the save options
+     */
+    public static Map<?, ?> createSaveOptions() {
+        HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+        saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
+        saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+        return saveOptions;
+    }
+
+    /**
+     * Creates an ImageDescriptor for a toolbar action.
+     * 
+     * @param filename
+     *            filename of the image
+     * @param bundleid
+     *            the current osgi plugin id
+     * @return new ImageDescriptor
+     */
+    protected ImageDescriptor createImage(String filename, String bundleid) {
+        Bundle bundle = Platform.getBundle(bundleid);
+        URL fullPathString = BundleUtility.find(bundle, filename);
+        ImageDescriptor imageDcr = ImageDescriptor.createFromURL(fullPathString);
+        return imageDcr;
+    }
+
 }

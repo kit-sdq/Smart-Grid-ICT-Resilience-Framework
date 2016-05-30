@@ -19,53 +19,53 @@ import smartgridtopo.SmartgridtopoFactory;
  */
 public class InterComPattern extends AbstractFormPattern {
 
-	@Override
-	public boolean isMainBusinessObjectApplicable(final Object mainBusinessObject) {
-		return mainBusinessObject instanceof InterCom;
-	}
+    @Override
+    public boolean isMainBusinessObjectApplicable(final Object mainBusinessObject) {
+        return mainBusinessObject instanceof InterCom;
+    }
 
-	@Override
-	public Object[] create(final ICreateContext context) {
-		addScenario();
-		SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
-		InterCom node = SmartgridtopoFactory.eINSTANCE.createInterCom();
-		// Add model element to resource.
-		// We add the model element to the resource of the diagram for
-		// simplicity's sake. Normally, a customer would use its own
-		// model persistence layer for storing the business model separately.
-		container.getContainsNE().add(node);
+    @Override
+    public Object[] create(final ICreateContext context) {
+        addScenario();
+        SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
+        InterCom node = SmartgridtopoFactory.eINSTANCE.createInterCom();
+        // Add model element to resource.
+        // We add the model element to the resource of the diagram for
+        // simplicity's sake. Normally, a customer would use its own
+        // model persistence layer for storing the business model separately.
+        container.getContainsNE().add(node);
 
-		node.setId(UIDHelper.generateUID());
+        node.setId(UIDHelper.generateUID());
 
-		// do the add
-		this.addGraphicalRepresentation(context, node);
+        // do the add
+        this.addGraphicalRepresentation(context, node);
 
-		// return newly created business object(s)
-		return new Object[] { node };
-	}
+        // return newly created business object(s)
+        return new Object[] { node };
+    }
 
-	@Override
-	protected String getName() {
-		return "Inter Com";
-	}
+    @Override
+    protected String getName() {
+        return "Inter Com";
+    }
 
-	@Override
-	protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
-		return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 139, 0)),
-				this.manageColor(new ColorConstant(127, 255, 0)));
-	}
+    @Override
+    protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
+        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 139, 0)),
+                this.manageColor(new ColorConstant(127, 255, 0)));
+    }
 
-	@Override
-	protected void linkObjects(ContainerShape containerShape, Object businessObject) {
-		InterCom addedNode = (InterCom) businessObject;
-		if (addedNode.eResource() == null) {
-			// getDiagram().eResource().getContents().add(addedNode);
-			throw new RuntimeException("BO not in Resource! (unecpectedly)");
-		}
+    @Override
+    protected void linkObjects(ContainerShape containerShape, Object businessObject) {
+        InterCom addedNode = (InterCom) businessObject;
+        if (addedNode.eResource() == null) {
+            // getDiagram().eResource().getContents().add(addedNode);
+            throw new RuntimeException("BO not in Resource! (unecpectedly)");
+        }
 
-		// create link and wire it
-		this.link(containerShape, addedNode);
+        // create link and wire it
+        this.link(containerShape, addedNode);
 
-	}
+    }
 
 }

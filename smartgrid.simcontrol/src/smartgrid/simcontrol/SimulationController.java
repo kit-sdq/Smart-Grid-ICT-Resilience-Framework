@@ -40,114 +40,115 @@ import smartgridtopo.SmartMeter;
 
 public final class SimulationController {
 
-	private static final Logger LOG = Logger.getLogger(SimulationController.class);
+    private static final Logger LOG = Logger.getLogger(SimulationController.class);
 
-	/* Generator Fields (not yet properly implemented) */
-	private static Boolean generateInput = false;
-	private static List<IInputGenerator> inputGeneratorList = new LinkedList<IInputGenerator>();
-	@SuppressWarnings("unused")
+    /* Generator Fields (not yet properly implemented) */
+    private static Boolean generateInput = false;
+    private static List<IInputGenerator> inputGeneratorList = new LinkedList<IInputGenerator>();
+    @SuppressWarnings("unused")
     private static IInputGenerator inputGenerator;
-	@SuppressWarnings("unused")
-	private static GenerationStyle desiredStyle;
-	@SuppressWarnings("unused")
-	private static int smartMeterCount;
-	@SuppressWarnings("unused")
-	private static int controlCenterCount;
+    @SuppressWarnings("unused")
+    private static GenerationStyle desiredStyle;
+    @SuppressWarnings("unused")
+    private static int smartMeterCount;
+    @SuppressWarnings("unused")
+    private static int controlCenterCount;
 
-	private static IKritisSimulationWrapper kritisSimulation;
-	private static IPowerLoadSimulationWrapper powerLoadSimulation;
-	private static IImpactAnalysis impactAnalsis;
-	private static IAttackerSimulation attackerSimulation;
-	private static ITerminationCondition terminationCondition;
-	private static ITimeProgressor timeProgressor;
+    private static IKritisSimulationWrapper kritisSimulation;
+    private static IPowerLoadSimulationWrapper powerLoadSimulation;
+    private static IImpactAnalysis impactAnalsis;
+    private static IAttackerSimulation attackerSimulation;
+    private static ITerminationCondition terminationCondition;
+    private static ITimeProgressor timeProgressor;
 
-	private static String fileSystemPath;
-	private static int maxTimeSteps;
-	private static SmartGridTopology topo;
-	private static ScenarioState initialState;
+    private static String fileSystemPath;
+    private static int maxTimeSteps;
+    private static SmartGridTopology topo;
+    private static ScenarioState initialState;
 
     private static FileAppender fileAppender;
 
-	private SimulationController() {
-	}
+    private SimulationController() {
+    }
 
-	/**
-	 * @param topo
-	 * @param initialState
-	 * @param maxTimeSteps
-	 */
-	public static void run() {
-		ScenarioState impactInputOld;
-		ScenarioState impactInput = initialState;
-		ScenarioResult impactResultOld;
-		
-		List<PowerPerNode> powerPerNodes = null; // TODO how to initialize?
-		List<AbstractCostFunction> costFunctions;
+    /**
+     * @param topo
+     * @param initialState
+     * @param maxTimeSteps
+     */
+    public static void run() {
+        ScenarioState impactInputOld;
+        ScenarioState impactInput = initialState;
+        ScenarioResult impactResultOld;
 
-		// Compute Initial Impact Analysis Result
-		ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
-		
-		// one iteration computes one timestep
-		for (int timeStep = 0; timeStep < maxTimeSteps; timeStep++) {
-			// Generates Path with default System separators
-			String timeStepPath = new File(fileSystemPath + "\\Zeitschritt " + timeStep).getPath();
+        List<PowerPerNode> powerPerNodes = null; // TODO how to initialize?
+        List<AbstractCostFunction> costFunctions;
 
-			costFunctions = kritisSimulation.run(powerPerNodes);
-			
-			impactResult = attackerSimulation.run(topo, impactResult);
-			if (impactResult == null) {
-				// Attacker simulation failed due to rootNodeID not found -->
-				// Abort the simulation
-				break;
-			}
-			
-			// save attack result to file
-			String attackResultFile = new File(timeStepPath + "\\AttackerSimulationResult.smartgridoutput").getPath();
-			smartgrid.helper.FileSystem.saveToFileSystem(impactResult, attackResultFile);
+        // Compute Initial Impact Analysis Result
+        ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
 
-			// impact and power may iterate several times
-			int innerLoopIterationCount = 0;
-			do {
-			    String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount).getPath();
-			    
-			    // run power load simulation
-		        List<SmartMeterState> smartMeterStates = convertToPowerLoadInput(impactResult);
-		        powerPerNodes = powerLoadSimulation.run(costFunctions, smartMeterStates);
-		        
-		        // copy the input
-		        impactInputOld = EcoreUtil.copy(impactInput);
-		        
-		        // convert input for impact analysis
-				updateImactAnalysisInput(impactInput, impactResult, powerPerNodes);
-				
-				// Save input to file
+        // one iteration computes one timestep
+        for (int timeStep = 0; timeStep < maxTimeSteps; timeStep++) {
+            // Generates Path with default System separators
+            String timeStepPath = new File(fileSystemPath + "\\Zeitschritt " + timeStep).getPath();
+
+            costFunctions = kritisSimulation.run(powerPerNodes);
+
+            impactResult = attackerSimulation.run(topo, impactResult);
+            if (impactResult == null) {
+                // Attacker simulation failed due to rootNodeID not found -->
+                // Abort the simulation
+                break;
+            }
+
+            // save attack result to file
+            String attackResultFile = new File(timeStepPath + "\\AttackerSimulationResult.smartgridoutput").getPath();
+            smartgrid.helper.FileSystem.saveToFileSystem(impactResult, attackResultFile);
+
+            // impact and power may iterate several times
+            int innerLoopIterationCount = 0;
+            do {
+                String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount).getPath();
+
+                // run power load simulation
+                List<SmartMeterState> smartMeterStates = convertToPowerLoadInput(impactResult);
+                powerPerNodes = powerLoadSimulation.run(costFunctions, smartMeterStates);
+
+                // copy the input
+                impactInputOld = EcoreUtil.copy(impactInput);
+
+                // convert input for impact analysis
+                updateImactAnalysisInput(impactInput, impactResult, powerPerNodes);
+
+                // Save input to file
                 String inputFile = new File(iterationPath + "\\PowerLoadResult.smartgridinput").getPath();
                 smartgrid.helper.FileSystem.saveToFileSystem(impactInput, inputFile);
-				
-				impactResultOld = impactResult;
-				impactResult = impactAnalsis.run(topo, impactInput);
-				
-				// Save Result
-				String resultFile = new File(iterationPath + "\\ImpactResult.smartgridoutput").getPath();
-				smartgrid.helper.FileSystem.saveToFileSystem(impactResult, resultFile);
 
-				innerLoopIterationCount++;
-			} while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld,
-					impactResult, impactResultOld));
+                impactResultOld = impactResult;
+                impactResult = impactAnalsis.run(topo, impactInput);
 
-			LOG.info("Time step "+timeStep+" terminated after "+innerLoopIterationCount+" power/impact iterations");
-			
-			// modify the scenario between time steps
-			timeProgressor.progress();
-		}
-		
-		LOG.info("Coupled simulation terminated");
-		
-		//remove file appender of this run
-		Logger.getRootLogger().removeAppender(fileAppender);
-	}
+                // Save Result
+                String resultFile = new File(iterationPath + "\\ImpactResult.smartgridoutput").getPath();
+                smartgrid.helper.FileSystem.saveToFileSystem(impactResult, resultFile);
 
-	// Private Methods
+                innerLoopIterationCount++;
+            } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult,
+                    impactResultOld));
+
+            LOG.info("Time step " + timeStep + " terminated after " + innerLoopIterationCount
+                    + " power/impact iterations");
+
+            // modify the scenario between time steps
+            timeProgressor.progress();
+        }
+
+        LOG.info("Coupled simulation terminated");
+
+        // remove file appender of this run
+        Logger.getRootLogger().removeAppender(fileAppender);
+    }
+
+    // Private Methods
 
     private static List<SmartMeterState> convertToPowerLoadInput(ScenarioResult impactResult) {
         List<SmartMeterState> smartMeterStates = new ArrayList<SmartMeterState>();
@@ -162,8 +163,8 @@ public final class SimulationController {
         return smartMeterStates;
     }
 
-    private static ScenarioState updateImactAnalysisInput(ScenarioState impactInput,
-            ScenarioResult impactResult, List<PowerPerNode> powerPerNodes) {
+    private static ScenarioState updateImactAnalysisInput(ScenarioState impactInput, ScenarioResult impactResult,
+            List<PowerPerNode> powerPerNodes) {
 
         for (EntityState state : impactResult.getStates()) {
             boolean hackedState = state instanceof On && ((On) state).isIsHacked();
@@ -175,106 +176,107 @@ public final class SimulationController {
                 }
             }
         }
-        
+
         for (PowerState powerState : impactInput.getPowerStates()) {
             String id = Integer.toString(powerState.getOwner().getId());
-            for(PowerPerNode powerPerNode : powerPerNodes) {
-                if(id.equals(powerPerNode.getPowerNodeID())) {
+            for (PowerPerNode powerPerNode : powerPerNodes) {
+                if (id.equals(powerPerNode.getPowerNodeID())) {
                     // TODO interpret data correctly
                     powerState.setPowerOutage(powerPerNode.getAbsolutePower() == 0);
                 }
             }
         }
-        
+
         return null;
     }
 
-	/*
-	 * Inits some things for all runs. Not for Interface based hook in !
-	 * 
-	 * Does: # Generates Output Path String # Inits the Simulations
-	 */
-	public static void init(ILaunchConfiguration launchConfig) throws CoreException {
-	    
-		InitializeLogger.initialize();
-		
-    	LOG.debug("loading launch config");
-    
-    	fileSystemPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
-    	
-    	//add fileappender for local logs
+    /*
+     * Inits some things for all runs. Not for Interface based hook in !
+     * 
+     * Does: # Generates Output Path String # Inits the Simulations
+     */
+    public static void init(ILaunchConfiguration launchConfig) throws CoreException {
+
+        InitializeLogger.initialize();
+
+        LOG.debug("loading launch config");
+
+        fileSystemPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
+
+        // add fileappender for local logs
         Logger rootLogger = Logger.getRootLogger();
         try {
-            Layout layout = ((Appender)rootLogger.getAllAppenders().nextElement()).getLayout();
-            fileAppender = new FileAppender(layout, fileSystemPath+"\\log.log");
+            Layout layout = ((Appender) rootLogger.getAllAppenders().nextElement()).getLayout();
+            fileAppender = new FileAppender(layout, fileSystemPath + "\\log.log");
             rootLogger.addAppender(fileAppender);
         } catch (IOException e) {
-           throw new RuntimeException("Error creating local log appender in the working directory. Most likely there are problems with access rights.");
-        }       
-    	
-    	// load models
+            throw new RuntimeException(
+                    "Error creating local log appender in the working directory. Most likely there are problems with access rights.");
+        }
+
+        // load models
         String inputPath = launchConfig.getAttribute(Constants.INPUT_PATH_KEY, "");
-    	String topoPath = launchConfig.getAttribute(Constants.TOPOLOGY_PATH_KEY, "");
-    	initialState = ScenarioModelHelper.loadInput(inputPath);
+        String topoPath = launchConfig.getAttribute(Constants.TOPOLOGY_PATH_KEY, "");
+        initialState = ScenarioModelHelper.loadInput(inputPath);
         topo = ScenarioModelHelper.loadScenario(topoPath);
         LOG.info("Scenario input state: " + inputPath);
         LOG.info("Topology: " + topoPath);
-    	
-    	/*
-    	 * Check whether this is really an Integer already done in
-    	 * smartgrid.simcontrol.ui.SimControlLaunchConfigurationTab. So just
-    	 * parsing to Int
-    	 */
-    	maxTimeSteps = Integer.parseUnsignedInt(launchConfig.getAttribute(Constants.TIMESTEPS_KEY, ""));
-    	LOG.info("Running for " + maxTimeSteps + " time steps");
-    	
-    	// Gets String from Config and compares whether it is the same String as Constants.TRUE
-    	generateInput = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FALSE).contains(Constants.TRUE);
-    	if (generateInput) {
-    		initGeneratorInput(launchConfig);
-    	}
 
-		// Retrieve simulations from extension points
-		loadCustomUserAnalysis(launchConfig);
+        /*
+         * Check whether this is really an Integer already done in
+         * smartgrid.simcontrol.ui.SimControlLaunchConfigurationTab. So just parsing to Int
+         */
+        maxTimeSteps = Integer.parseUnsignedInt(launchConfig.getAttribute(Constants.TIMESTEPS_KEY, ""));
+        LOG.info("Running for " + maxTimeSteps + " time steps");
 
-	    // Init all simulations
-		powerLoadSimulation.init(launchConfig);
-		kritisSimulation.init(launchConfig);
-		impactAnalsis.init(launchConfig);
-		attackerSimulation.init(launchConfig);
-		terminationCondition.init(launchConfig);
-		timeProgressor.init(launchConfig);
-		
-        LOG.info("Using power load simulation: "+powerLoadSimulation.getName());
-        LOG.info("Using KRITIS simulation: "+kritisSimulation.getName());
-        LOG.info("Using impact analysis: "+impactAnalsis.getName());
-        LOG.info("Using attacker simulation: "+attackerSimulation.getName());
-        LOG.info("Using termination condition: "+terminationCondition.getName());
-        LOG.info("Using time progressor: "+timeProgressor.getName());
-	}
+        // Gets String from Config and compares whether it is the same String as Constants.TRUE
+        generateInput = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FALSE)
+                .contains(Constants.TRUE);
+        if (generateInput) {
+            initGeneratorInput(launchConfig);
+        }
 
-	/**
-	 * @throws CoreException
-	 */
-	private static void loadCustomUserAnalysis(ILaunchConfiguration launchConfig) throws CoreException {
-		SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
+        // Retrieve simulations from extension points
+        loadCustomUserAnalysis(launchConfig);
 
-		List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
-		for (IAttackerSimulation e : attack) {
+        // Init all simulations
+        powerLoadSimulation.init(launchConfig);
+        kritisSimulation.init(launchConfig);
+        impactAnalsis.init(launchConfig);
+        attackerSimulation.init(launchConfig);
+        terminationCondition.init(launchConfig);
+        timeProgressor.init(launchConfig);
 
-			if (launchConfig.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "").equals(e.getName())) {
-				attackerSimulation = e;
-			}
-		}
+        LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
+        LOG.info("Using KRITIS simulation: " + kritisSimulation.getName());
+        LOG.info("Using impact analysis: " + impactAnalsis.getName());
+        LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+        LOG.info("Using termination condition: " + terminationCondition.getName());
+        LOG.info("Using time progressor: " + timeProgressor.getName());
+    }
 
-		List<IPowerLoadSimulationWrapper> power = helper.getPowerLoadSimulationExtensions();
-		for (IPowerLoadSimulationWrapper e : power) {
+    /**
+     * @throws CoreException
+     */
+    private static void loadCustomUserAnalysis(ILaunchConfiguration launchConfig) throws CoreException {
+        SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
-			if (launchConfig.getAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, "").equals(e.getName())) {
-				powerLoadSimulation = e;
-			}
-		}
-		
+        List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
+        for (IAttackerSimulation e : attack) {
+
+            if (launchConfig.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "").equals(e.getName())) {
+                attackerSimulation = e;
+            }
+        }
+
+        List<IPowerLoadSimulationWrapper> power = helper.getPowerLoadSimulationExtensions();
+        for (IPowerLoadSimulationWrapper e : power) {
+
+            if (launchConfig.getAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, "").equals(e.getName())) {
+                powerLoadSimulation = e;
+            }
+        }
+
         List<IKritisSimulationWrapper> kritis = helper.getKritisSimulationExtensions();
         for (IKritisSimulationWrapper e : kritis) {
 
@@ -283,79 +285,79 @@ public final class SimulationController {
             }
         }
 
-		List<ITerminationCondition> termination = helper.getTerminationConditionExtensions();
-		for (ITerminationCondition e : termination) {
+        List<ITerminationCondition> termination = helper.getTerminationConditionExtensions();
+        for (ITerminationCondition e : termination) {
 
-			if (launchConfig.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, "")
-					.equals(e.getName())) {
-				terminationCondition = e;
-			}
-		}
+            if (launchConfig.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, "").equals(e.getName())) {
+                terminationCondition = e;
+            }
+        }
 
-		List<ITimeProgressor> time = helper.getProgressorExtensions();
-		for (ITimeProgressor e : time) {
+        List<ITimeProgressor> time = helper.getProgressorExtensions();
+        for (ITimeProgressor e : time) {
 
-			if (launchConfig.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, "").equals(e.getName())) {
-				timeProgressor = e;
-			}
-		}
+            if (launchConfig.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, "").equals(e.getName())) {
+                timeProgressor = e;
+            }
+        }
 
-		List<IImpactAnalysis> impact = helper.getImpactAnalysisExtensions();
-		for (IImpactAnalysis e : impact) {
+        List<IImpactAnalysis> impact = helper.getImpactAnalysisExtensions();
+        for (IImpactAnalysis e : impact) {
 
-			if (launchConfig.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, "").equals(e.getName())) {
-				impactAnalsis = e;
-			}
-		}
+            if (launchConfig.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, "").equals(e.getName())) {
+                impactAnalsis = e;
+            }
+        }
 
-		if (generateInput) {
-			// #pragma parallel section
-			for (IInputGenerator e : inputGeneratorList) {
+        if (generateInput) {
+            // #pragma parallel section
+            for (IInputGenerator e : inputGeneratorList) {
 
-				// TODO Add User Selection from UI here
+                // TODO Add User Selection from UI here
 
-				// if(e.getName().equals("User Selection")){
-				inputGenerator = e;
-				// }
-			}
-		}
-	}
+                // if(e.getName().equals("User Selection")){
+                inputGenerator = e;
+                // }
+            }
+        }
+    }
 
-	/**
-	 * @throws CoreException
-	 * @throws NumberFormatException
-	 */
-	private static void initGeneratorInput(ILaunchConfiguration launchConfig) throws CoreException, NumberFormatException {
+    /**
+     * @throws CoreException
+     * @throws NumberFormatException
+     */
+    private static void initGeneratorInput(ILaunchConfiguration launchConfig)
+            throws CoreException, NumberFormatException {
 
-		assert generateInput : "Only run this Methods if generate Input is desired by user";
+        assert generateInput : "Only run this Methods if generate Input is desired by user";
 
-		String genStyleString = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FAIL);
+        String genStyleString = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FAIL);
 
-		if (genStyleString.equals(Constants.FAIL)) {
+        if (genStyleString.equals(Constants.FAIL)) {
 
-			genStyleString = Constants.DEFAULT_GEN_SYNTHETIC_INPUT;
-			LOG.info("[Simulationcontroller] Default Generation Style used");
-		}
+            genStyleString = Constants.DEFAULT_GEN_SYNTHETIC_INPUT;
+            LOG.info("[Simulationcontroller] Default Generation Style used");
+        }
 
-		SimulationController.desiredStyle = GenerationStyle.valueOf(genStyleString);
+        SimulationController.desiredStyle = GenerationStyle.valueOf(genStyleString);
 
-		String smartString = launchConfig.getAttribute(Constants.SMART_METER_COUNT_KEY, Constants.FAIL);
+        String smartString = launchConfig.getAttribute(Constants.SMART_METER_COUNT_KEY, Constants.FAIL);
 
-		if (smartString.equals(Constants.FAIL)) {
-			smartString = Constants.DEFAULT_SMART_METER_COUNT;
-			LOG.info("[SimulationController] Default SmartMeterCount used");
+        if (smartString.equals(Constants.FAIL)) {
+            smartString = Constants.DEFAULT_SMART_METER_COUNT;
+            LOG.info("[SimulationController] Default SmartMeterCount used");
 
-		}
+        }
 
-		SimulationController.smartMeterCount = Integer.parseInt(smartString);
+        SimulationController.smartMeterCount = Integer.parseInt(smartString);
 
-		String controlCenterString = launchConfig.getAttribute(Constants.CONTROL_CENTER_COUNT_KEY, Constants.FAIL);
+        String controlCenterString = launchConfig.getAttribute(Constants.CONTROL_CENTER_COUNT_KEY, Constants.FAIL);
 
-		if (controlCenterString.equals(Constants.FAIL)) {
-			controlCenterString = Constants.DEFAULT_CONTROL_CENTER_COUNT;
-			LOG.info("[SimulationController] Default ControlCenterCount used");
+        if (controlCenterString.equals(Constants.FAIL)) {
+            controlCenterString = Constants.DEFAULT_CONTROL_CENTER_COUNT;
+            LOG.info("[SimulationController] Default ControlCenterCount used");
 
-		}
-		SimulationController.controlCenterCount = Integer.parseInt(controlCenterString);
-	}
+        }
+        SimulationController.controlCenterCount = Integer.parseInt(controlCenterString);
+    }
 }

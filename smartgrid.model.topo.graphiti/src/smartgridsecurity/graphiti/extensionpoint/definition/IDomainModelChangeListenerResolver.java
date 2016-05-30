@@ -7,11 +7,12 @@ import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 
 /**
  * Resolver for all resource listeners.
+ * 
  * @author mario
  *
  */
 public interface IDomainModelChangeListenerResolver {
-	
-	public List<ResourceSetListener> getDomainModelChangeListener(DiagramBehavior behavior);
+
+    public List<ResourceSetListener> getDomainModelChangeListener(DiagramBehavior behavior);
 
 }

@@ -24,107 +24,102 @@ import smartgridtopo.NamedEntity;
 
 /**
  * Property sheet to display names.
+ * 
  * @author mario
  *
  */
-public class NamedEntityPropertiesSheet extends GFPropertySection implements
-		ITabbedPropertyConstants {
+public class NamedEntityPropertiesSheet extends GFPropertySection implements ITabbedPropertyConstants {
 
-	// UI elements
-	protected Text namedEntityWidget;
-	private Label label;
+    // UI elements
+    protected Text namedEntityWidget;
+    private Label label;
 
-	/**
-	 * The business object.
-	 */
-	protected EObject bo = null;
+    /**
+     * The business object.
+     */
+    protected EObject bo = null;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#createControls
-	 * (org.eclipse.swt.widgets.Composite,
-	 * org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage)
-	 */
-	@Override
-	public void createControls(Composite parent,
-			TabbedPropertySheetPage tabbedPropertySheetPage) {
-		super.createControls(parent, tabbedPropertySheetPage);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#createControls
+     * (org.eclipse.swt.widgets.Composite,
+     * org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage)
+     */
+    @Override
+    public void createControls(Composite parent, TabbedPropertySheetPage tabbedPropertySheetPage) {
+        super.createControls(parent, tabbedPropertySheetPage);
 
-		final TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
-		final Composite composite = factory.createFlatFormComposite(parent);
+        final TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
+        final Composite composite = factory.createFlatFormComposite(parent);
 
-		GridLayout layout = new GridLayout(2, false);
-		composite.setLayout(layout);
-		
-		label = new Label(composite, SWT.NONE);
-		label.setText("Name"
-				+ ": ");
-		
-		namedEntityWidget = new Text(composite, SWT.BORDER);
-		GridData gridData = new GridData();
-		gridData.horizontalAlignment = SWT.FILL;
-		gridData.grabExcessHorizontalSpace = true;
-		namedEntityWidget.setLayoutData(gridData);
-		namedEntityWidget.setText("");
+        GridLayout layout = new GridLayout(2, false);
+        composite.setLayout(layout);
 
-		namedEntityWidget.addModifyListener(new ModifyListener() {
+        label = new Label(composite, SWT.NONE);
+        label.setText("Name" + ": ");
 
-			@Override
-			public void modifyText(final ModifyEvent e) {
-				IFeature feature = new AbstractFeature(getDiagramTypeProvider().getFeatureProvider()) {
+        namedEntityWidget = new Text(composite, SWT.BORDER);
+        GridData gridData = new GridData();
+        gridData.horizontalAlignment = SWT.FILL;
+        gridData.grabExcessHorizontalSpace = true;
+        namedEntityWidget.setLayoutData(gridData);
+        namedEntityWidget.setText("");
 
-					@Override
-					public void execute(IContext context) {
-						PictogramElement pe = getSelectedPictogramElement();
-						if (pe != null) {
-							Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-							if (bo == null)
-								return;
-							NamedEntity entity = (NamedEntity) bo;
-							String name = ((Text)namedEntityWidget).getText();
-							if (!name.equals("")) {
-								entity.setName(name);
-							}
-						}
-					}
+        namedEntityWidget.addModifyListener(new ModifyListener() {
 
-					@Override
-					public boolean canExecute(IContext context) {
-						return true;
-					}
-				};
-				execute(feature, new CustomContext());
-			}
-		});
-	}
+            @Override
+            public void modifyText(final ModifyEvent e) {
+                IFeature feature = new AbstractFeature(getDiagramTypeProvider().getFeatureProvider()) {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
-	 */
-	@Override
-	public void refresh() {
-		PictogramElement pe = getSelectedPictogramElement();
-		if (pe != null) {
+                    @Override
+                    public void execute(IContext context) {
+                        PictogramElement pe = getSelectedPictogramElement();
+                        if (pe != null) {
+                            Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+                            if (bo == null)
+                                return;
+                            NamedEntity entity = (NamedEntity) bo;
+                            String name = ((Text) namedEntityWidget).getText();
+                            if (!name.equals("")) {
+                                entity.setName(name);
+                            }
+                        }
+                    }
 
-			EObject bo = Graphiti.getLinkService()
-					.getBusinessObjectForLinkedPictogramElement(pe);
-			// the filter assured, that it is a EClass
+                    @Override
+                    public boolean canExecute(IContext context) {
+                        return true;
+                    }
+                };
+                execute(feature, new CustomContext());
+            }
+        });
+    }
 
-			if (bo == null)
-				return;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
+     */
+    @Override
+    public void refresh() {
+        PictogramElement pe = getSelectedPictogramElement();
+        if (pe != null) {
 
-			if (((NamedEntity) bo).getName() != null) {
-				namedEntityWidget.setText(((NamedEntity) bo).getName());
-			} else {
-				namedEntityWidget.setText("");
-			}
+            EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+            // the filter assured, that it is a EClass
 
-		}
-	}
+            if (bo == null)
+                return;
+
+            if (((NamedEntity) bo).getName() != null) {
+                namedEntityWidget.setText(((NamedEntity) bo).getName());
+            } else {
+                namedEntityWidget.setText("");
+            }
+
+        }
+    }
 
 }

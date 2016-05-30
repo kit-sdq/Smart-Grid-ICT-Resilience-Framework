@@ -9,6 +9,6 @@ package smartgrid.attackersimulation;
  * @author Christian
  */
 public enum NodeMode {
-	NodeIDs, Nodes, RandomNode, // RandomID
+    NodeIDs, Nodes, RandomNode, // RandomID
 
 }

@@ -33,7 +33,6 @@ public class Activator extends AbstractUIPlugin {
         InitializeLogger.initialize();
         plugin = this;
     }
-    
 
     /*
      * (non-Javadoc)

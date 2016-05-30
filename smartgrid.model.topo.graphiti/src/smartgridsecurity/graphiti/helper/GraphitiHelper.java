@@ -6,47 +6,49 @@ import org.eclipse.graphiti.ui.editor.IDiagramContainerUI;
 
 /**
  * Helper class which holds all important Graphiti instances.
+ * 
  * @author mario
  *
  */
 public class GraphitiHelper {
-	
-	private static GraphitiHelper instance = null;
-	private IFeatureProvider featureProvider;
-	private IDiagramContainerUI diagramContainer;
-	private Diagram diagram;
-	
-	public IFeatureProvider getFeatureProvider() {
-		return featureProvider;
-	}
 
-	public void setFeatureProvider(IFeatureProvider featureProvider) {
-		this.featureProvider = featureProvider;
-	}
+    private static GraphitiHelper instance = null;
+    private IFeatureProvider featureProvider;
+    private IDiagramContainerUI diagramContainer;
+    private Diagram diagram;
 
-	public IDiagramContainerUI getDiagramContainer() {
-		return diagramContainer;
-	}
+    public IFeatureProvider getFeatureProvider() {
+        return featureProvider;
+    }
 
-	public void setDiagramContainer(IDiagramContainerUI diagramContainer) {
-		this.diagramContainer = diagramContainer;
-	}
+    public void setFeatureProvider(IFeatureProvider featureProvider) {
+        this.featureProvider = featureProvider;
+    }
 
-	public Diagram getDiagram() {
-		return diagram;
-	}
+    public IDiagramContainerUI getDiagramContainer() {
+        return diagramContainer;
+    }
 
-	public void setDiagram(Diagram diagram) {
-		this.diagram = diagram;
-	}
+    public void setDiagramContainer(IDiagramContainerUI diagramContainer) {
+        this.diagramContainer = diagramContainer;
+    }
 
-	private GraphitiHelper() {};
-	
-	public static GraphitiHelper getInstance() {
-		if (instance == null) {
-			instance = new GraphitiHelper();
-		}
-		return instance;
-	}
+    public Diagram getDiagram() {
+        return diagram;
+    }
+
+    public void setDiagram(Diagram diagram) {
+        this.diagram = diagram;
+    }
+
+    private GraphitiHelper() {
+    };
+
+    public static GraphitiHelper getInstance() {
+        if (instance == null) {
+            instance = new GraphitiHelper();
+        }
+        return instance;
+    }
 
 }

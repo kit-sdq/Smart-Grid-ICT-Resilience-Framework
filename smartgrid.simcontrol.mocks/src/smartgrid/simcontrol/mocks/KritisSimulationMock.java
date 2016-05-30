@@ -16,19 +16,19 @@ public class KritisSimulationMock implements IKritisSimulationWrapper {
     @Override
     public List<AbstractCostFunction> run(List<PowerPerNode> power) {
         return new ArrayList<AbstractCostFunction>();
-        
+
 //        List<AbstractCostFunction> list = new ArrayList<AbstractCostFunction>();
 //        list.add(new LinearCostFunction(power.get(0).getPowerNodeID(), 1));
 //        return list;
     }
 
-	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-		return ErrorCodeEnum.SUCCESS;
-	}
+    @Override
+    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+        return ErrorCodeEnum.SUCCESS;
+    }
 
-	@Override
-	public String getName() {
-		return "Mock";
-	}
+    @Override
+    public String getName() {
+        return "Mock";
+    }
 }

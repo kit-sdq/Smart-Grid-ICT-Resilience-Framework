@@ -7,15 +7,15 @@ import org.apache.log4j.PropertyConfigurator;
 
 public final class InitializeLogger {
 
-	private static final Logger LOG = Logger.getLogger(InitializeLogger.class);
+    private static final Logger LOG = Logger.getLogger(InitializeLogger.class);
 
-	private InitializeLogger() {
+    private InitializeLogger() {
 
-	}
+    }
 
-	public static void initialize() {
-		URL url = InitializeLogger.class.getResource("/log4j/log4j.properties");
-		PropertyConfigurator.configure(url);
-		LOG.debug("Log4j Logger initialized");
-	}
+    public static void initialize() {
+        URL url = InitializeLogger.class.getResource("/log4j/log4j.properties");
+        PropertyConfigurator.configure(url);
+        LOG.debug("Log4j Logger initialized");
+    }
 }

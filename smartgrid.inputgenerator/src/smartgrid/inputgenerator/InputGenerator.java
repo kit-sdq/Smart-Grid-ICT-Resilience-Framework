@@ -17,36 +17,36 @@ import smartgridtopo.impl.SmartgridtopoPackageImpl;
  */
 public class InputGenerator implements IInputGenerator {
 
-	/**
-	 * 
-	 */
-	public InputGenerator() {
-	}
+    /**
+     * 
+     */
+    public InputGenerator() {
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see smartgrid.simcontrol.interfaces.IInputGenerator#init()
-	 */
-	@Override
-	public void init() {
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see smartgrid.simcontrol.interfaces.IInputGenerator#init()
+     */
+    @Override
+    public void init() {
+    }
 
-	@Override
-	public InputModelDTO generate(GenerationStyle desiredStyle, int SmartMeterCount, int ControlCenterCount) {
+    @Override
+    public InputModelDTO generate(GenerationStyle desiredStyle, int SmartMeterCount, int ControlCenterCount) {
 
-		// Init Scenario State
-		SmartgridinputPackageImpl.init();
-		SmartgridinputFactory scenarioStateFactory = SmartgridinputFactory.eINSTANCE;
-		ScenarioState myScenarioStates = scenarioStateFactory.createScenarioState();
+        // Init Scenario State
+        SmartgridinputPackageImpl.init();
+        SmartgridinputFactory scenarioStateFactory = SmartgridinputFactory.eINSTANCE;
+        ScenarioState myScenarioStates = scenarioStateFactory.createScenarioState();
 
-		// Init Scenario Topo
-		SmartgridtopoPackageImpl.init();
-		SmartgridtopoFactory scenarioTopoFactore = SmartgridtopoFactory.eINSTANCE;
-		SmartGridTopology myScenarioTopo = scenarioTopoFactore.createSmartGridTopology();
+        // Init Scenario Topo
+        SmartgridtopoPackageImpl.init();
+        SmartgridtopoFactory scenarioTopoFactore = SmartgridtopoFactory.eINSTANCE;
+        SmartGridTopology myScenarioTopo = scenarioTopoFactore.createSmartGridTopology();
 
-		InputModelDTO myDTO = new InputModelDTO(myScenarioTopo, myScenarioStates);
+        InputModelDTO myDTO = new InputModelDTO(myScenarioTopo, myScenarioStates);
 
-		return myDTO;
-	}
+        return myDTO;
+    }
 }

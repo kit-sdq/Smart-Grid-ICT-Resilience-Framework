@@ -4,6 +4,7 @@ import org.eclipse.graphiti.util.ColorConstant;
 
 /**
  * This class provides global used constants.
+ * 
  * @author mario
  *
  */
@@ -11,7 +12,7 @@ public class ConstantProvider {
     public static final int shapeLineWidth = 3;
     public static final int connectionLineWidth = 2;
     public static final int questionMarkLineWidth = 3;
-    
+
     public static final ColorConstant FOREGROUND_BLACK = new ColorConstant(0, 0, 0);
     public static final ColorConstant CONTROL_CENTER_BACKGROUND = new ColorConstant(51, 102, 0);
     public static final ColorConstant GENERIC_CONTROLLER_FOREGROUND = new ColorConstant(210, 60, 0);

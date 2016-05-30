@@ -17,24 +17,24 @@ import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
  */
 public class NoOperationTimeProgressor implements ITimeProgressor {
 
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * This mock does nothing at all
-	 */
-	@Override
-	public void progress() {
-	}
+    /**
+     * {@inheritDoc}
+     * <p>
+     * This mock does nothing at all
+     */
+    @Override
+    public void progress() {
+    }
 
-	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-		// Nothing to do here..
-		return ErrorCodeEnum.SUCCESS;
-	}
+    @Override
+    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+        // Nothing to do here..
+        return ErrorCodeEnum.SUCCESS;
+    }
 
-	@Override
-	public String getName() {
-		return "No Operation";
-	}
+    @Override
+    public String getName() {
+        return "No Operation";
+    }
 
 }

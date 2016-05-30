@@ -61,7 +61,8 @@ public class ManageNodeAppearances {
     }
 
     public Color manageBackground(boolean powerOutage) {
-        return powerOutage ? manageColor(new ColorConstant(220, 220, 220)) : manageColor(ConstantProvider.POWER_GRID_NODE_BACKGROUND);
+        return powerOutage ? manageColor(new ColorConstant(220, 220, 220))
+                : manageColor(ConstantProvider.POWER_GRID_NODE_BACKGROUND);
     }
 
     public Color manageForeground() {

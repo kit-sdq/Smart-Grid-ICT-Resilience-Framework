@@ -23,19 +23,20 @@ import smartgridtopo.PhysicalConnection;
 
 /**
  * Pattern to create text comments.
+ * 
  * @author mario
  *
  */
 public class TextCommentPattern extends AbstractPattern {
-	
+
     private MultiText multiText;
 
-	@Override
+    @Override
     public String getCreateName() {
         return "Text Comment";
     }
 
-	@Override
+    @Override
     protected boolean isPatternControlled(final PictogramElement pictogramElement) {
         return true;
     }
@@ -45,25 +46,25 @@ public class TextCommentPattern extends AbstractPattern {
         return true;
     }
 
-	@Override
-	public boolean isMainBusinessObjectApplicable(Object mainBusinessObject) {
-		if (mainBusinessObject instanceof LogicalCommunication || mainBusinessObject instanceof PhysicalConnection) {
-			return false;
-		}
-		return true;
-	}
-	
+    @Override
+    public boolean isMainBusinessObjectApplicable(Object mainBusinessObject) {
+        if (mainBusinessObject instanceof LogicalCommunication || mainBusinessObject instanceof PhysicalConnection) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public boolean canCreate(final ICreateContext context) {
         return context.getTargetContainer() instanceof Diagram;
     }
-	
+
     @Override
     public boolean canAdd(final IAddContext context) {
-    	if (context.getTargetContainer() instanceof Diagram) {
-    		return true;
-    	}
-    	return false;
+        if (context.getTargetContainer() instanceof Diagram) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -75,11 +76,10 @@ public class TextCommentPattern extends AbstractPattern {
         final IPeCreateService peCreateService = Graphiti.getPeCreateService();
         final ContainerShape containerShape = peCreateService.createContainerShape(targetDiagram, true);
 
-		IDirectEditingInfo directEditingInfo = getFeatureProvider()
-				.getDirectEditingInfo();
-		directEditingInfo.setMainPictogramElement(containerShape);
-		directEditingInfo.setPictogramElement(containerShape);
-        
+        IDirectEditingInfo directEditingInfo = getFeatureProvider().getDirectEditingInfo();
+        directEditingInfo.setMainPictogramElement(containerShape);
+        directEditingInfo.setPictogramElement(containerShape);
+
         final IGaService gaService = Graphiti.getGaService();
         final Rectangle rect = gaService.createRectangle(containerShape);
         rect.setForeground(this.manageColor(ColorConstant.WHITE));
@@ -95,16 +95,14 @@ public class TextCommentPattern extends AbstractPattern {
         multiText.setVerticalAlignment(Orientation.ALIGNMENT_TOP);
         gaService.setLocationAndSize(multiText, 5, 5, 190, 25);
 
-		// Enable direct editing
-		getFeatureProvider().getDirectEditingInfo().setActive(true);
-		getFeatureProvider().getDirectEditingInfo().setMainPictogramElement(
-				containerShape);
-		getFeatureProvider().getDirectEditingInfo().setGraphicsAlgorithm(multiText);
-        
+        // Enable direct editing
+        getFeatureProvider().getDirectEditingInfo().setActive(true);
+        getFeatureProvider().getDirectEditingInfo().setMainPictogramElement(containerShape);
+        getFeatureProvider().getDirectEditingInfo().setGraphicsAlgorithm(multiText);
 
         return containerShape;
     }
-    
+
     @Override
     public int getEditingType() {
         return TYPE_MULTILINETEXT;
@@ -112,7 +110,7 @@ public class TextCommentPattern extends AbstractPattern {
 
     @Override
     public String getInitialValue(IDirectEditingContext context) {
-    	return ((MultiText) context.getGraphicsAlgorithm()).getValue();
+        return ((MultiText) context.getGraphicsAlgorithm()).getValue();
     }
 
     @Override
@@ -124,17 +122,15 @@ public class TextCommentPattern extends AbstractPattern {
         }
         return false;
     }
-    
-    
-	@Override
-	public void setValue(String value, IDirectEditingContext context) {
-		MultiText text = (MultiText) context.getGraphicsAlgorithm();
-		text.setValue(value);
-		updatePictogramElement(context.getPictogramElement());
-	}
 
-	
-	@Override
+    @Override
+    public void setValue(String value, IDirectEditingContext context) {
+        MultiText text = (MultiText) context.getGraphicsAlgorithm();
+        text.setValue(value);
+        updatePictogramElement(context.getPictogramElement());
+    }
+
+    @Override
     public Object[] create(final ICreateContext context) {
         this.addGraphicalRepresentation(context, null);
 

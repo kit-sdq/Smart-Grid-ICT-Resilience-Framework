@@ -16,31 +16,30 @@ import smartgridtopo.SmartGridTopology;
  */
 public interface IImpactAnalysis {
 
-	// TODO JavaDoc
-	/**
-	 * Runs the Impact Analysis
-	 * 
-	 * @param smartGridTopo
-	 * @param impactAnalysisInput
-	 * @return
-	 */
-	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput);
+    // TODO JavaDoc
+    /**
+     * Runs the Impact Analysis
+     * 
+     * @param smartGridTopo
+     * @param impactAnalysisInput
+     * @return
+     */
+    public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput);
 
-	/**
-	 * If using ExtensionPoints and so 0-parameter Constructor pass the config
-	 * from Simcontrol UI to this Method to build the desired ImpactAnalysis (
-	 * "Factory Method")
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @param config
-	 *            behavior for the Attacker
-	 * @return true if Init was successful
-	 * @throws CoreException
-	 *             If ILaunchConfiguration.getAttribute fails
-	 */
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
+    /**
+     * If using ExtensionPoints and so 0-parameter Constructor pass the config from Simcontrol UI to
+     * this Method to build the desired ImpactAnalysis ( "Factory Method")
+     * 
+     * 
+     * 
+     * 
+     * @param config
+     *            behavior for the Attacker
+     * @return true if Init was successful
+     * @throws CoreException
+     *             If ILaunchConfiguration.getAttribute fails
+     */
+    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
 
-	public String getName();
+    public String getName();
 }

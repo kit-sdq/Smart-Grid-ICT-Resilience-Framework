@@ -10,17 +10,18 @@ import smartgridsecurity.graphiti.extensionpoint.definition.IToolbarButtonAction
 
 /**
  * Contributor class to contribute all toolbar buttons to the main editor.
+ * 
  * @author mario
  *
  */
 public class OutputActionContributor implements IToolbarButtonActionResolver {
 
-	@Override
-	public List<ToolbarButtonAction> getToolbarButtons() {
-		ClearOutputButtonAction enableAction = new ClearOutputButtonAction();
-		//EnableButtonAction is a Listener who listens to changes in new and load action
-		ToolbarButtonAction[] actions = {new LoadOutputToolbarButtonAction(enableAction), enableAction};
-		return Arrays.asList(actions);
-	}
+    @Override
+    public List<ToolbarButtonAction> getToolbarButtons() {
+        ClearOutputButtonAction enableAction = new ClearOutputButtonAction();
+        // EnableButtonAction is a Listener who listens to changes in new and load action
+        ToolbarButtonAction[] actions = { new LoadOutputToolbarButtonAction(enableAction), enableAction };
+        return Arrays.asList(actions);
+    }
 
 }

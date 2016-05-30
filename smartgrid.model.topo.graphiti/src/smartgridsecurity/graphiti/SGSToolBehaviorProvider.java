@@ -16,31 +16,29 @@ import smartgridsecurity.graphiti.helper.ExtensionPointRegistry;
 
 /**
  * Specific SGS tool behavior provider. Adds all custom actions to the context menu.
+ * 
  * @author mario
  *
  */
 public class SGSToolBehaviorProvider extends DefaultToolBehaviorProvider {
 
-	public SGSToolBehaviorProvider(IDiagramTypeProvider diagramTypeProvider) {
-		super(diagramTypeProvider);
-	}
+    public SGSToolBehaviorProvider(IDiagramTypeProvider diagramTypeProvider) {
+        super(diagramTypeProvider);
+    }
 
-	@Override
-	public IContextButtonPadData getContextButtonPad(
-			IPictogramElementContext context) {
-		IContextButtonPadData data = super.getContextButtonPad(context);
-		 
-		    CustomContext cc = new CustomContext(new PictogramElement[] { context.getPictogramElement() });
-		    List<AbstractCustomFeature> features = ExtensionPointRegistry.getInstance().getAllContextButtons();
-		    for (ICustomFeature iCustomFeature : features) {
-		        ContextButtonEntry button = new ContextButtonEntry(iCustomFeature, cc);
-		        button.setText(iCustomFeature.getName());	
-		        button.setIconId(iCustomFeature.getImageId());
-		        data.getGenericContextButtons().add(button);
-		    }
-		    return data;
-	}
-	
-	
+    @Override
+    public IContextButtonPadData getContextButtonPad(IPictogramElementContext context) {
+        IContextButtonPadData data = super.getContextButtonPad(context);
+
+        CustomContext cc = new CustomContext(new PictogramElement[] { context.getPictogramElement() });
+        List<AbstractCustomFeature> features = ExtensionPointRegistry.getInstance().getAllContextButtons();
+        for (ICustomFeature iCustomFeature : features) {
+            ContextButtonEntry button = new ContextButtonEntry(iCustomFeature, cc);
+            button.setText(iCustomFeature.getName());
+            button.setIconId(iCustomFeature.getImageId());
+            data.getGenericContextButtons().add(button);
+        }
+        return data;
+    }
 
 }

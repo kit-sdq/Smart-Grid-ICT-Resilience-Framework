@@ -24,107 +24,103 @@ import smartgridtopo.Identifier;
 
 /**
  * Property sheet implementation to display id's.
+ * 
  * @author mario
  *
  */
-public class IdentifierPropertiesSheet extends GFPropertySection implements
-		ITabbedPropertyConstants {
+public class IdentifierPropertiesSheet extends GFPropertySection implements ITabbedPropertyConstants {
 
-	// UI elements
-	protected Text idWidget;
-	private Label label;
+    // UI elements
+    protected Text idWidget;
+    private Label label;
 
-	/**
-	 * The business object.
-	 */
-	protected EObject bo = null;
+    /**
+     * The business object.
+     */
+    protected EObject bo = null;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#createControls
-	 * (org.eclipse.swt.widgets.Composite,
-	 * org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage)
-	 */
-	@Override
-	public void createControls(Composite parent,
-			TabbedPropertySheetPage tabbedPropertySheetPage) {
-		super.createControls(parent, tabbedPropertySheetPage);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#createControls
+     * (org.eclipse.swt.widgets.Composite,
+     * org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage)
+     */
+    @Override
+    public void createControls(Composite parent, TabbedPropertySheetPage tabbedPropertySheetPage) {
+        super.createControls(parent, tabbedPropertySheetPage);
 
-		final TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
-		final Composite composite = factory.createFlatFormComposite(parent);
+        final TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
+        final Composite composite = factory.createFlatFormComposite(parent);
 
-		GridLayout layout = new GridLayout(2, false);
-		composite.setLayout(layout);
-		
-		label = new Label(composite, SWT.NONE);
-		label.setText("Identifier: ");
-		
-		idWidget = new Text(composite, SWT.BORDER);
-		GridData gridData = new GridData();
-		gridData.horizontalAlignment = SWT.FILL;
-		gridData.grabExcessHorizontalSpace = true;
-		idWidget.setLayoutData(gridData);
-		idWidget.setText("0");
+        GridLayout layout = new GridLayout(2, false);
+        composite.setLayout(layout);
 
-		idWidget.addModifyListener(new ModifyListener() {
+        label = new Label(composite, SWT.NONE);
+        label.setText("Identifier: ");
 
-			@Override
-			public void modifyText(final ModifyEvent e) {
-				IFeature feature = new AbstractFeature(getDiagramTypeProvider().getFeatureProvider()) {
+        idWidget = new Text(composite, SWT.BORDER);
+        GridData gridData = new GridData();
+        gridData.horizontalAlignment = SWT.FILL;
+        gridData.grabExcessHorizontalSpace = true;
+        idWidget.setLayoutData(gridData);
+        idWidget.setText("0");
 
-					@Override
-					public void execute(IContext context) {
-						final PictogramElement pe = getSelectedPictogramElement();
-						if (pe != null) {
-							Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-							if (bo == null)
-								return;
+        idWidget.addModifyListener(new ModifyListener() {
 
-							Identifier identifier = (Identifier) bo;
-							final String id = ((Text)idWidget).getText();
-							if (!(id.equals(Integer.toString(identifier.getId())))) {
-								identifier.setId(Integer.parseInt(id));
-							}
-						}
-					}
+            @Override
+            public void modifyText(final ModifyEvent e) {
+                IFeature feature = new AbstractFeature(getDiagramTypeProvider().getFeatureProvider()) {
 
-					@Override
-					public boolean canExecute(IContext context) {
-						return true;
-					}
-				};
-				execute(feature, new CustomContext());
+                    @Override
+                    public void execute(IContext context) {
+                        final PictogramElement pe = getSelectedPictogramElement();
+                        if (pe != null) {
+                            Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+                            if (bo == null)
+                                return;
 
-			}
-		});
-	}
+                            Identifier identifier = (Identifier) bo;
+                            final String id = ((Text) idWidget).getText();
+                            if (!(id.equals(Integer.toString(identifier.getId())))) {
+                                identifier.setId(Integer.parseInt(id));
+                            }
+                        }
+                    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
-	 */
-	@Override
-	public void refresh() {
-		PictogramElement pe = getSelectedPictogramElement();
-		if (pe != null) {
+                    @Override
+                    public boolean canExecute(IContext context) {
+                        return true;
+                    }
+                };
+                execute(feature, new CustomContext());
 
-			EObject bo = Graphiti.getLinkService()
-					.getBusinessObjectForLinkedPictogramElement(pe);
-			// the filter assured, that it is a EClass
-
-			if (bo == null) {
-				return;
-			}
-			
-            if (((Identifier)bo).getId() != 0) {
-    			idWidget.setText(Integer.toString(((Identifier) bo).getId()));
-            } else {
-            	idWidget.setText("");
             }
-		}
-	}
+        });
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
+     */
+    @Override
+    public void refresh() {
+        PictogramElement pe = getSelectedPictogramElement();
+        if (pe != null) {
+
+            EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+            // the filter assured, that it is a EClass
+
+            if (bo == null) {
+                return;
+            }
+
+            if (((Identifier) bo).getId() != 0) {
+                idWidget.setText(Integer.toString(((Identifier) bo).getId()));
+            } else {
+                idWidget.setText("");
+            }
+        }
+    }
 }

@@ -99,7 +99,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         for (int i = 0; i < genStyles.length; i++) {
             genStyleEnumStrings[i] = genStyles[i].name();
         }
-        
+
         container = new Composite(parent, SWT.NONE);
         this.setControl(container);
         container.setLayout(new FormLayout());
@@ -204,72 +204,72 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         ignoreLogicalConButton = new Button(optionsGroup, SWT.CHECK | SWT.CENTER);
         ignoreLogicalConButton.setAlignment(SWT.LEFT);
         ignoreLogicalConButton.setTouchEnabled(true);
-        
+
         ignoreLogicalConButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 // ignoreLogicalConnections =
                 // ignoreLogicalConButton.getEnabled();
                 propertyChanged();
-        
+
                 if (ignoreLogicalConButton.getSelection()) {
                     hackingStyleCombo.setText(HackingStyle.FULLY_MESHED_HACKING.name());
                 }
-        
+
             }
         });
-        
+
         ignoreLogicalConButton.setBounds(10, 24, 304, 24);
         ignoreLogicalConButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.ignoreLogicalConButton.text")); //$NON-NLS-1$
-        
+
         Group grpCyberAttackSimulation = new Group(optionsGroup, SWT.NONE);
         grpCyberAttackSimulation.setBounds(10, 54, 698, 120);
         grpCyberAttackSimulation.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
                 .getString("SimControlLaunchConfigurationTab.grpCyberAttackSimulation.text"));
-        
+
         Composite HackingStyleComposite = new Composite(grpCyberAttackSimulation, SWT.NONE);
         HackingStyleComposite.setBounds(10, 24, 660, 24);
-        
+
         Label hackingStyleLabel = new Label(HackingStyleComposite, SWT.NONE);
         hackingStyleLabel.setBounds(0, 0, 131, 24);
         hackingStyleLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
                 .getString("SimControlLaunchConfigurationTab.hackingStyleLabel.text"));
-        
+
         hackingStyleCombo = new Combo(HackingStyleComposite, SWT.READ_ONLY);
         hackingStyleCombo.setBounds(193, 0, 202, 23);
         hackingStyleCombo.setTouchEnabled(true);
-        
+
         hackingStyleCombo.setItems(hackinStyleEnumStrings);
-        
+
         Composite RootNodeComposite = new Composite(grpCyberAttackSimulation, SWT.NONE);
         RootNodeComposite.setBounds(10, 54, 660, 24);
-        
+
         rootNodeTextbox = new Text(RootNodeComposite, SWT.BORDER);
         rootNodeTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.inputTextbox.text")); //$NON-NLS-1$
         rootNodeTextbox.setBounds(193, 0, 202, 24);
-        
+
         Label rootNodeLabel = new Label(RootNodeComposite, SWT.NONE);
         rootNodeLabel.setBounds(0, 0, 147, 24);
         rootNodeLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.rootNodeLabel.text")); //$NON-NLS-1$
-        
+
         Composite hackingSpeedComposite = new Composite(grpCyberAttackSimulation, SWT.NONE);
         hackingSpeedComposite.setBounds(10, 84, 660, 24);
-        
+
         Label labelHackingSpeed = new Label(hackingSpeedComposite, SWT.NONE);
         labelHackingSpeed.setBounds(0, 0, 147, 24);
         labelHackingSpeed.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.labelHackingSpeed.text")); //$NON-NLS-1$
-        
+
         hackingSpeedText = new Text(hackingSpeedComposite, SWT.BORDER);
         hackingSpeedText.setText("[Sample Remove]");
         hackingSpeedText.setBounds(193, 0, 202, 24);
         hackingSpeedText.addModifyListener(e2 -> propertyChanged());
-        
+
         rootNodeTextbox.addModifyListener(e5 -> propertyChanged());
-        
+
         hackingStyleCombo.addModifyListener(e4 -> propertyChanged());
         Group terminationConditionGroup = new Group(optionsGroup, SWT.NONE);
         terminationConditionGroup.setEnabled(true);
@@ -277,20 +277,20 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 .getString("SimControlLaunchConfigurationTab.TerminationCondition.text")); //$NON-NLS-1$
         terminationConditionGroup.setBounds(10, 180, 698, 87);
         terminationConditionGroup.setLayout(null);
-        
+
         Label timeStepsLabel = new Label(terminationConditionGroup, SWT.NONE);
         timeStepsLabel.setLocation(10, 24);
         timeStepsLabel.setSize(148, 24);
         timeStepsLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.timeStepsLabel.text")); //$NON-NLS-1$
-        
+
         timeStepsTextBox = new Text(terminationConditionGroup, SWT.BORDER);
         timeStepsTextBox.setLocation(203, 24);
         timeStepsTextBox.setSize(202, 24);
         timeStepsTextBox.setTouchEnabled(true);
         timeStepsTextBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.inputTextbox.text")); //$NON-NLS-1$
-        
+
         iterationCountTextbox = new Text(terminationConditionGroup, SWT.BORDER);
         iterationCountTextbox.setLocation(203, 54);
         iterationCountTextbox.setSize(202, 24);

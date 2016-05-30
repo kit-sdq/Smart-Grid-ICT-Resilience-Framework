@@ -15,10 +15,8 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 //import smartgrid.simcontrol.interfaces.ITerminationCondition;
 //import smartgrid.simcontrol.interfaces.ITimeProgressor;
 
-
 /**
- * This class provides the Delegate for the SimControl Approach of the Smartgrid
- * Analysis'
+ * This class provides the Delegate for the SimControl Approach of the Smartgrid Analysis'
  * 
  * 
  * @author Christian
@@ -27,22 +25,22 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
  */
 public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
 
-	@SuppressWarnings("unused")
+    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(SimcontrolLaunchConfigurationDelegate.class);
 
-	/**
-	 * {@inheritDoc}
-	 * <P>
-	 * 
-	 * Launches an SimController Analysis with the given Launch Configuration
-	 */
-	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
-			throws CoreException {
+    /**
+     * {@inheritDoc}
+     * <P>
+     * 
+     * Launches an SimController Analysis with the given Launch Configuration
+     */
+    public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
+            throws CoreException {
 
-		SimulationController.init(configuration);
+        SimulationController.init(configuration);
 
-		SimulationController.run();
-	}
+        SimulationController.run();
+    }
 
 //	@Deprecated
 //	private SmartGridTopology loadScenario(String path) {

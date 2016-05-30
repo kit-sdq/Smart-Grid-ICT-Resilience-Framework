@@ -21,71 +21,70 @@ import smartgridtopo.SmartMeter;
 /**
  * This Class mocks the Imapct Analysis
  * 
- * It mocks the impact analysis in that way that regardless of the input states
- * every output state is marked as 'Online' and all states are packed in one
- * single cluster
+ * It mocks the impact analysis in that way that regardless of the input states every output state
+ * is marked as 'Online' and all states are packed in one single cluster
  * 
  * @author Christian, Michael
  *
  */
 public class ImpactAnalysisMock implements IImpactAnalysis {
 
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * 
-	 * 
-	 * NOT yet implemented!
-	 * 
-	 */
-	@Override
-	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput) {
-		SmartgridoutputPackageImpl.init();
-		SmartgridoutputFactory factory = SmartgridoutputFactory.eINSTANCE;
-		ScenarioResult result = factory.createScenarioResult();
+    /**
+     * {@inheritDoc}
+     * <p>
+     * 
+     * 
+     * NOT yet implemented!
+     * 
+     */
+    @Override
+    public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput) {
+        SmartgridoutputPackageImpl.init();
+        SmartgridoutputFactory factory = SmartgridoutputFactory.eINSTANCE;
+        ScenarioResult result = factory.createScenarioResult();
 
-		result.setScenario(smartGridTopo);
+        result.setScenario(smartGridTopo);
 
-		int smartmetercount = 0;
-		int controlcentercount = 0;
+        int smartmetercount = 0;
+        int controlcentercount = 0;
 
-		Cluster cl = factory.createCluster();
-		for (smartgridinput.EntityState entity : impactAnalysisInput.getEntityStates()) {
-			Online on = factory.createOnline();
-			on.setOwner(entity.getOwner());
-			on.setBelongsToCluster(cl);
+        Cluster cl = factory.createCluster();
+        for (smartgridinput.EntityState entity : impactAnalysisInput.getEntityStates()) {
+            Online on = factory.createOnline();
+            on.setOwner(entity.getOwner());
+            on.setBelongsToCluster(cl);
 
-			result.getStates().add(on);
+            result.getStates().add(on);
 
-			// Count smartMeters and controlCenters
-			if (entity.getOwner() instanceof SmartMeter) {
-				smartmetercount++;
-			} else if (entity.getOwner() instanceof ControlCenter) {
-				controlcentercount++;
-			}
-		}
+            // Count smartMeters and controlCenters
+            if (entity.getOwner() instanceof SmartMeter) {
+                smartmetercount++;
+            } else if (entity.getOwner() instanceof ControlCenter) {
+                controlcentercount++;
+            }
+        }
 
-		cl.setSmartMeterCount(smartmetercount);
-		cl.setControlCenterCount(controlcentercount);
+        cl.setSmartMeterCount(smartmetercount);
+        cl.setControlCenterCount(controlcentercount);
 
-		result.getClusters().add(cl);
+        result.getClusters().add(cl);
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * 
-	 */
-	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-		return ErrorCodeEnum.SUCCESS;
-	}
+    /**
+     * {@inheritDoc}
+     * <p>
+     * 
+     */
+    @Override
+    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+        return ErrorCodeEnum.SUCCESS;
+    }
 
-	@Override
-	public String getName() {
-		return "Mock";
-	}
+    @Override
+    public String getName() {
+        return "Mock";
+    }
 
 }

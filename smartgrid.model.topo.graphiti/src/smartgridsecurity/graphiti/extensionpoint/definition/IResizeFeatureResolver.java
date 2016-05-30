@@ -7,11 +7,12 @@ import org.eclipse.graphiti.features.IResizeShapeFeature;
 
 /**
  * Resolver for all resize features.
+ * 
  * @author mario
  *
  */
 public interface IResizeFeatureResolver {
-	
-	public List<IResizeShapeFeature> getResizeShapeFeature(IFeatureProvider fp);
+
+    public List<IResizeShapeFeature> getResizeShapeFeature(IFeatureProvider fp);
 
 }

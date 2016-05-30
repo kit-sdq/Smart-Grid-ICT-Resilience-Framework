@@ -12,28 +12,28 @@ import org.eclipse.swt.widgets.Text;
 
 /**
  * Custom page to create new smartgrid diagramms.
+ * 
  * @author mw
  *
  */
 public class CreateNewSmartgridDiagramPage extends WizardPage {
-	
-	private Text diagramName;
 
-	
-	public CreateNewSmartgridDiagramPage() {
-		super("wizardPage");
+    private Text diagramName;
+
+    public CreateNewSmartgridDiagramPage() {
+        super("wizardPage");
         setTitle("Smartgrid Security Diagram");
         setDescription("Enter diagram name");
-	}
+    }
 
-	@Override
-	public void createControl(Composite parent) {
+    @Override
+    public void createControl(Composite parent) {
         Composite container = new Composite(parent, SWT.NULL);
         setPageComplete(false);
 
         setControl(container);
         container.setLayout(new GridLayout(3, false));
-        
+
         Label lblDiagramName = new Label(container, SWT.NONE);
         lblDiagramName.setText("Diagram Name");
 
@@ -42,21 +42,21 @@ public class CreateNewSmartgridDiagramPage extends WizardPage {
         gridData.widthHint = 300;
         diagramName.setLayoutData(gridData);
         diagramName.addModifyListener(new ModifyListener() {
-			
-			@Override
-			public void modifyText(ModifyEvent e) {
-				String name = diagramName.getText();
+
+            @Override
+            public void modifyText(ModifyEvent e) {
+                String name = diagramName.getText();
                 setPageComplete(name.matches("^[a-zA-Z0-9_]+$") ? true : false);
-				
-			}
-		});
+
+            }
+        });
 
         diagramName.setFocus();
-		
-	}
-	
-	public String getFileName() {
-		return diagramName.getText();
-	}
+
+    }
+
+    public String getFileName() {
+        return diagramName.getText();
+    }
 
 }

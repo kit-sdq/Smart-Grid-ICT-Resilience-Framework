@@ -17,20 +17,20 @@ import smartgridtopo.SmartGridTopology;
 @SuppressWarnings("restriction")
 public class CreateDiagramHandler extends AbstractHandler {
 
-	public CreateDiagramHandler() {
-	}
+    public CreateDiagramHandler() {
+    }
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-		File emfFile = (File) selection.getFirstElement();
-		ResourceSet impl = new ResourceSetImpl();
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
+        File emfFile = (File) selection.getFirstElement();
+        ResourceSet impl = new ResourceSetImpl();
 
-		Resource resource = impl.getResource(URI.createFileURI(emfFile.getFullPath().toString()), true);
+        Resource resource = impl.getResource(URI.createFileURI(emfFile.getFullPath().toString()), true);
 
-		new ModelToDiagram(emfFile.getProjectRelativePath().toString(), emfFile.getProject())
-				.initializeDiagram((SmartGridTopology) resource.getContents().get(0));
-		return null;
-	}
+        new ModelToDiagram(emfFile.getProjectRelativePath().toString(), emfFile.getProject())
+                .initializeDiagram((SmartGridTopology) resource.getContents().get(0));
+        return null;
+    }
 
 }

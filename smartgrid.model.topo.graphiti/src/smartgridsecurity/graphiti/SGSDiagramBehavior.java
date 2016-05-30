@@ -16,61 +16,63 @@ import smartgridsecurity.graphiti.helper.ExtensionPointRegistry;
 
 /**
  * Specific Graphiti diagram behavior implementation.
+ * 
  * @author mario
  *
  */
 public class SGSDiagramBehavior extends DiagramBehavior {
-	private IDiagramContainerUI diagramContainer;
-	private ResourceSetListener listener;
+    private IDiagramContainerUI diagramContainer;
+    private ResourceSetListener listener;
 
-	public SGSDiagramBehavior(IDiagramContainerUI diagramContainer) {
-		super(diagramContainer);
-		this.diagramContainer = diagramContainer; 
-		initListeners();
-	}
-	
-	/**
-	 * Initializes all resource listeners of other plugins.
-	 */
-	private void initListeners() {
-		ExtensionPointRegistry.getInstance().clearResourceListeners();
-		List<ResourceSetListener> resListeners = (new EvaluateDomainModelChangeListeners(this)).evaluateFeatureExtension(Platform.getExtensionRegistry());
-		ExtensionPointRegistry.getInstance().addResourceListenersToRegistry(resListeners);
-		if (ExtensionPointRegistry.getInstance().getResourceListenersSize() > 0) {
-			listener = ExtensionPointRegistry.getInstance().getAllResourceListeners().get(0);
-		}
-	}
+    public SGSDiagramBehavior(IDiagramContainerUI diagramContainer) {
+        super(diagramContainer);
+        this.diagramContainer = diagramContainer;
+        initListeners();
+    }
 
-	@Override
-	protected void initActionRegistry(ZoomManager zoomManager) {
-		super.initActionRegistry(zoomManager);
-		final ActionRegistry actionRegistry = diagramContainer.getActionRegistry();
-		@SuppressWarnings("unchecked")
-		final List<String> selectionActions = diagramContainer.getSelectionActions();
-		
-		for (ToolbarButtonAction action : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
-			action.setDiagramContainer(diagramContainer);
-			actionRegistry.registerAction(action);
-			selectionActions.add(action.getId());
-		}
-	}
-	
-	@Override
-	protected void unregisterBusinessObjectsListener() {
-		super.unregisterBusinessObjectsListener();
-		if (listener != null) {
-			TransactionalEditingDomain eDomain = getEditingDomain();
-			eDomain.removeResourceSetListener(listener);
-		}
-	}
+    /**
+     * Initializes all resource listeners of other plugins.
+     */
+    private void initListeners() {
+        ExtensionPointRegistry.getInstance().clearResourceListeners();
+        List<ResourceSetListener> resListeners = (new EvaluateDomainModelChangeListeners(this))
+                .evaluateFeatureExtension(Platform.getExtensionRegistry());
+        ExtensionPointRegistry.getInstance().addResourceListenersToRegistry(resListeners);
+        if (ExtensionPointRegistry.getInstance().getResourceListenersSize() > 0) {
+            listener = ExtensionPointRegistry.getInstance().getAllResourceListeners().get(0);
+        }
+    }
 
-	@Override
-	protected void registerBusinessObjectsListener() {
-		super.registerBusinessObjectsListener();
-		if (listener != null) {
-			TransactionalEditingDomain eDomain = getEditingDomain();
-			eDomain.addResourceSetListener(listener);
-		}		
-	}	
+    @Override
+    protected void initActionRegistry(ZoomManager zoomManager) {
+        super.initActionRegistry(zoomManager);
+        final ActionRegistry actionRegistry = diagramContainer.getActionRegistry();
+        @SuppressWarnings("unchecked")
+        final List<String> selectionActions = diagramContainer.getSelectionActions();
+
+        for (ToolbarButtonAction action : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
+            action.setDiagramContainer(diagramContainer);
+            actionRegistry.registerAction(action);
+            selectionActions.add(action.getId());
+        }
+    }
+
+    @Override
+    protected void unregisterBusinessObjectsListener() {
+        super.unregisterBusinessObjectsListener();
+        if (listener != null) {
+            TransactionalEditingDomain eDomain = getEditingDomain();
+            eDomain.removeResourceSetListener(listener);
+        }
+    }
+
+    @Override
+    protected void registerBusinessObjectsListener() {
+        super.registerBusinessObjectsListener();
+        if (listener != null) {
+            TransactionalEditingDomain eDomain = getEditingDomain();
+            eDomain.addResourceSetListener(listener);
+        }
+    }
 
 }

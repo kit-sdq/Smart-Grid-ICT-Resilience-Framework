@@ -15,22 +15,21 @@ import smartgridtopo.SmartGridTopology;
  */
 public class NamedEntityPropertyFilter extends AbstractPropertySectionFilter {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.graphiti.ui.platform.AbstractPropertySectionFilter#accept(org
-	 * .eclipse.graphiti.mm.pictograms.PictogramElement)
-	 */
-	@Override
-	protected boolean accept(PictogramElement pictogramElement) {
-		Object instance = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pictogramElement);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.graphiti.ui.platform.AbstractPropertySectionFilter#accept(org
+     * .eclipse.graphiti.mm.pictograms.PictogramElement)
+     */
+    @Override
+    protected boolean accept(PictogramElement pictogramElement) {
+        Object instance = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pictogramElement);
 
-		if (instance instanceof NamedEntity && !(instance instanceof SmartGridTopology)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        if (instance instanceof NamedEntity && !(instance instanceof SmartGridTopology)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

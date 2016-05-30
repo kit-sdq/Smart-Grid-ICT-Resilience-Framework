@@ -16,43 +16,43 @@ import smartgridtopo.SmartGridTopology;
  */
 public class NoAttackerSimulation implements IAttackerSimulation {
 
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * 
-	 * An attacker who doesn't attack
-	 * 
-	 */
-	@Override
-	public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioResult impactAnalysisOutput) {
+    /**
+     * {@inheritDoc}
+     * <p>
+     * 
+     * An attacker who doesn't attack
+     * 
+     */
+    @Override
+    public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioResult impactAnalysisOutput) {
 
-		return impactAnalysisOutput;
-	}
+        return impactAnalysisOutput;
+    }
 
-	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) {
-		// Nothing to do here
-		return ErrorCodeEnum.SUCCESS;
-	}
+    @Override
+    public ErrorCodeEnum init(ILaunchConfiguration config) {
+        // Nothing to do here
+        return ErrorCodeEnum.SUCCESS;
+    }
 
-	@Override
-	public String getName() {
-		return "No Attack Simulation";
-	}
+    @Override
+    public String getName() {
+        return "No Attack Simulation";
+    }
 
-	@Override
-	public boolean enableHackingSpeed() {
-		return false;
-	}
+    @Override
+    public boolean enableHackingSpeed() {
+        return false;
+    }
 
-	@Override
-	public boolean enableRootNode() {
-		return false;
-	}
+    @Override
+    public boolean enableRootNode() {
+        return false;
+    }
 
-	@Override
-	public boolean enableLogicalConnections() {
-		return false;
-	}
+    @Override
+    public boolean enableLogicalConnections() {
+        return false;
+    }
 
 }

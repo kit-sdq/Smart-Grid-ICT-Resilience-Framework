@@ -7,7 +7,7 @@ import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 
 public interface IKritisSimulationWrapper extends IKritisSimulation {
 
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
+    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
 
-	public String getName();
+    public String getName();
 }

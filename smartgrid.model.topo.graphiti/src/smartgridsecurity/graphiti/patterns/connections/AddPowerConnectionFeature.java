@@ -20,6 +20,7 @@ import smartgridtopo.PowerGridNode;
 
 /**
  * Feature to add a power connection.
+ * 
  * @author mario
  *
  */

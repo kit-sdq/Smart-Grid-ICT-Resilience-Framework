@@ -10,63 +10,63 @@ import smartgridtopo.SmartGridTopology;
 
 public final class LoadOutputModelConformityHelper {
 
-	private LoadOutputModelConformityHelper() {
-	}
+    private LoadOutputModelConformityHelper() {
+    }
 
-	public static boolean checkOutputModelConformitySimple(ScenarioResult result, SmartGridTopology current) {
-		if (result.getScenario() == null) {
-			return true;
-		}
+    public static boolean checkOutputModelConformitySimple(ScenarioResult result, SmartGridTopology current) {
+        if (result.getScenario() == null) {
+            return true;
+        }
 
-		return result.getScenario().getId() == current.getId();
-	}
+        return result.getScenario().getId() == current.getId();
+    }
 
-	public static boolean checkOutputModelConformity(ScenarioResult output, SmartGridTopology current) {
-		// Check differences that would be obvious and ignore if
-		// output.getScenario() is null
-		boolean result = checkOutputModelConformitySimple(output, current);
+    public static boolean checkOutputModelConformity(ScenarioResult output, SmartGridTopology current) {
+        // Check differences that would be obvious and ignore if
+        // output.getScenario() is null
+        boolean result = checkOutputModelConformitySimple(output, current);
 
-		if (result) {
-			return compareAndCountEntityStates(output.getStates(), current.getContainsNE());
-		}
+        if (result) {
+            return compareAndCountEntityStates(output.getStates(), current.getContainsNE());
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	private static boolean compareAndCountEntityStates(List<EntityState> states, List<NetworkEntity> entities) {
-		boolean result = true;
+    private static boolean compareAndCountEntityStates(List<EntityState> states, List<NetworkEntity> entities) {
+        boolean result = true;
 
-		List<EntityState> noZombies = getListWithoutZombies(states);
+        List<EntityState> noZombies = getListWithoutZombies(states);
 
-		if (noZombies.size() == entities.size()) {
-			for (NetworkEntity entity : entities) {
-				boolean found = false;
-				for (EntityState state : noZombies) {
-					if (state.getOwner().getId() == entity.getId()) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					result = false;
-				}
-			}
-		} else {
-			result = false;
-		}
+        if (noZombies.size() == entities.size()) {
+            for (NetworkEntity entity : entities) {
+                boolean found = false;
+                for (EntityState state : noZombies) {
+                    if (state.getOwner().getId() == entity.getId()) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    result = false;
+                }
+            }
+        } else {
+            result = false;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	private static List<EntityState> getListWithoutZombies(List<EntityState> states) {
-		List<EntityState> noZombies = new ArrayList<EntityState>();
+    private static List<EntityState> getListWithoutZombies(List<EntityState> states) {
+        List<EntityState> noZombies = new ArrayList<EntityState>();
 
-		for (EntityState state : states) {
-			if (state.getOwner() != null) {
-				noZombies.add(state);
-			}
-		}
+        for (EntityState state : states) {
+            if (state.getOwner() != null) {
+                noZombies.add(state);
+            }
+        }
 
-		return noZombies;
-	}
+        return noZombies;
+    }
 }

@@ -8,13 +8,13 @@ package smartgrid.simcontrol.baselib;
  *
  */
 public enum ErrorCodeEnum {
-	
-	SUCCESS,
-	
-	DEFAULT_VALUES_USED,
-	
-	FAIL,
-	
-	NOT_SET
+
+    SUCCESS,
+
+    DEFAULT_VALUES_USED,
+
+    FAIL,
+
+    NOT_SET
 
 }

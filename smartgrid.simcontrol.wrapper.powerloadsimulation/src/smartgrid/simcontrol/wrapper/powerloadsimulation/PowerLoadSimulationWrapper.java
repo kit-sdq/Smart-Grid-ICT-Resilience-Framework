@@ -13,7 +13,7 @@ import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
 import smartgrid.simcontrol.baselib.coupling.SmartMeterState;
 
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
-    
+
     @Override
     public List<PowerPerNode> run(List<AbstractCostFunction> costFunctions, List<SmartMeterState> smartMeterStates) {
 

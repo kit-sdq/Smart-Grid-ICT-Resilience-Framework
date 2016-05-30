@@ -22,83 +22,83 @@ import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
 
 /**
- * This listener checks if the ScenarioModel is changed. If there is an input
- * model, the listener will create a new input model bo for every new topo bo..
+ * This listener checks if the ScenarioModel is changed. If there is an input model, the listener
+ * will create a new input model bo for every new topo bo..
  * 
  * @author mario
  *
  */
 public class ScenarioModelChangedListener implements ResourceSetListener {
-	private DiagramBehavior behavior;
+    private DiagramBehavior behavior;
 
-	public ScenarioModelChangedListener(DiagramBehavior diagramBehavior) {
-		behavior = diagramBehavior;
-	}
+    public ScenarioModelChangedListener(DiagramBehavior diagramBehavior) {
+        behavior = diagramBehavior;
+    }
 
-	@Override
-	public void resourceSetChanged(ResourceSetChangeEvent event) {
-		List<Notification> notifications = event.getNotifications();
-		for (final Notification notification : notifications) {
-			Object notifier = notification.getNotifier();
-			if (notifier instanceof SmartGridTopology && notification.getEventType() == Notification.ADD) {
-				for (final EObject obj : behavior.getDiagramTypeProvider().getDiagram().getLink()
-						.getBusinessObjects()) {
-					if (obj instanceof ScenarioState) {
-						Runnable myRunnable = new Runnable() {
+    @Override
+    public void resourceSetChanged(ResourceSetChangeEvent event) {
+        List<Notification> notifications = event.getNotifications();
+        for (final Notification notification : notifications) {
+            Object notifier = notification.getNotifier();
+            if (notifier instanceof SmartGridTopology && notification.getEventType() == Notification.ADD) {
+                for (final EObject obj : behavior.getDiagramTypeProvider().getDiagram().getLink()
+                        .getBusinessObjects()) {
+                    if (obj instanceof ScenarioState) {
+                        Runnable myRunnable = new Runnable() {
 
-							public void run() {
-								final TransactionalEditingDomain domain = behavior.getEditingDomain();
-								RecordingCommand c = new RecordingCommand(domain) {
-									@Override
-									protected void doExecute() {
-										ScenarioState scenarioState = (ScenarioState) obj;
-										if (notification.getNewValue() instanceof PowerGridNode) {
-											PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
-											state.setOwner((PowerGridNode) notification.getNewValue());
-											scenarioState.getPowerStates().add(state);
-										}
-										if (notification.getNewValue() instanceof NetworkEntity) {
-											EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
-											state.setOwner((NetworkEntity) notification.getNewValue());
-											scenarioState.getEntityStates().add(state);
-										}
-									}
-								};
-								domain.getCommandStack().execute(c);
+                            public void run() {
+                                final TransactionalEditingDomain domain = behavior.getEditingDomain();
+                                RecordingCommand c = new RecordingCommand(domain) {
+                                    @Override
+                                    protected void doExecute() {
+                                        ScenarioState scenarioState = (ScenarioState) obj;
+                                        if (notification.getNewValue() instanceof PowerGridNode) {
+                                            PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
+                                            state.setOwner((PowerGridNode) notification.getNewValue());
+                                            scenarioState.getPowerStates().add(state);
+                                        }
+                                        if (notification.getNewValue() instanceof NetworkEntity) {
+                                            EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
+                                            state.setOwner((NetworkEntity) notification.getNewValue());
+                                            scenarioState.getEntityStates().add(state);
+                                        }
+                                    }
+                                };
+                                domain.getCommandStack().execute(c);
 
-							}
-						};
-						Thread thread = new Thread(myRunnable);
-						thread.start();
-					}
-				}
-			}
-		}
-	}
+                            }
+                        };
+                        Thread thread = new Thread(myRunnable);
+                        thread.start();
+                    }
+                }
+            }
+        }
+    }
 
-	@Override
-	public NotificationFilter getFilter() {
-		return NotificationFilter.ANY;
-	}
+    @Override
+    public NotificationFilter getFilter() {
+        return NotificationFilter.ANY;
+    }
 
-	@Override
-	public Command transactionAboutToCommit(ResourceSetChangeEvent event) throws RollbackException {
-		return null;
-	}
+    @Override
+    public Command transactionAboutToCommit(ResourceSetChangeEvent event) throws RollbackException {
+        return null;
+    }
 
-	@Override
-	public boolean isAggregatePrecommitListener() {
-		return false;
-	}
+    @Override
+    public boolean isAggregatePrecommitListener() {
+        return false;
+    }
 
-	@Override
-	public boolean isPrecommitOnly() {
-		return false;
-	}
+    @Override
+    public boolean isPrecommitOnly() {
+        return false;
+    }
 
-	@Override
-	public boolean isPostcommitOnly() {
-		return false;
-	}
+    @Override
+    public boolean isPostcommitOnly() {
+        return false;
+    }
 
 }

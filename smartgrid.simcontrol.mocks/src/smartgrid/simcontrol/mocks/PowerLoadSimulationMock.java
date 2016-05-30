@@ -21,23 +21,23 @@ import smartgrid.simcontrol.baselib.coupling.SmartMeterState;
  */
 public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
 
-	/**
-	 * {@inheritDoc}
-	 * <P>
-	 * Runs a mocked Power Load Simulation. This Mock does not change anything.
-	 */
-	@Override
-	public List<PowerPerNode> run(List<AbstractCostFunction> costFunctions, List<SmartMeterState> smartMeterStates) {
-		return new ArrayList<PowerPerNode>();
-	}
+    /**
+     * {@inheritDoc}
+     * <P>
+     * Runs a mocked Power Load Simulation. This Mock does not change anything.
+     */
+    @Override
+    public List<PowerPerNode> run(List<AbstractCostFunction> costFunctions, List<SmartMeterState> smartMeterStates) {
+        return new ArrayList<PowerPerNode>();
+    }
 
-	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-		return ErrorCodeEnum.SUCCESS;
-	}
+    @Override
+    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+        return ErrorCodeEnum.SUCCESS;
+    }
 
-	@Override
-	public String getName() {
-		return "Mock";
-	}
+    @Override
+    public String getName() {
+        return "Mock";
+    }
 }

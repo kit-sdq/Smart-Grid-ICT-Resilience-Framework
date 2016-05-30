@@ -10,17 +10,15 @@ package smartgrid.simcontrol.baselib;
  *
  */
 public enum GenerationStyle {
-	
-	RANDOM,
-	
-	BIG_CLUSTERS,
-	
-	MANY_CLSUTERS,
-	
-	D3_TORUS_CLUSTER,
-	
-	HYPERCUBE
-	
-	
+
+    RANDOM,
+
+    BIG_CLUSTERS,
+
+    MANY_CLSUTERS,
+
+    D3_TORUS_CLUSTER,
+
+    HYPERCUBE
 
 }

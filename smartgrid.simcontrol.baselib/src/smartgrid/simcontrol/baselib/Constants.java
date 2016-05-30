@@ -59,12 +59,12 @@ public final class Constants {
      * Defines the TIMESTEPS_KEY
      */
     public static final String TIMESTEPS_KEY = "timeSteps"; //$NON-NLS-1$
-    
+
     /**
      * Defines Iteration Count key
      */
     public static final String ITERATION_COUNT_KEY = "iterationCount";
-    
+
     /**
      * Defines the IGNORE_LOC_CON_KEY
      */

@@ -9,7 +9,8 @@ public class AbstractSimcontrolTabGroup extends AbstractLaunchConfigurationTabGr
 
     @Override
     public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-        ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {new SimControlLaunchConfigurationTab(), new CommonTab()};
+        ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] { new SimControlLaunchConfigurationTab(),
+                new CommonTab() };
         this.setTabs(tabs);
     }
 }
