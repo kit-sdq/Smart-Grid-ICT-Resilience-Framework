@@ -4,10 +4,12 @@ package smartgridinput.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
 
-import smartgridinput.*;
+import smartgridinput.EntityState;
+import smartgridinput.PowerState;
+import smartgridinput.ScenarioState;
+import smartgridinput.SmartgridinputPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -3,7 +3,6 @@
 package smartgridinput.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import smartgridtopo.provider.SmartgridtopoEditPlugin;

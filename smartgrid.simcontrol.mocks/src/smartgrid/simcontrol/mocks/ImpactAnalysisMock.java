@@ -6,8 +6,8 @@ package smartgrid.simcontrol.mocks;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
-import smartgrid.simcontrol.interfaces.IImpactAnalysis;
+import smartgrid.simcontrol.baselib.ErrorCodeEnum;
+import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgridinput.ScenarioState;
 import smartgridoutput.Cluster;
 import smartgridoutput.Online;

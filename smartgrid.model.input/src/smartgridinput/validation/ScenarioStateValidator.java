@@ -8,7 +8,6 @@ import org.eclipse.emf.common.util.EList;
 
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
-
 import smartgridtopo.SmartGridTopology;
 
 /**

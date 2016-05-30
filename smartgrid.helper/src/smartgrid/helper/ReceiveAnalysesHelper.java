@@ -9,12 +9,12 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.RegistryFactory;
 
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.interfaces.IAttackerSimulation;
-import smartgrid.simcontrol.interfaces.IImpactAnalysis;
-import smartgrid.simcontrol.interfaces.IKritisSimulation;
-import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
-import smartgrid.simcontrol.interfaces.ITerminationCondition;
-import smartgrid.simcontrol.interfaces.ITimeProgressor;
+import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
+import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
+import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
+import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
+import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
+import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 
 public class ReceiveAnalysesHelper {
 
@@ -23,14 +23,14 @@ public class ReceiveAnalysesHelper {
 	public ReceiveAnalysesHelper() {
 	}
 
-	public List<IPowerLoadSimulation> getPowerLoadElements() throws CoreException {
-		List<IPowerLoadSimulation> list = new ArrayList<IPowerLoadSimulation>();
+	public List<IPowerLoadSimulationWrapper> getPowerLoadElements() throws CoreException {
+		List<IPowerLoadSimulationWrapper> list = new ArrayList<IPowerLoadSimulationWrapper>();
 		IConfigurationElement[] elements = registry
 				.getConfigurationElementsFor(Constants.POWER_LOAD_SIMULATION_EXTENSION_POINT);
 		for (IConfigurationElement element : elements) {
 			Object o = element.createExecutableExtension("powerLoadSimulation");
-			if (o instanceof IPowerLoadSimulation) {
-				list.add((IPowerLoadSimulation) o);
+			if (o instanceof IPowerLoadSimulationWrapper) {
+				list.add((IPowerLoadSimulationWrapper) o);
 			}
 		}
 		return list;
@@ -88,14 +88,14 @@ public class ReceiveAnalysesHelper {
 		return list;
 	}
 
-	public List<IKritisSimulation> getKritisSimulationElements() throws CoreException {
-		List<IKritisSimulation> list = new ArrayList<IKritisSimulation>();
+	public List<IKritisSimulationWrapper> getKritisSimulationElements() throws CoreException {
+		List<IKritisSimulationWrapper> list = new ArrayList<IKritisSimulationWrapper>();
 		IConfigurationElement[] elements = registry
 				.getConfigurationElementsFor(Constants.KRITIS_SIMULATION_EXTENSION_POINT);
 		for (IConfigurationElement element : elements) {
 			Object o = element.createExecutableExtension("class");
-			if (o instanceof IKritisSimulation) {
-				list.add((IKritisSimulation) o);
+			if (o instanceof IKritisSimulationWrapper) {
+				list.add((IKritisSimulationWrapper) o);
 			}
 		}
 		return list;

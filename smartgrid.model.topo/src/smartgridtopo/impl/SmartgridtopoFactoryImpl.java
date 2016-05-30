@@ -5,12 +5,24 @@ package smartgridtopo.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import smartgridtopo.*;
+import smartgridtopo.ConnectionType;
+import smartgridtopo.ControlCenter;
+import smartgridtopo.GenericController;
+import smartgridtopo.InterCom;
+import smartgridtopo.LogicalCommunication;
+import smartgridtopo.NetworkNode;
+import smartgridtopo.NetworkNodeType;
+import smartgridtopo.PhysicalConnection;
+import smartgridtopo.PowerGridNode;
+import smartgridtopo.Repository;
+import smartgridtopo.SmartGridTopology;
+import smartgridtopo.SmartMeter;
+import smartgridtopo.SmartMeterType;
+import smartgridtopo.SmartgridtopoFactory;
+import smartgridtopo.SmartgridtopoPackage;
 
 /**
  * <!-- begin-user-doc -->

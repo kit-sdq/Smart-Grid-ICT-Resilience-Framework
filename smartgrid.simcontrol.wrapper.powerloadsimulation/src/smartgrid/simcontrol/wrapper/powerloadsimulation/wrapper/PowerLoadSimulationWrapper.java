@@ -5,15 +5,15 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import smartgrid.simcontrol.baselib.ErrorCodeEnum;
+import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
-import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
-import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
 import smartgrid.simcontrol.wrapper.powerloadsimulation.simulation.PowerLoadSimulation;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
 
-public class PowerLoadSimulationWrapper implements IPowerLoadSimulation {
+public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
 	@Override
 	public ScenarioState run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput,
@@ -23,7 +23,8 @@ public class PowerLoadSimulationWrapper implements IPowerLoadSimulation {
 		// TODO: Get smartMeterStates and cost functions for the
 		// "doSimulation"-method
 
-		List<PowerPerNode> list = simulation.doSimuation(null, null);
+		@SuppressWarnings("unused")
+        List<PowerPerNode> list = simulation.doSimuation(null, null);
 
 		// TODO: Convert PowerPerNode list to ScenarioState
 

@@ -20,8 +20,8 @@ import org.eclipse.ui.PlatformUI;
 import smartgrid.helper.FileSystem;
 import smartgrid.model.helper.input.LoadInputModelConformityHelper;
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
-import smartgrid.simcontrol.interfaces.IImpactAnalysis;
+import smartgrid.simcontrol.baselib.ErrorCodeEnum;
+import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
@@ -60,7 +60,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 	private Map<Integer, Integer> internalToExternalID;
 	private Map<Integer, Cluster> internalToCluster;
 	private Map<Integer, Double[]> controlCenterConnectivity;
-	//
+
 	private String outputPath;
 	private boolean initDone = false;
 	private boolean ignoreLogicalConnections;

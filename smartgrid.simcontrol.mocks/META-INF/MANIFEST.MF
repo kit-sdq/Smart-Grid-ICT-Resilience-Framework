@@ -10,4 +10,3 @@ Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  org.eclipse.core.runtime;bundle-version="3.10.0",
  smartgrid.simcontrol;bundle-version="1.0.0",
  smartgrid.simcontrol.baselib
-Import-Package: smartgrid.simcontrol.interfaces

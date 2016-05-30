@@ -10,21 +10,21 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ReceiveAnalysesHelper;
 import smartgrid.helper.ScenarioHelper;
+import smartgrid.inputgenerator.IInputGenerator;
 import smartgrid.log4j.InitializeLogger;
 import smartgrid.simcontrol.baselib.Constants;
+import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.GenerationStyle;
-import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
-import smartgrid.simcontrol.interfaces.IAttackerSimulation;
-import smartgrid.simcontrol.interfaces.IImpactAnalysis;
-import smartgrid.simcontrol.interfaces.IInputGenerator;
-import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
-import smartgrid.simcontrol.interfaces.ITerminationCondition;
-import smartgrid.simcontrol.interfaces.ITimeProgressor;
+import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
+import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
+import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
+import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
+import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
+import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
@@ -33,34 +33,36 @@ public final class SimulationController {
 
 	private static final Logger LOG = Logger.getLogger(SimulationController.class);
 
-	/* Generator Fields */
-
+	/* Generator Fields (not yet properly implemented) */
 	private static List<IInputGenerator> inputGeneratorList = new LinkedList<IInputGenerator>();
-	private static IInputGenerator usedInputGenerator;
+	@SuppressWarnings("unused")
+    private static IInputGenerator inputGenerator;
+	@SuppressWarnings("unused")
 	private static GenerationStyle desiredStyle;
-	private static int SmartMeterCount;
-	private static int ControlCenterCount;
+	@SuppressWarnings("unused")
+	private static int smartMeterCount;
+	@SuppressWarnings("unused")
+	private static int controlCenterCount;
 
 	/* Analysis Fields */
 
 	// Used Analysis from Selection
-	private static IPowerLoadSimulation usedPowerLoadSimulation;
-	private static IImpactAnalysis usedImpactAnalsis;
-	private static IAttackerSimulation usedAttackerSimulation;
+	private static IKritisSimulationWrapper kritisSimulation;
+	private static IPowerLoadSimulationWrapper powerLoadSimulation;
+	private static IImpactAnalysis impactAnalsis;
+	private static IAttackerSimulation attackerSimulation;
 
 	/* Workflow Fields */
 
 	// Use Workflow Fields from Selection
-	private static ITerminationCondition usedTerminationCondition;
-	private static ITimeProgressor usedTimeProgressor;
+	private static ITerminationCondition terminationCondition;
+	private static ITimeProgressor timeProgressor;
 
 	/* Organisation Fields */
-
 	private static ILaunchConfiguration myConfiguration;
 	private static StringBuilder fileSystemPath;
 
-	private static IExtensionRegistry registry;
-
+	@SuppressWarnings("unused")
 	private static Boolean ignoreLogicalCon; // TODO Perhaps here not needed
 												// depends on Further changes
 
@@ -98,7 +100,7 @@ public final class SimulationController {
 		ScenarioResult impactResultOld;
 
 		// Compute Initial Impact Analysis Result
-		ScenarioResult impactResult = usedImpactAnalsis.run(topo, initialState);
+		ScenarioResult impactResult = impactAnalsis.run(topo, initialState);
 
 		if (impactResult == null) {
 			return;
@@ -120,7 +122,9 @@ public final class SimulationController {
 			// Generates Path with default System separators
 			String timeStepPath = new File(fileSystemPath.toString() + "\\Zeitschritt " + i).getPath();
 
-			impactResult = usedAttackerSimulation.run(topo, impactResult);
+			kritisSimulation.run(topo, impactInput);
+			
+			impactResult = attackerSimulation.run(topo, impactResult);
 
 			if (impactResult == null) {
 				// Attacker simulation failed due to rootNodeID not found -->
@@ -136,33 +140,32 @@ public final class SimulationController {
 			int innerLoopIterationCount = 0;
 			do {
 				impactInputOld = impactInput;
-				impactInput = usedPowerLoadSimulation.run(topo, impactInput, impactResult);
+				impactInput = powerLoadSimulation.run(topo, impactInput, impactResult);
+				
 				impactResultOld = impactResult;
-				impactResult = usedImpactAnalsis.run(topo, impactInput);
+				impactResult = impactAnalsis.run(topo, impactInput);
+				
 				innerLoopIterationCount++;
 
 				// Save Iteration to file system
 
 				// Exampel Zeitschritt 1\Iteration 1\
 				String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount).getPath();
-				// TODO Externalize Strings
 
 				// Save Input
 				String inputFile = new File(iterationPath + "\\PowerLoadResult.smartgridinput").getPath();
-
 				smartgrid.helper.FileSystem.saveToFileSystem(impactInputOld, inputFile);
 
 				// Save Result
 				String resultFile = new File(iterationPath + "\\ImpactResult.smartgridoutput").getPath();
-
 				smartgrid.helper.FileSystem.saveToFileSystem(impactResult, resultFile);
 
 				// End 1 Iteration
-			} while (usedTerminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld,
+			} while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld,
 					impactResult, impactResultOld));
 
 			// modify the scenario between time steps
-			usedTimeProgressor.progress();
+			timeProgressor.progress();
 		} // End 1 TimeStep
 		
 		//remove file appender of this run
@@ -248,11 +251,11 @@ public final class SimulationController {
 		//
 
 		try { // Inits the Simulations
-			powerError = SimulationController.usedPowerLoadSimulation.init(myConfiguration);
-			impactError = SimulationController.usedImpactAnalsis.init(myConfiguration);
-			attackerError = SimulationController.usedAttackerSimulation.init(myConfiguration);
-			terminationError = SimulationController.usedTerminationCondition.init(myConfiguration);
-			timeError = SimulationController.usedTimeProgressor.init(myConfiguration);
+			powerError = SimulationController.powerLoadSimulation.init(myConfiguration);
+			impactError = SimulationController.impactAnalsis.init(myConfiguration);
+			attackerError = SimulationController.attackerSimulation.init(myConfiguration);
+			terminationError = SimulationController.terminationCondition.init(myConfiguration);
+			timeError = SimulationController.timeProgressor.init(myConfiguration);
 
 		} catch (CoreException e) {
 
@@ -283,24 +286,32 @@ public final class SimulationController {
 		for (IAttackerSimulation e : attack) {
 
 			if (myConfiguration.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "").equals(e.getName())) {
-				usedAttackerSimulation = e;
+				attackerSimulation = e;
 			}
 		}
 
-		List<IPowerLoadSimulation> power = helper.getPowerLoadElements();
-		for (IPowerLoadSimulation e : power) {
+		List<IPowerLoadSimulationWrapper> power = helper.getPowerLoadElements();
+		for (IPowerLoadSimulationWrapper e : power) {
 
 			if (myConfiguration.getAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, "").equals(e.getName())) {
-				usedPowerLoadSimulation = e;
+				powerLoadSimulation = e;
 			}
 		}
+		
+        List<IKritisSimulationWrapper> kritis = helper.getKritisSimulationElements();
+        for (IKritisSimulationWrapper e : kritis) {
+
+            if (myConfiguration.getAttribute(Constants.KRITIS_SIMULATION_CONFIG, "").equals(e.getName())) {
+                kritisSimulation = e;
+            }
+        }
 
 		List<ITerminationCondition> termination = helper.getTerminationConditionElements();
 		for (ITerminationCondition e : termination) {
 
 			if (myConfiguration.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, "")
 					.equals(e.getName())) {
-				usedTerminationCondition = e;
+				terminationCondition = e;
 			}
 		}
 
@@ -308,7 +319,7 @@ public final class SimulationController {
 		for (ITimeProgressor e : time) {
 
 			if (myConfiguration.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, "").equals(e.getName())) {
-				usedTimeProgressor = e;
+				timeProgressor = e;
 			}
 		}
 
@@ -316,7 +327,7 @@ public final class SimulationController {
 		for (IImpactAnalysis e : impact) {
 
 			if (myConfiguration.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, "").equals(e.getName())) {
-				usedImpactAnalsis = e;
+				impactAnalsis = e;
 			}
 		}
 
@@ -327,9 +338,8 @@ public final class SimulationController {
 				// TODO Add User Selection from UI here
 
 				// if(e.getName().equals("User Selection")){
-				usedInputGenerator = e;
+				inputGenerator = e;
 				// }
-
 			}
 		}
 	}
@@ -360,7 +370,7 @@ public final class SimulationController {
 
 		}
 
-		SimulationController.SmartMeterCount = Integer.parseInt(smartString);
+		SimulationController.smartMeterCount = Integer.parseInt(smartString);
 
 		String controlCenterString = myConfiguration.getAttribute(Constants.CONTROL_CENTER_COUNT_KEY, Constants.FAIL);
 
@@ -369,6 +379,6 @@ public final class SimulationController {
 			LOG.info("[SimulationController] Default ControlCenterCount used");
 
 		}
-		SimulationController.ControlCenterCount = Integer.parseInt(controlCenterString);
+		SimulationController.controlCenterCount = Integer.parseInt(controlCenterString);
 	}
 }

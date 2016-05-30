@@ -9,7 +9,6 @@ Require-Bundle: org.eclipse.emf.ecore,
  smartgrid.model.output,
  smartgrid.model.input,
  smartgrid.model.topo,
- smartgrid.simcontrol.interfaces,
  org.eclipse.equinox.registry,
  smartgrid.simcontrol.baselib,
  org.apache.log4j;bundle-version="1.2.15"

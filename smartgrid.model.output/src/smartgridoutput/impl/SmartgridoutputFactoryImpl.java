@@ -5,12 +5,17 @@ package smartgridoutput.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import smartgridoutput.*;
+import smartgridoutput.Cluster;
+import smartgridoutput.Defect;
+import smartgridoutput.NoPower;
+import smartgridoutput.NoUplink;
+import smartgridoutput.Online;
+import smartgridoutput.ScenarioResult;
+import smartgridoutput.SmartgridoutputFactory;
+import smartgridoutput.SmartgridoutputPackage;
 
 /**
  * <!-- begin-user-doc -->

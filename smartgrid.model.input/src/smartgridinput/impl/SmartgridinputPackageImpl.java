@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import smartgridinput.EntityState;
@@ -14,7 +13,6 @@ import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputFactory;
 import smartgridinput.SmartgridinputPackage;
-
 import smartgridtopo.SmartgridtopoPackage;
 
 /**

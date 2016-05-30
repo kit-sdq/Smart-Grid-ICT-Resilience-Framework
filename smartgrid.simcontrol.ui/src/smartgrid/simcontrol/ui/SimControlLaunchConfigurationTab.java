@@ -20,8 +20,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -36,12 +34,12 @@ import smartgrid.helper.ReceiveAnalysesHelper;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.GenerationStyle;
 import smartgrid.simcontrol.baselib.HackingStyle;
-import smartgrid.simcontrol.interfaces.IAttackerSimulation;
-import smartgrid.simcontrol.interfaces.IImpactAnalysis;
-import smartgrid.simcontrol.interfaces.IKritisSimulation;
-import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
-import smartgrid.simcontrol.interfaces.ITerminationCondition;
-import smartgrid.simcontrol.interfaces.ITimeProgressor;
+import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
+import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
+import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
+import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
+import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
+import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 
 /**
  * This Class provides the SimController Configuration Tab
@@ -853,6 +851,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         // return false;
     }
 
+    @SuppressWarnings("unused")
     private boolean areOptionsWrong() {
         // TODO Add coming checks for the options section of the Ui here
         final boolean timeStepsWrong = !this.isUInt(this.timeStepsTextBox.getText());
@@ -903,8 +902,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     }
 
     private void addPowerLoadElements(ReceiveAnalysesHelper helper) throws CoreException {
-        List<IPowerLoadSimulation> list = helper.getPowerLoadElements();
-        for (IPowerLoadSimulation ele : list) {
+        List<IPowerLoadSimulationWrapper> list = helper.getPowerLoadElements();
+        for (IPowerLoadSimulationWrapper ele : list) {
             comboPowerLoadSimulation.add(ele.getName());
         }
         if (comboPowerLoadSimulation.getItemCount() > 0) {
@@ -923,8 +922,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     }
 
     private void addKritisSimulationElements(ReceiveAnalysesHelper helper) throws CoreException {
-        List<IKritisSimulation> list = helper.getKritisSimulationElements();
-        for (IKritisSimulation ele : list) {
+        List<IKritisSimulationWrapper> list = helper.getKritisSimulationElements();
+        for (IKritisSimulationWrapper ele : list) {
             comboKritisSimulation.add(ele.getName());
         }
         if (comboKritisSimulation.getItemCount() > 0) {

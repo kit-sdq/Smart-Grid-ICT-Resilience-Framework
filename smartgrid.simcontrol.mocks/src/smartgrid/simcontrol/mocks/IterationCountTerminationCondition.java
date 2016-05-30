@@ -6,10 +6,11 @@ package smartgrid.simcontrol.mocks;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import smartgrid.simcontrol.baselib.Constants;
+import smartgrid.simcontrol.baselib.ErrorCodeEnum;
+import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
-import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.interfaces.*;
 
 /**
  * Mocks the TerminationCondition

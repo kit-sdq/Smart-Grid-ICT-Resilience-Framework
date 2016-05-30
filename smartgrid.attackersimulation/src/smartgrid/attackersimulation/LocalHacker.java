@@ -17,9 +17,9 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ScenarioHelper;
 import smartgrid.simcontrol.baselib.Constants;
+import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.HackingStyle;
-import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
-import smartgrid.simcontrol.interfaces.IAttackerSimulation;
+import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.Cluster;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;

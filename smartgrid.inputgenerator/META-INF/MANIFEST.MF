@@ -3,8 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Inputgenerator
 Bundle-SymbolicName: smartgrid.inputgenerator
 Bundle-Version: 1.0.0.qualifier
-Require-Bundle: smartgrid.simcontrol.interfaces;bundle-version="1.0.0",
- smartgrid.simcontrol.baselib;bundle-version="1.0.0",
+Require-Bundle: smartgrid.simcontrol.baselib;bundle-version="1.0.0",
  smartgrid.model.input
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Export-Package: smartgrid.inputgenerator

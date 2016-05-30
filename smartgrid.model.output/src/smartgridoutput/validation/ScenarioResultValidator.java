@@ -8,7 +8,6 @@ import org.eclipse.emf.common.util.EList;
 
 import smartgridoutput.Cluster;
 import smartgridoutput.EntityState;
-
 import smartgridtopo.SmartGridTopology;
 
 /**

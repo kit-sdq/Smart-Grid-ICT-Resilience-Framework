@@ -4,12 +4,13 @@ package smartgridinput.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import smartgridinput.*;
+import smartgridinput.EntityState;
+import smartgridinput.PowerState;
+import smartgridinput.ScenarioState;
+import smartgridinput.SmartgridinputPackage;
 
 /**
  * <!-- begin-user-doc -->

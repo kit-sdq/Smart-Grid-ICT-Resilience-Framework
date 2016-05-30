@@ -4,7 +4,6 @@
    <extension
          point="smartgrid.simcontrol.extensionpoints.powerLoadSimulation">
       <powerLoadSimulation
-            class="smartgrid.simcontrol.mocks.PowerLoadSimulationMock"
             powerLoadSimulation="smartgrid.simcontrol.mocks.PowerLoadSimulationMock">
       </powerLoadSimulation>
    </extension>

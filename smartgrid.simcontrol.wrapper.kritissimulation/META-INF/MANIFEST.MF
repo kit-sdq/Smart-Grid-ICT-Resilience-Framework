@@ -7,7 +7,6 @@ Bundle-Activator: smartgrid.simcontrol.wrapper.kritissimulation.Activator
 Require-Bundle: org.eclipse.core.runtime,
  smartgrid.simcontrol;bundle-version="1.0.0",
  smartgrid.simcontrol.baselib,
- smartgrid.simcontrol.interfaces,
  smartgrid.model.output,
  smartgrid.model.topo,
  smartgrid.model.input,

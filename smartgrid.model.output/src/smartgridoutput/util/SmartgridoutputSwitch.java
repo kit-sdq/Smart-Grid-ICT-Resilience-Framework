@@ -4,10 +4,18 @@ package smartgridoutput.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
 
-import smartgridoutput.*;
+import smartgridoutput.Cluster;
+import smartgridoutput.Defect;
+import smartgridoutput.EntityState;
+import smartgridoutput.NoPower;
+import smartgridoutput.NoUplink;
+import smartgridoutput.Offline;
+import smartgridoutput.On;
+import smartgridoutput.Online;
+import smartgridoutput.ScenarioResult;
+import smartgridoutput.SmartgridoutputPackage;
 
 /**
  * <!-- begin-user-doc -->

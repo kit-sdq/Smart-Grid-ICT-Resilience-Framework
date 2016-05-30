@@ -4,12 +4,28 @@ package smartgridtopo.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import smartgridtopo.*;
+import smartgridtopo.CommunicatingEntity;
+import smartgridtopo.ConnectionType;
+import smartgridtopo.ControlCenter;
+import smartgridtopo.GenericController;
+import smartgridtopo.Identifier;
+import smartgridtopo.InterCom;
+import smartgridtopo.LogicalCommunication;
+import smartgridtopo.NamedEntity;
+import smartgridtopo.NamedIdentifier;
+import smartgridtopo.NetworkEntity;
+import smartgridtopo.NetworkNode;
+import smartgridtopo.NetworkNodeType;
+import smartgridtopo.PhysicalConnection;
+import smartgridtopo.PowerGridNode;
+import smartgridtopo.Repository;
+import smartgridtopo.SmartGridTopology;
+import smartgridtopo.SmartMeter;
+import smartgridtopo.SmartMeterType;
+import smartgridtopo.SmartgridtopoPackage;
 
 /**
  * <!-- begin-user-doc -->

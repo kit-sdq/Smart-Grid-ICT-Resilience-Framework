@@ -5,7 +5,6 @@ Bundle-SymbolicName: smartgrid.simcontrol.wrapper.powerloadsimulation;singleton:
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: smartgrid.simcontrol.wrapper.powerloadsimulation.Activator
 Require-Bundle: org.eclipse.core.runtime,
- smartgrid.simcontrol.interfaces,
  smartgrid.model.input,
  smartgrid.model.topo,
  smartgrid.model.output,

@@ -4,12 +4,19 @@ package smartgridoutput.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import smartgridoutput.*;
+import smartgridoutput.Cluster;
+import smartgridoutput.Defect;
+import smartgridoutput.EntityState;
+import smartgridoutput.NoPower;
+import smartgridoutput.NoUplink;
+import smartgridoutput.Offline;
+import smartgridoutput.On;
+import smartgridoutput.Online;
+import smartgridoutput.ScenarioResult;
+import smartgridoutput.SmartgridoutputPackage;
 
 /**
  * <!-- begin-user-doc -->

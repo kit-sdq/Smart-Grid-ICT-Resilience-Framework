@@ -6,8 +6,8 @@ package smartgrid.simcontrol.mocks;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.interfaces.ErrorCodeEnum;
-import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
+import smartgrid.simcontrol.baselib.ErrorCodeEnum;
+import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgridinput.ScenarioState;
 import smartgridoutput.EntityState;
 import smartgridoutput.On;
@@ -18,7 +18,7 @@ import smartgridtopo.SmartGridTopology;
  * @author Christian
  *
  */
-public class PowerLoadSimulationMock implements IPowerLoadSimulation {
+public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
 
 	/**
 	 * {@inheritDoc}
