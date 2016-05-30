@@ -186,8 +186,8 @@ public final class SimulationController {
 
 		// Read ILaunchConfiguration
 		try {
-			LOG.debug("[SimulationController]: Loaded");
-			LOG.debug("[SimulationController]: Find parameters");
+			LOG.debug("Loaded");
+			LOG.debug("Find parameters");
 
 			String inputPath = myConfiguration.getAttribute(Constants.INPUT_PATH_KEY, ""); // smartgrid.simcontrol.ui.Constants
 
@@ -200,8 +200,8 @@ public final class SimulationController {
 			SimulationController.timeSteps = Integer
 					.parseUnsignedInt(myConfiguration.getAttribute(Constants.TIMESTEPS_KEY, ""));
 
-			LOG.info("[SimulationController]: Input : " + inputPath);
-			LOG.info("[SimulationController]: Topology : " + topoPath);
+			LOG.info("Input : " + inputPath);
+			LOG.info("Topology : " + topoPath);
 
 			initialState = ScenarioHelper.loadInput(inputPath);
 			topo = ScenarioHelper.loadScenario(topoPath);
@@ -242,7 +242,7 @@ public final class SimulationController {
 		try {
 			loadCustomUserAnalysis();
 		} catch (CoreException e1) {
-			LOG.error("[SimulationController]: Exception occured while loading custom user analysis");
+			LOG.error("Exception occured while loading custom user analysis");
 			e1.printStackTrace();
 		}
 		//

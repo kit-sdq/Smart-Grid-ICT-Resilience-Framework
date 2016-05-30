@@ -181,7 +181,7 @@ public class ViralHacker implements IAttackerSimulation {
 			myError = ErrorCodeEnum.DEFAULT_VALUES_USED;
 		}
 
-		LOGGER.info("[Viral Hacker]: Init done");
+		LOGGER.debug("Init done");
 
 		initDone = true;
 		return myError;
@@ -254,7 +254,7 @@ public class ViralHacker implements IAttackerSimulation {
 	 */
 	private void startHacking() {
 		// Switch Hacking Modes here
-		LOGGER.info("Start Hacking with Viral Hacker");
+		LOGGER.debug("Start Hacking with Viral Hacker");
 		switch (this.usedHackingStyle) {
 		case BFS_HACKING:
 			bfsHacking();
@@ -296,7 +296,7 @@ public class ViralHacker implements IAttackerSimulation {
 
 		} // End for hacked seed nodes
 		this.seedNodes.addAll(freshHackedNodes); // Attention during if parallel
-		LOGGER.info("[Viral Hacker] Done Hacking with DFS");
+		LOGGER.debug("Done Hacking with DFS");
 	}
 
 	/*
@@ -434,7 +434,7 @@ public class ViralHacker implements IAttackerSimulation {
 
 			} // Layer Loop most outer
 
-			LOGGER.info("[Viral Hacker]: Done hacking with BFS");
+			LOGGER.debug("Done hacking with BFS");
 
 		} // End For hacked seedNodes
 
@@ -502,7 +502,7 @@ public class ViralHacker implements IAttackerSimulation {
 				howManyToHack--;
 			}
 		}
-		LOGGER.info("[Viral Hacker]: Done hacking with Full Meshed Hacking");
+		LOGGER.debug("Done hacking with Full Meshed Hacking");
 	}
 
 	/*

@@ -143,7 +143,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 			this.ignoreLogicalConnections = (Constants.TRUE).equals(ignoreLogicalConnectionsString);
 		}
 
-		LOG.info("[GraphAnalyzer]: Init done");
+		LOG.debug("Init done");
 		this.initDone = true;
 
 		return myError;
