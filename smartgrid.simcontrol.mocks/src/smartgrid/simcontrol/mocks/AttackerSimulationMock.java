@@ -3,7 +3,6 @@
  */
 package smartgrid.simcontrol.mocks;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
@@ -21,7 +20,7 @@ public class AttackerSimulationMock implements IAttackerSimulation {
 	 * {@inheritDoc}
 	 * <p>
 	 * 
-	 * Mocks a Atacker who doesn't atack
+	 * An attacker who doesn't attack
 	 * 
 	 */
 	@Override
@@ -31,7 +30,7 @@ public class AttackerSimulationMock implements IAttackerSimulation {
 	}
 
 	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+	public ErrorCodeEnum init(ILaunchConfiguration config) throws Exception {
 		// Nothing to do here
 		return ErrorCodeEnum.SUCCESS;
 	}

@@ -257,7 +257,7 @@ public final class SimulationController {
 			terminationError = SimulationController.terminationCondition.init(myConfiguration);
 			timeError = SimulationController.timeProgressor.init(myConfiguration);
 
-		} catch (CoreException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 

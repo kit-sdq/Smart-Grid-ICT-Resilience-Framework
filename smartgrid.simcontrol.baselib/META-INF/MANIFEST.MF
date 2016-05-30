@@ -7,6 +7,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: smartgrid.simcontrol.baselib,
  smartgrid.simcontrol.baselib.coupling
 Require-Bundle: smartgrid.model.output,
- org.eclipse.equinox.registry,
- org.eclipse.debug.core,
- smartgrid.model.input
+ smartgrid.model.input,
+ org.eclipse.debug.core
