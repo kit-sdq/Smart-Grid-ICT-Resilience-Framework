@@ -31,9 +31,9 @@ import smartgridtopo.impl.SmartgridtopoPackageImpl;
  * @author Christian
  *
  */
-public final class ScenarioHelper {
+public final class ScenarioModelHelper {
 
-	private static Logger LOG = Logger.getLogger(ScenarioHelper.class);
+	private static Logger LOG = Logger.getLogger(ScenarioModelHelper.class);
 
 	public static SmartGridTopology loadScenario(String path) {
 		SmartGridTopology s = null;
@@ -179,7 +179,7 @@ public final class ScenarioHelper {
 
 			// Are my Neighbors at my Cluster ? Otherwise they are gone
 			// (Destroyed or something)
-			if (neighborIDList.contains(ScenarioHelper.getIDfromEntityOnState(clusterNode))) {
+			if (neighborIDList.contains(ScenarioModelHelper.getIDfromEntityOnState(clusterNode))) {
 
 				neighborOnList.add(clusterNode);
 			}

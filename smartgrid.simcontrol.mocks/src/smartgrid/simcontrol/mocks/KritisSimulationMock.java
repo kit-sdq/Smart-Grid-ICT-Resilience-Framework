@@ -9,16 +9,17 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.AbstractCostFunction;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.LinearCostFunction;
 import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
 
 public class KritisSimulationMock implements IKritisSimulationWrapper {
 
     @Override
     public List<AbstractCostFunction> run(List<PowerPerNode> power) {
-        List<AbstractCostFunction> list = new ArrayList<AbstractCostFunction>();
-        list.add(new LinearCostFunction(power.get(0).getPowerNodeID(), 1));
-        return list;
+        return new ArrayList<AbstractCostFunction>();
+        
+//        List<AbstractCostFunction> list = new ArrayList<AbstractCostFunction>();
+//        list.add(new LinearCostFunction(power.get(0).getPowerNodeID(), 1));
+//        return list;
     }
 
 	@Override
@@ -28,6 +29,6 @@ public class KritisSimulationMock implements IKritisSimulationWrapper {
 
 	@Override
 	public String getName() {
-		return "KRITIS Simulation Mock";
+		return "Mock";
 	}
 }

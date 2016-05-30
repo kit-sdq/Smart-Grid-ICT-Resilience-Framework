@@ -15,11 +15,10 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import smartgrid.helper.SimulationExtensionPointHelper;
-import smartgrid.helper.ScenarioHelper;
+import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.inputgenerator.IInputGenerator;
 import smartgrid.log4j.InitializeLogger;
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.GenerationStyle;
 import smartgrid.simcontrol.baselib.coupling.AbstractCostFunction;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
@@ -62,10 +61,12 @@ public final class SimulationController {
 	private static ITerminationCondition terminationCondition;
 	private static ITimeProgressor timeProgressor;
 
-	private static StringBuilder fileSystemPath;
-	private static int timeSteps;
+	private static String fileSystemPath;
+	private static int maxTimeSteps;
 	private static SmartGridTopology topo;
 	private static ScenarioState initialState;
+
+    private static FileAppender fileAppender;
 
 	private SimulationController() {
 	}
@@ -73,7 +74,7 @@ public final class SimulationController {
 	/**
 	 * @param topo
 	 * @param initialState
-	 * @param timeSteps
+	 * @param maxTimeSteps
 	 */
 	public static void run() {
 		ScenarioState impactInputOld;
@@ -86,21 +87,10 @@ public final class SimulationController {
 		// Compute Initial Impact Analysis Result
 		ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
 		
-		//add fileappender for local logs
-		Logger rootLogger = Logger.getRootLogger();
-		FileAppender fileAppender = null;
-		try {
-            Layout layout = ((Appender)rootLogger.getAllAppenders().nextElement()).getLayout();
-            fileAppender = new FileAppender(layout, fileSystemPath.toString()+"\\log.log");
-            rootLogger.addAppender(fileAppender);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 		// one iteration computes one timestep
-		for (int i = 0; i < timeSteps; i++) {
+		for (int timeStep = 0; timeStep < maxTimeSteps; timeStep++) {
 			// Generates Path with default System separators
-			String timeStepPath = new File(fileSystemPath.toString() + "\\Zeitschritt " + i).getPath();
+			String timeStepPath = new File(fileSystemPath + "\\Zeitschritt " + timeStep).getPath();
 
 			costFunctions = kritisSimulation.run(powerPerNodes);
 			
@@ -145,12 +135,16 @@ public final class SimulationController {
 			} while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld,
 					impactResult, impactResultOld));
 
+			LOG.info("Time step "+timeStep+" terminated after "+innerLoopIterationCount+" power/impact iterations");
+			
 			// modify the scenario between time steps
 			timeProgressor.progress();
 		}
 		
+		LOG.info("Coupled simulation terminated");
+		
 		//remove file appender of this run
-		rootLogger.removeAppender(fileAppender);
+		Logger.getRootLogger().removeAppender(fileAppender);
 	}
 
 	// Private Methods
@@ -200,100 +194,63 @@ public final class SimulationController {
 	 * 
 	 * Does: # Generates Output Path String # Inits the Simulations
 	 */
-	public static void init(ILaunchConfiguration launchConfig) {
+	public static void init(ILaunchConfiguration launchConfig) throws CoreException {
+	    
 		InitializeLogger.initialize();
 		
-		String tempPath = "C:\\Temp\\";
-
-		// Read ILaunchConfiguration
-		try {
-			LOG.debug("Loaded");
-			LOG.debug("Find parameters");
-
-			String inputPath = launchConfig.getAttribute(Constants.INPUT_PATH_KEY, ""); // smartgrid.simcontrol.ui.Constants
-
-			String topoPath = launchConfig.getAttribute(Constants.TOPOLOGY_PATH_KEY, "");
-			/*
-			 * Check whether this is really an Integer already done in
-			 * smartgrid.simcontrol.ui.SimControlLaunchConfigurationTab. So just
-			 * parsing to Int
-			 */
-			SimulationController.timeSteps = Integer
-					.parseUnsignedInt(launchConfig.getAttribute(Constants.TIMESTEPS_KEY, ""));
-
-			LOG.info("Input : " + inputPath);
-			LOG.info("Topology : " + topoPath);
-
-			initialState = ScenarioHelper.loadInput(inputPath);
-			topo = ScenarioHelper.loadScenario(topoPath);
-
-			tempPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
-			
-			// Gets String from Config and compares whether it is the same
-			// String as Constants.TRUE
-			generateInput = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FALSE)
-					.contains(Constants.TRUE);
-
-			if (generateInput) {
-				initGeneratorInput(launchConfig);
-			}
-
-		} catch (CoreException e) {
-			LOG.error("[SimulationController] LaunchConfig not valid, using Path: C:\\Temp\\");
-			e.printStackTrace();
-		}
-
-		SimulationController.fileSystemPath = new StringBuilder(tempPath);
-
-		// Init Simulations Errorcodes
-		ErrorCodeEnum powerError = ErrorCodeEnum.NOT_SET;
-		ErrorCodeEnum kritisError = ErrorCodeEnum.NOT_SET;
-		ErrorCodeEnum impactError = ErrorCodeEnum.NOT_SET;
-		ErrorCodeEnum attackerError = ErrorCodeEnum.NOT_SET;
-		ErrorCodeEnum terminationError = ErrorCodeEnum.NOT_SET;
-		ErrorCodeEnum timeError = ErrorCodeEnum.NOT_SET;
+    	LOG.debug("loading launch config");
+    
+    	fileSystemPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
+    	
+    	//add fileappender for local logs
+        Logger rootLogger = Logger.getRootLogger();
+        try {
+            Layout layout = ((Appender)rootLogger.getAllAppenders().nextElement()).getLayout();
+            fileAppender = new FileAppender(layout, fileSystemPath+"\\log.log");
+            rootLogger.addAppender(fileAppender);
+        } catch (IOException e) {
+           throw new RuntimeException("Error creating local log appender in the working directory. Most likely there are problems with access rights.");
+        }       
+    	
+    	// load models
+        String inputPath = launchConfig.getAttribute(Constants.INPUT_PATH_KEY, "");
+    	String topoPath = launchConfig.getAttribute(Constants.TOPOLOGY_PATH_KEY, "");
+    	initialState = ScenarioModelHelper.loadInput(inputPath);
+        topo = ScenarioModelHelper.loadScenario(topoPath);
+        LOG.info("Scenario input state: " + inputPath);
+        LOG.info("Topology: " + topoPath);
+    	
+    	/*
+    	 * Check whether this is really an Integer already done in
+    	 * smartgrid.simcontrol.ui.SimControlLaunchConfigurationTab. So just
+    	 * parsing to Int
+    	 */
+    	maxTimeSteps = Integer.parseUnsignedInt(launchConfig.getAttribute(Constants.TIMESTEPS_KEY, ""));
+    	LOG.info("Running for " + maxTimeSteps + " time steps");
+    	
+    	// Gets String from Config and compares whether it is the same String as Constants.TRUE
+    	generateInput = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FALSE).contains(Constants.TRUE);
+    	if (generateInput) {
+    		initGeneratorInput(launchConfig);
+    	}
 
 		// Retrieve simulations from extension points
-		try {
-			loadCustomUserAnalysis(launchConfig);
-		} catch (CoreException e1) {
-			LOG.error("Exception occured while loading custom user analysis");
-			e1.printStackTrace();
-		}
+		loadCustomUserAnalysis(launchConfig);
 
-		try {
-		    // Init all simulations
-			powerError = SimulationController.powerLoadSimulation.init(launchConfig);
-			kritisError = SimulationController.kritisSimulation.init(launchConfig);
-			impactError = SimulationController.impactAnalsis.init(launchConfig);
-			attackerError = SimulationController.attackerSimulation.init(launchConfig);
-			terminationError = SimulationController.terminationCondition.init(launchConfig);
-			timeError = SimulationController.timeProgressor.init(launchConfig);
-			
-			LOG.info("Using power load simulation: "+powerLoadSimulation.getName());
-			LOG.info("Using KRITIS simulation: "+kritisSimulation.getName());
-			LOG.info("Using impact analysis: "+impactAnalsis.getName());
-			LOG.info("Using attacker simulation: "+attackerSimulation.getName());
-			LOG.info("Using termination condition: "+terminationCondition.getName());
-			LOG.info("Using time progressor: "+timeProgressor.getName());
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-			final String newline = System.getProperty("line.separator");
-
-			String printError = "init failed with these Errors " + newline
-					+ "power load simulation: " + powerError.toString() + newline + "KRITIS simulation: " +
-			        kritisError.toString() + newline + "impact analysis: " + impactError.toString() +
-			        newline + "attacker simulation: " + attackerError.toString() + newline +
-			        "termination condition: " + terminationError.toString() + newline + "time progressor: "
-					+ timeError.toString();
-
-			LOG.error(printError);
-
-		}
-
+	    // Init all simulations
+		powerLoadSimulation.init(launchConfig);
+		kritisSimulation.init(launchConfig);
+		impactAnalsis.init(launchConfig);
+		attackerSimulation.init(launchConfig);
+		terminationCondition.init(launchConfig);
+		timeProgressor.init(launchConfig);
+		
+        LOG.info("Using power load simulation: "+powerLoadSimulation.getName());
+        LOG.info("Using KRITIS simulation: "+kritisSimulation.getName());
+        LOG.info("Using impact analysis: "+impactAnalsis.getName());
+        LOG.info("Using attacker simulation: "+attackerSimulation.getName());
+        LOG.info("Using termination condition: "+terminationCondition.getName());
+        LOG.info("Using time progressor: "+timeProgressor.getName());
 	}
 
 	/**

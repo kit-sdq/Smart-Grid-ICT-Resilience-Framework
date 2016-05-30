@@ -1,5 +1,6 @@
 package smartgrid.simcontrol.baselib.coupling;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
@@ -40,7 +41,7 @@ public interface ITerminationCondition {
 	 * @return true if Init was successful
 	 * @throws CoreException If ILaunchConfiguration.getAttribute fails
 	 */
-	ErrorCodeEnum init(ILaunchConfiguration config) throws Exception;
+	ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
 	
 	public String getName();
 }

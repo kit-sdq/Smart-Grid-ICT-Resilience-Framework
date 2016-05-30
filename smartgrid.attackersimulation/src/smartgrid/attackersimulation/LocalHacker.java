@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.helper.ScenarioHelper;
+import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.HackingStyle;
@@ -59,9 +59,6 @@ public class LocalHacker implements IAttackerSimulation {
 	private boolean firstRun = true;
 	private boolean initDone = false;
 
-	/*
-	 * Temp Vairables
-	 */
 	private SmartGridTopology mySmartGridTopo;
 	private ScenarioResult myScenarioResult;
 
@@ -69,7 +66,6 @@ public class LocalHacker implements IAttackerSimulation {
 	 * For ExtensionPoints .. use this together with the init() Method
 	 */
 	public LocalHacker() {
-
 	}
 
 	/**
@@ -171,9 +167,14 @@ public class LocalHacker implements IAttackerSimulation {
 		// Adding extracted Parameters
 		this.rootNodeID = rootNodeID;
 		this.usedHackingStyle = desiredHackingStyle;
+		
+		LOG.info("Infection root node ID is: "+rootNodeID);
+		LOG.info("Hacking style is: "+desiredHackingStyle);
+		LOG.info("Hacking speed is: "+hackingSpeed);
+		
 		this.initDone = true;
 
-		LOG.info("[Local Hacker]: Init done");
+		LOG.debug("Init done");
 
 		return errorCode;
 	}
@@ -202,7 +203,7 @@ public class LocalHacker implements IAttackerSimulation {
 			firstRun = false;
 		} else {
 			// Find Root On Entity using ID I already know
-			this.rootNode = ScenarioHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
+			this.rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
 		}
 
 		// Each TimeStep Case
@@ -294,7 +295,7 @@ public class LocalHacker implements IAttackerSimulation {
 		 * the Entities --> It's only the "hardwired" logical Connection
 		 * neighbors
 		 */
-		Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioHelper
+		Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper
 				.genNeighborMapbyID(this.mySmartGridTopo);
 
 		// Root is in cluster to hack --> so Root is StartNode
@@ -305,7 +306,7 @@ public class LocalHacker implements IAttackerSimulation {
 			for (On Node : currentLayer) {
 
 				// getting Neighbors
-				int nodeID = ScenarioHelper.getIDfromEntityOnState(Node);
+				int nodeID = ScenarioModelHelper.getIDfromEntityOnState(Node);
 
 				// Getting Neighbor List with ID from Node
 				// These Nodes could be in my Cluster but not sure
@@ -316,7 +317,7 @@ public class LocalHacker implements IAttackerSimulation {
 					 * Neighbors out that because of their State (e.g.
 					 * destroyed) don't functions
 					 */
-					LinkedList<On> neighborOnList = ScenarioHelper.getNeighborsFromCluster(clusterToHack,
+					LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack,
 							neighborIDList);
 
 					/*
@@ -368,7 +369,7 @@ public class LocalHacker implements IAttackerSimulation {
 		 * the Entities --> It's only the "hardwired" logical Connection
 		 * neighbors
 		 */
-		Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioHelper
+		Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper
 				.genNeighborMapbyID(this.mySmartGridTopo);
 
 		dfs(clusterToHack, Node, IDtoHisNeighborLinks, hackCount);
@@ -388,7 +389,7 @@ public class LocalHacker implements IAttackerSimulation {
 	private void dfs(Cluster clusterToHack, On Node, Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks,
 			int hackCount) {
 		// getting Neighbors
-		int nodeID = ScenarioHelper.getIDfromEntityOnState(Node);
+		int nodeID = ScenarioModelHelper.getIDfromEntityOnState(Node);
 
 		// Getting Neighbor List with ID from Node
 		// These Nodes could be in my Cluster but not sure
@@ -400,7 +401,7 @@ public class LocalHacker implements IAttackerSimulation {
 			 * Neighbors out that because of their State (e.g. destroyed) don't
 			 * functions
 			 */
-			LinkedList<On> neighborOnList = ScenarioHelper.getNeighborsFromCluster(clusterToHack, neighborIDList);
+			LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack, neighborIDList);
 
 			/* Now I have my alive (in my Cluster) Neighbor OnState List */
 			for (On neighbor : neighborOnList) {
@@ -489,7 +490,7 @@ public class LocalHacker implements IAttackerSimulation {
 			break;
 
 		default:
-			this.rootNode = ScenarioHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
+			this.rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
 			if (rootNode == null) {
 				invalidRootNodeIdDialog();
 				rootNodeValid = false;

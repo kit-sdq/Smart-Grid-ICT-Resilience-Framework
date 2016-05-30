@@ -137,11 +137,14 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
 			// Checks whether DEFAULT_IGNORE_LOC_CON_KEY is true and assigns it
 			this.ignoreLogicalConnections = (Constants.TRUE).equals(Constants.DEFAULT_IGNORE_LOC_CON);
+			
 		} else {
 			// checks whether ignoreLogicalConnectionsString is true and assigns
 			// it
 			this.ignoreLogicalConnections = (Constants.TRUE).equals(ignoreLogicalConnectionsString);
 		}
+		
+		LOG.info("Ignoring logical connections: "+ignoreLogicalConnections);
 
 		LOG.debug("Init done");
 		this.initDone = true;

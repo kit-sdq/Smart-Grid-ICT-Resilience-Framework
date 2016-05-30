@@ -3,6 +3,7 @@
  */
 package smartgrid.simcontrol.mocks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -27,7 +28,7 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
 	 */
 	@Override
 	public List<PowerPerNode> run(List<AbstractCostFunction> costFunctions, List<SmartMeterState> smartMeterStates) {
-		return null;
+		return new ArrayList<PowerPerNode>();
 	}
 
 	@Override
@@ -37,6 +38,6 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
 
 	@Override
 	public String getName() {
-		return "Power Load Simulation Mock";
+		return "Mock";
 	}
 }

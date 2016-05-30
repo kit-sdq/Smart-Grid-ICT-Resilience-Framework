@@ -3,6 +3,7 @@
  */
 package smartgrid.simcontrol.mocks;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
@@ -13,65 +14,59 @@ import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
 
 /**
- * Mocks the TerminationCondition
+ * A fixed iteration count termination condition
  * 
  * @author Christian
  *
  */
 public class IterationCountTerminationCondition implements ITerminationCondition {
 
-	private int _breakafterIterationCount;
+    private static final Logger LOG = Logger.getLogger(IterationCountTerminationCondition.class);
 
-	public IterationCountTerminationCondition() {
-		_breakafterIterationCount = 2;
-	}
+    private int maxIterations;
 
-	/**
-	 * Constructs a new Instance of TerminationConditionMock
-	 * 
-	 * @param breakafterIterationCount
-	 *            Set the number of Iterations
-	 */
-	public IterationCountTerminationCondition(int breakafterIterationCount) {
+    public IterationCountTerminationCondition() {
+        maxIterations = 2;
+    }
 
-		_breakafterIterationCount = breakafterIterationCount;
+    /**
+     * Constructs a new Instance of TerminationConditionMock
+     * 
+     * @param breakafterIterationCount
+     *            Set the number of Iterations
+     */
+    public IterationCountTerminationCondition(int breakafterIterationCount) {
 
-	}
+        maxIterations = breakafterIterationCount;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * 
-	 * Simply breaks after specified IterationCount from the Contructor
-	 * 
-	 */
-	@Override
-	public boolean evaluate(int iterationCount, ScenarioState impactInput, ScenarioState impactInputOld,
-			ScenarioResult impactResult, ScenarioResult impactResultOld) {
+    /**
+     * {@inheritDoc}
+     * <p>
+     * 
+     * Simply breaks after specified IterationCount from the Contructor
+     * 
+     */
+    @Override
+    public boolean evaluate(int currentIteration, ScenarioState impactInput, ScenarioState impactInputOld,
+            ScenarioResult impactResult, ScenarioResult impactResultOld) {
 
-		boolean run;
+        boolean continueRunning = currentIteration < maxIterations;
+        return continueRunning;
+    }
 
-		if (iterationCount < _breakafterIterationCount) {
+    @Override
+    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+        maxIterations = Integer
+                .parseInt(config.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
+        LOG.info("Performing at most " + maxIterations + " iterations between power/impact per time step");
 
-			run = true;
-		} else {
-			run = false;
-		}
+        return ErrorCodeEnum.SUCCESS;
+    }
 
-		return run;
-	}
-
-	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-		_breakafterIterationCount = Integer
-				.parseInt(config.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
-
-		return ErrorCodeEnum.SUCCESS;
-	}
-
-	@Override
-	public String getName() {
-		return "Iteration Count";
-	}
+    @Override
+    public String getName() {
+        return "Iteration Count";
+    }
 
 }

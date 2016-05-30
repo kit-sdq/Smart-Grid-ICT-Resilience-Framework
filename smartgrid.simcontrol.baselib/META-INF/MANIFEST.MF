@@ -8,4 +8,5 @@ Export-Package: smartgrid.simcontrol.baselib,
  smartgrid.simcontrol.baselib.coupling
 Require-Bundle: smartgrid.model.output,
  smartgrid.model.input,
- org.eclipse.debug.core
+ org.eclipse.debug.core,
+ org.eclipse.equinox.registry

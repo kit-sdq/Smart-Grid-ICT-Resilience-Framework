@@ -30,7 +30,7 @@ public class NoAttackerSimulation implements IAttackerSimulation {
 	}
 
 	@Override
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws Exception {
+	public ErrorCodeEnum init(ILaunchConfiguration config) {
 		// Nothing to do here
 		return ErrorCodeEnum.SUCCESS;
 	}

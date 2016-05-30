@@ -1,5 +1,6 @@
 package smartgrid.simcontrol.baselib.coupling;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
@@ -24,7 +25,7 @@ public interface ITimeProgressor {
 	 * @return true if Init was successful
 	 * @throws CoreException If ILaunchConfiguration.getAttribute fails
 	 */
-	public ErrorCodeEnum init(ILaunchConfiguration config) throws Exception;
+	public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
 	
 	public String getName();
 }
