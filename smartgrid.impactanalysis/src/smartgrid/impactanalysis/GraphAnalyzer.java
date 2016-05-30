@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-import smartgrid.helper.FileSystem;
+import smartgrid.helper.FileSystemHelper;
 import smartgrid.model.helper.input.LoadInputModelConformityHelper;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
@@ -210,7 +210,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
         result.setScenario(smartGridTopo);
 
         // Saves to File System
-        // FileSystem.saveToFileSystem(result, this.outputPath); //TODO For
+        // FileSystemHelper.saveToFileSystem(result, this.outputPath); //TODO For
         // Debug purposes only can/should? be removed for SimController later
 
         LOG.debug("Working Directory = " + System.getProperty("user.dir"));
@@ -233,7 +233,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
         if (result != null) {
             // Saves to File System
-            FileSystem.saveToFileSystem(result, this.outputPath);
+            FileSystemHelper.saveToFileSystem(result, this.outputPath);
         }
     }
 

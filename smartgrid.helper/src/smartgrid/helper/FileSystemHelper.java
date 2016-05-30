@@ -21,9 +21,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
  * @author Christian
  *
  */
-public final class FileSystem {
+public final class FileSystemHelper {
 
-    private static final Logger LOG = Logger.getLogger(FileSystem.class);
+    private static final Logger LOG = Logger.getLogger(FileSystemHelper.class);
 
     /**
      * This Method saves a Scenario Result on the File System at the given Path
@@ -47,7 +47,7 @@ public final class FileSystem {
         try {
             resource.save(Collections.EMPTY_MAP);
         } catch (final IOException e) {
-            LOG.error("IOException occured when performing method \"FileSystem.saveToFileSystem\"");
+            LOG.error("IOException occured when performing method \"FileSystemHelper.saveToFileSystem\"");
             e.printStackTrace();
         }
     }
@@ -88,7 +88,7 @@ public final class FileSystem {
             resourceTopo.save(Collections.EMPTY_MAP);
             resourceInput.save(Collections.EMPTY_MAP);
         } catch (final IOException e) {
-            LOG.error("IOException occured when performing method \"FileSystem.saveToFileSystemAll\"");
+            LOG.error("IOException occured when performing method \"FileSystemHelper.saveToFileSystemAll\"");
             e.printStackTrace();
         }
         /*

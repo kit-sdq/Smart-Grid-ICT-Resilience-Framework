@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.inputgenerator.IInputGenerator;
@@ -61,7 +62,7 @@ public final class SimulationController {
     private static ITerminationCondition terminationCondition;
     private static ITimeProgressor timeProgressor;
 
-    private static String fileSystemPath;
+    private static String workingDirPath;
     private static int maxTimeSteps;
     private static SmartGridTopology topo;
     private static ScenarioState initialState;
@@ -90,7 +91,7 @@ public final class SimulationController {
         // one iteration computes one timestep
         for (int timeStep = 0; timeStep < maxTimeSteps; timeStep++) {
             // Generates Path with default System separators
-            final String timeStepPath = new File(fileSystemPath + "\\Zeitschritt " + timeStep).getPath();
+            final String timeStepPath = new File(workingDirPath + "\\Zeitschritt " + timeStep).getPath();
 
             costFunctions = kritisSimulation.run(powerPerNodes);
 
@@ -104,7 +105,7 @@ public final class SimulationController {
             // save attack result to file
             final String attackResultFile = new File(timeStepPath + "\\AttackerSimulationResult.smartgridoutput")
                     .getPath();
-            smartgrid.helper.FileSystem.saveToFileSystem(impactResult, attackResultFile);
+            FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
 
             // impact and power may iterate several times
             int innerLoopIterationCount = 0;
@@ -124,14 +125,14 @@ public final class SimulationController {
 
                 // Save input to file
                 final String inputFile = new File(iterationPath + "\\PowerLoadResult.smartgridinput").getPath();
-                smartgrid.helper.FileSystem.saveToFileSystem(impactInput, inputFile);
+                FileSystemHelper.saveToFileSystem(impactInput, inputFile);
 
                 impactResultOld = impactResult;
                 impactResult = impactAnalsis.run(topo, impactInput);
 
                 // Save Result
                 final String resultFile = new File(iterationPath + "\\ImpactResult.smartgridoutput").getPath();
-                smartgrid.helper.FileSystem.saveToFileSystem(impactResult, resultFile);
+                FileSystemHelper.saveToFileSystem(impactResult, resultFile);
 
                 innerLoopIterationCount++;
             } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult,
@@ -148,6 +149,7 @@ public final class SimulationController {
 
         // remove file appender of this run
         Logger.getRootLogger().removeAppender(fileAppender);
+        fileAppender.close();
     }
 
     // Private Methods
@@ -203,13 +205,13 @@ public final class SimulationController {
 
         LOG.debug("loading launch config");
 
-        fileSystemPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
+        determineWorkingDirPath(launchConfig);
 
         // add fileappender for local logs
         final Logger rootLogger = Logger.getRootLogger();
         try {
             final Layout layout = ((Appender) rootLogger.getAllAppenders().nextElement()).getLayout();
-            fileAppender = new FileAppender(layout, fileSystemPath + "\\log.log");
+            fileAppender = new FileAppender(layout, workingDirPath + "\\log.log");
             rootLogger.addAppender(fileAppender);
         } catch (final IOException e) {
             throw new RuntimeException(
@@ -255,6 +257,28 @@ public final class SimulationController {
         LOG.info("Using attacker simulation: " + attackerSimulation.getName());
         LOG.info("Using termination condition: " + terminationCondition.getName());
         LOG.info("Using time progressor: " + timeProgressor.getName());
+    }
+
+    private static void determineWorkingDirPath(final ILaunchConfiguration launchConfig) throws CoreException {
+        String initialPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
+        String currentPath = initialPath;
+        int runningNumber = 0;
+        while(new File(currentPath).exists()) {
+            LOG.info("Exists already: "+currentPath);
+            
+            currentPath = removeTrailingSeparator(initialPath) + runningNumber + '\\';
+            runningNumber++;
+        }
+        workingDirPath = currentPath;
+        LOG.info("Working dir is: "+workingDirPath);
+    }
+
+    private static String removeTrailingSeparator(String initialPath) {
+        if(initialPath.endsWith("\\"))
+        {
+            return initialPath.substring(0, initialPath.length()-1);
+        }
+        return initialPath;
     }
 
     /**
