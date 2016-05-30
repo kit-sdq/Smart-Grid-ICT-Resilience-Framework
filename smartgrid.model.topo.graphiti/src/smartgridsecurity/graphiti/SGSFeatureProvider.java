@@ -44,7 +44,7 @@ import smartgridtopo.PowerGridNode;
 
 /**
  * This class implements the SGS feature provider.
- * 
+ *
  * @author mario
  *
  */
@@ -53,7 +53,7 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
     public SGSFeatureProvider(final IDiagramTypeProvider dtp) {
         super(dtp);
         GraphitiHelper.getInstance().setFeatureProvider(this);
-        GraphitiHelper.getInstance().setDiagram(getDiagramTypeProvider().getDiagram());
+        GraphitiHelper.getInstance().setDiagram(this.getDiagramTypeProvider().getDiagram());
 
         this.addPattern(new SmartMeterPattern());
         this.addPattern(new GenericControllerPattern());
@@ -62,7 +62,7 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
         this.addPattern(new NetworkNodePattern());
         this.addPattern(new PowerGridNodePattern());
         this.addPattern(new TextCommentPattern());
-        addContextButtons();
+        this.addContextButtons();
         // atm not used
         // addResizeFeatures();
 
@@ -77,21 +77,21 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
      */
     private void addContextButtons() {
         ExtensionPointRegistry.getInstance().clearContextButtons();
-        List<AbstractCustomFeature> extensionCustomButtons = (new EvaluateContextButtons(this))
+        final List<AbstractCustomFeature> extensionCustomButtons = (new EvaluateContextButtons(this))
                 .evaluateFeatureExtension(Platform.getExtensionRegistry());
         ExtensionPointRegistry.getInstance().addContextButtonsToRegistry(extensionCustomButtons);
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.DefaultFeatureProviderWithPatterns#getAddFeature
      * (org.eclipse.graphiti.features.context.IAddContext)
      */
     @Override
-    public IAddFeature getAddFeature(IAddContext context) {
+    public IAddFeature getAddFeature(final IAddContext context) {
         if (context instanceof IAddConnectionContext && context.getNewObject() instanceof Object[]) {
-            Object[] objects = (Object[]) context.getNewObject();
+            final Object[] objects = (Object[]) context.getNewObject();
             if (objects[0] instanceof NetworkEntity && objects[1] instanceof PowerGridNode) {
                 return new AddPowerConnectionFeature(this);
             }
@@ -101,14 +101,14 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.DefaultFeatureProviderWithPatterns#
      * getCreateConnectionFeatures()
      */
     @Override
     public ICreateConnectionFeature[] getCreateConnectionFeatures() {
-        int length = super.getCreateConnectionFeatures().length;
-        ICreateConnectionFeature[] createFeature = new ICreateConnectionFeature[length + 1];
+        final int length = super.getCreateConnectionFeatures().length;
+        final ICreateConnectionFeature[] createFeature = new ICreateConnectionFeature[length + 1];
         System.arraycopy(super.getCreateConnectionFeatures(), 0, createFeature, 0, length);
         createFeature[length] = new CreatePowerConnectionFeature(this);
         return createFeature;
@@ -116,16 +116,16 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.DefaultFeatureProviderWithPatterns#
      * getRemoveFeature(org.eclipse.graphiti.features.context.IRemoveContext)
      */
     @Override
-    public IRemoveFeature getRemoveFeature(IRemoveContext context) {
+    public IRemoveFeature getRemoveFeature(final IRemoveContext context) {
         if (context.getPictogramElement() instanceof Connection) {
-            Connection con = (Connection) context.getPictogramElement();
-            NetworkEntity start = getNetworkEntity(con.getStart());
-            PowerGridNode end = getPowerGridNode(con.getEnd());
+            final Connection con = (Connection) context.getPictogramElement();
+            final NetworkEntity start = this.getNetworkEntity(con.getStart());
+            final PowerGridNode end = this.getPowerGridNode(con.getEnd());
 
             if (start != null && end != null) {
                 return new RemovePowerConnectionFeature(this);
@@ -136,16 +136,16 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.DefaultFeatureProviderWithPatterns#
      * getDeleteFeature(org.eclipse.graphiti.features.context.IDeleteContext)
      */
     @Override
-    public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+    public IDeleteFeature getDeleteFeature(final IDeleteContext context) {
         if (context.getPictogramElement() instanceof Connection) {
-            Connection con = (Connection) context.getPictogramElement();
-            NetworkEntity start = getNetworkEntity(con.getStart());
-            PowerGridNode end = getPowerGridNode(con.getEnd());
+            final Connection con = (Connection) context.getPictogramElement();
+            final NetworkEntity start = this.getNetworkEntity(con.getStart());
+            final PowerGridNode end = this.getPowerGridNode(con.getEnd());
 
             if (start != null && end != null) {
                 return new DeletePowerConnectionFeature(this);
@@ -156,14 +156,14 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
 
     /**
      * Get a {@link Anchor}'s parent interface.
-     * 
+     *
      * @param anchor
      *            The {@link Anchor}.
      * @return The {@link NetworkEntity}.
      */
-    private NetworkEntity getNetworkEntity(Anchor anchor) {
+    private NetworkEntity getNetworkEntity(final Anchor anchor) {
         if (anchor != null) {
-            Object object = getBusinessObjectForPictogramElement(anchor.getParent());
+            final Object object = this.getBusinessObjectForPictogramElement(anchor.getParent());
             if (object instanceof NetworkEntity) {
                 return (NetworkEntity) object;
             }
@@ -173,14 +173,14 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
 
     /**
      * Get a {@link Anchor}'s parent interface.
-     * 
+     *
      * @param anchor
      *            The {@link Anchor}.
      * @return The {@link PowerGridNode}.
      */
-    private PowerGridNode getPowerGridNode(Anchor anchor) {
+    private PowerGridNode getPowerGridNode(final Anchor anchor) {
         if (anchor != null) {
-            Object object = getBusinessObjectForPictogramElement(anchor.getParent());
+            final Object object = this.getBusinessObjectForPictogramElement(anchor.getParent());
             if (object instanceof PowerGridNode) {
                 return (PowerGridNode) object;
             }
@@ -189,12 +189,12 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
     }
 
     @Override
-    public ICustomFeature[] getCustomFeatures(ICustomContext context) {
+    public ICustomFeature[] getCustomFeatures(final ICustomContext context) {
         return super.getCustomFeatures(context);
     }
 
     @Override
-    public IResizeShapeFeature getResizeShapeFeature(IResizeShapeContext context) {
+    public IResizeShapeFeature getResizeShapeFeature(final IResizeShapeContext context) {
         return new RestrictResizePictogramFeature(this);
     }
 

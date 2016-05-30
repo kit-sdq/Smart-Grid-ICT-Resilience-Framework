@@ -17,8 +17,8 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 
 /**
  * This class provides the Delegate for the SimControl Approach of the Smartgrid Analysis'
- * 
- * 
+ *
+ *
  * @author Christian
  * @implements ILaunchConfigurationDelegate
  *
@@ -31,11 +31,12 @@ public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurati
     /**
      * {@inheritDoc}
      * <P>
-     * 
+     *
      * Launches an SimController Analysis with the given Launch Configuration
      */
-    public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
-            throws CoreException {
+    @Override
+    public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
+            final IProgressMonitor monitor) throws CoreException {
 
         SimulationController.init(configuration);
 

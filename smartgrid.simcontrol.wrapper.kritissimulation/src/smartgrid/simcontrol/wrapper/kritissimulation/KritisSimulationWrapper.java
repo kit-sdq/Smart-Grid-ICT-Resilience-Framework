@@ -14,22 +14,22 @@ import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
 public class KritisSimulationWrapper implements IKritisSimulationWrapper {
 
     @Override
-    public List<AbstractCostFunction> run(List<PowerPerNode> power) {
+    public List<AbstractCostFunction> run(final List<PowerPerNode> power) {
 
         // TODO implement wrapper!
-        IKritisSimulation dummy = new IKritisSimulation() {
+        final IKritisSimulation dummy = new IKritisSimulation() {
             @Override
-            public List<AbstractCostFunction> run(List<PowerPerNode> power) {
+            public List<AbstractCostFunction> run(final List<PowerPerNode> power) {
                 throw new RuntimeException("KRITIS wrapper not yet implemented!");
             }
         };
 
-        List<AbstractCostFunction> costFunctions = dummy.run(power);
+        final List<AbstractCostFunction> costFunctions = dummy.run(power);
         return costFunctions;
     }
 
     @Override
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
         return ErrorCodeEnum.SUCCESS;
     }
 

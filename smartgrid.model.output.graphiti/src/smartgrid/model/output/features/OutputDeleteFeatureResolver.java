@@ -16,9 +16,10 @@ public class OutputDeleteFeatureResolver implements IDeleteFeatureResolver {
     }
 
     @Override
-    public void deleteBusinessObjects(List<EObject> boFromDiagram, EObject owner, TransactionalEditingDomain domain) {
+    public void deleteBusinessObjects(final List<EObject> boFromDiagram, final EObject owner,
+            final TransactionalEditingDomain domain) {
         ScenarioResult result = null;
-        for (EObject ob : boFromDiagram) {
+        for (final EObject ob : boFromDiagram) {
             if (ob instanceof ScenarioResult) {
                 result = (ScenarioResult) ob;
             }
@@ -33,13 +34,14 @@ public class OutputDeleteFeatureResolver implements IDeleteFeatureResolver {
                     }
                 }
                 if (position > -1) {
-                    removeElement(result, position, domain);
+                    this.removeElement(result, position, domain);
                 }
             }
         }
     }
 
-    private void removeElement(ScenarioResult result, int position, TransactionalEditingDomain domain) {
+    private void removeElement(final ScenarioResult result, final int position,
+            final TransactionalEditingDomain domain) {
         domain.getCommandStack().execute(new RecordingCommand(domain) {
             @Override
             protected void doExecute() {

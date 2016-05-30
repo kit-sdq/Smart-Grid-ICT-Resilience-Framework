@@ -13,7 +13,7 @@ import smartgridsecurity.graphiti.ConstantProvider;
 
 /**
  * Helper class to draw the SGS pe#s.
- * 
+ *
  * @author mario
  *
  */
@@ -21,7 +21,7 @@ public class FeatureRepresentationHelper {
 
     /**
      * Create an ellipse.
-     * 
+     *
      * @param containerShape
      *            the current container shape
      * @param colorForeground
@@ -30,8 +30,8 @@ public class FeatureRepresentationHelper {
      *            the background color
      * @return new ellipse representation
      */
-    public static GraphicsAlgorithm createEllipse(ContainerShape containerShape, Color colorForeground,
-            Color colorBackground) {
+    public static GraphicsAlgorithm createEllipse(final ContainerShape containerShape, final Color colorForeground,
+            final Color colorBackground) {
         final IGaService gaService = Graphiti.getGaService();
         final Ellipse ellipse = gaService.createEllipse(containerShape);
         // ellipse.setForeground(this.manageColor(new ColorConstant(0, 60, 30)));
@@ -43,7 +43,7 @@ public class FeatureRepresentationHelper {
 
     /**
      * Create a rectangle.
-     * 
+     *
      * @param containerShape
      *            the current container shape
      * @param colorForeground
@@ -52,8 +52,8 @@ public class FeatureRepresentationHelper {
      *            the background color
      * @return new rectangle representation
      */
-    public static GraphicsAlgorithm createRect(ContainerShape containerShape, Color colorForeground,
-            Color colorBackground) {
+    public static GraphicsAlgorithm createRect(final ContainerShape containerShape, final Color colorForeground,
+            final Color colorBackground) {
         final IGaService gaService = Graphiti.getGaService();
         final Rectangle rect = gaService.createRectangle(containerShape);
         rect.setWidth(25);
@@ -66,7 +66,7 @@ public class FeatureRepresentationHelper {
 
     /**
      * Create a polygon.
-     * 
+     *
      * @param containerShape
      *            the current container shape
      * @param colorForeground
@@ -75,13 +75,13 @@ public class FeatureRepresentationHelper {
      *            the background color
      * @return new polygon representation
      */
-    public static GraphicsAlgorithm createPolygon(ContainerShape containerShape, Color colorForeground,
-            Color colorBackground) {
+    public static GraphicsAlgorithm createPolygon(final ContainerShape containerShape, final Color colorForeground,
+            final Color colorBackground) {
         final IGaService gaService = Graphiti.getGaService();
-        int halfWidth = 13;
-        int width = halfWidth * 2;
-        int xy[] = new int[] { halfWidth, 0, width, width, 0, width };
-        Polygon p = gaService.createPolygon(containerShape, xy);
+        final int halfWidth = 13;
+        final int width = halfWidth * 2;
+        final int xy[] = new int[] { halfWidth, 0, width, width, 0, width };
+        final Polygon p = gaService.createPolygon(containerShape, xy);
         p.setForeground(colorForeground);
         p.setBackground(colorBackground);
         p.setLineWidth(ConstantProvider.shapeLineWidth);

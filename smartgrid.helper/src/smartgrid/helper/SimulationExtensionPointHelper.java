@@ -18,17 +18,17 @@ import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 
 public class SimulationExtensionPointHelper {
 
-    private IExtensionRegistry registry = RegistryFactory.getRegistry();
+    private final IExtensionRegistry registry = RegistryFactory.getRegistry();
 
     public SimulationExtensionPointHelper() {
     }
 
     public List<IPowerLoadSimulationWrapper> getPowerLoadSimulationExtensions() throws CoreException {
-        List<IPowerLoadSimulationWrapper> list = new ArrayList<IPowerLoadSimulationWrapper>();
-        IConfigurationElement[] elements = registry
+        final List<IPowerLoadSimulationWrapper> list = new ArrayList<IPowerLoadSimulationWrapper>();
+        final IConfigurationElement[] elements = this.registry
                 .getConfigurationElementsFor(Constants.POWER_LOAD_SIMULATION_EXTENSION_POINT);
-        for (IConfigurationElement element : elements) {
-            Object o = element.createExecutableExtension("powerLoadSimulation");
+        for (final IConfigurationElement element : elements) {
+            final Object o = element.createExecutableExtension("powerLoadSimulation");
             if (o instanceof IPowerLoadSimulationWrapper) {
                 list.add((IPowerLoadSimulationWrapper) o);
             }
@@ -37,11 +37,11 @@ public class SimulationExtensionPointHelper {
     }
 
     public List<IAttackerSimulation> getAttackerSimulationExtensions() throws CoreException {
-        List<IAttackerSimulation> list = new ArrayList<IAttackerSimulation>();
-        IConfigurationElement[] elements = registry
+        final List<IAttackerSimulation> list = new ArrayList<IAttackerSimulation>();
+        final IConfigurationElement[] elements = this.registry
                 .getConfigurationElementsFor(Constants.ATTACKER_SIMULATION_EXTENSION_POINT);
-        for (IConfigurationElement element : elements) {
-            Object o = element.createExecutableExtension("class");
+        for (final IConfigurationElement element : elements) {
+            final Object o = element.createExecutableExtension("class");
             if (o instanceof IAttackerSimulation) {
                 list.add((IAttackerSimulation) o);
             }
@@ -50,11 +50,11 @@ public class SimulationExtensionPointHelper {
     }
 
     public List<ITerminationCondition> getTerminationConditionExtensions() throws CoreException {
-        List<ITerminationCondition> list = new ArrayList<ITerminationCondition>();
-        IConfigurationElement[] elements = registry
+        final List<ITerminationCondition> list = new ArrayList<ITerminationCondition>();
+        final IConfigurationElement[] elements = this.registry
                 .getConfigurationElementsFor(Constants.TERMINATION_CONDITION_EXTENSION_POINT);
-        for (IConfigurationElement element : elements) {
-            Object o = element.createExecutableExtension("class");
+        for (final IConfigurationElement element : elements) {
+            final Object o = element.createExecutableExtension("class");
             if (o instanceof ITerminationCondition) {
                 list.add((ITerminationCondition) o);
             }
@@ -63,11 +63,11 @@ public class SimulationExtensionPointHelper {
     }
 
     public List<ITimeProgressor> getProgressorExtensions() throws CoreException {
-        List<ITimeProgressor> list = new ArrayList<ITimeProgressor>();
-        IConfigurationElement[] elements = registry
+        final List<ITimeProgressor> list = new ArrayList<ITimeProgressor>();
+        final IConfigurationElement[] elements = this.registry
                 .getConfigurationElementsFor(Constants.TIME_PROGRESSOR_EXTENSION_POINT);
-        for (IConfigurationElement element : elements) {
-            Object o = element.createExecutableExtension("class");
+        for (final IConfigurationElement element : elements) {
+            final Object o = element.createExecutableExtension("class");
             if (o instanceof ITimeProgressor) {
                 list.add((ITimeProgressor) o);
             }
@@ -76,11 +76,11 @@ public class SimulationExtensionPointHelper {
     }
 
     public List<IImpactAnalysis> getImpactAnalysisExtensions() throws CoreException {
-        List<IImpactAnalysis> list = new ArrayList<IImpactAnalysis>();
-        IConfigurationElement[] elements = registry
+        final List<IImpactAnalysis> list = new ArrayList<IImpactAnalysis>();
+        final IConfigurationElement[] elements = this.registry
                 .getConfigurationElementsFor(Constants.IMPACT_ANALYSIS_EXTENSION_POINT);
-        for (IConfigurationElement element : elements) {
-            Object o = element.createExecutableExtension("class");
+        for (final IConfigurationElement element : elements) {
+            final Object o = element.createExecutableExtension("class");
             if (o instanceof IImpactAnalysis) {
                 list.add((IImpactAnalysis) o);
             }
@@ -89,11 +89,11 @@ public class SimulationExtensionPointHelper {
     }
 
     public List<IKritisSimulationWrapper> getKritisSimulationExtensions() throws CoreException {
-        List<IKritisSimulationWrapper> list = new ArrayList<IKritisSimulationWrapper>();
-        IConfigurationElement[] elements = registry
+        final List<IKritisSimulationWrapper> list = new ArrayList<IKritisSimulationWrapper>();
+        final IConfigurationElement[] elements = this.registry
                 .getConfigurationElementsFor(Constants.KRITIS_SIMULATION_EXTENSION_POINT);
-        for (IConfigurationElement element : elements) {
-            Object o = element.createExecutableExtension("class");
+        for (final IConfigurationElement element : elements) {
+            final Object o = element.createExecutableExtension("class");
             if (o instanceof IKritisSimulationWrapper) {
                 list.add((IKritisSimulationWrapper) o);
             }

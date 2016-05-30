@@ -4,7 +4,7 @@ import org.eclipse.graphiti.util.ColorConstant;
 
 /**
  * This class provides global used constants.
- * 
+ *
  * @author mario
  *
  */

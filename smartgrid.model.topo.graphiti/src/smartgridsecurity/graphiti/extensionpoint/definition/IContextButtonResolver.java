@@ -7,7 +7,7 @@ import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 
 /**
  * Resolver for all context buttons.
- * 
+ *
  * @author mario
  *
  */

@@ -24,41 +24,44 @@ import smartgridtopo.SmartGridTopology;
 /**
  * This listener checks if the ScenarioModel is changed. If there is an input model, the listener
  * will create a new input model bo for every new topo bo..
- * 
+ *
  * @author mario
  *
  */
 public class ScenarioModelChangedListener implements ResourceSetListener {
-    private DiagramBehavior behavior;
+    private final DiagramBehavior behavior;
 
-    public ScenarioModelChangedListener(DiagramBehavior diagramBehavior) {
-        behavior = diagramBehavior;
+    public ScenarioModelChangedListener(final DiagramBehavior diagramBehavior) {
+        this.behavior = diagramBehavior;
     }
 
     @Override
-    public void resourceSetChanged(ResourceSetChangeEvent event) {
-        List<Notification> notifications = event.getNotifications();
+    public void resourceSetChanged(final ResourceSetChangeEvent event) {
+        final List<Notification> notifications = event.getNotifications();
         for (final Notification notification : notifications) {
-            Object notifier = notification.getNotifier();
+            final Object notifier = notification.getNotifier();
             if (notifier instanceof SmartGridTopology && notification.getEventType() == Notification.ADD) {
-                for (final EObject obj : behavior.getDiagramTypeProvider().getDiagram().getLink()
+                for (final EObject obj : this.behavior.getDiagramTypeProvider().getDiagram().getLink()
                         .getBusinessObjects()) {
                     if (obj instanceof ScenarioState) {
-                        Runnable myRunnable = new Runnable() {
+                        final Runnable myRunnable = new Runnable() {
 
+                            @Override
                             public void run() {
-                                final TransactionalEditingDomain domain = behavior.getEditingDomain();
-                                RecordingCommand c = new RecordingCommand(domain) {
+                                final TransactionalEditingDomain domain = ScenarioModelChangedListener.this.behavior
+                                        .getEditingDomain();
+                                final RecordingCommand c = new RecordingCommand(domain) {
                                     @Override
                                     protected void doExecute() {
-                                        ScenarioState scenarioState = (ScenarioState) obj;
+                                        final ScenarioState scenarioState = (ScenarioState) obj;
                                         if (notification.getNewValue() instanceof PowerGridNode) {
-                                            PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
+                                            final PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
                                             state.setOwner((PowerGridNode) notification.getNewValue());
                                             scenarioState.getPowerStates().add(state);
                                         }
                                         if (notification.getNewValue() instanceof NetworkEntity) {
-                                            EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
+                                            final EntityState state = SmartgridinputFactory.eINSTANCE
+                                                    .createEntityState();
                                             state.setOwner((NetworkEntity) notification.getNewValue());
                                             scenarioState.getEntityStates().add(state);
                                         }
@@ -68,7 +71,7 @@ public class ScenarioModelChangedListener implements ResourceSetListener {
 
                             }
                         };
-                        Thread thread = new Thread(myRunnable);
+                        final Thread thread = new Thread(myRunnable);
                         thread.start();
                     }
                 }
@@ -82,7 +85,7 @@ public class ScenarioModelChangedListener implements ResourceSetListener {
     }
 
     @Override
-    public Command transactionAboutToCommit(ResourceSetChangeEvent event) throws RollbackException {
+    public Command transactionAboutToCommit(final ResourceSetChangeEvent event) throws RollbackException {
         return null;
     }
 

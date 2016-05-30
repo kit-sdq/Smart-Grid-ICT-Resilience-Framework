@@ -6,7 +6,7 @@ import smartgridsecurity.graphiti.actions.ToolbarButtonAction;
 
 /**
  * resolver for all toolbar actions.
- * 
+ *
  * @author mario
  *
  */

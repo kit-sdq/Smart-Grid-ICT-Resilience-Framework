@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package smartgrid.helper;
 
@@ -27,26 +27,26 @@ public final class FileSystem {
 
     /**
      * This Method saves a Scenario Result on the File System at the given Path
-     * 
-     * 
+     *
+     *
      * @param result
      *            Scenario Result to be written on File System
      * @param path
      *            Path there the File will be written to
      */
-    public static void saveToFileSystem(EObject result, String path) {
+    public static void saveToFileSystem(final EObject result, final String path) {
         /*
          * Save Data as Smartgridoutput on HDD under "path" location
          */
-        ResourceSet resSet = new ResourceSetImpl();
+        final ResourceSet resSet = new ResourceSetImpl();
 
-        Resource resource = resSet.createResource(URI.createFileURI(path));
+        final Resource resource = resSet.createResource(URI.createFileURI(path));
         resource.getContents().add(result);
         // EcoreUtil.resolveAll(resSet);
 
         try {
             resource.save(Collections.EMPTY_MAP);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             LOG.error("IOException occured when performing method \"FileSystem.saveToFileSystem\"");
             e.printStackTrace();
         }
@@ -54,39 +54,40 @@ public final class FileSystem {
 
     /**
      * QUICK AND DIRTY !
-     * 
+     *
      * This Method saves a Scenario Result on the File System at the given Path
-     * 
-     * 
+     *
+     *
      * @param result
      *            Scenario Result to be written on File System
      * @param path
      *            Path there the File will be written to
      */
-    public static void saveToFileSystemAll(final String dirPath, EObject result, EObject topo, EObject input) {
+    public static void saveToFileSystemAll(final String dirPath, final EObject result, final EObject topo,
+            final EObject input) {
         /*
          * Save Data as Smartgridoutput on HDD under "path" location
          */
         ResourceSet resSet = new ResourceSetImpl();
 
-        Resource resourceResult = resSet.createResource(URI.createFileURI(dirPath + "result"));
+        final Resource resourceResult = resSet.createResource(URI.createFileURI(dirPath + "result"));
         resourceResult.getContents().add(result);
 
         resSet = new ResourceSetImpl();
 
-        Resource resourceTopo = resSet.createResource(URI.createFileURI(dirPath + "toto"));
+        final Resource resourceTopo = resSet.createResource(URI.createFileURI(dirPath + "toto"));
         resourceTopo.getContents().add(topo);
 
         resSet = new ResourceSetImpl();
 
-        Resource resourceInput = resSet.createResource(URI.createFileURI(dirPath + "Input"));
+        final Resource resourceInput = resSet.createResource(URI.createFileURI(dirPath + "Input"));
         resourceInput.getContents().add(input);
 
         try {
             resourceResult.save(Collections.EMPTY_MAP);
             resourceTopo.save(Collections.EMPTY_MAP);
             resourceInput.save(Collections.EMPTY_MAP);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             LOG.error("IOException occured when performing method \"FileSystem.saveToFileSystemAll\"");
             e.printStackTrace();
         }
@@ -98,15 +99,15 @@ public final class FileSystem {
     /**
      * Saves all File Resources belonging to this PcmInstance to the given location and updates the
      * references of the models to the new files.
-     * 
+     *
      * @param dirPath
      *            path to the directory in which to save
      */
-    public static void saveModel(final String dirPath, EObject result, EObject topo, EObject input) {
+    public static void saveModel(final String dirPath, final EObject result, final EObject topo, final EObject input) {
 
-        ResourceSet resourceSet = new ResourceSetImpl();
+        final ResourceSet resourceSet = new ResourceSetImpl();
 
-        Resource reResult = resourceSet.createResource(URI.createFileURI(dirPath));
+        final Resource reResult = resourceSet.createResource(URI.createFileURI(dirPath));
 
         reResult.getContents().add(result);
         reResult.getContents().add(input);

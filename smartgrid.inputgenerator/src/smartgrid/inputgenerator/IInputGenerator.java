@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package smartgrid.inputgenerator;
 
@@ -7,7 +7,7 @@ import smartgrid.simcontrol.baselib.GenerationStyle;
 
 /**
  * This Interface is used for Input Model Generation for the Simcontrol Approach
- * 
+ *
  * @author Christian
  *
  */
@@ -20,8 +20,8 @@ public interface IInputGenerator {
 
     /**
      * Generates a Input Model according the given Parameters
-     * 
-     * 
+     *
+     *
      * @param desiredStyle
      *            sets the "shape" of the Input @see
      *            {@link smartgrid.simcontrol.baselib.GenerationStyle}

@@ -13,7 +13,7 @@ import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Pattern to create smart meters.
- * 
+ *
  * @author mario
  *
  */
@@ -26,8 +26,9 @@ public class SmartMeterPattern extends AbstractFormPattern {
 
     @Override
     public Object[] create(final ICreateContext context) {
-        addScenario();
-        SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
+        this.addScenario();
+        final SmartGridTopology container = (SmartGridTopology) this
+                .getBusinessObjectForPictogramElement(this.getDiagram());
         final SmartMeter node = SmartgridtopoFactory.eINSTANCE.createSmartMeter();
         node.setId(UIDHelper.generateUID());
 
@@ -45,14 +46,14 @@ public class SmartMeterPattern extends AbstractFormPattern {
     }
 
     @Override
-    protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
+    protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
         return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(140, 0, 0)),
                 this.manageColor(new ColorConstant(255, 0, 0)));
     }
 
     @Override
-    protected void linkObjects(ContainerShape containerShape, Object businessObject) {
-        SmartMeter addedNode = (SmartMeter) businessObject;
+    protected void linkObjects(final ContainerShape containerShape, final Object businessObject) {
+        final SmartMeter addedNode = (SmartMeter) businessObject;
         if (addedNode.eResource() == null) {
             // getDiagram().eResource().getContents().add(addedNode);
             throw new RuntimeException("BO not in Resource! (unecpectedly)");

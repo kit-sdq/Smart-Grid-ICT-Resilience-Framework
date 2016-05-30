@@ -2,7 +2,7 @@ package smartgrid.model.output;
 
 /**
  * Class to provide global used strings.
- * 
+ *
  * @author mario
  *
  */

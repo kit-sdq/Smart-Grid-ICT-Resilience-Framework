@@ -7,7 +7,7 @@ import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 
 /**
  * Resolver for all resource listeners.
- * 
+ *
  * @author mario
  *
  */

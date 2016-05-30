@@ -15,24 +15,25 @@ import smartgrid.simcontrol.baselib.coupling.SmartMeterState;
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
     @Override
-    public List<PowerPerNode> run(List<AbstractCostFunction> costFunctions, List<SmartMeterState> smartMeterStates) {
+    public List<PowerPerNode> run(final List<AbstractCostFunction> costFunctions,
+            final List<SmartMeterState> smartMeterStates) {
 
         // TODO implement wrapper!
-        IPowerLoadSimulation dummy = new IPowerLoadSimulation() {
+        final IPowerLoadSimulation dummy = new IPowerLoadSimulation() {
             @Override
-            public List<PowerPerNode> run(List<AbstractCostFunction> costFunctions,
-                    List<SmartMeterState> smartMeterStates) {
+            public List<PowerPerNode> run(final List<AbstractCostFunction> costFunctions,
+                    final List<SmartMeterState> smartMeterStates) {
                 throw new RuntimeException("Power load simulation wrapper not implemented!");
             }
         };
 
-        List<PowerPerNode> powerPerNodes = dummy.run(costFunctions, smartMeterStates);
+        final List<PowerPerNode> powerPerNodes = dummy.run(costFunctions, smartMeterStates);
 
         return powerPerNodes;
     }
 
     @Override
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
         return ErrorCodeEnum.SUCCESS;
     }
 

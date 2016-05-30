@@ -12,16 +12,16 @@ import smartgridsecurity.graphiti.actions.ToolbarButtonAction;
 
 /**
  * Registry which holds the input of all SGS extension points.
- * 
+ *
  * @author mario
  *
  */
 public class ExtensionPointRegistry {
     private static ExtensionPointRegistry instance = null;
-    private List<ToolbarButtonAction> buttonIDs = new LinkedList<ToolbarButtonAction>();
-    private List<AbstractCustomFeature> featureIDs = new LinkedList<AbstractCustomFeature>();
-    private List<IResizeShapeFeature> resizefeatureIDs = new LinkedList<IResizeShapeFeature>();
-    private List<ResourceSetListener> resourceListeners = new LinkedList<ResourceSetListener>();
+    private final List<ToolbarButtonAction> buttonIDs = new LinkedList<ToolbarButtonAction>();
+    private final List<AbstractCustomFeature> featureIDs = new LinkedList<AbstractCustomFeature>();
+    private final List<IResizeShapeFeature> resizefeatureIDs = new LinkedList<IResizeShapeFeature>();
+    private final List<ResourceSetListener> resourceListeners = new LinkedList<ResourceSetListener>();
 
     private ExtensionPointRegistry() {
     };
@@ -33,71 +33,71 @@ public class ExtensionPointRegistry {
         return instance;
     }
 
-    public void addActionToRegistry(ToolbarButtonAction action) {
-        buttonIDs.add(action);
+    public void addActionToRegistry(final ToolbarButtonAction action) {
+        this.buttonIDs.add(action);
     }
 
-    public void removeActionFromRegistry(ToolbarButtonAction action) {
-        buttonIDs.remove(action);
+    public void removeActionFromRegistry(final ToolbarButtonAction action) {
+        this.buttonIDs.remove(action);
     }
 
     public List<ToolbarButtonAction> getAllToolbarActions() {
-        return buttonIDs;
+        return this.buttonIDs;
     }
 
     public int getButtonActionsSize() {
-        return buttonIDs.size();
+        return this.buttonIDs.size();
     }
 
     public int getCustomFeaturesSize() {
-        return featureIDs.size();
+        return this.featureIDs.size();
     }
 
-    public void addContextButtonsToRegistry(List<AbstractCustomFeature> features) {
-        featureIDs.addAll(features);
+    public void addContextButtonsToRegistry(final List<AbstractCustomFeature> features) {
+        this.featureIDs.addAll(features);
     }
 
     public List<AbstractCustomFeature> getAllContextButtons() {
-        return featureIDs;
+        return this.featureIDs;
     }
 
     public int getResizeFeaturesSize() {
-        return resizefeatureIDs.size();
+        return this.resizefeatureIDs.size();
     }
 
-    public void addResizeFeaturesToRegistry(List<IResizeShapeFeature> features) {
-        resizefeatureIDs.addAll(features);
+    public void addResizeFeaturesToRegistry(final List<IResizeShapeFeature> features) {
+        this.resizefeatureIDs.addAll(features);
     }
 
     public List<IResizeShapeFeature> getAllResizeShape() {
-        return resizefeatureIDs;
+        return this.resizefeatureIDs;
     }
 
     public void clearResizeFeatures() {
-        resizefeatureIDs.clear();
+        this.resizefeatureIDs.clear();
     }
 
     public int getResourceListenersSize() {
-        return resourceListeners.size();
+        return this.resourceListeners.size();
     }
 
-    public void addResourceListenersToRegistry(List<ResourceSetListener> features) {
-        resourceListeners.addAll(features);
+    public void addResourceListenersToRegistry(final List<ResourceSetListener> features) {
+        this.resourceListeners.addAll(features);
     }
 
     public List<ResourceSetListener> getAllResourceListeners() {
-        return resourceListeners;
+        return this.resourceListeners;
     }
 
     public void clearResourceListeners() {
-        resourceListeners.clear();
+        this.resourceListeners.clear();
     }
 
-    public boolean isPatternRegistredInRegistry(IAction action) {
-        return buttonIDs.contains(action);
+    public boolean isPatternRegistredInRegistry(final IAction action) {
+        return this.buttonIDs.contains(action);
     }
 
     public void clearContextButtons() {
-        featureIDs.clear();
+        this.featureIDs.clear();
     }
 }

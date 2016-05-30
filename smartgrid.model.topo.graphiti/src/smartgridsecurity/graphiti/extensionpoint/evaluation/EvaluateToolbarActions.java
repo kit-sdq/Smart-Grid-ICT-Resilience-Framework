@@ -19,7 +19,7 @@ import smartgridsecurity.graphiti.extensionpoint.definition.IToolbarButtonAction
 /**
  * This class evaluates the toolbar action extension point and adds all toolbar action instances to
  * a list.
- * 
+ *
  * @author mario
  *
  */
@@ -30,57 +30,57 @@ public class EvaluateToolbarActions {
 
     /**
      * Evaluates all feature extensions.
-     * 
+     *
      * @param registry
      *            the extension registry of the current platform
      * @return all found feature extensions
      */
-    public List<ToolbarButtonAction> evaluateFeatureExtension(IExtensionRegistry registry) {
-        return evaluate(registry);
+    public List<ToolbarButtonAction> evaluateFeatureExtension(final IExtensionRegistry registry) {
+        return this.evaluate(registry);
     }
 
     /**
      * Private method to evaluate all feature extensions.
-     * 
+     *
      * @param registry
      *            the extension registry of the current platform
      * @return all found feature extensions
      */
-    private List<ToolbarButtonAction> evaluate(IExtensionRegistry registry) {
-        IConfigurationElement[] config = registry.getConfigurationElementsFor(TOOLBAR_ACTION_ID);
+    private List<ToolbarButtonAction> evaluate(final IExtensionRegistry registry) {
+        final IConfigurationElement[] config = registry.getConfigurationElementsFor(TOOLBAR_ACTION_ID);
 
         // define the thread pool
-        ExecutorService pool = Executors.newCachedThreadPool();
-        List<Future<List<ToolbarButtonAction>>> list = new LinkedList<Future<List<ToolbarButtonAction>>>();
-        List<ToolbarButtonAction> toolbarButtonActionList = new LinkedList<ToolbarButtonAction>();
+        final ExecutorService pool = Executors.newCachedThreadPool();
+        final List<Future<List<ToolbarButtonAction>>> list = new LinkedList<Future<List<ToolbarButtonAction>>>();
+        final List<ToolbarButtonAction> toolbarButtonActionList = new LinkedList<ToolbarButtonAction>();
 
         try {
-            for (IConfigurationElement e : config) {
+            for (final IConfigurationElement e : config) {
                 LOG.debug("Evaluating extension");
                 final Object o = e.createExecutableExtension("class");
                 if (o instanceof IToolbarButtonActionResolver) {
                     // Executes the evaluation in a thread an returns the result
                     // in the future
-                    Callable<List<ToolbarButtonAction>> callable = new EvaluateAbstractPattern(
+                    final Callable<List<ToolbarButtonAction>> callable = new EvaluateAbstractPattern(
                             (IToolbarButtonActionResolver) o);
-                    Future<List<ToolbarButtonAction>> future = pool.submit(callable);
+                    final Future<List<ToolbarButtonAction>> future = pool.submit(callable);
                     list.add(future);
                 }
             }
 
             // add all AbstractPattern to list
-            for (Future<List<ToolbarButtonAction>> buttn : list) {
+            for (final Future<List<ToolbarButtonAction>> buttn : list) {
                 try {
-                    for (ToolbarButtonAction tba : buttn.get()) {
+                    for (final ToolbarButtonAction tba : buttn.get()) {
                         toolbarButtonActionList.add(tba);
                     }
-                } catch (InterruptedException e1) {
+                } catch (final InterruptedException e1) {
                     e1.printStackTrace();
-                } catch (ExecutionException e1) {
+                } catch (final ExecutionException e1) {
                     e1.printStackTrace();
                 }
             }
-        } catch (CoreException ex) {
+        } catch (final CoreException ex) {
             LOG.error("CoreException occured, message is: " + ex.getMessage());
         }
         return toolbarButtonActionList;
@@ -92,15 +92,15 @@ public class EvaluateToolbarActions {
      */
     private class EvaluateAbstractPattern implements Callable<List<ToolbarButtonAction>> {
 
-        private IToolbarButtonActionResolver buttons;
+        private final IToolbarButtonActionResolver buttons;
 
-        public EvaluateAbstractPattern(IToolbarButtonActionResolver f) {
+        public EvaluateAbstractPattern(final IToolbarButtonActionResolver f) {
             this.buttons = f;
         }
 
         @Override
         public List<ToolbarButtonAction> call() throws Exception {
-            return buttons.getToolbarButtons();
+            return this.buttons.getToolbarButtons();
         }
 
     }

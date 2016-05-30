@@ -13,7 +13,7 @@ import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Pattern to create power grid nodes.
- * 
+ *
  * @author mario
  *
  */
@@ -26,8 +26,9 @@ public class PowerGridNodePattern extends AbstractFormPattern {
 
     @Override
     public Object[] create(final ICreateContext context) {
-        addScenario();
-        SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
+        this.addScenario();
+        final SmartGridTopology container = (SmartGridTopology) this
+                .getBusinessObjectForPictogramElement(this.getDiagram());
         final PowerGridNode node = SmartgridtopoFactory.eINSTANCE.createPowerGridNode();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
@@ -57,14 +58,14 @@ public class PowerGridNodePattern extends AbstractFormPattern {
     }
 
     @Override
-    protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
+    protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
         return FeatureRepresentationHelper.createPolygon(containerShape, this.manageColor(new ColorConstant(0, 0, 0)),
                 this.manageColor(new ColorConstant(255, 255, 0)));
     }
 
     @Override
-    protected void linkObjects(ContainerShape containerShape, Object businessObject) {
-        PowerGridNode addedNode = (PowerGridNode) businessObject;
+    protected void linkObjects(final ContainerShape containerShape, final Object businessObject) {
+        final PowerGridNode addedNode = (PowerGridNode) businessObject;
         if (addedNode.eResource() == null) {
             // getDiagram().eResource().getContents().add(addedNode);
             throw new RuntimeException("BO not in Resource! (unecpectedly)");

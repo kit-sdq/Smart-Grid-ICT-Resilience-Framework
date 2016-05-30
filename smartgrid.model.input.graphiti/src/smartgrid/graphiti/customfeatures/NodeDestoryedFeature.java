@@ -19,24 +19,24 @@ import smartgridtopo.SmartGridTopology;
 
 /**
  * This class implements a custom action to destroy and repair NetworkNodes.
- * 
+ *
  * @author mario
  *
  */
 public class NodeDestoryedFeature extends AbstractCustomFeature {
 
-    public NodeDestoryedFeature(IFeatureProvider fp) {
+    public NodeDestoryedFeature(final IFeatureProvider fp) {
         super(fp);
     }
 
     /**
      * This method checks if an input model is already loaded.
-     * 
+     *
      * @return true if loaded, false otherwise
      */
     private boolean isInputModelAlreadyCreated() {
-        for (EObject obj : getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects()) {
+        for (final EObject obj : this.getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram()
+                .getLink().getBusinessObjects()) {
             if (obj instanceof ScenarioState) {
                 return true;
             }
@@ -45,25 +45,26 @@ public class NodeDestoryedFeature extends AbstractCustomFeature {
     }
 
     @Override
-    public void execute(ICustomContext context) {
-        if (!isInputModelAlreadyCreated()) {
-            InputModelCreator creator = new InputModelCreator(GraphitiHelper.getInstance().getDiagramContainer());
+    public void execute(final ICustomContext context) {
+        if (!this.isInputModelAlreadyCreated()) {
+            final InputModelCreator creator = new InputModelCreator(GraphitiHelper.getInstance().getDiagramContainer());
             creator.createNewInputModel(true);
         }
 
         final PictogramElement pe = context.getPictogramElements()[0];
-        TransactionalEditingDomain domain = getDiagramBehavior().getEditingDomain();
-        RecordingCommand rc = new RecordingCommand(domain) {
+        final TransactionalEditingDomain domain = this.getDiagramBehavior().getEditingDomain();
+        final RecordingCommand rc = new RecordingCommand(domain) {
 
             @Override
             protected void doExecute() {
-                ManageNodeAppearances manager = new ManageNodeAppearances(getDiagramBehavior().getDiagramContainer());
+                final ManageNodeAppearances manager = new ManageNodeAppearances(
+                        NodeDestoryedFeature.this.getDiagramBehavior().getDiagramContainer());
                 // get location of the current topo pe
-                EObject obj = pe.getLink().getBusinessObjects().get(0);
+                final EObject obj = pe.getLink().getBusinessObjects().get(0);
 
                 EObject states = null;
-                for (EObject tmp : getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram()
-                        .getLink().getBusinessObjects()) {
+                for (final EObject tmp : NodeDestoryedFeature.this.getDiagramBehavior().getDiagramContainer()
+                        .getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
                     if (tmp instanceof ScenarioState) {
                         states = tmp;
                         break;
@@ -72,7 +73,7 @@ public class NodeDestoryedFeature extends AbstractCustomFeature {
 
                 // create new input pe
                 if (states != null) {
-                    for (EntityState entity : ((ScenarioState) states).getEntityStates()) {
+                    for (final EntityState entity : ((ScenarioState) states).getEntityStates()) {
                         if ((obj instanceof NetworkEntity && ((NetworkEntity) obj).getId() == entity.getOwner().getId())
                                 || (obj instanceof EntityState
                                         && ((EntityState) obj).getOwner().getId() == entity.getOwner().getId())) {
@@ -82,7 +83,7 @@ public class NodeDestoryedFeature extends AbstractCustomFeature {
                             if (entity.isIsDestroyed()) {
                                 entity.setIsDestroyed(false);
                                 // Remove cross lines
-                                ContainerShape shape = (ContainerShape) pe;
+                                final ContainerShape shape = (ContainerShape) pe;
                                 manager.removeChildren(shape);
                             } else {
                                 entity.setIsDestroyed(true);
@@ -97,9 +98,9 @@ public class NodeDestoryedFeature extends AbstractCustomFeature {
     }
 
     @Override
-    public boolean canExecute(ICustomContext context) {
+    public boolean canExecute(final ICustomContext context) {
         boolean ret = false;
-        for (EObject obj : getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : this.getDiagram().getLink().getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
                 return false;
             }
@@ -107,9 +108,9 @@ public class NodeDestoryedFeature extends AbstractCustomFeature {
                 ret = true;
             }
         }
-        PictogramElement[] pes = context.getPictogramElements();
+        final PictogramElement[] pes = context.getPictogramElements();
         if (pes != null && pes.length == 1) {
-            Object bo = getBusinessObjectForPictogramElement(pes[0]);
+            final Object bo = this.getBusinessObjectForPictogramElement(pes[0]);
             if (bo instanceof NetworkEntity || bo instanceof EntityState) {
                 ret = ret & true;
             } else {

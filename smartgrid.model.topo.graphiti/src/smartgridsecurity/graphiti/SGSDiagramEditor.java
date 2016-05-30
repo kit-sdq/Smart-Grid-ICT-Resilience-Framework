@@ -7,7 +7,7 @@ import smartgridsecurity.graphiti.helper.GraphitiHelper;
 
 /**
  * Specific Graphiti editor implementation.
- * 
+ *
  * @author mario
  *
  */

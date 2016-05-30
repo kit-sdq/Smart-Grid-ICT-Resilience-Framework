@@ -13,7 +13,8 @@ public final class LoadOutputModelConformityHelper {
     private LoadOutputModelConformityHelper() {
     }
 
-    public static boolean checkOutputModelConformitySimple(ScenarioResult result, SmartGridTopology current) {
+    public static boolean checkOutputModelConformitySimple(final ScenarioResult result,
+            final SmartGridTopology current) {
         if (result.getScenario() == null) {
             return true;
         }
@@ -21,10 +22,10 @@ public final class LoadOutputModelConformityHelper {
         return result.getScenario().getId() == current.getId();
     }
 
-    public static boolean checkOutputModelConformity(ScenarioResult output, SmartGridTopology current) {
+    public static boolean checkOutputModelConformity(final ScenarioResult output, final SmartGridTopology current) {
         // Check differences that would be obvious and ignore if
         // output.getScenario() is null
-        boolean result = checkOutputModelConformitySimple(output, current);
+        final boolean result = checkOutputModelConformitySimple(output, current);
 
         if (result) {
             return compareAndCountEntityStates(output.getStates(), current.getContainsNE());
@@ -33,15 +34,16 @@ public final class LoadOutputModelConformityHelper {
         return result;
     }
 
-    private static boolean compareAndCountEntityStates(List<EntityState> states, List<NetworkEntity> entities) {
+    private static boolean compareAndCountEntityStates(final List<EntityState> states,
+            final List<NetworkEntity> entities) {
         boolean result = true;
 
-        List<EntityState> noZombies = getListWithoutZombies(states);
+        final List<EntityState> noZombies = getListWithoutZombies(states);
 
         if (noZombies.size() == entities.size()) {
-            for (NetworkEntity entity : entities) {
+            for (final NetworkEntity entity : entities) {
                 boolean found = false;
-                for (EntityState state : noZombies) {
+                for (final EntityState state : noZombies) {
                     if (state.getOwner().getId() == entity.getId()) {
                         found = true;
                         break;
@@ -58,10 +60,10 @@ public final class LoadOutputModelConformityHelper {
         return result;
     }
 
-    private static List<EntityState> getListWithoutZombies(List<EntityState> states) {
-        List<EntityState> noZombies = new ArrayList<EntityState>();
+    private static List<EntityState> getListWithoutZombies(final List<EntityState> states) {
+        final List<EntityState> noZombies = new ArrayList<EntityState>();
 
-        for (EntityState state : states) {
+        for (final EntityState state : states) {
             if (state.getOwner() != null) {
                 noZombies.add(state);
             }

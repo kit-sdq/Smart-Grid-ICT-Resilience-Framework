@@ -12,14 +12,15 @@ public class Tarjan {
 
     /**
      * expects the graph to be BIDRECTIONAL (simplification of tarjan)
-     * 
+     *
      * @param adjacentMatrix
      * @return
      */
-    public static List<List<Integer>> getClusters(double[][] adjacentMatrix, Map<Integer, Integer> internalToExternal) {
-        List<List<Integer>> result = new LinkedList<List<Integer>>();
-        LinkedList<Integer> unprogressedNodes = new LinkedList<Integer>();
-        boolean[] visited = new boolean[adjacentMatrix.length];
+    public static List<List<Integer>> getClusters(final double[][] adjacentMatrix,
+            final Map<Integer, Integer> internalToExternal) {
+        final List<List<Integer>> result = new LinkedList<List<Integer>>();
+        final LinkedList<Integer> unprogressedNodes = new LinkedList<Integer>();
+        final boolean[] visited = new boolean[adjacentMatrix.length];
         for (int i = 0; i < adjacentMatrix.length; i++) {
             unprogressedNodes.add(i);
             visited[i] = false;
@@ -30,23 +31,24 @@ public class Tarjan {
         LOG.debug(Arrays.toString(unprogressedNodes.toArray()));
         while (unprogressedNodes.size() > 0) {
             // start building a new cluster
-            LinkedList<Integer> nodesToCheck = new LinkedList<Integer>();
-            int starter = unprogressedNodes.pollFirst();
+            final LinkedList<Integer> nodesToCheck = new LinkedList<Integer>();
+            final int starter = unprogressedNodes.pollFirst();
             nodesToCheck.add(starter);
             visited[starter] = true;
             LOG.debug("[Tarjan]: New cluster with " + internalToExternal.get(starter));
 
-            LinkedList<Integer> cluster = new LinkedList<Integer>();
+            final LinkedList<Integer> cluster = new LinkedList<Integer>();
             while (nodesToCheck.size() > 0) {
-                int n = nodesToCheck.pollFirst();
+                final int n = nodesToCheck.pollFirst();
                 cluster.add(n);
                 LOG.debug("[Tarjan]: Find neighbor of: " + internalToExternal.get(n));
                 for (int i = 0; i < adjacentMatrix.length; i++) {
-                    if (adjacentMatrix[n][i] > 0)
+                    if (adjacentMatrix[n][i] > 0) {
                         LOG.debug("[Tarjan]: Found neighbor: " + internalToExternal.get(i));
+                    }
                     if (adjacentMatrix[n][i] > 0 && !visited[i]) {
                         LOG.debug("[Tarjan]: Unvisited neighbor: " + internalToExternal.get(i));
-                        int m = i;
+                        final int m = i;
 
                         visited[m] = true;
                         nodesToCheck.add(m);
@@ -60,10 +62,10 @@ public class Tarjan {
         return result;
     }
 
-    static String printConvertedList(List<Integer> l, Map<Integer, Integer> internalToExternal) {
+    static String printConvertedList(final List<Integer> l, final Map<Integer, Integer> internalToExternal) {
         String s = "";
 
-        for (Integer i : l) {
+        for (final Integer i : l) {
             s += internalToExternal.get(i) + " ";
         }
 

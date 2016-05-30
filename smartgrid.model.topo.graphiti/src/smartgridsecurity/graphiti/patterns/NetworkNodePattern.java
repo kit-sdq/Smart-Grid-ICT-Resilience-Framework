@@ -13,7 +13,7 @@ import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Pattern to create network nodes.
- * 
+ *
  * @author mario
  *
  */
@@ -26,8 +26,9 @@ public class NetworkNodePattern extends AbstractFormPattern {
 
     @Override
     public Object[] create(final ICreateContext context) {
-        addScenario();
-        SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
+        this.addScenario();
+        final SmartGridTopology container = (SmartGridTopology) this
+                .getBusinessObjectForPictogramElement(this.getDiagram());
         final NetworkNode node = SmartgridtopoFactory.eINSTANCE.createNetworkNode();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
@@ -50,14 +51,14 @@ public class NetworkNodePattern extends AbstractFormPattern {
     }
 
     @Override
-    protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
+    protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
         return FeatureRepresentationHelper.createRect(containerShape, this.manageColor(new ColorConstant(0, 51, 102)),
                 this.manageColor(new ColorConstant(0, 102, 204)));
     }
 
     @Override
-    protected void linkObjects(ContainerShape containerShape, Object businessObject) {
-        NetworkNode addedNode = (NetworkNode) businessObject;
+    protected void linkObjects(final ContainerShape containerShape, final Object businessObject) {
+        final NetworkNode addedNode = (NetworkNode) businessObject;
         if (addedNode.eResource() == null) {
             // getDiagram().eResource().getContents().add(addedNode);
             throw new RuntimeException("BO not in Resource! (unecpectedly)");

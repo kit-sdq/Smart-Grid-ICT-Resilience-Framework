@@ -6,7 +6,7 @@ import org.eclipse.graphiti.ui.editor.IDiagramContainerUI;
 
 /**
  * Helper class which holds all important Graphiti instances.
- * 
+ *
  * @author mario
  *
  */
@@ -18,26 +18,26 @@ public class GraphitiHelper {
     private Diagram diagram;
 
     public IFeatureProvider getFeatureProvider() {
-        return featureProvider;
+        return this.featureProvider;
     }
 
-    public void setFeatureProvider(IFeatureProvider featureProvider) {
+    public void setFeatureProvider(final IFeatureProvider featureProvider) {
         this.featureProvider = featureProvider;
     }
 
     public IDiagramContainerUI getDiagramContainer() {
-        return diagramContainer;
+        return this.diagramContainer;
     }
 
-    public void setDiagramContainer(IDiagramContainerUI diagramContainer) {
+    public void setDiagramContainer(final IDiagramContainerUI diagramContainer) {
         this.diagramContainer = diagramContainer;
     }
 
     public Diagram getDiagram() {
-        return diagram;
+        return this.diagram;
     }
 
-    public void setDiagram(Diagram diagram) {
+    public void setDiagram(final Diagram diagram) {
         this.diagram = diagram;
     }
 

@@ -14,9 +14,10 @@ import smartgridtopo.PowerGridNode;
 public class InputDeleteFeature implements IDeleteFeatureResolver {
 
     @Override
-    public void deleteBusinessObjects(List<EObject> boFromDiagram, EObject owner, TransactionalEditingDomain domain) {
+    public void deleteBusinessObjects(final List<EObject> boFromDiagram, final EObject owner,
+            final TransactionalEditingDomain domain) {
         ScenarioState state = null;
-        for (EObject ob : boFromDiagram) {
+        for (final EObject ob : boFromDiagram) {
             if (ob instanceof ScenarioState) {
                 state = (ScenarioState) ob;
             }
@@ -31,7 +32,7 @@ public class InputDeleteFeature implements IDeleteFeatureResolver {
                     }
                 }
                 if (position > -1) {
-                    removeElement(false, state, position, domain);
+                    this.removeElement(false, state, position, domain);
                 }
             } else if (owner instanceof NetworkEntity) {
                 for (int i = 0; i < state.getEntityStates().size(); i++) {
@@ -41,14 +42,14 @@ public class InputDeleteFeature implements IDeleteFeatureResolver {
                     }
                 }
                 if (position > -1) {
-                    removeElement(true, state, position, domain);
+                    this.removeElement(true, state, position, domain);
                 }
             }
         }
     }
 
-    private void removeElement(boolean networkEntity, ScenarioState state, int position,
-            TransactionalEditingDomain domain) {
+    private void removeElement(final boolean networkEntity, final ScenarioState state, final int position,
+            final TransactionalEditingDomain domain) {
         domain.getCommandStack().execute(new RecordingCommand(domain) {
             @Override
             protected void doExecute() {

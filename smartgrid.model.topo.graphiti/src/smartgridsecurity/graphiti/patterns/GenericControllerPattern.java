@@ -13,7 +13,7 @@ import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Pattern to create generic controller.
- * 
+ *
  * @author mario
  *
  */
@@ -26,9 +26,10 @@ public class GenericControllerPattern extends AbstractFormPattern {
 
     @Override
     public Object[] create(final ICreateContext context) {
-        addScenario();
-        SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
-        GenericController node = SmartgridtopoFactory.eINSTANCE.createGenericController();
+        this.addScenario();
+        final SmartGridTopology container = (SmartGridTopology) this
+                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final GenericController node = SmartgridtopoFactory.eINSTANCE.createGenericController();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
         // simplicity's sake. Normally, a customer would use its own
@@ -50,14 +51,14 @@ public class GenericControllerPattern extends AbstractFormPattern {
     }
 
     @Override
-    protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
+    protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
         return FeatureRepresentationHelper.createEllipse(containerShape,
                 this.manageColor(new ColorConstant(210, 60, 0)), this.manageColor(new ColorConstant(255, 140, 0)));
     }
 
     @Override
-    protected void linkObjects(ContainerShape containerShape, Object businessObject) {
-        GenericController addedNode = (GenericController) businessObject;
+    protected void linkObjects(final ContainerShape containerShape, final Object businessObject) {
+        final GenericController addedNode = (GenericController) businessObject;
         if (addedNode.eResource() == null) {
             // getDiagram().eResource().getContents().add(addedNode);
             throw new RuntimeException("BO not in Resource! (unecpectedly)");

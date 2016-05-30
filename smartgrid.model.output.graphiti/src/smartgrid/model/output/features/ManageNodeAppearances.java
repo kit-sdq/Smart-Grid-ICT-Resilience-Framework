@@ -31,13 +31,13 @@ import smartgridtopo.SmartMeter;
 
 public class ManageNodeAppearances {
 
-    private IDiagramContainer diagramContainer;
+    private final IDiagramContainer diagramContainer;
 
-    public ManageNodeAppearances(IDiagramContainer diagramContainer) {
+    public ManageNodeAppearances(final IDiagramContainer diagramContainer) {
         this.diagramContainer = diagramContainer;
     }
 
-    public void removeChildren(ContainerShape shape) {
+    public void removeChildren(final ContainerShape shape) {
         while (shape.getChildren().size() > 0) {
             shape.getChildren().remove(0);
         }
@@ -45,54 +45,54 @@ public class ManageNodeAppearances {
 
     /**
      * Method to draw a question mark into a pe.
-     * 
+     *
      * @param containerShape
      *            the current shape
      */
-    public void drawQuestionMark(ContainerShape containerShape) {
-        int xy[] = new int[] { 4, 2, 14, 2, 14, 8, 6, 8, 6, 15, 16, 15 };
-        drawMark(containerShape, xy);
+    public void drawQuestionMark(final ContainerShape containerShape) {
+        final int xy[] = new int[] { 4, 2, 14, 2, 14, 8, 6, 8, 6, 15, 16, 15 };
+        this.drawMark(containerShape, xy);
     }
 
-    private void drawMark(ContainerShape containerShape, int[] xy) {
+    private void drawMark(final ContainerShape containerShape, final int[] xy) {
         final IPeCreateService peCreateService = Graphiti.getPeCreateService();
         final IGaService gaService = Graphiti.getGaService();
         // create line
-        Shape lineShape = peCreateService.createShape(containerShape, false);
+        final Shape lineShape = peCreateService.createShape(containerShape, false);
 
-        Polyline p = gaService.createPolyline(lineShape, xy);
-        p.setForeground(manageColor(new ColorConstant(0, 0, 0)));
+        final Polyline p = gaService.createPolyline(lineShape, xy);
+        p.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
         p.setLineWidth(ConstantProvider.questionMarkLineWidth);
 
-        Shape circleShape = peCreateService.createShape(containerShape, false);
-        Ellipse circle = gaService.createEllipse(circleShape);
+        final Shape circleShape = peCreateService.createShape(containerShape, false);
+        final Ellipse circle = gaService.createEllipse(circleShape);
         circle.setLineWidth(ConstantProvider.questionMarkLineWidth);
         circle.setX(9);
         circle.setY(17);
         circle.setHeight(3);
         circle.setWidth(3);
-        circle.setForeground(manageColor(new ColorConstant(0, 0, 0)));
+        circle.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
     }
 
-    public void drawExclamationMark(ContainerShape shape) {
-        int xy[] = new int[] { 9, 2, 9, 15 };
-        drawMark(shape, xy);
+    public void drawExclamationMark(final ContainerShape shape) {
+        final int xy[] = new int[] { 9, 2, 9, 15 };
+        this.drawMark(shape, xy);
     }
 
     /**
      * Draw a specific network entity.
-     * 
+     *
      * @param containerShape
      *            the current container shape
      * @return the specific network entity ga
      */
-    public void manageGraphicalPatternRepresentation(ContainerShape containerShape, boolean original) {
+    public void manageGraphicalPatternRepresentation(final ContainerShape containerShape, final boolean original) {
         GraphicsAlgorithm ga = null;
-        int locationX = containerShape.getGraphicsAlgorithm().getX();
-        int locationY = containerShape.getGraphicsAlgorithm().getY();
-        int width = containerShape.getGraphicsAlgorithm().getWidth();
-        int height = containerShape.getGraphicsAlgorithm().getHeight();
-        EObject bo = containerShape.getLink().getBusinessObjects().get(0);
+        final int locationX = containerShape.getGraphicsAlgorithm().getX();
+        final int locationY = containerShape.getGraphicsAlgorithm().getY();
+        final int width = containerShape.getGraphicsAlgorithm().getWidth();
+        final int height = containerShape.getGraphicsAlgorithm().getHeight();
+        final EObject bo = containerShape.getLink().getBusinessObjects().get(0);
 
         if (bo instanceof SmartMeter) {
             ga = original
@@ -139,7 +139,7 @@ public class ManageNodeAppearances {
                             this.manageColor(new ColorConstant(0, 51, 102)),
                             this.manageColor(new ColorConstant(182, 191, 204)));
         }
-        IGaService gaService = Graphiti.getGaService();
+        final IGaService gaService = Graphiti.getGaService();
         gaService.setLocationAndSize(ga, locationX, locationY, width, height);
         // }
 
@@ -147,15 +147,15 @@ public class ManageNodeAppearances {
 
     /**
      * Resolve output bo from NetworkEnitity bo.
-     * 
+     *
      * @param toResolve
      *            bo to resolve
      * @param loadedBO
      *            lis of all output bo's
      * @return the resolve bo
      */
-    public Object resolveBOfromNetworkEntity(NetworkEntity toResolve, EList<?> loadedBO) {
-        for (Object obj : loadedBO) {
+    public Object resolveBOfromNetworkEntity(final NetworkEntity toResolve, final EList<?> loadedBO) {
+        for (final Object obj : loadedBO) {
             if (obj instanceof EntityState && ((EntityState) obj).getOwner().getId() == toResolve.getId()) {
                 return obj;
             }
@@ -165,21 +165,21 @@ public class ManageNodeAppearances {
 
     /**
      * This method is primary used for showing that a PowerGridNode is enabled or disabled
-     * 
+     *
      * @param constant
      *            the new color for a container shape
      * @return the created color
      */
-    private Color manageColor(IColorConstant constant) {
-        Collection<Color> colors = diagramContainer.getDiagramTypeProvider().getDiagram().getColors();
-        for (Color existingColor : colors) {
+    private Color manageColor(final IColorConstant constant) {
+        final Collection<Color> colors = this.diagramContainer.getDiagramTypeProvider().getDiagram().getColors();
+        for (final Color existingColor : colors) {
             if (existingColor.getRed() == constant.getRed() && existingColor.getGreen() == constant.getGreen()
                     && existingColor.getBlue() == constant.getBlue()) {
                 return existingColor;
             }
         }
 
-        Color newColor = StylesFactory.eINSTANCE.createColor();
+        final Color newColor = StylesFactory.eINSTANCE.createColor();
         newColor.eSet(StylesPackage.eINSTANCE.getColor_Red(), constant.getRed());
         newColor.eSet(StylesPackage.eINSTANCE.getColor_Green(), constant.getGreen());
         newColor.eSet(StylesPackage.eINSTANCE.getColor_Blue(), constant.getBlue());

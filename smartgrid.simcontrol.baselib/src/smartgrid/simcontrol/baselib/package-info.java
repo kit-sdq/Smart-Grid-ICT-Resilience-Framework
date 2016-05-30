@@ -1,6 +1,6 @@
 /**
  * This Package contains Base classes needed by many classes
- * 
+ *
  * @author Christian
  *
  */

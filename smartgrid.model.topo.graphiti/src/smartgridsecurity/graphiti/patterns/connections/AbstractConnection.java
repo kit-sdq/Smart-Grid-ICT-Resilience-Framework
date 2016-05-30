@@ -16,38 +16,38 @@ import smartgridsecurity.graphiti.ConstantProvider;
 
 /**
  * Abstract pattern which implements common features of all connections.
- * 
+ *
  * @author mario
  *
  */
 public abstract class AbstractConnection extends AbstractConnectionPattern {
 
     @Override
-    public PictogramElement add(IAddContext context) {
+    public PictogramElement add(final IAddContext context) {
         // Initializations
-        IAddConnectionContext addConContext = (IAddConnectionContext) context;
-        IPeCreateService peCreateService = Graphiti.getPeCreateService();
-        IGaService gaService = Graphiti.getGaService();
+        final IAddConnectionContext addConContext = (IAddConnectionContext) context;
+        final IPeCreateService peCreateService = Graphiti.getPeCreateService();
+        final IGaService gaService = Graphiti.getGaService();
 
         // Create connection
-        Connection connection = peCreateService.createCompositeConnection(getDiagram());
+        final Connection connection = peCreateService.createCompositeConnection(this.getDiagram());
         connection.setStart(addConContext.getSourceAnchor());
         connection.setEnd(addConContext.getTargetAnchor());
 
         // Create the line
-        Polyline polyline = gaService.createPlainPolygon(connection);
+        final Polyline polyline = gaService.createPlainPolygon(connection);
         polyline.setLineWidth(ConstantProvider.connectionLineWidth);
-        polyline.setForeground(manageColor(getConnectionColor()));
+        polyline.setForeground(this.manageColor(this.getConnectionColor()));
 
         // Do linking
-        link(connection, context.getNewObject());
+        this.link(connection, context.getNewObject());
 
         return connection;
     }
 
     /**
      * Gets a business object from anchor.
-     * 
+     *
      * @param sourceAnchor
      *            the anchor
      * @return the retrieved business object
@@ -58,7 +58,7 @@ public abstract class AbstractConnection extends AbstractConnectionPattern {
 
     /**
      * Gets the color of a current connection.
-     * 
+     *
      * @return the color
      */
     protected abstract IColorConstant getConnectionColor();

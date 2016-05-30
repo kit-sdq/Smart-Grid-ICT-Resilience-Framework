@@ -10,7 +10,7 @@ import smartgridtopo.NetworkEntity;
 
 /**
  * Feature to delete a power connection.
- * 
+ *
  * @author mario
  *
  */
@@ -28,9 +28,9 @@ public class DeletePowerConnectionFeature extends DefaultDeleteFeature {
     @Override
     public void delete(final IDeleteContext context) {
         // Get interfaces
-        NetworkEntity start = getNetworkEntity(((Connection) context.getPictogramElement()).getStart());
+        final NetworkEntity start = this.getNetworkEntity(((Connection) context.getPictogramElement()).getStart());
 
-        Object end = getBusinessObjectForPictogramElement(
+        final Object end = this.getBusinessObjectForPictogramElement(
                 ((Connection) context.getPictogramElement()).getEnd().getParent());
 
         // Remove end from start's parent interfaces list
@@ -41,14 +41,14 @@ public class DeletePowerConnectionFeature extends DefaultDeleteFeature {
 
     /**
      * Get a {@link Anchor}'s parent interface.
-     * 
+     *
      * @param anchor
      *            The {@link Anchor}.
      * @return The {@link NetworkEntity}.
      */
-    private NetworkEntity getNetworkEntity(Anchor anchor) {
+    private NetworkEntity getNetworkEntity(final Anchor anchor) {
         if (anchor != null) {
-            Object object = getBusinessObjectForPictogramElement(anchor.getParent());
+            final Object object = this.getBusinessObjectForPictogramElement(anchor.getParent());
             if (object instanceof NetworkEntity) {
                 return (NetworkEntity) object;
             }

@@ -20,7 +20,7 @@ import smartgridsecurity.graphiti.extensionpoint.definition.IResizeFeatureResolv
 /**
  * This class evaluates the resize feature extension point and adds all resize feature instances to
  * a list.
- * 
+ *
  * @author mario
  *
  */
@@ -28,64 +28,64 @@ public class EvaluateResizeFeatures {
     private static final Logger LOG = Logger.getLogger(EvaluateResizeFeatures.class);
 
     private static final String RESIZE_FEATURES_ID = "smartgridsecurity.graphiti.extension.resizefeature";
-    private IFeatureProvider fp;
+    private final IFeatureProvider fp;
 
-    public EvaluateResizeFeatures(IFeatureProvider f) {
-        fp = f;
+    public EvaluateResizeFeatures(final IFeatureProvider f) {
+        this.fp = f;
     }
 
     /**
      * Evaluates all feature extensions.
-     * 
+     *
      * @param registry
      *            the extension registry of the current platform
      * @return all found feature extensions
      */
-    public List<IResizeShapeFeature> evaluateFeatureExtension(IExtensionRegistry registry) {
-        return evaluate(registry);
+    public List<IResizeShapeFeature> evaluateFeatureExtension(final IExtensionRegistry registry) {
+        return this.evaluate(registry);
     }
 
     /**
      * Private method to evaluate all feature extensions.
-     * 
+     *
      * @param registry
      *            the extension registry of the current platform
      * @return all found feature extensions
      */
-    private List<IResizeShapeFeature> evaluate(IExtensionRegistry registry) {
-        IConfigurationElement[] config = registry.getConfigurationElementsFor(RESIZE_FEATURES_ID);
+    private List<IResizeShapeFeature> evaluate(final IExtensionRegistry registry) {
+        final IConfigurationElement[] config = registry.getConfigurationElementsFor(RESIZE_FEATURES_ID);
 
         // define the thread pool
-        ExecutorService pool = Executors.newCachedThreadPool();
-        List<Future<List<IResizeShapeFeature>>> list = new LinkedList<Future<List<IResizeShapeFeature>>>();
-        List<IResizeShapeFeature> resizeShapeFeatureList = new LinkedList<IResizeShapeFeature>();
+        final ExecutorService pool = Executors.newCachedThreadPool();
+        final List<Future<List<IResizeShapeFeature>>> list = new LinkedList<Future<List<IResizeShapeFeature>>>();
+        final List<IResizeShapeFeature> resizeShapeFeatureList = new LinkedList<IResizeShapeFeature>();
 
         try {
-            for (IConfigurationElement e : config) {
+            for (final IConfigurationElement e : config) {
                 LOG.info("Evaluating resize shape extension");
                 final Object o = e.createExecutableExtension("class");
                 if (o instanceof IResizeFeatureResolver) {
                     // Executes the evaluation in a thread an returns the result in the future
-                    Callable<List<IResizeShapeFeature>> callable = new EvaluateAbstractPattern(
-                            (IResizeFeatureResolver) o, fp);
-                    Future<List<IResizeShapeFeature>> future = pool.submit(callable);
+                    final Callable<List<IResizeShapeFeature>> callable = new EvaluateAbstractPattern(
+                            (IResizeFeatureResolver) o, this.fp);
+                    final Future<List<IResizeShapeFeature>> future = pool.submit(callable);
                     list.add(future);
                 }
             }
 
             // add all AbstractPattern to list
-            for (Future<List<IResizeShapeFeature>> buttn : list) {
+            for (final Future<List<IResizeShapeFeature>> buttn : list) {
                 try {
-                    for (IResizeShapeFeature tba : buttn.get()) {
+                    for (final IResizeShapeFeature tba : buttn.get()) {
                         resizeShapeFeatureList.add(tba);
                     }
-                } catch (InterruptedException e1) {
+                } catch (final InterruptedException e1) {
                     e1.printStackTrace();
-                } catch (ExecutionException e1) {
+                } catch (final ExecutionException e1) {
                     e1.printStackTrace();
                 }
             }
-        } catch (CoreException ex) {
+        } catch (final CoreException ex) {
             LOG.error("[EvaluateResizeFeatures]: CoreException occured, message is: " + ex.getMessage());
         }
         return resizeShapeFeatureList;
@@ -97,17 +97,17 @@ public class EvaluateResizeFeatures {
      */
     private class EvaluateAbstractPattern implements Callable<List<IResizeShapeFeature>> {
 
-        private IResizeFeatureResolver resolver;
-        private IFeatureProvider provider;
+        private final IResizeFeatureResolver resolver;
+        private final IFeatureProvider provider;
 
-        public EvaluateAbstractPattern(IResizeFeatureResolver f, IFeatureProvider fp) {
+        public EvaluateAbstractPattern(final IResizeFeatureResolver f, final IFeatureProvider fp) {
             this.resolver = f;
             this.provider = fp;
         }
 
         @Override
         public List<IResizeShapeFeature> call() throws Exception {
-            return resolver.getResizeShapeFeature(provider);
+            return this.resolver.getResizeShapeFeature(this.provider);
         }
 
     }

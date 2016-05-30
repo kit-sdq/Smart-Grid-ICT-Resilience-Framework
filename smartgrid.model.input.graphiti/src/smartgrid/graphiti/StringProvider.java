@@ -2,7 +2,7 @@ package smartgrid.graphiti;
 
 /**
  * Class to provide global used strings.
- * 
+ *
  * @author mario
  *
  */

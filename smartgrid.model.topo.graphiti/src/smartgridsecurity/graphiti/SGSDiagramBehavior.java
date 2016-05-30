@@ -16,18 +16,18 @@ import smartgridsecurity.graphiti.helper.ExtensionPointRegistry;
 
 /**
  * Specific Graphiti diagram behavior implementation.
- * 
+ *
  * @author mario
  *
  */
 public class SGSDiagramBehavior extends DiagramBehavior {
-    private IDiagramContainerUI diagramContainer;
+    private final IDiagramContainerUI diagramContainer;
     private ResourceSetListener listener;
 
-    public SGSDiagramBehavior(IDiagramContainerUI diagramContainer) {
+    public SGSDiagramBehavior(final IDiagramContainerUI diagramContainer) {
         super(diagramContainer);
         this.diagramContainer = diagramContainer;
-        initListeners();
+        this.initListeners();
     }
 
     /**
@@ -35,23 +35,23 @@ public class SGSDiagramBehavior extends DiagramBehavior {
      */
     private void initListeners() {
         ExtensionPointRegistry.getInstance().clearResourceListeners();
-        List<ResourceSetListener> resListeners = (new EvaluateDomainModelChangeListeners(this))
+        final List<ResourceSetListener> resListeners = (new EvaluateDomainModelChangeListeners(this))
                 .evaluateFeatureExtension(Platform.getExtensionRegistry());
         ExtensionPointRegistry.getInstance().addResourceListenersToRegistry(resListeners);
         if (ExtensionPointRegistry.getInstance().getResourceListenersSize() > 0) {
-            listener = ExtensionPointRegistry.getInstance().getAllResourceListeners().get(0);
+            this.listener = ExtensionPointRegistry.getInstance().getAllResourceListeners().get(0);
         }
     }
 
     @Override
-    protected void initActionRegistry(ZoomManager zoomManager) {
+    protected void initActionRegistry(final ZoomManager zoomManager) {
         super.initActionRegistry(zoomManager);
-        final ActionRegistry actionRegistry = diagramContainer.getActionRegistry();
+        final ActionRegistry actionRegistry = this.diagramContainer.getActionRegistry();
         @SuppressWarnings("unchecked")
-        final List<String> selectionActions = diagramContainer.getSelectionActions();
+        final List<String> selectionActions = this.diagramContainer.getSelectionActions();
 
-        for (ToolbarButtonAction action : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
-            action.setDiagramContainer(diagramContainer);
+        for (final ToolbarButtonAction action : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
+            action.setDiagramContainer(this.diagramContainer);
             actionRegistry.registerAction(action);
             selectionActions.add(action.getId());
         }
@@ -60,18 +60,18 @@ public class SGSDiagramBehavior extends DiagramBehavior {
     @Override
     protected void unregisterBusinessObjectsListener() {
         super.unregisterBusinessObjectsListener();
-        if (listener != null) {
-            TransactionalEditingDomain eDomain = getEditingDomain();
-            eDomain.removeResourceSetListener(listener);
+        if (this.listener != null) {
+            final TransactionalEditingDomain eDomain = this.getEditingDomain();
+            eDomain.removeResourceSetListener(this.listener);
         }
     }
 
     @Override
     protected void registerBusinessObjectsListener() {
         super.registerBusinessObjectsListener();
-        if (listener != null) {
-            TransactionalEditingDomain eDomain = getEditingDomain();
-            eDomain.addResourceSetListener(listener);
+        if (this.listener != null) {
+            final TransactionalEditingDomain eDomain = this.getEditingDomain();
+            eDomain.addResourceSetListener(this.listener);
         }
     }
 

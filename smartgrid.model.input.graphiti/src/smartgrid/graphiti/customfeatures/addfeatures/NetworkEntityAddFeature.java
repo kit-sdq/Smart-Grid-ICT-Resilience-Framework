@@ -26,25 +26,25 @@ import smartgridtopo.SmartMeter;
 
 /**
  * Custom AddFeature to draw network entities pe's for input models.
- * 
+ *
  * @author mario
  *
  */
 public class NetworkEntityAddFeature extends AbstractAddFeature {
-    private EObject bo;
+    private final EObject bo;
 
-    public NetworkEntityAddFeature(IFeatureProvider fp, EObject o) {
+    public NetworkEntityAddFeature(final IFeatureProvider fp, final EObject o) {
         super(fp);
-        bo = o;
+        this.bo = o;
     }
 
     @Override
-    public boolean canAdd(IAddContext context) {
+    public boolean canAdd(final IAddContext context) {
         return true;
     }
 
     @Override
-    public PictogramElement add(IAddContext context) {
+    public PictogramElement add(final IAddContext context) {
         final Diagram targetDiagram = (Diagram) context.getTargetContainer();
 
         // CONTAINER SHAPE
@@ -58,43 +58,43 @@ public class NetworkEntityAddFeature extends AbstractAddFeature {
         // int width = 100;
         // int height = 50;
         final IGaService gaService = Graphiti.getGaService();
-        final GraphicsAlgorithm shape = getGraphicalPatternRepresentation(containerShape);
+        final GraphicsAlgorithm shape = this.getGraphicalPatternRepresentation(containerShape);
         gaService.setLocationAndSize(shape, context.getX(), context.getY(), 20, 20);
 
-        if (bo instanceof EntityState && ((EntityState) bo).isIsDestroyed() == true) {
-            drawDestroyed(containerShape);
+        if (this.bo instanceof EntityState && ((EntityState) this.bo).isIsDestroyed() == true) {
+            this.drawDestroyed(containerShape);
         }
         // gaService.setLocationAndSize(p, context.getX(), context.getY(), 20, 20);
-        link(containerShape, context.getNewObject());
+        this.link(containerShape, context.getNewObject());
 
         return containerShape;
     }
 
     /**
      * Draw a specific network entity.
-     * 
+     *
      * @param containerShape
      *            the current container shape
      * @return the specific network entity ga
      */
-    private GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
-        if (bo instanceof EntityState && ((EntityState) bo).getOwner() instanceof SmartMeter) {
+    private GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
+        if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof SmartMeter) {
             return FeatureRepresentationHelper.createEllipse(containerShape,
                     this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(255, 0, 0)));
         }
-        if (bo instanceof EntityState && ((EntityState) bo).getOwner() instanceof ControlCenter) {
+        if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof ControlCenter) {
             return FeatureRepresentationHelper.createEllipse(containerShape,
                     this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(51, 102, 0)));
         }
-        if (bo instanceof EntityState && ((EntityState) bo).getOwner() instanceof GenericController) {
+        if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof GenericController) {
             return FeatureRepresentationHelper.createEllipse(containerShape,
                     this.manageColor(new ColorConstant(210, 60, 0)), this.manageColor(new ColorConstant(255, 140, 0)));
         }
-        if (bo instanceof EntityState && ((EntityState) bo).getOwner() instanceof InterCom) {
+        if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof InterCom) {
             return FeatureRepresentationHelper.createEllipse(containerShape,
                     this.manageColor(new ColorConstant(0, 139, 0)), this.manageColor(new ColorConstant(127, 255, 0)));
         }
-        if (bo instanceof EntityState && ((EntityState) bo).getOwner() instanceof NetworkNode) {
+        if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof NetworkNode) {
             return FeatureRepresentationHelper.createRect(containerShape,
                     this.manageColor(new ColorConstant(0, 51, 102)), this.manageColor(new ColorConstant(0, 102, 204)));
         }
@@ -103,23 +103,23 @@ public class NetworkEntityAddFeature extends AbstractAddFeature {
 
     /**
      * Method to draw a cross. This is used to show that a network entity is destroyed.
-     * 
+     *
      * @param containerShape
      *            the current container shape
      */
-    private void drawDestroyed(ContainerShape containerShape) {
+    private void drawDestroyed(final ContainerShape containerShape) {
         final IPeCreateService peCreateService = Graphiti.getPeCreateService();
         final IGaService gaService = Graphiti.getGaService();
         // create line
-        Shape lineShape = peCreateService.createShape(containerShape, false);
+        final Shape lineShape = peCreateService.createShape(containerShape, false);
         int xy[] = new int[] { 0, 20, 20, 0 };
-        Polygon p = gaService.createPolygon(lineShape, xy);
-        p.setForeground(manageColor(new ColorConstant(0, 0, 0)));
+        final Polygon p = gaService.createPolygon(lineShape, xy);
+        p.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
         p.setLineWidth(ConstantProvider.shapeLineWidth);
         xy = new int[] { 0, 0, 20, 20 };
-        Shape secondLine = peCreateService.createShape(containerShape, false);
-        Polygon poly = gaService.createPolygon(secondLine, xy);
-        poly.setForeground(manageColor(new ColorConstant(0, 0, 0)));
+        final Shape secondLine = peCreateService.createShape(containerShape, false);
+        final Polygon poly = gaService.createPolygon(secondLine, xy);
+        poly.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
         poly.setLineWidth(ConstantProvider.shapeLineWidth);
     }
 

@@ -10,7 +10,7 @@ import smartgridtopo.SmartGridTopology;
 
 //TODO JavaDoc
 /**
- * 
+ *
  * Interface for the Impact Analysis
  *
  */
@@ -19,7 +19,7 @@ public interface IImpactAnalysis {
     // TODO JavaDoc
     /**
      * Runs the Impact Analysis
-     * 
+     *
      * @param smartGridTopo
      * @param impactAnalysisInput
      * @return
@@ -29,10 +29,10 @@ public interface IImpactAnalysis {
     /**
      * If using ExtensionPoints and so 0-parameter Constructor pass the config from Simcontrol UI to
      * this Method to build the desired ImpactAnalysis ( "Factory Method")
-     * 
-     * 
-     * 
-     * 
+     *
+     *
+     *
+     *
      * @param config
      *            behavior for the Attacker
      * @return true if Init was successful

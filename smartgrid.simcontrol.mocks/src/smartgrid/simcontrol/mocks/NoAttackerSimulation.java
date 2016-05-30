@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package smartgrid.simcontrol.mocks;
 
@@ -19,18 +19,18 @@ public class NoAttackerSimulation implements IAttackerSimulation {
     /**
      * {@inheritDoc}
      * <p>
-     * 
+     *
      * An attacker who doesn't attack
-     * 
+     *
      */
     @Override
-    public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioResult impactAnalysisOutput) {
+    public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioResult impactAnalysisOutput) {
 
         return impactAnalysisOutput;
     }
 
     @Override
-    public ErrorCodeEnum init(ILaunchConfiguration config) {
+    public ErrorCodeEnum init(final ILaunchConfiguration config) {
         // Nothing to do here
         return ErrorCodeEnum.SUCCESS;
     }

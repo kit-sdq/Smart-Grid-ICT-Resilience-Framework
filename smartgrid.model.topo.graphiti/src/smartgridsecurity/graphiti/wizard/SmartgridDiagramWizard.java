@@ -59,41 +59,43 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
     private final IWorkbench workbench;
 
     public SmartgridDiagramWizard() {
-        newDiagramPage = new CreateNewSmartgridDiagramPage();
-        workspace = ResourcesPlugin.getWorkspace();
-        editorId = "SmartGridSecurityDiagramType";
-        workbench = PlatformUI.getWorkbench();
+        this.newDiagramPage = new CreateNewSmartgridDiagramPage();
+        this.workspace = ResourcesPlugin.getWorkspace();
+        this.editorId = "SmartGridSecurityDiagramType";
+        this.workbench = PlatformUI.getWorkbench();
     }
 
     @Override
-    public void init(IWorkbench workbench, IStructuredSelection selection) {
+    public void init(final IWorkbench workbench, final IStructuredSelection selection) {
         this.selection = selection;
-        setNeedsProgressMonitor(true);
+        this.setNeedsProgressMonitor(true);
     }
 
     @Override
     public void addPages() {
         super.addPages();
-        addPage(newDiagramPage);
+        this.addPage(this.newDiagramPage);
     }
 
     @Override
     public boolean performFinish() {
-        final String fileName = newDiagramPage.getFileName();
-        final URI uri = URI.createPlatformResourceURI(getCurrentProjectPath() + "/" + fileName + ".sgdiagram", true);
-        final URI modelUri = URI.createPlatformResourceURI(getCurrentProjectPath() + "/" + fileName + ".smartgridtopo",
+        final String fileName = this.newDiagramPage.getFileName();
+        final URI uri = URI.createPlatformResourceURI(this.getCurrentProjectPath() + "/" + fileName + ".sgdiagram",
                 true);
+        final URI modelUri = URI
+                .createPlatformResourceURI(this.getCurrentProjectPath() + "/" + fileName + ".smartgridtopo", true);
 
         // create diagram and open it
-        IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
+        final IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 
             @Override
             protected void execute(final IProgressMonitor monitor) throws CoreException, InterruptedException {
-                Resource diagramResource = createDiagram(uri, fileName, modelUri, monitor);
-                if (diagramResource != null && editorId != null) {
+                final Resource diagramResource = SmartgridDiagramWizard.this.createDiagram(uri, fileName, modelUri,
+                        monitor);
+                if (diagramResource != null && SmartgridDiagramWizard.this.editorId != null) {
                     try {
-                        openDiagram(diagramResource);
-                    } catch (PartInitException exception) {
+                        SmartgridDiagramWizard.this.openDiagram(diagramResource);
+                    } catch (final PartInitException exception) {
                         exception.printStackTrace();
                     }
                 }
@@ -101,11 +103,11 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
         };
 
         try {
-            getContainer().run(false, true, op);
-        } catch (InterruptedException exception) {
+            this.getContainer().run(false, true, op);
+        } catch (final InterruptedException exception) {
             exception.printStackTrace();
             return false;
-        } catch (InvocationTargetException exception) {
+        } catch (final InvocationTargetException exception) {
             exception.printStackTrace();
             return false;
         }
@@ -114,7 +116,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 
     /**
      * Creates the diagram
-     * 
+     *
      * @param diagramURI
      *            the diagram uri
      * @param name
@@ -128,9 +130,9 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
     private Resource createDiagram(final URI diagramURI, final String name, final URI modelURI,
             final IProgressMonitor progressMonitor) {
         progressMonitor.beginTask("Creating diagram and model files", 2);
-        TransactionalEditingDomain editingDomain = GraphitiUi.getEmfService().createResourceSetAndEditingDomain();
-        ResourceSet resourceSet = editingDomain.getResourceSet();
-        CommandStack commandStack = editingDomain.getCommandStack();
+        final TransactionalEditingDomain editingDomain = GraphitiUi.getEmfService().createResourceSetAndEditingDomain();
+        final ResourceSet resourceSet = editingDomain.getResourceSet();
+        final CommandStack commandStack = editingDomain.getCommandStack();
         // create resources for the diagram and domain model files
         final Resource diagramResource = resourceSet.createResource(diagramURI);
         final Resource modelResource = resourceSet.createResource(modelURI);
@@ -139,7 +141,8 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
                 @Override
                 protected void doExecute() {
                     // create diagram and business models
-                    createModel(diagramResource, name, modelResource, modelURI.lastSegment());
+                    SmartgridDiagramWizard.this.createModel(diagramResource, name, modelResource,
+                            modelURI.lastSegment());
                 }
             });
         }
@@ -148,7 +151,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
             // save models
             modelResource.save(createSaveOptions());
             diagramResource.save(createSaveOptions());
-        } catch (IOException exception) {
+        } catch (final IOException exception) {
             exception.printStackTrace();
         }
         progressMonitor.done();
@@ -157,11 +160,11 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 
     /**
      * Create save options.
-     * 
+     *
      * @return the save options
      */
     public static Map<?, ?> createSaveOptions() {
-        HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+        final HashMap<String, Object> saveOptions = new HashMap<String, Object>();
         saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
         saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
         return saveOptions;
@@ -169,21 +172,21 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 
     /**
      * Opens the created diagram
-     * 
+     *
      * @param diagramResource
      *            the diagram resource
      * @throws PartInitException
      *             if diagram could not be opened
      */
     private void openDiagram(final Resource diagramResource) throws PartInitException {
-        IFile file = workspace.getRoot().getFile(new Path(diagramResource.getURI().toPlatformString(true)));
-        selectAndReveal(file);
-        openFileToEdit(getShell(), file);
+        final IFile file = this.workspace.getRoot().getFile(new Path(diagramResource.getURI().toPlatformString(true)));
+        this.selectAndReveal(file);
+        this.openFileToEdit(this.getShell(), file);
     }
 
     /**
      * Creates diagram and business models
-     * 
+     *
      * @param diagramResource
      *            the diagram resource
      * @param diagramName
@@ -197,16 +200,17 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
             final String modelName) {
         // create model resource
         modelResource.setTrackingModification(true);
-        EObject domainModel = SmartgridtopoFactory.eINSTANCE.createSmartGridTopology();
+        final EObject domainModel = SmartgridtopoFactory.eINSTANCE.createSmartGridTopology();
         modelResource.getContents().add(domainModel);
 
         // create diagram resource
         diagramResource.setTrackingModification(true);
-        Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + hashCode(), diagramName, 10, true);
-        diagram.setDiagramTypeId(editorId);
+        final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + this.hashCode(), diagramName,
+                10, true);
+        diagram.setDiagramTypeId(this.editorId);
 
         // link model and diagram
-        PictogramLink link = PictogramsFactory.eINSTANCE.createPictogramLink();
+        final PictogramLink link = PictogramsFactory.eINSTANCE.createPictogramLink();
         link.setPictogramElement(diagram);
         link.getBusinessObjects().add(domainModel);
         diagramResource.getContents().add(diagram);
@@ -215,31 +219,35 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
     /**
      * Returns the the path of the current selected project. This code was taken from NewDiagramPage
      * class of spray.
-     * 
+     *
      * @return the path
      */
     private String getCurrentProjectPath() {
-        if (selection == null || selection.isEmpty() || !(selection instanceof IStructuredSelection))
+        if (this.selection == null || this.selection.isEmpty() || !(this.selection instanceof IStructuredSelection)) {
             return null;
-        IStructuredSelection ssel = (IStructuredSelection) selection;
-        if (ssel.size() > 1)
+        }
+        final IStructuredSelection ssel = (IStructuredSelection) this.selection;
+        if (ssel.size() > 1) {
             return null;
-        Object obj = ssel.getFirstElement();
-        if (!(obj instanceof IAdaptable))
+        }
+        final Object obj = ssel.getFirstElement();
+        if (!(obj instanceof IAdaptable)) {
             return null;
+        }
 
         IResource resource = null;
-        resource = (IResource) ((IAdaptable) obj).getAdapter(IResource.class);
+        resource = ((IAdaptable) obj).getAdapter(IResource.class);
         IContainer container;
-        if (resource instanceof IContainer)
+        if (resource instanceof IContainer) {
             container = (IContainer) resource;
-        else
+        } else {
             container = resource.getParent();
+        }
         return container.getFullPath().toString();
     }
 
-    public void selectAndReveal(IFile file) {
-        BasicNewResourceWizard.selectAndReveal(file, workbench.getActiveWorkbenchWindow());
+    public void selectAndReveal(final IFile file) {
+        BasicNewResourceWizard.selectAndReveal(file, this.workbench.getActiveWorkbenchWindow());
     }
 
     /**
@@ -252,7 +260,8 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
         shell.getDisplay().asyncExec(new Runnable() {
             @Override
             public void run() {
-                final IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
+                final IWorkbenchPage page = SmartgridDiagramWizard.this.workbench.getActiveWorkbenchWindow()
+                        .getActivePage();
                 try {
                     IDE.openEditor(page, file, true);
                 } catch (final PartInitException e) {

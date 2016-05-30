@@ -13,7 +13,7 @@ import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Pattern to create inter coms.
- * 
+ *
  * @author mario
  *
  */
@@ -26,9 +26,10 @@ public class InterComPattern extends AbstractFormPattern {
 
     @Override
     public Object[] create(final ICreateContext context) {
-        addScenario();
-        SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
-        InterCom node = SmartgridtopoFactory.eINSTANCE.createInterCom();
+        this.addScenario();
+        final SmartGridTopology container = (SmartGridTopology) this
+                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final InterCom node = SmartgridtopoFactory.eINSTANCE.createInterCom();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
         // simplicity's sake. Normally, a customer would use its own
@@ -50,14 +51,14 @@ public class InterComPattern extends AbstractFormPattern {
     }
 
     @Override
-    protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
+    protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
         return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 139, 0)),
                 this.manageColor(new ColorConstant(127, 255, 0)));
     }
 
     @Override
-    protected void linkObjects(ContainerShape containerShape, Object businessObject) {
-        InterCom addedNode = (InterCom) businessObject;
+    protected void linkObjects(final ContainerShape containerShape, final Object businessObject) {
+        final InterCom addedNode = (InterCom) businessObject;
         if (addedNode.eResource() == null) {
             // getDiagram().eResource().getContents().add(addedNode);
             throw new RuntimeException("BO not in Resource! (unecpectedly)");

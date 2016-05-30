@@ -58,13 +58,13 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
     /**
      * Constructor
      */
-    public ZestLayoutDiagramFeature(IFeatureProvider fp) {
+    public ZestLayoutDiagramFeature(final IFeatureProvider fp) {
         super(fp);
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.features.custom.AbstractCustomFeature#getDescription ()
      */
     @Override
@@ -74,7 +74,7 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.features.impl.AbstractFeature#getName()
      */
     @Override
@@ -84,13 +84,13 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.features.custom.AbstractCustomFeature#canExecute(org
      * .eclipse.graphiti .features.context.ICustomContext)
      */
     @Override
-    public boolean canExecute(ICustomContext context) {
-        PictogramElement[] pes = context.getPictogramElements();
+    public boolean canExecute(final ICustomContext context) {
+        final PictogramElement[] pes = context.getPictogramElements();
         if (pes != null && pes.length == 1 && pes[0] instanceof Diagram) {
             return true;
         }
@@ -99,45 +99,45 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.
      * graphiti.features .context.ICustomContext)
      */
     @Override
-    public void execute(ICustomContext context) {
+    public void execute(final ICustomContext context) {
 
         // get a map of the self connection anchor locations
-        final Map<Connection, Point> selves = getSelfConnections();
+        final Map<Connection, Point> selves = this.getSelfConnections();
 
         // get the chosen LayoutAlgorithmn instance
-        LayoutAlgorithm layoutAlgorithm = getLayoutAlgorithmn(5);
+        final LayoutAlgorithm layoutAlgorithm = this.getLayoutAlgorithmn(5);
 
         if (layoutAlgorithm != null) {
             try {
 
                 // Get the map of SimpleNode per Shapes
-                Map<Shape, SimpleNode> map = getLayoutEntities();
+                final Map<Shape, SimpleNode> map = this.getLayoutEntities();
 
                 // Get the array of Connection LayoutRelationships
-                LayoutRelationship[] connections = getConnectionEntities(map);
+                final LayoutRelationship[] connections = this.getConnectionEntities(map);
 
                 // Setup the array of Shape LayoutEntity
-                LayoutEntity[] entities = map.values().toArray(new LayoutEntity[0]);
+                final LayoutEntity[] entities = map.values().toArray(new LayoutEntity[0]);
 
                 // Get the diagram GraphicsAlgorithmn (we need the graph
                 // dimensions)
-                GraphicsAlgorithm ga = getDiagram().getGraphicsAlgorithm();
+                final GraphicsAlgorithm ga = this.getDiagram().getGraphicsAlgorithm();
 
                 // Apply the LayoutAlgorithmn
                 layoutAlgorithm.applyLayout(entities, connections, 0, 0, ga.getWidth(), ga.getHeight(), false, false);
 
                 // Update the Graphiti Shapes and Connections locations
-                updateGraphCoordinates(entities, connections);
+                this.updateGraphCoordinates(entities, connections);
 
                 // Reposition the self connections bendpoints:
-                adaptSelfBendPoints(selves);
+                this.adaptSelfBendPoints(selves);
 
-            } catch (InvalidLayoutConfiguration e) {
+            } catch (final InvalidLayoutConfiguration e) {
                 e.printStackTrace();
             }
         }
@@ -154,15 +154,15 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
      *         s
      */
     private Map<Connection, Point> getSelfConnections() {
-        IGaService gaService = Graphiti.getGaService();
-        Map<Connection, Point> selves = new HashMap<Connection, Point>();
-        EList<Connection> connections = getDiagram().getConnections();
-        for (Connection connection : connections) {
-            AnchorContainer source = connection.getStart().getParent();
-            AnchorContainer target = connection.getEnd().getParent();
+        final IGaService gaService = Graphiti.getGaService();
+        final Map<Connection, Point> selves = new HashMap<Connection, Point>();
+        final EList<Connection> connections = this.getDiagram().getConnections();
+        for (final Connection connection : connections) {
+            final AnchorContainer source = connection.getStart().getParent();
+            final AnchorContainer target = connection.getEnd().getParent();
             if (source == target) {
-                GraphicsAlgorithm p = source.getGraphicsAlgorithm();
-                Point start = gaService.createPoint(p.getX(), p.getY());
+                final GraphicsAlgorithm p = source.getGraphicsAlgorithm();
+                final Point start = gaService.createPoint(p.getX(), p.getY());
                 selves.put(connection, start);
             }
         }
@@ -177,20 +177,20 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
      *            The {@link Map} of initial {@link Anchor} location {@link Point} per
      *            {@link Connection}s
      */
-    private void adaptSelfBendPoints(Map<Connection, Point> selves) {
-        for (Connection connection : selves.keySet()) {
-            Point p = selves.get(connection);
-            FreeFormConnection ffcon = (FreeFormConnection) connection;
-            EList<Point> pointList = ffcon.getBendpoints();
-            AnchorContainer source = connection.getStart().getParent();
-            GraphicsAlgorithm start = source.getGraphicsAlgorithm();
-            int deltaX = start.getX() - p.getX();
-            int deltaY = start.getY() - p.getY();
+    private void adaptSelfBendPoints(final Map<Connection, Point> selves) {
+        for (final Connection connection : selves.keySet()) {
+            final Point p = selves.get(connection);
+            final FreeFormConnection ffcon = (FreeFormConnection) connection;
+            final EList<Point> pointList = ffcon.getBendpoints();
+            final AnchorContainer source = connection.getStart().getParent();
+            final GraphicsAlgorithm start = source.getGraphicsAlgorithm();
+            final int deltaX = start.getX() - p.getX();
+            final int deltaY = start.getY() - p.getY();
             for (int i = 0; i < pointList.size(); i++) {
-                Point bendPoint = pointList.get(i);
-                int x = bendPoint.getX();
+                final Point bendPoint = pointList.get(i);
+                final int x = bendPoint.getX();
                 bendPoint.setX(x + deltaX);
-                int y = bendPoint.getY();
+                final int y = bendPoint.getY();
                 bendPoint.setY(y + deltaY);
             }
         }
@@ -203,34 +203,34 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
      * @param entities
      * @param connections
      */
-    private void updateGraphCoordinates(LayoutEntity[] entities, LayoutRelationship[] connections) {
-        for (LayoutEntity entity : entities) {
-            SimpleNode node = (SimpleNode) entity;
-            Shape shape = (Shape) node.getRealObject();
-            Double x = node.getX();
-            Double y = node.getY();
+    private void updateGraphCoordinates(final LayoutEntity[] entities, final LayoutRelationship[] connections) {
+        for (final LayoutEntity entity : entities) {
+            final SimpleNode node = (SimpleNode) entity;
+            final Shape shape = (Shape) node.getRealObject();
+            final Double x = node.getX();
+            final Double y = node.getY();
             shape.getGraphicsAlgorithm().setX(x.intValue());
             shape.getGraphicsAlgorithm().setY(y.intValue());
-            Double width = node.getWidth();
-            Double height = node.getHeight();
+            final Double width = node.getWidth();
+            final Double height = node.getHeight();
             shape.getGraphicsAlgorithm().setWidth(width.intValue());
             shape.getGraphicsAlgorithm().setHeight(height.intValue());
         }
 
-        IGaService gaService = Graphiti.getGaService();
-        for (LayoutRelationship relationship : connections) {
-            SimpleRelationship rel = (SimpleRelationship) relationship;
+        final IGaService gaService = Graphiti.getGaService();
+        for (final LayoutRelationship relationship : connections) {
+            final SimpleRelationship rel = (SimpleRelationship) relationship;
             // Using FreeFormConnections with BendPoints, we reset them to the
             // Zest computed
             // locations
             if (rel.getGraphData() instanceof FreeFormConnection) {
-                FreeFormConnection connection = (FreeFormConnection) rel.getGraphData();
+                final FreeFormConnection connection = (FreeFormConnection) rel.getGraphData();
                 connection.getBendpoints().clear();
-                LayoutBendPoint[] bendPoints = rel.getBendPoints();
-                for (LayoutBendPoint bendPoint : bendPoints) {
-                    Double x = bendPoint.getX();
-                    Double y = bendPoint.getY();
-                    Point p = gaService.createPoint(x.intValue(), y.intValue());
+                final LayoutBendPoint[] bendPoints = rel.getBendPoints();
+                for (final LayoutBendPoint bendPoint : bendPoints) {
+                    final Double x = bendPoint.getX();
+                    final Double y = bendPoint.getY();
+                    final Point p = gaService.createPoint(x.intValue(), y.intValue());
                     connection.getBendpoints().add(p);
                 }
             }
@@ -241,11 +241,11 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
      * @return a {@link Map} of {@link SimpleNode} per {@link Shape}
      */
     private Map<Shape, SimpleNode> getLayoutEntities() {
-        Map<Shape, SimpleNode> map = new HashMap<Shape, SimpleNode>();
-        EList<Shape> children = getDiagram().getChildren();
-        for (Shape shape : children) {
-            GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
-            SimpleNode entity = new SimpleNode(shape, ga.getX(), ga.getY(), ga.getWidth(), ga.getHeight());
+        final Map<Shape, SimpleNode> map = new HashMap<Shape, SimpleNode>();
+        final EList<Shape> children = this.getDiagram().getChildren();
+        for (final Shape shape : children) {
+            final GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
+            final SimpleNode entity = new SimpleNode(shape, ga.getX(), ga.getY(), ga.getWidth(), ga.getHeight());
             map.put(shape, entity);
         }
         return map;
@@ -257,41 +257,41 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
      *            {@link SimpleRelationship} to source and target entities
      * @return the array of {@link LayoutRelationship}s to compute
      */
-    private LayoutRelationship[] getConnectionEntities(Map<Shape, SimpleNode> map) {
-        List<LayoutRelationship> liste = new ArrayList<LayoutRelationship>();
-        EList<Connection> connections = getDiagram().getConnections();
-        for (Connection connection : connections) {
+    private LayoutRelationship[] getConnectionEntities(final Map<Shape, SimpleNode> map) {
+        final List<LayoutRelationship> liste = new ArrayList<LayoutRelationship>();
+        final EList<Connection> connections = this.getDiagram().getConnections();
+        for (final Connection connection : connections) {
 
             String label = null;
-            EList<ConnectionDecorator> decorators = connection.getConnectionDecorators();
-            for (ConnectionDecorator decorator : decorators) {
+            final EList<ConnectionDecorator> decorators = connection.getConnectionDecorators();
+            for (final ConnectionDecorator decorator : decorators) {
                 if (decorator.getGraphicsAlgorithm() instanceof Text) {
                     label = ((Text) decorator.getGraphicsAlgorithm()).getValue();
                 }
             }
 
             // get the SimpleNode already created from the map:
-            Shape source = (Shape) connection.getStart().getParent();
-            SimpleNode sourceEntity = map.get(source);
-            Shape target = (Shape) connection.getEnd().getParent();
-            SimpleNode targetEntity = map.get(target);
+            final Shape source = (Shape) connection.getStart().getParent();
+            final SimpleNode sourceEntity = map.get(source);
+            final Shape target = (Shape) connection.getEnd().getParent();
+            final SimpleNode targetEntity = map.get(target);
 
             if (source != target) { // we don't add self relations to avoid
                                     // Cycle errors
-                SimpleRelationship relationship = new SimpleRelationship(sourceEntity, targetEntity,
+                final SimpleRelationship relationship = new SimpleRelationship(sourceEntity, targetEntity,
                         (source != target));
                 relationship.setGraphData(connection);
                 relationship.clearBendPoints();
                 relationship.setLabel(label);
                 if (connection instanceof FreeFormConnection) {
-                    FreeFormConnection ffcon = (FreeFormConnection) connection;
+                    final FreeFormConnection ffcon = (FreeFormConnection) connection;
 
-                    EList<Point> pointList = ffcon.getBendpoints();
-                    List<LayoutBendPoint> bendPoints = new ArrayList<LayoutBendPoint>();
+                    final EList<Point> pointList = ffcon.getBendpoints();
+                    final List<LayoutBendPoint> bendPoints = new ArrayList<LayoutBendPoint>();
                     for (int i = 0; i < pointList.size(); i++) {
-                        Point point = pointList.get(i);
-                        boolean isControlPoint = (i != 0) && (i != pointList.size() - 1);
-                        LayoutBendPoint bendPoint = new BendPoint(point.getX(), point.getY(), isControlPoint);
+                        final Point point = pointList.get(i);
+                        final boolean isControlPoint = (i != 0) && (i != pointList.size() - 1);
+                        final LayoutBendPoint bendPoint = new BendPoint(point.getX(), point.getY(), isControlPoint);
                         bendPoints.add(bendPoint);
                     }
 
@@ -307,13 +307,13 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
 
     /**
      * Leave this for testing purposes
-     * 
+     *
      * @param current
      * @return
      */
-    private LayoutAlgorithm getLayoutAlgorithmn(int current) {
+    private LayoutAlgorithm getLayoutAlgorithmn(final int current) {
         LayoutAlgorithm layout;
-        int style = LayoutStyles.NO_LAYOUT_NODE_RESIZING;
+        final int style = LayoutStyles.NO_LAYOUT_NODE_RESIZING;
         switch (current) {
         case 1:
             layout = new SpringLayoutAlgorithm(style);
@@ -382,17 +382,18 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
 
         private Object graphData;
 
-        public SimpleRelationship(LayoutEntity sourceEntity, LayoutEntity destinationEntity, boolean bidirectional) {
+        public SimpleRelationship(final LayoutEntity sourceEntity, final LayoutEntity destinationEntity,
+                final boolean bidirectional) {
             super(sourceEntity, destinationEntity, bidirectional);
         }
 
         @Override
         public Object getGraphData() {
-            return graphData;
+            return this.graphData;
         }
 
         @Override
-        public void setGraphData(Object o) {
+        public void setGraphData(final Object o) {
             this.graphData = o;
         }
     }

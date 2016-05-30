@@ -24,7 +24,7 @@ import smartgridtopo.Identifier;
 
 /**
  * Property sheet implementation to display id's.
- * 
+ *
  * @author mario
  *
  */
@@ -41,47 +41,49 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#createControls
      * (org.eclipse.swt.widgets.Composite,
      * org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage)
      */
     @Override
-    public void createControls(Composite parent, TabbedPropertySheetPage tabbedPropertySheetPage) {
+    public void createControls(final Composite parent, final TabbedPropertySheetPage tabbedPropertySheetPage) {
         super.createControls(parent, tabbedPropertySheetPage);
 
-        final TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
+        final TabbedPropertySheetWidgetFactory factory = this.getWidgetFactory();
         final Composite composite = factory.createFlatFormComposite(parent);
 
-        GridLayout layout = new GridLayout(2, false);
+        final GridLayout layout = new GridLayout(2, false);
         composite.setLayout(layout);
 
-        label = new Label(composite, SWT.NONE);
-        label.setText("Identifier: ");
+        this.label = new Label(composite, SWT.NONE);
+        this.label.setText("Identifier: ");
 
-        idWidget = new Text(composite, SWT.BORDER);
-        GridData gridData = new GridData();
+        this.idWidget = new Text(composite, SWT.BORDER);
+        final GridData gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
         gridData.grabExcessHorizontalSpace = true;
-        idWidget.setLayoutData(gridData);
-        idWidget.setText("0");
+        this.idWidget.setLayoutData(gridData);
+        this.idWidget.setText("0");
 
-        idWidget.addModifyListener(new ModifyListener() {
+        this.idWidget.addModifyListener(new ModifyListener() {
 
             @Override
             public void modifyText(final ModifyEvent e) {
-                IFeature feature = new AbstractFeature(getDiagramTypeProvider().getFeatureProvider()) {
+                final IFeature feature = new AbstractFeature(
+                        IdentifierPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
 
                     @Override
-                    public void execute(IContext context) {
-                        final PictogramElement pe = getSelectedPictogramElement();
+                    public void execute(final IContext context) {
+                        final PictogramElement pe = IdentifierPropertiesSheet.this.getSelectedPictogramElement();
                         if (pe != null) {
-                            Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-                            if (bo == null)
+                            final Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+                            if (bo == null) {
                                 return;
+                            }
 
-                            Identifier identifier = (Identifier) bo;
-                            final String id = ((Text) idWidget).getText();
+                            final Identifier identifier = (Identifier) bo;
+                            final String id = IdentifierPropertiesSheet.this.idWidget.getText();
                             if (!(id.equals(Integer.toString(identifier.getId())))) {
                                 identifier.setId(Integer.parseInt(id));
                             }
@@ -89,11 +91,11 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
                     }
 
                     @Override
-                    public boolean canExecute(IContext context) {
+                    public boolean canExecute(final IContext context) {
                         return true;
                     }
                 };
-                execute(feature, new CustomContext());
+                IdentifierPropertiesSheet.this.execute(feature, new CustomContext());
 
             }
         });
@@ -101,15 +103,15 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
      */
     @Override
     public void refresh() {
-        PictogramElement pe = getSelectedPictogramElement();
+        final PictogramElement pe = this.getSelectedPictogramElement();
         if (pe != null) {
 
-            EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+            final EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
             // the filter assured, that it is a EClass
 
             if (bo == null) {
@@ -117,9 +119,9 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
             }
 
             if (((Identifier) bo).getId() != 0) {
-                idWidget.setText(Integer.toString(((Identifier) bo).getId()));
+                this.idWidget.setText(Integer.toString(((Identifier) bo).getId()));
             } else {
-                idWidget.setText("");
+                this.idWidget.setText("");
             }
         }
     }

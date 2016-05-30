@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 package smartgrid.simcontrol.baselib;
 
 /**
  * Defines the Constants used as Keys in the {@link org.eclipse.debug.core#ILaunchConfiguration}
  * Dict
- * 
+ *
  * @author Christian
  *
  */
@@ -47,11 +47,11 @@ public final class Constants {
     public static final String INPUT_PATH_KEY = "inputPath"; //$NON-NLS-1$
 
     /**
-     * 
+     *
      * Defines NODE PATH
-     * 
+     *
      * The path to File on Disk with a On EntityStates List
-     * 
+     *
      */
     public static final String NODE_PATH = "nodepath"; //$NON-NLS-1$
 

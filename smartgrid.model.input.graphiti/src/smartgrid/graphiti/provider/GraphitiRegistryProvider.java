@@ -4,7 +4,7 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 
 /**
  * This class provides important Graphiti features to the input model plugin.
- * 
+ *
  * @author mario
  *
  */
@@ -22,12 +22,12 @@ public class GraphitiRegistryProvider {
         return instance;
     }
 
-    public void setFeatureProvider(IFeatureProvider fp) {
-        featureProvider = fp;
+    public void setFeatureProvider(final IFeatureProvider fp) {
+        this.featureProvider = fp;
     }
 
     public IFeatureProvider getFeatureProvider() {
-        return featureProvider;
+        return this.featureProvider;
     }
 
 }

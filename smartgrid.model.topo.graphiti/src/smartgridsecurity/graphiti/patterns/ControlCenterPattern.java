@@ -13,7 +13,7 @@ import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Pattern to implement control centers.
- * 
+ *
  * @author mario
  *
  */
@@ -26,9 +26,10 @@ public class ControlCenterPattern extends AbstractFormPattern {
 
     @Override
     public Object[] create(final ICreateContext context) {
-        addScenario();
-        SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
-        ControlCenter node = SmartgridtopoFactory.eINSTANCE.createControlCenter();
+        this.addScenario();
+        final SmartGridTopology container = (SmartGridTopology) this
+                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final ControlCenter node = SmartgridtopoFactory.eINSTANCE.createControlCenter();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
         // simplicity's sake. Normally, a customer would use its own
@@ -50,14 +51,14 @@ public class ControlCenterPattern extends AbstractFormPattern {
     }
 
     @Override
-    protected GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
+    protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
         return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 0, 0)),
                 this.manageColor(new ColorConstant(51, 102, 0)));
     }
 
     @Override
-    protected void linkObjects(ContainerShape containerShape, Object businessObject) {
-        ControlCenter addedNode = (ControlCenter) businessObject;
+    protected void linkObjects(final ContainerShape containerShape, final Object businessObject) {
+        final ControlCenter addedNode = (ControlCenter) businessObject;
         if (addedNode.eResource() == null) {
             // getDiagram().eResource().getContents().add(addedNode);
             throw new RuntimeException("BO not in Resource! (unecpectedly)");

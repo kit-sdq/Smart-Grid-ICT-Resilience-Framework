@@ -10,7 +10,7 @@ import smartgridoutput.ScenarioResult;
 //TODO JavaDoc
 /**
  * ITerminationCondition Interface
- * 
+ *
  *
  */
 public interface ITerminationCondition {
@@ -18,7 +18,7 @@ public interface ITerminationCondition {
     // TODO JavaDoc
     /**
      * Evaluates the TerminationCondition.
-     * 
+     *
      * @param iterationCount
      * @param impactInput
      * @param impactInputOld
@@ -32,10 +32,10 @@ public interface ITerminationCondition {
     /**
      * If using ExtensionPoints and so 0-parameter Constructor pass the config from Simcontrol UI to
      * this Method to build the desired AttackerSimulation ("Factory Method")
-     * 
-     * 
-     * 
-     * 
+     *
+     *
+     *
+     *
      * @param config
      *            behavior for the Attacker
      * @return true if Init was successful

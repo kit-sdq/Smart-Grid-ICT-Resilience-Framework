@@ -7,7 +7,7 @@ import org.eclipse.graphiti.features.IResizeShapeFeature;
 
 /**
  * Resolver for all resize features.
- * 
+ *
  * @author mario
  *
  */

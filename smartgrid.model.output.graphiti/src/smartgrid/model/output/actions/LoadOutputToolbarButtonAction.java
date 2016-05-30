@@ -37,7 +37,7 @@ import smartgridtopo.SmartGridTopology;
 
 /**
  * This class defines an action which loads a specific output model.
- * 
+ *
  * @author mario
  *
  */
@@ -47,30 +47,32 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
 
     private boolean loadSuccessful = true;
 
-    public LoadOutputToolbarButtonAction(IPropertyChangeListener listener) {
-        ACTION_ID = "LoadOutputToolbarButtonActionId";
-        TOOL_TIP = "Load a State Result";
-        setToolTipText(TOOL_TIP);
-        setId(ACTION_ID);
-        addPropertyChangeListener(listener);
-        setImageDescriptor(createImage("icons" + File.separator + "load_output.png", "smartgrid.model.output"));
+    public LoadOutputToolbarButtonAction(final IPropertyChangeListener listener) {
+        this.ACTION_ID = "LoadOutputToolbarButtonActionId";
+        this.TOOL_TIP = "Load a State Result";
+        this.setToolTipText(this.TOOL_TIP);
+        this.setId(this.ACTION_ID);
+        this.addPropertyChangeListener(listener);
+        this.setImageDescriptor(
+                this.createImage("icons" + File.separator + "load_output.png", "smartgrid.model.output"));
     }
 
     @Override
-    public void setDiagramContainer(IDiagramContainerUI container) {
-        diagramContainer = container;
+    public void setDiagramContainer(final IDiagramContainerUI container) {
+        this.diagramContainer = container;
     }
 
     @Override
     public void run() {
         LOG.info("[LoadOutputToolbarButtonAction]: Start loading output model");
-        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+        final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-        for (EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
+                .getBusinessObjects()) {
             // no input loaded
-            if ((obj instanceof SmartGridTopology) && diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                    .getBusinessObjects().size() == 1) {
-                MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
+            if ((obj instanceof SmartGridTopology) && this.diagramContainer.getDiagramTypeProvider().getDiagram()
+                    .getLink().getBusinessObjects().size() == 1) {
+                final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot load output model without input model");
                 messageBox.open();
                 LOG.info(
@@ -82,45 +84,46 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
         final FileDialog dialog = new FileDialog(shell, SWT.OPEN);
         dialog.setFilterExtensions(new String[] { "*.smartgridoutput" });
         dialog.setFilterNames(new String[] { "Smart Grid Output" });
-        String fileSelected = dialog.open();
+        final String fileSelected = dialog.open();
 
         if (fileSelected == null) {
             return;
         } else {
             // Perform Action, like save the file.
             LOG.info("Selected file: " + fileSelected);
-            final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
+            final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
 
             Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
                     .put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 
             // load the resource and resolve the proxies
-            File source = new File(fileSelected);
-            ResourceSet rs = new ResourceSetImpl();
-            Resource r = rs.createResource(URI.createFileURI(source.getAbsolutePath()));
+            final File source = new File(fileSelected);
+            final ResourceSet rs = new ResourceSetImpl();
+            final Resource r = rs.createResource(URI.createFileURI(source.getAbsolutePath()));
 
             try {
                 r.load(null);
                 EcoreUtil.resolveAll(rs);
                 final EObject obj = r.getContents().get(0);
-                RecordingCommand cmd = new RecordingCommand(domain) {
+                final RecordingCommand cmd = new RecordingCommand(domain) {
                     @Override
                     protected void doExecute() {
-                        ManageNodeAppearances manager = new ManageNodeAppearances(diagramContainer);
+                        final ManageNodeAppearances manager = new ManageNodeAppearances(
+                                LoadOutputToolbarButtonAction.this.diagramContainer);
                         // is input loaded?
                         boolean hasOutput = false;
-                        EList<EObject> boList = diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                                .getBusinessObjects();
+                        final EList<EObject> boList = LoadOutputToolbarButtonAction.this.diagramContainer
+                                .getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
 
                         // Conformity check
                         for (final EObject current : boList) {
                             if (current instanceof SmartGridTopology) {
                                 if (!(LoadOutputModelConformityHelper.checkOutputModelConformitySimple(
                                         (ScenarioResult) obj, (SmartGridTopology) current))) {
-                                    MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
+                                    final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                                     messageBox.setMessage("Output model is not conform to the current topo model");
                                     messageBox.open();
-                                    loadSuccessful = false;
+                                    LoadOutputToolbarButtonAction.this.loadSuccessful = false;
                                     LOG.info(
                                             "[LoadOutputToolbarButtonAction]: Loading output model failed since it is not conform to the topo model");
                                     return;
@@ -137,18 +140,17 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
                             }
                         }
 
-                        Shape[] shapes = (Shape[]) diagramContainer.getDiagramTypeProvider().getDiagram().getChildren()
-                                .toArray();
+                        final Shape[] shapes = (Shape[]) LoadOutputToolbarButtonAction.this.diagramContainer
+                                .getDiagramTypeProvider().getDiagram().getChildren().toArray();
                         LOG.debug("[LoadOutputToolbarButtonAction]: Applying output elements to the diagram");
                         if (hasOutput) {
                             // Clear all output Elements
-                            for (int i = 0; i < shapes.length; i++) {
-                                Shape currentShape = shapes[i];
+                            for (final Shape currentShape : shapes) {
                                 // set visible true for all input pe's
                                 if ((currentShape.getLink().getBusinessObjects().get(0) instanceof NetworkEntity)) {
                                     currentShape.setVisible(true);
                                     manager.manageGraphicalPatternRepresentation((ContainerShape) currentShape, true);
-                                    Object bo = manager.resolveBOfromNetworkEntity(
+                                    final Object bo = manager.resolveBOfromNetworkEntity(
                                             (NetworkEntity) currentShape.getLink().getBusinessObjects().get(0),
                                             result.getStates());
 
@@ -157,14 +159,12 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
                                     }
                                 }
                             }
-                            diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()
-                                    .remove(result);
+                            LoadOutputToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram()
+                                    .getLink().getBusinessObjects().remove(result);
                         }
-                        for (int i = 0; i < shapes.length; i++) {
-                            Shape containerShape = shapes[i];
-
+                        for (final Shape containerShape : shapes) {
                             if (containerShape.getLink().getBusinessObjects().get(0) instanceof NetworkEntity) {
-                                Object ob = manager.resolveBOfromNetworkEntity(
+                                final Object ob = manager.resolveBOfromNetworkEntity(
                                         (NetworkEntity) containerShape.getLink().getBusinessObjects().get(0),
                                         ((ScenarioResult) obj).getStates());
                                 if (ob != null && !(ob instanceof Online) && !(ob instanceof Defect)) {
@@ -184,21 +184,21 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
 
                             }
                         }
-                        if (loadSuccessful) {
+                        if (LoadOutputToolbarButtonAction.this.loadSuccessful) {
                             boList.add(obj);
                         }
                     }
                 };
                 domain.getCommandStack().execute(cmd);
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 LOG.error("[smartgrid.model.output.graphiti.LoadOutputToolbarButtonAction]: IOException occured");
                 e.printStackTrace();
             }
         }
-        if (loadSuccessful) {
-            firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
+        if (this.loadSuccessful) {
+            this.firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
         }
-        loadSuccessful = true;
+        this.loadSuccessful = true;
         LOG.info("[LoadOutputToolbarButtonAction]: Successfully finished loading output model");
     }
 }

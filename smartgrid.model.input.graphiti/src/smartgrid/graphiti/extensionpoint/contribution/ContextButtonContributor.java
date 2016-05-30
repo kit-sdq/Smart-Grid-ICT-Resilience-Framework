@@ -13,15 +13,15 @@ import smartgridsecurity.graphiti.extensionpoint.definition.IContextButtonResolv
 
 /**
  * Contributor class to contribute all context buttons to the main editor.
- * 
+ *
  * @author mario
  *
  */
 public class ContextButtonContributor implements IContextButtonResolver {
 
     @Override
-    public List<AbstractCustomFeature> getContextButtons(IFeatureProvider fp) {
-        AbstractCustomFeature[] actions = { new NodeDestoryedFeature(fp), new PowerEnabledFeature(fp) };
+    public List<AbstractCustomFeature> getContextButtons(final IFeatureProvider fp) {
+        final AbstractCustomFeature[] actions = { new NodeDestoryedFeature(fp), new PowerEnabledFeature(fp) };
         GraphitiRegistryProvider.getInstance().setFeatureProvider(fp);
         return Arrays.asList(actions);
     }

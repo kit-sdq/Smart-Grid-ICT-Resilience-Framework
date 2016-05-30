@@ -1,11 +1,11 @@
 /**
- * 
+ *
  */
 package smartgrid.simcontrol.baselib;
 
 /**
  * Defines supported Modes to generate synthetic Input models for smartgrid analysis
- * 
+ *
  * @author Christian
  *
  */

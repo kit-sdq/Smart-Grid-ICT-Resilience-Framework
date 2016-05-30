@@ -16,7 +16,7 @@ import smartgridtopo.SmartgridtopoFactory;
 
 /**
  * Connection feature to create physical connection.
- * 
+ *
  * @author mario
  *
  */
@@ -24,73 +24,74 @@ public class PhysicalConnectionPattern extends AbstractConnection {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.AbstractBasePattern#canAdd(org.eclipse.
      * graphiti.features.context.IAddContext)
      */
     @Override
-    public boolean canAdd(IAddContext context) {
+    public boolean canAdd(final IAddContext context) {
         if (false == context instanceof IAddConnectionContext) {
             return false;
         }
-        IAddConnectionContext acc = (IAddConnectionContext) context;
+        final IAddConnectionContext acc = (IAddConnectionContext) context;
         return null != acc.getNewObject() && acc.getNewObject() instanceof PhysicalConnection;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.AbstractConnectionPattern#create(org.eclipse
      * .graphiti.features.context.ICreateConnectionContext)
      */
     @Override
-    public Connection create(ICreateConnectionContext context) {
+    public Connection create(final ICreateConnectionContext context) {
         // Get source and target nodes
 
         // Create new role and add to contents
-        PhysicalConnection newRole = SmartgridtopoFactory.eINSTANCE.createPhysicalConnection();
+        final PhysicalConnection newRole = SmartgridtopoFactory.eINSTANCE.createPhysicalConnection();
 
         // add to resources
-        SmartGridTopology scenario = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
+        final SmartGridTopology scenario = (SmartGridTopology) this
+                .getBusinessObjectForPictogramElement(this.getDiagram());
         scenario.getContainsPC().add(newRole);
 
         // Get anchors
-        Anchor sourceAnchor = context.getSourceAnchor();
-        Anchor targetAnchor = context.getTargetAnchor();
-        newRole.getLinks().add((NetworkEntity) getBoFromAnchor(sourceAnchor));
-        newRole.getLinks().add((NetworkEntity) getBoFromAnchor(targetAnchor));
+        final Anchor sourceAnchor = context.getSourceAnchor();
+        final Anchor targetAnchor = context.getTargetAnchor();
+        newRole.getLinks().add((NetworkEntity) this.getBoFromAnchor(sourceAnchor));
+        newRole.getLinks().add((NetworkEntity) this.getBoFromAnchor(targetAnchor));
 
-        AddConnectionContext addContext = new AddConnectionContext(sourceAnchor, targetAnchor);
+        final AddConnectionContext addContext = new AddConnectionContext(sourceAnchor, targetAnchor);
         addContext.setNewObject(newRole);
 
-        Connection connection = (Connection) getFeatureProvider().addIfPossible(addContext);
+        final Connection connection = (Connection) this.getFeatureProvider().addIfPossible(addContext);
 
         return connection;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.AbstractConnectionPattern#canStartConnection
      * (org.eclipse.graphiti.features.context.ICreateConnectionContext)
      */
     @Override
-    public boolean canStartConnection(ICreateConnectionContext context) {
-        Object sourceElement = getBusinessObjectForPictogramElement(context.getSourcePictogramElement());
+    public boolean canStartConnection(final ICreateConnectionContext context) {
+        final Object sourceElement = this.getBusinessObjectForPictogramElement(context.getSourcePictogramElement());
         return sourceElement instanceof NetworkEntity;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.AbstractConnectionPattern#canCreate(org.
      * eclipse.graphiti.features.context.ICreateConnectionContext)
      */
     @Override
-    public boolean canCreate(ICreateConnectionContext context) {
+    public boolean canCreate(final ICreateConnectionContext context) {
         // Get source and target picto elements
-        PictogramElement sourcePictogramElement = context.getSourcePictogramElement();
-        PictogramElement targetPictogramElement = context.getTargetPictogramElement();
+        final PictogramElement sourcePictogramElement = context.getSourcePictogramElement();
+        final PictogramElement targetPictogramElement = context.getTargetPictogramElement();
 
         // False if one is null
         if (sourcePictogramElement == null || targetPictogramElement == null) {
@@ -98,12 +99,12 @@ public class PhysicalConnectionPattern extends AbstractConnection {
         }
 
         // Get BOs
-        Object sourceDomainObject = getBusinessObjectForPictogramElement(sourcePictogramElement);
-        Object targetDomainObject = getBusinessObjectForPictogramElement(targetPictogramElement);
+        final Object sourceDomainObject = this.getBusinessObjectForPictogramElement(sourcePictogramElement);
+        final Object targetDomainObject = this.getBusinessObjectForPictogramElement(targetPictogramElement);
 
         // Check for type
-        boolean sourceIsCorrect = sourceDomainObject instanceof NetworkEntity;
-        boolean targetIsCorrect = targetDomainObject instanceof NetworkEntity;
+        final boolean sourceIsCorrect = sourceDomainObject instanceof NetworkEntity;
+        final boolean targetIsCorrect = targetDomainObject instanceof NetworkEntity;
 
         // True if both are of type BasicComp or CompositeComp
         return sourceIsCorrect && targetIsCorrect;
@@ -111,7 +112,7 @@ public class PhysicalConnectionPattern extends AbstractConnection {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.eclipse.graphiti.pattern.AbstractConnectionPattern#getCreateName()
      */
     @Override

@@ -20,7 +20,7 @@ import smartgridsecurity.graphiti.extensionpoint.definition.IDomainModelChangeLi
 /**
  * This class evaluates the resource listener extension point and adds all listener instances to a
  * list.
- * 
+ *
  * @author mario
  *
  */
@@ -28,65 +28,65 @@ public class EvaluateDomainModelChangeListeners {
     private static final Logger LOG = Logger.getLogger(EvaluateDomainModelChangeListeners.class);
 
     private static final String RESIZE_FEATURES_ID = "smartgridsecurity.graphiti.extension.domain.changed";
-    private DiagramBehavior db;
+    private final DiagramBehavior db;
 
-    public EvaluateDomainModelChangeListeners(DiagramBehavior db) {
+    public EvaluateDomainModelChangeListeners(final DiagramBehavior db) {
         this.db = db;
     }
 
     /**
      * Evaluates all feature extensions.
-     * 
+     *
      * @param registry
      *            the extension registry of the current platform
      * @return all found feature extensions
      */
-    public List<ResourceSetListener> evaluateFeatureExtension(IExtensionRegistry registry) {
-        return evaluate(registry);
+    public List<ResourceSetListener> evaluateFeatureExtension(final IExtensionRegistry registry) {
+        return this.evaluate(registry);
     }
 
     /**
      * Private method to evaluate all feature extensions.
-     * 
+     *
      * @param registry
      *            the extension registry of the current platform
      * @return all found feature extensions
      */
-    private List<ResourceSetListener> evaluate(IExtensionRegistry registry) {
-        IConfigurationElement[] config = registry.getConfigurationElementsFor(RESIZE_FEATURES_ID);
+    private List<ResourceSetListener> evaluate(final IExtensionRegistry registry) {
+        final IConfigurationElement[] config = registry.getConfigurationElementsFor(RESIZE_FEATURES_ID);
 
         // define the thread pool
-        ExecutorService pool = Executors.newCachedThreadPool();
-        List<Future<List<ResourceSetListener>>> list = new LinkedList<Future<List<ResourceSetListener>>>();
-        List<ResourceSetListener> listenerList = new LinkedList<ResourceSetListener>();
+        final ExecutorService pool = Executors.newCachedThreadPool();
+        final List<Future<List<ResourceSetListener>>> list = new LinkedList<Future<List<ResourceSetListener>>>();
+        final List<ResourceSetListener> listenerList = new LinkedList<ResourceSetListener>();
 
         try {
-            for (IConfigurationElement e : config) {
+            for (final IConfigurationElement e : config) {
                 LOG.debug("Evaluating resource listener extension");
                 final Object o = e.createExecutableExtension("class");
                 if (o instanceof IDomainModelChangeListenerResolver) {
                     // Executes the evaluation in a thread an returns the result
                     // in the future
-                    Callable<List<ResourceSetListener>> callable = new EvaluateAbstractPattern(
-                            (IDomainModelChangeListenerResolver) o, db);
-                    Future<List<ResourceSetListener>> future = pool.submit(callable);
+                    final Callable<List<ResourceSetListener>> callable = new EvaluateAbstractPattern(
+                            (IDomainModelChangeListenerResolver) o, this.db);
+                    final Future<List<ResourceSetListener>> future = pool.submit(callable);
                     list.add(future);
                 }
             }
 
             // add all AbstractPattern to list
-            for (Future<List<ResourceSetListener>> buttn : list) {
+            for (final Future<List<ResourceSetListener>> buttn : list) {
                 try {
-                    for (ResourceSetListener tba : buttn.get()) {
+                    for (final ResourceSetListener tba : buttn.get()) {
                         listenerList.add(tba);
                     }
-                } catch (InterruptedException e1) {
+                } catch (final InterruptedException e1) {
                     e1.printStackTrace();
-                } catch (ExecutionException e1) {
+                } catch (final ExecutionException e1) {
                     e1.printStackTrace();
                 }
             }
-        } catch (CoreException ex) {
+        } catch (final CoreException ex) {
             LOG.error("CoreException occured, message is: " + ex.getMessage());
         }
         return listenerList;
@@ -98,17 +98,17 @@ public class EvaluateDomainModelChangeListeners {
      */
     private class EvaluateAbstractPattern implements Callable<List<ResourceSetListener>> {
 
-        private IDomainModelChangeListenerResolver resolver;
-        private DiagramBehavior behavior;
+        private final IDomainModelChangeListenerResolver resolver;
+        private final DiagramBehavior behavior;
 
-        public EvaluateAbstractPattern(IDomainModelChangeListenerResolver f, DiagramBehavior fp) {
+        public EvaluateAbstractPattern(final IDomainModelChangeListenerResolver f, final DiagramBehavior fp) {
             this.resolver = f;
             this.behavior = fp;
         }
 
         @Override
         public List<ResourceSetListener> call() throws Exception {
-            return resolver.getDomainModelChangeListener(behavior);
+            return this.resolver.getDomainModelChangeListener(this.behavior);
         }
 
     }

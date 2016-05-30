@@ -6,24 +6,24 @@ public class SmartMeterState {
     private String smartMeterID;
     private EntityState smartMeterState;
 
-    public SmartMeterState(String smartMeterID, EntityState smartMeterState) {
+    public SmartMeterState(final String smartMeterID, final EntityState smartMeterState) {
         this.smartMeterID = smartMeterID;
         this.smartMeterState = smartMeterState;
     }
 
     public String getSmartMeterID() {
-        return smartMeterID;
+        return this.smartMeterID;
     }
 
     public EntityState getSmartMeterState() {
-        return smartMeterState;
+        return this.smartMeterState;
     }
 
-    public void setSmartMeterID(String smartMeterID) {
+    public void setSmartMeterID(final String smartMeterID) {
         this.smartMeterID = smartMeterID;
     }
 
-    public void setSmartMeterState(EntityState smartMeterState) {
+    public void setSmartMeterState(final EntityState smartMeterState) {
         this.smartMeterState = smartMeterState;
     }
 }

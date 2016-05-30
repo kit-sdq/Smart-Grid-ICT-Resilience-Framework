@@ -18,25 +18,25 @@ import smartgridsecurity.graphiti.helper.FeatureRepresentationHelper;
 
 /**
  * Custom AddFeature to draw power grid node pe's for input models.
- * 
+ *
  * @author mario
  *
  */
 public class PowerGridAddFeature extends AbstractAddFeature {
-    private EObject bo;
+    private final EObject bo;
 
-    public PowerGridAddFeature(IFeatureProvider fp, EObject o) {
+    public PowerGridAddFeature(final IFeatureProvider fp, final EObject o) {
         super(fp);
-        bo = o;
+        this.bo = o;
     }
 
     @Override
-    public boolean canAdd(IAddContext context) {
+    public boolean canAdd(final IAddContext context) {
         return true;
     }
 
     @Override
-    public PictogramElement add(IAddContext context) {
+    public PictogramElement add(final IAddContext context) {
         final Diagram targetDiagram = (Diagram) context.getTargetContainer();
 
         // CONTAINER SHAPE
@@ -50,24 +50,24 @@ public class PowerGridAddFeature extends AbstractAddFeature {
         // int width = 100;
         // int height = 50;
         final IGaService gaService = Graphiti.getGaService();
-        final GraphicsAlgorithm shape = getGraphicalPatternRepresentation(containerShape);
+        final GraphicsAlgorithm shape = this.getGraphicalPatternRepresentation(containerShape);
         gaService.setLocationAndSize(shape, context.getX(), context.getY(), 20, 20);
 
         // gaService.setLocationAndSize(p, context.getX(), context.getY(), 20, 20);
-        link(containerShape, context.getNewObject());
+        this.link(containerShape, context.getNewObject());
 
         return containerShape;
     }
 
     /**
      * Draw a power grid node.
-     * 
+     *
      * @param containerShape
      *            the current container shape
      * @return the graphical power grid representation
      */
-    private GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
-        if (bo instanceof PowerState && ((PowerState) bo).isPowerOutage() == false) {
+    private GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
+        if (this.bo instanceof PowerState && ((PowerState) this.bo).isPowerOutage() == false) {
             return FeatureRepresentationHelper.createPolygon(containerShape,
                     this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(255, 255, 0)));
         }

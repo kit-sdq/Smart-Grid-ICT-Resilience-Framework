@@ -14,7 +14,7 @@ import org.eclipse.graphiti.services.IPeCreateService;
 
 /**
  * Abstract pattern which implements common features of all patterns.
- * 
+ *
  * @author mario
  *
  */
@@ -22,7 +22,7 @@ public abstract class AbstractFormPattern extends AbstractPattern {
 
     @Override
     public String getCreateName() {
-        return getName();
+        return this.getName();
     }
 
     @Override
@@ -63,10 +63,10 @@ public abstract class AbstractFormPattern extends AbstractPattern {
         peCreateService.createChopboxAnchor(containerShape);
 
         final IGaService gaService = Graphiti.getGaService();
-        final GraphicsAlgorithm shape = getGraphicalPatternRepresentation(containerShape);
+        final GraphicsAlgorithm shape = this.getGraphicalPatternRepresentation(containerShape);
         gaService.setLocationAndSize(shape, context.getX(), context.getY(), 20, 20);
 
-        linkObjects(containerShape, context.getNewObject());
+        this.linkObjects(containerShape, context.getNewObject());
 
         return containerShape;
     }
@@ -83,20 +83,20 @@ public abstract class AbstractFormPattern extends AbstractPattern {
     }
 
     @Override
-    public boolean canResizeShape(IResizeShapeContext context) {
+    public boolean canResizeShape(final IResizeShapeContext context) {
         return false;
     }
 
     /**
      * Gets the pattern name.
-     * 
+     *
      * @return the name
      */
     protected abstract String getName();
 
     /**
      * Gets the graphical representation of the pattern.
-     * 
+     *
      * @param containerShape
      *            the current shape
      * @return the current graphical representation
@@ -105,7 +105,7 @@ public abstract class AbstractFormPattern extends AbstractPattern {
 
     /**
      * Links a business object to a specific pe.
-     * 
+     *
      * @param containerShape
      *            the current shape
      * @param businessObject

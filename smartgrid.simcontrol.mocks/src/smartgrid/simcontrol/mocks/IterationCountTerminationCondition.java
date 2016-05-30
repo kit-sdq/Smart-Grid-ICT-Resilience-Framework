@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package smartgrid.simcontrol.mocks;
 
@@ -15,7 +15,7 @@ import smartgridoutput.ScenarioResult;
 
 /**
  * A fixed iteration count termination condition
- * 
+ *
  * @author Christian
  *
  */
@@ -26,40 +26,41 @@ public class IterationCountTerminationCondition implements ITerminationCondition
     private int maxIterations;
 
     public IterationCountTerminationCondition() {
-        maxIterations = 2;
+        this.maxIterations = 2;
     }
 
     /**
      * Constructs a new Instance of TerminationConditionMock
-     * 
+     *
      * @param breakafterIterationCount
      *            Set the number of Iterations
      */
-    public IterationCountTerminationCondition(int breakafterIterationCount) {
+    public IterationCountTerminationCondition(final int breakafterIterationCount) {
 
-        maxIterations = breakafterIterationCount;
+        this.maxIterations = breakafterIterationCount;
     }
 
     /**
      * {@inheritDoc}
      * <p>
-     * 
+     *
      * Simply breaks after specified IterationCount from the Contructor
-     * 
+     *
      */
     @Override
-    public boolean evaluate(int currentIteration, ScenarioState impactInput, ScenarioState impactInputOld,
-            ScenarioResult impactResult, ScenarioResult impactResultOld) {
+    public boolean evaluate(final int currentIteration, final ScenarioState impactInput,
+            final ScenarioState impactInputOld, final ScenarioResult impactResult,
+            final ScenarioResult impactResultOld) {
 
-        boolean continueRunning = currentIteration < maxIterations;
+        final boolean continueRunning = currentIteration < this.maxIterations;
         return continueRunning;
     }
 
     @Override
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
-        maxIterations = Integer
+    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
+        this.maxIterations = Integer
                 .parseInt(config.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
-        LOG.info("Performing at most " + maxIterations + " iterations between power/impact per time step");
+        LOG.info("Performing at most " + this.maxIterations + " iterations between power/impact per time step");
 
         return ErrorCodeEnum.SUCCESS;
     }

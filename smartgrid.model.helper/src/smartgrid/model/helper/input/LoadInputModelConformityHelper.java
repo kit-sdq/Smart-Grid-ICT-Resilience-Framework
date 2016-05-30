@@ -12,16 +12,16 @@ import smartgridtopo.SmartGridTopology;
 
 public class LoadInputModelConformityHelper {
 
-    public static boolean checkInputModelConformitySimple(ScenarioState state, SmartGridTopology current) {
+    public static boolean checkInputModelConformitySimple(final ScenarioState state, final SmartGridTopology current) {
         if (state.getScenario() == null) {
             return true;
         }
         return state.getScenario().getId() == current.getId();
     }
 
-    public static boolean checkInputModelConformity(ScenarioState state, SmartGridTopology current) {
+    public static boolean checkInputModelConformity(final ScenarioState state, final SmartGridTopology current) {
         // Check differences that would be obvious
-        boolean result = checkInputModelConformitySimple(state, current);
+        final boolean result = checkInputModelConformitySimple(state, current);
 
         if (result) {
             return compareAndCountPowerStates(state.getPowerStates(), current.getContainsPGN())
@@ -31,15 +31,16 @@ public class LoadInputModelConformityHelper {
         return result;
     }
 
-    private static boolean compareAndCountEntityStates(List<EntityState> states, List<NetworkEntity> entities) {
+    private static boolean compareAndCountEntityStates(final List<EntityState> states,
+            final List<NetworkEntity> entities) {
         boolean result = true;
 
-        List<EntityState> noZombies = getListWithoutZombies(states);
+        final List<EntityState> noZombies = getListWithoutZombies(states);
 
         if (noZombies.size() == entities.size()) {
-            for (NetworkEntity entity : entities) {
+            for (final NetworkEntity entity : entities) {
                 boolean found = false;
-                for (EntityState state : noZombies) {
+                for (final EntityState state : noZombies) {
                     if (state.getOwner().getId() == entity.getId()) {
                         found = true;
                         break;
@@ -56,10 +57,10 @@ public class LoadInputModelConformityHelper {
         return result;
     }
 
-    private static List<EntityState> getListWithoutZombies(List<EntityState> states) {
-        List<EntityState> noZombies = new ArrayList<EntityState>();
+    private static List<EntityState> getListWithoutZombies(final List<EntityState> states) {
+        final List<EntityState> noZombies = new ArrayList<EntityState>();
 
-        for (EntityState state : states) {
+        for (final EntityState state : states) {
             if (state.getOwner() != null) {
                 noZombies.add(state);
             }
@@ -68,15 +69,16 @@ public class LoadInputModelConformityHelper {
         return noZombies;
     }
 
-    private static boolean compareAndCountPowerStates(List<PowerState> states, List<PowerGridNode> current) {
+    private static boolean compareAndCountPowerStates(final List<PowerState> states,
+            final List<PowerGridNode> current) {
         boolean result = true;
 
-        List<PowerState> noZombies = getListWithoutZombiesPower(states);
+        final List<PowerState> noZombies = getListWithoutZombiesPower(states);
 
         if (noZombies.size() == current.size()) {
-            for (PowerGridNode node : current) {
+            for (final PowerGridNode node : current) {
                 boolean found = false;
-                for (PowerState state : noZombies) {
+                for (final PowerState state : noZombies) {
                     if (state.getOwner().getId() == node.getId()) {
                         found = true;
                         break;
@@ -93,10 +95,10 @@ public class LoadInputModelConformityHelper {
         return result;
     }
 
-    private static List<PowerState> getListWithoutZombiesPower(List<PowerState> states) {
-        List<PowerState> noZombies = new ArrayList<PowerState>();
+    private static List<PowerState> getListWithoutZombiesPower(final List<PowerState> states) {
+        final List<PowerState> noZombies = new ArrayList<PowerState>();
 
-        for (PowerState state : states) {
+        for (final PowerState state : states) {
             if (state.getOwner() != null) {
                 noZombies.add(state);
             }

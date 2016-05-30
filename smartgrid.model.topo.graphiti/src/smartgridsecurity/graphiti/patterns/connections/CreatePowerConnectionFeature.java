@@ -12,7 +12,7 @@ import smartgridtopo.PowerGridNode;
 
 /**
  * Feature to create a power connection. That means that a business object will be created.
- * 
+ *
  * @author mario
  *
  */

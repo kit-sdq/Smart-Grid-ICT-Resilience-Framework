@@ -24,7 +24,7 @@ import smartgridtopo.NetworkEntity;
 /**
  * This class defines a toolbar action. If this action is executed, the output model will be
  * reverted.
- * 
+ *
  * @author mario
  *
  */
@@ -34,64 +34,65 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
 
     public ClearOutputButtonAction() {
         super(AS_CHECK_BOX);
-        ACTION_ID = "EnableOutputButtonActionId";
-        TOOL_TIP = "Clear the State Result representation";
-        setToolTipText(TOOL_TIP);
-        setId(ACTION_ID);
-        addPropertyChangeListener(this);
-        setImageDescriptor(createImage("icons" + File.separator + "clear_output.png", "smartgrid.model.output"));
+        this.ACTION_ID = "EnableOutputButtonActionId";
+        this.TOOL_TIP = "Clear the State Result representation";
+        this.setToolTipText(this.TOOL_TIP);
+        this.setId(this.ACTION_ID);
+        this.addPropertyChangeListener(this);
+        this.setImageDescriptor(
+                this.createImage("icons" + File.separator + "clear_output.png", "smartgrid.model.output"));
     }
 
     @Override
-    public void setDiagramContainer(IDiagramContainerUI container) {
-        diagramContainer = container;
-        checkOutputModel();
+    public void setDiagramContainer(final IDiagramContainerUI container) {
+        this.diagramContainer = container;
+        this.checkOutputModel();
     }
 
     /**
      * This method checks if there is an output model. If true, the action will be enabled.
      */
     private void checkOutputModel() {
-        EList<EObject> list = diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
-        for (EObject model : list) {
+        final EList<EObject> list = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
+                .getBusinessObjects();
+        for (final EObject model : list) {
             if (model instanceof ScenarioResult) {
-                setEnabled(true);
+                this.setEnabled(true);
                 return;
             }
         }
-        setEnabled(false);
+        this.setEnabled(false);
     }
 
     @Override
     public void run() {
         LOG.info("[ClearOutputButtonAction]: Start clearing output model from diagram");
-        final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
-        RecordingCommand c = new RecordingCommand(domain) {
+        final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
+        final RecordingCommand c = new RecordingCommand(domain) {
             @Override
             protected void doExecute() {
                 ScenarioResult result = null;
-                EObject[] objects = (EObject[]) diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                        .getBusinessObjects().toArray();
-                for (int j = 0; j < objects.length; j++) {
-                    if (objects[j] instanceof ScenarioResult) {
-                        result = (ScenarioResult) objects[j];
+                final EObject[] objects = (EObject[]) ClearOutputButtonAction.this.diagramContainer
+                        .getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().toArray();
+                for (final EObject object : objects) {
+                    if (object instanceof ScenarioResult) {
+                        result = (ScenarioResult) object;
                     }
                 }
 
-                ManageNodeAppearances manager = new ManageNodeAppearances(diagramContainer);
+                final ManageNodeAppearances manager = new ManageNodeAppearances(
+                        ClearOutputButtonAction.this.diagramContainer);
                 // copy list to array -> otherwise you'll get a concurrency
                 // exception
-                Shape[] shapes = (Shape[]) diagramContainer.getDiagramTypeProvider().getDiagram().getChildren()
-                        .toArray();
+                final Shape[] shapes = (Shape[]) ClearOutputButtonAction.this.diagramContainer.getDiagramTypeProvider()
+                        .getDiagram().getChildren().toArray();
                 LOG.debug("[ClearOutputButtonAction]: Clearing all nodes");
-                for (int i = 0; i < shapes.length; i++) {
-                    Shape currentShape = shapes[i];
-
+                for (final Shape currentShape : shapes) {
                     // Clears the diagram from all output entities
                     if ((currentShape.getLink().getBusinessObjects().get(0) instanceof NetworkEntity)) {
                         currentShape.setVisible(true);
                         manager.manageGraphicalPatternRepresentation((ContainerShape) currentShape, true);
-                        Object bo = manager.resolveBOfromNetworkEntity(
+                        final Object bo = manager.resolveBOfromNetworkEntity(
                                 (NetworkEntity) currentShape.getLink().getBusinessObjects().get(0), result.getStates());
 
                         if (bo != null
@@ -100,19 +101,20 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
                         }
                     }
                 }
-                diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().remove(result);
+                ClearOutputButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
+                        .getBusinessObjects().remove(result);
 
             }
         };
         domain.getCommandStack().execute(c);
-        setEnabled(false);
+        this.setEnabled(false);
         LOG.info("[ClearOutputButtonAction]: Clearing successfully finished");
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent event) {
+    public void propertyChange(final PropertyChangeEvent event) {
         if (event.getProperty().equals(StringProvider.ENABLE_CLEAR_BUTTON)) {
-            setEnabled(true);
+            this.setEnabled(true);
         }
     }
 }

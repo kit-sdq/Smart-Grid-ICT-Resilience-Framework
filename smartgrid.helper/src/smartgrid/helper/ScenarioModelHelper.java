@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package smartgrid.helper;
 
@@ -35,29 +35,29 @@ public final class ScenarioModelHelper {
 
     private static Logger LOG = Logger.getLogger(ScenarioModelHelper.class);
 
-    public static SmartGridTopology loadScenario(String path) {
+    public static SmartGridTopology loadScenario(final String path) {
         SmartGridTopology s = null;
         SmartgridtopoPackageImpl.init();
 
-        ResourceSet resSet = new ResourceSetImpl();
-        Resource resource = resSet.getResource(URI.createFileURI(path), true);
+        final ResourceSet resSet = new ResourceSetImpl();
+        final Resource resource = resSet.getResource(URI.createFileURI(path), true);
 
-        EObject r = resource.getContents().get(0);
+        final EObject r = resource.getContents().get(0);
         LOG.debug("Class: " + r.getClass());
         s = (SmartGridTopology) resource.getContents().get(0);
         return s;
     }
 
-    public static ScenarioState loadInput(String path) {
+    public static ScenarioState loadInput(final String path) {
         ScenarioState input = null;
         SmartgridinputPackageImpl.init();
 
         // Code Removed - Christian
 
-        ResourceSet resSet = new ResourceSetImpl();
-        Resource resource = resSet.getResource(URI.createFileURI(path), true);
+        final ResourceSet resSet = new ResourceSetImpl();
+        final Resource resource = resSet.getResource(URI.createFileURI(path), true);
 
-        EObject r = resource.getContents().get(0);
+        final EObject r = resource.getContents().get(0);
         LOG.debug("Class: " + r.getClass());
         input = (ScenarioState) resource.getContents().get(0);
 
@@ -68,28 +68,28 @@ public final class ScenarioModelHelper {
      * Generates a Map the Keys are one certain NodeId and the LinkedList <Integer> Element are all
      * Nodes to which Key has a logical Connection in the Scenario (Topology) Model @see
      * {@link smartgridtopo.Scenario}
-     * 
+     *
      * Attention these are the hardwired Connections ! the current EntityState of the Network Entity
      * is respected !!
      *
-     * 
+     *
      * @param mySmartGridTopo
      *            The Topology of the Model from the Analysis
      * @return a Map with NodeID as Key and LinkedList<"NodeID"> of Keys logical Neighbor as Value
      */
-    public static Map<Integer, LinkedList<Integer>> genNeighborMapbyID(SmartGridTopology mySmartGridTopo) {
+    public static Map<Integer, LinkedList<Integer>> genNeighborMapbyID(final SmartGridTopology mySmartGridTopo) {
         /*
          * Maps one Node (by ID) to his List of neighbor Nodes (also by ID)
          */
-        Map<Integer, LinkedList<Integer>> IDLinks = new HashMap<Integer, LinkedList<Integer>>();
+        final Map<Integer, LinkedList<Integer>> IDLinks = new HashMap<Integer, LinkedList<Integer>>();
 
-        for (LogicalCommunication myLCom : mySmartGridTopo.getContainsLC()) {
+        for (final LogicalCommunication myLCom : mySmartGridTopo.getContainsLC()) {
 
             // Links 2! NetworkEntities together
             // Node u <--Link--> Node v
-            int key = myLCom.getLinks().get(0).getId();
+            final int key = myLCom.getLinks().get(0).getId();
 
-            int value = myLCom.getLinks().get(1).getId();
+            final int value = myLCom.getLinks().get(1).getId();
 
             // Add Node u --Link--> Node v
             addNeighbors(IDLinks, key, value);
@@ -105,15 +105,15 @@ public final class ScenarioModelHelper {
 
     /**
      * Searches in all EntityStates that On State that has the given NetworkEntity ID
-     * 
-     * 
+     *
+     *
      * @param entityID
      *            The Id for that to search the On State
      * @param myScenarioResult
      *            In that "Container" are the States to search for
      * @return the On State with given ID
      */
-    public static On findEntityOnStateFromID(int entityID, ScenarioResult myScenarioResult) {
+    public static On findEntityOnStateFromID(final int entityID, final ScenarioResult myScenarioResult) {
 
         boolean foundNodeID = false;
 
@@ -121,7 +121,7 @@ public final class ScenarioModelHelper {
 
         // Alternative with foreach Cluster foreach On Entities ?? (Double
         // foreach Loop!)
-        for (smartgridoutput.EntityState currentNode : myScenarioResult.getStates()) {
+        for (final smartgridoutput.EntityState currentNode : myScenarioResult.getStates()) {
             // Using only Entities that is On
             if (currentNode.getOwner().getId() == entityID && currentNode instanceof On
                     && !(currentNode.getOwner() instanceof NetworkNode)) {
@@ -142,14 +142,14 @@ public final class ScenarioModelHelper {
 
     /**
      * Returns the NetworkEntity Id from given On State
-     * 
+     *
      * @param eintityOnState
      *            The State
      * @return Id of the Network Entity
      */
-    public static int getIDfromEntityOnState(On eintityOnState) {
+    public static int getIDfromEntityOnState(final On eintityOnState) {
 
-        int id = eintityOnState.getOwner().getId();
+        final int id = eintityOnState.getOwner().getId();
 
         return id;
     }
@@ -157,9 +157,9 @@ public final class ScenarioModelHelper {
     /**
      * Filters the hardwired Logical Connections of the Neighbors out that because of their State
      * (e.g. destroyed) don't functions
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param clusterToHack
      *            the Target Cluster in which are all Nodes located that have a (transitive)
      *            Connection between them
@@ -168,12 +168,13 @@ public final class ScenarioModelHelper {
      * @return Nodes that are in the intersection of the above Container --> These are my direct
      *         alive Neighbors
      */
-    public static LinkedList<On> getNeighborsFromCluster(Cluster clusterToHack, LinkedList<Integer> neighborIDList) {
+    public static LinkedList<On> getNeighborsFromCluster(final Cluster clusterToHack,
+            final LinkedList<Integer> neighborIDList) {
 
-        LinkedList<On> neighborOnList = new LinkedList<On>();
+        final LinkedList<On> neighborOnList = new LinkedList<On>();
 
         // Check whether this Neighbor is in my Cluster
-        for (On clusterNode : clusterToHack.getHasEntities()) {
+        for (final On clusterNode : clusterToHack.getHasEntities()) {
 
             // Are my Neighbors at my Cluster ? Otherwise they are gone
             // (Destroyed or something)
@@ -190,14 +191,14 @@ public final class ScenarioModelHelper {
 
     /*
      * Add another Value (Neighbor) to keys (Node) list
-     * 
+     *
      * @param IDLinks Reference to the List Nodes and their Neighbors
-     * 
+     *
      * @param key the Node
-     * 
+     *
      * @param value the Neighbor from "Key" Node
      */
-    private static void addNeighbors(Map<Integer, LinkedList<Integer>> IDLinks, int key, int value) {
+    private static void addNeighbors(final Map<Integer, LinkedList<Integer>> IDLinks, final int key, final int value) {
         // Search "Key" --> Neighbor List "Values"
         LinkedList<Integer> myNeighbor = IDLinks.get(key);
 
@@ -222,9 +223,9 @@ public final class ScenarioModelHelper {
         }
     }
 
-    public static List<On> getHackedNodes(List<EntityState> states) {
-        List<On> on = new ArrayList<On>();
-        for (EntityState state : states) {
+    public static List<On> getHackedNodes(final List<EntityState> states) {
+        final List<On> on = new ArrayList<On>();
+        for (final EntityState state : states) {
             if (state instanceof On && ((On) state).isIsHacked()) {
                 on.add((On) state);
             }

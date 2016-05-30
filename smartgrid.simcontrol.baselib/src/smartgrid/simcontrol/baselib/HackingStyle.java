@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package smartgrid.simcontrol.baselib;
 

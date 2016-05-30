@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package smartgrid.simcontrol.mocks;
 
@@ -27,12 +27,13 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
      * Runs a mocked Power Load Simulation. This Mock does not change anything.
      */
     @Override
-    public List<PowerPerNode> run(List<AbstractCostFunction> costFunctions, List<SmartMeterState> smartMeterStates) {
+    public List<PowerPerNode> run(final List<AbstractCostFunction> costFunctions,
+            final List<SmartMeterState> smartMeterStates) {
         return new ArrayList<PowerPerNode>();
     }
 
     @Override
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
         return ErrorCodeEnum.SUCCESS;
     }
 

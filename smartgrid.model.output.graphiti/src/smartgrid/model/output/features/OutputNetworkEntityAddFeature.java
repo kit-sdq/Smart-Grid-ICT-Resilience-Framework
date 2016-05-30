@@ -27,20 +27,20 @@ import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartMeter;
 
 public class OutputNetworkEntityAddFeature extends AbstractAddFeature {
-    private EObject bo;
+    private final EObject bo;
 
-    public OutputNetworkEntityAddFeature(IFeatureProvider fp, EObject o) {
+    public OutputNetworkEntityAddFeature(final IFeatureProvider fp, final EObject o) {
         super(fp);
-        bo = o;
+        this.bo = o;
     }
 
     @Override
-    public boolean canAdd(IAddContext context) {
+    public boolean canAdd(final IAddContext context) {
         return true;
     }
 
     @Override
-    public PictogramElement add(IAddContext context) {
+    public PictogramElement add(final IAddContext context) {
         final Diagram targetDiagram = (Diagram) context.getTargetContainer();
 
         // CONTAINER SHAPE
@@ -54,45 +54,45 @@ public class OutputNetworkEntityAddFeature extends AbstractAddFeature {
         // int width = 100;
         // int height = 50;
         final IGaService gaService = Graphiti.getGaService();
-        final GraphicsAlgorithm shape = getGraphicalPatternRepresentation(containerShape);
+        final GraphicsAlgorithm shape = this.getGraphicalPatternRepresentation(containerShape);
         gaService.setLocationAndSize(shape, context.getX(), context.getY(), 20, 20);
 
-        if (bo instanceof NoUplink) {
-            drawQuestionMark(containerShape);
+        if (this.bo instanceof NoUplink) {
+            this.drawQuestionMark(containerShape);
         }
 
         // gaService.setLocationAndSize(p, context.getX(), context.getY(), 20, 20);
-        link(containerShape, context.getNewObject());
+        this.link(containerShape, context.getNewObject());
 
         return containerShape;
     }
 
     /**
      * Draw a specific network entity.
-     * 
+     *
      * @param containerShape
      *            the current container shape
      * @return the specific network entity ga
      */
-    private GraphicsAlgorithm getGraphicalPatternRepresentation(ContainerShape containerShape) {
-        if (((EntityState) bo).getOwner() instanceof SmartMeter) {
+    private GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
+        if (((EntityState) this.bo).getOwner() instanceof SmartMeter) {
             return FeatureRepresentationHelper.createEllipse(containerShape,
                     this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(225, 200, 200)));
         }
-        if (((EntityState) bo).getOwner() instanceof ControlCenter) {
+        if (((EntityState) this.bo).getOwner() instanceof ControlCenter) {
             return FeatureRepresentationHelper.createEllipse(containerShape,
                     this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(124, 154, 139)));
         }
-        if (((EntityState) bo).getOwner() instanceof GenericController) {
+        if (((EntityState) this.bo).getOwner() instanceof GenericController) {
             return FeatureRepresentationHelper.createEllipse(containerShape,
                     this.manageColor(new ColorConstant(210, 60, 0)),
                     this.manageColor(new ColorConstant(200, 188, 168)));
         }
-        if (((EntityState) bo).getOwner() instanceof InterCom) {
+        if (((EntityState) this.bo).getOwner() instanceof InterCom) {
             return FeatureRepresentationHelper.createEllipse(containerShape,
                     this.manageColor(new ColorConstant(0, 139, 0)), this.manageColor(new ColorConstant(199, 212, 139)));
         }
-        if (((EntityState) bo).getOwner() instanceof NetworkNode) {
+        if (((EntityState) this.bo).getOwner() instanceof NetworkNode) {
             return FeatureRepresentationHelper.createRect(containerShape,
                     this.manageColor(new ColorConstant(0, 51, 102)),
                     this.manageColor(new ColorConstant(182, 191, 204)));
@@ -103,30 +103,31 @@ public class OutputNetworkEntityAddFeature extends AbstractAddFeature {
 
     /**
      * Method to draw a question mark into a pe.
-     * 
+     *
      * @param containerShape
      *            the current shape
      */
-    private void drawQuestionMark(ContainerShape containerShape) {
+    private void drawQuestionMark(final ContainerShape containerShape) {
         final IPeCreateService peCreateService = Graphiti.getPeCreateService();
         final IGaService gaService = Graphiti.getGaService();
         // create line
-        Shape lineShape = peCreateService.createShape(containerShape, false);
+        final Shape lineShape = peCreateService.createShape(containerShape, false);
 //        int xy[] = new int[] {4, 8, 12, 4, 8, 12, 8, 8, 8, 12, 12, 12 };
-        int xy[] = new int[] { 4, 2, 14, 2, 14, 8, 6, 8, 6, 15, 16, 15 };// , 8, 12, 8, 8, 8, 12,
-                                                                         // 12, 12 };
-        Polyline p = gaService.createPolyline(lineShape, xy);
-        p.setForeground(manageColor(new ColorConstant(0, 0, 0)));
+        final int xy[] = new int[] { 4, 2, 14, 2, 14, 8, 6, 8, 6, 15, 16, 15 };// , 8, 12, 8, 8, 8,
+                                                                               // 12,
+        // 12, 12 };
+        final Polyline p = gaService.createPolyline(lineShape, xy);
+        p.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
         p.setLineWidth(ConstantProvider.questionMarkLineWidth);
 
-        Shape circleShape = peCreateService.createShape(containerShape, false);
-        Ellipse circle = gaService.createEllipse(circleShape);
+        final Shape circleShape = peCreateService.createShape(containerShape, false);
+        final Ellipse circle = gaService.createEllipse(circleShape);
         circle.setLineWidth(ConstantProvider.questionMarkLineWidth);
         circle.setX(9);
         circle.setY(17);
         circle.setHeight(3);
         circle.setWidth(3);
-        circle.setForeground(manageColor(new ColorConstant(0, 0, 0)));
+        circle.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
     }
 
 }

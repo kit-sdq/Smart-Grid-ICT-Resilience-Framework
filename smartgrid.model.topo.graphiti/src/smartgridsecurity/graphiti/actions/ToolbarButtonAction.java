@@ -15,7 +15,7 @@ import org.osgi.framework.Bundle;
 
 /**
  * Abstract class which has to be implemented by all toolbar actions of SGS editor.
- * 
+ *
  * @author mario
  *
  */
@@ -29,13 +29,13 @@ public abstract class ToolbarButtonAction extends Action {
     public ToolbarButtonAction() {
     }
 
-    public ToolbarButtonAction(int style) {
+    public ToolbarButtonAction(final int style) {
         super("", style);
     }
 
     /**
      * Sets the current diagram container.
-     * 
+     *
      * @param container
      *            the current container
      */
@@ -43,11 +43,11 @@ public abstract class ToolbarButtonAction extends Action {
 
     /**
      * Create save options.
-     * 
+     *
      * @return the save options
      */
     public static Map<?, ?> createSaveOptions() {
-        HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+        final HashMap<String, Object> saveOptions = new HashMap<String, Object>();
         saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
         saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
         return saveOptions;
@@ -55,17 +55,17 @@ public abstract class ToolbarButtonAction extends Action {
 
     /**
      * Creates an ImageDescriptor for a toolbar action.
-     * 
+     *
      * @param filename
      *            filename of the image
      * @param bundleid
      *            the current osgi plugin id
      * @return new ImageDescriptor
      */
-    protected ImageDescriptor createImage(String filename, String bundleid) {
-        Bundle bundle = Platform.getBundle(bundleid);
-        URL fullPathString = BundleUtility.find(bundle, filename);
-        ImageDescriptor imageDcr = ImageDescriptor.createFromURL(fullPathString);
+    protected ImageDescriptor createImage(final String filename, final String bundleid) {
+        final Bundle bundle = Platform.getBundle(bundleid);
+        final URL fullPathString = BundleUtility.find(bundle, filename);
+        final ImageDescriptor imageDcr = ImageDescriptor.createFromURL(fullPathString);
         return imageDcr;
     }
 

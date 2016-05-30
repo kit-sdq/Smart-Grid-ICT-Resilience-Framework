@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Text;
 
 /**
  * Custom page to create new smartgrid diagramms.
- * 
+ *
  * @author mw
  *
  */
@@ -22,41 +22,41 @@ public class CreateNewSmartgridDiagramPage extends WizardPage {
 
     public CreateNewSmartgridDiagramPage() {
         super("wizardPage");
-        setTitle("Smartgrid Security Diagram");
-        setDescription("Enter diagram name");
+        this.setTitle("Smartgrid Security Diagram");
+        this.setDescription("Enter diagram name");
     }
 
     @Override
-    public void createControl(Composite parent) {
-        Composite container = new Composite(parent, SWT.NULL);
-        setPageComplete(false);
+    public void createControl(final Composite parent) {
+        final Composite container = new Composite(parent, SWT.NULL);
+        this.setPageComplete(false);
 
-        setControl(container);
+        this.setControl(container);
         container.setLayout(new GridLayout(3, false));
 
-        Label lblDiagramName = new Label(container, SWT.NONE);
+        final Label lblDiagramName = new Label(container, SWT.NONE);
         lblDiagramName.setText("Diagram Name");
 
-        diagramName = new Text(container, SWT.BORDER);
-        GridData gridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1);
+        this.diagramName = new Text(container, SWT.BORDER);
+        final GridData gridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1);
         gridData.widthHint = 300;
-        diagramName.setLayoutData(gridData);
-        diagramName.addModifyListener(new ModifyListener() {
+        this.diagramName.setLayoutData(gridData);
+        this.diagramName.addModifyListener(new ModifyListener() {
 
             @Override
-            public void modifyText(ModifyEvent e) {
-                String name = diagramName.getText();
-                setPageComplete(name.matches("^[a-zA-Z0-9_]+$") ? true : false);
+            public void modifyText(final ModifyEvent e) {
+                final String name = CreateNewSmartgridDiagramPage.this.diagramName.getText();
+                CreateNewSmartgridDiagramPage.this.setPageComplete(name.matches("^[a-zA-Z0-9_]+$") ? true : false);
 
             }
         });
 
-        diagramName.setFocus();
+        this.diagramName.setFocus();
 
     }
 
     public String getFileName() {
-        return diagramName.getText();
+        return this.diagramName.getText();
     }
 
 }

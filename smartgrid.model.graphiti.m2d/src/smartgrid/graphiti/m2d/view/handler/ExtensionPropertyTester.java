@@ -12,12 +12,12 @@ public class ExtensionPropertyTester extends PropertyTester {
     }
 
     @Override
-    public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+    public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue) {
         boolean result = false;
         if (receiver instanceof TreeSelection) {
-            Object element = ((TreeSelection) receiver).getFirstElement();
+            final Object element = ((TreeSelection) receiver).getFirstElement();
             if (element instanceof File) {
-                String extension = ((File) element).getFileExtension();
+                final String extension = ((File) element).getFileExtension();
                 if (extension != null) {
                     result = extension.equals(expectedValue);
                 }

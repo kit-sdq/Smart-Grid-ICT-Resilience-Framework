@@ -5,7 +5,7 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 
 /**
  * Specific SG Editor diagram type provider.
- * 
+ *
  * @author mario
  *
  */
@@ -20,10 +20,10 @@ public class SGSDiagramTypeProvider extends AbstractDiagramTypeProvider {
 
     @Override
     public IToolBehaviorProvider[] getAvailableToolBehaviorProviders() {
-        if (toolBehaviorProviders == null) {
-            toolBehaviorProviders = new IToolBehaviorProvider[] { new SGSToolBehaviorProvider(this) };
+        if (this.toolBehaviorProviders == null) {
+            this.toolBehaviorProviders = new IToolBehaviorProvider[] { new SGSToolBehaviorProvider(this) };
         }
-        return toolBehaviorProviders;
+        return this.toolBehaviorProviders;
     }
 
     @Override

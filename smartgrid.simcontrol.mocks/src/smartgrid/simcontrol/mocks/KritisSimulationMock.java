@@ -14,7 +14,7 @@ import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
 public class KritisSimulationMock implements IKritisSimulationWrapper {
 
     @Override
-    public List<AbstractCostFunction> run(List<PowerPerNode> power) {
+    public List<AbstractCostFunction> run(final List<PowerPerNode> power) {
         return new ArrayList<AbstractCostFunction>();
 
 //        List<AbstractCostFunction> list = new ArrayList<AbstractCostFunction>();
@@ -23,7 +23,7 @@ public class KritisSimulationMock implements IKritisSimulationWrapper {
     }
 
     @Override
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException {
+    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
         return ErrorCodeEnum.SUCCESS;
     }
 

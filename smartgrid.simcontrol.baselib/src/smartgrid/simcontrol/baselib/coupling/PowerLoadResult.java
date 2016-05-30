@@ -6,18 +6,18 @@ import smartgridinput.ScenarioState;
 
 public class PowerLoadResult {
 
-    private ScenarioState scenarioState;
-    private List<PowerPerNode> powerPerNodes;
+    private final ScenarioState scenarioState;
+    private final List<PowerPerNode> powerPerNodes;
 
     public ScenarioState getScenarioState() {
-        return scenarioState;
+        return this.scenarioState;
     }
 
     public List<PowerPerNode> getPowerPerNodes() {
-        return powerPerNodes;
+        return this.powerPerNodes;
     }
 
-    public PowerLoadResult(ScenarioState scenarioState, List<PowerPerNode> powerPerNodes) {
+    public PowerLoadResult(final ScenarioState scenarioState, final List<PowerPerNode> powerPerNodes) {
         super();
         this.scenarioState = scenarioState;
         this.powerPerNodes = powerPerNodes;

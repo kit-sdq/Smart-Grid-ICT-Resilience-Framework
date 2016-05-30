@@ -7,18 +7,18 @@ import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 /**
  * Resize feature to restrict the resize mechanism of input model pe's. The class is not used at the
  * moment.
- * 
+ *
  * @author mario
  *
  */
 public class RestrictResizeFeature extends DefaultResizeShapeFeature {
 
-    public RestrictResizeFeature(IFeatureProvider fp) {
+    public RestrictResizeFeature(final IFeatureProvider fp) {
         super(fp);
     }
 
     @Override
-    public boolean canResizeShape(IResizeShapeContext context) {
+    public boolean canResizeShape(final IResizeShapeContext context) {
         return false;
     }
 

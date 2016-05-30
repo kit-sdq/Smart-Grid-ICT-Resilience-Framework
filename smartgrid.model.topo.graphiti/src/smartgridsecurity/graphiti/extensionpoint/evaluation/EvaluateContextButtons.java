@@ -20,7 +20,7 @@ import smartgridsecurity.graphiti.extensionpoint.definition.IContextButtonResolv
 /**
  * This class evaluates the context button extension point and adds all context button instances to
  * a list.
- * 
+ *
  * @author mario
  *
  */
@@ -28,65 +28,65 @@ public class EvaluateContextButtons {
     private static final Logger LOG = Logger.getLogger(EvaluateContextButtons.class);
 
     private static final String CONTEXT_BUTTON_ID = "smartgridsecurity.graphiti.extension.contextbutton";
-    private IFeatureProvider fp;
+    private final IFeatureProvider fp;
 
-    public EvaluateContextButtons(IFeatureProvider f) {
-        fp = f;
+    public EvaluateContextButtons(final IFeatureProvider f) {
+        this.fp = f;
     }
 
     /**
      * Evaluates all feature extensions.
-     * 
+     *
      * @param registry
      *            the extension registry of the current platform
      * @return all found feature extensions
      */
-    public List<AbstractCustomFeature> evaluateFeatureExtension(IExtensionRegistry registry) {
-        return evaluate(registry);
+    public List<AbstractCustomFeature> evaluateFeatureExtension(final IExtensionRegistry registry) {
+        return this.evaluate(registry);
     }
 
     /**
      * Private method to evaluate all feature extensions.
-     * 
+     *
      * @param registry
      *            the extension registry of the current platform
      * @return all found feature extensions
      */
-    private List<AbstractCustomFeature> evaluate(IExtensionRegistry registry) {
-        IConfigurationElement[] config = registry.getConfigurationElementsFor(CONTEXT_BUTTON_ID);
+    private List<AbstractCustomFeature> evaluate(final IExtensionRegistry registry) {
+        final IConfigurationElement[] config = registry.getConfigurationElementsFor(CONTEXT_BUTTON_ID);
 
         // define the thread pool
-        ExecutorService pool = Executors.newCachedThreadPool();
-        List<Future<List<AbstractCustomFeature>>> list = new LinkedList<Future<List<AbstractCustomFeature>>>();
-        List<AbstractCustomFeature> AbstractCustomFeatureList = new LinkedList<AbstractCustomFeature>();
+        final ExecutorService pool = Executors.newCachedThreadPool();
+        final List<Future<List<AbstractCustomFeature>>> list = new LinkedList<Future<List<AbstractCustomFeature>>>();
+        final List<AbstractCustomFeature> AbstractCustomFeatureList = new LinkedList<AbstractCustomFeature>();
 
         try {
-            for (IConfigurationElement e : config) {
+            for (final IConfigurationElement e : config) {
                 LOG.debug("Evaluating custom button extension");
                 final Object o = e.createExecutableExtension("class");
                 if (o instanceof IContextButtonResolver) {
                     // Executes the evaluation in a thread an returns the result
                     // in the future
-                    Callable<List<AbstractCustomFeature>> callable = new EvaluateAbstractPattern(
-                            (IContextButtonResolver) o, fp);
-                    Future<List<AbstractCustomFeature>> future = pool.submit(callable);
+                    final Callable<List<AbstractCustomFeature>> callable = new EvaluateAbstractPattern(
+                            (IContextButtonResolver) o, this.fp);
+                    final Future<List<AbstractCustomFeature>> future = pool.submit(callable);
                     list.add(future);
                 }
             }
 
             // add all AbstractPattern to list
-            for (Future<List<AbstractCustomFeature>> buttn : list) {
+            for (final Future<List<AbstractCustomFeature>> buttn : list) {
                 try {
-                    for (AbstractCustomFeature tba : buttn.get()) {
+                    for (final AbstractCustomFeature tba : buttn.get()) {
                         AbstractCustomFeatureList.add(tba);
                     }
-                } catch (InterruptedException e1) {
+                } catch (final InterruptedException e1) {
                     e1.printStackTrace();
-                } catch (ExecutionException e1) {
+                } catch (final ExecutionException e1) {
                     e1.printStackTrace();
                 }
             }
-        } catch (CoreException ex) {
+        } catch (final CoreException ex) {
             LOG.error("CoreException occured, message is: " + ex.getMessage());
         }
         return AbstractCustomFeatureList;
@@ -98,17 +98,17 @@ public class EvaluateContextButtons {
      */
     private class EvaluateAbstractPattern implements Callable<List<AbstractCustomFeature>> {
 
-        private IContextButtonResolver resolver;
-        private IFeatureProvider provider;
+        private final IContextButtonResolver resolver;
+        private final IFeatureProvider provider;
 
-        public EvaluateAbstractPattern(IContextButtonResolver f, IFeatureProvider fp) {
+        public EvaluateAbstractPattern(final IContextButtonResolver f, final IFeatureProvider fp) {
             this.resolver = f;
             this.provider = fp;
         }
 
         @Override
         public List<AbstractCustomFeature> call() throws Exception {
-            return resolver.getContextButtons(provider);
+            return this.resolver.getContextButtons(this.provider);
         }
 
     }

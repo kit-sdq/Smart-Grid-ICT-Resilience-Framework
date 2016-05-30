@@ -10,7 +10,7 @@ public interface IDeleteFeatureResolver {
     /**
      * this method provides parameters in order to be able to delete business elements from specific
      * models
-     * 
+     *
      * @param boFromDiagram
      *            a list of business objects contained in the current diagram
      * @param owner

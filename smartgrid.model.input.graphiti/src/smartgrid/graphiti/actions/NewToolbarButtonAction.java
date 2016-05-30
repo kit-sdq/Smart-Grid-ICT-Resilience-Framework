@@ -25,50 +25,52 @@ import smartgridtopo.SmartGridTopology;
 
 /**
  * This class defines a toolbar action to create new input models.
- * 
+ *
  * @author mario
  *
  */
 public class NewToolbarButtonAction extends ToolbarButtonAction {
 
-    public NewToolbarButtonAction(IPropertyChangeListener listener) {
+    public NewToolbarButtonAction(final IPropertyChangeListener listener) {
         super();
-        ACTION_ID = "NewToolbarButtonActionId";
-        TOOL_TIP = "Create new State Scenario";
-        setToolTipText(TOOL_TIP);
-        setId(ACTION_ID);
-        addPropertyChangeListener(listener);
-        setImageDescriptor(createImage("icons" + File.separator + "new_input.png", "smartgrid.model.input"));
+        this.ACTION_ID = "NewToolbarButtonActionId";
+        this.TOOL_TIP = "Create new State Scenario";
+        this.setToolTipText(this.TOOL_TIP);
+        this.setId(this.ACTION_ID);
+        this.addPropertyChangeListener(listener);
+        this.setImageDescriptor(this.createImage("icons" + File.separator + "new_input.png", "smartgrid.model.input"));
     }
 
     @Override
     public void run() {
-        for (EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
+                .getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
-                MessageBox messageBox = new MessageBox(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-                        SWT.ICON_ERROR);
+                final MessageBox messageBox = new MessageBox(
+                        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot create new input model while output model is loaded");
                 messageBox.open();
                 return;
             }
         }
 
-        for (EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
+                .getBusinessObjects()) {
             if (obj instanceof ScenarioState) {
 
-                final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
-                RecordingCommand c = new RecordingCommand(domain) {
+                final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
+                final RecordingCommand c = new RecordingCommand(domain) {
                     @Override
                     protected void doExecute() {
                         // copy list to array -> otherwise you'll get a
                         // concurrency exception
-                        Shape[] shapes = (Shape[]) diagramContainer.getDiagramTypeProvider().getDiagram().getChildren()
-                                .toArray();
+                        final Shape[] shapes = (Shape[]) NewToolbarButtonAction.this.diagramContainer
+                                .getDiagramTypeProvider().getDiagram().getChildren().toArray();
 
                         // First, clear all states if there are any
-                        ManageNodeAppearances manager = new ManageNodeAppearances(diagramContainer);
-                        for (int i = 0; i < shapes.length; i++) {
-                            Shape currentShape = shapes[i];
+                        final ManageNodeAppearances manager = new ManageNodeAppearances(
+                                NewToolbarButtonAction.this.diagramContainer);
+                        for (final Shape currentShape : shapes) {
                             if (currentShape.getLink().getBusinessObjects().get(0) instanceof PowerGridNode) {
                                 currentShape.setVisible(true);
 
@@ -87,14 +89,15 @@ public class NewToolbarButtonAction extends ToolbarButtonAction {
             }
         }
 
-        InputModelCreator creator = new InputModelCreator(diagramContainer);
-        int returnCode = creator.createNewInputModel(false);
+        final InputModelCreator creator = new InputModelCreator(this.diagramContainer);
+        final int returnCode = creator.createNewInputModel(false);
         if (returnCode == Window.OK) {
-            firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
+            this.firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
         }
     }
 
-    public void setDiagramContainer(IDiagramContainerUI container) {
-        diagramContainer = container;
+    @Override
+    public void setDiagramContainer(final IDiagramContainerUI container) {
+        this.diagramContainer = container;
     }
 }

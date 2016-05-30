@@ -21,12 +21,12 @@ public class CreateDiagramHandler extends AbstractHandler {
     }
 
     @Override
-    public Object execute(ExecutionEvent event) throws ExecutionException {
-        TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-        File emfFile = (File) selection.getFirstElement();
-        ResourceSet impl = new ResourceSetImpl();
+    public Object execute(final ExecutionEvent event) throws ExecutionException {
+        final TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
+        final File emfFile = (File) selection.getFirstElement();
+        final ResourceSet impl = new ResourceSetImpl();
 
-        Resource resource = impl.getResource(URI.createFileURI(emfFile.getFullPath().toString()), true);
+        final Resource resource = impl.getResource(URI.createFileURI(emfFile.getFullPath().toString()), true);
 
         new ModelToDiagram(emfFile.getProjectRelativePath().toString(), emfFile.getProject())
                 .initializeDiagram((SmartGridTopology) resource.getContents().get(0));
