@@ -3,29 +3,13 @@ package smartgrid.simcontrol.baselib.coupling;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
-import smartgridinput.ScenarioState;
-import smartgridoutput.ScenarioResult;
-import smartgridtopo.SmartGridTopology;
 
 /**
  * 
  * Interface for the PowerLoad Simulation
  *
  */
-public interface IPowerLoadSimulationWrapper {
-
-	/**
-	 * Runs the Power Load Simulation
-	 * 
-	 * @param smartGridTopo
-	 * @param impactAnalysisInput
-	 * @param impactAnalysisOutput
-	 *            contains up to date hacked states (don't use hacked state of
-	 *            input)
-	 * @return
-	 */
-	public ScenarioState run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput,
-			ScenarioResult impactAnalysisOutput);
+public interface IPowerLoadSimulationWrapper extends IPowerLoadSimulation {
 
 	/**
 	 * If using ExtensionPoints and so 0-parameter Constructor pass the config

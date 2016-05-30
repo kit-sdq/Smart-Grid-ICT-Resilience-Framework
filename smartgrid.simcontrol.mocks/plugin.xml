@@ -34,7 +34,7 @@
    <extension
          point="smartgrid.simcontrol.extensionpoints.attackerSimulation">
       <AttackerSimulation
-            class="smartgrid.simcontrol.mocks.AttackerSimulationMock">
+            class="smartgrid.simcontrol.mocks.NoAttackerSimulation">
       </AttackerSimulation>
    </extension>
 

@@ -14,7 +14,7 @@ import smartgridtopo.SmartGridTopology;
  * @author Christian
  *
  */
-public class AttackerSimulationMock implements IAttackerSimulation {
+public class NoAttackerSimulation implements IAttackerSimulation {
 
 	/**
 	 * {@inheritDoc}

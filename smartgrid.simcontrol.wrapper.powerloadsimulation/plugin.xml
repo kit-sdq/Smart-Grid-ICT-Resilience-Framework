@@ -4,7 +4,7 @@
    <extension
          point="smartgrid.simcontrol.extensionpoints.powerLoadSimulation">
       <powerLoadSimulation
-            powerLoadSimulation="smartgrid.simcontrol.wrapper.powerloadsimulation.wrapper.PowerLoadSimulationWrapper">
+            powerLoadSimulation="smartgrid.simcontrol.wrapper.powerloadsimulation.PowerLoadSimulationWrapper">
       </powerLoadSimulation>
    </extension>
 

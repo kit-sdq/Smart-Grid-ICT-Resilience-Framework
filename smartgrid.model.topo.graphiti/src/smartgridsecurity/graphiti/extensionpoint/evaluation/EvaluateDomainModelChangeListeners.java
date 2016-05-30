@@ -62,7 +62,7 @@ public class EvaluateDomainModelChangeListeners {
 
 		try {
 			for (IConfigurationElement e : config) {
-				LOG.info("Evaluating resource listener extension");
+				LOG.debug("Evaluating resource listener extension");
 				final Object o = e.createExecutableExtension("class");
 				if (o instanceof IDomainModelChangeListenerResolver) {
 					// Executes the evaluation in a thread an returns the result
@@ -87,7 +87,7 @@ public class EvaluateDomainModelChangeListeners {
 				}
 			}
 		} catch (CoreException ex) {
-			LOG.error("[EvaluateDomainModelChangeListeners]: CoreException occured, message is: " + ex.getMessage());
+			LOG.error("CoreException occured, message is: " + ex.getMessage());
 		}
 		return listenerList;
 	}

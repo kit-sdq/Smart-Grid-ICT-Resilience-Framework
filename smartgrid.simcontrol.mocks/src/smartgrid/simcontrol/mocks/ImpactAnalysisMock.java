@@ -85,7 +85,7 @@ public class ImpactAnalysisMock implements IImpactAnalysis {
 
 	@Override
 	public String getName() {
-		return "Impact Analyses Mock";
+		return "Impact Analysis Mock";
 	}
 
 }

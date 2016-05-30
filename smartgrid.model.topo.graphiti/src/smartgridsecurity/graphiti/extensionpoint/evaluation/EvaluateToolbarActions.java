@@ -56,7 +56,7 @@ public class EvaluateToolbarActions {
 
 		try {
 			for (IConfigurationElement e : config) {
-				LOG.info("Evaluating extension");
+				LOG.debug("Evaluating extension");
 				final Object o = e.createExecutableExtension("class");
 				if (o instanceof IToolbarButtonActionResolver) {
 					// Executes the evaluation in a thread an returns the result
@@ -81,7 +81,7 @@ public class EvaluateToolbarActions {
 				}
 			}
 		} catch (CoreException ex) {
-			LOG.error("[EvaluateToolbarActions]: CoreException occured, message is: " + ex.getMessage());
+			LOG.error("CoreException occured, message is: " + ex.getMessage());
 		}
 		return toolbarButtonActionList;
 	}

@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import smartgrid.helper.ReceiveAnalysesHelper;
+import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.GenerationStyle;
 import smartgrid.simcontrol.baselib.HackingStyle;
@@ -424,10 +424,10 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
             @Override
             public void modifyText(ModifyEvent e) {
-                ReceiveAnalysesHelper helper = new ReceiveAnalysesHelper();
+                SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
                 try {
-                    List<IAttackerSimulation> list = helper.getAttackerSimulationElements();
+                    List<IAttackerSimulation> list = helper.getAttackerSimulationExtensions();
                     IAttackerSimulation sim = null;
                     for (IAttackerSimulation attack : list) {
                         if (attack.getName()
@@ -887,7 +887,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     }
 
     private void addElementsToCombos() {
-        ReceiveAnalysesHelper helper = new ReceiveAnalysesHelper();
+        SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
         try {
             addPowerLoadElements(helper);
@@ -901,8 +901,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addPowerLoadElements(ReceiveAnalysesHelper helper) throws CoreException {
-        List<IPowerLoadSimulationWrapper> list = helper.getPowerLoadElements();
+    private void addPowerLoadElements(SimulationExtensionPointHelper helper) throws CoreException {
+        List<IPowerLoadSimulationWrapper> list = helper.getPowerLoadSimulationExtensions();
         for (IPowerLoadSimulationWrapper ele : list) {
             comboPowerLoadSimulation.add(ele.getName());
         }
@@ -911,8 +911,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addAttackerSimulationElements(ReceiveAnalysesHelper helper) throws CoreException {
-        List<IAttackerSimulation> list = helper.getAttackerSimulationElements();
+    private void addAttackerSimulationElements(SimulationExtensionPointHelper helper) throws CoreException {
+        List<IAttackerSimulation> list = helper.getAttackerSimulationExtensions();
         for (IAttackerSimulation ele : list) {
             comboAttackSimulation.add(ele.getName());
         }
@@ -921,8 +921,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addKritisSimulationElements(ReceiveAnalysesHelper helper) throws CoreException {
-        List<IKritisSimulationWrapper> list = helper.getKritisSimulationElements();
+    private void addKritisSimulationElements(SimulationExtensionPointHelper helper) throws CoreException {
+        List<IKritisSimulationWrapper> list = helper.getKritisSimulationExtensions();
         for (IKritisSimulationWrapper ele : list) {
             comboKritisSimulation.add(ele.getName());
         }
@@ -931,8 +931,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addTerminationConditionElements(ReceiveAnalysesHelper helper) throws CoreException {
-        List<ITerminationCondition> list = helper.getTerminationConditionElements();
+    private void addTerminationConditionElements(SimulationExtensionPointHelper helper) throws CoreException {
+        List<ITerminationCondition> list = helper.getTerminationConditionExtensions();
         for (ITerminationCondition ele : list) {
             comboTerminationCondition.add(ele.getName());
         }
@@ -941,8 +941,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addProgressorElements(ReceiveAnalysesHelper helper) throws CoreException {
-        List<ITimeProgressor> list = helper.getProgressorElements();
+    private void addProgressorElements(SimulationExtensionPointHelper helper) throws CoreException {
+        List<ITimeProgressor> list = helper.getProgressorExtensions();
         for (ITimeProgressor ele : list) {
             comboProgressor.add(ele.getName());
         }
@@ -951,8 +951,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addImpactAnalysisElements(ReceiveAnalysesHelper helper) throws CoreException {
-        List<IImpactAnalysis> list = helper.getImpactAnalysisElements();
+    private void addImpactAnalysisElements(SimulationExtensionPointHelper helper) throws CoreException {
+        List<IImpactAnalysis> list = helper.getImpactAnalysisExtensions();
         for (IImpactAnalysis ele : list) {
             comboImpactAnalysis.add(ele.getName());
         }

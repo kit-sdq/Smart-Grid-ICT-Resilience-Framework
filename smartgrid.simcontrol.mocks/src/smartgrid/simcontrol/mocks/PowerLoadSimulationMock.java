@@ -3,16 +3,16 @@
  */
 package smartgrid.simcontrol.mocks;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
+import smartgrid.simcontrol.baselib.coupling.AbstractCostFunction;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
-import smartgridinput.ScenarioState;
-import smartgridoutput.EntityState;
-import smartgridoutput.On;
-import smartgridoutput.ScenarioResult;
-import smartgridtopo.SmartGridTopology;
+import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
+import smartgrid.simcontrol.baselib.coupling.SmartMeterState;
 
 /**
  * @author Christian
@@ -26,20 +26,8 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
 	 * Runs a mocked Power Load Simulation. This Mock does not change anything.
 	 */
 	@Override
-	public ScenarioState run(SmartGridTopology smartGridTopo, ScenarioState impactAnalysisInput,
-			ScenarioResult impactAnalysisOutput) {
-
-		for (EntityState state : impactAnalysisOutput.getStates()) {
-			if (state instanceof On && ((On) state).isIsHacked()) {
-				for (smartgridinput.EntityState input : impactAnalysisInput.getEntityStates()) {
-					if (input.getOwner().equals(state.getOwner())) {
-						input.setIsHacked(true);
-					}
-				}
-			}
-		}
-
-		return impactAnalysisInput;
+	public List<PowerPerNode> run(List<AbstractCostFunction> costFunctions, List<SmartMeterState> smartMeterStates) {
+		return null;
 	}
 
 	@Override
@@ -49,7 +37,6 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
 
 	@Override
 	public String getName() {
-		return "Powerload Simulation Mock";
+		return "Power Load Simulation Mock";
 	}
-
 }
