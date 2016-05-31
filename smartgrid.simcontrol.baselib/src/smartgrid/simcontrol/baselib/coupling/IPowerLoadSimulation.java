@@ -1,7 +1,9 @@
 package smartgrid.simcontrol.baselib.coupling;
 
-import java.util.List;
+import java.util.Map;
+
+import smartgridoutput.EntityState;
 
 public interface IPowerLoadSimulation {
-    List<PowerPerNode> run(List<AbstractCostFunction> costFunctions, List<SmartMeterState> smartMeterStates);
+    Map<String,Double> run(Map<String,Double> kritisDemand, Map<String,EntityState> smartMeterStates);
 }

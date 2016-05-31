@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Appender;
 import org.apache.log4j.FileAppender;
@@ -82,8 +83,7 @@ public final class SimulationController {
         final ScenarioState impactInput = initialState;
         ScenarioResult impactResultOld;
 
-        List<PowerPerNode> powerPerNodes = null; // TODO how to initialize?
-        List<AbstractCostFunction> costFunctions;
+        List<AbstractCostFunction> kritisDemand;
 
         // Compute Initial Impact Analysis Result
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
@@ -93,7 +93,11 @@ public final class SimulationController {
             // Generates Path with default System separators
             final String timeStepPath = new File(workingDirPath + "\\Zeitschritt " + timeStep).getPath();
 
-            costFunctions = kritisSimulation.run(powerPerNodes);
+            if (timeStep == 0) {
+                kritisDemand = kritisSimulation.getDefaultDemand();
+            } else {
+                kritisDemand = kritisSimulation.run(power);
+            }
 
             impactResult = attackerSimulation.run(topo, impactResult);
             if (impactResult == null) {
@@ -115,13 +119,13 @@ public final class SimulationController {
 
                 // run power load simulation
                 final List<SmartMeterState> smartMeterStates = convertToPowerLoadInput(impactResult);
-                powerPerNodes = powerLoadSimulation.run(costFunctions, smartMeterStates);
+                power = powerLoadSimulation.run(costFunctions, smartMeterStates);
 
                 // copy the input
                 impactInputOld = EcoreUtil.copy(impactInput);
 
                 // convert input for impact analysis
-                updateImactAnalysisInput(impactInput, impactResult, powerPerNodes);
+                updateImactAnalysisInput(impactInput, impactResult, power);
 
                 // Save input to file
                 final String inputFile = new File(iterationPath + "\\PowerLoadResult.smartgridinput").getPath();
@@ -263,20 +267,19 @@ public final class SimulationController {
         String initialPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
         String currentPath = initialPath;
         int runningNumber = 0;
-        while(new File(currentPath).exists()) {
-            LOG.info("Exists already: "+currentPath);
-            
+        while (new File(currentPath).exists()) {
+            LOG.info("Exists already: " + currentPath);
+
             currentPath = removeTrailingSeparator(initialPath) + runningNumber + '\\';
             runningNumber++;
         }
         workingDirPath = currentPath;
-        LOG.info("Working dir is: "+workingDirPath);
+        LOG.info("Working dir is: " + workingDirPath);
     }
 
     private static String removeTrailingSeparator(String initialPath) {
-        if(initialPath.endsWith("\\"))
-        {
-            return initialPath.substring(0, initialPath.length()-1);
+        if (initialPath.endsWith("\\")) {
+            return initialPath.substring(0, initialPath.length() - 1);
         }
         return initialPath;
     }
