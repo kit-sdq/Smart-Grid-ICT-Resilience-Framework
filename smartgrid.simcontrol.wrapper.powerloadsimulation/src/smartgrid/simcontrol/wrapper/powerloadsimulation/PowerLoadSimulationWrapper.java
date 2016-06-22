@@ -1,35 +1,33 @@
 package smartgrid.simcontrol.wrapper.powerloadsimulation;
 
-import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
-import smartgrid.simcontrol.baselib.coupling.AbstractCostFunction;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulation;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
-import smartgrid.simcontrol.baselib.coupling.SmartMeterState;
+import smartgrid.simcontrol.baselib.coupling.PowerSpec;
+import smartgridoutput.EntityState;
 
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
+
+
     @Override
-    public List<PowerPerNode> run(final List<AbstractCostFunction> costFunctions,
-            final List<SmartMeterState> smartMeterStates) {
+    public Map<String, Double> run(Map<String, PowerSpec> kritisDemands, Map<String, EntityState> smartMeterStates) {
 
         // TODO implement wrapper!
         final IPowerLoadSimulation dummy = new IPowerLoadSimulation() {
             @Override
-            public List<PowerPerNode> run(final List<AbstractCostFunction> costFunctions,
-                    final List<SmartMeterState> smartMeterStates) {
+            public Map<String, Double> run(Map<String, PowerSpec> kritisDemands,
+                    Map<String, EntityState> smartMeterStates) {
                 throw new RuntimeException("Power load simulation wrapper not implemented!");
             }
         };
 
-        final List<PowerPerNode> powerPerNodes = dummy.run(costFunctions, smartMeterStates);
-
-        return powerPerNodes;
+        return dummy.run(kritisDemands, smartMeterStates);
     }
 
     @Override

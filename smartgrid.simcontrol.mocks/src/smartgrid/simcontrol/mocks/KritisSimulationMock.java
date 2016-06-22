@@ -1,25 +1,25 @@
 package smartgrid.simcontrol.mocks;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
-import smartgrid.simcontrol.baselib.coupling.AbstractCostFunction;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
+import smartgrid.simcontrol.baselib.coupling.PowerSpec;
 
 public class KritisSimulationMock implements IKritisSimulationWrapper {
 
     @Override
-    public List<AbstractCostFunction> run(final List<PowerPerNode> power) {
-        return new ArrayList<AbstractCostFunction>();
+    public Map<String, PowerSpec> run(Map<String, Double> power) {
+        return new HashMap<String, PowerSpec>();
+    }
 
-//        List<AbstractCostFunction> list = new ArrayList<AbstractCostFunction>();
-//        list.add(new LinearCostFunction(power.get(0).getPowerNodeID(), 1));
-//        return list;
+    @Override
+    public Map<String, PowerSpec> getDefaultDemand() {
+        return new HashMap<String, PowerSpec>();
     }
 
     @Override

@@ -5,5 +5,5 @@ import java.util.Map;
 import smartgridoutput.EntityState;
 
 public interface IPowerLoadSimulation {
-    Map<String,Double> run(Map<String,Double> kritisDemand, Map<String,EntityState> smartMeterStates);
+    Map<String, Double> run(Map<String, PowerSpec> kritisDemands, Map<String, EntityState> smartMeterStates);
 }

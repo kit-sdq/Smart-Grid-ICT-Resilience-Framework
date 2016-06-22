@@ -1,4 +1,4 @@
-package smartgrid.simcontrol;
+package smartgrid.simcontrol.baselib.coupling;
 
 public class PowerSpec {
     private double defaultDemand;
@@ -13,7 +13,6 @@ public class PowerSpec {
     }
 
     public PowerSpec(double defaultDemand, double actualDemand) {
-        super();
         this.defaultDemand = defaultDemand;
         this.actualDemand = actualDemand;
     }

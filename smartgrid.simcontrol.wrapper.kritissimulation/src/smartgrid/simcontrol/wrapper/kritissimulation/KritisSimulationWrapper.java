@@ -1,31 +1,35 @@
 package smartgrid.simcontrol.wrapper.kritissimulation;
 
-import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
-import smartgrid.simcontrol.baselib.coupling.AbstractCostFunction;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulation;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.PowerPerNode;
+import smartgrid.simcontrol.baselib.coupling.PowerSpec;
 
 public class KritisSimulationWrapper implements IKritisSimulationWrapper {
 
     @Override
-    public List<AbstractCostFunction> run(final List<PowerPerNode> power) {
+    public Map<String, PowerSpec> run(Map<String, Double> power) {
 
         // TODO implement wrapper!
         final IKritisSimulation dummy = new IKritisSimulation() {
             @Override
-            public List<AbstractCostFunction> run(final List<PowerPerNode> power) {
+            public Map<String, PowerSpec> run(Map<String, Double> power) {
                 throw new RuntimeException("KRITIS wrapper not yet implemented!");
             }
         };
 
-        final List<AbstractCostFunction> costFunctions = dummy.run(power);
-        return costFunctions;
+        return dummy.run(power);
+    }
+
+    @Override
+    public Map<String, PowerSpec> getDefaultDemand() {
+        // TODO implement wrapper!
+        return null;
     }
 
     @Override
@@ -37,5 +41,4 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
     public String getName() {
         return "KRITIS Simulation Wrapper";
     }
-
 }
