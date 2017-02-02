@@ -1,3 +1,4 @@
+package smartgrid.simcontrol.baselib.coupling.outdated;
 //package smartgrid.simcontrol.baselib.coupling;
 //
 //public abstract class AbstractCostFunction {
