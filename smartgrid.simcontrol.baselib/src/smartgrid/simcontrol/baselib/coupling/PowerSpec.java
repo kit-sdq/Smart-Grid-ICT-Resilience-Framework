@@ -1,20 +1,25 @@
 package smartgrid.simcontrol.baselib.coupling;
 
 public class PowerSpec {
-    private double defaultDemand;
-    private double actualDemand;
+    private double baseDemand; //optimal demand
+    private double actualDemand; //reduced demand during power failure
+    private double criticality; //1 = human casualties (has to be supplied)
 
     public double getDefaultDemand() {
-        return defaultDemand;
+        return baseDemand;
     }
 
     public double getActualDemand() {
         return actualDemand;
     }
-
-    public PowerSpec(double defaultDemand, double actualDemand) {
-        this.defaultDemand = defaultDemand;
-        this.actualDemand = actualDemand;
+    
+    public double getCriticality() {
+        return criticality;
     }
 
+    public PowerSpec(double baseDemand, double actualDemand, double criticality) {
+        this.baseDemand = baseDemand;
+        this.actualDemand = actualDemand;
+        this.criticality = criticality;
+    }
 }

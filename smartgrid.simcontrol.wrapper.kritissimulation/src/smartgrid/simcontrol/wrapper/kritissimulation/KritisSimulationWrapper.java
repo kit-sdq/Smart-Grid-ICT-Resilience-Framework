@@ -26,16 +26,16 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
 
         // get all agents with power supply
         Iterable<Electrified> agents = kritisSimConnector.getAgents(Electrified.class);
-        
+
         // set power supply
         for (Electrified ag : agents) {
             String agentId = ((BaseAgent) ag).getAgentId();
             double powerSupply = power.get(agentId);
-            ag.setPowerInputWatt((int)powerSupply); //TODO: remove cast
-            
+            ag.setPowerInputWatt((int) powerSupply); //TODO: remove cast
+
             LOG.debug("Set power input " + powerSupply + " for agent " + agentId);
         }
-        
+
         LOG.debug("Performing KRITIS simulation step");
         kritisSimConnector.step();
 
@@ -45,12 +45,11 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
         // get power demand
         Map<String, PowerSpec> powerDemand = new HashMap<String, PowerSpec>();
         for (Electrified ag : agents) {
-            //TODO: use proper methods, remove cast
-            double powerRequired = (double) ag.getPowerRequired();
-            PowerSpec powerSpec = new PowerSpec(powerRequired, powerRequired);
+            double powerRequired = (double) ag.getPowerRequired(); //TODO: remove cast
+            PowerSpec powerSpec = new PowerSpec(powerRequired, powerRequired, 0); //TODO: pass proper criticality value
 
             String agentId = ((BaseAgent) ag).getAgentId();
-            
+
             powerDemand.put(agentId, powerSpec);
             LOG.debug("Got demand " + powerRequired + " from agent " + agentId);
         }
@@ -68,12 +67,11 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
         //get default demand
         Map<String, PowerSpec> powerDemand = new HashMap<String, PowerSpec>();
         for (Electrified ag : agents) {
-            // TODO: use proper methods, remove cast
-            double powerRequired = (double) ag.getPowerRequired();
-            PowerSpec powerSpec = new PowerSpec(powerRequired, powerRequired);
+            double powerRequired = (double) ag.getPowerRequired(); // TODO: use proper methods, remove cast
+            PowerSpec powerSpec = new PowerSpec(powerRequired, powerRequired, 0); //TODO: pass proper criticality value
 
             String agentId = ((BaseAgent) ag).getAgentId();
-            
+
             powerDemand.put(agentId, powerSpec);
             LOG.debug("Got default demand " + powerRequired + " from agent " + agentId);
         }
@@ -84,11 +82,9 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
     public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
 
         // initialize KRITIS-model
-        kritisSimConnector = new SimConnector(
-                "/Shared_workspace/gekoppelte_simulation/IKET/TestSimulation/mysim_v1/SimCity.rs");
+        kritisSimConnector = new SimConnector("/Shared_workspace/gekoppelte_simulation/IKET/TestSimulation/mysim_v1/SimCity.rs");
 
-        kritisSimConnector.initSimulation(
-                "/Shared_workspace/gekoppelte_simulation/IKET/TestSimulation/mysim_v1/agents/houseHoldAgentArray.json",
+        kritisSimConnector.initSimulation("/Shared_workspace/gekoppelte_simulation/IKET/TestSimulation/mysim_v1/agents/houseHoldAgentArray.json",
                 "/Shared_workspace/gekoppelte_simulation/IKET/TestSimulation/mysim_v1/agents/pharmacyAgentArray.json");
 
         return ErrorCodeEnum.SUCCESS;
