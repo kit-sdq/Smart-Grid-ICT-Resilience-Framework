@@ -100,6 +100,7 @@ public final class SimulationController {
             if (impactResult == null) {
                 // Attacker simulation failed due to rootNodeID not found -->
                 // Abort the simulation
+                //TODO: improve reporting
                 break;
             }
 
