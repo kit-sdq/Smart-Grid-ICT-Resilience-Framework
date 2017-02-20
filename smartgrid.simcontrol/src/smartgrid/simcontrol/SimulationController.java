@@ -29,11 +29,16 @@ import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
-import smartgrid.simcontrol.baselib.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.SmartMeterState;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
+import smartgridoutput.Defect;
 import smartgridoutput.EntityState;
+import smartgridoutput.NoPower;
+import smartgridoutput.NoUplink;
 import smartgridoutput.On;
+import smartgridoutput.Online;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.NetworkEntity;
 import smartgridtopo.SmartGridTopology;
@@ -105,18 +110,16 @@ public final class SimulationController {
             }
 
             // save attack result to file
-            final String attackResultFile = new File(timeStepPath + "\\AttackerSimulationResult.smartgridoutput")
-                    .getPath();
+            final String attackResultFile = new File(timeStepPath + "\\AttackerSimulationResult.smartgridoutput").getPath();
             FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
 
             // impact and power may iterate several times
             int innerLoopIterationCount = 0;
             do {
-                final String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount)
-                        .getPath();
+                final String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount).getPath();
 
                 // run power load simulation
-                final Map<String,EntityState> smartMeterStates = convertToPowerLoadInput(impactResult);
+                final Map<String, SmartMeterState> smartMeterStates = convertToPowerLoadInput(impactResult);
                 powerSupply = powerLoadSimulation.run(kritisPowerDemand, smartMeterStates);
 
                 // copy the input
@@ -137,11 +140,9 @@ public final class SimulationController {
                 FileSystemHelper.saveToFileSystem(impactResult, resultFile);
 
                 innerLoopIterationCount++;
-            } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult,
-                    impactResultOld));
+            } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult, impactResultOld));
 
-            LOG.info("Time step " + timeStep + " terminated after " + innerLoopIterationCount
-                    + " power/impact iterations");
+            LOG.info("Time step " + timeStep + " terminated after " + innerLoopIterationCount + " power/impact iterations");
 
             // modify the scenario between time steps
             timeProgressor.progress();
@@ -156,16 +157,37 @@ public final class SimulationController {
 
     // Private Methods
 
-    private static Map<String,EntityState> convertToPowerLoadInput(final ScenarioResult impactResult) {
-        final Map<String,EntityState> smartMeterStates = new HashMap<String,EntityState>();
+    private static Map<String, SmartMeterState> convertToPowerLoadInput(final ScenarioResult impactResult) {
+        final Map<String, SmartMeterState> smartMeterStates = new HashMap<String, SmartMeterState>();
         for (final EntityState state : impactResult.getStates()) {
             final NetworkEntity stateOwner = state.getOwner();
             if (stateOwner instanceof SmartMeter) {
                 final String id = Integer.toString(stateOwner.getId());
-                smartMeterStates.put(id, state);
+                smartMeterStates.put(id, stateToEnum(state));
             }
         }
         return smartMeterStates;
+    }
+
+    private static SmartMeterState stateToEnum(EntityState state) {
+        if (state instanceof Online) {
+            if (((Online) state).isIsHacked()) {
+                return SmartMeterState.ONLINE_HACKED;
+            } else {
+                return SmartMeterState.ONLINE;
+            }
+        } else if(state instanceof NoUplink) {
+            if (((NoUplink) state).isIsHacked()) {
+                return SmartMeterState.NO_UPLINK_HACKED;
+            } else {
+                return SmartMeterState.NO_UPLINK;
+            }
+        } else if(state instanceof NoPower) {
+            return SmartMeterState.NO_POWER;
+        } else if(state instanceof Defect) {
+            return SmartMeterState.DEFECT;
+        }
+        throw new RuntimeException("Unknown EntityState");
     }
 
     /**
@@ -175,8 +197,7 @@ public final class SimulationController {
      * @param powerSupply
      * @return
      */
-    private static void updateImactAnalysisInput(final ScenarioState impactInput,
-            final ScenarioResult impactResult, final Map<String,Double> powerSupply) {
+    private static void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, final Map<String, Double> powerSupply) {
 
         //Transfer hacked state into next input
         for (final EntityState state : impactResult.getStates()) {
@@ -221,8 +242,7 @@ public final class SimulationController {
             fileAppender = new FileAppender(layout, workingDirPath + "\\log.log");
             rootLogger.addAppender(fileAppender);
         } catch (final IOException e) {
-            throw new RuntimeException(
-                    "Error creating local log appender in the working directory. Most likely there are problems with access rights.");
+            throw new RuntimeException("Error creating local log appender in the working directory. Most likely there are problems with access rights.");
         }
 
         // load models
@@ -241,8 +261,7 @@ public final class SimulationController {
         LOG.info("Running for " + maxTimeSteps + " time steps");
 
         // Gets String from Config and compares whether it is the same String as Constants.TRUE
-        generateInput = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FALSE)
-                .contains(Constants.TRUE);
+        generateInput = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FALSE).contains(Constants.TRUE);
         if (generateInput) {
             initGeneratorInput(launchConfig);
         }
@@ -358,8 +377,7 @@ public final class SimulationController {
      * @throws CoreException
      * @throws NumberFormatException
      */
-    private static void initGeneratorInput(final ILaunchConfiguration launchConfig)
-            throws CoreException, NumberFormatException {
+    private static void initGeneratorInput(final ILaunchConfiguration launchConfig) throws CoreException, NumberFormatException {
 
         assert generateInput : "Only run this Methods if generate Input is desired by user";
 
