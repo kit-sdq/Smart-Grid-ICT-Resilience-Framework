@@ -6,23 +6,20 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
-import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulation;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.PowerSpec;
-import smartgridoutput.EntityState;
+import smartgrid.simcontrol.coupling.IPowerLoadSimulation;
+import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.SmartMeterState;
 
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
-
-
     @Override
-    public Map<String, Double> run(Map<String, PowerSpec> kritisDemands, Map<String, EntityState> smartMeterStates) {
+    public Map<String, Double> run(Map<String, PowerSpec> kritisDemands, Map<String, SmartMeterState> smartMeterStates) {
 
         // TODO implement wrapper!
         final IPowerLoadSimulation dummy = new IPowerLoadSimulation() {
             @Override
-            public Map<String, Double> run(Map<String, PowerSpec> kritisDemands,
-                    Map<String, EntityState> smartMeterStates) {
+            public Map<String, Double> run(Map<String, PowerSpec> kritisDemands, Map<String, SmartMeterState> smartMeterStates) {
                 throw new RuntimeException("Power load simulation wrapper not implemented!");
             }
         };

@@ -8,7 +8,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.PowerSpec;
 
 public class KritisSimulationMock implements IKritisSimulationWrapper {
 

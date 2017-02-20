@@ -12,7 +12,7 @@ import simcity.power.Electrified;
 import simcity.xlauncher.SimConnector;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.PowerSpec;
 
 public class KritisSimulationWrapper implements IKritisSimulationWrapper {
 
