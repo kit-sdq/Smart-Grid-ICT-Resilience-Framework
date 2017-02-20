@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.baselib.coupling;
+package smartgrid.simcontrol.coupling;
 
 import java.util.Map;
 

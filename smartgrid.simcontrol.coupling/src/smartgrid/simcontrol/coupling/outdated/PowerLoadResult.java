@@ -1,5 +1,5 @@
-package smartgrid.simcontrol.baselib.coupling.outdated;
-//package smartgrid.simcontrol.baselib.coupling;
+package smartgrid.simcontrol.coupling.outdated;
+//package smartgrid.simcontrol.coupling;
 //
 //import java.util.List;
 //

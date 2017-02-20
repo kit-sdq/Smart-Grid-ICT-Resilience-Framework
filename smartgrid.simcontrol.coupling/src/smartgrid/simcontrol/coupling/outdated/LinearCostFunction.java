@@ -1,5 +1,5 @@
-package smartgrid.simcontrol.baselib.coupling.outdated;
-//package smartgrid.simcontrol.baselib.coupling;
+package smartgrid.simcontrol.coupling.outdated;
+//package smartgrid.simcontrol.coupling;
 //
 //public class LinearCostFunction extends AbstractCostFunction {
 //    private double gradient;

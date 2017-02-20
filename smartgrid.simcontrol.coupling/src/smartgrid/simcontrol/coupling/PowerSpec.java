@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.baselib.coupling;
+package smartgrid.simcontrol.coupling;
 
 public class PowerSpec {
     private double baseDemand; //optimal demand
