@@ -5,7 +5,6 @@ package smartgridtopo.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-
 import smartgridtopo.CommunicatingEntity;
 import smartgridtopo.ConnectionType;
 import smartgridtopo.ControlCenter;

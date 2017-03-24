@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Smart Grid Topo Profiles
+Bundle-SymbolicName: smartgrid.model.topo.profiles;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: SDQ
+Require-Bundle: org.modelversioning.emfprofile,
+ org.modelversioning.emfprofile.registry,
+ smartgrid.model.topo

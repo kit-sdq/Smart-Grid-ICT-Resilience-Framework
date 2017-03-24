@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:emfprofile="http://www.modelversioning.org/emfprofile/1.1" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation">
+  <emfprofile:Profile xmi:id="_pPB5QA_lEeeA863J7caVIQ" name="SmartGridProfiles" nsURI="http://sdq.ipd.uka.de/smartgridtopo/profiles" nsPrefix="smartgrid.model.topo.profiles">
+    <eClassifiers xmi:type="emfprofile:Stereotype" xmi:id="_eumoMBB5EeeyTpU19ntvNA" name="Replication">
+      <eSuperTypes xmi:type="ecore:EClass" href="http://www.modelversioning.org/emfprofile/application/1.1#//StereotypeApplication"/>
+      <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_gyt1ABB5EeeyTpU19ntvNA" name="replications" lowerBound="1" upperBound="-1">
+        <eType xmi:type="ecore:EClass" href="http://sdq.ipd.uka.de/smartgridtopo/topoextension#//Replication"/>
+      </eStructuralFeatures>
+      <extensions xmi:type="emfprofile:Extension" xmi:id="_gJB-0BB5EeeyTpU19ntvNA" upperBound="1">
+        <target xmi:type="ecore:EClass" href="http://sdq.ipd.uka.de/smartgridtopo/1.1#//SmartMeter"/>
+      </extensions>
+    </eClassifiers>
+  </emfprofile:Profile>
+  <notation:Diagram xmi:id="_pQ9y8A_lEeeA863J7caVIQ" type="EMFProfile" element="_pPB5QA_lEeeA863J7caVIQ" name="profile.emfprofile_diagram" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_b4wccBB5EeeyTpU19ntvNA" type="2002">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_b418ABB5EeeyTpU19ntvNA" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_b418ARB5EeeyTpU19ntvNA" key="modelID" value="EMFProfile"/>
+      </eAnnotations>
+      <children xmi:type="notation:DecorationNode" xmi:id="_b41U8BB5EeeyTpU19ntvNA" type="5002"/>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_b41U8RB5EeeyTpU19ntvNA" type="7004">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_b41U8hB5EeeyTpU19ntvNA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_b41U8xB5EeeyTpU19ntvNA"/>
+      </children>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_b41U9BB5EeeyTpU19ntvNA" type="7005">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_b41U9RB5EeeyTpU19ntvNA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_b41U9hB5EeeyTpU19ntvNA"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_b4wccRB5EeeyTpU19ntvNA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_b4wcchB5EeeyTpU19ntvNA" fontName=".SF NS Text"/>
+      <element xmi:type="ecore:EClass" href="http://sdq.ipd.uka.de/smartgridtopo/1.1#//SmartMeter"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b4wccxB5EeeyTpU19ntvNA" x="512" y="180"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_eA4mkBB5EeeyTpU19ntvNA" type="2002">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_eA5NoBB5EeeyTpU19ntvNA" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_eA5NoRB5EeeyTpU19ntvNA" key="modelID" value="EMFProfile"/>
+      </eAnnotations>
+      <children xmi:type="notation:DecorationNode" xmi:id="_eA4mlBB5EeeyTpU19ntvNA" type="5002"/>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_eA4mlRB5EeeyTpU19ntvNA" type="7004">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_eA4mlhB5EeeyTpU19ntvNA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_eA4mlxB5EeeyTpU19ntvNA"/>
+      </children>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_eA4mmBB5EeeyTpU19ntvNA" type="7005">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_eA4mmRB5EeeyTpU19ntvNA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_eA4mmhB5EeeyTpU19ntvNA"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_eA4mkRB5EeeyTpU19ntvNA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_eA4mkhB5EeeyTpU19ntvNA" fontName=".SF NS Text"/>
+      <element xmi:type="ecore:EClass" href="http://sdq.ipd.uka.de/smartgridtopo/topoextension#//Replication"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eA4mkxB5EeeyTpU19ntvNA" x="320" y="320"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_euqSkBB5EeeyTpU19ntvNA" type="2006" element="_eumoMBB5EeeyTpU19ntvNA">
+      <children xmi:type="notation:DecorationNode" xmi:id="_euqSlBB5EeeyTpU19ntvNA" type="5008"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_euqSlRB5EeeyTpU19ntvNA" type="7008">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_euqSlhB5EeeyTpU19ntvNA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_euqSlxB5EeeyTpU19ntvNA"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_euqSkRB5EeeyTpU19ntvNA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_euqSkhB5EeeyTpU19ntvNA" fontName=".SF NS Text"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_euqSkxB5EeeyTpU19ntvNA" x="290" y="178"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_pQ9y8Q_lEeeA863J7caVIQ"/>
+    <edges xmi:type="notation:Edge" xmi:id="_gJD0ABB5EeeyTpU19ntvNA" type="4005" element="_gJB-0BB5EeeyTpU19ntvNA" source="_euqSkBB5EeeyTpU19ntvNA" target="_b4wccBB5EeeyTpU19ntvNA">
+      <children xmi:type="notation:DecorationNode" xmi:id="_gJEbEBB5EeeyTpU19ntvNA" type="6004">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gJFCIBB5EeeyTpU19ntvNA" x="10" y="10"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_gJD0ARB5EeeyTpU19ntvNA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_gJD0AhB5EeeyTpU19ntvNA" fontName=".SF NS Text"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_gJD0AxB5EeeyTpU19ntvNA" points="[35, 9, -202, 6]$[187, 9, -50, 6]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_gyxfYBB5EeeyTpU19ntvNA" type="4003" element="_gyt1ABB5EeeyTpU19ntvNA" source="_euqSkBB5EeeyTpU19ntvNA" target="_eA4mkBB5EeeyTpU19ntvNA">
+      <children xmi:type="notation:DecorationNode" xmi:id="_gyyGcBB5EeeyTpU19ntvNA" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gyyGcRB5EeeyTpU19ntvNA" x="-10" y="-10"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_gyyGchB5EeeyTpU19ntvNA" type="6002">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gyyGcxB5EeeyTpU19ntvNA" x="10" y="10"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_gyxfYRB5EeeyTpU19ntvNA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_gyxfYhB5EeeyTpU19ntvNA" fontName=".SF NS Text"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_gyxfYxB5EeeyTpU19ntvNA" points="[5, 20, -40, -123]$[41, 163, -4, 20]"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>
