@@ -36,6 +36,7 @@ class ReplicationCompletionForSmartMeter extends AbstractCompletion<SmartMeter, 
 	}
 	
 	def SmartMeter duplicateSmartMeter(SmartMeter smartMeter) {
+		//TODO: also duplicate references to the smart meter
 		return EcoreUtil.copy(smartMeter)
 	}
 	

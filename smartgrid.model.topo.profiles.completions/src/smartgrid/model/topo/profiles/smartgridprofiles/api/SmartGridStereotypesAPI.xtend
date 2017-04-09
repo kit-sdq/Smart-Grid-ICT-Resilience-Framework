@@ -29,6 +29,7 @@ class SmartGridStereotypesAPI {
 		val Object taggedValue = eObject.getTaggedValue(referenceName, stereotypeName)
 		if(!(taggedValue instanceof EObjectResolvingEList<?>)){
 			logger.warn("The tagged value is not from type " + EObjectResolvingEList)	
+			return null
 		} 
 		return ensureSingleTaggedValueFromType(taggedValue as EObjectResolvingEList<?>, eObject, t)
 	}
