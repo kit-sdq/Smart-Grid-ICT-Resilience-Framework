@@ -139,6 +139,10 @@ public final class SimulationController {
                 final String resultFile = new File(iterationPath + "\\ImpactResult.smartgridoutput").getPath();
                 FileSystemHelper.saveToFileSystem(impactResult, resultFile);
 
+                //generate report
+                final File resultReportPath = new File(iterationPath + "\\ResultReport.csv");
+                ReportGenerator.saveScenarioResult(resultReportPath, impactResult);
+                
                 innerLoopIterationCount++;
             } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult, impactResultOld));
 
