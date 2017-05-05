@@ -73,7 +73,7 @@ public class CompletionExecuterHandler extends AbstractHandler {
 			resource.copy(newPath, true, null);
 			
 		} catch (final CoreException e1) {
-			throw new ExecutionException("Could copy the resource model.");
+			throw new ExecutionException("Could not copy the resource model.");
 		}
 		return resource.getProject().getWorkspace().getRoot().getFile(newPath);
 	}
