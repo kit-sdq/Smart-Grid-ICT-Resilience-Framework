@@ -63,7 +63,7 @@ public final class StaticSimulationController {
         timeStep = 0;
     }
 
-    public void run(Map<String, PowerSpec> kritisPowerDemand) {
+    public Map<String, Double> run(Map<String, PowerSpec> kritisPowerDemand) {
 
         // Compute Initial Impact Analysis Result
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
@@ -111,6 +111,8 @@ public final class StaticSimulationController {
         } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult, impactResultOld));
 
         LOG.info("Time step " + timeStep + " terminated after " + innerLoopIterationCount + " power/impact iterations");
+        
+        return powerSupply;
     }
 
     public void shutDown() {
