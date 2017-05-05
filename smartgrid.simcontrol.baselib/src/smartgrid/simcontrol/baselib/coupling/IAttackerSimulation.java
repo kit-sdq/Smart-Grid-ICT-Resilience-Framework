@@ -16,7 +16,7 @@ public interface IAttackerSimulation {
 
     // TODO JavaDoc
     /**
-     * Runs the Atacker Simulation
+     * Runs the Attacker Simulation
      *
      * @param smartGridTopo
      * @param impactAnalysisOutput
