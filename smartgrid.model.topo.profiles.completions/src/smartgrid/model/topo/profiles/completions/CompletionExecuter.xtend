@@ -24,43 +24,41 @@ class CompletionExecuter {
 			return
 		}
 		val completionsToExecute = collectExecutableCompletions(smartGridTopology)
-		completionsToExecute.forEach[it.execute]		
+		completionsToExecute.forEach[it.execute]
 	}
-	
+
 	private def collectExecutableCompletions(SmartGridTopology smartGridTopology) {
 		val contents = smartGridTopology.eAllContents
 		val completionsToExecute = new ArrayList<ExecutableCompletion>
-		var EObject eObj
-		while (contents.hasNext) {
-			eObj = contents.next
+		contents.forEach [ eObj |
 			for (completion : completions) {
 				if (completion.typeToComplete.isInstance(eObj)) {
 					val completionObject = SmartGridStereotypesAPI.getStereotype(eObj, completion.referenceName,
 						completion.stereotypeName, completion.typeOfCompletionObject)
-					completionsToExecute.add(new ExecutableCompletion(completion, eObj, completionObject))
+					if (completionObject != null) // TODO Hack
+						completionsToExecute.add(new ExecutableCompletion(completion, eObj, completionObject))
 				}
 			}
-		}
+		]
 		return completionsToExecute
 	}
 }
 
-
-class ExecutableCompletion{
-	private val Completion<?,?> completion
+class ExecutableCompletion {
+	private val Completion<?, ?> completion
 	private val Object objectToComplete
 	private val Object completionObject
-	
-	new(Completion<?,?> completion, Object objectToComplete, Object completionObject){
+
+	new(Completion<?, ?> completion, Object objectToComplete, Object completionObject) {
 		this.completion = completion
 		this.objectToComplete = objectToComplete
 		this.completionObject = completionObject
 	}
-	
+
 	def execute() {
 		val t = completion.typeToComplete.cast(objectToComplete)
 		val u = completion.typeOfCompletionObject.cast(completionObject)
 		completion.executeCompletion(t, u)
 	}
-	
+
 }
