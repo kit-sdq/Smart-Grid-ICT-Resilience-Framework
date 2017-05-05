@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="SmartGridSecurityDiagramType" name="cigre1" snapToGrid="true" pictogramLinks="//@children.0/@link //@children.1/@link //@children.2/@link //@children.3/@link //@children.4/@link //@children.5/@link //@children.6/@link //@children.7/@link //@children.8/@link //@children.9/@link //@children.10/@link //@children.11/@link //@children.12/@link //@children.13/@link //@children.14/@link //@children.15/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link //@connections.13/@link //@connections.14/@link //@connections.15/@link //@connections.16/@link //@connections.17/@link //@children.16/@link //@children.17/@link //@children.18/@link //@connections.18/@link //@connections.19/@link //@connections.20/@link //@connections.21/@link //@connections.22/@link //@connections.23/@link //@connections.24/@link //@connections.25/@link //@connections.26/@link //@connections.27/@link //@connections.28/@link //@connections.29/@link //@connections.30/@link //@connections.31/@link //@connections.32/@link //@children.19/@link //@children.20/@link //@children.21/@link //@children.22/@link //@children.23/@link //@children.24/@link //@children.25/@link //@children.26/@link //@children.27/@link" version="0.13.0">
+  <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+  <link>
+    <businessObjects href="cigre1.smartgridtopo#/"/>
+  </link>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="360" y="287"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1853135405"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.36" incomingConnections="//@connections.4 //@connections.23"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="190" y="460"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1259763947"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.39" incomingConnections="//@connections.5 //@connections.24"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="650" y="660"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#731243059"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.40" incomingConnections="//@connections.7 //@connections.30"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="769" y="609"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#139183333"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.42" incomingConnections="//@connections.8 //@connections.29"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="750" y="334"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#300030748"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.46" incomingConnections="//@connections.10 //@connections.28"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="510" y="460"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1407817927"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.45" incomingConnections="//@connections.13 //@connections.27"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="460" y="360"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1900085142"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.48" incomingConnections="//@connections.14 //@connections.26"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="530" y="339"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1583516156"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.49" incomingConnections="//@connections.15 //@connections.25"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="20" height="20" x="420" y="118"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#595040528"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.34" incomingConnections="//@connections.12 //@connections.21"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.5" foreground="//@colors.4" lineWidth="3" transparency="0.0" width="20" height="20" x="530" y="50"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#909650707"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" incomingConnections="//@connections.22 //@connections.31 //@connections.32"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="510" y="140"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#661022293"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1 //@connections.2 //@connections.33 //@connections.12" incomingConnections="//@connections.0"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="500" y="250"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1799498139"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3 //@connections.4 //@connections.37" incomingConnections="//@connections.1 //@connections.11 //@connections.16 //@connections.18"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="510" y="420"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1412249218"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.13 //@connections.14 //@connections.15 //@connections.16 //@connections.17 //@connections.44" incomingConnections="//@connections.19"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="679" y="570"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#705120909"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.7 //@connections.8 //@connections.9 //@connections.41" incomingConnections="//@connections.6 //@connections.20"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="660" y="350"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#2123563179"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.10 //@connections.11 //@connections.47" incomingConnections="//@connections.2 //@connections.9 //@connections.17"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.7" foreground="//@colors.6" lineWidth="3" transparency="0.0" width="20" height="20" x="290" y="390"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1875716647"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.5 //@connections.6 //@connections.38" incomingConnections="//@connections.3"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.10" foreground="//@colors.9" lineWidth="3" transparency="0.0" width="20" height="20" x="370" y="214"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1980206987"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.18 //@connections.21 //@connections.22 //@connections.23 //@connections.24 //@connections.35"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.10" foreground="//@colors.9" lineWidth="3" transparency="0.0" width="20" height="20" x="570" y="360"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1061630349"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.19 //@connections.25 //@connections.26 //@connections.27 //@connections.32 //@connections.50"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Ellipse" background="//@colors.10" foreground="//@colors.9" lineWidth="3" transparency="0.0" width="20" height="20" x="769" y="470"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1702039383"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.20 //@connections.28 //@connections.29 //@connections.30 //@connections.31 //@connections.43"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="439" y="69">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1766854756"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.33 //@connections.34"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="634" y="624">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1537697963"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.40"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="820" y="500">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#995201981"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.41 //@connections.42 //@connections.43"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="450" y="200">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1116017742"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.35 //@connections.36 //@connections.37"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="190" y="335">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#650898077"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.38 //@connections.39"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="719" y="280">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1703964796"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.46 //@connections.47"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="570" y="460">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#711038434"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.44 //@connections.45 //@connections.50"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="440" y="390">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1083884110"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.48"/>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.12" foreground="//@colors.4" lineWidth="3" filled="true" transparency="0.0" width="20" height="20" x="526" y="290">
+      <points x="13"/>
+      <points x="26" y="26"/>
+      <points y="26"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#1377554286"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.49"/>
+  </children>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.9/@anchors.0" end="//@children.10/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.0"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.10/@anchors.0" end="//@children.11/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.1"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.10/@anchors.0" end="//@children.14/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.2"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.11/@anchors.0" end="//@children.15/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.3"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.11/@anchors.0" end="//@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.4"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.15/@anchors.0" end="//@children.1/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.5"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.15/@anchors.0" end="//@children.13/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.6"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.13/@anchors.0" end="//@children.2/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.7"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.13/@anchors.0" end="//@children.3/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.8"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.13/@anchors.0" end="//@children.14/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.9"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.14/@anchors.0" end="//@children.4/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.10"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.14/@anchors.0" end="//@children.11/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.11"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.10/@anchors.0" end="//@children.8/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.12"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.12/@anchors.0" end="//@children.5/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.13"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.12/@anchors.0" end="//@children.6/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.14"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.12/@anchors.0" end="//@children.7/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.15"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.12/@anchors.0" end="//@children.11/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.16"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.12/@anchors.0" end="//@children.14/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.17"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.16/@anchors.0" end="//@children.11/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.18"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.17/@anchors.0" end="//@children.12/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.19"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.18/@anchors.0" end="//@children.13/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.8" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsPC.20"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.16/@anchors.0" end="//@children.8/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.0"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.16/@anchors.0" end="//@children.9/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.1"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.16/@anchors.0" end="//@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.2"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.16/@anchors.0" end="//@children.1/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.3"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.17/@anchors.0" end="//@children.7/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.4"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.17/@anchors.0" end="//@children.6/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.5"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.17/@anchors.0" end="//@children.5/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.6"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.18/@anchors.0" end="//@children.4/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.7"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.18/@anchors.0" end="//@children.3/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.8"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.18/@anchors.0" end="//@children.2/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.9"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.18/@anchors.0" end="//@children.9/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.10"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:CompositeConnection" visible="true" active="true" start="//@children.17/@anchors.0" end="//@children.9/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polygon" foreground="//@colors.11" lineWidth="2" lineStyle="UNSPECIFIED"/>
+    <link>
+      <businessObjects href="cigre1.smartgridtopo#//@ContainsLC.11"/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.10/@anchors.0" end="//@children.19/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.8/@anchors.0" end="//@children.19/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.16/@anchors.0" end="//@children.22/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@anchors.0" end="//@children.22/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.11/@anchors.0" end="//@children.22/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.15/@anchors.0" end="//@children.23/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.0" end="//@children.23/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.2/@anchors.0" end="//@children.20/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.13/@anchors.0" end="//@children.21/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.0" end="//@children.21/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.18/@anchors.0" end="//@children.21/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.12/@anchors.0" end="//@children.25/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.5/@anchors.0" end="//@children.25/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.4/@anchors.0" end="//@children.24/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.14/@anchors.0" end="//@children.24/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.6/@anchors.0" end="//@children.26/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.7/@anchors.0" end="//@children.27/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.17/@anchors.0" end="//@children.25/@anchors.0">
+    <properties key="RelType" value="Plain"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.4" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <colors red="227" green="238" blue="249"/>
+  <colors red="255" green="255" blue="255"/>
+  <colors red="140"/>
+  <colors red="255"/>
+  <colors/>
+  <colors red="51" green="102"/>
+  <colors green="51" blue="102"/>
+  <colors green="102" blue="204"/>
+  <colors blue="255"/>
+  <colors green="139"/>
+  <colors red="127" green="255"/>
+  <colors green="127"/>
+  <colors red="255" green="255"/>
+</pi:Diagram>
