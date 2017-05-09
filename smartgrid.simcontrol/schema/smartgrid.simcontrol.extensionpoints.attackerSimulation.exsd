@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":smartgrid.simcontrol.interfaces.IAttackerSimulation"/>
+                  <meta.attribute kind="java" basedOn=":smartgrid.simcontrol.baselib.coupling.IAttackerSimulation"/>
                </appinfo>
             </annotation>
          </attribute>

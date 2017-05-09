@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":smartgrid.simcontrol.interfaces.ITimeProgressor"/>
+                  <meta.attribute kind="java" basedOn=":smartgrid.simcontrol.baselib.coupling.ITimeProgressor"/>
                </appinfo>
             </annotation>
          </attribute>
