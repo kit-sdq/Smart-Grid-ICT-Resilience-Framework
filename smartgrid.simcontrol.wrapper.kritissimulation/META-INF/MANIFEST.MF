@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Import-Package: smartgrid.simcontrol.coupling

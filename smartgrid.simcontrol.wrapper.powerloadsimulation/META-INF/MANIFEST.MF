@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.core.runtime,
  smartgrid.simcontrol.baselib;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Import-Package: smartgrid.simcontrol.coupling

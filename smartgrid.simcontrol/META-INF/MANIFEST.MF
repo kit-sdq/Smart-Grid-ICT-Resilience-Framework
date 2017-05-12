@@ -18,4 +18,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: smartgrid.inputgenerator
+Import-Package: smartgrid.inputgenerator,
+ smartgrid.simcontrol.coupling
