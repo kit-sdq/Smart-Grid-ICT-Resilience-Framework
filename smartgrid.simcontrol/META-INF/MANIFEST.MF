@@ -13,10 +13,9 @@ Require-Bundle: org.eclipse.ui,
  smartgrid.simcontrol.baselib,
  org.apache.log4j;bundle-version="1.2.15",
  smartgrid.log4starter,
- smartgrid.inputgenerator
+ smartgrid.inputgenerator,
+ smartgrid.simcontrol.coupling;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: smartgrid.inputgenerator,
- smartgrid.simcontrol.coupling

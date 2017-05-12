@@ -11,9 +11,9 @@ Export-Package: smartgrid.simcontrol.baselib,
    smartgridtopo,
    smartgrid.simcontrol.coupling,
    smartgridinput,
-   org.eclipse.debug.core",
- smartgrid.simcontrol.coupling
+   org.eclipse.debug.core"
 Require-Bundle: smartgrid.model.output,
  smartgrid.model.input,
  org.eclipse.debug.core,
- org.eclipse.equinox.registry
+ org.eclipse.equinox.registry,
+ smartgrid.simcontrol.coupling;bundle-version="1.0.0"

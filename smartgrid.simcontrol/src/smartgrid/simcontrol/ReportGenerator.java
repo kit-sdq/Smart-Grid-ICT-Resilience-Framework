@@ -1,6 +1,5 @@
 package smartgrid.simcontrol;
 
-import java.awt.RenderingHints.Key;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
