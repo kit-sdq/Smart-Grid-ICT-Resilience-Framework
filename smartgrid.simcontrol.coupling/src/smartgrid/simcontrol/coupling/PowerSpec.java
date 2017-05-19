@@ -65,6 +65,38 @@ public class PowerSpec {
 	public double getCriticality() {
 		return criticality;
 	}
+
+
+	/**
+	 * @return the optDemand
+	 */
+	public double getOptDemand() {
+		return optDemand;
+	}
+
+
+	/**
+	 * @param optDemand the optDemand to set
+	 */
+	public void setOptDemand(double optDemand) {
+		this.optDemand = optDemand;
+	}
+
+
+	/**
+	 * @param minReqDemand the minReqDemand to set
+	 */
+	public void setMinReqDemand(double minReqDemand) {
+		this.minReqDemand = minReqDemand;
+	}
+
+
+	/**
+	 * @param criticality the criticality to set
+	 */
+	public void setCriticality(double criticality) {
+		this.criticality = criticality;
+	}
 	
 }
 
