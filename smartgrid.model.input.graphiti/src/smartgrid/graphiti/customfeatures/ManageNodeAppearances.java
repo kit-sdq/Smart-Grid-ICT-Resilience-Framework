@@ -2,7 +2,9 @@ package smartgrid.graphiti.customfeatures;
 
 import java.util.Collection;
 
+import org.eclipse.graphiti.mm.algorithms.Ellipse;
 import org.eclipse.graphiti.mm.algorithms.Polygon;
+import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.algorithms.styles.StylesFactory;
 import org.eclipse.graphiti.mm.algorithms.styles.StylesPackage;
@@ -58,6 +60,40 @@ public class ManageNodeAppearances {
         final Polygon poly = gaService.createPolygon(secondLine, xy);
         poly.setForeground(this.manageColor(ConstantProvider.FOREGROUND_BLACK));
         poly.setLineWidth(ConstantProvider.shapeLineWidth);
+    }
+    /**
+     * Method to draw exclamation mark. This is used to show that a network entity is hacked
+     * 
+     * @param containerShape
+     * 			the current container shape
+     */
+    public void drawHacked(final ContainerShape containerShape){
+    	drawExclamationMark(containerShape);
+    }
+    public void drawExclamationMark(final ContainerShape shape) {
+    	//Code copied from smartgrid.model.output.features.ManageNodeAppearances maybe refactoring could resolve code duplications
+        final int xy[] = new int[] { 9, 2, 9, 15 };
+        this.drawMark(shape, xy);
+    }
+    private void drawMark(final ContainerShape containerShape, final int[] xy) {
+    	//Code copied from smartgrid.model.output.features.ManageNodeAppearances maybe refactoring could resolve code duplications
+        final IPeCreateService peCreateService = Graphiti.getPeCreateService();
+        final IGaService gaService = Graphiti.getGaService();
+        // create line
+        final Shape lineShape = peCreateService.createShape(containerShape, false);
+
+        final Polyline p = gaService.createPolyline(lineShape, xy);
+        p.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
+        p.setLineWidth(ConstantProvider.questionMarkLineWidth);
+
+        final Shape circleShape = peCreateService.createShape(containerShape, false);
+        final Ellipse circle = gaService.createEllipse(circleShape);
+        circle.setLineWidth(ConstantProvider.questionMarkLineWidth);
+        circle.setX(9);
+        circle.setY(17);
+        circle.setHeight(3);
+        circle.setWidth(3);
+        circle.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
     }
 
     public Color manageBackground(final boolean powerOutage) {

@@ -172,12 +172,15 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                                 final Object ob = LoadToolbarButtonAction.this.resolveBOfromNetworkEntity(
                                         (NetworkEntity) containerShape.getLink().getBusinessObjects().get(0),
                                         ((ScenarioState) obj).getEntityStates());
-                                if (ob != null && ob instanceof EntityState && ((EntityState) ob).isIsDestroyed()
-                                        && containerShape instanceof ContainerShape) {
-                                    manager.drawDestroyed((ContainerShape) containerShape);
-                                } else if (ob != null && ob instanceof EntityState
-                                        && containerShape instanceof ContainerShape) {
-                                    manager.removeChildren((ContainerShape) containerShape);
+                                if(ob != null && ob instanceof EntityState && containerShape instanceof ContainerShape) {
+	                                if (((EntityState) ob).isIsDestroyed()) {
+	                                    manager.drawDestroyed((ContainerShape) containerShape);
+	                                } else if(((EntityState) ob).isIsHacked()){
+	                                	//hacked but not destroyed
+	                                	manager.drawHacked((ContainerShape) containerShape);
+	                                } else {
+	                                    manager.removeChildren((ContainerShape) containerShape);
+	                                }
                                 }
                             }
                         }
