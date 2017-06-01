@@ -1,104 +1,112 @@
 package smartgrid.simcontrol.coupling;
 
 public class PowerSpec {
-	private String ciType;     //CI, -component ID
-	private String ciName;     //CI, -component name
-	private String ciSmartID;  //Smart meter agent-ID
+    private String ciType; //CI, -component ID
+    private String ciName; //CI, -component name
+    private String ciSmartID; //Smart meter agent-ID
+    private int aggregation;
     private double optDemand; //optimal demand
     private double minReqDemand; //Minimum required power
     private double criticality; //1 = human casualties (has to be supplied)
 
-
     public PowerSpec(String ciType, String ciName, String ciSmartID, double optDemand, double minReqDemand, double criticality) {
         this.ciType = ciType;
         this.ciName = ciName;
-        this.ciSmartID = ciSmartID;    	
-    	this.optDemand = optDemand;
+        this.ciSmartID = ciSmartID;
+        this.aggregation = 1;
+        this.optDemand = optDemand;
         this.minReqDemand = minReqDemand;
         this.criticality = criticality;
     }
 
+    public PowerSpec(String ciType, String ciName, String ciSmartID, int aggregation, double optDemand, double minReqDemand, double criticality) {
+        this.ciType = ciType;
+        this.ciName = ciName;
+        this.ciSmartID = ciSmartID;
+        this.aggregation = aggregation;
+        this.optDemand = optDemand;
+        this.minReqDemand = minReqDemand;
+        this.criticality = criticality;
+    }
 
-	/**
-	 * @return the ciType
-	 */
-	public String getCiType() {
-		return ciType;
-	}
+    /**
+     * @return the ciType
+     */
+    public String getCiType() {
+        return ciType;
+    }
 
+    /**
+     * @return the ciName
+     */
+    public String getCiName() {
+        return ciName;
+    }
 
-	/**
-	 * @return the ciName
-	 */
-	public String getCiName() {
-		return ciName;
-	}
+    /**
+     * @return the ciSmartID
+     */
+    public String getCiSmartID() {
+        return ciSmartID;
+    }
 
+    /**
+     * @return the aggregation
+     */
+    public int getAggregation() {
+        return aggregation;
+    }
 
-	/**
-	 * @return the ciSmartID
-	 */
-	public String getCiSmartID() {
-		return ciSmartID;
-	}
+    /**
+     * @return the baseDemand
+     */
+    public double getBaseDemand() {
+        return optDemand;
+    }
 
+    /**
+     * @return the minReqDemand
+     */
+    public double getMinReqDemand() {
+        return minReqDemand;
+    }
 
-	/**
-	 * @return the baseDemand
-	 */
-	public double getBaseDemand() {
-		return optDemand;
-	}
+    /**
+     * @return the criticality
+     */
+    public double getCriticality() {
+        return criticality;
+    }
 
+    /**
+     * @return the optDemand
+     */
+    public double getOptDemand() {
+        return optDemand;
+    }
 
-	/**
-	 * @return the minReqDemand
-	 */
-	public double getMinReqDemand() {
-		return minReqDemand;
-	}
+    /**
+     * @param optDemand
+     *            the optDemand to set
+     */
+    public void setOptDemand(double optDemand) {
+        this.optDemand = optDemand;
+    }
 
+    /**
+     * @param minReqDemand
+     *            the minReqDemand to set
+     */
+    public void setMinReqDemand(double minReqDemand) {
+        this.minReqDemand = minReqDemand;
+    }
 
-	/**
-	 * @return the criticality
-	 */
-	public double getCriticality() {
-		return criticality;
-	}
+    /**
+     * @param criticality
+     *            the criticality to set
+     */
+    public void setCriticality(double criticality) {
+        this.criticality = criticality;
+    }
 
-
-	/**
-	 * @return the optDemand
-	 */
-	public double getOptDemand() {
-		return optDemand;
-	}
-
-
-	/**
-	 * @param optDemand the optDemand to set
-	 */
-	public void setOptDemand(double optDemand) {
-		this.optDemand = optDemand;
-	}
-
-
-	/**
-	 * @param minReqDemand the minReqDemand to set
-	 */
-	public void setMinReqDemand(double minReqDemand) {
-		this.minReqDemand = minReqDemand;
-	}
-
-
-	/**
-	 * @param criticality the criticality to set
-	 */
-	public void setCriticality(double criticality) {
-		this.criticality = criticality;
-	}
-	
 }
-
-
-
