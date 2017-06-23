@@ -12,6 +12,8 @@ public class Startup implements IStartup {
 
     @Override
     public void earlyStartup() {
+        System.out.println("Early startup");
+        LOG.info("Early startup");
         ensureServerRunning();
     }
 
@@ -24,11 +26,13 @@ public class Startup implements IStartup {
         }
     }
 
-    public void shutDown() {
+    public static void shutDown() {
         try {
             synchronized (Startup.class) {
-                rmiServer.shutDown();
-                rmiServer = null;
+                if (rmiServer != null) {
+                    rmiServer.shutDown();
+                    rmiServer = null;
+                }
             }
         } catch (RemoteException e) {
             LOG.error("Error while shutting down the RMI server.");
