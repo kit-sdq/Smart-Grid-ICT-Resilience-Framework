@@ -1,7 +1,5 @@
 package smartgrid.simcontrol;
 
-import java.rmi.RemoteException;
-
 import org.apache.log4j.Logger;
 import org.eclipse.ui.IStartup;
 
@@ -29,16 +27,11 @@ public class Startup implements IStartup {
     }
 
     public static void shutDown() {
-        try {
-            synchronized (Startup.class) {
-                if (rmiServer != null) {
-                    rmiServer.shutDown();
-                    rmiServer = null;
-                }
+        synchronized (Startup.class) {
+            if (rmiServer != null) {
+                rmiServer.shutDownServer();
+                rmiServer = null;
             }
-        } catch (RemoteException e) {
-            LOG.error("Error while shutting down the RMI server.");
-            e.printStackTrace();
         }
     }
 }
