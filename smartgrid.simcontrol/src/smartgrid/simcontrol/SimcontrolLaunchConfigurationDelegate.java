@@ -7,14 +7,6 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 
-/*TODO Delete after Branching */
-
-//import smartgrid.simcontrol.interfaces.IAttackerSimulation;
-//import smartgrid.simcontrol.interfaces.IImpactAnalysis;
-//import smartgrid.simcontrol.interfaces.IPowerLoadSimulation;
-//import smartgrid.simcontrol.interfaces.ITerminationCondition;
-//import smartgrid.simcontrol.interfaces.ITimeProgressor;
-
 /**
  * This class provides the Delegate for the SimControl Approach of the Smartgrid Analysis'
  *
@@ -35,8 +27,7 @@ public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurati
      * Launches an SimController Analysis with the given Launch Configuration
      */
     @Override
-    public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
-            final IProgressMonitor monitor) throws CoreException {
+    public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch, final IProgressMonitor monitor) throws CoreException {
 
         SimulationController.init(configuration);
 
