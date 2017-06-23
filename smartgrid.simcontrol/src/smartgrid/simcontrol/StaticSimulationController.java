@@ -60,7 +60,7 @@ public final class StaticSimulationController implements ISimulationController {
     private ScenarioState impactInputOld;
     private ScenarioState impactInput;
     private ScenarioResult impactResultOld;
-    private Map<String, Double> powerSupply; // TODO change type
+    private Map<String, Map<String, Double>> powerSupply;
 
     public StaticSimulationController() {
         timeStep = 0;
@@ -72,7 +72,7 @@ public final class StaticSimulationController implements ISimulationController {
      * @see smartgrid.simcontrol.ISimulationController#run(java.util.Map)
      */
     @Override
-    public Map<String, Double> run(Map<String, PowerSpec> kritisPowerDemand) {
+    public Map<String, Map<String, Double>> run(Map<String, PowerSpec> kritisPowerDemand) {
 
         // Compute Initial Impact Analysis Result
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
@@ -94,7 +94,7 @@ public final class StaticSimulationController implements ISimulationController {
             // run power load simulation
             final Map<String, SmartMeterState> smartMeterStates = convertToPowerLoadInput(impactResult);
 //            powerSupply = powerLoadSimulation.run(kritisPowerDemand, smartMeterStates); // TODO invoke interface correctly
-            powerLoadSimulation.run(new HashMap<String, Map<String, PowerSpec>>(), new HashMap<String, Map<String, ISmartMeterState>>());
+            powerSupply = powerLoadSimulation.run(new HashMap<String, Map<String, PowerSpec>>(), new HashMap<String, Map<String, ISmartMeterState>>());
 
             // copy the input
             impactInputOld = EcoreUtil.copy(impactInput);
@@ -179,7 +179,7 @@ public final class StaticSimulationController implements ISimulationController {
      * @param powerSupply
      * @return
      */
-    private void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, final Map<String, Double> powerSupply) {
+    private void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, Map<String, Map<String, Double>> powerSupply) {
 
         //Transfer hacked state into next input
         for (final EntityState state : impactResult.getStates()) {
@@ -196,9 +196,13 @@ public final class StaticSimulationController implements ISimulationController {
         //Transfer power supply state into next input
         for (final PowerState inputPowerState : impactInput.getPowerStates()) {
             final String id = Integer.toString(inputPowerState.getOwner().getId());
-            for (final Entry<String, Double> powerForEntities : powerSupply.entrySet()) {
-                if (id.equalsIgnoreCase(powerForEntities.getKey())) {
-                    inputPowerState.setPowerOutage(powerForEntities.getValue() == 0.0d);
+
+            // iterate over node entries
+            for (final Entry<String, Map<String, Double>> powerForNode : powerSupply.entrySet()) {
+                Map<String, Double> value = powerForNode.getValue();
+                Double supply = value.get(id);
+                if (supply != null) {
+                    inputPowerState.setPowerOutage(supply == 0.0d); //TODO when is there really a power outage? what todo with aggregated states?
                 }
             }
         }
