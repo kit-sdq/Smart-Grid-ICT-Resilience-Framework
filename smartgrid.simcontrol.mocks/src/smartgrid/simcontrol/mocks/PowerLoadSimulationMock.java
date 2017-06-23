@@ -11,8 +11,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
+import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
-import smartgrid.simcontrol.coupling.SmartMeterState;
 
 /**
  * @author Christian
@@ -26,9 +26,8 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
      * Runs a mocked Power Load Simulation. This Mock does not change anything.
      */
     @Override
-    public Map<String, Double> run(Map<String, PowerSpec> kritisDemands, Map<String, SmartMeterState> smartMeterStates) {
-        // TODO Auto-generated method stub
-        return new HashMap<String, Double>();
+    public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisDemands, Map<String, Map<String, ISmartMeterState>> smartMeterStates) {
+        return new HashMap<String, Map<String,Double>>();
     }
 
     @Override
