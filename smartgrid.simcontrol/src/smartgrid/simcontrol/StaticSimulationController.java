@@ -22,7 +22,10 @@ import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
+import smartgrid.simcontrol.coupling.ISimulationController;
+import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.SimcontrolException;
 import smartgrid.simcontrol.coupling.SmartMeterState;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
@@ -37,9 +40,9 @@ import smartgridtopo.NetworkEntity;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 
-public final class StaticSimulationController {
+public final class StaticSimulationController implements ISimulationController {
 
-    private static final Logger LOG = Logger.getLogger(SimulationController.class);
+    private static final Logger LOG = Logger.getLogger(StaticSimulationController.class);
 
     private IPowerLoadSimulationWrapper powerLoadSimulation;
     private IImpactAnalysis impactAnalsis;
@@ -57,12 +60,18 @@ public final class StaticSimulationController {
     private ScenarioState impactInputOld;
     private ScenarioState impactInput;
     private ScenarioResult impactResultOld;
-    private Map<String, Double> powerSupply;
+    private Map<String, Double> powerSupply; // TODO change type
 
     public StaticSimulationController() {
         timeStep = 0;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see smartgrid.simcontrol.ISimulationController#run(java.util.Map)
+     */
+    @Override
     public Map<String, Double> run(Map<String, PowerSpec> kritisPowerDemand) {
 
         // Compute Initial Impact Analysis Result
@@ -84,7 +93,8 @@ public final class StaticSimulationController {
 
             // run power load simulation
             final Map<String, SmartMeterState> smartMeterStates = convertToPowerLoadInput(impactResult);
-            powerSupply = powerLoadSimulation.run(kritisPowerDemand, smartMeterStates);
+//            powerSupply = powerLoadSimulation.run(kritisPowerDemand, smartMeterStates); // TODO invoke interface correctly
+            powerLoadSimulation.run(new HashMap<String, Map<String, PowerSpec>>(), new HashMap<String, Map<String, ISmartMeterState>>());
 
             // copy the input
             impactInputOld = EcoreUtil.copy(impactInput);
@@ -111,10 +121,16 @@ public final class StaticSimulationController {
         } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult, impactResultOld));
 
         LOG.info("Time step " + timeStep + " terminated after " + innerLoopIterationCount + " power/impact iterations");
-        
+
         return powerSupply;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see smartgrid.simcontrol.ISimulationController#shutDown()
+     */
+    @Override
     public void shutDown() {
         // remove file appender of this run
         Logger.getRootLogger().removeAppender(fileAppender);
@@ -193,7 +209,14 @@ public final class StaticSimulationController {
      *
      * Does: # Generates Output Path String # Inits the Simulations
      */
-    public void init(String outputPath, String topoPath, String inputStatePath) throws CoreException {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see smartgrid.simcontrol.ISimulationController#init(java.lang.String, java.lang.String,
+     * java.lang.String)
+     */
+    @Override
+    public void init(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
 
         InitializeLogger.initialize();
 
@@ -219,7 +242,11 @@ public final class StaticSimulationController {
         LOG.info("Topology: " + topoPath);
 
         // Retrieve simulations from extension points
-        loadCustomUserAnalysis();
+        try {
+            loadCustomUserAnalysis();
+        } catch (CoreException e) {
+            throw new SimcontrolException("Individual simulations could not be created", e);
+        }
 
         //TODO: currently, these are all mocks, so no init is needed atm
         // Init all simulations
@@ -234,7 +261,7 @@ public final class StaticSimulationController {
         LOG.info("Using termination condition: " + terminationCondition.getName());
     }
 
-    private String determineWorkingDirPath(String initialPath) throws CoreException {
+    private String determineWorkingDirPath(String initialPath) {
         initialPath = removeTrailingSeparator(initialPath);
         String currentPath = initialPath;
         int runningNumber = 0;
