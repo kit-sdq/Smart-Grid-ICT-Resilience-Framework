@@ -58,13 +58,6 @@ public class PowerSpec {
     }
 
     /**
-     * @return the baseDemand
-     */
-    public double getBaseDemand() {
-        return optDemand;
-    }
-
-    /**
      * @return the minReqDemand
      */
     public double getMinReqDemand() {
