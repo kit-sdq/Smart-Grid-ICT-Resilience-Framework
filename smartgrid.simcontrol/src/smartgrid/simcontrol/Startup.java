@@ -15,8 +15,7 @@ public class Startup implements IStartup {
     @Override
     public void earlyStartup() {
         LoggingInitializer.initialize();
-        System.out.println("Early startup");
-        LOG.info("Early startup");
+        LOG.info("Performing early startup");
         ensureServerRunning();
     }
 
