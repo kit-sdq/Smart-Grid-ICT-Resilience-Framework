@@ -53,6 +53,5 @@ public class RmiServer implements ISimulationController {
     @Override
     public void shutDown() throws RemoteException {
         LOG.info("shutDown was called remotely");
-        this.shutDownServer();
     }
 }
