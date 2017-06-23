@@ -7,33 +7,27 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
-import smartgrid.simcontrol.coupling.IPowerLoadSimulation;
+import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
-import smartgrid.simcontrol.coupling.SmartMeterState;
+import smartgrid.simcontrol.iip.PowerLoadSimulationDummy;
 
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
-    @Override
-    public Map<String, Double> run(Map<String, PowerSpec> kritisDemands, Map<String, SmartMeterState> smartMeterStates) {
-
-        // TODO implement wrapper!
-        final IPowerLoadSimulation dummy = new IPowerLoadSimulation() {
-            @Override
-            public Map<String, Double> run(Map<String, PowerSpec> kritisDemands, Map<String, SmartMeterState> smartMeterStates) {
-                throw new RuntimeException("Power load simulation wrapper not implemented!");
-            }
-        };
-
-        return dummy.run(kritisDemands, smartMeterStates);
-    }
-
+    private PowerLoadSimulationDummy powerSim;
+    
     @Override
     public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
+        powerSim = new PowerLoadSimulationDummy();
         return ErrorCodeEnum.SUCCESS;
     }
 
     @Override
     public String getName() {
         return "Power Load Simulation Wrapper";
+    }
+
+    @Override
+    public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisDemands, Map<String, Map<String, ISmartMeterState>> smartMeterStates) {
+        return powerSim.run(kritisDemands, smartMeterStates);
     }
 }
