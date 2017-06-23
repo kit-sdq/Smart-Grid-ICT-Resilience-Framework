@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import org.apache.log4j.Logger;
 import org.eclipse.ui.IStartup;
 
+import smartgrid.log4j.LoggingInitializer;
+
 public class Startup implements IStartup {
 
     private static final Logger LOG = Logger.getLogger(Startup.class);
@@ -12,6 +14,7 @@ public class Startup implements IStartup {
 
     @Override
     public void earlyStartup() {
+        LoggingInitializer.initialize();
         System.out.println("Early startup");
         LOG.info("Early startup");
         ensureServerRunning();
