@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface ISimulationController extends Remote {
 
-    void init(String outputPath, String topoPath, String inputStatePath) throws RemoteException;
+    void init(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException;
 
     Map<String, Double> run(Map<String, PowerSpec> kritisPowerDemand) throws RemoteException;
 
