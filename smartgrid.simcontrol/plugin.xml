@@ -21,9 +21,11 @@
             delegate= "org.eclipse.jdt.internal.launching.JavaLocalApplicationLaunchConfigurationDelegate" 
       </launchConfigurationType>
    </extension>
-
-   
-
-
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="smartgrid.simcontrol.Startup">
+      </startup>
+   </extension>
 
 </plugin>
