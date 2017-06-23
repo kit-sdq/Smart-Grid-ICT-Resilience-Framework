@@ -3,7 +3,7 @@ package smartgrid.simcontrol;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import smartgrid.log4j.InitializeLogger;
+import smartgrid.log4j.LoggingInitializer;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -31,7 +31,7 @@ public class Activator extends AbstractUIPlugin {
     public void start(final BundleContext context) throws Exception {
         super.start(context);
         plugin = this;
-        InitializeLogger.initialize();
+        LoggingInitializer.initialize();
         Startup.ensureServerRunning();
     }
 

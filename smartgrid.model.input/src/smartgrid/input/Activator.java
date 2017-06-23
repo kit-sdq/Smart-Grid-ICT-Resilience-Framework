@@ -3,7 +3,7 @@ package smartgrid.input;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import smartgrid.log4j.InitializeLogger;
+import smartgrid.log4j.LoggingInitializer;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -30,7 +30,7 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		InitializeLogger.initialize();
+		LoggingInitializer.initialize();
 		plugin = this;
 	}
 

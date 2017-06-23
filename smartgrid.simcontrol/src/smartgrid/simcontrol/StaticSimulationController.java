@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
-import smartgrid.log4j.InitializeLogger;
+import smartgrid.log4j.LoggingInitializer;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
@@ -218,7 +218,7 @@ public final class StaticSimulationController implements ISimulationController {
     @Override
     public void init(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
 
-        InitializeLogger.initialize();
+        LoggingInitializer.initialize();
 
         LOG.debug("loading launch config");
 
