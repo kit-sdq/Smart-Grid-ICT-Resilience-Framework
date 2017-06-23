@@ -37,18 +37,18 @@ public class RmiServer implements ISimulationController {
 
     @Override
     public void init(String outputPath, String topoPath, String inputStatePath) throws RemoteException {
-        LOG.info("init");
+        LOG.info("init was called remotely");
     }
 
     @Override
-    public Map<String, Double> run(Map<String, PowerSpec> kritisPowerDemand) throws RemoteException {
-        LOG.info("run");
-        return new HashMap<String, Double>();
+    public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException {
+        LOG.info("run was called remotely");
+        return new HashMap<String, Map<String,Double>>();
     }
 
     @Override
     public void shutDown() throws RemoteException {
         // TODO properly shutdown this server
-        LOG.info("shutDown");
+        LOG.info("shutDown was called remotely");
     }
 }

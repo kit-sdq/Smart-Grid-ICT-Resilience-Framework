@@ -72,7 +72,7 @@ public final class StaticSimulationController implements ISimulationController {
      * @see smartgrid.simcontrol.ISimulationController#run(java.util.Map)
      */
     @Override
-    public Map<String, Map<String, Double>> run(Map<String, PowerSpec> kritisPowerDemand) {
+    public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
 
         // Compute Initial Impact Analysis Result
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
