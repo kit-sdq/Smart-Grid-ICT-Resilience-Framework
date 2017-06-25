@@ -78,6 +78,7 @@ public class ExtensionRepositoryItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TopoextensionPackage.Literals.EXTENSION_REPOSITORY__REPLICATIONS);
+			childrenFeatures.add(TopoextensionPackage.Literals.EXTENSION_REPOSITORY__COMPLETION);
 		}
 		return childrenFeatures;
 	}
@@ -131,6 +132,7 @@ public class ExtensionRepositoryItemProvider
 
 		switch (notification.getFeatureID(ExtensionRepository.class)) {
 			case TopoextensionPackage.EXTENSION_REPOSITORY__REPLICATIONS:
+			case TopoextensionPackage.EXTENSION_REPOSITORY__COMPLETION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -152,6 +154,11 @@ public class ExtensionRepositoryItemProvider
 			(createChildParameter
 				(TopoextensionPackage.Literals.EXTENSION_REPOSITORY__REPLICATIONS,
 				 TopoextensionFactory.eINSTANCE.createReplication()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TopoextensionPackage.Literals.EXTENSION_REPOSITORY__COMPLETION,
+				 TopoextensionFactory.eINSTANCE.createCompletion()));
 	}
 
 	/**

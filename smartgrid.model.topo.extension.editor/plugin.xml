@@ -34,4 +34,32 @@
       </editor>
    </extension>
 
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated topoextension -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="smartgridtopo.presentation.SmartgridtopoModelWizardID"
+            name="%_UI_SmartgridtopoModelWizard_label"
+            class="smartgridtopo.presentation.SmartgridtopoModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SmartgridtopoModelFile.gif">
+         <description>%_UI_SmartgridtopoModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated topoextension -->
+      <editor
+            id="smartgridtopo.presentation.SmartgridtopoEditorID"
+            name="%_UI_SmartgridtopoEditor_label"
+            icon="icons/full/obj16/SmartgridtopoModelFile.gif"
+            extensions="smartgridtopo"
+            class="smartgridtopo.presentation.SmartgridtopoEditor"
+            contributorClass="smartgridtopo.presentation.SmartgridtopoActionBarContributor">
+      </editor>
+   </extension>
+
 </plugin>

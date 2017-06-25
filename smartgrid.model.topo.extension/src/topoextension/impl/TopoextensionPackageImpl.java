@@ -9,6 +9,9 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import smartgridtopo.SmartgridtopoPackage;
+import smartgridtopo.impl.SmartgridtopoPackageImpl;
+import topoextension.Completion;
 import topoextension.ExtensionRepository;
 import topoextension.Replication;
 import topoextension.TopoextensionFactory;
@@ -34,6 +37,13 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
 	 * @generated
 	 */
 	private EClass replicationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass completionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -81,11 +91,16 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		SmartgridtopoPackageImpl theSmartgridtopoPackage = (SmartgridtopoPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SmartgridtopoPackage.eNS_URI) instanceof SmartgridtopoPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SmartgridtopoPackage.eNS_URI) : SmartgridtopoPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theTopoextensionPackage.createPackageContents();
+		theSmartgridtopoPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTopoextensionPackage.initializePackageContents();
+		theSmartgridtopoPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theTopoextensionPackage.freeze();
@@ -119,6 +134,15 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExtensionRepository_Completion() {
+		return (EReference)extensionRepositoryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getReplication() {
 		return replicationEClass;
 	}
@@ -130,6 +154,24 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
 	 */
 	public EAttribute getReplication_NrOfReplicas() {
 		return (EAttribute)replicationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCompletion() {
+		return completionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompletion_Networkentity() {
+		return (EReference)completionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -162,9 +204,13 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
 		// Create classes and their features
 		extensionRepositoryEClass = createEClass(EXTENSION_REPOSITORY);
 		createEReference(extensionRepositoryEClass, EXTENSION_REPOSITORY__REPLICATIONS);
+		createEReference(extensionRepositoryEClass, EXTENSION_REPOSITORY__COMPLETION);
 
 		replicationEClass = createEClass(REPLICATION);
 		createEAttribute(replicationEClass, REPLICATION__NR_OF_REPLICAS);
+
+		completionEClass = createEClass(COMPLETION);
+		createEReference(completionEClass, COMPLETION__NETWORKENTITY);
 	}
 
 	/**
@@ -190,6 +236,9 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		SmartgridtopoPackage theSmartgridtopoPackage = (SmartgridtopoPackage)EPackage.Registry.INSTANCE.getEPackage(SmartgridtopoPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -199,9 +248,13 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
 		// Initialize classes, features, and operations; add parameters
 		initEClass(extensionRepositoryEClass, ExtensionRepository.class, "ExtensionRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExtensionRepository_Replications(), this.getReplication(), null, "replications", null, 0, -1, ExtensionRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExtensionRepository_Completion(), this.getCompletion(), null, "completion", null, 0, -1, ExtensionRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(replicationEClass, Replication.class, "Replication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getReplication_NrOfReplicas(), ecorePackage.getEInt(), "nrOfReplicas", null, 0, 1, Replication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(completionEClass, Completion.class, "Completion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompletion_Networkentity(), theSmartgridtopoPackage.getNetworkEntity(), null, "networkentity", null, 1, -1, Completion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

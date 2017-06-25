@@ -58,6 +58,7 @@ public class TopoextensionFactoryImpl extends EFactoryImpl implements Topoextens
 		switch (eClass.getClassifierID()) {
 			case TopoextensionPackage.EXTENSION_REPOSITORY: return createExtensionRepository();
 			case TopoextensionPackage.REPLICATION: return createReplication();
+			case TopoextensionPackage.COMPLETION: return createCompletion();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -81,6 +82,16 @@ public class TopoextensionFactoryImpl extends EFactoryImpl implements Topoextens
 	public Replication createReplication() {
 		ReplicationImpl replication = new ReplicationImpl();
 		return replication;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Completion createCompletion() {
+		CompletionImpl completion = new CompletionImpl();
+		return completion;
 	}
 
 	/**

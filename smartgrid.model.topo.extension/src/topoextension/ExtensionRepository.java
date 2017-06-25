@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link topoextension.ExtensionRepository#getReplications <em>Replications</em>}</li>
+ *   <li>{@link topoextension.ExtensionRepository#getCompletion <em>Completion</em>}</li>
  * </ul>
  *
  * @see topoextension.TopoextensionPackage#getExtensionRepository()
@@ -38,5 +39,21 @@ public interface ExtensionRepository extends EObject {
 	 * @generated
 	 */
 	EList<Replication> getReplications();
+
+	/**
+	 * Returns the value of the '<em><b>Completion</b></em>' containment reference list.
+	 * The list contents are of type {@link topoextension.Completion}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Completion</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Completion</em>' containment reference list.
+	 * @see topoextension.TopoextensionPackage#getExtensionRepository_Completion()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Completion> getCompletion();
 
 } // ExtensionRepository

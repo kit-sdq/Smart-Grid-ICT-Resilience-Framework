@@ -157,6 +157,7 @@ import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import topoextension.provider.TopoextensionItemProviderAdapterFactory;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import smartgridtopo.provider.SmartgridtopoItemProviderAdapterFactory;
 
 
 /**
@@ -702,6 +703,7 @@ public class TopoextensionEditor
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TopoextensionItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new SmartgridtopoItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.

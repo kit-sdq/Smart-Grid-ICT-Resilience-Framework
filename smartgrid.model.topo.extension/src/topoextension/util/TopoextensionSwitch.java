@@ -78,6 +78,12 @@ public class TopoextensionSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TopoextensionPackage.COMPLETION: {
+				Completion completion = (Completion)theEObject;
+				T result = caseCompletion(completion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -109,6 +115,21 @@ public class TopoextensionSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReplication(Replication object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Completion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Completion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompletion(Completion object) {
 		return null;
 	}
 

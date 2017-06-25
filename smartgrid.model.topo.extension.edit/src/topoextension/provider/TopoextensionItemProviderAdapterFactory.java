@@ -118,6 +118,29 @@ public class TopoextensionItemProviderAdapterFactory extends TopoextensionAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link topoextension.Completion} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CompletionItemProvider completionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link topoextension.Completion}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCompletionAdapter() {
+		if (completionItemProvider == null) {
+			completionItemProvider = new CompletionItemProvider(this);
+		}
+
+		return completionItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -218,6 +241,7 @@ public class TopoextensionItemProviderAdapterFactory extends TopoextensionAdapte
 	public void dispose() {
 		if (extensionRepositoryItemProvider != null) extensionRepositoryItemProvider.dispose();
 		if (replicationItemProvider != null) replicationItemProvider.dispose();
+		if (completionItemProvider != null) completionItemProvider.dispose();
 	}
 
 }

@@ -76,6 +76,10 @@ public class TopoextensionAdapterFactory extends AdapterFactoryImpl {
 				return createReplicationAdapter();
 			}
 			@Override
+			public Adapter caseCompletion(Completion object) {
+				return createCompletionAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -120,6 +124,20 @@ public class TopoextensionAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReplicationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link topoextension.Completion <em>Completion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see topoextension.Completion
+	 * @generated
+	 */
+	public Adapter createCompletionAdapter() {
 		return null;
 	}
 

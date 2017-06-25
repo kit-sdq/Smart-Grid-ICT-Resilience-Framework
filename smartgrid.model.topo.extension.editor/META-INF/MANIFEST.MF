@@ -8,7 +8,8 @@ Bundle-Activator: topoextension.presentation.TopoextensionEditorPlugin$Implement
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: topoextension.presentation
+Export-Package: smartgridtopo.presentation,
+ topoextension.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
  smartgrid.model.topo.extension.edit;visibility:=reexport,

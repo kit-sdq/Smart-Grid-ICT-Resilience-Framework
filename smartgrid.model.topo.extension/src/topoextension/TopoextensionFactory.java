@@ -40,6 +40,15 @@ public interface TopoextensionFactory extends EFactory {
 	Replication createReplication();
 
 	/**
+	 * Returns a new object of class '<em>Completion</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Completion</em>'.
+	 * @generated
+	 */
+	Completion createCompletion();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
