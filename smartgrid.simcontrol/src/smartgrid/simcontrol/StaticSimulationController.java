@@ -140,6 +140,7 @@ public final class StaticSimulationController implements ISimulationController {
     // Private Methods
 
     private Map<String, SmartMeterState> convertToPowerLoadInput(final ScenarioResult impactResult) {
+        // TODO update to conform to new interfaces?
         final Map<String, SmartMeterState> smartMeterStates = new HashMap<String, SmartMeterState>();
         for (final EntityState state : impactResult.getStates()) {
             final NetworkEntity stateOwner = state.getOwner();
@@ -181,6 +182,7 @@ public final class StaticSimulationController implements ISimulationController {
      */
     private void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, Map<String, Map<String, Double>> powerSupply) {
 
+        // TODO update to conform to new interfaces?
         //Transfer hacked state into next input
         for (final EntityState state : impactResult.getStates()) {
             final boolean hackedState = state instanceof On && ((On) state).isIsHacked();
