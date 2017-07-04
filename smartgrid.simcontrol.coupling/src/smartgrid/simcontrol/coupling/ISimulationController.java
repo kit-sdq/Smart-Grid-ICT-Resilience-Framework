@@ -6,9 +6,11 @@ import java.util.Map;
 
 public interface ISimulationController extends Remote {
 
-    void init(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException;
+    void initActive() throws RemoteException, SimcontrolException;
 
-    Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException;
+    void initReactive(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException;
 
-    void shutDown() throws RemoteException;
+    Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException, SimcontrolException;
+
+    void shutDown() throws RemoteException, SimcontrolException;
 }
