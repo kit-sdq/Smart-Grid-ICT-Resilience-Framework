@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -20,9 +19,14 @@ public class RmiServer implements ISimulationController {
 
     private static final Logger LOG = Logger.getLogger(RmiServer.class);
 
-    private RmiServerState state = RmiServerState.NOT_INIT;
+    private static final String ERROR_SERVER_NOT_INITIALIZED = "The SimControl RMI server is not initialized.";
+    private static final String ERROR_SERVER_ALREADY_INITIALIZED = "The SimControl RMI server is already initialized.";
+    private static final String ERROR_NOT_IMPLEMENTED = "Not yet implemented.";
 
-    public void initServer() {
+    private RmiServerState state = RmiServerState.NOT_INIT;
+    private ReactiveSimulationController reactiveSimControl;
+
+    public void startServer() {
         try {
             ISimulationController stub = (ISimulationController) UnicastRemoteObject.exportObject(this, 0);
             Registry registry = LocateRegistry.createRegistry(1099);
@@ -34,37 +38,57 @@ public class RmiServer implements ISimulationController {
         }
     }
 
+    public void shutDownServer() {
+        // TODO properly shut down this server
+    }
+
     @Override
-    public void initActive() throws RemoteException {
+    public void initActive() throws SimcontrolException {
         LOG.info("init active called remotely");
+        if (state != RmiServerState.NOT_INIT) {
+            LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
+            throw new SimcontrolException(ERROR_SERVER_ALREADY_INITIALIZED);
+        }
         state = RmiServerState.ACTIVE;
     }
 
     @Override
-    public void initReactive(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException {
+    public void initReactive(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
         LOG.info("init reactive called remotely");
-        state = RmiServerState.REACTIVE;
-    }
-
-    @Override
-    public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException {
-        LOG.info("run was called remotely");
-        if (state == RmiServerState.ACTIVE) {
-
-        } else {
-
+        if (state != RmiServerState.NOT_INIT) {
+            LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
+            throw new SimcontrolException(ERROR_SERVER_ALREADY_INITIALIZED);
         }
-        return new HashMap<String, Map<String, Double>>();
+        state = RmiServerState.REACTIVE;
+
+        reactiveSimControl = new ReactiveSimulationController();
+        reactiveSimControl.init(outputPath, topoPath, inputStatePath);
     }
 
     @Override
-    public void shutDown() throws RemoteException {
-        LOG.info("shutDown was called remotely");
-        state = RmiServerState.NOT_INIT;
+    public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws SimcontrolException {
+        LOG.info("run was called remotely");
+        Map<String, Map<String, Double>> powerSupply;
+        if (state == RmiServerState.ACTIVE) {
+            throw new SimcontrolException(ERROR_NOT_IMPLEMENTED); // TODO implement
+        } else if (state == RmiServerState.REACTIVE) {
+            powerSupply = reactiveSimControl.run(kritisPowerDemand);
+        } else {
+            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+        }
+        return powerSupply;
     }
 
-    public void shutDownServer() {
-        // TODO properly shut down this server
+    @Override
+    public void shutDown() throws RemoteException, SimcontrolException {
+        LOG.info("shutDown was called remotely");
+        if (state == RmiServerState.NOT_INIT) {
+            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
+            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+        }
+        state = RmiServerState.NOT_INIT;
+
+        /* what to do here? */
     }
 
     private enum RmiServerState {

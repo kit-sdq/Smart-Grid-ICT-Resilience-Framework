@@ -21,7 +21,7 @@ public class Startup implements IStartup {
         synchronized (Startup.class) {
             if (rmiServer == null) {
                 rmiServer = new RmiServer();
-                rmiServer.initServer();
+                rmiServer.startServer();
             }
         }
     }
