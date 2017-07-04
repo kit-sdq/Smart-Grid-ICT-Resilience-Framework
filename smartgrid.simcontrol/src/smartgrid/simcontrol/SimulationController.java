@@ -45,6 +45,7 @@ public final class SimulationController {
 
     private static final Logger LOG = Logger.getLogger(SimulationController.class);
 
+    // TODO delete once active remote communication is implemented
 //    /*
 //     * This is not properly synchronized regarding protocol. In practice, multiple remote calls to
 //     * initActive and/or multiple starts from the SimControl launch config can overwrite this
