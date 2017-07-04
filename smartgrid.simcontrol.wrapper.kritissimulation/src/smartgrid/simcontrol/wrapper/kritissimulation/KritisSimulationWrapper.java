@@ -8,18 +8,20 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.rmi.BlockingKritisDataExchanger;
 
 public class KritisSimulationWrapper implements IKritisSimulationWrapper {
 
+    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(KritisSimulationWrapper.class);
 
     @Override
-    public Map<String, PowerSpec> run(Map<String, Double> power) {
-        return null;
+    public Map<String, Map<String, PowerSpec>> run(Map<String, Map<String, Double>> power) {
+        return BlockingKritisDataExchanger.passDataToKritisSim(power);
     }
 
     @Override
-    public Map<String, PowerSpec> getDefaultDemand() {
+    public Map<String, Map<String, PowerSpec>> getDefaultDemand() {
         return null;
     }
 
