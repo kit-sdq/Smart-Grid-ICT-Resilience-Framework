@@ -20,7 +20,7 @@ public class RmiServer implements ISimulationController {
     private final ISimulationController simControl;
 
     public RmiServer() {
-        simControl = new StaticSimulationController();
+        simControl = new ReactiveSimulationController();
     }
 
     public void initServer() {

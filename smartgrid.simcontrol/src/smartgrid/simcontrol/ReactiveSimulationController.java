@@ -40,9 +40,9 @@ import smartgridtopo.NetworkEntity;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 
-public final class StaticSimulationController implements ISimulationController {
+public final class ReactiveSimulationController implements ISimulationController {
 
-    private static final Logger LOG = Logger.getLogger(StaticSimulationController.class);
+    private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
     private IPowerLoadSimulationWrapper powerLoadSimulation;
     private IImpactAnalysis impactAnalsis;
@@ -62,7 +62,7 @@ public final class StaticSimulationController implements ISimulationController {
     private ScenarioResult impactResultOld;
     private Map<String, Map<String, Double>> powerSupply;
 
-    public StaticSimulationController() {
+    public ReactiveSimulationController() {
         timeStep = 0;
     }
 
