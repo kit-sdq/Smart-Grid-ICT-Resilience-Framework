@@ -3,7 +3,6 @@ package smartgrid.simcontrol;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -19,10 +18,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
-import smartgrid.inputgenerator.IInputGenerator;
-import smartgrid.log4j.InitializeLogger;
+import smartgrid.log4j.LoggingInitializer;
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.GenerationStyle;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
@@ -48,41 +45,29 @@ public final class SimulationController {
 
     private static final Logger LOG = Logger.getLogger(SimulationController.class);
 
-    /* Generator Fields (not yet properly implemented) */
-    private static Boolean generateInput = false;
-    private static List<IInputGenerator> inputGeneratorList = new LinkedList<IInputGenerator>();
-    @SuppressWarnings("unused")
-    private static IInputGenerator inputGenerator;
-    @SuppressWarnings("unused")
-    private static GenerationStyle desiredStyle;
-    @SuppressWarnings("unused")
-    private static int smartMeterCount;
-    @SuppressWarnings("unused")
-    private static int controlCenterCount;
+    private IKritisSimulationWrapper kritisSimulation;
+    private IPowerLoadSimulationWrapper powerLoadSimulation;
+    private IImpactAnalysis impactAnalsis;
+    private IAttackerSimulation attackerSimulation;
+    private ITerminationCondition terminationCondition;
+    private ITimeProgressor timeProgressor;
 
-    private static IKritisSimulationWrapper kritisSimulation;
-    private static IPowerLoadSimulationWrapper powerLoadSimulation;
-    private static IImpactAnalysis impactAnalsis;
-    private static IAttackerSimulation attackerSimulation;
-    private static ITerminationCondition terminationCondition;
-    private static ITimeProgressor timeProgressor;
+    private String workingDirPath;
+    private int maxTimeSteps;
+    private SmartGridTopology topo;
+    private ScenarioState initialState;
 
-    private static String workingDirPath;
-    private static int maxTimeSteps;
-    private static SmartGridTopology topo;
-    private static ScenarioState initialState;
+    private FileAppender fileAppender;
 
-    private static FileAppender fileAppender;
-
-    private SimulationController() {
-    }
+//    private SimulationController() {
+//    }
 
     /**
      * @param topo
      * @param initialState
      * @param maxTimeSteps
      */
-    public static void run() {
+    public void run() {
         ScenarioState impactInputOld;
         final ScenarioState impactInput = initialState;
         ScenarioResult impactResultOld;
@@ -142,7 +127,7 @@ public final class SimulationController {
                 //generate report
                 final File resultReportPath = new File(iterationPath + "\\ResultReport.csv");
                 ReportGenerator.saveScenarioResult(resultReportPath, impactResult);
-                
+
                 innerLoopIterationCount++;
             } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult, impactResultOld));
 
@@ -161,7 +146,7 @@ public final class SimulationController {
 
     // Private Methods
 
-    private static Map<String, SmartMeterState> convertToPowerLoadInput(final ScenarioResult impactResult) {
+    private Map<String, SmartMeterState> convertToPowerLoadInput(final ScenarioResult impactResult) {
         final Map<String, SmartMeterState> smartMeterStates = new HashMap<String, SmartMeterState>();
         for (final EntityState state : impactResult.getStates()) {
             final NetworkEntity stateOwner = state.getOwner();
@@ -173,22 +158,22 @@ public final class SimulationController {
         return smartMeterStates;
     }
 
-    private static SmartMeterState stateToEnum(EntityState state) {
+    private SmartMeterState stateToEnum(EntityState state) {
         if (state instanceof Online) {
             if (((Online) state).isIsHacked()) {
                 return SmartMeterState.ONLINE_HACKED;
             } else {
                 return SmartMeterState.ONLINE;
             }
-        } else if(state instanceof NoUplink) {
+        } else if (state instanceof NoUplink) {
             if (((NoUplink) state).isIsHacked()) {
                 return SmartMeterState.NO_UPLINK_HACKED;
             } else {
                 return SmartMeterState.NO_UPLINK;
             }
-        } else if(state instanceof NoPower) {
+        } else if (state instanceof NoPower) {
             return SmartMeterState.NO_POWER;
-        } else if(state instanceof Defect) {
+        } else if (state instanceof Defect) {
             return SmartMeterState.DEFECT;
         }
         throw new RuntimeException("Unknown EntityState");
@@ -201,7 +186,7 @@ public final class SimulationController {
      * @param powerSupply
      * @return
      */
-    private static void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, final Map<String, Double> powerSupply) {
+    private void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, final Map<String, Double> powerSupply) {
 
         //Transfer hacked state into next input
         for (final EntityState state : impactResult.getStates()) {
@@ -231,9 +216,9 @@ public final class SimulationController {
      *
      * Does: # Generates Output Path String # Inits the Simulations
      */
-    public static void init(final ILaunchConfiguration launchConfig) throws CoreException {
+    public void init(final ILaunchConfiguration launchConfig) throws CoreException {
 
-        InitializeLogger.initialize();
+        LoggingInitializer.initialize();
 
         LOG.debug("loading launch config");
 
@@ -264,12 +249,6 @@ public final class SimulationController {
         maxTimeSteps = Integer.parseUnsignedInt(launchConfig.getAttribute(Constants.TIMESTEPS_KEY, ""));
         LOG.info("Running for " + maxTimeSteps + " time steps");
 
-        // Gets String from Config and compares whether it is the same String as Constants.TRUE
-        generateInput = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FALSE).contains(Constants.TRUE);
-        if (generateInput) {
-            initGeneratorInput(launchConfig);
-        }
-
         // Retrieve simulations from extension points
         loadCustomUserAnalysis(launchConfig);
 
@@ -289,7 +268,7 @@ public final class SimulationController {
         LOG.info("Using time progressor: " + timeProgressor.getName());
     }
 
-    private static void determineWorkingDirPath(final ILaunchConfiguration launchConfig) throws CoreException {
+    private void determineWorkingDirPath(final ILaunchConfiguration launchConfig) throws CoreException {
         String initialPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
         String currentPath = initialPath;
         int runningNumber = 0;
@@ -303,7 +282,7 @@ public final class SimulationController {
         LOG.info("Working dir is: " + workingDirPath);
     }
 
-    private static String removeTrailingSeparator(String initialPath) {
+    private String removeTrailingSeparator(String initialPath) {
         if (initialPath.endsWith("\\")) {
             return initialPath.substring(0, initialPath.length() - 1);
         }
@@ -313,7 +292,7 @@ public final class SimulationController {
     /**
      * @throws CoreException
      */
-    private static void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException {
+    private void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException {
         final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
         final List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
@@ -363,55 +342,5 @@ public final class SimulationController {
                 impactAnalsis = e;
             }
         }
-
-        if (generateInput) {
-            // #pragma parallel section
-            for (final IInputGenerator e : inputGeneratorList) {
-
-                // TODO Add User Selection from UI here
-
-                // if(e.getName().equals("User Selection")){
-                inputGenerator = e;
-                // }
-            }
-        }
-    }
-
-    /**
-     * @throws CoreException
-     * @throws NumberFormatException
-     */
-    private static void initGeneratorInput(final ILaunchConfiguration launchConfig) throws CoreException, NumberFormatException {
-
-        assert generateInput : "Only run this Methods if generate Input is desired by user";
-
-        String genStyleString = launchConfig.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.FAIL);
-
-        if (genStyleString.equals(Constants.FAIL)) {
-
-            genStyleString = Constants.DEFAULT_GEN_SYNTHETIC_INPUT;
-            LOG.info("[Simulationcontroller] Default Generation Style used");
-        }
-
-        SimulationController.desiredStyle = GenerationStyle.valueOf(genStyleString);
-
-        String smartString = launchConfig.getAttribute(Constants.SMART_METER_COUNT_KEY, Constants.FAIL);
-
-        if (smartString.equals(Constants.FAIL)) {
-            smartString = Constants.DEFAULT_SMART_METER_COUNT;
-            LOG.info("[SimulationController] Default SmartMeterCount used");
-
-        }
-
-        SimulationController.smartMeterCount = Integer.parseInt(smartString);
-
-        String controlCenterString = launchConfig.getAttribute(Constants.CONTROL_CENTER_COUNT_KEY, Constants.FAIL);
-
-        if (controlCenterString.equals(Constants.FAIL)) {
-            controlCenterString = Constants.DEFAULT_CONTROL_CENTER_COUNT;
-            LOG.info("[SimulationController] Default ControlCenterCount used");
-
-        }
-        SimulationController.controlCenterCount = Integer.parseInt(controlCenterString);
     }
 }
