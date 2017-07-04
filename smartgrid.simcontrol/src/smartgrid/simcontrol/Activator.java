@@ -4,6 +4,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import smartgrid.log4j.LoggingInitializer;
+import smartgrid.simcontrol.rmi.Startup;
 
 /**
  * The activator class controls the plug-in life cycle

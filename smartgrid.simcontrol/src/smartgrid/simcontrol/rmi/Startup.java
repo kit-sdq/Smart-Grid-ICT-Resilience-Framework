@@ -1,10 +1,9 @@
-package smartgrid.simcontrol;
+package smartgrid.simcontrol.rmi;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.IStartup;
 
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.simcontrol.rmi.RmiServer;
 
 public class Startup implements IStartup {
 

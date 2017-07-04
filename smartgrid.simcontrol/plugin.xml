@@ -24,7 +24,7 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="smartgrid.simcontrol.Startup">
+            class="smartgrid.simcontrol.rmi.Startup">
       </startup>
    </extension>
 
