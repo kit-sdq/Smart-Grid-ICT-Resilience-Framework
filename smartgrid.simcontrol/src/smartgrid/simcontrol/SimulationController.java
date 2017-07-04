@@ -53,11 +53,19 @@ public final class SimulationController {
     private static SimulationController instance;
 
     public static synchronized SimulationController getInstance() {
+        while (instance == null)
+            try {
+                SimulationController.class.wait();
+            } catch (InterruptedException e) {
+                LOG.warn("Interrupted while waiting for SimulationController singleton. This is unexpected.", e);
+            }
+
         return instance;
     }
 
     public static synchronized void setInstance(SimulationController newInstance) {
         instance = newInstance;
+        SimulationController.class.notifyAll();
     }
 
     private IKritisSimulationWrapper kritisSimulation;
