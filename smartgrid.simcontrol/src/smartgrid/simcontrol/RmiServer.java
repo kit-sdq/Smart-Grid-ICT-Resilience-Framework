@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.SimcontrolException;
+import smartgrid.simcontrol.rmi.BlockingKritisDataExchanger;
 
 /**
  * @author Misha
@@ -21,9 +22,14 @@ public class RmiServer implements ISimulationController {
 
     private static final String ERROR_SERVER_NOT_INITIALIZED = "The SimControl RMI server is not initialized.";
     private static final String ERROR_SERVER_ALREADY_INITIALIZED = "The SimControl RMI server is already initialized.";
-    private static final String ERROR_NOT_IMPLEMENTED = "Not yet implemented.";
+//    private static final String ERROR_NOT_IMPLEMENTED = "Not yet implemented.";
 
     private RmiServerState state = RmiServerState.NOT_INIT;
+
+    private enum RmiServerState {
+        NOT_INIT, ACTIVE, REACTIVE;
+    }
+
     private ReactiveSimulationController reactiveSimControl;
 
     public void startServer() {
@@ -70,7 +76,7 @@ public class RmiServer implements ISimulationController {
         LOG.info("run was called remotely");
         Map<String, Map<String, Double>> powerSupply;
         if (state == RmiServerState.ACTIVE) {
-            throw new SimcontrolException(ERROR_NOT_IMPLEMENTED); // TODO implement
+            powerSupply = BlockingKritisDataExchanger.getDataFromCoupling(kritisPowerDemand);
         } else if (state == RmiServerState.REACTIVE) {
             powerSupply = reactiveSimControl.run(kritisPowerDemand);
         } else {
@@ -89,9 +95,5 @@ public class RmiServer implements ISimulationController {
         state = RmiServerState.NOT_INIT;
 
         /* what to do here? */
-    }
-
-    private enum RmiServerState {
-        NOT_INIT, ACTIVE, REACTIVE;
     }
 }
