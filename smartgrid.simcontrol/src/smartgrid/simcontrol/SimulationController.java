@@ -45,28 +45,28 @@ public final class SimulationController {
 
     private static final Logger LOG = Logger.getLogger(SimulationController.class);
 
-    /*
-     * This is not properly synchronized regarding protocol. In practice, multiple remote calls to
-     * initActive and/or multiple starts from the SimControl launch config can overwrite this
-     * singleton.
-     */
-    private static SimulationController instance;
-
-    public static synchronized SimulationController getInstance() {
-        while (instance == null)
-            try {
-                SimulationController.class.wait();
-            } catch (InterruptedException e) {
-                LOG.warn("Interrupted while waiting for SimulationController singleton. This is unexpected.", e);
-            }
-
-        return instance;
-    }
-
-    public static synchronized void setInstance(SimulationController newInstance) {
-        instance = newInstance;
-        SimulationController.class.notifyAll();
-    }
+//    /*
+//     * This is not properly synchronized regarding protocol. In practice, multiple remote calls to
+//     * initActive and/or multiple starts from the SimControl launch config can overwrite this
+//     * singleton.
+//     */
+//    private static SimulationController instance;
+//
+//    public static synchronized SimulationController getInstance() {
+//        while (instance == null)
+//            try {
+//                SimulationController.class.wait();
+//            } catch (InterruptedException e) {
+//                LOG.warn("Interrupted while waiting for SimulationController singleton. This is unexpected.", e);
+//            }
+//
+//        return instance;
+//    }
+//
+//    public static synchronized void setInstance(SimulationController newInstance) {
+//        instance = newInstance;
+//        SimulationController.class.notifyAll();
+//    }
 
     private IKritisSimulationWrapper kritisSimulation;
     private IPowerLoadSimulationWrapper powerLoadSimulation;
