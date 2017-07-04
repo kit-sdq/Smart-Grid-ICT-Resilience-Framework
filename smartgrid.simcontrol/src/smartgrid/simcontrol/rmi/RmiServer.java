@@ -1,4 +1,4 @@
-package smartgrid.simcontrol;
+package smartgrid.simcontrol.rmi;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -8,10 +8,10 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import smartgrid.simcontrol.ReactiveSimulationController;
 import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.SimcontrolException;
-import smartgrid.simcontrol.rmi.BlockingKritisDataExchanger;
 
 /**
  * @author Misha
