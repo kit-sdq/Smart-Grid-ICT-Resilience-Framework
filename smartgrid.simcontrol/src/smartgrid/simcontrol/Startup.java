@@ -17,21 +17,17 @@ public class Startup implements IStartup {
         ensureServerRunning();
     }
 
-    public static void ensureServerRunning() {
-        synchronized (Startup.class) {
-            if (rmiServer == null) {
-                rmiServer = new RmiServer();
-                rmiServer.startServer();
-            }
+    public static synchronized void ensureServerRunning() {
+        if (rmiServer == null) {
+            rmiServer = new RmiServer();
+            rmiServer.startServer();
         }
     }
 
-    public static void shutDown() {
-        synchronized (Startup.class) {
-            if (rmiServer != null) {
-                rmiServer.shutDownServer();
-                rmiServer = null;
-            }
+    public static synchronized void shutDown() {
+        if (rmiServer != null) {
+            rmiServer.shutDownServer();
+            rmiServer = null;
         }
     }
 }
