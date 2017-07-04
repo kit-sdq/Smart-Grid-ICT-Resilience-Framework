@@ -22,7 +22,6 @@ import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
-import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.SimcontrolException;
@@ -40,7 +39,7 @@ import smartgridtopo.NetworkEntity;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 
-public final class ReactiveSimulationController implements ISimulationController {
+public final class ReactiveSimulationController {
 
     private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
@@ -71,7 +70,6 @@ public final class ReactiveSimulationController implements ISimulationController
      * 
      * @see smartgrid.simcontrol.ISimulationController#run(java.util.Map)
      */
-    @Override
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
 
         // Compute Initial Impact Analysis Result
@@ -130,7 +128,6 @@ public final class ReactiveSimulationController implements ISimulationController
      * 
      * @see smartgrid.simcontrol.ISimulationController#shutDown()
      */
-    @Override
     public void shutDown() {
         // remove file appender of this run
         Logger.getRootLogger().removeAppender(fileAppender);
@@ -221,7 +218,6 @@ public final class ReactiveSimulationController implements ISimulationController
      * @see smartgrid.simcontrol.ISimulationController#init(java.lang.String, java.lang.String,
      * java.lang.String)
      */
-    @Override
     public void init(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
 
         LoggingInitializer.initialize();

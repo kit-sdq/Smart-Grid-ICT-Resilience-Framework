@@ -11,17 +11,16 @@ import org.apache.log4j.Logger;
 
 import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.SimcontrolException;
 
+/**
+ * @author Misha
+ */
 public class RmiServer implements ISimulationController {
 
     private static final Logger LOG = Logger.getLogger(RmiServer.class);
 
-    //TODO connect with simControl
-    private final ISimulationController simControl;
-
-    public RmiServer() {
-        simControl = new ReactiveSimulationController();
-    }
+    private RmiServerState state = RmiServerState.NOT_INIT;
 
     public void initServer() {
         try {
@@ -35,23 +34,40 @@ public class RmiServer implements ISimulationController {
         }
     }
 
-    public void shutDownServer() {
-        // TODO properly shut down this server
+    @Override
+    public void initActive() throws RemoteException {
+        LOG.info("init active called remotely");
+        state = RmiServerState.ACTIVE;
     }
 
     @Override
-    public void init(String outputPath, String topoPath, String inputStatePath) throws RemoteException {
-        LOG.info("init was called remotely");
+    public void initReactive(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException {
+        LOG.info("init reactive called remotely");
+        state = RmiServerState.REACTIVE;
     }
 
     @Override
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException {
         LOG.info("run was called remotely");
+        if (state == RmiServerState.ACTIVE) {
+
+        } else {
+
+        }
         return new HashMap<String, Map<String, Double>>();
     }
 
     @Override
     public void shutDown() throws RemoteException {
         LOG.info("shutDown was called remotely");
+        state = RmiServerState.NOT_INIT;
+    }
+
+    public void shutDownServer() {
+        // TODO properly shut down this server
+    }
+
+    private enum RmiServerState {
+        NOT_INIT, ACTIVE, REACTIVE;
     }
 }
