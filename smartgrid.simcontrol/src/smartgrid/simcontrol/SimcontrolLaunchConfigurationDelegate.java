@@ -10,10 +10,9 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 /**
  * This class provides the Delegate for the SimControl Approach of the Smartgrid Analysis'
  *
- *
  * @author Christian
+ * @author Misha
  * @implements ILaunchConfigurationDelegate
- *
  */
 public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
 
@@ -31,40 +30,7 @@ public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurati
 
         SimulationController simControl = new SimulationController();
         simControl.init(configuration);
+        SimulationController.setInstance(simControl);
         simControl.run();
     }
-
-//	@Deprecated
-//	private SmartGridTopology loadScenario(String path) {
-//		SmartGridTopology s = null;
-//		SmartgridtopoPackageImpl.init();
-//
-//		// Code Removed - Christian
-//
-//		ResourceSet resSet = new ResourceSetImpl();
-//		Resource resource = resSet.getResource(URI.createFileURI(path), true);
-//
-//		EObject r = resource.getContents().get(0);
-//		LOG.debug("[SimcontrolLaunchConfigurationDelegate]: Class: " + r.getClass());
-//		s = (SmartGridTopology) resource.getContents().get(0);
-//
-//		return s;
-//	}
-//
-//	@Deprecated
-//	private ScenarioState loadInput(String path) {
-//		ScenarioState input = null;
-//		SmartgridinputPackageImpl.init();
-//
-//		// Code Removed - Christian
-//
-//		ResourceSet resSet = new ResourceSetImpl();
-//		Resource resource = resSet.getResource(URI.createFileURI(path), true);
-//
-//		EObject r = resource.getContents().get(0);
-//		LOG.debug("[SimcontrolLaunchConfigurationDelegate]: Class: " + r.getClass());
-//		input = (ScenarioState) resource.getContents().get(0);
-//
-//		return input;
-//	}
 }

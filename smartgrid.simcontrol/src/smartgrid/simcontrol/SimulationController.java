@@ -45,6 +45,21 @@ public final class SimulationController {
 
     private static final Logger LOG = Logger.getLogger(SimulationController.class);
 
+    /*
+     * This is not properly synchronized regarding protocol. In practice, multiple remote calls to
+     * initActive and/or multiple starts from the SimControl launch config can overwrite this
+     * singleton.
+     */
+    private static SimulationController instance;
+
+    public static synchronized SimulationController getInstance() {
+        return instance;
+    }
+
+    public static synchronized void setInstance(SimulationController newInstance) {
+        instance = newInstance;
+    }
+
     private IKritisSimulationWrapper kritisSimulation;
     private IPowerLoadSimulationWrapper powerLoadSimulation;
     private IImpactAnalysis impactAnalsis;
@@ -58,9 +73,6 @@ public final class SimulationController {
     private ScenarioState initialState;
 
     private FileAppender fileAppender;
-
-//    private SimulationController() {
-//    }
 
     /**
      * @param topo
