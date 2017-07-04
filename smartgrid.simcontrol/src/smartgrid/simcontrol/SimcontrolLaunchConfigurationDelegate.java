@@ -29,9 +29,9 @@ public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurati
     @Override
     public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch, final IProgressMonitor monitor) throws CoreException {
 
-        SimulationController.init(configuration);
-
-        SimulationController.run();
+        SimulationController simControl = new SimulationController();
+        simControl.init(configuration);
+        simControl.run();
     }
 
 //	@Deprecated
