@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import smartgrid.simcontrol.ReactiveSimulationController;
 import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.PowerSpec;
-import smartgrid.simcontrol.coupling.SimcontrolException;
+import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
 
 /**
  * @author Misha

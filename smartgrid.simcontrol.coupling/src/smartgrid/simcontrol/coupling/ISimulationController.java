@@ -4,6 +4,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Map;
 
+import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
+
 public interface ISimulationController extends Remote {
 
     void initActive() throws RemoteException, SimcontrolException;

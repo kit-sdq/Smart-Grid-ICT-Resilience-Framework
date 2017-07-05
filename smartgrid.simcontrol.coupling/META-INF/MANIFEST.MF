@@ -3,5 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Coupling
 Bundle-SymbolicName: smartgrid.simcontrol.coupling
 Bundle-Version: 1.0.0.qualifier
-Export-Package: smartgrid.simcontrol.coupling
+Export-Package: smartgrid.simcontrol.coupling,
+ smartgrid.simcontrol.coupling.Exceptions
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.coupling;
+package smartgrid.simcontrol.coupling.Exceptions;
 
 public class SimcontrolException extends Exception {
 

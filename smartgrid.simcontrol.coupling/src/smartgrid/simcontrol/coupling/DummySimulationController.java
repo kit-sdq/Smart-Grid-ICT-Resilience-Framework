@@ -10,6 +10,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
+
 /**
  * @author tim
  */
