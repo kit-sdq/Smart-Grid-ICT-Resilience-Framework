@@ -30,7 +30,6 @@ public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurati
 
         SimulationController simControl = new SimulationController();
         simControl.init(configuration);
-        SimulationController.setInstance(simControl);
         simControl.run();
     }
 }

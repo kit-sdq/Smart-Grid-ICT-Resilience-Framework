@@ -2,10 +2,8 @@ package smartgrid.simcontrol;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Appender;
 import org.apache.log4j.FileAppender;
@@ -26,20 +24,11 @@ import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
+import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
-import smartgrid.simcontrol.coupling.SmartMeterState;
-import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
-import smartgridoutput.Defect;
-import smartgridoutput.EntityState;
-import smartgridoutput.NoPower;
-import smartgridoutput.NoUplink;
-import smartgridoutput.On;
-import smartgridoutput.Online;
 import smartgridoutput.ScenarioResult;
-import smartgridtopo.NetworkEntity;
 import smartgridtopo.SmartGridTopology;
-import smartgridtopo.SmartMeter;
 
 public final class SimulationController {
 
@@ -92,18 +81,21 @@ public final class SimulationController {
         ScenarioState impactInputOld;
         final ScenarioState impactInput = initialState;
         ScenarioResult impactResultOld;
-        Map<String, PowerSpec> kritisPowerDemand = kritisSimulation.getDefaultDemand();
-        Map<String, Double> powerSupply = null;
+        Map<String, Map<String, PowerSpec>> kritisPowerDemand;
+        Map<String, Map<String, Double>> powerSupply = null;
 
         // Compute Initial Impact Analysis Result
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
 
         // one iteration computes one timestep
         for (int timeStep = 0; timeStep < maxTimeSteps; timeStep++) {
+
             // Generates Path with default System separators
             final String timeStepPath = new File(workingDirPath + "\\Zeitschritt " + timeStep).getPath();
 
-            if (timeStep != 0) {
+            if (timeStep == 0) {
+                kritisPowerDemand = kritisSimulation.getDefaultDemand();
+            } else {
                 kritisPowerDemand = kritisSimulation.run(powerSupply);
             }
 
@@ -125,14 +117,14 @@ public final class SimulationController {
                 final String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount).getPath();
 
                 // run power load simulation
-                final Map<String, SmartMeterState> smartMeterStates = convertToPowerLoadInput(impactResult);
+                final Map<String, Map<String, ISmartMeterState>> smartMeterStates = ReactiveSimulationController.convertToPowerLoadInput(impactResult);
                 powerSupply = powerLoadSimulation.run(kritisPowerDemand, smartMeterStates);
 
                 // copy the input
                 impactInputOld = EcoreUtil.copy(impactInput);
 
                 // convert input for impact analysis
-                updateImactAnalysisInput(impactInput, impactResult, powerSupply);
+                ReactiveSimulationController.updateImactAnalysisInput(impactInput, impactResult, powerSupply);
 
                 // Save input to file
                 final String inputFile = new File(iterationPath + "\\PowerLoadResult.smartgridinput").getPath();
@@ -167,70 +159,70 @@ public final class SimulationController {
 
     // Private Methods
 
-    private Map<String, SmartMeterState> convertToPowerLoadInput(final ScenarioResult impactResult) {
-        final Map<String, SmartMeterState> smartMeterStates = new HashMap<String, SmartMeterState>();
-        for (final EntityState state : impactResult.getStates()) {
-            final NetworkEntity stateOwner = state.getOwner();
-            if (stateOwner instanceof SmartMeter) {
-                final String id = Integer.toString(stateOwner.getId());
-                smartMeterStates.put(id, stateToEnum(state));
-            }
-        }
-        return smartMeterStates;
-    }
-
-    private SmartMeterState stateToEnum(EntityState state) {
-        if (state instanceof Online) {
-            if (((Online) state).isIsHacked()) {
-                return SmartMeterState.ONLINE_HACKED;
-            } else {
-                return SmartMeterState.ONLINE;
-            }
-        } else if (state instanceof NoUplink) {
-            if (((NoUplink) state).isIsHacked()) {
-                return SmartMeterState.NO_UPLINK_HACKED;
-            } else {
-                return SmartMeterState.NO_UPLINK;
-            }
-        } else if (state instanceof NoPower) {
-            return SmartMeterState.NO_POWER;
-        } else if (state instanceof Defect) {
-            return SmartMeterState.DEFECT;
-        }
-        throw new RuntimeException("Unknown EntityState");
-    }
-
-    /**
-     * 
-     * @param impactInput
-     * @param impactResult
-     * @param powerSupply
-     * @return
-     */
-    private void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, final Map<String, Double> powerSupply) {
-
-        //Transfer hacked state into next input
-        for (final EntityState state : impactResult.getStates()) {
-            final boolean hackedState = state instanceof On && ((On) state).isIsHacked();
-            final NetworkEntity owner = state.getOwner();
-            for (final smartgridinput.EntityState inputEntityState : impactInput.getEntityStates()) {
-                if (inputEntityState.getOwner().equals(owner)) {
-                    inputEntityState.setIsHacked(hackedState);
-                    break;
-                }
-            }
-        }
-
-        //Transfer power supply state into next input
-        for (final PowerState inputPowerState : impactInput.getPowerStates()) {
-            final String id = Integer.toString(inputPowerState.getOwner().getId());
-            for (final Entry<String, Double> powerForEntities : powerSupply.entrySet()) {
-                if (id.equalsIgnoreCase(powerForEntities.getKey())) {
-                    inputPowerState.setPowerOutage(powerForEntities.getValue() == 0.0d);
-                }
-            }
-        }
-    }
+//    private Map<String, Map<String, ISmartMeterState>> convertToPowerLoadInput(final ScenarioResult impactResult) {
+//        final Map<String, SmartMeterState> smartMeterStates = new HashMap<String, SmartMeterState>();
+//        for (final EntityState state : impactResult.getStates()) {
+//            final NetworkEntity stateOwner = state.getOwner();
+//            if (stateOwner instanceof SmartMeter) {
+//                final String id = Integer.toString(stateOwner.getId());
+//                smartMeterStates.put(id, stateToEnum(state));
+//            }
+//        }
+//        return smartMeterStates;
+//    }
+//
+//    private SmartMeterState stateToEnum(EntityState state) {
+//        if (state instanceof Online) {
+//            if (((Online) state).isIsHacked()) {
+//                return SmartMeterState.ONLINE_HACKED;
+//            } else {
+//                return SmartMeterState.ONLINE;
+//            }
+//        } else if (state instanceof NoUplink) {
+//            if (((NoUplink) state).isIsHacked()) {
+//                return SmartMeterState.NO_UPLINK_HACKED;
+//            } else {
+//                return SmartMeterState.NO_UPLINK;
+//            }
+//        } else if (state instanceof NoPower) {
+//            return SmartMeterState.NO_POWER;
+//        } else if (state instanceof Defect) {
+//            return SmartMeterState.DEFECT;
+//        }
+//        throw new RuntimeException("Unknown EntityState");
+//    }
+//
+//    /**
+//     * 
+//     * @param impactInput
+//     * @param impactResult
+//     * @param powerSupply
+//     * @return
+//     */
+//    private void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, final Map<String, Double> powerSupply) {
+//
+//        //Transfer hacked state into next input
+//        for (final EntityState state : impactResult.getStates()) {
+//            final boolean hackedState = state instanceof On && ((On) state).isIsHacked();
+//            final NetworkEntity owner = state.getOwner();
+//            for (final smartgridinput.EntityState inputEntityState : impactInput.getEntityStates()) {
+//                if (inputEntityState.getOwner().equals(owner)) {
+//                    inputEntityState.setIsHacked(hackedState);
+//                    break;
+//                }
+//            }
+//        }
+//
+//        //Transfer power supply state into next input
+//        for (final PowerState inputPowerState : impactInput.getPowerStates()) {
+//            final String id = Integer.toString(inputPowerState.getOwner().getId());
+//            for (final Entry<String, Double> powerForEntities : powerSupply.entrySet()) {
+//                if (id.equalsIgnoreCase(powerForEntities.getKey())) {
+//                    inputPowerState.setPowerOutage(powerForEntities.getValue() == 0.0d);
+//                }
+//            }
+//        }
+//    }
 
     /*
      * Inits some things for all runs. Not for Interface based hook in !
