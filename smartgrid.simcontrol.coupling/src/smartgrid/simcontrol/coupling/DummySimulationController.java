@@ -23,7 +23,7 @@ public class DummySimulationController implements ISimulationController {
      * @see smartgrid.simcontrol.coupling.ISimulationController#run(java.util.Map)
      */
     @Override
-    public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException {
+    public Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException {
         System.out.println("RMI: run called");
         return new HashMap<String, Map<String, Double>>();
     }
@@ -66,5 +66,12 @@ public class DummySimulationController implements ISimulationController {
     public void initReactive(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException {
         System.out.println("RMI: init reactive called");
     }
+
+	@Override
+	public void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData)
+			throws RemoteException, SimcontrolException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
