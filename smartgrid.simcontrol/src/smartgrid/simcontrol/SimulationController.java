@@ -2,6 +2,7 @@ package smartgrid.simcontrol;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -96,7 +97,7 @@ public final class SimulationController {
             if (timeStep == 0) {
                 kritisPowerDemand = kritisSimulation.getDefaultDemand();
             } else {
-                kritisPowerDemand = kritisSimulation.run(powerSupply);
+                kritisPowerDemand = kritisSimulation.run(convertPowerSupply(powerSupply));
             }
 
             impactResult = attackerSimulation.run(topo, impactResult);
@@ -155,6 +156,10 @@ public final class SimulationController {
         // remove file appender of this run
         Logger.getRootLogger().removeAppender(fileAppender);
         fileAppender.close();
+    }
+
+    private Map<String, Map<String, Double>> convertPowerSupply(Map<String, Map<String, Double>> powerSupply) {
+        return new HashMap<String, Map<String, Double>>(); // TODO implement!
     }
 
     // Private Methods
