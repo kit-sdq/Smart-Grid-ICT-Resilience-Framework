@@ -31,7 +31,7 @@ class CompletionExecuter {
 		contents.forEach [ eObj |
 			for (completion : completions) {
 				if (completion.typeToComplete.isInstance(eObj)) {
-//					val isApplied = SmartGridStereotypesAPI.hasStereotype()
+//					val isApplied = SmartGridStereotypesAPI.hasStereotype() TODO improve check if stereotype is present
 					val completionObject = SmartGridStereotypesAPI.getStereotype(eObj, completion.referenceName,
 						completion.stereotypeName, completion.typeOfCompletionObject)
 					if (completionObject != null) // TODO Hack
