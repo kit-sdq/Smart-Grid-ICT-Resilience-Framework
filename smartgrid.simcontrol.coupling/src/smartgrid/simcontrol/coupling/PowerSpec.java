@@ -3,6 +3,9 @@ package smartgrid.simcontrol.coupling;
 import java.io.Serializable;
 
 public class PowerSpec implements Serializable {
+
+    private static final long serialVersionUID = -2011261885321879024L;
+
     private String ciType; //CI, -component ID
     private String ciName; //CI, -component name
     private String ciSmartID; //Smart meter agent-ID
