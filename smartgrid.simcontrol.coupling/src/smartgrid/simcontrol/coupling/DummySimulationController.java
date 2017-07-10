@@ -3,14 +3,11 @@
  */
 package smartgrid.simcontrol.coupling;
 
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
-
-import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
 
 /**
  * @author tim
@@ -23,7 +20,7 @@ public class DummySimulationController implements ISimulationController {
      * @see smartgrid.simcontrol.coupling.ISimulationController#run(java.util.Map)
      */
     @Override
-    public Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException {
+    public Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
         System.out.println("RMI: run called");
         return new HashMap<String, Map<String, Double>>();
     }
@@ -34,7 +31,7 @@ public class DummySimulationController implements ISimulationController {
      * @see smartgrid.simcontrol.coupling.ISimulationController#shutDown()
      */
     @Override
-    public void shutDown() throws RemoteException {
+    public void shutDown() {
         System.out.println("RMI: shutdown called");
     }
 
@@ -58,20 +55,19 @@ public class DummySimulationController implements ISimulationController {
     }
 
     @Override
-    public void initActive() throws RemoteException, SimcontrolException {
+    public void initActive() {
         System.out.println("RMI: init active called");
     }
 
     @Override
-    public void initReactive(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException {
+    public void initReactive(String outputPath, String topoPath, String inputStatePath) {
         System.out.println("RMI: init reactive called");
     }
 
-	@Override
-	public void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData)
-			throws RemoteException, SimcontrolException {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData) {
+        // TODO Auto-generated method stub
+
+    }
 
 }
