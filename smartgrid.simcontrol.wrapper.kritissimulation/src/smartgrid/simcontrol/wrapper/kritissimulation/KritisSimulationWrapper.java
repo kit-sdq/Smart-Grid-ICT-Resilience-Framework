@@ -17,18 +17,13 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
     private static final Logger LOG = Logger.getLogger(KritisSimulationWrapper.class);
 
     @Override
-    public Map<String, PowerSpec> run(Map<String, Double> power) {
-//        return BlockingKritisDataExchanger.passDataToKritisSim(power); // currently uses nested map
-        return new HashMap<String, PowerSpec>(); // TODO implement!
-    }
-
-    public Map<String, Map<String, PowerSpec>> runWithNestedMap(Map<String, Map<String, Double>> power) {
+    public Map<String, Map<String, PowerSpec>> run(Map<String, Map<String, Double>> power) {
         return BlockingKritisDataExchanger.passDataToKritisSim(power);
     }
 
     @Override
-    public Map<String, PowerSpec> getDefaultDemand() {
-        return new HashMap<String, PowerSpec>(); // TODO implement!
+    public Map<String, Map<String, PowerSpec>> getDefaultDemand() {
+        return new HashMap<String, Map<String, PowerSpec>>(); // TODO implement?
     }
 
     @Override
