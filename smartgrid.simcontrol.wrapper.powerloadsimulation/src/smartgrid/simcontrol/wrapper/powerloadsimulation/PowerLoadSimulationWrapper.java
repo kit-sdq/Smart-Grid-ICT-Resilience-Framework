@@ -2,7 +2,6 @@ package smartgrid.simcontrol.wrapper.powerloadsimulation;
 
 import java.util.Map;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
@@ -14,9 +13,9 @@ import smartgrid.simcontrol.iip.PowerLoadSimulationDummy;
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
     private PowerLoadSimulationDummy powerSim;
-    
+
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
+    public ErrorCodeEnum init(final ILaunchConfiguration config) {
         powerSim = new PowerLoadSimulationDummy();
         return ErrorCodeEnum.SUCCESS;
     }
