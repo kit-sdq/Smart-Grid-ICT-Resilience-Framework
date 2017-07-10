@@ -1,6 +1,5 @@
 package smartgrid.simcontrol.rmi;
 
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -11,6 +10,7 @@ import org.apache.log4j.Logger;
 import smartgrid.simcontrol.ReactiveSimulationController;
 import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.SmartMeterGeoData;
 import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
 
 /**
@@ -22,7 +22,8 @@ public class RmiServer implements ISimulationController {
 
     private static final String ERROR_SERVER_NOT_INITIALIZED = "The SimControl RMI server is not initialized.";
     private static final String ERROR_SERVER_ALREADY_INITIALIZED = "The SimControl RMI server is already initialized.";
-//    private static final String ERROR_NOT_IMPLEMENTED = "Not yet implemented.";
+    @SuppressWarnings("unused")
+    private static final String ERROR_NOT_IMPLEMENTED = "Not yet implemented.";
 
     private RmiServerState state = RmiServerState.NOT_INIT;
 
@@ -72,7 +73,13 @@ public class RmiServer implements ISimulationController {
     }
 
     @Override
-    public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws SimcontrolException {
+    public void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData) {
+        LOG.info("init topo called remotely");
+        // To-do implement
+    }
+
+    @Override
+    public Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws SimcontrolException {
         LOG.info("run was called remotely");
         Map<String, Map<String, Double>> powerSupply;
         if (state == RmiServerState.ACTIVE) {
@@ -86,7 +93,7 @@ public class RmiServer implements ISimulationController {
     }
 
     @Override
-    public void shutDown() throws RemoteException, SimcontrolException {
+    public void shutDown() throws SimcontrolException {
         LOG.info("shutDown was called remotely");
         if (state == RmiServerState.NOT_INIT) {
             LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
