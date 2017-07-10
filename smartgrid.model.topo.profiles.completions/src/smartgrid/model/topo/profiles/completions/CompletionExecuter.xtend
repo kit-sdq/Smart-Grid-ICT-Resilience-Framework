@@ -3,8 +3,6 @@ package smartgrid.model.topo.profiles.completions
 import java.util.ArrayList
 import java.util.List
 import org.apache.log4j.Logger
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.lib.annotations.Accessors
 import smartgrid.model.topo.profiles.smartgridprofiles.api.SmartGridProfilesAPI
 import smartgrid.model.topo.profiles.smartgridprofiles.api.SmartGridStereotypesAPI
 import smartgridtopo.SmartGridTopology
@@ -33,6 +31,7 @@ class CompletionExecuter {
 		contents.forEach [ eObj |
 			for (completion : completions) {
 				if (completion.typeToComplete.isInstance(eObj)) {
+//					val isApplied = SmartGridStereotypesAPI.hasStereotype()
 					val completionObject = SmartGridStereotypesAPI.getStereotype(eObj, completion.referenceName,
 						completion.stereotypeName, completion.typeOfCompletionObject)
 					if (completionObject != null) // TODO Hack

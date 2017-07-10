@@ -34,6 +34,10 @@ class SmartGridStereotypesAPI {
 		return ensureSingleTaggedValueFromType(taggedValue as EObjectResolvingEList<?>, eObject, t)
 	}
 
+	def public static boolean hasStereotype(EObject eObject, String stereotypeName) {
+		return eObject.isStereotypeApplied(stereotypeName)
+	}
+
 	def private static <T> T ensureSingleTaggedValueFromType(EObjectResolvingEList<?> taggedValue, EObject eObject,
 		Class<T> t) {
 		if (taggedValue.size == 0) {
