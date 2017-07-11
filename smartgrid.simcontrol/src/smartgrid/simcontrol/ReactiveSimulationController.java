@@ -24,6 +24,7 @@ import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
+import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.SmartMeterState;
@@ -49,6 +50,7 @@ public final class ReactiveSimulationController {
     private IImpactAnalysis impactAnalsis;
     private IAttackerSimulation attackerSimulation;
     private ITerminationCondition terminationCondition;
+    private ITimeProgressor timeProgressor;
 
     private String workingDirPath;
     private SmartGridTopology topo;
@@ -120,6 +122,9 @@ public final class ReactiveSimulationController {
 
         LOG.info("Time step " + timeStep + " terminated after " + innerLoopIterationCount + " power/impact iterations");
 
+        // modify the scenario between time steps
+        timeProgressor.progress();
+
         return powerSupply;
     }
 
@@ -155,7 +160,7 @@ public final class ReactiveSimulationController {
         // copy empty map
         final Map<String, Map<String, ISmartMeterState>> powerLoadInput = new HashMap<String, Map<String, ISmartMeterState>>(emptyPowerLoadInput);
 
-        // iterate over states and convert them into map
+        // iterate over states and convert them into nested map
         for (final EntityState state : impactResult.getStates()) {
             final NetworkEntity stateOwner = state.getOwner();
             if (stateOwner instanceof SmartMeter) {
@@ -295,37 +300,47 @@ public final class ReactiveSimulationController {
     private void loadDefaultAnalyses() throws CoreException {
         final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
-        // TODO only mocks are used here
-
+        // TODO init which attack simulation should be used and initialize it
         final List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
         for (final IAttackerSimulation e : attack) {
 
-            if ("No Attack Simulation".equals(e.getName())) {
+            if (e.getName().equals("No Attack Simulation")) {
                 attackerSimulation = e;
             }
         }
 
+        // To-do at some point, IIP might want some init data
         final List<IPowerLoadSimulationWrapper> power = helper.getPowerLoadSimulationExtensions();
         for (final IPowerLoadSimulationWrapper e : power) {
 
-            if ("Mock".equals(e.getName())) {
+            if (e.getName().equals("Power Load Simulation Wrapper")) {
                 powerLoadSimulation = e;
             }
         }
 
+        // TODO init! (with number of iterations)
         final List<ITerminationCondition> termination = helper.getTerminationConditionExtensions();
         for (final ITerminationCondition e : termination) {
 
-            if ("Iteration Count".equals(e.getName())) {
+            if (e.getName().equals("Iteration Count")) {
                 terminationCondition = e;
             }
         }
 
+        // TODO init?
         final List<IImpactAnalysis> impact = helper.getImpactAnalysisExtensions();
         for (final IImpactAnalysis e : impact) {
 
-            if ("Mock".equals(e.getName())) {
+            if (e.getName().equals("Graph Analyzer Impact Analysis")) {
                 impactAnalsis = e;
+            }
+        }
+
+        final List<ITimeProgressor> time = helper.getProgressorExtensions();
+        for (final ITimeProgressor e : time) {
+
+            if (e.getName().equals("No Operation")) {
+                timeProgressor = e;
             }
         }
 
@@ -333,6 +348,7 @@ public final class ReactiveSimulationController {
         LOG.info("Using impact analysis: " + impactAnalsis.getName());
         LOG.info("Using attacker simulation: " + attackerSimulation.getName());
         LOG.info("Using termination condition: " + terminationCondition.getName());
+        LOG.info("Using time progressor: " + timeProgressor.getName());
     }
 
     public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException {
@@ -362,14 +378,6 @@ public final class ReactiveSimulationController {
             }
         }
 
-//        final List<ITimeProgressor> time = helper.getProgressorExtensions();
-//        for (final ITimeProgressor e : time) {
-//
-//            if (launchConfig.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, "").equals(e.getName())) {
-//                timeProgressor = e;
-//            }
-//        }
-
         final List<IImpactAnalysis> impact = helper.getImpactAnalysisExtensions();
         for (final IImpactAnalysis e : impact) {
 
@@ -378,16 +386,24 @@ public final class ReactiveSimulationController {
             }
         }
 
+        final List<ITimeProgressor> time = helper.getProgressorExtensions();
+        for (final ITimeProgressor e : time) {
+
+            if (launchConfig.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, "").equals(e.getName())) {
+                timeProgressor = e;
+            }
+        }
+
         powerLoadSimulation.init(launchConfig);
         impactAnalsis.init(launchConfig);
         attackerSimulation.init(launchConfig);
         terminationCondition.init(launchConfig);
-//        timeProgressor.init(launchConfig);
+        timeProgressor.init(launchConfig);
 
         LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
         LOG.info("Using impact analysis: " + impactAnalsis.getName());
         LOG.info("Using attacker simulation: " + attackerSimulation.getName());
         LOG.info("Using termination condition: " + terminationCondition.getName());
-//        LOG.info("Using time progressor: " + timeProgressor.getName());
+        LOG.info("Using time progressor: " + timeProgressor.getName());
     }
 }
