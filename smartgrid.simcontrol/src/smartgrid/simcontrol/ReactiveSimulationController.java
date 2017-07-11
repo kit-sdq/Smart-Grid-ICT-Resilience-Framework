@@ -2,6 +2,7 @@ package smartgrid.simcontrol;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,6 +39,7 @@ import smartgridoutput.Online;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.NetworkEntity;
 import smartgridtopo.SmartGridTopology;
+import smartgridtopo.SmartMeter;
 
 public final class ReactiveSimulationController {
 
@@ -61,11 +63,15 @@ public final class ReactiveSimulationController {
     private ScenarioResult impactResultOld;
     private Map<String, Map<String, Double>> powerSupply;
 
+    private Map<String, Map<String, ISmartMeterState>> emptyPowerLoadInput;
+
     public ReactiveSimulationController() {
         timeStep = 0;
     }
 
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
+
+        ensureEmptyPowerInput(kritisPowerDemand);
 
         // Compute Initial Impact Analysis Result
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
@@ -85,7 +91,7 @@ public final class ReactiveSimulationController {
             final String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount).getPath();
 
             // run power load simulation
-            final Map<String, Map<String, ISmartMeterState>> smartMeterStates = convertToPowerLoadInput(impactResult);
+            final Map<String, Map<String, ISmartMeterState>> smartMeterStates = convertToPowerLoadInput(impactResult, kritisPowerDemand);
             powerSupply = powerLoadSimulation.run(kritisPowerDemand, smartMeterStates);
 
             // copy the input
@@ -117,29 +123,53 @@ public final class ReactiveSimulationController {
         return powerSupply;
     }
 
+    private void ensureEmptyPowerInput(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
+
+        // do only once
+        if (emptyPowerLoadInput != null) {
+            return;
+        }
+
+        emptyPowerLoadInput = new HashMap<String, Map<String, ISmartMeterState>>();
+
+        // copy the structure of the input
+        for (Entry<String, Map<String, PowerSpec>> nodeEntry : kritisPowerDemand.entrySet()) {
+            HashMap<String, ISmartMeterState> prosumerMap = new HashMap<String, ISmartMeterState>();
+            emptyPowerLoadInput.put(nodeEntry.getKey(), prosumerMap);
+
+            for (Entry<String, PowerSpec> prosumerEntry : nodeEntry.getValue().entrySet()) {
+                // do not yet insert smartmeter states
+                prosumerMap.put(prosumerEntry.getKey(), null);
+            }
+        }
+    }
+
     public void shutDown() {
         // remove file appender of this run
         Logger.getRootLogger().removeAppender(fileAppender);
         fileAppender.close();
     }
 
-    // Private Methods
+    private Map<String, Map<String, ISmartMeterState>> convertToPowerLoadInput(final ScenarioResult impactResult, Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
 
-    public static Map<String, Map<String, ISmartMeterState>> convertToPowerLoadInput(final ScenarioResult impactResult) {
-        // TODO update to conform to new interfaces
-//        final Map<String, SmartMeterState> smartMeterStates = new HashMap<String, SmartMeterState>();
-//        for (final EntityState state : impactResult.getStates()) {
-//            final NetworkEntity stateOwner = state.getOwner();
-//            if (stateOwner instanceof SmartMeter) {
-//                final String id = Integer.toString(stateOwner.getId());
+        // copy empty map
+        final Map<String, Map<String, ISmartMeterState>> powerLoadInput = new HashMap<String, Map<String, ISmartMeterState>>(emptyPowerLoadInput);
+
+        // iterate over states and convert them into map
+        for (final EntityState state : impactResult.getStates()) {
+            final NetworkEntity stateOwner = state.getOwner();
+            if (stateOwner instanceof SmartMeter) {
+                final String id = Integer.toString(stateOwner.getId());
+//                String nodeId = findNodeId(Id, );
 //                smartMeterStates.put(id, stateToEnum(state));
-//            }
-//        }
-//        return smartMeterStates;
-        return null;
+            }
+        }
+        return powerLoadInput;
+
+        // TODO WIP!
     }
 
-    public static SmartMeterState stateToEnum(EntityState state) {
+    private static SmartMeterState stateToEnum(EntityState state) {
         if (state instanceof Online) {
             if (((Online) state).isIsHacked()) {
                 return SmartMeterState.ONLINE_HACKED;
@@ -167,7 +197,7 @@ public final class ReactiveSimulationController {
      * @param powerSupply
      * @return
      */
-    public static void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, Map<String, Map<String, Double>> powerSupply) {
+    private static void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, Map<String, Map<String, Double>> powerSupply) {
 
         // TODO update to conform to new interfaces?
         //Transfer hacked state into next input
@@ -253,8 +283,10 @@ public final class ReactiveSimulationController {
         return initialPath;
     }
 
-    public void loadDefaultAnalyses() throws CoreException {
+    private void loadDefaultAnalyses() throws CoreException {
         final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
+
+        // TODO only mocks are used here
 
         final List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
         for (final IAttackerSimulation e : attack) {
