@@ -7,6 +7,8 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 
+import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
+
 /**
  * This class provides the Delegate for the SimControl Approach of the Smartgrid Analysis'
  *
@@ -29,7 +31,11 @@ public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurati
     public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch, final IProgressMonitor monitor) throws CoreException {
 
         SimulationController simControl = new SimulationController();
-        simControl.init(configuration);
+        try {
+            simControl.init(configuration);
+        } catch (SimcontrolException e) {
+            throw new RuntimeException("Could not initiate SimControl", e); // TODO here, a dialog should be used
+        }
         simControl.run();
     }
 }

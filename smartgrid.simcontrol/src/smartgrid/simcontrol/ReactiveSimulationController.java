@@ -11,12 +11,14 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
+import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
@@ -220,14 +222,16 @@ public final class ReactiveSimulationController {
 
         LoggingInitializer.initialize();
 
-        LOG.debug("loading launch config");
+        LOG.debug("init reactive launch config");
 
+        LOG.info("Output: " + outputPath);
         workingDirPath = determineWorkingDirPath(outputPath);
+        LOG.info("Working directory: " + workingDirPath);
 
         // add fileappender for local logs
         final Logger rootLogger = Logger.getRootLogger();
         try {
-            final Layout layout = ((Appender) rootLogger.getAllAppenders().nextElement()).getLayout();
+            Layout layout = ((Appender) rootLogger.getAllAppenders().nextElement()).getLayout();
             fileAppender = new FileAppender(layout, workingDirPath + "\\log.log");
             rootLogger.addAppender(fileAppender);
         } catch (final IOException e) {
@@ -243,22 +247,10 @@ public final class ReactiveSimulationController {
 
         // Retrieve simulations from extension points
         try {
-            loadCustomUserAnalysis();
+            loadDefaultAnalyses();
         } catch (CoreException e) {
             throw new SimcontrolException("Individual simulations could not be created", e);
         }
-
-        //TODO: currently, these are all mocks, so no init is needed atm
-        // Init all simulations
-//        powerLoadSimulation.init(launchConfig);
-//        impactAnalsis.init(launchConfig);
-//        attackerSimulation.init(launchConfig);
-//        terminationCondition.init(launchConfig);
-
-        LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
-        LOG.info("Using impact analysis: " + impactAnalsis.getName());
-        LOG.info("Using attacker simulation: " + attackerSimulation.getName());
-        LOG.info("Using termination condition: " + terminationCondition.getName());
     }
 
     private String determineWorkingDirPath(String initialPath) {
@@ -282,7 +274,7 @@ public final class ReactiveSimulationController {
         return initialPath;
     }
 
-    private void loadCustomUserAnalysis() throws CoreException {
+    public void loadDefaultAnalyses() throws CoreException {
         final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
         final List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
@@ -316,5 +308,66 @@ public final class ReactiveSimulationController {
                 impactAnalsis = e;
             }
         }
+
+        LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
+        LOG.info("Using impact analysis: " + impactAnalsis.getName());
+        LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+        LOG.info("Using termination condition: " + terminationCondition.getName());
+    }
+
+    public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException {
+        final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
+
+        final List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
+        for (final IAttackerSimulation e : attack) {
+
+            if (launchConfig.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "").equals(e.getName())) {
+                attackerSimulation = e;
+            }
+        }
+
+        final List<IPowerLoadSimulationWrapper> power = helper.getPowerLoadSimulationExtensions();
+        for (final IPowerLoadSimulationWrapper e : power) {
+
+            if (launchConfig.getAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, "").equals(e.getName())) {
+                powerLoadSimulation = e;
+            }
+        }
+
+        final List<ITerminationCondition> termination = helper.getTerminationConditionExtensions();
+        for (final ITerminationCondition e : termination) {
+
+            if (launchConfig.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, "").equals(e.getName())) {
+                terminationCondition = e;
+            }
+        }
+
+//        final List<ITimeProgressor> time = helper.getProgressorExtensions();
+//        for (final ITimeProgressor e : time) {
+//
+//            if (launchConfig.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, "").equals(e.getName())) {
+//                timeProgressor = e;
+//            }
+//        }
+
+        final List<IImpactAnalysis> impact = helper.getImpactAnalysisExtensions();
+        for (final IImpactAnalysis e : impact) {
+
+            if (launchConfig.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, "").equals(e.getName())) {
+                impactAnalsis = e;
+            }
+        }
+
+        powerLoadSimulation.init(launchConfig);
+        impactAnalsis.init(launchConfig);
+        attackerSimulation.init(launchConfig);
+        terminationCondition.init(launchConfig);
+//        timeProgressor.init(launchConfig);
+
+        LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
+        LOG.info("Using impact analysis: " + impactAnalsis.getName());
+        LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+        LOG.info("Using termination condition: " + terminationCondition.getName());
+//        LOG.info("Using time progressor: " + timeProgressor.getName());
     }
 }
