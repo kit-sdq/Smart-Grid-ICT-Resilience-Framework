@@ -16,10 +16,10 @@ import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
  * @author Misha
  * @implements ILaunchConfigurationDelegate
  */
-public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
+public class SimcontroLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
 
     @SuppressWarnings("unused")
-    private static final Logger LOG = Logger.getLogger(SimcontrolLaunchConfigurationDelegate.class);
+    private static final Logger LOG = Logger.getLogger(SimcontroLaunchConfigurationDelegate.class);
 
     /**
      * {@inheritDoc}
