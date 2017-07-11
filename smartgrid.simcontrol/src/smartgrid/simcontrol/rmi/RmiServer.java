@@ -73,9 +73,16 @@ public class RmiServer implements ISimulationController {
     }
 
     @Override
-    public void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData) {
+    public void initTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
         LOG.info("init topo called remotely");
-        // To-do implement
+//        if (state == RmiServerState.NOT_INIT) {
+//            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
+//            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+//        } else if (state == RmiServerState.REACTIVE) {
+//            // To-do implement
+//        } else {
+//            // To-do implement
+//        }
     }
 
     @Override
@@ -103,7 +110,7 @@ public class RmiServer implements ISimulationController {
         else if (state == RmiServerState.REACTIVE) {
             reactiveSimControl.shutDown();
         }
-        // To-do here, the active simcontrol could be shutDown if there was a pointer (blocking sync required)
+        // To-do here, the active simcontrol could be shutDown if there was a pointer (rendezvous required)
 
         state = RmiServerState.NOT_INIT;
     }
