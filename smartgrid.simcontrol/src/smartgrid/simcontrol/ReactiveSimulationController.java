@@ -159,14 +159,23 @@ public final class ReactiveSimulationController {
         for (final EntityState state : impactResult.getStates()) {
             final NetworkEntity stateOwner = state.getOwner();
             if (stateOwner instanceof SmartMeter) {
-                final String id = Integer.toString(stateOwner.getId());
-//                String nodeId = findNodeId(Id, );
-//                smartMeterStates.put(id, stateToEnum(state));
+                final String prosumerId = Integer.toString(stateOwner.getId());
+                String nodeId = findNodeId(prosumerId);
+                powerLoadInput.get(nodeId).put(prosumerId, stateToEnum(state));
             }
         }
         return powerLoadInput;
+    }
 
-        // TODO WIP!
+    private String findNodeId(String prosumerId) {
+        for (Entry<String, Map<String, ISmartMeterState>> nodeEntry : emptyPowerLoadInput.entrySet()) {
+            Map<String, ISmartMeterState> mapOfProsumersInNode = nodeEntry.getValue();
+            if (mapOfProsumersInNode.containsKey(prosumerId)) {
+                String nodeId = nodeEntry.getKey();
+                return nodeId;
+            }
+        }
+        return null;
     }
 
     private static SmartMeterState stateToEnum(EntityState state) {
