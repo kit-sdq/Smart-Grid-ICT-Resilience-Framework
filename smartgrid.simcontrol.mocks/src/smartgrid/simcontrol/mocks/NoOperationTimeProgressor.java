@@ -3,7 +3,6 @@
  */
 package smartgrid.simcontrol.mocks;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
@@ -27,7 +26,7 @@ public class NoOperationTimeProgressor implements ITimeProgressor {
     }
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
+    public ErrorCodeEnum init(final ILaunchConfiguration config) {
         // Nothing to do here..
         return ErrorCodeEnum.SUCCESS;
     }
