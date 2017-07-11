@@ -37,7 +37,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -138,6 +137,7 @@ public class SmartgridoutputModelWizard extends Wizard implements INewWizard {
      * 
      * @generated
      */
+    @Override
     public void init(IWorkbench workbench, IStructuredSelection selection) {
         this.workbench = workbench;
         this.selection = selection;
@@ -153,7 +153,7 @@ public class SmartgridoutputModelWizard extends Wizard implements INewWizard {
      */
     protected Collection<String> getInitialObjectNames() {
         if (initialObjectNames == null) {
-            initialObjectNames = new ArrayList<String>();
+            initialObjectNames = new ArrayList<>();
             for (EClassifier eClassifier : smartgridoutputPackage.getEClassifiers()) {
                 if (eClassifier instanceof EClass) {
                     EClass eClass = (EClass) eClassifier;
@@ -217,7 +217,7 @@ public class SmartgridoutputModelWizard extends Wizard implements INewWizard {
 
                         // Save the contents of the resource to the file system.
                         //
-                        Map<Object, Object> options = new HashMap<Object, Object>();
+                        Map<Object, Object> options = new HashMap<>();
                         options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage.getEncoding());
                         resource.save(options);
                     } catch (Exception exception) {
@@ -237,11 +237,7 @@ public class SmartgridoutputModelWizard extends Wizard implements INewWizard {
             final IWorkbenchPart activePart = page.getActivePart();
             if (activePart instanceof ISetSelectionTarget) {
                 final ISelection targetSelection = new StructuredSelection(modelFile);
-                getShell().getDisplay().asyncExec(new Runnable() {
-                    public void run() {
-                        ((ISetSelectionTarget) activePart).selectReveal(targetSelection);
-                    }
-                });
+                getShell().getDisplay().asyncExec(() -> ((ISetSelectionTarget) activePart).selectReveal(targetSelection));
             }
 
             // Open an editor on the new file.
@@ -345,6 +341,7 @@ public class SmartgridoutputModelWizard extends Wizard implements INewWizard {
          * 
          * @generated
          */
+        @Override
         public void createControl(Composite parent) {
             Composite composite = new Composite(parent, SWT.NONE);
             {
@@ -418,11 +415,7 @@ public class SmartgridoutputModelWizard extends Wizard implements INewWizard {
          * 
          * @generated
          */
-        protected ModifyListener validator = new ModifyListener() {
-            public void modifyText(ModifyEvent e) {
-                setPageComplete(validatePage());
-            }
-        };
+        protected ModifyListener validator = e -> setPageComplete(validatePage());
 
         /**
          * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -499,7 +492,7 @@ public class SmartgridoutputModelWizard extends Wizard implements INewWizard {
          */
         protected Collection<String> getEncodings() {
             if (encodings == null) {
-                encodings = new ArrayList<String>();
+                encodings = new ArrayList<>();
                 for (StringTokenizer stringTokenizer = new StringTokenizer(SmartgridoutputEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens();) {
                     encodings.add(stringTokenizer.nextToken());
                 }

@@ -101,6 +101,7 @@ public class EntityStateImpl extends MinimalEObjectImpl.Container implements Ent
      * 
      * @generated
      */
+    @Override
     public boolean isIsDestroyed() {
         return isDestroyed;
     }
@@ -110,6 +111,7 @@ public class EntityStateImpl extends MinimalEObjectImpl.Container implements Ent
      * 
      * @generated
      */
+    @Override
     public void setIsDestroyed(boolean newIsDestroyed) {
         boolean oldIsDestroyed = isDestroyed;
         isDestroyed = newIsDestroyed;
@@ -122,6 +124,7 @@ public class EntityStateImpl extends MinimalEObjectImpl.Container implements Ent
      * 
      * @generated
      */
+    @Override
     public boolean isIsHacked() {
         return isHacked;
     }
@@ -131,6 +134,7 @@ public class EntityStateImpl extends MinimalEObjectImpl.Container implements Ent
      * 
      * @generated
      */
+    @Override
     public void setIsHacked(boolean newIsHacked) {
         boolean oldIsHacked = isHacked;
         isHacked = newIsHacked;
@@ -143,6 +147,7 @@ public class EntityStateImpl extends MinimalEObjectImpl.Container implements Ent
      * 
      * @generated
      */
+    @Override
     public NetworkEntity getOwner() {
         if (owner != null && owner.eIsProxy()) {
             InternalEObject oldOwner = (InternalEObject) owner;
@@ -169,6 +174,7 @@ public class EntityStateImpl extends MinimalEObjectImpl.Container implements Ent
      * 
      * @generated
      */
+    @Override
     public void setOwner(NetworkEntity newOwner) {
         NetworkEntity oldOwner = owner;
         owner = newOwner;

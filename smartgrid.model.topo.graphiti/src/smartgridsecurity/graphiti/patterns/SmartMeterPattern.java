@@ -26,14 +26,14 @@ public class SmartMeterPattern extends AbstractFormPattern {
 
     @Override
     public Object[] create(final ICreateContext context) {
-        this.addScenario();
-        final SmartGridTopology container = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
+        addScenario();
+        final SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
         final SmartMeter node = SmartgridtopoFactory.eINSTANCE.createSmartMeter();
         node.setId(UIDHelper.generateUID());
 
         container.getContainsNE().add(node);
 
-        this.addGraphicalRepresentation(context, node);
+        addGraphicalRepresentation(context, node);
 
         // return newly created business object(s)
         return new Object[] { node };

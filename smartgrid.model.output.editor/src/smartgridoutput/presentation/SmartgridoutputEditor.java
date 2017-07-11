@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -29,7 +28,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.ui.MarkerHelper;
@@ -169,7 +167,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
-    protected List<PropertySheetPage> propertySheetPages = new ArrayList<PropertySheetPage>();
+    protected List<PropertySheetPage> propertySheetPages = new ArrayList<>();
 
     /**
      * This is the viewer that shadows the selection in the content outline. The parent relation
@@ -246,7 +244,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
-    protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
+    protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<>();
 
     /**
      * This keeps track of the selection of the editor as a whole. <!-- begin-user-doc --> <!--
@@ -271,6 +269,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * @generated
      */
     protected IPartListener partListener = new IPartListener() {
+        @Override
         public void partActivated(IWorkbenchPart p) {
             if (p instanceof ContentOutline) {
                 if (((ContentOutline) p).getCurrentPage() == contentOutlinePage) {
@@ -288,18 +287,22 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
             }
         }
 
+        @Override
         public void partBroughtToTop(IWorkbenchPart p) {
             // Ignore.
         }
 
+        @Override
         public void partClosed(IWorkbenchPart p) {
             // Ignore.
         }
 
+        @Override
         public void partDeactivated(IWorkbenchPart p) {
             // Ignore.
         }
 
+        @Override
         public void partOpened(IWorkbenchPart p) {
             // Ignore.
         }
@@ -311,7 +314,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
-    protected Collection<Resource> removedResources = new ArrayList<Resource>();
+    protected Collection<Resource> removedResources = new ArrayList<>();
 
     /**
      * Resources that have been changed since last activation. <!-- begin-user-doc --> <!--
@@ -319,14 +322,14 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
-    protected Collection<Resource> changedResources = new ArrayList<Resource>();
+    protected Collection<Resource> changedResources = new ArrayList<>();
 
     /**
      * Resources that have been saved. <!-- begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      */
-    protected Collection<Resource> savedResources = new ArrayList<Resource>();
+    protected Collection<Resource> savedResources = new ArrayList<>();
 
     /**
      * Map to store the diagnostic associated with a resource. <!-- begin-user-doc --> <!--
@@ -334,7 +337,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
-    protected Map<Resource, Diagnostic> resourceToDiagnosticMap = new LinkedHashMap<Resource, Diagnostic>();
+    protected Map<Resource, Diagnostic> resourceToDiagnosticMap = new LinkedHashMap<>();
 
     /**
      * Controls whether the problem indication should be updated. <!-- begin-user-doc --> <!--
@@ -367,11 +370,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
                     }
 
                     if (updateProblemIndication) {
-                        getSite().getShell().getDisplay().asyncExec(new Runnable() {
-                            public void run() {
-                                updateProblemIndication();
-                            }
-                        });
+                        getSite().getShell().getDisplay().asyncExec(() -> updateProblemIndication());
                     }
                     break;
                 }
@@ -391,11 +390,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
             basicUnsetTarget(target);
             resourceToDiagnosticMap.remove(target);
             if (updateProblemIndication) {
-                getSite().getShell().getDisplay().asyncExec(new Runnable() {
-                    public void run() {
-                        updateProblemIndication();
-                    }
-                });
+                getSite().getShell().getDisplay().asyncExec(() -> updateProblemIndication());
             }
         }
     };
@@ -405,69 +400,64 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
-    protected IResourceChangeListener resourceChangeListener = new IResourceChangeListener() {
-        public void resourceChanged(IResourceChangeEvent event) {
-            IResourceDelta delta = event.getDelta();
-            try {
-                class ResourceDeltaVisitor implements IResourceDeltaVisitor {
-                    protected ResourceSet resourceSet = editingDomain.getResourceSet();
-                    protected Collection<Resource> changedResources = new ArrayList<Resource>();
-                    protected Collection<Resource> removedResources = new ArrayList<Resource>();
+    protected IResourceChangeListener resourceChangeListener = event -> {
+        IResourceDelta delta = event.getDelta();
+        try {
+            class ResourceDeltaVisitor implements IResourceDeltaVisitor {
+                protected ResourceSet resourceSet = editingDomain.getResourceSet();
+                protected Collection<Resource> changedResources = new ArrayList<>();
+                protected Collection<Resource> removedResources = new ArrayList<>();
 
-                    public boolean visit(IResourceDelta delta) {
-                        if (delta.getResource().getType() == IResource.FILE) {
-                            if (delta.getKind() == IResourceDelta.REMOVED || delta.getKind() == IResourceDelta.CHANGED && delta.getFlags() != IResourceDelta.MARKERS) {
-                                Resource resource = resourceSet.getResource(URI.createPlatformResourceURI(delta.getFullPath().toString(), true), false);
-                                if (resource != null) {
-                                    if (delta.getKind() == IResourceDelta.REMOVED) {
-                                        removedResources.add(resource);
-                                    } else if (!savedResources.remove(resource)) {
-                                        changedResources.add(resource);
-                                    }
+                @Override
+                public boolean visit(IResourceDelta delta) {
+                    if (delta.getResource().getType() == IResource.FILE) {
+                        if (delta.getKind() == IResourceDelta.REMOVED || delta.getKind() == IResourceDelta.CHANGED && delta.getFlags() != IResourceDelta.MARKERS) {
+                            Resource resource = resourceSet.getResource(URI.createPlatformResourceURI(delta.getFullPath().toString(), true), false);
+                            if (resource != null) {
+                                if (delta.getKind() == IResourceDelta.REMOVED) {
+                                    removedResources.add(resource);
+                                } else if (!savedResources.remove(resource)) {
+                                    changedResources.add(resource);
                                 }
                             }
-                            return false;
                         }
-
-                        return true;
+                        return false;
                     }
 
-                    public Collection<Resource> getChangedResources() {
-                        return changedResources;
-                    }
-
-                    public Collection<Resource> getRemovedResources() {
-                        return removedResources;
-                    }
+                    return true;
                 }
 
-                final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor();
-                delta.accept(visitor);
-
-                if (!visitor.getRemovedResources().isEmpty()) {
-                    getSite().getShell().getDisplay().asyncExec(new Runnable() {
-                        public void run() {
-                            removedResources.addAll(visitor.getRemovedResources());
-                            if (!isDirty()) {
-                                getSite().getPage().closeEditor(SmartgridoutputEditor.this, false);
-                            }
-                        }
-                    });
+                public Collection<Resource> getChangedResources() {
+                    return changedResources;
                 }
 
-                if (!visitor.getChangedResources().isEmpty()) {
-                    getSite().getShell().getDisplay().asyncExec(new Runnable() {
-                        public void run() {
-                            changedResources.addAll(visitor.getChangedResources());
-                            if (getSite().getPage().getActiveEditor() == SmartgridoutputEditor.this) {
-                                handleActivate();
-                            }
-                        }
-                    });
+                public Collection<Resource> getRemovedResources() {
+                    return removedResources;
                 }
-            } catch (CoreException exception) {
-                SmartgridoutputEditorPlugin.INSTANCE.log(exception);
             }
+
+            final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor();
+            delta.accept(visitor);
+
+            if (!visitor.getRemovedResources().isEmpty()) {
+                getSite().getShell().getDisplay().asyncExec(() -> {
+                    removedResources.addAll(visitor.getRemovedResources());
+                    if (!isDirty()) {
+                        getSite().getPage().closeEditor(SmartgridoutputEditor.this, false);
+                    }
+                });
+            }
+
+            if (!visitor.getChangedResources().isEmpty()) {
+                getSite().getShell().getDisplay().asyncExec(() -> {
+                    changedResources.addAll(visitor.getChangedResources());
+                    if (getSite().getPage().getActiveEditor() == SmartgridoutputEditor.this) {
+                        handleActivate();
+                    }
+                });
+            }
+        } catch (CoreException exception) {
+            SmartgridoutputEditorPlugin.INSTANCE.log(exception);
         }
     };
 
@@ -630,30 +620,24 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
 
         // Add a listener to set the most recent command's affected objects to be the selection of the viewer with focus.
         //
-        commandStack.addCommandStackListener(new CommandStackListener() {
-            public void commandStackChanged(final EventObject event) {
-                getContainer().getDisplay().asyncExec(new Runnable() {
-                    public void run() {
-                        firePropertyChange(IEditorPart.PROP_DIRTY);
+        commandStack.addCommandStackListener(event -> getContainer().getDisplay().asyncExec(() -> {
+            firePropertyChange(IEditorPart.PROP_DIRTY);
 
-                        // Try to select the affected objects.
-                        //
-                        Command mostRecentCommand = ((CommandStack) event.getSource()).getMostRecentCommand();
-                        if (mostRecentCommand != null) {
-                            setSelectionToViewer(mostRecentCommand.getAffectedObjects());
-                        }
-                        for (Iterator<PropertySheetPage> i = propertySheetPages.iterator(); i.hasNext();) {
-                            PropertySheetPage propertySheetPage = i.next();
-                            if (propertySheetPage.getControl().isDisposed()) {
-                                i.remove();
-                            } else {
-                                propertySheetPage.refresh();
-                            }
-                        }
-                    }
-                });
+            // Try to select the affected objects.
+            //
+            Command mostRecentCommand = ((CommandStack) event.getSource()).getMostRecentCommand();
+            if (mostRecentCommand != null) {
+                setSelectionToViewer(mostRecentCommand.getAffectedObjects());
             }
-        });
+            for (Iterator<PropertySheetPage> i = propertySheetPages.iterator(); i.hasNext();) {
+                PropertySheetPage propertySheetPage = i.next();
+                if (propertySheetPage.getControl().isDisposed()) {
+                    i.remove();
+                } else {
+                    propertySheetPage.refresh();
+                }
+            }
+        }));
 
         // Create the editing domain with a special command stack.
         //
@@ -682,13 +666,11 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
         // Make sure it's okay.
         //
         if (theSelection != null && !theSelection.isEmpty()) {
-            Runnable runnable = new Runnable() {
-                public void run() {
-                    // Try to select the items in the current content viewer of the editor.
-                    //
-                    if (currentViewer != null) {
-                        currentViewer.setSelection(new StructuredSelection(theSelection.toArray()), true);
-                    }
+            Runnable runnable = () -> {
+                // Try to select the items in the current content viewer of the editor.
+                //
+                if (currentViewer != null) {
+                    currentViewer.setSelection(new StructuredSelection(theSelection.toArray()), true);
                 }
             };
             getSite().getShell().getDisplay().asyncExec(runnable);
@@ -703,6 +685,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
+    @Override
     public EditingDomain getEditingDomain() {
         return editingDomain;
     }
@@ -794,13 +777,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
             if (selectionChangedListener == null) {
                 // Create the listener on demand.
                 //
-                selectionChangedListener = new ISelectionChangedListener() {
-                    // This just notifies those things that are affected by the section.
-                    //
-                    public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
-                        setSelection(selectionChangedEvent.getSelection());
-                    }
-                };
+                selectionChangedListener = selectionChangedEvent -> setSelection(selectionChangedEvent.getSelection());
             }
 
             // Stop listening to the old one.
@@ -831,6 +808,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
+    @Override
     public Viewer getViewer() {
         return currentViewer;
     }
@@ -1118,11 +1096,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
                 setPageText(pageIndex, getString("_UI_TreeWithColumnsPage_label"));
             }
 
-            getSite().getShell().getDisplay().asyncExec(new Runnable() {
-                public void run() {
-                    setActivePage(0);
-                }
-            });
+            getSite().getShell().getDisplay().asyncExec(() -> setActivePage(0));
         }
 
         // Ensures that this editor will only display the page's tab
@@ -1141,11 +1115,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
             }
         });
 
-        getSite().getShell().getDisplay().asyncExec(new Runnable() {
-            public void run() {
-                updateProblemIndication();
-            }
-        });
+        getSite().getShell().getDisplay().asyncExec(() -> updateProblemIndication());
     }
 
     /**
@@ -1267,13 +1237,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
 
             // Listen to selection so that we can handle it is a special way.
             //
-            contentOutlinePage.addSelectionChangedListener(new ISelectionChangedListener() {
-                // This ensures that we handle selections correctly.
-                //
-                public void selectionChanged(SelectionChangedEvent event) {
-                    handleContentOutlineSelection(event.getSelection());
-                }
-            });
+            contentOutlinePage.addSelectionChangedListener(event -> handleContentOutlineSelection(event.getSelection()));
         }
 
         return contentOutlinePage;
@@ -1322,7 +1286,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
                 // If it's the selection viewer, then we want it to select the same selection as this selection.
                 //
                 if (currentViewerPane.getViewer() == selectionViewer) {
-                    ArrayList<Object> selectionList = new ArrayList<Object>();
+                    ArrayList<Object> selectionList = new ArrayList<>();
                     selectionList.add(selectedElement);
                     while (selectedElements.hasNext()) {
                         selectionList.add(selectedElements.next());
@@ -1364,7 +1328,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
     public void doSave(IProgressMonitor progressMonitor) {
         // Save only resources that have actually changed.
         //
-        final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
+        final Map<Object, Object> saveOptions = new HashMap<>();
         saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
         saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 
@@ -1470,7 +1434,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * @generated
      */
     protected void doSaveAs(URI uri, IEditorInput editorInput) {
-        (editingDomain.getResourceSet().getResources().get(0)).setURI(uri);
+        editingDomain.getResourceSet().getResources().get(0).setURI(uri);
         setInputWithNotify(editorInput);
         setPartName(editorInput.getName());
         IProgressMonitor progressMonitor = getActionBars().getStatusLineManager() != null ? getActionBars().getStatusLineManager().getProgressMonitor() : new NullProgressMonitor();
@@ -1482,6 +1446,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
+    @Override
     public void gotoMarker(IMarker marker) {
         List<?> targetObjects = markerHelper.getTargetObjects(editingDomain, marker);
         if (!targetObjects.isEmpty()) {
@@ -1524,6 +1489,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
+    @Override
     public void addSelectionChangedListener(ISelectionChangedListener listener) {
         selectionChangedListeners.add(listener);
     }
@@ -1534,6 +1500,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
+    @Override
     public void removeSelectionChangedListener(ISelectionChangedListener listener) {
         selectionChangedListeners.remove(listener);
     }
@@ -1544,6 +1511,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
+    @Override
     public ISelection getSelection() {
         return editorSelection;
     }
@@ -1555,6 +1523,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
+    @Override
     public void setSelection(ISelection selection) {
         editorSelection = selection;
 
@@ -1622,6 +1591,7 @@ public class SmartgridoutputEditor extends MultiPageEditorPart implements IEditi
      * 
      * @generated
      */
+    @Override
     public void menuAboutToShow(IMenuManager menuManager) {
         ((IMenuListener) getEditorSite().getActionBarContributor()).menuAboutToShow(menuManager);
     }

@@ -31,7 +31,7 @@ public class InputDeleteFeature implements IDeleteFeatureResolver {
                     }
                 }
                 if (position > -1) {
-                    this.removeElement(false, state, position, domain);
+                    removeElement(false, state, position, domain);
                 }
             } else if (owner instanceof NetworkEntity) {
                 for (int i = 0; i < state.getEntityStates().size(); i++) {
@@ -41,7 +41,7 @@ public class InputDeleteFeature implements IDeleteFeatureResolver {
                     }
                 }
                 if (position > -1) {
-                    this.removeElement(true, state, position, domain);
+                    removeElement(true, state, position, domain);
                 }
             }
         }

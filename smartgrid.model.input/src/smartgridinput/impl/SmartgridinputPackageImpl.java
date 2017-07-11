@@ -113,6 +113,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EClass getScenarioState() {
         return scenarioStateEClass;
     }
@@ -122,6 +123,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EReference getScenarioState_EntityStates() {
         return (EReference) scenarioStateEClass.getEStructuralFeatures().get(0);
     }
@@ -131,6 +133,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EReference getScenarioState_PowerStates() {
         return (EReference) scenarioStateEClass.getEStructuralFeatures().get(1);
     }
@@ -140,6 +143,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EReference getScenarioState_Scenario() {
         return (EReference) scenarioStateEClass.getEStructuralFeatures().get(2);
     }
@@ -149,6 +153,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EClass getEntityState() {
         return entityStateEClass;
     }
@@ -158,6 +163,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EAttribute getEntityState_IsDestroyed() {
         return (EAttribute) entityStateEClass.getEStructuralFeatures().get(0);
     }
@@ -167,6 +173,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EAttribute getEntityState_IsHacked() {
         return (EAttribute) entityStateEClass.getEStructuralFeatures().get(1);
     }
@@ -176,6 +183,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EReference getEntityState_Owner() {
         return (EReference) entityStateEClass.getEStructuralFeatures().get(2);
     }
@@ -185,6 +193,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EClass getPowerState() {
         return powerStateEClass;
     }
@@ -194,6 +203,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EReference getPowerState_Owner() {
         return (EReference) powerStateEClass.getEStructuralFeatures().get(0);
     }
@@ -203,6 +213,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EAttribute getPowerState_PowerOutage() {
         return (EAttribute) powerStateEClass.getEStructuralFeatures().get(1);
     }
@@ -212,6 +223,7 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public SmartgridinputFactory getSmartgridinputFactory() {
         return (SmartgridinputFactory) getEFactoryInstance();
     }
@@ -284,9 +296,9 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
 
         // Initialize classes, features, and operations; add parameters
         initEClass(scenarioStateEClass, ScenarioState.class, "ScenarioState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getScenarioState_EntityStates(), this.getEntityState(), null, "EntityStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+        initEReference(getScenarioState_EntityStates(), getEntityState(), null, "EntityStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getScenarioState_PowerStates(), this.getPowerState(), null, "PowerStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+        initEReference(getScenarioState_PowerStates(), getPowerState(), null, "PowerStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getScenarioState_Scenario(), theSmartgridtopoPackage.getSmartGridTopology(), null, "Scenario", null, 0, 1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
                 !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -26,8 +26,8 @@ public class PowerGridNodePattern extends AbstractFormPattern {
 
     @Override
     public Object[] create(final ICreateContext context) {
-        this.addScenario();
-        final SmartGridTopology container = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
+        addScenario();
+        final SmartGridTopology container = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
         final PowerGridNode node = SmartgridtopoFactory.eINSTANCE.createPowerGridNode();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
@@ -45,7 +45,7 @@ public class PowerGridNodePattern extends AbstractFormPattern {
         node.setId(UIDHelper.generateUID());
 
         // do the add
-        this.addGraphicalRepresentation(context, node);
+        addGraphicalRepresentation(context, node);
 
         // return newly created business object(s)
         return new Object[] { node };

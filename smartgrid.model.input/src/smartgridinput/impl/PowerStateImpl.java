@@ -80,6 +80,7 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
      * 
      * @generated
      */
+    @Override
     public PowerGridNode getOwner() {
         if (owner != null && owner.eIsProxy()) {
             InternalEObject oldOwner = (InternalEObject) owner;
@@ -106,6 +107,7 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
      * 
      * @generated
      */
+    @Override
     public void setOwner(PowerGridNode newOwner) {
         PowerGridNode oldOwner = owner;
         owner = newOwner;
@@ -118,6 +120,7 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
      * 
      * @generated
      */
+    @Override
     public boolean isPowerOutage() {
         return powerOutage;
     }
@@ -127,6 +130,7 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
      * 
      * @generated
      */
+    @Override
     public void setPowerOutage(boolean newPowerOutage) {
         boolean oldPowerOutage = powerOutage;
         powerOutage = newPowerOutage;

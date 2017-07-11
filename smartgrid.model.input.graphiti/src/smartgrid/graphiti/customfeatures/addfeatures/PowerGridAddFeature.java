@@ -27,7 +27,7 @@ public class PowerGridAddFeature extends AbstractAddFeature {
 
     public PowerGridAddFeature(final IFeatureProvider fp, final EObject o) {
         super(fp);
-        this.bo = o;
+        bo = o;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PowerGridAddFeature extends AbstractAddFeature {
         // int width = 100;
         // int height = 50;
         final IGaService gaService = Graphiti.getGaService();
-        final GraphicsAlgorithm shape = this.getGraphicalPatternRepresentation(containerShape);
+        final GraphicsAlgorithm shape = getGraphicalPatternRepresentation(containerShape);
         gaService.setLocationAndSize(shape, context.getX(), context.getY(), 20, 20);
 
         // gaService.setLocationAndSize(p, context.getX(), context.getY(), 20, 20);
@@ -67,7 +67,7 @@ public class PowerGridAddFeature extends AbstractAddFeature {
      * @return the graphical power grid representation
      */
     private GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
-        if (this.bo instanceof PowerState && ((PowerState) this.bo).isPowerOutage() == false) {
+        if (bo instanceof PowerState && ((PowerState) bo).isPowerOutage() == false) {
             return FeatureRepresentationHelper.createPolygon(containerShape, this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(255, 255, 0)));
         }
         return FeatureRepresentationHelper.createPolygon(containerShape, this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(220, 220, 220)));

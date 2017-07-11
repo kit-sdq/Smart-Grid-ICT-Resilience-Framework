@@ -54,7 +54,7 @@ public class SmartgridinputItemProviderAdapterFactory extends SmartgridinputAdap
      * 
      * @generated
      */
-    protected Collection<Object> supportedTypes = new ArrayList<Object>();
+    protected Collection<Object> supportedTypes = new ArrayList<>();
 
     /**
      * This constructs an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -144,6 +144,7 @@ public class SmartgridinputItemProviderAdapterFactory extends SmartgridinputAdap
      * 
      * @generated
      */
+    @Override
     public ComposeableAdapterFactory getRootAdapterFactory() {
         return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
     }
@@ -154,6 +155,7 @@ public class SmartgridinputItemProviderAdapterFactory extends SmartgridinputAdap
      * 
      * @generated
      */
+    @Override
     public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
         this.parentAdapterFactory = parentAdapterFactory;
     }
@@ -188,7 +190,7 @@ public class SmartgridinputItemProviderAdapterFactory extends SmartgridinputAdap
     public Object adapt(Object object, Object type) {
         if (isFactoryForType(type)) {
             Object adapter = super.adapt(object, type);
-            if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+            if (!(type instanceof Class<?>) || ((Class<?>) type).isInstance(adapter)) {
                 return adapter;
             }
         }
@@ -201,6 +203,7 @@ public class SmartgridinputItemProviderAdapterFactory extends SmartgridinputAdap
      * 
      * @generated
      */
+    @Override
     public void addListener(INotifyChangedListener notifyChangedListener) {
         changeNotifier.addListener(notifyChangedListener);
     }
@@ -210,6 +213,7 @@ public class SmartgridinputItemProviderAdapterFactory extends SmartgridinputAdap
      * 
      * @generated
      */
+    @Override
     public void removeListener(INotifyChangedListener notifyChangedListener) {
         changeNotifier.removeListener(notifyChangedListener);
     }
@@ -220,6 +224,7 @@ public class SmartgridinputItemProviderAdapterFactory extends SmartgridinputAdap
      * 
      * @generated
      */
+    @Override
     public void fireNotifyChanged(Notification notification) {
         changeNotifier.fireNotifyChanged(notification);
 
@@ -234,6 +239,7 @@ public class SmartgridinputItemProviderAdapterFactory extends SmartgridinputAdap
      * 
      * @generated
      */
+    @Override
     public void dispose() {
         if (scenarioStateItemProvider != null)
             scenarioStateItemProvider.dispose();

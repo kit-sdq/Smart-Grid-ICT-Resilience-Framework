@@ -107,35 +107,35 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
     public void execute(final ICustomContext context) {
 
         // get a map of the self connection anchor locations
-        final Map<Connection, Point> selves = this.getSelfConnections();
+        final Map<Connection, Point> selves = getSelfConnections();
 
         // get the chosen LayoutAlgorithmn instance
-        final LayoutAlgorithm layoutAlgorithm = this.getLayoutAlgorithmn(5);
+        final LayoutAlgorithm layoutAlgorithm = getLayoutAlgorithmn(5);
 
         if (layoutAlgorithm != null) {
             try {
 
                 // Get the map of SimpleNode per Shapes
-                final Map<Shape, SimpleNode> map = this.getLayoutEntities();
+                final Map<Shape, SimpleNode> map = getLayoutEntities();
 
                 // Get the array of Connection LayoutRelationships
-                final LayoutRelationship[] connections = this.getConnectionEntities(map);
+                final LayoutRelationship[] connections = getConnectionEntities(map);
 
                 // Setup the array of Shape LayoutEntity
                 final LayoutEntity[] entities = map.values().toArray(new LayoutEntity[0]);
 
                 // Get the diagram GraphicsAlgorithmn (we need the graph
                 // dimensions)
-                final GraphicsAlgorithm ga = this.getDiagram().getGraphicsAlgorithm();
+                final GraphicsAlgorithm ga = getDiagram().getGraphicsAlgorithm();
 
                 // Apply the LayoutAlgorithmn
                 layoutAlgorithm.applyLayout(entities, connections, 0, 0, ga.getWidth(), ga.getHeight(), false, false);
 
                 // Update the Graphiti Shapes and Connections locations
-                this.updateGraphCoordinates(entities, connections);
+                updateGraphCoordinates(entities, connections);
 
                 // Reposition the self connections bendpoints:
-                this.adaptSelfBendPoints(selves);
+                adaptSelfBendPoints(selves);
 
             } catch (final InvalidLayoutConfiguration e) {
                 e.printStackTrace();
@@ -155,8 +155,8 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
      */
     private Map<Connection, Point> getSelfConnections() {
         final IGaService gaService = Graphiti.getGaService();
-        final Map<Connection, Point> selves = new HashMap<Connection, Point>();
-        final EList<Connection> connections = this.getDiagram().getConnections();
+        final Map<Connection, Point> selves = new HashMap<>();
+        final EList<Connection> connections = getDiagram().getConnections();
         for (final Connection connection : connections) {
             final AnchorContainer source = connection.getStart().getParent();
             final AnchorContainer target = connection.getEnd().getParent();
@@ -241,8 +241,8 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
      * @return a {@link Map} of {@link SimpleNode} per {@link Shape}
      */
     private Map<Shape, SimpleNode> getLayoutEntities() {
-        final Map<Shape, SimpleNode> map = new HashMap<Shape, SimpleNode>();
-        final EList<Shape> children = this.getDiagram().getChildren();
+        final Map<Shape, SimpleNode> map = new HashMap<>();
+        final EList<Shape> children = getDiagram().getChildren();
         for (final Shape shape : children) {
             final GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
             final SimpleNode entity = new SimpleNode(shape, ga.getX(), ga.getY(), ga.getWidth(), ga.getHeight());
@@ -258,8 +258,8 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
      * @return the array of {@link LayoutRelationship}s to compute
      */
     private LayoutRelationship[] getConnectionEntities(final Map<Shape, SimpleNode> map) {
-        final List<LayoutRelationship> liste = new ArrayList<LayoutRelationship>();
-        final EList<Connection> connections = this.getDiagram().getConnections();
+        final List<LayoutRelationship> liste = new ArrayList<>();
+        final EList<Connection> connections = getDiagram().getConnections();
         for (final Connection connection : connections) {
 
             String label = null;
@@ -278,7 +278,7 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
 
             if (source != target) { // we don't add self relations to avoid
                                         // Cycle errors
-                final SimpleRelationship relationship = new SimpleRelationship(sourceEntity, targetEntity, (source != target));
+                final SimpleRelationship relationship = new SimpleRelationship(sourceEntity, targetEntity, source != target);
                 relationship.setGraphData(connection);
                 relationship.clearBendPoints();
                 relationship.setLabel(label);
@@ -286,10 +286,10 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
                     final FreeFormConnection ffcon = (FreeFormConnection) connection;
 
                     final EList<Point> pointList = ffcon.getBendpoints();
-                    final List<LayoutBendPoint> bendPoints = new ArrayList<LayoutBendPoint>();
+                    final List<LayoutBendPoint> bendPoints = new ArrayList<>();
                     for (int i = 0; i < pointList.size(); i++) {
                         final Point point = pointList.get(i);
-                        final boolean isControlPoint = (i != 0) && (i != pointList.size() - 1);
+                        final boolean isControlPoint = i != 0 && i != pointList.size() - 1;
                         final LayoutBendPoint bendPoint = new BendPoint(point.getX(), point.getY(), isControlPoint);
                         bendPoints.add(bendPoint);
                     }
@@ -383,12 +383,12 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
 
         @Override
         public Object getGraphData() {
-            return this.graphData;
+            return graphData;
         }
 
         @Override
         public void setGraphData(final Object o) {
-            this.graphData = o;
+            graphData = o;
         }
     }
 

@@ -79,6 +79,7 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public ScenarioResult createScenarioResult() {
         ScenarioResultImpl scenarioResult = new ScenarioResultImpl();
         return scenarioResult;
@@ -89,6 +90,7 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public Online createOnline() {
         OnlineImpl online = new OnlineImpl();
         return online;
@@ -99,6 +101,7 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public Defect createDefect() {
         DefectImpl defect = new DefectImpl();
         return defect;
@@ -109,6 +112,7 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public NoPower createNoPower() {
         NoPowerImpl noPower = new NoPowerImpl();
         return noPower;
@@ -119,6 +123,7 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public NoUplink createNoUplink() {
         NoUplinkImpl noUplink = new NoUplinkImpl();
         return noUplink;
@@ -129,6 +134,7 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public Cluster createCluster() {
         ClusterImpl cluster = new ClusterImpl();
         return cluster;
@@ -139,6 +145,7 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public SmartgridoutputPackage getSmartgridoutputPackage() {
         return (SmartgridoutputPackage) getEPackage();
     }

@@ -53,7 +53,7 @@ public class AddPowerConnectionFeature extends AbstractAddFeature {
 
         // CONNECTION WITH POLYLINE
         final IPeCreateService peCreateService = Graphiti.getPeCreateService();
-        final Connection connection = peCreateService.createFreeFormConnection(this.getDiagram());
+        final Connection connection = peCreateService.createFreeFormConnection(getDiagram());
         final IAddConnectionContext addConContext = (IAddConnectionContext) context;
         connection.setStart(addConContext.getSourceAnchor());
         connection.setEnd(addConContext.getTargetAnchor());
@@ -67,7 +67,7 @@ public class AddPowerConnectionFeature extends AbstractAddFeature {
 
         // Create arrow
         final ConnectionDecorator cd = peCreateService.createConnectionDecorator(connection, false, 1.0, true);
-        this.createArrow(cd);
+        createArrow(cd);
 
         // create link and wire it
         // this.link(connection, (Object[]) context.getNewObject());

@@ -95,6 +95,7 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
      * 
      * @generated
      */
+    @Override
     public NetworkEntity getOwner() {
         if (owner != null && owner.eIsProxy()) {
             InternalEObject oldOwner = (InternalEObject) owner;
@@ -121,6 +122,7 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
      * 
      * @generated
      */
+    @Override
     public void setOwner(NetworkEntity newOwner) {
         NetworkEntity oldOwner = owner;
         owner = newOwner;
@@ -133,6 +135,7 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
      * 
      * @generated
      */
+    @Override
     public Cluster getBelongsToCluster() {
         if (belongsToCluster != null && belongsToCluster.eIsProxy()) {
             InternalEObject oldBelongsToCluster = (InternalEObject) belongsToCluster;
@@ -177,6 +180,7 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
      * 
      * @generated
      */
+    @Override
     public void setBelongsToCluster(Cluster newBelongsToCluster) {
         if (newBelongsToCluster != belongsToCluster) {
             NotificationChain msgs = null;
@@ -196,6 +200,7 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
      * 
      * @generated
      */
+    @Override
     public boolean isIsHacked() {
         return isHacked;
     }
@@ -205,6 +210,7 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
      * 
      * @generated
      */
+    @Override
     public void setIsHacked(boolean newIsHacked) {
         boolean oldIsHacked = isHacked;
         isHacked = newIsHacked;

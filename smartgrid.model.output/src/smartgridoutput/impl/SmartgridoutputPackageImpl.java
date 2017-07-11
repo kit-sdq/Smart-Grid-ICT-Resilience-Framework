@@ -161,6 +161,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getScenarioResult() {
         return scenarioResultEClass;
     }
@@ -170,6 +171,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EReference getScenarioResult_States() {
         return (EReference) scenarioResultEClass.getEStructuralFeatures().get(0);
     }
@@ -179,6 +181,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EReference getScenarioResult_Clusters() {
         return (EReference) scenarioResultEClass.getEStructuralFeatures().get(1);
     }
@@ -188,6 +191,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EReference getScenarioResult_Scenario() {
         return (EReference) scenarioResultEClass.getEStructuralFeatures().get(2);
     }
@@ -197,6 +201,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getEntityState() {
         return entityStateEClass;
     }
@@ -206,6 +211,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EReference getEntityState_Owner() {
         return (EReference) entityStateEClass.getEStructuralFeatures().get(0);
     }
@@ -215,6 +221,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getOnline() {
         return onlineEClass;
     }
@@ -224,6 +231,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getDefect() {
         return defectEClass;
     }
@@ -233,6 +241,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getNoPower() {
         return noPowerEClass;
     }
@@ -242,6 +251,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getNoUplink() {
         return noUplinkEClass;
     }
@@ -251,6 +261,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getOffline() {
         return offlineEClass;
     }
@@ -260,6 +271,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getCluster() {
         return clusterEClass;
     }
@@ -269,6 +281,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EAttribute getCluster_ControlCenterCount() {
         return (EAttribute) clusterEClass.getEStructuralFeatures().get(0);
     }
@@ -278,6 +291,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EAttribute getCluster_SmartMeterCount() {
         return (EAttribute) clusterEClass.getEStructuralFeatures().get(1);
     }
@@ -287,6 +301,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EReference getCluster_HasEntities() {
         return (EReference) clusterEClass.getEStructuralFeatures().get(2);
     }
@@ -296,6 +311,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EClass getOn() {
         return onEClass;
     }
@@ -305,6 +321,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EReference getOn_BelongsToCluster() {
         return (EReference) onEClass.getEStructuralFeatures().get(0);
     }
@@ -314,6 +331,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public EAttribute getOn_IsHacked() {
         return (EAttribute) onEClass.getEStructuralFeatures().get(1);
     }
@@ -323,6 +341,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * 
      * @generated
      */
+    @Override
     public SmartgridoutputFactory getSmartgridoutputFactory() {
         return (SmartgridoutputFactory) getEFactoryInstance();
     }
@@ -405,20 +424,20 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
         // Set bounds for type parameters
 
         // Add supertypes to classes
-        onlineEClass.getESuperTypes().add(this.getOn());
-        defectEClass.getESuperTypes().add(this.getEntityState());
-        defectEClass.getESuperTypes().add(this.getOffline());
-        noPowerEClass.getESuperTypes().add(this.getEntityState());
-        noPowerEClass.getESuperTypes().add(this.getOffline());
-        noUplinkEClass.getESuperTypes().add(this.getOffline());
-        noUplinkEClass.getESuperTypes().add(this.getOn());
-        onEClass.getESuperTypes().add(this.getEntityState());
+        onlineEClass.getESuperTypes().add(getOn());
+        defectEClass.getESuperTypes().add(getEntityState());
+        defectEClass.getESuperTypes().add(getOffline());
+        noPowerEClass.getESuperTypes().add(getEntityState());
+        noPowerEClass.getESuperTypes().add(getOffline());
+        noUplinkEClass.getESuperTypes().add(getOffline());
+        noUplinkEClass.getESuperTypes().add(getOn());
+        onEClass.getESuperTypes().add(getEntityState());
 
         // Initialize classes, features, and operations; add parameters
         initEClass(scenarioResultEClass, ScenarioResult.class, "ScenarioResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getScenarioResult_States(), this.getEntityState(), null, "States", null, 0, -1, ScenarioResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+        initEReference(getScenarioResult_States(), getEntityState(), null, "States", null, 0, -1, ScenarioResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getScenarioResult_Clusters(), this.getCluster(), null, "Clusters", null, 0, -1, ScenarioResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+        initEReference(getScenarioResult_Clusters(), getCluster(), null, "Clusters", null, 0, -1, ScenarioResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getScenarioResult_Scenario(), theSmartgridtopoPackage.getSmartGridTopology(), null, "Scenario", null, 0, 1, ScenarioResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
                 !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -442,11 +461,11 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
                 IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getCluster_SmartMeterCount(), ecorePackage.getEInt(), "SmartMeterCount", null, 0, 1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
                 IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getCluster_HasEntities(), this.getOn(), this.getOn_BelongsToCluster(), "HasEntities", null, 0, -1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+        initEReference(getCluster_HasEntities(), getOn(), getOn_BelongsToCluster(), "HasEntities", null, 0, -1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
                 IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(onEClass, On.class, "On", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getOn_BelongsToCluster(), this.getCluster(), this.getCluster_HasEntities(), "BelongsToCluster", null, 0, 1, On.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+        initEReference(getOn_BelongsToCluster(), getCluster(), getCluster_HasEntities(), "BelongsToCluster", null, 0, 1, On.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
                 IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getOn_IsHacked(), ecorePackage.getEBoolean(), "IsHacked", "false", 1, 1, On.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
                 IS_ORDERED);

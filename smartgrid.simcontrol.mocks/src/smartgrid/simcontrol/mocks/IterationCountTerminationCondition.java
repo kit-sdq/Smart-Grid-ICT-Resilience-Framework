@@ -26,7 +26,7 @@ public class IterationCountTerminationCondition implements ITerminationCondition
     private int maxIterations;
 
     public IterationCountTerminationCondition() {
-        this.maxIterations = 2;
+        maxIterations = 2;
     }
 
     /**
@@ -37,7 +37,7 @@ public class IterationCountTerminationCondition implements ITerminationCondition
      */
     public IterationCountTerminationCondition(final int breakafterIterationCount) {
 
-        this.maxIterations = breakafterIterationCount;
+        maxIterations = breakafterIterationCount;
     }
 
     /**
@@ -50,14 +50,14 @@ public class IterationCountTerminationCondition implements ITerminationCondition
     @Override
     public boolean evaluate(final int currentIteration, final ScenarioState impactInput, final ScenarioState impactInputOld, final ScenarioResult impactResult, final ScenarioResult impactResultOld) {
 
-        final boolean continueRunning = currentIteration < this.maxIterations;
+        final boolean continueRunning = currentIteration < maxIterations;
         return continueRunning;
     }
 
     @Override
     public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
-        this.maxIterations = Integer.parseInt(config.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
-        LOG.info("Performing at most " + this.maxIterations + " iterations between power/impact per time step");
+        maxIterations = Integer.parseInt(config.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
+        LOG.info("Performing at most " + maxIterations + " iterations between power/impact per time step");
 
         return ErrorCodeEnum.SUCCESS;
     }

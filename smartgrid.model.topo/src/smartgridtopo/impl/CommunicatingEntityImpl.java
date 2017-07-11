@@ -63,9 +63,10 @@ public abstract class CommunicatingEntityImpl extends NetworkEntityImpl implemen
      * 
      * @generated
      */
+    @Override
     public EList<LogicalCommunication> getCommunicatesBy() {
         if (communicatesBy == null) {
-            communicatesBy = new EObjectWithInverseResolvingEList.ManyInverse<LogicalCommunication>(LogicalCommunication.class, this, SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY,
+            communicatesBy = new EObjectWithInverseResolvingEList.ManyInverse<>(LogicalCommunication.class, this, SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY,
                     SmartgridtopoPackage.LOGICAL_COMMUNICATION__LINKS);
         }
         return communicatesBy;

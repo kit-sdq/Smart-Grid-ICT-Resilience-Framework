@@ -58,6 +58,7 @@ public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
      * 
      * @generated
      */
+    @Override
     public NetworkNodeType getIsA() {
         if (isA != null && isA.eIsProxy()) {
             InternalEObject oldIsA = (InternalEObject) isA;
@@ -84,6 +85,7 @@ public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
      * 
      * @generated
      */
+    @Override
     public void setIsA(NetworkNodeType newIsA) {
         NetworkNodeType oldIsA = isA;
         isA = newIsA;

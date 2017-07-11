@@ -27,8 +27,8 @@ public class CreatePowerConnectionFeature extends AbstractCreateConnectionFeatur
         final Anchor sourceAnchor = context.getSourceAnchor();
         final Anchor targetAnchor = context.getTargetAnchor();
         if (sourceAnchor != null && targetAnchor != null) {
-            final Object target = this.getBoFromAnchor(targetAnchor);
-            final Object source = this.getBoFromAnchor(sourceAnchor);
+            final Object target = getBoFromAnchor(targetAnchor);
+            final Object source = getBoFromAnchor(sourceAnchor);
 
             if (source != null && target != null && source instanceof NetworkEntity && target instanceof PowerGridNode) {
                 final NetworkEntity sourceNetworkEntity = (NetworkEntity) source;
@@ -41,14 +41,14 @@ public class CreatePowerConnectionFeature extends AbstractCreateConnectionFeatur
     }
 
     private Object getBoFromAnchor(final Anchor sourceAnchor) {
-        return this.getBusinessObjectForPictogramElement(sourceAnchor.getParent());
+        return getBusinessObjectForPictogramElement(sourceAnchor.getParent());
     }
 
     @Override
     public boolean canStartConnection(final ICreateConnectionContext context) {
         final Anchor sourceAnchor = context.getSourceAnchor();
         if (sourceAnchor != null) {
-            final Object source = this.getBoFromAnchor(sourceAnchor);
+            final Object source = getBoFromAnchor(sourceAnchor);
             if (source instanceof NetworkEntity) {
                 return true;
             }
@@ -59,8 +59,8 @@ public class CreatePowerConnectionFeature extends AbstractCreateConnectionFeatur
     @Override
     public Connection create(final ICreateConnectionContext context) {
         // get EClasses which should be connected
-        final NetworkEntity source = (NetworkEntity) this.getBoFromAnchor(context.getSourceAnchor());
-        final PowerGridNode target = (PowerGridNode) this.getBoFromAnchor(context.getTargetAnchor());
+        final NetworkEntity source = (NetworkEntity) getBoFromAnchor(context.getSourceAnchor());
+        final PowerGridNode target = (PowerGridNode) getBoFromAnchor(context.getTargetAnchor());
 
         // set reference in domain model
         source.getConnectedTo().add(target);
@@ -73,7 +73,7 @@ public class CreatePowerConnectionFeature extends AbstractCreateConnectionFeatur
         addContext.putProperty("RelType", "Plain");
 
         Connection newConnection;
-        newConnection = (Connection) this.getFeatureProvider().addIfPossible(addContext);
+        newConnection = (Connection) getFeatureProvider().addIfPossible(addContext);
         // newConnection = this.addGraphicalRepresentation(addContext, newObject);
         // newConnection = (Connection) add(addContext);
 

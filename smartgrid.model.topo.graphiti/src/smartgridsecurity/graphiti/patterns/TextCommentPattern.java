@@ -76,7 +76,7 @@ public class TextCommentPattern extends AbstractPattern {
         final IPeCreateService peCreateService = Graphiti.getPeCreateService();
         final ContainerShape containerShape = peCreateService.createContainerShape(targetDiagram, true);
 
-        final IDirectEditingInfo directEditingInfo = this.getFeatureProvider().getDirectEditingInfo();
+        final IDirectEditingInfo directEditingInfo = getFeatureProvider().getDirectEditingInfo();
         directEditingInfo.setMainPictogramElement(containerShape);
         directEditingInfo.setPictogramElement(containerShape);
 
@@ -87,18 +87,18 @@ public class TextCommentPattern extends AbstractPattern {
         gaService.setLocationAndSize(rect, context.getX(), context.getY(), 200, 35);
 
         final Shape textShape = peCreateService.createShape(containerShape, false);
-        this.multiText = gaService.createMultiText(textShape);
-        this.multiText.setFont(gaService.manageFont(this.getDiagram(), "Arial", 14));
-        this.multiText.setValue("");
-        this.multiText.setForeground(this.manageColor(IColorConstant.BLACK));
-        this.multiText.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);
-        this.multiText.setVerticalAlignment(Orientation.ALIGNMENT_TOP);
-        gaService.setLocationAndSize(this.multiText, 5, 5, 190, 25);
+        multiText = gaService.createMultiText(textShape);
+        multiText.setFont(gaService.manageFont(getDiagram(), "Arial", 14));
+        multiText.setValue("");
+        multiText.setForeground(this.manageColor(IColorConstant.BLACK));
+        multiText.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);
+        multiText.setVerticalAlignment(Orientation.ALIGNMENT_TOP);
+        gaService.setLocationAndSize(multiText, 5, 5, 190, 25);
 
         // Enable direct editing
-        this.getFeatureProvider().getDirectEditingInfo().setActive(true);
-        this.getFeatureProvider().getDirectEditingInfo().setMainPictogramElement(containerShape);
-        this.getFeatureProvider().getDirectEditingInfo().setGraphicsAlgorithm(this.multiText);
+        getFeatureProvider().getDirectEditingInfo().setActive(true);
+        getFeatureProvider().getDirectEditingInfo().setMainPictogramElement(containerShape);
+        getFeatureProvider().getDirectEditingInfo().setGraphicsAlgorithm(multiText);
 
         return containerShape;
     }
@@ -127,12 +127,12 @@ public class TextCommentPattern extends AbstractPattern {
     public void setValue(final String value, final IDirectEditingContext context) {
         final MultiText text = (MultiText) context.getGraphicsAlgorithm();
         text.setValue(value);
-        this.updatePictogramElement(context.getPictogramElement());
+        updatePictogramElement(context.getPictogramElement());
     }
 
     @Override
     public Object[] create(final ICreateContext context) {
-        this.addGraphicalRepresentation(context, null);
+        addGraphicalRepresentation(context, null);
 
         // return newly created business object(s)
         return new Object[] { null };

@@ -23,7 +23,7 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
 
     @Override
     public Map<String, Map<String, PowerSpec>> getDefaultDemand() {
-        return new HashMap<String, Map<String, PowerSpec>>(); // TODO implement?
+        return new HashMap<>(); // TODO implement?
     }
 
     @Override

@@ -49,17 +49,17 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 
     public LoadToolbarButtonAction(final IPropertyChangeListener listener) {
         super();
-        this.ACTION_ID = "LoadToolbarButtonActionId";
-        this.TOOL_TIP = "Load a State Scenario";
-        this.setToolTipText(this.TOOL_TIP);
-        this.setId(this.ACTION_ID);
-        this.addPropertyChangeListener(listener);
-        this.setImageDescriptor(this.createImage("icons" + File.separator + "load_input.png", "smartgrid.model.input"));
+        ACTION_ID = "LoadToolbarButtonActionId";
+        TOOL_TIP = "Load a State Scenario";
+        setToolTipText(TOOL_TIP);
+        setId(ACTION_ID);
+        addPropertyChangeListener(listener);
+        setImageDescriptor(createImage("icons" + File.separator + "load_input.png", "smartgrid.model.input"));
     }
 
     @Override
     public void setDiagramContainer(final IDiagramContainerUI container) {
-        this.diagramContainer = container;
+        diagramContainer = container;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
         final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
         // check if an output model is loaded
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
                 final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot open new input model while output model is loaded");
@@ -90,7 +90,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
         } else {
             // Perform Action, like save the file.
             LOG.info("Selected file: " + fileSelected);
-            final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
+            final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
 
             Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 
@@ -114,12 +114,12 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                         // Conformity check
                         for (final EObject current : boList) {
                             if (current instanceof SmartGridTopology) {
-                                if (!(LoadInputModelConformityHelper.checkInputModelConformitySimple((ScenarioState) obj, (SmartGridTopology) current))) {
+                                if (!LoadInputModelConformityHelper.checkInputModelConformitySimple((ScenarioState) obj, (SmartGridTopology) current)) {
                                     final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                                     messageBox.setMessage("Input model is not conform to the current topo model");
                                     messageBox.open();
                                     LOG.info("[LoadToolbarButtonAction]: Loading failed since input model is not conform to topo model");
-                                    LoadToolbarButtonAction.this.loadSuccessful = false;
+                                    loadSuccessful = false;
                                     return;
                                 }
                             }
@@ -184,10 +184,10 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                 e.printStackTrace();
             }
         }
-        if (this.loadSuccessful) {
+        if (loadSuccessful) {
             this.firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
         }
-        this.loadSuccessful = true;
+        loadSuccessful = true;
         LOG.info("[LoadToolbarButtonAction]: Successfully loaded input model");
     }
 

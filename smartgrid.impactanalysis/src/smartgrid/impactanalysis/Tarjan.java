@@ -17,8 +17,8 @@ public class Tarjan {
      * @return
      */
     public static List<List<Integer>> getClusters(final double[][] adjacentMatrix, final Map<Integer, Integer> internalToExternal) {
-        final List<List<Integer>> result = new LinkedList<List<Integer>>();
-        final LinkedList<Integer> unprogressedNodes = new LinkedList<Integer>();
+        final List<List<Integer>> result = new LinkedList<>();
+        final LinkedList<Integer> unprogressedNodes = new LinkedList<>();
         final boolean[] visited = new boolean[adjacentMatrix.length];
         for (int i = 0; i < adjacentMatrix.length; i++) {
             unprogressedNodes.add(i);
@@ -30,13 +30,13 @@ public class Tarjan {
         LOG.debug(Arrays.toString(unprogressedNodes.toArray()));
         while (unprogressedNodes.size() > 0) {
             // start building a new cluster
-            final LinkedList<Integer> nodesToCheck = new LinkedList<Integer>();
+            final LinkedList<Integer> nodesToCheck = new LinkedList<>();
             final int starter = unprogressedNodes.pollFirst();
             nodesToCheck.add(starter);
             visited[starter] = true;
             LOG.debug("[Tarjan]: New cluster with " + internalToExternal.get(starter));
 
-            final LinkedList<Integer> cluster = new LinkedList<Integer>();
+            final LinkedList<Integer> cluster = new LinkedList<>();
             while (nodesToCheck.size() > 0) {
                 final int n = nodesToCheck.pollFirst();
                 cluster.add(n);

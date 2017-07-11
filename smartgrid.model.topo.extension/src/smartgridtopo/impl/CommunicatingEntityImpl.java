@@ -5,12 +5,9 @@ package smartgridtopo.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -66,9 +63,10 @@ public abstract class CommunicatingEntityImpl extends NetworkEntityImpl implemen
      * 
      * @generated
      */
+    @Override
     public EList<LogicalCommunication> getCommunicatesBy() {
         if (communicatesBy == null) {
-            communicatesBy = new EObjectWithInverseResolvingEList.ManyInverse<LogicalCommunication>(LogicalCommunication.class, this, SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY,
+            communicatesBy = new EObjectWithInverseResolvingEList.ManyInverse<>(LogicalCommunication.class, this, SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY,
                     SmartgridtopoPackage.LOGICAL_COMMUNICATION__LINKS);
         }
         return communicatesBy;

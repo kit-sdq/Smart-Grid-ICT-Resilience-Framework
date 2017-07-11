@@ -42,7 +42,7 @@ public class EvaluateDomainModelChangeListeners {
      * @return all found feature extensions
      */
     public List<ResourceSetListener> evaluateFeatureExtension(final IExtensionRegistry registry) {
-        return this.evaluate(registry);
+        return evaluate(registry);
     }
 
     /**
@@ -57,8 +57,8 @@ public class EvaluateDomainModelChangeListeners {
 
         // define the thread pool
         final ExecutorService pool = Executors.newCachedThreadPool();
-        final List<Future<List<ResourceSetListener>>> list = new LinkedList<Future<List<ResourceSetListener>>>();
-        final List<ResourceSetListener> listenerList = new LinkedList<ResourceSetListener>();
+        final List<Future<List<ResourceSetListener>>> list = new LinkedList<>();
+        final List<ResourceSetListener> listenerList = new LinkedList<>();
 
         try {
             for (final IConfigurationElement e : config) {
@@ -67,7 +67,7 @@ public class EvaluateDomainModelChangeListeners {
                 if (o instanceof IDomainModelChangeListenerResolver) {
                     // Executes the evaluation in a thread an returns the result
                     // in the future
-                    final Callable<List<ResourceSetListener>> callable = new EvaluateAbstractPattern((IDomainModelChangeListenerResolver) o, this.db);
+                    final Callable<List<ResourceSetListener>> callable = new EvaluateAbstractPattern((IDomainModelChangeListenerResolver) o, db);
                     final Future<List<ResourceSetListener>> future = pool.submit(callable);
                     list.add(future);
                 }
@@ -101,13 +101,13 @@ public class EvaluateDomainModelChangeListeners {
         private final DiagramBehavior behavior;
 
         public EvaluateAbstractPattern(final IDomainModelChangeListenerResolver f, final DiagramBehavior fp) {
-            this.resolver = f;
-            this.behavior = fp;
+            resolver = f;
+            behavior = fp;
         }
 
         @Override
         public List<ResourceSetListener> call() throws Exception {
-            return this.resolver.getDomainModelChangeListener(this.behavior);
+            return resolver.getDomainModelChangeListener(behavior);
         }
 
     }

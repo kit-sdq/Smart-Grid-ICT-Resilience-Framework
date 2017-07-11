@@ -56,7 +56,7 @@ public class LoadInputModelConformityHelper {
     }
 
     private static List<EntityState> getListWithoutZombies(final List<EntityState> states) {
-        final List<EntityState> noZombies = new ArrayList<EntityState>();
+        final List<EntityState> noZombies = new ArrayList<>();
 
         for (final EntityState state : states) {
             if (state.getOwner() != null) {
@@ -93,7 +93,7 @@ public class LoadInputModelConformityHelper {
     }
 
     private static List<PowerState> getListWithoutZombiesPower(final List<PowerState> states) {
-        final List<PowerState> noZombies = new ArrayList<PowerState>();
+        final List<PowerState> noZombies = new ArrayList<>();
 
         for (final PowerState state : states) {
             if (state.getOwner() != null) {

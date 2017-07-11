@@ -12,77 +12,52 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.StringTokenizer;
 
-import org.eclipse.emf.common.CommonPlugin;
-
-import org.eclipse.emf.common.util.URI;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.emf.ecore.xmi.XMLResource;
-
-import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
-
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-
 import org.eclipse.core.runtime.IProgressMonitor;
-
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.CommonPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.dialogs.MessageDialog;
-
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
-
 import org.eclipse.swt.SWT;
-
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.ModifyEvent;
-
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
-
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
 import smartgridtopo.SmartgridtopoFactory;
 import smartgridtopo.SmartgridtopoPackage;
-import topoextension.provider.TopoextensionEditPlugin;
-
-import org.eclipse.core.runtime.Path;
-
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
-
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-
 import topoextension.presentation.TopoextensionEditorPlugin;
+import topoextension.provider.TopoextensionEditPlugin;
 
 /**
  * This is a simple wizard for creating a new model file. <!-- begin-user-doc --> <!-- end-user-doc
@@ -163,6 +138,7 @@ public class SmartgridtopoModelWizard extends Wizard implements INewWizard {
      * 
      * @generated
      */
+    @Override
     public void init(IWorkbench workbench, IStructuredSelection selection) {
         this.workbench = workbench;
         this.selection = selection;
@@ -178,7 +154,7 @@ public class SmartgridtopoModelWizard extends Wizard implements INewWizard {
      */
     protected Collection<String> getInitialObjectNames() {
         if (initialObjectNames == null) {
-            initialObjectNames = new ArrayList<String>();
+            initialObjectNames = new ArrayList<>();
             for (EClassifier eClassifier : smartgridtopoPackage.getEClassifiers()) {
                 if (eClassifier instanceof EClass) {
                     EClass eClass = (EClass) eClassifier;
@@ -242,7 +218,7 @@ public class SmartgridtopoModelWizard extends Wizard implements INewWizard {
 
                         // Save the contents of the resource to the file system.
                         //
-                        Map<Object, Object> options = new HashMap<Object, Object>();
+                        Map<Object, Object> options = new HashMap<>();
                         options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage.getEncoding());
                         resource.save(options);
                     } catch (Exception exception) {
@@ -262,11 +238,7 @@ public class SmartgridtopoModelWizard extends Wizard implements INewWizard {
             final IWorkbenchPart activePart = page.getActivePart();
             if (activePart instanceof ISetSelectionTarget) {
                 final ISelection targetSelection = new StructuredSelection(modelFile);
-                getShell().getDisplay().asyncExec(new Runnable() {
-                    public void run() {
-                        ((ISetSelectionTarget) activePart).selectReveal(targetSelection);
-                    }
-                });
+                getShell().getDisplay().asyncExec(() -> ((ISetSelectionTarget) activePart).selectReveal(targetSelection));
             }
 
             // Open an editor on the new file.
@@ -370,6 +342,7 @@ public class SmartgridtopoModelWizard extends Wizard implements INewWizard {
          * 
          * @generated
          */
+        @Override
         public void createControl(Composite parent) {
             Composite composite = new Composite(parent, SWT.NONE);
             {
@@ -443,11 +416,7 @@ public class SmartgridtopoModelWizard extends Wizard implements INewWizard {
          * 
          * @generated
          */
-        protected ModifyListener validator = new ModifyListener() {
-            public void modifyText(ModifyEvent e) {
-                setPageComplete(validatePage());
-            }
-        };
+        protected ModifyListener validator = e -> setPageComplete(validatePage());
 
         /**
          * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -524,7 +493,7 @@ public class SmartgridtopoModelWizard extends Wizard implements INewWizard {
          */
         protected Collection<String> getEncodings() {
             if (encodings == null) {
-                encodings = new ArrayList<String>();
+                encodings = new ArrayList<>();
                 for (StringTokenizer stringTokenizer = new StringTokenizer(TopoextensionEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens();) {
                     encodings.add(stringTokenizer.nextToken());
                 }

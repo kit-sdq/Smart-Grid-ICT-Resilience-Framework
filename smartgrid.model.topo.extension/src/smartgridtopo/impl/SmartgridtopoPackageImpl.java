@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import smartgridtopo.CommunicatingEntity;
@@ -29,9 +28,7 @@ import smartgridtopo.SmartMeter;
 import smartgridtopo.SmartMeterType;
 import smartgridtopo.SmartgridtopoFactory;
 import smartgridtopo.SmartgridtopoPackage;
-
 import topoextension.TopoextensionPackage;
-
 import topoextension.impl.TopoextensionPackageImpl;
 
 /**
@@ -240,6 +237,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getSmartGridTopology() {
         return smartGridTopologyEClass;
     }
@@ -249,6 +247,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getSmartGridTopology_ContainsNE() {
         return (EReference) smartGridTopologyEClass.getEStructuralFeatures().get(0);
     }
@@ -258,6 +257,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getSmartGridTopology_ContainsPGN() {
         return (EReference) smartGridTopologyEClass.getEStructuralFeatures().get(1);
     }
@@ -267,6 +267,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getSmartGridTopology_ContainsPC() {
         return (EReference) smartGridTopologyEClass.getEStructuralFeatures().get(2);
     }
@@ -276,6 +277,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getSmartGridTopology_ContainsLC() {
         return (EReference) smartGridTopologyEClass.getEStructuralFeatures().get(3);
     }
@@ -285,6 +287,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getNamedEntity() {
         return namedEntityEClass;
     }
@@ -294,6 +297,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EAttribute getNamedEntity_Name() {
         return (EAttribute) namedEntityEClass.getEStructuralFeatures().get(0);
     }
@@ -303,6 +307,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getIdentifier() {
         return identifierEClass;
     }
@@ -312,6 +317,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EAttribute getIdentifier_Id() {
         return (EAttribute) identifierEClass.getEStructuralFeatures().get(0);
     }
@@ -321,6 +327,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getNamedIdentifier() {
         return namedIdentifierEClass;
     }
@@ -330,6 +337,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getNetworkEntity() {
         return networkEntityEClass;
     }
@@ -339,6 +347,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getNetworkEntity_ConnectedTo() {
         return (EReference) networkEntityEClass.getEStructuralFeatures().get(0);
     }
@@ -348,6 +357,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getNetworkEntity_LinkedBy() {
         return (EReference) networkEntityEClass.getEStructuralFeatures().get(1);
     }
@@ -357,6 +367,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getPowerGridNode() {
         return powerGridNodeEClass;
     }
@@ -366,6 +377,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getSmartMeter() {
         return smartMeterEClass;
     }
@@ -375,6 +387,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getSmartMeter_IsA() {
         return (EReference) smartMeterEClass.getEStructuralFeatures().get(0);
     }
@@ -384,6 +397,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EAttribute getSmartMeter_Aggregation() {
         return (EAttribute) smartMeterEClass.getEStructuralFeatures().get(1);
     }
@@ -393,6 +407,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getSmartMeterType() {
         return smartMeterTypeEClass;
     }
@@ -402,6 +417,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getPhysicalConnection() {
         return physicalConnectionEClass;
     }
@@ -411,6 +427,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getPhysicalConnection_Links() {
         return (EReference) physicalConnectionEClass.getEStructuralFeatures().get(0);
     }
@@ -420,6 +437,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getPhysicalConnection_IsA() {
         return (EReference) physicalConnectionEClass.getEStructuralFeatures().get(1);
     }
@@ -429,6 +447,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getRepository() {
         return repositoryEClass;
     }
@@ -438,6 +457,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getRepository_ContainsSmartMeterTypes() {
         return (EReference) repositoryEClass.getEStructuralFeatures().get(0);
     }
@@ -447,6 +467,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getRepository_ContainsConnectionType() {
         return (EReference) repositoryEClass.getEStructuralFeatures().get(1);
     }
@@ -456,6 +477,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getRepository_ContainsNetworkNodeTypes() {
         return (EReference) repositoryEClass.getEStructuralFeatures().get(2);
     }
@@ -465,6 +487,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getConnectionType() {
         return connectionTypeEClass;
     }
@@ -474,6 +497,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getNetworkNode() {
         return networkNodeEClass;
     }
@@ -483,6 +507,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getNetworkNode_IsA() {
         return (EReference) networkNodeEClass.getEStructuralFeatures().get(0);
     }
@@ -492,6 +517,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getNetworkNodeType() {
         return networkNodeTypeEClass;
     }
@@ -501,6 +527,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getNetworkNodeType_IsA() {
         return (EReference) networkNodeTypeEClass.getEStructuralFeatures().get(0);
     }
@@ -510,6 +537,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getControlCenter() {
         return controlCenterEClass;
     }
@@ -519,6 +547,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getGenericController() {
         return genericControllerEClass;
     }
@@ -528,6 +557,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getCommunicatingEntity() {
         return communicatingEntityEClass;
     }
@@ -537,6 +567,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getCommunicatingEntity_CommunicatesBy() {
         return (EReference) communicatingEntityEClass.getEStructuralFeatures().get(0);
     }
@@ -546,6 +577,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getInterCom() {
         return interComEClass;
     }
@@ -555,6 +587,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EClass getLogicalCommunication() {
         return logicalCommunicationEClass;
     }
@@ -564,6 +597,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public EReference getLogicalCommunication_Links() {
         return (EReference) logicalCommunicationEClass.getEStructuralFeatures().get(0);
     }
@@ -573,6 +607,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public SmartgridtopoFactory getSmartgridtopoFactory() {
         return (SmartgridtopoFactory) getEFactoryInstance();
     }
@@ -680,33 +715,33 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         // Set bounds for type parameters
 
         // Add supertypes to classes
-        smartGridTopologyEClass.getESuperTypes().add(this.getNamedIdentifier());
-        namedIdentifierEClass.getESuperTypes().add(this.getIdentifier());
-        namedIdentifierEClass.getESuperTypes().add(this.getNamedEntity());
-        networkEntityEClass.getESuperTypes().add(this.getNamedIdentifier());
-        powerGridNodeEClass.getESuperTypes().add(this.getNamedIdentifier());
-        smartMeterEClass.getESuperTypes().add(this.getCommunicatingEntity());
-        smartMeterTypeEClass.getESuperTypes().add(this.getNamedIdentifier());
-        physicalConnectionEClass.getESuperTypes().add(this.getNamedEntity());
-        repositoryEClass.getESuperTypes().add(this.getNamedIdentifier());
-        connectionTypeEClass.getESuperTypes().add(this.getNamedIdentifier());
-        networkNodeEClass.getESuperTypes().add(this.getNetworkEntity());
-        networkNodeTypeEClass.getESuperTypes().add(this.getNamedIdentifier());
-        controlCenterEClass.getESuperTypes().add(this.getCommunicatingEntity());
-        genericControllerEClass.getESuperTypes().add(this.getCommunicatingEntity());
-        communicatingEntityEClass.getESuperTypes().add(this.getNetworkEntity());
-        interComEClass.getESuperTypes().add(this.getCommunicatingEntity());
-        logicalCommunicationEClass.getESuperTypes().add(this.getNamedEntity());
+        smartGridTopologyEClass.getESuperTypes().add(getNamedIdentifier());
+        namedIdentifierEClass.getESuperTypes().add(getIdentifier());
+        namedIdentifierEClass.getESuperTypes().add(getNamedEntity());
+        networkEntityEClass.getESuperTypes().add(getNamedIdentifier());
+        powerGridNodeEClass.getESuperTypes().add(getNamedIdentifier());
+        smartMeterEClass.getESuperTypes().add(getCommunicatingEntity());
+        smartMeterTypeEClass.getESuperTypes().add(getNamedIdentifier());
+        physicalConnectionEClass.getESuperTypes().add(getNamedEntity());
+        repositoryEClass.getESuperTypes().add(getNamedIdentifier());
+        connectionTypeEClass.getESuperTypes().add(getNamedIdentifier());
+        networkNodeEClass.getESuperTypes().add(getNetworkEntity());
+        networkNodeTypeEClass.getESuperTypes().add(getNamedIdentifier());
+        controlCenterEClass.getESuperTypes().add(getCommunicatingEntity());
+        genericControllerEClass.getESuperTypes().add(getCommunicatingEntity());
+        communicatingEntityEClass.getESuperTypes().add(getNetworkEntity());
+        interComEClass.getESuperTypes().add(getCommunicatingEntity());
+        logicalCommunicationEClass.getESuperTypes().add(getNamedEntity());
 
         // Initialize classes, features, and operations; add parameters
         initEClass(smartGridTopologyEClass, SmartGridTopology.class, "SmartGridTopology", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getSmartGridTopology_ContainsNE(), this.getNetworkEntity(), null, "ContainsNE", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+        initEReference(getSmartGridTopology_ContainsNE(), getNetworkEntity(), null, "ContainsNE", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getSmartGridTopology_ContainsPGN(), this.getPowerGridNode(), null, "ContainsPGN", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+        initEReference(getSmartGridTopology_ContainsPGN(), getPowerGridNode(), null, "ContainsPGN", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getSmartGridTopology_ContainsPC(), this.getPhysicalConnection(), null, "ContainsPC", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+        initEReference(getSmartGridTopology_ContainsPC(), getPhysicalConnection(), null, "ContainsPC", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
                 IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getSmartGridTopology_ContainsLC(), this.getLogicalCommunication(), null, "ContainsLC", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+        initEReference(getSmartGridTopology_ContainsLC(), getLogicalCommunication(), null, "ContainsLC", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
                 IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(namedEntityEClass, NamedEntity.class, "NamedEntity", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -720,15 +755,15 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         initEClass(namedIdentifierEClass, NamedIdentifier.class, "NamedIdentifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(networkEntityEClass, NetworkEntity.class, "NetworkEntity", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getNetworkEntity_ConnectedTo(), this.getPowerGridNode(), null, "ConnectedTo", null, 1, -1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+        initEReference(getNetworkEntity_ConnectedTo(), getPowerGridNode(), null, "ConnectedTo", null, 1, -1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
                 IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNetworkEntity_LinkedBy(), this.getPhysicalConnection(), this.getPhysicalConnection_Links(), "LinkedBy", null, 0, -1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE,
+        initEReference(getNetworkEntity_LinkedBy(), getPhysicalConnection(), getPhysicalConnection_Links(), "LinkedBy", null, 0, -1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE,
                 IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(powerGridNodeEClass, PowerGridNode.class, "PowerGridNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(smartMeterEClass, SmartMeter.class, "SmartMeter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getSmartMeter_IsA(), this.getSmartMeterType(), null, "IsA", null, 0, 1, SmartMeter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+        initEReference(getSmartMeter_IsA(), getSmartMeterType(), null, "IsA", null, 0, 1, SmartMeter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
                 !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getSmartMeter_Aggregation(), ecorePackage.getEInt(), "Aggregation", "1", 0, 1, SmartMeter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
                 !IS_DERIVED, IS_ORDERED);
@@ -736,27 +771,27 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         initEClass(smartMeterTypeEClass, SmartMeterType.class, "SmartMeterType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(physicalConnectionEClass, PhysicalConnection.class, "PhysicalConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getPhysicalConnection_Links(), this.getNetworkEntity(), this.getNetworkEntity_LinkedBy(), "Links", null, 2, 2, PhysicalConnection.class, !IS_TRANSIENT, !IS_VOLATILE,
+        initEReference(getPhysicalConnection_Links(), getNetworkEntity(), getNetworkEntity_LinkedBy(), "Links", null, 2, 2, PhysicalConnection.class, !IS_TRANSIENT, !IS_VOLATILE,
                 IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getPhysicalConnection_IsA(), this.getConnectionType(), null, "IsA", null, 0, 1, PhysicalConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+        initEReference(getPhysicalConnection_IsA(), getConnectionType(), null, "IsA", null, 0, 1, PhysicalConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
                 IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(repositoryEClass, Repository.class, "Repository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getRepository_ContainsSmartMeterTypes(), this.getSmartMeterType(), null, "ContainsSmartMeterTypes", null, 0, -1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+        initEReference(getRepository_ContainsSmartMeterTypes(), getSmartMeterType(), null, "ContainsSmartMeterTypes", null, 0, -1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
                 IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRepository_ContainsConnectionType(), this.getConnectionType(), null, "ContainsConnectionType", null, 0, -1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+        initEReference(getRepository_ContainsConnectionType(), getConnectionType(), null, "ContainsConnectionType", null, 0, -1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
                 IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRepository_ContainsNetworkNodeTypes(), this.getNetworkNodeType(), null, "ContainsNetworkNodeTypes", null, 0, -1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+        initEReference(getRepository_ContainsNetworkNodeTypes(), getNetworkNodeType(), null, "ContainsNetworkNodeTypes", null, 0, -1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
                 IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(connectionTypeEClass, ConnectionType.class, "ConnectionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(networkNodeEClass, NetworkNode.class, "NetworkNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getNetworkNode_IsA(), this.getNetworkNodeType(), null, "IsA", null, 0, 1, NetworkNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+        initEReference(getNetworkNode_IsA(), getNetworkNodeType(), null, "IsA", null, 0, 1, NetworkNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
                 !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(networkNodeTypeEClass, NetworkNodeType.class, "NetworkNodeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getNetworkNodeType_IsA(), this.getSmartMeterType(), null, "IsA", null, 1, 1, NetworkNodeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+        initEReference(getNetworkNodeType_IsA(), getSmartMeterType(), null, "IsA", null, 1, 1, NetworkNodeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
                 IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(controlCenterEClass, ControlCenter.class, "ControlCenter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -764,13 +799,13 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         initEClass(genericControllerEClass, GenericController.class, "GenericController", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(communicatingEntityEClass, CommunicatingEntity.class, "CommunicatingEntity", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getCommunicatingEntity_CommunicatesBy(), this.getLogicalCommunication(), this.getLogicalCommunication_Links(), "CommunicatesBy", null, 0, -1, CommunicatingEntity.class,
+        initEReference(getCommunicatingEntity_CommunicatesBy(), getLogicalCommunication(), getLogicalCommunication_Links(), "CommunicatesBy", null, 0, -1, CommunicatingEntity.class,
                 !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(interComEClass, InterCom.class, "InterCom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(logicalCommunicationEClass, LogicalCommunication.class, "LogicalCommunication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getLogicalCommunication_Links(), this.getCommunicatingEntity(), this.getCommunicatingEntity_CommunicatesBy(), "Links", null, 2, 2, LogicalCommunication.class, !IS_TRANSIENT,
+        initEReference(getLogicalCommunication_Links(), getCommunicatingEntity(), getCommunicatingEntity_CommunicatesBy(), "Links", null, 2, 2, LogicalCommunication.class, !IS_TRANSIENT,
                 !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource

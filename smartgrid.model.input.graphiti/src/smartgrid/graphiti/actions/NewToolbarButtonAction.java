@@ -33,17 +33,17 @@ public class NewToolbarButtonAction extends ToolbarButtonAction {
 
     public NewToolbarButtonAction(final IPropertyChangeListener listener) {
         super();
-        this.ACTION_ID = "NewToolbarButtonActionId";
-        this.TOOL_TIP = "Create new State Scenario";
-        this.setToolTipText(this.TOOL_TIP);
-        this.setId(this.ACTION_ID);
-        this.addPropertyChangeListener(listener);
-        this.setImageDescriptor(this.createImage("icons" + File.separator + "new_input.png", "smartgrid.model.input"));
+        ACTION_ID = "NewToolbarButtonActionId";
+        TOOL_TIP = "Create new State Scenario";
+        setToolTipText(TOOL_TIP);
+        setId(ACTION_ID);
+        addPropertyChangeListener(listener);
+        setImageDescriptor(createImage("icons" + File.separator + "new_input.png", "smartgrid.model.input"));
     }
 
     @Override
     public void run() {
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
                 final MessageBox messageBox = new MessageBox(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot create new input model while output model is loaded");
@@ -52,10 +52,10 @@ public class NewToolbarButtonAction extends ToolbarButtonAction {
             }
         }
 
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (obj instanceof ScenarioState) {
 
-                final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
+                final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
                 final RecordingCommand c = new RecordingCommand(domain) {
                     @Override
                     protected void doExecute() {
@@ -84,7 +84,7 @@ public class NewToolbarButtonAction extends ToolbarButtonAction {
             }
         }
 
-        final InputModelCreator creator = new InputModelCreator(this.diagramContainer);
+        final InputModelCreator creator = new InputModelCreator(diagramContainer);
         final int returnCode = creator.createNewInputModel(false);
         if (returnCode == Window.OK) {
             this.firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
@@ -93,6 +93,6 @@ public class NewToolbarButtonAction extends ToolbarButtonAction {
 
     @Override
     public void setDiagramContainer(final IDiagramContainerUI container) {
-        this.diagramContainer = container;
+        diagramContainer = container;
     }
 }

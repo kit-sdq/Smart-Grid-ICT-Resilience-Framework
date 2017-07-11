@@ -23,6 +23,6 @@ public final class HashMapHelper {
      * @return Empty HashMap
      */
     public static <K, V> HashMap<K, V> createOptimalFixedSizeHashMap(int capacity) {
-        return new HashMap<K, V>(capacity + 1, 1);
+        return new HashMap<>(capacity + 1, 1);
     }
 }

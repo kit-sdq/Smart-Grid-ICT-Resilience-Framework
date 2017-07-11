@@ -18,7 +18,7 @@ public class PowerSpec implements Serializable {
         this.ciType = ciType;
         this.ciName = ciName;
         this.ciSmartID = ciSmartID;
-        this.aggregation = 1;
+        aggregation = 1;
         this.optDemand = optDemand;
         this.minReqDemand = minReqDemand;
         this.criticality = criticality;

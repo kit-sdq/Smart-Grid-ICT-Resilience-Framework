@@ -19,7 +19,7 @@ public class InputModelDTO {
      * @return the myScenarioTopo
      */
     public SmartGridTopology getMyScenarioTopo() {
-        return this.myScenarioTopo;
+        return myScenarioTopo;
     }
 
     /**
@@ -34,7 +34,7 @@ public class InputModelDTO {
      * @return the myScenarioStates
      */
     public ScenarioState getMyScenarioStates() {
-        return this.myScenarioStates;
+        return myScenarioStates;
     }
 
     /**

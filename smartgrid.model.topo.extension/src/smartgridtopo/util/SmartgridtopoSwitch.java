@@ -4,10 +4,27 @@ package smartgridtopo.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
 
-import smartgridtopo.*;
+import smartgridtopo.CommunicatingEntity;
+import smartgridtopo.ConnectionType;
+import smartgridtopo.ControlCenter;
+import smartgridtopo.GenericController;
+import smartgridtopo.Identifier;
+import smartgridtopo.InterCom;
+import smartgridtopo.LogicalCommunication;
+import smartgridtopo.NamedEntity;
+import smartgridtopo.NamedIdentifier;
+import smartgridtopo.NetworkEntity;
+import smartgridtopo.NetworkNode;
+import smartgridtopo.NetworkNodeType;
+import smartgridtopo.PhysicalConnection;
+import smartgridtopo.PowerGridNode;
+import smartgridtopo.Repository;
+import smartgridtopo.SmartGridTopology;
+import smartgridtopo.SmartMeter;
+import smartgridtopo.SmartMeterType;
+import smartgridtopo.SmartgridtopoPackage;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance hierarchy. It supports the

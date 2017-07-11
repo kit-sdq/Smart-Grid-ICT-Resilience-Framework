@@ -135,11 +135,11 @@ public final class ReactiveSimulationController {
             return;
         }
 
-        emptyPowerLoadInput = new HashMap<String, Map<String, ISmartMeterState>>();
+        emptyPowerLoadInput = new HashMap<>();
 
         // copy the structure of the input
         for (Entry<String, Map<String, PowerSpec>> nodeEntry : kritisPowerDemand.entrySet()) {
-            HashMap<String, ISmartMeterState> prosumerMap = new HashMap<String, ISmartMeterState>();
+            HashMap<String, ISmartMeterState> prosumerMap = new HashMap<>();
             emptyPowerLoadInput.put(nodeEntry.getKey(), prosumerMap);
 
             for (Entry<String, PowerSpec> prosumerEntry : nodeEntry.getValue().entrySet()) {
@@ -158,7 +158,7 @@ public final class ReactiveSimulationController {
     private Map<String, Map<String, ISmartMeterState>> convertToPowerLoadInput(final ScenarioResult impactResult, Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
 
         // copy empty map
-        final Map<String, Map<String, ISmartMeterState>> powerLoadInput = new HashMap<String, Map<String, ISmartMeterState>>(emptyPowerLoadInput);
+        final Map<String, Map<String, ISmartMeterState>> powerLoadInput = new HashMap<>(emptyPowerLoadInput);
 
         // iterate over states and convert them into nested map
         for (final EntityState state : impactResult.getStates()) {

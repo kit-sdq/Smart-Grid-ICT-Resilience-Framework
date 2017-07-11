@@ -34,38 +34,38 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
 
     public ClearOutputButtonAction() {
         super(AS_CHECK_BOX);
-        this.ACTION_ID = "EnableOutputButtonActionId";
-        this.TOOL_TIP = "Clear the State Result representation";
-        this.setToolTipText(this.TOOL_TIP);
-        this.setId(this.ACTION_ID);
-        this.addPropertyChangeListener(this);
-        this.setImageDescriptor(this.createImage("icons" + File.separator + "clear_output.png", "smartgrid.model.output"));
+        ACTION_ID = "EnableOutputButtonActionId";
+        TOOL_TIP = "Clear the State Result representation";
+        setToolTipText(TOOL_TIP);
+        setId(ACTION_ID);
+        addPropertyChangeListener(this);
+        setImageDescriptor(createImage("icons" + File.separator + "clear_output.png", "smartgrid.model.output"));
     }
 
     @Override
     public void setDiagramContainer(final IDiagramContainerUI container) {
-        this.diagramContainer = container;
-        this.checkOutputModel();
+        diagramContainer = container;
+        checkOutputModel();
     }
 
     /**
      * This method checks if there is an output model. If true, the action will be enabled.
      */
     private void checkOutputModel() {
-        final EList<EObject> list = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
+        final EList<EObject> list = diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
         for (final EObject model : list) {
             if (model instanceof ScenarioResult) {
-                this.setEnabled(true);
+                setEnabled(true);
                 return;
             }
         }
-        this.setEnabled(false);
+        setEnabled(false);
     }
 
     @Override
     public void run() {
         LOG.info("[ClearOutputButtonAction]: Start clearing output model from diagram");
-        final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
+        final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
         final RecordingCommand c = new RecordingCommand(domain) {
             @Override
             protected void doExecute() {
@@ -84,12 +84,12 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
                 LOG.debug("[ClearOutputButtonAction]: Clearing all nodes");
                 for (final Shape currentShape : shapes) {
                     // Clears the diagram from all output entities
-                    if ((currentShape.getLink().getBusinessObjects().get(0) instanceof NetworkEntity)) {
+                    if (currentShape.getLink().getBusinessObjects().get(0) instanceof NetworkEntity) {
                         currentShape.setVisible(true);
                         manager.manageGraphicalPatternRepresentation((ContainerShape) currentShape, true);
                         final Object bo = manager.resolveBOfromNetworkEntity((NetworkEntity) currentShape.getLink().getBusinessObjects().get(0), result.getStates());
 
-                        if (bo != null && (bo instanceof NoUplink || (bo instanceof Online && ((Online) bo).isIsHacked()))) {
+                        if (bo != null && (bo instanceof NoUplink || bo instanceof Online && ((Online) bo).isIsHacked())) {
                             manager.removeChildren((ContainerShape) currentShape);
                         }
                     }
@@ -99,14 +99,14 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
             }
         };
         domain.getCommandStack().execute(c);
-        this.setEnabled(false);
+        setEnabled(false);
         LOG.info("[ClearOutputButtonAction]: Clearing successfully finished");
     }
 
     @Override
     public void propertyChange(final PropertyChangeEvent event) {
         if (event.getProperty().equals(StringProvider.ENABLE_CLEAR_BUTTON)) {
-            this.setEnabled(true);
+            setEnabled(true);
         }
     }
 }

@@ -9,8 +9,6 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -50,51 +48,47 @@ public class NamedEntityPropertiesSheet extends GFPropertySection implements ITa
     public void createControls(final Composite parent, final TabbedPropertySheetPage tabbedPropertySheetPage) {
         super.createControls(parent, tabbedPropertySheetPage);
 
-        final TabbedPropertySheetWidgetFactory factory = this.getWidgetFactory();
+        final TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
         final Composite composite = factory.createFlatFormComposite(parent);
 
         final GridLayout layout = new GridLayout(2, false);
         composite.setLayout(layout);
 
-        this.label = new Label(composite, SWT.NONE);
-        this.label.setText("Name" + ": ");
+        label = new Label(composite, SWT.NONE);
+        label.setText("Name" + ": ");
 
-        this.namedEntityWidget = new Text(composite, SWT.BORDER);
+        namedEntityWidget = new Text(composite, SWT.BORDER);
         final GridData gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
         gridData.grabExcessHorizontalSpace = true;
-        this.namedEntityWidget.setLayoutData(gridData);
-        this.namedEntityWidget.setText("");
+        namedEntityWidget.setLayoutData(gridData);
+        namedEntityWidget.setText("");
 
-        this.namedEntityWidget.addModifyListener(new ModifyListener() {
+        namedEntityWidget.addModifyListener(e -> {
+            final IFeature feature = new AbstractFeature(NamedEntityPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
 
-            @Override
-            public void modifyText(final ModifyEvent e) {
-                final IFeature feature = new AbstractFeature(NamedEntityPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
-
-                    @Override
-                    public void execute(final IContext context) {
-                        final PictogramElement pe = NamedEntityPropertiesSheet.this.getSelectedPictogramElement();
-                        if (pe != null) {
-                            final Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-                            if (bo == null) {
-                                return;
-                            }
-                            final NamedEntity entity = (NamedEntity) bo;
-                            final String name = NamedEntityPropertiesSheet.this.namedEntityWidget.getText();
-                            if (!name.equals("")) {
-                                entity.setName(name);
-                            }
+                @Override
+                public void execute(final IContext context) {
+                    final PictogramElement pe = NamedEntityPropertiesSheet.this.getSelectedPictogramElement();
+                    if (pe != null) {
+                        final Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+                        if (bo == null) {
+                            return;
+                        }
+                        final NamedEntity entity = (NamedEntity) bo;
+                        final String name = namedEntityWidget.getText();
+                        if (!name.equals("")) {
+                            entity.setName(name);
                         }
                     }
+                }
 
-                    @Override
-                    public boolean canExecute(final IContext context) {
-                        return true;
-                    }
-                };
-                NamedEntityPropertiesSheet.this.execute(feature, new CustomContext());
-            }
+                @Override
+                public boolean canExecute(final IContext context) {
+                    return true;
+                }
+            };
+            NamedEntityPropertiesSheet.this.execute(feature, new CustomContext());
         });
     }
 
@@ -105,7 +99,7 @@ public class NamedEntityPropertiesSheet extends GFPropertySection implements ITa
      */
     @Override
     public void refresh() {
-        final PictogramElement pe = this.getSelectedPictogramElement();
+        final PictogramElement pe = getSelectedPictogramElement();
         if (pe != null) {
 
             final EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
@@ -116,9 +110,9 @@ public class NamedEntityPropertiesSheet extends GFPropertySection implements ITa
             }
 
             if (((NamedEntity) bo).getName() != null) {
-                this.namedEntityWidget.setText(((NamedEntity) bo).getName());
+                namedEntityWidget.setText(((NamedEntity) bo).getName());
             } else {
-                this.namedEntityWidget.setText("");
+                namedEntityWidget.setText("");
             }
 
         }

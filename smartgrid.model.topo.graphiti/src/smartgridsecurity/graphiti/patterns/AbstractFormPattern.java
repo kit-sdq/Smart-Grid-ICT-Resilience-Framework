@@ -22,26 +22,26 @@ public abstract class AbstractFormPattern extends AbstractPattern {
 
     @Override
     public String getCreateName() {
-        return this.getName();
+        return getName();
     }
 
     @Override
     protected boolean isPatternControlled(final PictogramElement pictogramElement) {
-        final Object domainObject = this.getBusinessObjectForPictogramElement(pictogramElement);
-        return this.isMainBusinessObjectApplicable(domainObject);
+        final Object domainObject = getBusinessObjectForPictogramElement(pictogramElement);
+        return isMainBusinessObjectApplicable(domainObject);
     }
 
     @Override
     protected boolean isPatternRoot(final PictogramElement pictogramElement) {
         // TODO: better implementation
-        final Object domainObject = this.getBusinessObjectForPictogramElement(pictogramElement);
-        return this.isMainBusinessObjectApplicable(domainObject);
+        final Object domainObject = getBusinessObjectForPictogramElement(pictogramElement);
+        return isMainBusinessObjectApplicable(domainObject);
     }
 
     @Override
     public boolean canAdd(final IAddContext context) {
         // check if user wants to add a EClass
-        if (this.isMainBusinessObjectApplicable(context.getNewObject())) {
+        if (isMainBusinessObjectApplicable(context.getNewObject())) {
             // check if user wants to add to a diagram
             if (context.getTargetContainer() instanceof Diagram) {
                 return true;
@@ -63,10 +63,10 @@ public abstract class AbstractFormPattern extends AbstractPattern {
         peCreateService.createChopboxAnchor(containerShape);
 
         final IGaService gaService = Graphiti.getGaService();
-        final GraphicsAlgorithm shape = this.getGraphicalPatternRepresentation(containerShape);
+        final GraphicsAlgorithm shape = getGraphicalPatternRepresentation(containerShape);
         gaService.setLocationAndSize(shape, context.getX(), context.getY(), 20, 20);
 
-        this.linkObjects(containerShape, context.getNewObject());
+        linkObjects(containerShape, context.getNewObject());
 
         return containerShape;
     }

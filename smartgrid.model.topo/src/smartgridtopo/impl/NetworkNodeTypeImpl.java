@@ -102,6 +102,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public int getId() {
         return id;
     }
@@ -111,6 +112,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public void setId(int newId) {
         int oldId = id;
         id = newId;
@@ -123,6 +125,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -132,6 +135,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public void setName(String newName) {
         String oldName = name;
         name = newName;
@@ -144,6 +148,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public SmartMeterType getIsA() {
         if (isA != null && isA.eIsProxy()) {
             InternalEObject oldIsA = (InternalEObject) isA;
@@ -170,6 +175,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public void setIsA(SmartMeterType newIsA) {
         SmartMeterType oldIsA = isA;
         isA = newIsA;

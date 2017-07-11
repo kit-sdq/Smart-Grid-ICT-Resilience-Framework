@@ -15,15 +15,15 @@ public class SGSDiagramTypeProvider extends AbstractDiagramTypeProvider {
 
     public SGSDiagramTypeProvider() {
         super();
-        this.setFeatureProvider(new SGSFeatureProvider(this));
+        setFeatureProvider(new SGSFeatureProvider(this));
     }
 
     @Override
     public IToolBehaviorProvider[] getAvailableToolBehaviorProviders() {
-        if (this.toolBehaviorProviders == null) {
-            this.toolBehaviorProviders = new IToolBehaviorProvider[] { new SGSToolBehaviorProvider(this) };
+        if (toolBehaviorProviders == null) {
+            toolBehaviorProviders = new IToolBehaviorProvider[] { new SGSToolBehaviorProvider(this) };
         }
-        return this.toolBehaviorProviders;
+        return toolBehaviorProviders;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class SGSDeleteFeature extends DefaultDeleteFeature {
                 if (o instanceof IDeleteFeatureResolver) {
                     final Diagram diagram = (Diagram) context.getPictogramElement().eContainer();
                     ((IDeleteFeatureResolver) o).deleteBusinessObjects(diagram.getLink().getBusinessObjects(), context.getPictogramElement().getLink().getBusinessObjects().get(0),
-                            this.getDiagramBehavior().getEditingDomain());
+                            getDiagramBehavior().getEditingDomain());
                 }
             } catch (final CoreException e) {
                 e.printStackTrace();
@@ -41,10 +41,10 @@ public class SGSDeleteFeature extends DefaultDeleteFeature {
         // If it's a NetworkEntity, delete all incoming and outgoing connections
         if (context.getPictogramElement().getLink().getBusinessObjects().get(0) instanceof NetworkEntity) {
             final NetworkEntity node = (NetworkEntity) context.getPictogramElement().getLink().getBusinessObjects().get(0);
-            this.deleteBusinessObjects(node.getLinkedBy().toArray());
+            deleteBusinessObjects(node.getLinkedBy().toArray());
             if (context.getPictogramElement().getLink().getBusinessObjects().get(0) instanceof CommunicatingEntity) {
                 final CommunicatingEntity commEntity = (CommunicatingEntity) context.getPictogramElement().getLink().getBusinessObjects().get(0);
-                this.deleteBusinessObjects(commEntity.getCommunicatesBy().toArray());
+                deleteBusinessObjects(commEntity.getCommunicatesBy().toArray());
             }
         }
 

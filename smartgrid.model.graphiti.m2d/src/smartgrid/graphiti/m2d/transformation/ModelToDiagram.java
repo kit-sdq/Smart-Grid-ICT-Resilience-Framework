@@ -76,15 +76,15 @@ public final class ModelToDiagram {
      *            the business object which contents should be added to a new diagram
      */
     public void initializeDiagram(final SmartGridTopology scenario) {
-        final String diagramPath = this.pathToModel.substring(0, this.pathToModel.lastIndexOf("/") + 1);
-        final String diagramName = this.pathToModel.substring(this.pathToModel.lastIndexOf("/") + 1, this.pathToModel.lastIndexOf("."));
-        final Resource diagramRes = this.createDiagram(diagramPath, diagramName, scenario);
+        final String diagramPath = pathToModel.substring(0, pathToModel.lastIndexOf("/") + 1);
+        final String diagramName = pathToModel.substring(pathToModel.lastIndexOf("/") + 1, pathToModel.lastIndexOf("."));
+        final Resource diagramRes = createDiagram(diagramPath, diagramName, scenario);
 
         // First, start with reading and adding the nodes to the diagram
-        final List<PowerGridNode> pge = new ArrayList<PowerGridNode>();
-        final List<NetworkEntity> ne = new ArrayList<NetworkEntity>();
-        final List<LogicalCommunication> lc = new ArrayList<LogicalCommunication>();
-        final List<PhysicalConnection> pc = new ArrayList<PhysicalConnection>();
+        final List<PowerGridNode> pge = new ArrayList<>();
+        final List<NetworkEntity> ne = new ArrayList<>();
+        final List<LogicalCommunication> lc = new ArrayList<>();
+        final List<PhysicalConnection> pc = new ArrayList<>();
 
         pge.addAll(scenario.getContainsPGN());
         ne.addAll(scenario.getContainsNE());
@@ -92,8 +92,8 @@ public final class ModelToDiagram {
         pc.addAll(scenario.getContainsPC());
 
         // Convert PGE's to pictogram elements
-        final CommandStack commandStack = this.editingDomain.getCommandStack();
-        commandStack.execute(new RecordingCommand(this.editingDomain) {
+        final CommandStack commandStack = editingDomain.getCommandStack();
+        commandStack.execute(new RecordingCommand(editingDomain) {
 
             @Override
             protected void doExecute() {
@@ -112,7 +112,7 @@ public final class ModelToDiagram {
                     e.printStackTrace();
                 }
 
-                PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor((IEditorPart) ModelToDiagram.this.part, false);
+                PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor((IEditorPart) part, false);
             }
         });
     }
@@ -120,8 +120,8 @@ public final class ModelToDiagram {
     private Resource createDiagram(final String diagramPath, final String diagramName, final SmartGridTopology scenario) {
         LOG.info("[ModelToDiagram]: Creating diagram...");
 
-        final URI diagramURI = URI.createPlatformResourceURI(this.project.getFullPath().toString() + "/" + diagramPath + diagramName + F_DIAGRAM, true);
-        final IFile diagramFile = this.project.getFile(diagramPath + diagramName + F_DIAGRAM);
+        final URI diagramURI = URI.createPlatformResourceURI(project.getFullPath().toString() + "/" + diagramPath + diagramName + F_DIAGRAM, true);
+        final IFile diagramFile = project.getFile(diagramPath + diagramName + F_DIAGRAM);
 
         try {
             if (diagramFile.exists()) {
@@ -133,19 +133,19 @@ public final class ModelToDiagram {
             e.printStackTrace();
         }
 
-        this.editingDomain = GraphitiUi.getEmfService().createResourceSetAndEditingDomain();
-        final ResourceSet resourceSet = this.editingDomain.getResourceSet();
-        final CommandStack commandStack = this.editingDomain.getCommandStack();
+        editingDomain = GraphitiUi.getEmfService().createResourceSetAndEditingDomain();
+        final ResourceSet resourceSet = editingDomain.getResourceSet();
+        final CommandStack commandStack = editingDomain.getCommandStack();
 
         final Resource diagramResource = resourceSet.createResource(diagramURI);
 
-        commandStack.execute(new RecordingCommand(this.editingDomain) {
+        commandStack.execute(new RecordingCommand(editingDomain) {
             @Override
             protected void doExecute() {
                 // create resources for the diagram and domain model files
 
                 diagramResource.setTrackingModification(true);
-                final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + this.hashCode(), diagramName, 10, true);
+                final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + hashCode(), diagramName, 10, true);
                 diagram.setDiagramTypeId("SmartGridSecurityDiagramType");
                 // link model and diagram
                 final PictogramLink link = PictogramsFactory.eINSTANCE.createPictogramLink();
@@ -157,27 +157,27 @@ public final class ModelToDiagram {
         });
 
         try {
-            diagramResource.save(this.createSaveOptions());
+            diagramResource.save(createSaveOptions());
         } catch (final IOException e) {
             LOG.error("[ModelToDiagram]: Saving new diagram went wrong, see StackTrace");
             LOG.error(e.getMessage());
             e.printStackTrace();
         }
-        GraphitiHelper.getInstance().setDiagram((Diagram) diagramResource.getContents().get((0)));
+        GraphitiHelper.getInstance().setDiagram((Diagram) diagramResource.getContents().get(0));
         final Diagram diagram = GraphitiHelper.getInstance().getDiagram();
-        this.diagramPathFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(diagramResource.getURI().toPlatformString(true)));
+        diagramPathFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(diagramResource.getURI().toPlatformString(true)));
 
         // Adding relevant objects to the graphiti helper
         final SGSDiagramTypeProvider provider = new SGSDiagramTypeProvider();
 
         try {
-            BasicNewResourceWizard.selectAndReveal(this.diagramPathFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
-            this.part = (SGSDiagramEditor) IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), this.diagramPathFile);
+            BasicNewResourceWizard.selectAndReveal(diagramPathFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
+            part = (SGSDiagramEditor) IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), diagramPathFile);
 
-            provider.init(diagram, this.part.getDiagramBehavior());
+            provider.init(diagram, part.getDiagramBehavior());
 
             GraphitiHelper.getInstance().setFeatureProvider(provider.getFeatureProvider());
-            GraphitiHelper.getInstance().setDiagramContainer(this.part);
+            GraphitiHelper.getInstance().setDiagramContainer(part);
 
         } catch (final PartInitException e1) {
             e1.printStackTrace();
@@ -194,7 +194,7 @@ public final class ModelToDiagram {
      * @return the save options
      */
     private Map<?, ?> createSaveOptions() {
-        final HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+        final HashMap<String, Object> saveOptions = new HashMap<>();
         saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
         saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
         return saveOptions;
@@ -203,30 +203,30 @@ public final class ModelToDiagram {
     private void addPEs(final Diagram diagram, final SmartGridTopology scenario) {
         LOG.debug("[ModelToDiagram]: Adding PowerGridNodes to the diagram");
         for (final PowerGridNode power : scenario.getContainsPGN()) {
-            this.addElements(diagram, power);
+            addElements(diagram, power);
         }
         LOG.debug("[ModelToDiagram]: Adding NetworkEntities to the diagram");
         for (final NetworkEntity network : scenario.getContainsNE()) {
-            this.addElements(diagram, network);
+            addElements(diagram, network);
             if (!network.getConnectedTo().isEmpty()) {
-                this.addNetworkEntityWithPowerConnections(diagram, this.getPeFromBusiness(diagram, network), network.getConnectedTo());
+                addNetworkEntityWithPowerConnections(diagram, getPeFromBusiness(diagram, network), network.getConnectedTo());
             }
         }
         LOG.debug("[ModelToDiagram]: Adding PhysicalConnections to the diagram");
         for (final PhysicalConnection connection : scenario.getContainsPC()) {
-            this.addConnection(diagram, connection);
+            addConnection(diagram, connection);
 
         }
         LOG.debug("[ModelToDiagram]: Adding LogicalCommunications to the diagram");
         for (final LogicalCommunication communication : scenario.getContainsLC()) {
-            this.addConnection(diagram, communication);
+            addConnection(diagram, communication);
         }
     }
 
     private void addNetworkEntityWithPowerConnections(final Diagram diagram, final Shape entity, final List<PowerGridNode> connections) {
 
-        final CommandStack commandStack = this.editingDomain.getCommandStack();
-        commandStack.execute(new RecordingCommand(this.editingDomain) {
+        final CommandStack commandStack = editingDomain.getCommandStack();
+        commandStack.execute(new RecordingCommand(editingDomain) {
 
             @Override
             protected void doExecute() {
@@ -259,13 +259,13 @@ public final class ModelToDiagram {
     }
 
     private void addElements(final Diagram diagram, final Object newObject) {
-        final AreaContext area = this.createAreaContext();
+        final AreaContext area = createAreaContext();
         final AddContext add = new AddContext(area, newObject);
         add.setTargetContainer(diagram);
         add.setNewObject(newObject);
 
-        final CommandStack commandStack = this.editingDomain.getCommandStack();
-        commandStack.execute(new RecordingCommand(this.editingDomain) {
+        final CommandStack commandStack = editingDomain.getCommandStack();
+        commandStack.execute(new RecordingCommand(editingDomain) {
 
             @Override
             protected void doExecute() {
@@ -289,17 +289,17 @@ public final class ModelToDiagram {
         // outcome doesn't matter
         // but the cast is still necessary
         if (connect instanceof PhysicalConnection) {
-            first = this.getPeFromBusiness(diagram, ((PhysicalConnection) connect).getLinks().get(0));
-            second = this.getPeFromBusiness(diagram, ((PhysicalConnection) connect).getLinks().get(1));
+            first = getPeFromBusiness(diagram, ((PhysicalConnection) connect).getLinks().get(0));
+            second = getPeFromBusiness(diagram, ((PhysicalConnection) connect).getLinks().get(1));
         } else {
-            first = this.getPeFromBusiness(diagram, ((LogicalCommunication) connect).getLinks().get(0));
-            second = this.getPeFromBusiness(diagram, ((LogicalCommunication) connect).getLinks().get(1));
+            first = getPeFromBusiness(diagram, ((LogicalCommunication) connect).getLinks().get(0));
+            second = getPeFromBusiness(diagram, ((LogicalCommunication) connect).getLinks().get(1));
         }
         final Anchor firstAnchor = first.getAnchors().get(0);
         final Anchor secondAnchor = second.getAnchors().get(0);
 
-        final CommandStack commandStack = this.editingDomain.getCommandStack();
-        commandStack.execute(new RecordingCommand(this.editingDomain) {
+        final CommandStack commandStack = editingDomain.getCommandStack();
+        commandStack.execute(new RecordingCommand(editingDomain) {
 
             @Override
             protected void doExecute() {

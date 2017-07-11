@@ -5,12 +5,14 @@ package topoextension.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import topoextension.*;
+import topoextension.Completion;
+import topoextension.ExtensionRepository;
+import topoextension.Replication;
+import topoextension.TopoextensionFactory;
+import topoextension.TopoextensionPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
@@ -68,6 +70,7 @@ public class TopoextensionFactoryImpl extends EFactoryImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public ExtensionRepository createExtensionRepository() {
         ExtensionRepositoryImpl extensionRepository = new ExtensionRepositoryImpl();
         return extensionRepository;
@@ -78,6 +81,7 @@ public class TopoextensionFactoryImpl extends EFactoryImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public Replication createReplication() {
         ReplicationImpl replication = new ReplicationImpl();
         return replication;
@@ -88,6 +92,7 @@ public class TopoextensionFactoryImpl extends EFactoryImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public Completion createCompletion() {
         CompletionImpl completion = new CompletionImpl();
         return completion;
@@ -98,6 +103,7 @@ public class TopoextensionFactoryImpl extends EFactoryImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public TopoextensionPackage getTopoextensionPackage() {
         return (TopoextensionPackage) getEPackage();
     }

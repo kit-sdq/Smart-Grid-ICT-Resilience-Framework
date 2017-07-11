@@ -86,6 +86,7 @@ public class LogicalCommunicationImpl extends MinimalEObjectImpl.Container imple
      * 
      * @generated
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -95,6 +96,7 @@ public class LogicalCommunicationImpl extends MinimalEObjectImpl.Container imple
      * 
      * @generated
      */
+    @Override
     public void setName(String newName) {
         String oldName = name;
         name = newName;
@@ -107,9 +109,10 @@ public class LogicalCommunicationImpl extends MinimalEObjectImpl.Container imple
      * 
      * @generated
      */
+    @Override
     public EList<CommunicatingEntity> getLinks() {
         if (links == null) {
-            links = new EObjectWithInverseResolvingEList.ManyInverse<CommunicatingEntity>(CommunicatingEntity.class, this, SmartgridtopoPackage.LOGICAL_COMMUNICATION__LINKS,
+            links = new EObjectWithInverseResolvingEList.ManyInverse<>(CommunicatingEntity.class, this, SmartgridtopoPackage.LOGICAL_COMMUNICATION__LINKS,
                     SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY);
         }
         return links;

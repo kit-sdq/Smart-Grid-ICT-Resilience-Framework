@@ -31,7 +31,7 @@ public class EvaluateContextButtons {
     private final IFeatureProvider fp;
 
     public EvaluateContextButtons(final IFeatureProvider f) {
-        this.fp = f;
+        fp = f;
     }
 
     /**
@@ -42,7 +42,7 @@ public class EvaluateContextButtons {
      * @return all found feature extensions
      */
     public List<AbstractCustomFeature> evaluateFeatureExtension(final IExtensionRegistry registry) {
-        return this.evaluate(registry);
+        return evaluate(registry);
     }
 
     /**
@@ -57,8 +57,8 @@ public class EvaluateContextButtons {
 
         // define the thread pool
         final ExecutorService pool = Executors.newCachedThreadPool();
-        final List<Future<List<AbstractCustomFeature>>> list = new LinkedList<Future<List<AbstractCustomFeature>>>();
-        final List<AbstractCustomFeature> AbstractCustomFeatureList = new LinkedList<AbstractCustomFeature>();
+        final List<Future<List<AbstractCustomFeature>>> list = new LinkedList<>();
+        final List<AbstractCustomFeature> AbstractCustomFeatureList = new LinkedList<>();
 
         try {
             for (final IConfigurationElement e : config) {
@@ -67,7 +67,7 @@ public class EvaluateContextButtons {
                 if (o instanceof IContextButtonResolver) {
                     // Executes the evaluation in a thread an returns the result
                     // in the future
-                    final Callable<List<AbstractCustomFeature>> callable = new EvaluateAbstractPattern((IContextButtonResolver) o, this.fp);
+                    final Callable<List<AbstractCustomFeature>> callable = new EvaluateAbstractPattern((IContextButtonResolver) o, fp);
                     final Future<List<AbstractCustomFeature>> future = pool.submit(callable);
                     list.add(future);
                 }
@@ -101,13 +101,13 @@ public class EvaluateContextButtons {
         private final IFeatureProvider provider;
 
         public EvaluateAbstractPattern(final IContextButtonResolver f, final IFeatureProvider fp) {
-            this.resolver = f;
-            this.provider = fp;
+            resolver = f;
+            provider = fp;
         }
 
         @Override
         public List<AbstractCustomFeature> call() throws Exception {
-            return this.resolver.getContextButtons(this.provider);
+            return resolver.getContextButtons(provider);
         }
 
     }

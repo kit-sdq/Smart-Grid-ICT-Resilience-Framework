@@ -18,7 +18,7 @@ public class GraphitiHelper {
     private Diagram diagram;
 
     public IFeatureProvider getFeatureProvider() {
-        return this.featureProvider;
+        return featureProvider;
     }
 
     public void setFeatureProvider(final IFeatureProvider featureProvider) {
@@ -26,7 +26,7 @@ public class GraphitiHelper {
     }
 
     public IDiagramContainerUI getDiagramContainer() {
-        return this.diagramContainer;
+        return diagramContainer;
     }
 
     public void setDiagramContainer(final IDiagramContainerUI diagramContainer) {
@@ -34,7 +34,7 @@ public class GraphitiHelper {
     }
 
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 
     public void setDiagram(final Diagram diagram) {

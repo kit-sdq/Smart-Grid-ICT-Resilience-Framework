@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import smartgridtopo.SmartgridtopoPackage;
@@ -118,6 +117,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public EClass getExtensionRepository() {
         return extensionRepositoryEClass;
     }
@@ -127,6 +127,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public EReference getExtensionRepository_Replications() {
         return (EReference) extensionRepositoryEClass.getEStructuralFeatures().get(0);
     }
@@ -136,6 +137,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public EReference getExtensionRepository_Completion() {
         return (EReference) extensionRepositoryEClass.getEStructuralFeatures().get(1);
     }
@@ -145,6 +147,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public EClass getReplication() {
         return replicationEClass;
     }
@@ -154,6 +157,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public EAttribute getReplication_NrOfReplicas() {
         return (EAttribute) replicationEClass.getEStructuralFeatures().get(0);
     }
@@ -163,6 +167,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public EClass getCompletion() {
         return completionEClass;
     }
@@ -172,6 +177,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public EReference getCompletion_Networkentity() {
         return (EReference) completionEClass.getEStructuralFeatures().get(0);
     }
@@ -181,6 +187,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * 
      * @generated
      */
+    @Override
     public TopoextensionFactory getTopoextensionFactory() {
         return (TopoextensionFactory) getEFactoryInstance();
     }
@@ -249,9 +256,9 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
 
         // Initialize classes, features, and operations; add parameters
         initEClass(extensionRepositoryEClass, ExtensionRepository.class, "ExtensionRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getExtensionRepository_Replications(), this.getReplication(), null, "replications", null, 0, -1, ExtensionRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+        initEReference(getExtensionRepository_Replications(), getReplication(), null, "replications", null, 0, -1, ExtensionRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
                 IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getExtensionRepository_Completion(), this.getCompletion(), null, "completion", null, 0, -1, ExtensionRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+        initEReference(getExtensionRepository_Completion(), getCompletion(), null, "completion", null, 0, -1, ExtensionRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(replicationEClass, Replication.class, "Replication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -79,6 +79,7 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
      * 
      * @generated
      */
+    @Override
     public SmartMeterType getIsA() {
         if (isA != null && isA.eIsProxy()) {
             InternalEObject oldIsA = (InternalEObject) isA;
@@ -105,6 +106,7 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
      * 
      * @generated
      */
+    @Override
     public void setIsA(SmartMeterType newIsA) {
         SmartMeterType oldIsA = isA;
         isA = newIsA;
@@ -117,6 +119,7 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
      * 
      * @generated
      */
+    @Override
     public int getAggregation() {
         return aggregation;
     }
@@ -126,6 +129,7 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
      * 
      * @generated
      */
+    @Override
     public void setAggregation(int newAggregation) {
         int oldAggregation = aggregation;
         aggregation = newAggregation;

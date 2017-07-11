@@ -4,10 +4,12 @@ package topoextension.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
 
-import topoextension.*;
+import topoextension.Completion;
+import topoextension.ExtensionRepository;
+import topoextension.Replication;
+import topoextension.TopoextensionPackage;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance hierarchy. It supports the

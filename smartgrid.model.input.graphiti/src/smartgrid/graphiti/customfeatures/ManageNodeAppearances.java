@@ -53,12 +53,12 @@ public class ManageNodeAppearances {
         final Shape lineShape = peCreateService.createShape(containerShape, false);
         int xy[] = new int[] { 0, 20, 20, 0 };
         final Polygon p = gaService.createPolygon(lineShape, xy);
-        p.setForeground(this.manageColor(ConstantProvider.FOREGROUND_BLACK));
+        p.setForeground(manageColor(ConstantProvider.FOREGROUND_BLACK));
         p.setLineWidth(ConstantProvider.shapeLineWidth);
         xy = new int[] { 0, 0, 20, 20 };
         final Shape secondLine = peCreateService.createShape(containerShape, false);
         final Polygon poly = gaService.createPolygon(secondLine, xy);
-        poly.setForeground(this.manageColor(ConstantProvider.FOREGROUND_BLACK));
+        poly.setForeground(manageColor(ConstantProvider.FOREGROUND_BLACK));
         poly.setLineWidth(ConstantProvider.shapeLineWidth);
     }
 
@@ -75,7 +75,7 @@ public class ManageNodeAppearances {
     public void drawExclamationMark(final ContainerShape shape) {
         //Code copied from smartgrid.model.output.features.ManageNodeAppearances maybe refactoring could resolve code duplications
         final int xy[] = new int[] { 9, 2, 9, 15 };
-        this.drawMark(shape, xy);
+        drawMark(shape, xy);
     }
 
     private void drawMark(final ContainerShape containerShape, final int[] xy) {
@@ -86,7 +86,7 @@ public class ManageNodeAppearances {
         final Shape lineShape = peCreateService.createShape(containerShape, false);
 
         final Polyline p = gaService.createPolyline(lineShape, xy);
-        p.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
+        p.setForeground(manageColor(new ColorConstant(0, 0, 0)));
         p.setLineWidth(ConstantProvider.questionMarkLineWidth);
 
         final Shape circleShape = peCreateService.createShape(containerShape, false);
@@ -96,15 +96,15 @@ public class ManageNodeAppearances {
         circle.setY(17);
         circle.setHeight(3);
         circle.setWidth(3);
-        circle.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
+        circle.setForeground(manageColor(new ColorConstant(0, 0, 0)));
     }
 
     public Color manageBackground(final boolean powerOutage) {
-        return powerOutage ? this.manageColor(new ColorConstant(220, 220, 220)) : this.manageColor(ConstantProvider.POWER_GRID_NODE_BACKGROUND);
+        return powerOutage ? manageColor(new ColorConstant(220, 220, 220)) : manageColor(ConstantProvider.POWER_GRID_NODE_BACKGROUND);
     }
 
     public Color manageForeground() {
-        return this.manageColor(ConstantProvider.FOREGROUND_BLACK);
+        return manageColor(ConstantProvider.FOREGROUND_BLACK);
     }
 
     /**
@@ -115,7 +115,7 @@ public class ManageNodeAppearances {
      * @return the created color
      */
     private Color manageColor(final IColorConstant constant) {
-        final Collection<Color> colors = this.diagramContainer.getDiagramTypeProvider().getDiagram().getColors();
+        final Collection<Color> colors = diagramContainer.getDiagramTypeProvider().getDiagram().getColors();
         for (final Color existingColor : colors) {
             if (existingColor.getRed() == constant.getRed() && existingColor.getGreen() == constant.getGreen() && existingColor.getBlue() == constant.getBlue()) {
                 return existingColor;

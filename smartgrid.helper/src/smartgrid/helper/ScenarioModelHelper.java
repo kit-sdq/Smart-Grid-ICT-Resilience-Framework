@@ -81,7 +81,7 @@ public final class ScenarioModelHelper {
         /*
          * Maps one Node (by ID) to his List of neighbor Nodes (also by ID)
          */
-        final Map<Integer, LinkedList<Integer>> IDLinks = new HashMap<Integer, LinkedList<Integer>>();
+        final Map<Integer, LinkedList<Integer>> IDLinks = new HashMap<>();
 
         for (final LogicalCommunication myLCom : mySmartGridTopo.getContainsLC()) {
 
@@ -169,7 +169,7 @@ public final class ScenarioModelHelper {
      */
     public static LinkedList<On> getNeighborsFromCluster(final Cluster clusterToHack, final LinkedList<Integer> neighborIDList) {
 
-        final LinkedList<On> neighborOnList = new LinkedList<On>();
+        final LinkedList<On> neighborOnList = new LinkedList<>();
 
         // Check whether this Neighbor is in my Cluster
         for (final On clusterNode : clusterToHack.getHasEntities()) {
@@ -210,7 +210,7 @@ public final class ScenarioModelHelper {
         // Key not in Map (myNeighbor List == null)
         else {
             // Construct New Linked List
-            myNeighbor = new LinkedList<Integer>();
+            myNeighbor = new LinkedList<>();
 
             // Add fresh Neighbor "Value"
             myNeighbor.add(value);
@@ -222,7 +222,7 @@ public final class ScenarioModelHelper {
     }
 
     public static List<On> getHackedNodes(final List<EntityState> states) {
-        final List<On> on = new ArrayList<On>();
+        final List<On> on = new ArrayList<>();
         for (final EntityState state : states) {
             if (state instanceof On && ((On) state).isIsHacked()) {
                 on.add((On) state);

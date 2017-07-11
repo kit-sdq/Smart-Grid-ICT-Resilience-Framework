@@ -80,6 +80,7 @@ public abstract class OnImpl extends EntityStateImpl implements On {
      * 
      * @generated
      */
+    @Override
     public Cluster getBelongsToCluster() {
         if (belongsToCluster != null && belongsToCluster.eIsProxy()) {
             InternalEObject oldBelongsToCluster = (InternalEObject) belongsToCluster;
@@ -124,6 +125,7 @@ public abstract class OnImpl extends EntityStateImpl implements On {
      * 
      * @generated
      */
+    @Override
     public void setBelongsToCluster(Cluster newBelongsToCluster) {
         if (newBelongsToCluster != belongsToCluster) {
             NotificationChain msgs = null;
@@ -143,6 +145,7 @@ public abstract class OnImpl extends EntityStateImpl implements On {
      * 
      * @generated
      */
+    @Override
     public boolean isIsHacked() {
         return isHacked;
     }
@@ -152,6 +155,7 @@ public abstract class OnImpl extends EntityStateImpl implements On {
      * 
      * @generated
      */
+    @Override
     public void setIsHacked(boolean newIsHacked) {
         boolean oldIsHacked = isHacked;
         isHacked = newIsHacked;

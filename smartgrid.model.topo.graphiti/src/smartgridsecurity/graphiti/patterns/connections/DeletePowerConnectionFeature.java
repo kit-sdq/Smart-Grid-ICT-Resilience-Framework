@@ -28,9 +28,9 @@ public class DeletePowerConnectionFeature extends DefaultDeleteFeature {
     @Override
     public void delete(final IDeleteContext context) {
         // Get interfaces
-        final NetworkEntity start = this.getNetworkEntity(((Connection) context.getPictogramElement()).getStart());
+        final NetworkEntity start = getNetworkEntity(((Connection) context.getPictogramElement()).getStart());
 
-        final Object end = this.getBusinessObjectForPictogramElement(((Connection) context.getPictogramElement()).getEnd().getParent());
+        final Object end = getBusinessObjectForPictogramElement(((Connection) context.getPictogramElement()).getEnd().getParent());
 
         // Remove end from start's parent interfaces list
         start.getConnectedTo().remove(end);
@@ -47,7 +47,7 @@ public class DeletePowerConnectionFeature extends DefaultDeleteFeature {
      */
     private NetworkEntity getNetworkEntity(final Anchor anchor) {
         if (anchor != null) {
-            final Object object = this.getBusinessObjectForPictogramElement(anchor.getParent());
+            final Object object = getBusinessObjectForPictogramElement(anchor.getParent());
             if (object instanceof NetworkEntity) {
                 return (NetworkEntity) object;
             }

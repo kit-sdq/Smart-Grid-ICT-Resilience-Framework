@@ -3,10 +3,8 @@
 package smartgridtopo.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -104,6 +102,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public int getId() {
         return id;
     }
@@ -113,6 +112,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public void setId(int newId) {
         int oldId = id;
         id = newId;
@@ -125,6 +125,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -134,6 +135,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public void setName(String newName) {
         String oldName = name;
         name = newName;
@@ -146,6 +148,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public SmartMeterType getIsA() {
         if (isA != null && isA.eIsProxy()) {
             InternalEObject oldIsA = (InternalEObject) isA;
@@ -172,6 +175,7 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
      * 
      * @generated
      */
+    @Override
     public void setIsA(SmartMeterType newIsA) {
         SmartMeterType oldIsA = isA;
         isA = newIsA;

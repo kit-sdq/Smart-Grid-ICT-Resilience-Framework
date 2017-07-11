@@ -22,7 +22,7 @@ public class DummySimulationController implements ISimulationController {
     @Override
     public Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
         System.out.println("RMI: run called");
-        return new HashMap<String, Map<String, Double>>();
+        return new HashMap<>();
     }
 
     /*

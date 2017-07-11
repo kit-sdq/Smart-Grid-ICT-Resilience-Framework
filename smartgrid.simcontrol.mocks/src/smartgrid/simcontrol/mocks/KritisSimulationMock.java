@@ -13,12 +13,12 @@ public class KritisSimulationMock implements IKritisSimulationWrapper {
 
     @Override
     public Map<String, Map<String, PowerSpec>> run(Map<String, Map<String, Double>> power) {
-        return new HashMap<String, Map<String, PowerSpec>>(); // TODO at least transfer structure from power to outpout
+        return new HashMap<>(); // TODO at least transfer structure from power to outpout
     }
 
     @Override
     public Map<String, Map<String, PowerSpec>> getDefaultDemand() {
-        return new HashMap<String, Map<String, PowerSpec>>(); // TODO return more meaningful values?
+        return new HashMap<>(); // TODO return more meaningful values?
     }
 
     @Override

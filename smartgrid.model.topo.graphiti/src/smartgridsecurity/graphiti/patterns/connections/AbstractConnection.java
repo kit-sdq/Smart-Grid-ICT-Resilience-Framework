@@ -30,14 +30,14 @@ public abstract class AbstractConnection extends AbstractConnectionPattern {
         final IGaService gaService = Graphiti.getGaService();
 
         // Create connection
-        final Connection connection = peCreateService.createCompositeConnection(this.getDiagram());
+        final Connection connection = peCreateService.createCompositeConnection(getDiagram());
         connection.setStart(addConContext.getSourceAnchor());
         connection.setEnd(addConContext.getTargetAnchor());
 
         // Create the line
         final Polyline polyline = gaService.createPlainPolygon(connection);
         polyline.setLineWidth(ConstantProvider.connectionLineWidth);
-        polyline.setForeground(this.manageColor(this.getConnectionColor()));
+        polyline.setForeground(this.manageColor(getConnectionColor()));
 
         // Do linking
         this.link(connection, context.getNewObject());
@@ -53,7 +53,7 @@ public abstract class AbstractConnection extends AbstractConnectionPattern {
      * @return the retrieved business object
      */
     protected Object getBoFromAnchor(final Anchor sourceAnchor) {
-        return this.getBusinessObjectForPictogramElement(sourceAnchor.getParent());
+        return getBusinessObjectForPictogramElement(sourceAnchor.getParent());
     }
 
     /**

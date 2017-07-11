@@ -144,6 +144,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * 
      * @generated
      */
+    @Override
     public int getId() {
         return id;
     }
@@ -153,6 +154,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * 
      * @generated
      */
+    @Override
     public void setId(int newId) {
         int oldId = id;
         id = newId;
@@ -165,6 +167,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * 
      * @generated
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -174,6 +177,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * 
      * @generated
      */
+    @Override
     public void setName(String newName) {
         String oldName = name;
         name = newName;
@@ -186,9 +190,10 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * 
      * @generated
      */
+    @Override
     public EList<NetworkEntity> getContainsNE() {
         if (containsNE == null) {
-            containsNE = new EObjectContainmentEList<NetworkEntity>(NetworkEntity.class, this, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_NE);
+            containsNE = new EObjectContainmentEList<>(NetworkEntity.class, this, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_NE);
         }
         return containsNE;
     }
@@ -198,9 +203,10 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * 
      * @generated
      */
+    @Override
     public EList<PowerGridNode> getContainsPGN() {
         if (containsPGN == null) {
-            containsPGN = new EObjectContainmentEList<PowerGridNode>(PowerGridNode.class, this, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_PGN);
+            containsPGN = new EObjectContainmentEList<>(PowerGridNode.class, this, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_PGN);
         }
         return containsPGN;
     }
@@ -210,9 +216,10 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * 
      * @generated
      */
+    @Override
     public EList<PhysicalConnection> getContainsPC() {
         if (containsPC == null) {
-            containsPC = new EObjectContainmentEList<PhysicalConnection>(PhysicalConnection.class, this, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_PC);
+            containsPC = new EObjectContainmentEList<>(PhysicalConnection.class, this, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_PC);
         }
         return containsPC;
     }
@@ -222,9 +229,10 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * 
      * @generated
      */
+    @Override
     public EList<LogicalCommunication> getContainsLC() {
         if (containsLC == null) {
-            containsLC = new EObjectContainmentEList<LogicalCommunication>(LogicalCommunication.class, this, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_LC);
+            containsLC = new EObjectContainmentEList<>(LogicalCommunication.class, this, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_LC);
         }
         return containsLC;
     }

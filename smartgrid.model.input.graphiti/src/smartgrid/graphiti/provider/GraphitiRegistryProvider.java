@@ -23,11 +23,11 @@ public class GraphitiRegistryProvider {
     }
 
     public void setFeatureProvider(final IFeatureProvider fp) {
-        this.featureProvider = fp;
+        featureProvider = fp;
     }
 
     public IFeatureProvider getFeatureProvider() {
-        return this.featureProvider;
+        return featureProvider;
     }
 
 }

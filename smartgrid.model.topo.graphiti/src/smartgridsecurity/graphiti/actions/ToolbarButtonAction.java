@@ -47,7 +47,7 @@ public abstract class ToolbarButtonAction extends Action {
      * @return the save options
      */
     public static Map<?, ?> createSaveOptions() {
-        final HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+        final HashMap<String, Object> saveOptions = new HashMap<>();
         saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
         saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
         return saveOptions;

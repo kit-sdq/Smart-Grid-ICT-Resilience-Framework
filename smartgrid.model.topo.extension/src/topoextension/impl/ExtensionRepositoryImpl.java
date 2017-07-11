@@ -5,14 +5,10 @@ package topoextension.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -79,9 +75,10 @@ public class ExtensionRepositoryImpl extends MinimalEObjectImpl.Container implem
      * 
      * @generated
      */
+    @Override
     public EList<Replication> getReplications() {
         if (replications == null) {
-            replications = new EObjectContainmentEList<Replication>(Replication.class, this, TopoextensionPackage.EXTENSION_REPOSITORY__REPLICATIONS);
+            replications = new EObjectContainmentEList<>(Replication.class, this, TopoextensionPackage.EXTENSION_REPOSITORY__REPLICATIONS);
         }
         return replications;
     }
@@ -91,9 +88,10 @@ public class ExtensionRepositoryImpl extends MinimalEObjectImpl.Container implem
      * 
      * @generated
      */
+    @Override
     public EList<Completion> getCompletion() {
         if (completion == null) {
-            completion = new EObjectContainmentEList<Completion>(Completion.class, this, TopoextensionPackage.EXTENSION_REPOSITORY__COMPLETION);
+            completion = new EObjectContainmentEList<>(Completion.class, this, TopoextensionPackage.EXTENSION_REPOSITORY__COMPLETION);
         }
         return completion;
     }

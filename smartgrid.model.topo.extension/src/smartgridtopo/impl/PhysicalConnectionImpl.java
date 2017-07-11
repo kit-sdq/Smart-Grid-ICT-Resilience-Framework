@@ -6,15 +6,11 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -102,6 +98,7 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
      * 
      * @generated
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -111,6 +108,7 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
      * 
      * @generated
      */
+    @Override
     public void setName(String newName) {
         String oldName = name;
         name = newName;
@@ -123,9 +121,10 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
      * 
      * @generated
      */
+    @Override
     public EList<NetworkEntity> getLinks() {
         if (links == null) {
-            links = new EObjectWithInverseResolvingEList.ManyInverse<NetworkEntity>(NetworkEntity.class, this, SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS,
+            links = new EObjectWithInverseResolvingEList.ManyInverse<>(NetworkEntity.class, this, SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS,
                     SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY);
         }
         return links;
@@ -136,6 +135,7 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
      * 
      * @generated
      */
+    @Override
     public ConnectionType getIsA() {
         if (isA != null && isA.eIsProxy()) {
             InternalEObject oldIsA = (InternalEObject) isA;
@@ -162,6 +162,7 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
      * 
      * @generated
      */
+    @Override
     public void setIsA(ConnectionType newIsA) {
         ConnectionType oldIsA = isA;
         isA = newIsA;

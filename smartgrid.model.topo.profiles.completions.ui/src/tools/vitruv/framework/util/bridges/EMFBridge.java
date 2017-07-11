@@ -134,8 +134,8 @@ public final class EMFBridge {
         String[] folderNames = folderName.split(File.separator);
         IContainer currentContainer = project;
         IFolder folder = null;
-        for (int i = 0; i < folderNames.length; i++) {
-            folder = currentContainer.getFolder(new Path(folderNames[i]));
+        for (String folderName2 : folderNames) {
+            folder = currentContainer.getFolder(new Path(folderName2));
             if (!folder.exists()) {
                 try {
                     folder.create(true, true, new NullProgressMonitor());

@@ -59,7 +59,7 @@ public final class LoadOutputModelConformityHelper {
     }
 
     private static List<EntityState> getListWithoutZombies(final List<EntityState> states) {
-        final List<EntityState> noZombies = new ArrayList<EntityState>();
+        final List<EntityState> noZombies = new ArrayList<>();
 
         for (final EntityState state : states) {
             if (state.getOwner() != null) {

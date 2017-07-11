@@ -3,9 +3,7 @@
 package topoextension.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -69,6 +67,7 @@ public class ReplicationImpl extends MinimalEObjectImpl.Container implements Rep
      * 
      * @generated
      */
+    @Override
     public int getNrOfReplicas() {
         return nrOfReplicas;
     }
@@ -78,6 +77,7 @@ public class ReplicationImpl extends MinimalEObjectImpl.Container implements Rep
      * 
      * @generated
      */
+    @Override
     public void setNrOfReplicas(int newNrOfReplicas) {
         int oldNrOfReplicas = nrOfReplicas;
         nrOfReplicas = newNrOfReplicas;

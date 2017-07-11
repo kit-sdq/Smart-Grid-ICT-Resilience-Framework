@@ -4,12 +4,13 @@ package topoextension.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import topoextension.*;
+import topoextension.Completion;
+import topoextension.ExtensionRepository;
+import topoextension.Replication;
+import topoextension.TopoextensionPackage;
 
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter

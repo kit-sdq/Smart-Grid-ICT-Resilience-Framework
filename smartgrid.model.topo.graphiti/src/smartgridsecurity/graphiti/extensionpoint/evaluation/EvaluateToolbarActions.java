@@ -36,7 +36,7 @@ public class EvaluateToolbarActions {
      * @return all found feature extensions
      */
     public List<ToolbarButtonAction> evaluateFeatureExtension(final IExtensionRegistry registry) {
-        return this.evaluate(registry);
+        return evaluate(registry);
     }
 
     /**
@@ -51,8 +51,8 @@ public class EvaluateToolbarActions {
 
         // define the thread pool
         final ExecutorService pool = Executors.newCachedThreadPool();
-        final List<Future<List<ToolbarButtonAction>>> list = new LinkedList<Future<List<ToolbarButtonAction>>>();
-        final List<ToolbarButtonAction> toolbarButtonActionList = new LinkedList<ToolbarButtonAction>();
+        final List<Future<List<ToolbarButtonAction>>> list = new LinkedList<>();
+        final List<ToolbarButtonAction> toolbarButtonActionList = new LinkedList<>();
 
         try {
             for (final IConfigurationElement e : config) {
@@ -94,12 +94,12 @@ public class EvaluateToolbarActions {
         private final IToolbarButtonActionResolver buttons;
 
         public EvaluateAbstractPattern(final IToolbarButtonActionResolver f) {
-            this.buttons = f;
+            buttons = f;
         }
 
         @Override
         public List<ToolbarButtonAction> call() throws Exception {
-            return this.buttons.getToolbarButtons();
+            return buttons.getToolbarButtons();
         }
 
     }

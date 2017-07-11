@@ -23,11 +23,11 @@ public class SGSImageProvider extends AbstractImageProvider {
     @Override
     protected void addAvailableImages() {
         // register the path for each image identifier
-        this.addImageFilePath(IMG_BROKEN, "icons/broken.gif");
-        this.addImageFilePath(IMG_BROKEN_NEW, "icons/broken.png");
-        this.addImageFilePath(IMG_DISABLE, "icons/disable.png");
-        this.addImageFilePath(IMG_ENABLE, "icons/enable.png");
-        this.addImageFilePath(IMG_REPAIR, "icons/repair.png");
+        addImageFilePath(IMG_BROKEN, "icons/broken.gif");
+        addImageFilePath(IMG_BROKEN_NEW, "icons/broken.png");
+        addImageFilePath(IMG_DISABLE, "icons/disable.png");
+        addImageFilePath(IMG_ENABLE, "icons/enable.png");
+        addImageFilePath(IMG_REPAIR, "icons/repair.png");
     }
 
 }

@@ -32,7 +32,7 @@ public class ScenarioModelChangedListener implements ResourceSetListener {
     private final DiagramBehavior behavior;
 
     public ScenarioModelChangedListener(final DiagramBehavior diagramBehavior) {
-        this.behavior = diagramBehavior;
+        behavior = diagramBehavior;
     }
 
     @Override
@@ -41,32 +41,28 @@ public class ScenarioModelChangedListener implements ResourceSetListener {
         for (final Notification notification : notifications) {
             final Object notifier = notification.getNotifier();
             if (notifier instanceof SmartGridTopology && notification.getEventType() == Notification.ADD) {
-                for (final EObject obj : this.behavior.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+                for (final EObject obj : behavior.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
                     if (obj instanceof ScenarioState) {
-                        final Runnable myRunnable = new Runnable() {
-
-                            @Override
-                            public void run() {
-                                final TransactionalEditingDomain domain = ScenarioModelChangedListener.this.behavior.getEditingDomain();
-                                final RecordingCommand c = new RecordingCommand(domain) {
-                                    @Override
-                                    protected void doExecute() {
-                                        final ScenarioState scenarioState = (ScenarioState) obj;
-                                        if (notification.getNewValue() instanceof PowerGridNode) {
-                                            final PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
-                                            state.setOwner((PowerGridNode) notification.getNewValue());
-                                            scenarioState.getPowerStates().add(state);
-                                        }
-                                        if (notification.getNewValue() instanceof NetworkEntity) {
-                                            final EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
-                                            state.setOwner((NetworkEntity) notification.getNewValue());
-                                            scenarioState.getEntityStates().add(state);
-                                        }
+                        final Runnable myRunnable = () -> {
+                            final TransactionalEditingDomain domain = behavior.getEditingDomain();
+                            final RecordingCommand c = new RecordingCommand(domain) {
+                                @Override
+                                protected void doExecute() {
+                                    final ScenarioState scenarioState = (ScenarioState) obj;
+                                    if (notification.getNewValue() instanceof PowerGridNode) {
+                                        final PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
+                                        state.setOwner((PowerGridNode) notification.getNewValue());
+                                        scenarioState.getPowerStates().add(state);
                                     }
-                                };
-                                domain.getCommandStack().execute(c);
+                                    if (notification.getNewValue() instanceof NetworkEntity) {
+                                        final EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
+                                        state.setOwner((NetworkEntity) notification.getNewValue());
+                                        scenarioState.getEntityStates().add(state);
+                                    }
+                                }
+                            };
+                            domain.getCommandStack().execute(c);
 
-                            }
                         };
                         final Thread thread = new Thread(myRunnable);
                         thread.start();

@@ -121,6 +121,7 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
      * 
      * @generated
      */
+    @Override
     public int getId() {
         return id;
     }
@@ -130,6 +131,7 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
      * 
      * @generated
      */
+    @Override
     public void setId(int newId) {
         int oldId = id;
         id = newId;
@@ -142,6 +144,7 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
      * 
      * @generated
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -151,6 +154,7 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
      * 
      * @generated
      */
+    @Override
     public void setName(String newName) {
         String oldName = name;
         name = newName;
@@ -163,9 +167,10 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
      * 
      * @generated
      */
+    @Override
     public EList<PowerGridNode> getConnectedTo() {
         if (connectedTo == null) {
-            connectedTo = new EObjectResolvingEList<PowerGridNode>(PowerGridNode.class, this, SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO);
+            connectedTo = new EObjectResolvingEList<>(PowerGridNode.class, this, SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO);
         }
         return connectedTo;
     }
@@ -175,9 +180,10 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
      * 
      * @generated
      */
+    @Override
     public EList<PhysicalConnection> getLinkedBy() {
         if (linkedBy == null) {
-            linkedBy = new EObjectWithInverseResolvingEList.ManyInverse<PhysicalConnection>(PhysicalConnection.class, this, SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY,
+            linkedBy = new EObjectWithInverseResolvingEList.ManyInverse<>(PhysicalConnection.class, this, SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY,
                     SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS);
         }
         return linkedBy;

@@ -33,7 +33,7 @@ public class OutputDeleteFeatureResolver implements IDeleteFeatureResolver {
                     }
                 }
                 if (position > -1) {
-                    this.removeElement(result, position, domain);
+                    removeElement(result, position, domain);
                 }
             }
         }

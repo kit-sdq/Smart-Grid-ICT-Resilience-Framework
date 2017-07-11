@@ -80,17 +80,17 @@ public class LocalHacker implements IAttackerSimulation {
      */
     public LocalHacker(final HackingStyle desiredHackingStyle, final int hackingSpeed) {
 
-        this.usedHackingStyle = desiredHackingStyle;
+        usedHackingStyle = desiredHackingStyle;
 
         // It's 0 Based --> 0 means 1 Node will be hacked. No negative Value
         // allowed !
 
         assert hackingSpeed >= 0 : "HackingSpeed is 0 Based --> No negative Value allowed !";
-        this.setHackingSpeed(hackingSpeed - 1);
+        setHackingSpeed(hackingSpeed - 1);
 
-        this.rootNodeID = -1; // Means No Root provided
-        this.initDone = true;
-        this.rootNodeValid = true;
+        rootNodeID = -1; // Means No Root provided
+        initDone = true;
+        rootNodeValid = true;
     }
 
     /**
@@ -111,8 +111,8 @@ public class LocalHacker implements IAttackerSimulation {
 
         this.rootNodeID = rootNodeID;
 
-        this.initDone = true;
-        this.rootNodeValid = true;
+        initDone = true;
+        rootNodeValid = true;
     }
 
     @Override
@@ -148,27 +148,27 @@ public class LocalHacker implements IAttackerSimulation {
                 rootNodeID = Integer.parseInt(Constants.DEFAULT_ROOT_NODE_ID);
             }
             if (hackingSpeedString.equals(Constants.FAIL)) {
-                this.hackingSpeed = Integer.parseInt(Constants.DEFAULT_HACKING_SPEED);
+                hackingSpeed = Integer.parseInt(Constants.DEFAULT_HACKING_SPEED);
             }
         } else {
             desiredHackingStyle = HackingStyle.valueOf(desiredHackingStyleString);
 
             rootNodeID = Integer.parseInt(rootNodeIDString);
 
-            this.hackingSpeed = Integer.parseInt(hackingSpeedString);
+            hackingSpeed = Integer.parseInt(hackingSpeedString);
 
             errorCode = ErrorCodeEnum.SUCCESS;
         }
 
         // Adding extracted Parameters
         this.rootNodeID = rootNodeID;
-        this.usedHackingStyle = desiredHackingStyle;
+        usedHackingStyle = desiredHackingStyle;
 
         LOG.info("Infection root node ID is: " + rootNodeID);
         LOG.info("Hacking style is: " + desiredHackingStyle);
-        LOG.info("Hacking speed is: " + this.hackingSpeed);
+        LOG.info("Hacking speed is: " + hackingSpeed);
 
-        this.initDone = true;
+        initDone = true;
 
         LOG.debug("Init done");
 
@@ -184,42 +184,42 @@ public class LocalHacker implements IAttackerSimulation {
     @Override
     public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioResult impactAnalysisOutput) {
 
-        assert (this.initDone) : "Init wasn't run! Run init() first !";
+        assert initDone : "Init wasn't run! Run init() first !";
 
         // Copy Input in own Variables
-        this.mySmartGridTopo = smartGridTopo;
-        this.myScenarioResult = impactAnalysisOutput;
+        mySmartGridTopo = smartGridTopo;
+        myScenarioResult = impactAnalysisOutput;
 
-        if (this.firstRun) {
+        if (firstRun) {
 
             // Uses ID from Constructor (calls findEntityOnStateFromID() in this
             // case) or if not chooses Random Node
-            this.setHackingRootOnEntityState();
-            this.firstRun = false;
+            setHackingRootOnEntityState();
+            firstRun = false;
         } else {
             // Find Root On Entity using ID I already know
-            this.rootNode = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.myScenarioResult);
+            rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
         }
 
         // Each TimeStep Case
 
-        if (this.rootNode != null) {
+        if (rootNode != null) {
             /* ** At this Point we have valid RootNodeID and rootNode !! ** */
-            assert (this.rootNode.getOwner().getId() == this.rootNodeID) : "Root Node Not Valid !";
+            assert rootNode.getOwner().getId() == rootNodeID : "Root Node Not Valid !";
             // Hack Root just in case its not hacked
             // this.rootNode.setIsHacked(true);
 
             // Starting hacking according to the desired hacking Style
-            this.hackNext(this.rootNode.getBelongsToCluster());
+            hackNext(rootNode.getBelongsToCluster());
         }
-        if (this.rootNodeValid) {
-            this.myScenarioResult.setScenario(smartGridTopo);
+        if (rootNodeValid) {
+            myScenarioResult.setScenario(smartGridTopo);
         } else {
-            this.myScenarioResult = null;
-            this.rootNodeValid = true;
+            myScenarioResult = null;
+            rootNodeValid = true;
         }
         LOG.info("[Local Hacker]: Hacking done");
-        return this.myScenarioResult;
+        return myScenarioResult;
     }
 
     // Private Methods
@@ -230,15 +230,15 @@ public class LocalHacker implements IAttackerSimulation {
         // usedHackingStyle = HackingStyle.DFS_HACKING;
         // usedHackingStyle = HackingStyle.FULLY_MESHED_HACKING;
 
-        switch (this.usedHackingStyle) {
+        switch (usedHackingStyle) {
         case BFS_HACKING:
-            this.bfsHacking(clusterToHack);
+            bfsHacking(clusterToHack);
             break;
         case DFS_HACKING:
-            this.dfsHacking(clusterToHack);
+            dfsHacking(clusterToHack);
             break;
         case FULLY_MESHED_HACKING:
-            this.fullMeshedHacking(clusterToHack);
+            fullMeshedHacking(clusterToHack);
             break;
         }
     }
@@ -278,8 +278,8 @@ public class LocalHacker implements IAttackerSimulation {
         // --> Trivial cause it was called with root.belongsToCluster
 
         // For The BFS Algo
-        List<On> currentLayer = new LinkedList<On>();
-        List<On> nextLayer = new LinkedList<On>();
+        List<On> currentLayer = new LinkedList<>();
+        List<On> nextLayer = new LinkedList<>();
 
         @SuppressWarnings("unused")
         int layerCount; // Not used atm but just in case
@@ -288,10 +288,10 @@ public class LocalHacker implements IAttackerSimulation {
          * Reads from Scenario so this List don't respects changes in States of the Entities -->
          * It's only the "hardwired" logical Connection neighbors
          */
-        final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(this.mySmartGridTopo);
+        final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(mySmartGridTopo);
 
         // Root is in cluster to hack --> so Root is StartNode
-        currentLayer.add(this.rootNode);
+        currentLayer.add(rootNode);
 
         // Starting BFS Algorithm
         hackingDone: for (layerCount = 0; !currentLayer.isEmpty(); layerCount++) {
@@ -320,7 +320,7 @@ public class LocalHacker implements IAttackerSimulation {
                             neighbor.setIsHacked(true);
                             hackedNodesCount++;
 
-                            if (hackedNodesCount > this.hackingSpeed) {
+                            if (hackedNodesCount > hackingSpeed) {
                                 break hackingDone;
                             }
 
@@ -339,7 +339,7 @@ public class LocalHacker implements IAttackerSimulation {
              * Q := Q' Q' := Clear
              */
             currentLayer = nextLayer;
-            nextLayer = new LinkedList<On>();
+            nextLayer = new LinkedList<>();
         } // Layer Loop most outer
         LOG.info("[Local Hacker]: Done hacking with BFS");
     }// End Method
@@ -352,15 +352,15 @@ public class LocalHacker implements IAttackerSimulation {
 
         final int hackCount = 0;
 
-        final On Node = this.rootNode;
+        final On Node = rootNode;
 
         /*
          * Reads from Scenario so this List don't respects changes in States of the Entities -->
          * It's only the "hardwired" logical Connection neighbors
          */
-        final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(this.mySmartGridTopo);
+        final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(mySmartGridTopo);
 
-        this.dfs(clusterToHack, Node, IDtoHisNeighborLinks, hackCount);
+        dfs(clusterToHack, Node, IDtoHisNeighborLinks, hackCount);
 
     }
 
@@ -392,19 +392,19 @@ public class LocalHacker implements IAttackerSimulation {
             /* Now I have my alive (in my Cluster) Neighbor OnState List */
             for (final On neighbor : neighborOnList) {
 
-                if (hackCount > this.hackingSpeed) {
+                if (hackCount > hackingSpeed) {
                     break; // Stopp hacking for this run
                 }
 
                 else if (neighbor.isIsHacked()) {
-                    this.dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, ++hackCount);
+                    dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, ++hackCount);
                 } else {
                     if (!(neighbor.getOwner() instanceof NetworkNode)) {
                         LOG.debug("Hacked with BFS node " + neighbor.getOwner().getId());
                         neighbor.setIsHacked(true);
                     }
                     hackCount++;
-                    this.dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, hackCount);
+                    dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, hackCount);
                 }
 
             }
@@ -430,7 +430,7 @@ public class LocalHacker implements IAttackerSimulation {
                 hackedNodesCount++;
             }
 
-        } while (hackedNodesCount < this.hackingSpeed && myIter.hasNext());
+        } while (hackedNodesCount < hackingSpeed && myIter.hasNext());
 
     }
 
@@ -438,14 +438,14 @@ public class LocalHacker implements IAttackerSimulation {
         Cluster myCluster;
         final Random myRandom = new Random();
 
-        final int clusterCount = this.myScenarioResult.getClusters().size();
+        final int clusterCount = myScenarioResult.getClusters().size();
 
         // Choose Random Cluster with Entries
 
         do {
             // [0 - clusterCount) Exclusive upper bound
             final int myClusterNumber = myRandom.nextInt(clusterCount);
-            myCluster = this.myScenarioResult.getClusters().get(myClusterNumber);
+            myCluster = myScenarioResult.getClusters().get(myClusterNumber);
 
         } while (myCluster.getHasEntities().isEmpty()); // Or threshold of
                                                         // Entities in
@@ -459,38 +459,38 @@ public class LocalHacker implements IAttackerSimulation {
         final int myEntityNumber = myRandom.nextInt(entityCount); // [0 -
         // entityCount)
 
-        this.rootNode = myCluster.getHasEntities().get(myEntityNumber);
-        this.rootNodeID = this.rootNode.getOwner().getId();
-        if (this.rootNode.getOwner() instanceof NetworkNode) {
-            this.chooseRootIDByRandom();
+        rootNode = myCluster.getHasEntities().get(myEntityNumber);
+        rootNodeID = rootNode.getOwner().getId();
+        if (rootNode.getOwner() instanceof NetworkNode) {
+            chooseRootIDByRandom();
         }
     }
 
     private void setHackingRootOnEntityState() {
-        switch (this.rootNodeID) {
+        switch (rootNodeID) {
 
         // Choose Root - Root ID not set
         case -1:
-            this.chooseRootIDByRandom();
+            chooseRootIDByRandom();
             break;
 
         default:
-            this.rootNode = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.myScenarioResult);
-            if (this.rootNode == null) {
-                this.invalidRootNodeIdDialog();
-                this.rootNodeValid = false;
+            rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
+            if (rootNode == null) {
+                invalidRootNodeIdDialog();
+                rootNodeValid = false;
             }
             break;
 
         }// End Swtich
 
-        if (this.rootNodeValid && !this.rootNode.isIsHacked()) {
-            this.rootNode.setIsHacked(true);
+        if (rootNodeValid && !rootNode.isIsHacked()) {
+            rootNode.setIsHacked(true);
         }
     }
 
     private void invalidRootNodeIdDialog() {
-        LOG.warn("[Local Hacker]: Root node with ID " + this.rootNode.getOwner().getId() + " is invalid");
+        LOG.warn("[Local Hacker]: Root node with ID " + rootNode.getOwner().getId() + " is invalid");
         // TODO: Find better solution than swing Dialog
         JOptionPane.showMessageDialog(null, "The root node ID you've entered is not valid. Remember not to use NetworkNodes as root node. Simulation will be aborted");
     }
@@ -519,7 +519,7 @@ public class LocalHacker implements IAttackerSimulation {
      * @return the usedHackingStyle
      */
     public HackingStyle getUsedHackingStyle() {
-        return this.usedHackingStyle;
+        return usedHackingStyle;
     }
 
     /**
@@ -534,7 +534,7 @@ public class LocalHacker implements IAttackerSimulation {
      * @return the rootNodeID
      */
     public int getRootNodeID() {
-        return this.rootNodeID;
+        return rootNodeID;
     }
 
     /**
@@ -549,7 +549,7 @@ public class LocalHacker implements IAttackerSimulation {
      * @return the hackingSpeed
      */
     public int getHackingSpeed() {
-        return this.hackingSpeed;
+        return hackingSpeed;
     }
 
     /**

@@ -10,7 +10,7 @@ public class AggregatedSmartMeterStates implements ISmartMeterState {
 
     public AggregatedSmartMeterStates(String nodeId, int onlineCount, int onlineHackedCount, int noUplinkCount, int noUplinkHackedCount, int noPowerCount, int defectCount) {
         this.nodeId = nodeId;
-        states = new HashMap<SmartMeterState, Integer>(6);
+        states = new HashMap<>(6);
         states.put(SmartMeterState.ONLINE, onlineCount);
         states.put(SmartMeterState.ONLINE_HACKED, onlineHackedCount);
         states.put(SmartMeterState.NO_UPLINK, noUplinkCount);
@@ -29,7 +29,7 @@ public class AggregatedSmartMeterStates implements ISmartMeterState {
     }
 
     public double getStatePercentage(SmartMeterState state) {
-        return (double) 100 * getStateCount(state) / this.getTotalCount();
+        return (double) 100 * getStateCount(state) / getTotalCount();
     }
 
     public int getTotalCount() {

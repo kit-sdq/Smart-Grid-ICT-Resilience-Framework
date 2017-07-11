@@ -37,32 +37,32 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
 
     public ClearButtonAction() {
         super(AS_CHECK_BOX);
-        this.ACTION_ID = "EnableInputButtonActionId";
-        this.TOOL_TIP = "Clear the State Scenario representation";
-        this.setToolTipText(this.TOOL_TIP);
-        this.setId(this.ACTION_ID);
-        this.addPropertyChangeListener(this);
-        this.setImageDescriptor(this.createImage("icons" + File.separator + "clear_input.png", "smartgrid.model.input"));
+        ACTION_ID = "EnableInputButtonActionId";
+        TOOL_TIP = "Clear the State Scenario representation";
+        setToolTipText(TOOL_TIP);
+        setId(ACTION_ID);
+        addPropertyChangeListener(this);
+        setImageDescriptor(createImage("icons" + File.separator + "clear_input.png", "smartgrid.model.input"));
     }
 
     @Override
     public void setDiagramContainer(final IDiagramContainerUI container) {
-        this.diagramContainer = container;
-        this.checkInputModel();
+        diagramContainer = container;
+        checkInputModel();
     }
 
     /**
      * This method checks if there is an input model. If true, the action will be enabled.
      */
     private void checkInputModel() {
-        final EList<EObject> list = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
+        final EList<EObject> list = diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
         for (final EObject model : list) {
             if (model instanceof ScenarioState) {
-                this.setEnabled(true);
+                setEnabled(true);
                 return;
             }
         }
-        this.setEnabled(false);
+        setEnabled(false);
     }
 
     /**
@@ -71,7 +71,7 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
     @Override
     public void run() {
         LOG.info("[ClearButtonAction]: Start clearing input model from diagram");
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
                 final MessageBox messageBox = new MessageBox(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot clear input model while output model is loaded");
@@ -80,7 +80,7 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
                 return;
             }
         }
-        final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
+        final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
         final RecordingCommand c = new RecordingCommand(domain) {
             @Override
             protected void doExecute() {
@@ -123,14 +123,14 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
             }
         };
         domain.getCommandStack().execute(c);
-        this.setEnabled(false);
+        setEnabled(false);
         LOG.info("[ClearButtonAction]: Clearing successfully finished");
     }
 
     @Override
     public void propertyChange(final PropertyChangeEvent event) {
         if (event.getProperty().equals(StringProvider.ENABLE_CLEAR_BUTTON)) {
-            this.setEnabled(true);
+            setEnabled(true);
         }
     }
 }

@@ -108,6 +108,7 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
      * 
      * @generated
      */
+    @Override
     public int getControlCenterCount() {
         return controlCenterCount;
     }
@@ -117,6 +118,7 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
      * 
      * @generated
      */
+    @Override
     public void setControlCenterCount(int newControlCenterCount) {
         int oldControlCenterCount = controlCenterCount;
         controlCenterCount = newControlCenterCount;
@@ -129,6 +131,7 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
      * 
      * @generated
      */
+    @Override
     public int getSmartMeterCount() {
         return smartMeterCount;
     }
@@ -138,6 +141,7 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
      * 
      * @generated
      */
+    @Override
     public void setSmartMeterCount(int newSmartMeterCount) {
         int oldSmartMeterCount = smartMeterCount;
         smartMeterCount = newSmartMeterCount;
@@ -150,9 +154,10 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
      * 
      * @generated
      */
+    @Override
     public EList<On> getHasEntities() {
         if (hasEntities == null) {
-            hasEntities = new EObjectWithInverseResolvingEList<On>(On.class, this, SmartgridoutputPackage.CLUSTER__HAS_ENTITIES, SmartgridoutputPackage.ON__BELONGS_TO_CLUSTER);
+            hasEntities = new EObjectWithInverseResolvingEList<>(On.class, this, SmartgridoutputPackage.CLUSTER__HAS_ENTITIES, SmartgridoutputPackage.ON__BELONGS_TO_CLUSTER);
         }
         return hasEntities;
     }

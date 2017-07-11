@@ -59,6 +59,7 @@ public abstract class EntityStateImpl extends MinimalEObjectImpl.Container imple
      * 
      * @generated
      */
+    @Override
     public NetworkEntity getOwner() {
         if (owner != null && owner.eIsProxy()) {
             InternalEObject oldOwner = (InternalEObject) owner;
@@ -85,6 +86,7 @@ public abstract class EntityStateImpl extends MinimalEObjectImpl.Container imple
      * 
      * @generated
      */
+    @Override
     public void setOwner(NetworkEntity newOwner) {
         NetworkEntity oldOwner = owner;
         owner = newOwner;

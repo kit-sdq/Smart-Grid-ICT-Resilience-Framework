@@ -30,13 +30,13 @@ public class PowerEnabledFeature extends AbstractCustomFeature {
 
     @Override
     public void execute(final ICustomContext context) {
-        if (!this.isInputModelAlreadyCreated()) {
+        if (!isInputModelAlreadyCreated()) {
             final InputModelCreator creator = new InputModelCreator(GraphitiHelper.getInstance().getDiagramContainer());
             creator.createNewInputModel(true);
         }
 
         final PictogramElement pe = context.getPictogramElements()[0];
-        final TransactionalEditingDomain domain = this.getDiagramBehavior().getEditingDomain();
+        final TransactionalEditingDomain domain = getDiagramBehavior().getEditingDomain();
         final RecordingCommand rc = new RecordingCommand(domain) {
 
             @Override
@@ -55,8 +55,8 @@ public class PowerEnabledFeature extends AbstractCustomFeature {
                 // create new input model pe
                 if (states != null) {
                     for (final PowerState power : ((ScenarioState) states).getPowerStates()) {
-                        if ((obj instanceof PowerGridNode && ((PowerGridNode) obj).getId() == power.getOwner().getId())
-                                || (obj instanceof PowerState && ((PowerState) obj).getOwner().getId() == power.getOwner().getId())) {
+                        if (obj instanceof PowerGridNode && ((PowerGridNode) obj).getId() == power.getOwner().getId()
+                                || obj instanceof PowerState && ((PowerState) obj).getOwner().getId() == power.getOwner().getId()) {
 
                             if (!power.isPowerOutage()) {
                                 power.setPowerOutage(!power.isPowerOutage());
@@ -82,7 +82,7 @@ public class PowerEnabledFeature extends AbstractCustomFeature {
      * @return true if loaded, false otherwise
      */
     private boolean isInputModelAlreadyCreated() {
-        for (final EObject obj : this.getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (obj instanceof ScenarioState) {
                 return true;
             }
@@ -93,17 +93,17 @@ public class PowerEnabledFeature extends AbstractCustomFeature {
     @Override
     public boolean canExecute(final ICustomContext context) {
         boolean ret = false;
-        for (final EObject obj : this.getDiagram().getLink().getBusinessObjects()) {
+        for (final EObject obj : getDiagram().getLink().getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
                 return false;
             }
-            if ((obj instanceof ScenarioState)) {
+            if (obj instanceof ScenarioState) {
                 ret = true;
             }
         }
         final PictogramElement[] pes = context.getPictogramElements();
         if (pes != null && pes.length == 1) {
-            final Object bo = this.getBusinessObjectForPictogramElement(pes[0]);
+            final Object bo = getBusinessObjectForPictogramElement(pes[0]);
             if (bo instanceof PowerGridNode || bo instanceof PowerState) {
                 ret = ret & true;
             } else {

@@ -3,10 +3,8 @@
 package smartgridtopo.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import smartgridtopo.SmartMeter;
@@ -81,6 +79,7 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
      * 
      * @generated
      */
+    @Override
     public SmartMeterType getIsA() {
         if (isA != null && isA.eIsProxy()) {
             InternalEObject oldIsA = (InternalEObject) isA;
@@ -107,6 +106,7 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
      * 
      * @generated
      */
+    @Override
     public void setIsA(SmartMeterType newIsA) {
         SmartMeterType oldIsA = isA;
         isA = newIsA;
@@ -119,6 +119,7 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
      * 
      * @generated
      */
+    @Override
     public int getAggregation() {
         return aggregation;
     }
@@ -128,6 +129,7 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
      * 
      * @generated
      */
+    @Override
     public void setAggregation(int newAggregation) {
         int oldAggregation = aggregation;
         aggregation = newAggregation;

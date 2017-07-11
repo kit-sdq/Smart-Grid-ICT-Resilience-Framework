@@ -4,8 +4,8 @@ package smartgridtopo.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 import java.util.List;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -67,7 +67,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
-    protected Collection<Object> supportedTypes = new ArrayList<Object>();
+    protected Collection<Object> supportedTypes = new ArrayList<>();
 
     /**
      * This constructs an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -387,6 +387,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
+    @Override
     public ComposeableAdapterFactory getRootAdapterFactory() {
         return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
     }
@@ -397,6 +398,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
+    @Override
     public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
         this.parentAdapterFactory = parentAdapterFactory;
     }
@@ -431,7 +433,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
     public Object adapt(Object object, Object type) {
         if (isFactoryForType(type)) {
             Object adapter = super.adapt(object, type);
-            if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+            if (!(type instanceof Class<?>) || ((Class<?>) type).isInstance(adapter)) {
                 return adapter;
             }
         }
@@ -453,6 +455,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
+    @Override
     public Collection<?> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
         return childCreationExtenderManager.getNewChildDescriptors(object, editingDomain);
     }
@@ -462,6 +465,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
+    @Override
     public ResourceLocator getResourceLocator() {
         return childCreationExtenderManager;
     }
@@ -471,6 +475,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
+    @Override
     public void addListener(INotifyChangedListener notifyChangedListener) {
         changeNotifier.addListener(notifyChangedListener);
     }
@@ -480,6 +485,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
+    @Override
     public void removeListener(INotifyChangedListener notifyChangedListener) {
         changeNotifier.removeListener(notifyChangedListener);
     }
@@ -490,6 +496,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
+    @Override
     public void fireNotifyChanged(Notification notification) {
         changeNotifier.fireNotifyChanged(notification);
 
@@ -504,6 +511,7 @@ public class SmartgridtopoItemProviderAdapterFactory extends SmartgridtopoAdapte
      * 
      * @generated
      */
+    @Override
     public void dispose() {
         if (smartGridTopologyItemProvider != null)
             smartGridTopologyItemProvider.dispose();

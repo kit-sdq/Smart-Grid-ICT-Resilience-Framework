@@ -57,8 +57,8 @@ public class ViralHacker implements IAttackerSimulation {
     public ViralHacker() {
 
         // Init Lists
-        this.seedNodeIDs = new LinkedList<Integer>();
-        this.seedNodes = new LinkedList<On>();
+        seedNodeIDs = new LinkedList<>();
+        seedNodes = new LinkedList<>();
     }
 
     /**
@@ -68,8 +68,8 @@ public class ViralHacker implements IAttackerSimulation {
     public ViralHacker(final int hackingSpeed) {
 
         this.hackingSpeed = hackingSpeed;
-        this.mode = NodeMode.RandomNode;
-        this.initDone = true;
+        mode = NodeMode.RandomNode;
+        initDone = true;
     }
 
     /**
@@ -82,8 +82,8 @@ public class ViralHacker implements IAttackerSimulation {
         this(hackingSpeed);
 
         this.seedNodeIDs = seedNodeIDs;
-        this.mode = NodeMode.NodeIDs;
-        this.initDone = true;
+        mode = NodeMode.NodeIDs;
+        initDone = true;
     }
 
     /**
@@ -95,7 +95,7 @@ public class ViralHacker implements IAttackerSimulation {
         this(hackingSpeed);
 
         this.seedNodes = seedNodes;
-        this.mode = NodeMode.Nodes;
+        mode = NodeMode.Nodes;
     }
 
     /**
@@ -120,9 +120,9 @@ public class ViralHacker implements IAttackerSimulation {
         }
 
         // Set nodeMode for Viral Hacker
-        this.mode = NodeMode.valueOf(myModeString);
+        mode = NodeMode.valueOf(myModeString);
 
-        this.hackingSpeed = Integer.parseInt(config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
+        hackingSpeed = Integer.parseInt(config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
 
         // Getting Hacking Style
         String hackingStyleString = config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.FAIL);
@@ -131,15 +131,15 @@ public class ViralHacker implements IAttackerSimulation {
             hackingStyleString = Constants.DEFAULT_HACKING_STYLE;
         }
 
-        this.usedHackingStyle = HackingStyle.valueOf(hackingStyleString);
+        usedHackingStyle = HackingStyle.valueOf(hackingStyleString);
 
-        switch (this.mode) {
+        switch (mode) {
         case RandomNode:
             // Nothing else to do here ...
             break;
         case NodeIDs:
 
-            final List<String> fail = new LinkedList<String>();
+            final List<String> fail = new LinkedList<>();
             fail.add(Constants.FAIL);
 
             // Getting NodeID
@@ -148,10 +148,10 @@ public class ViralHacker implements IAttackerSimulation {
             for (final String idStrings : nodeIDStrings) {
                 if (idStrings.equals(Constants.FAIL)) {
                     defaultUsed = true;
-                    this.mode = NodeMode.RandomNode;
+                    mode = NodeMode.RandomNode;
                     break;
                 }
-                this.seedNodeIDs.add(Integer.parseInt(idStrings));
+                seedNodeIDs.add(Integer.parseInt(idStrings));
             }
 
             break;
@@ -161,7 +161,7 @@ public class ViralHacker implements IAttackerSimulation {
 
             if (nodePath.equals(Constants.FAIL)) {
                 defaultUsed = true;
-                this.mode = NodeMode.RandomNode;
+                mode = NodeMode.RandomNode;
                 break;
             }
 
@@ -180,12 +180,12 @@ public class ViralHacker implements IAttackerSimulation {
             myError = ErrorCodeEnum.DEFAULT_VALUES_USED;
         }
 
-        LOG.info("Hacking style is: " + this.usedHackingStyle);
-        LOG.info("Hacking speed is: " + this.hackingSpeed);
+        LOG.info("Hacking style is: " + usedHackingStyle);
+        LOG.info("Hacking speed is: " + hackingSpeed);
 
         LOG.debug("Init done");
 
-        this.initDone = true;
+        initDone = true;
         return myError;
     }
 
@@ -198,54 +198,54 @@ public class ViralHacker implements IAttackerSimulation {
     @Override
     public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioResult impactAnalysisOutput) {
 
-        assert (this.initDone) : "Init wasn't run! Run init() first !";
+        assert initDone : "Init wasn't run! Run init() first !";
 
-        this.myResult = impactAnalysisOutput;
-        this.myScenario = smartGridTopo;
+        myResult = impactAnalysisOutput;
+        myScenario = smartGridTopo;
 
-        this.doFirstRun();
+        doFirstRun();
 
         // Rebuild Nodes List for every run because Object References change
         // between runs
-        if (!this.firstRun) {
-            this.buildSeedNodesList();
+        if (!firstRun) {
+            buildSeedNodesList();
         }
 
         /* *** At this point we have valid Node(ID)Lists **** */
 
-        this.startHacking();
+        startHacking();
 
-        return this.myResult;
+        return myResult;
     }
 
     private void doFirstRun() {
-        if (this.firstRun) {
-            switch (this.mode) {
+        if (firstRun) {
+            switch (mode) {
             case RandomNode:
-                final List<On> hackedNodes = ScenarioModelHelper.getHackedNodes(this.myResult.getStates());
+                final List<On> hackedNodes = ScenarioModelHelper.getHackedNodes(myResult.getStates());
 
                 // In case there are no hacked nodes, choose one randomly,
                 // otherwise build seed node list
                 if (hackedNodes.isEmpty()) {
-                    this.chooseRandomSeedNodes();
+                    chooseRandomSeedNodes();
                 } else {
-                    this.seedNodes = hackedNodes;
-                    this.buildSeedNodeIDsList();
+                    seedNodes = hackedNodes;
+                    buildSeedNodeIDsList();
                 }
                 break;
             case NodeIDs: // --> Get Nodes
-                this.buildSeedNodesList();
+                buildSeedNodesList();
                 break;
             case Nodes: // --> Get NodeIDs
-                this.buildSeedNodeIDsList();
+                buildSeedNodeIDsList();
                 break;
             }// End Swtich
 
             // Hack Seed Nodes
-            assert (!this.seedNodes.isEmpty());
+            assert !seedNodes.isEmpty();
 
             // Done First Run operations
-            this.firstRun = false;
+            firstRun = false;
 
         } // End FirstRun
     }
@@ -256,15 +256,15 @@ public class ViralHacker implements IAttackerSimulation {
     private void startHacking() {
         // Switch Hacking Modes here
         LOG.debug("Start Hacking with Viral Hacker");
-        switch (this.usedHackingStyle) {
+        switch (usedHackingStyle) {
         case BFS_HACKING:
-            this.bfsHacking();
+            bfsHacking();
             break;
         case DFS_HACKING:
-            this.dfsHacking();
+            dfsHacking();
             break;
         case FULLY_MESHED_HACKING:
-            this.fullMeshedHacking();
+            fullMeshedHacking();
             break;
         default:
             break;
@@ -278,24 +278,24 @@ public class ViralHacker implements IAttackerSimulation {
     private void dfsHacking() {
 
         // --> Attention in parallel critical section needed?
-        final List<On> freshHackedNodes = new LinkedList<On>();
+        final List<On> freshHackedNodes = new LinkedList<>();
         final int hackCount = 0;
 
-        for (int i = 0; i < this.seedNodes.size(); i++) {
+        for (int i = 0; i < seedNodes.size(); i++) {
 
-            final On node = this.seedNodes.get(i);
-            final Cluster clusterToHack = this.seedNodes.get(i).getBelongsToCluster();
+            final On node = seedNodes.get(i);
+            final Cluster clusterToHack = seedNodes.get(i).getBelongsToCluster();
 
             /*
              * Reads from Scenario so this List don't respects changes in States of the Entities -->
              * It's only the "hardwired" logical Connection neighbors
              */
-            final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(this.myScenario);
+            final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(myScenario);
 
-            this.dfs(clusterToHack, node, IDtoHisNeighborLinks, hackCount, freshHackedNodes);
+            dfs(clusterToHack, node, IDtoHisNeighborLinks, hackCount, freshHackedNodes);
 
         } // End for hacked seed nodes
-        this.seedNodes.addAll(freshHackedNodes); // Attention during if parallel
+        seedNodes.addAll(freshHackedNodes); // Attention during if parallel
         LOG.debug("Done Hacking with DFS");
     }
 
@@ -319,7 +319,7 @@ public class ViralHacker implements IAttackerSimulation {
         final LinkedList<Integer> neighborIDList = iDtoHisNeighborLinks.get(nodeID);
 
         if (neighborIDList == null) {
-            return this.hackingSpeed;
+            return hackingSpeed;
         }
 
         /*
@@ -331,12 +331,12 @@ public class ViralHacker implements IAttackerSimulation {
         /* Now I have my alive (in my Cluster) Neighbor OnState List */
         for (final On neighbor : neighborOnList) {
 
-            if (hackCount >= this.hackingSpeed) {
+            if (hackCount >= hackingSpeed) {
                 break; // Stopp hacking for this run
             } else if (neighbor.isIsHacked()) {
-                this.dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount + 1, freshHackedNodes);
+                dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount + 1, freshHackedNodes);
             } else if (neighbor.getOwner() instanceof NetworkNode) {
-                return this.dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount, freshHackedNodes);
+                return dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount, freshHackedNodes);
             } else {
                 LOG.debug("Hacked with DFS node " + neighbor.getOwner().getId());
                 neighbor.setIsHacked(true);
@@ -344,7 +344,7 @@ public class ViralHacker implements IAttackerSimulation {
                 freshHackedNodes.add(neighbor);
 
                 hackCount++;
-                return this.dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount, freshHackedNodes);
+                return dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount, freshHackedNodes);
             }
         }
         return hackCount;
@@ -355,14 +355,14 @@ public class ViralHacker implements IAttackerSimulation {
      */
     private void bfsHacking() {
 
-        final List<On> freshHackedNodes = new LinkedList<On>();
+        final List<On> freshHackedNodes = new LinkedList<>();
 
-        for (final On hackedNode : this.seedNodes) {
+        for (final On hackedNode : seedNodes) {
             int hackedNodesCount = 0;
 
             // For The BFS Algo
-            List<On> currentLayer = new LinkedList<On>();
-            List<On> nextLayer = new LinkedList<On>();
+            List<On> currentLayer = new LinkedList<>();
+            List<On> nextLayer = new LinkedList<>();
             final Cluster clusterToHack = hackedNode.getBelongsToCluster();
 
             @SuppressWarnings("unused")
@@ -372,7 +372,7 @@ public class ViralHacker implements IAttackerSimulation {
              * Reads from Scenario so this List don't respects changes in States of the Entities -->
              * It's only the "hardwired" logical Connection neighbors
              */
-            final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(this.myScenario);
+            final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(myScenario);
 
             // Root is in cluster to hack --> so Root is StartNode
             currentLayer.add(hackedNode);
@@ -409,7 +409,7 @@ public class ViralHacker implements IAttackerSimulation {
                             freshHackedNodes.add(neighbor);
                             hackedNodesCount++;
 
-                            if (hackedNodesCount > this.hackingSpeed) {
+                            if (hackedNodesCount > hackingSpeed) {
                                 break hackingDone;
                             }
                             nextLayer.add(neighbor);
@@ -426,7 +426,7 @@ public class ViralHacker implements IAttackerSimulation {
                  * Q := Q' Q' := Clear
                  */
                 currentLayer = nextLayer;
-                nextLayer = new LinkedList<On>();
+                nextLayer = new LinkedList<>();
 
             } // Layer Loop most outer
 
@@ -435,18 +435,18 @@ public class ViralHacker implements IAttackerSimulation {
         } // End For hacked seedNodes
 
         // Now add new hacked Nodes to seed List
-        this.seedNodes.addAll(freshHackedNodes);
+        seedNodes.addAll(freshHackedNodes);
     }
 
     /*
      * Uses the seedNodeID List to search for On Entity State in Topo
      */
     private void buildSeedNodesList() {
-        this.seedNodes = new LinkedList<On>();
+        seedNodes = new LinkedList<>();
 
-        for (final int id : this.seedNodeIDs) {
-            final On node = ScenarioModelHelper.findEntityOnStateFromID(id, this.myResult);
-            this.seedNodes.add(node);
+        for (final int id : seedNodeIDs) {
+            final On node = ScenarioModelHelper.findEntityOnStateFromID(id, myResult);
+            seedNodes.add(node);
         }
     }
 
@@ -454,11 +454,11 @@ public class ViralHacker implements IAttackerSimulation {
      * Uses the On Entity States List to search for their ID and generates a Int List of Node IDs
      */
     private void buildSeedNodeIDsList() {
-        this.seedNodeIDs = new LinkedList<Integer>();
+        seedNodeIDs = new LinkedList<>();
 
-        for (final On node : this.seedNodes) {
+        for (final On node : seedNodes) {
             final int id = ScenarioModelHelper.getIDfromEntityOnState(node);
-            this.seedNodeIDs.add(id);
+            seedNodeIDs.add(id);
         }
     }
 
@@ -468,10 +468,10 @@ public class ViralHacker implements IAttackerSimulation {
      */
     private void fullMeshedHacking() {
         // foreach Cluster in the ScenarioResult
-        for (final Cluster myCluster : this.myResult.getClusters()) {
+        for (final Cluster myCluster : myResult.getClusters()) {
 
             int hackedNodesinCluster = 0;
-            final List<On> notHackedNodes = new LinkedList<On>();
+            final List<On> notHackedNodes = new LinkedList<>();
 
             // Count hacked Node in that certain Cluster
             for (final On myNode : myCluster.getHasEntities()) {
@@ -486,7 +486,7 @@ public class ViralHacker implements IAttackerSimulation {
             } // End Nodes in certain Cluster
 
             // Each Hacked Nodes in the Cluster hacks "hackingSpeed" other Nodes
-            int howManyToHack = hackedNodesinCluster * this.hackingSpeed;
+            int howManyToHack = hackedNodesinCluster * hackingSpeed;
             final Random rand = new Random();
 
             while (howManyToHack > 0 && !notHackedNodes.isEmpty()) {
@@ -508,9 +508,9 @@ public class ViralHacker implements IAttackerSimulation {
 
         boolean iDsValid;
 
-        for (final Integer seedNodeId : this.seedNodeIDs) {
+        for (final Integer seedNodeId : seedNodeIDs) {
 
-            for (final Cluster myCluster : this.myResult.getClusters()) {
+            for (final Cluster myCluster : myResult.getClusters()) {
                 for (final On myNode : myCluster.getHasEntities()) {
                     iDsValid = myNode.getOwner().getId() == seedNodeId;
 
@@ -527,20 +527,20 @@ public class ViralHacker implements IAttackerSimulation {
      * Generates Random Seed Nodes and builds both ID and Node (On Entity State) Lists !
      */
     private void chooseRandomSeedNodes() {
-        this.seedNodes.clear();
-        this.seedNodeIDs.clear();
-        final Cluster myCluster[] = new Cluster[this.hackingSpeed];
+        seedNodes.clear();
+        seedNodeIDs.clear();
+        final Cluster myCluster[] = new Cluster[hackingSpeed];
         int myClusterNumber;
 
         final Random myRandom = new Random();
 
-        final int clusterCount = this.myResult.getClusters().size();
+        final int clusterCount = myResult.getClusters().size();
 
         for (int i = 0; i < myCluster.length; i++) {
 
             do {
                 myClusterNumber = myRandom.nextInt(clusterCount);
-                myCluster[i] = this.myResult.getClusters().get(myClusterNumber);
+                myCluster[i] = myResult.getClusters().get(myClusterNumber);
 
             } while (myCluster[i].getHasEntities().isEmpty());
 
@@ -556,9 +556,9 @@ public class ViralHacker implements IAttackerSimulation {
 
             if (!(node.getOwner() instanceof NetworkNode)) {
                 node.setIsHacked(true);
-                this.seedNodes.add(node);
+                seedNodes.add(node);
 
-                this.seedNodeIDs.add(node.getOwner().getId());
+                seedNodeIDs.add(node.getOwner().getId());
                 break; // End seedNodes initialization since hacking should
                        // start with 1 node
             }
@@ -569,7 +569,7 @@ public class ViralHacker implements IAttackerSimulation {
      * @return the hackingSpeed
      */
     public int getHackingSpeed() {
-        return this.hackingSpeed;
+        return hackingSpeed;
     }
 
     /**

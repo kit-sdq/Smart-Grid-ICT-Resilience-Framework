@@ -26,7 +26,7 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
      */
     @Override
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisDemands, Map<String, Map<String, ISmartMeterState>> smartMeterStates) {
-        return new HashMap<String, Map<String, Double>>();
+        return new HashMap<>();
     }
 
     @Override

@@ -51,19 +51,19 @@ public class PhysicalConnectionPattern extends AbstractConnection {
         final PhysicalConnection newRole = SmartgridtopoFactory.eINSTANCE.createPhysicalConnection();
 
         // add to resources
-        final SmartGridTopology scenario = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
+        final SmartGridTopology scenario = (SmartGridTopology) getBusinessObjectForPictogramElement(getDiagram());
         scenario.getContainsPC().add(newRole);
 
         // Get anchors
         final Anchor sourceAnchor = context.getSourceAnchor();
         final Anchor targetAnchor = context.getTargetAnchor();
-        newRole.getLinks().add((NetworkEntity) this.getBoFromAnchor(sourceAnchor));
-        newRole.getLinks().add((NetworkEntity) this.getBoFromAnchor(targetAnchor));
+        newRole.getLinks().add((NetworkEntity) getBoFromAnchor(sourceAnchor));
+        newRole.getLinks().add((NetworkEntity) getBoFromAnchor(targetAnchor));
 
         final AddConnectionContext addContext = new AddConnectionContext(sourceAnchor, targetAnchor);
         addContext.setNewObject(newRole);
 
-        final Connection connection = (Connection) this.getFeatureProvider().addIfPossible(addContext);
+        final Connection connection = (Connection) getFeatureProvider().addIfPossible(addContext);
 
         return connection;
     }
@@ -76,7 +76,7 @@ public class PhysicalConnectionPattern extends AbstractConnection {
      */
     @Override
     public boolean canStartConnection(final ICreateConnectionContext context) {
-        final Object sourceElement = this.getBusinessObjectForPictogramElement(context.getSourcePictogramElement());
+        final Object sourceElement = getBusinessObjectForPictogramElement(context.getSourcePictogramElement());
         return sourceElement instanceof NetworkEntity;
     }
 
@@ -98,8 +98,8 @@ public class PhysicalConnectionPattern extends AbstractConnection {
         }
 
         // Get BOs
-        final Object sourceDomainObject = this.getBusinessObjectForPictogramElement(sourcePictogramElement);
-        final Object targetDomainObject = this.getBusinessObjectForPictogramElement(targetPictogramElement);
+        final Object sourceDomainObject = getBusinessObjectForPictogramElement(sourcePictogramElement);
+        final Object targetDomainObject = getBusinessObjectForPictogramElement(targetPictogramElement);
 
         // Check for type
         final boolean sourceIsCorrect = sourceDomainObject instanceof NetworkEntity;

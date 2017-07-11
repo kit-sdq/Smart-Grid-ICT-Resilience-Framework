@@ -53,22 +53,22 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
     public SGSFeatureProvider(final IDiagramTypeProvider dtp) {
         super(dtp);
         GraphitiHelper.getInstance().setFeatureProvider(this);
-        GraphitiHelper.getInstance().setDiagram(this.getDiagramTypeProvider().getDiagram());
+        GraphitiHelper.getInstance().setDiagram(getDiagramTypeProvider().getDiagram());
 
-        this.addPattern(new SmartMeterPattern());
-        this.addPattern(new GenericControllerPattern());
-        this.addPattern(new InterComPattern());
-        this.addPattern(new ControlCenterPattern());
-        this.addPattern(new NetworkNodePattern());
-        this.addPattern(new PowerGridNodePattern());
-        this.addPattern(new TextCommentPattern());
-        this.addContextButtons();
+        addPattern(new SmartMeterPattern());
+        addPattern(new GenericControllerPattern());
+        addPattern(new InterComPattern());
+        addPattern(new ControlCenterPattern());
+        addPattern(new NetworkNodePattern());
+        addPattern(new PowerGridNodePattern());
+        addPattern(new TextCommentPattern());
+        addContextButtons();
         // atm not used
         // addResizeFeatures();
 
         // Warning: add new connection also to TextCommentPattern.isMainBusinessObjectApplicable
-        this.addConnectionPattern(new PhysicalConnectionPattern());
-        this.addConnectionPattern(new LogicalCommunicationPattern());
+        addConnectionPattern(new PhysicalConnectionPattern());
+        addConnectionPattern(new LogicalCommunicationPattern());
     }
 
     /**
@@ -77,7 +77,7 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
      */
     private void addContextButtons() {
         ExtensionPointRegistry.getInstance().clearContextButtons();
-        final List<AbstractCustomFeature> extensionCustomButtons = (new EvaluateContextButtons(this)).evaluateFeatureExtension(Platform.getExtensionRegistry());
+        final List<AbstractCustomFeature> extensionCustomButtons = new EvaluateContextButtons(this).evaluateFeatureExtension(Platform.getExtensionRegistry());
         ExtensionPointRegistry.getInstance().addContextButtonsToRegistry(extensionCustomButtons);
     }
 
@@ -123,8 +123,8 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
     public IRemoveFeature getRemoveFeature(final IRemoveContext context) {
         if (context.getPictogramElement() instanceof Connection) {
             final Connection con = (Connection) context.getPictogramElement();
-            final NetworkEntity start = this.getNetworkEntity(con.getStart());
-            final PowerGridNode end = this.getPowerGridNode(con.getEnd());
+            final NetworkEntity start = getNetworkEntity(con.getStart());
+            final PowerGridNode end = getPowerGridNode(con.getEnd());
 
             if (start != null && end != null) {
                 return new RemovePowerConnectionFeature(this);
@@ -143,8 +143,8 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
     public IDeleteFeature getDeleteFeature(final IDeleteContext context) {
         if (context.getPictogramElement() instanceof Connection) {
             final Connection con = (Connection) context.getPictogramElement();
-            final NetworkEntity start = this.getNetworkEntity(con.getStart());
-            final PowerGridNode end = this.getPowerGridNode(con.getEnd());
+            final NetworkEntity start = getNetworkEntity(con.getStart());
+            final PowerGridNode end = getPowerGridNode(con.getEnd());
 
             if (start != null && end != null) {
                 return new DeletePowerConnectionFeature(this);
@@ -162,7 +162,7 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
      */
     private NetworkEntity getNetworkEntity(final Anchor anchor) {
         if (anchor != null) {
-            final Object object = this.getBusinessObjectForPictogramElement(anchor.getParent());
+            final Object object = getBusinessObjectForPictogramElement(anchor.getParent());
             if (object instanceof NetworkEntity) {
                 return (NetworkEntity) object;
             }
@@ -179,7 +179,7 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
      */
     private PowerGridNode getPowerGridNode(final Anchor anchor) {
         if (anchor != null) {
-            final Object object = this.getBusinessObjectForPictogramElement(anchor.getParent());
+            final Object object = getBusinessObjectForPictogramElement(anchor.getParent());
             if (object instanceof PowerGridNode) {
                 return (PowerGridNode) object;
             }

@@ -9,7 +9,7 @@ public class SmartGridCompletionExecuterTest extends SmartGridCompletionTest {
     @Test
     public void testSmartGridCompletionExecuter() {
         SmartGridCompletionExecuter smartGridCompletionExecuter = new SmartGridCompletionExecuter();
-        smartGridCompletionExecuter.executeCompletions(this.smartGridTopology);
+        smartGridCompletionExecuter.executeCompletions(smartGridTopology);
         //TODO: assert
     }
 

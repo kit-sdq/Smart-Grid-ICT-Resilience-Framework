@@ -70,6 +70,7 @@ public class SmartgridinputFactoryImpl extends EFactoryImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public ScenarioState createScenarioState() {
         ScenarioStateImpl scenarioState = new ScenarioStateImpl();
         return scenarioState;
@@ -80,6 +81,7 @@ public class SmartgridinputFactoryImpl extends EFactoryImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public EntityState createEntityState() {
         EntityStateImpl entityState = new EntityStateImpl();
         return entityState;
@@ -90,6 +92,7 @@ public class SmartgridinputFactoryImpl extends EFactoryImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public PowerState createPowerState() {
         PowerStateImpl powerState = new PowerStateImpl();
         return powerState;
@@ -100,6 +103,7 @@ public class SmartgridinputFactoryImpl extends EFactoryImpl implements Smartgrid
      * 
      * @generated
      */
+    @Override
     public SmartgridinputPackage getSmartgridinputPackage() {
         return (SmartgridinputPackage) getEPackage();
     }

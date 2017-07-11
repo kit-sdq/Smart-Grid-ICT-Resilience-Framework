@@ -6,15 +6,11 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -139,6 +135,7 @@ public class RepositoryImpl extends MinimalEObjectImpl.Container implements Repo
      * 
      * @generated
      */
+    @Override
     public int getId() {
         return id;
     }
@@ -148,6 +145,7 @@ public class RepositoryImpl extends MinimalEObjectImpl.Container implements Repo
      * 
      * @generated
      */
+    @Override
     public void setId(int newId) {
         int oldId = id;
         id = newId;
@@ -160,6 +158,7 @@ public class RepositoryImpl extends MinimalEObjectImpl.Container implements Repo
      * 
      * @generated
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -169,6 +168,7 @@ public class RepositoryImpl extends MinimalEObjectImpl.Container implements Repo
      * 
      * @generated
      */
+    @Override
     public void setName(String newName) {
         String oldName = name;
         name = newName;
@@ -181,9 +181,10 @@ public class RepositoryImpl extends MinimalEObjectImpl.Container implements Repo
      * 
      * @generated
      */
+    @Override
     public EList<SmartMeterType> getContainsSmartMeterTypes() {
         if (containsSmartMeterTypes == null) {
-            containsSmartMeterTypes = new EObjectContainmentEList<SmartMeterType>(SmartMeterType.class, this, SmartgridtopoPackage.REPOSITORY__CONTAINS_SMART_METER_TYPES);
+            containsSmartMeterTypes = new EObjectContainmentEList<>(SmartMeterType.class, this, SmartgridtopoPackage.REPOSITORY__CONTAINS_SMART_METER_TYPES);
         }
         return containsSmartMeterTypes;
     }
@@ -193,9 +194,10 @@ public class RepositoryImpl extends MinimalEObjectImpl.Container implements Repo
      * 
      * @generated
      */
+    @Override
     public EList<ConnectionType> getContainsConnectionType() {
         if (containsConnectionType == null) {
-            containsConnectionType = new EObjectContainmentEList<ConnectionType>(ConnectionType.class, this, SmartgridtopoPackage.REPOSITORY__CONTAINS_CONNECTION_TYPE);
+            containsConnectionType = new EObjectContainmentEList<>(ConnectionType.class, this, SmartgridtopoPackage.REPOSITORY__CONTAINS_CONNECTION_TYPE);
         }
         return containsConnectionType;
     }
@@ -205,9 +207,10 @@ public class RepositoryImpl extends MinimalEObjectImpl.Container implements Repo
      * 
      * @generated
      */
+    @Override
     public EList<NetworkNodeType> getContainsNetworkNodeTypes() {
         if (containsNetworkNodeTypes == null) {
-            containsNetworkNodeTypes = new EObjectContainmentEList<NetworkNodeType>(NetworkNodeType.class, this, SmartgridtopoPackage.REPOSITORY__CONTAINS_NETWORK_NODE_TYPES);
+            containsNetworkNodeTypes = new EObjectContainmentEList<>(NetworkNodeType.class, this, SmartgridtopoPackage.REPOSITORY__CONTAINS_NETWORK_NODE_TYPES);
         }
         return containsNetworkNodeTypes;
     }

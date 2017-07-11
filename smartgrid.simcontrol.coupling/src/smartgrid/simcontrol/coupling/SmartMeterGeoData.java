@@ -14,7 +14,7 @@ public class SmartMeterGeoData implements Serializable {
     }
 
     public void setLat(double _lat) {
-        this.lat = _lat;
+        lat = _lat;
     }
 
     public double getLon() {
@@ -22,6 +22,6 @@ public class SmartMeterGeoData implements Serializable {
     }
 
     public void setLon(double _lon) {
-        this.lon = _lon;
+        lon = _lon;
     }
 }

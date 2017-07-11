@@ -68,11 +68,11 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
     @Override
     public void createControl(final Composite parent) {
 
-        this.container = new Composite(parent, SWT.NONE);
-        this.setControl(this.container);
-        this.container.setLayout(new FormLayout());
+        container = new Composite(parent, SWT.NONE);
+        setControl(container);
+        container.setLayout(new FormLayout());
 
-        final Group group = new Group(this.container, SWT.NONE);
+        final Group group = new Group(container, SWT.NONE);
         final FormData fd_group = new FormData();
         fd_group.left = new FormAttachment(0, 10);
         fd_group.top = new FormAttachment(0, 10);
@@ -80,22 +80,22 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
 
         group.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages").getString("LaunchConfigurationTab1.group.text"));
 
-        this.inputTextbox = new Text(group, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
+        inputTextbox = new Text(group, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
 
-        this.inputTextbox.setBounds(10, 22, 553, 41);
-        this.inputTextbox.addModifyListener(e -> this.propertyChanged());
-        this.inputTextbox.setEditable(true);
-        this.inputTextbox.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages").getString("LaunchConfigurationTab1.inputTextbox.text"));
+        inputTextbox.setBounds(10, 22, 553, 41);
+        inputTextbox.addModifyListener(e -> propertyChanged());
+        inputTextbox.setEditable(true);
+        inputTextbox.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages").getString("LaunchConfigurationTab1.inputTextbox.text"));
         final org.eclipse.swt.widgets.Button SelectInputPathButton = new org.eclipse.swt.widgets.Button(group, SWT.TOGGLE);
         SelectInputPathButton.setBounds(569, 22, 143, 32);
 
         SelectInputPathButton.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages").getString("LaunchConfigurationTab1.SelectInputPathButton.text"));
 
-        this.topologyTextbox = new Text(group, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
-        this.topologyTextbox.setBounds(10, 69, 553, 41);
-        this.topologyTextbox.addModifyListener(e -> this.propertyChanged());
-        this.topologyTextbox.setEditable(true);
-        this.topologyTextbox.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages") //$NON-NLS-1$
+        topologyTextbox = new Text(group, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
+        topologyTextbox.setBounds(10, 69, 553, 41);
+        topologyTextbox.addModifyListener(e -> propertyChanged());
+        topologyTextbox.setEditable(true);
+        topologyTextbox.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages") //$NON-NLS-1$
                 .getString("LaunchConfigurationTab1.inputTextbox.text")); //$NON-NLS-1$
 
         final org.eclipse.swt.widgets.Button SelectTopologyPathButton = new org.eclipse.swt.widgets.Button(group, SWT.TOGGLE);
@@ -107,7 +107,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
         });
         SelectTopologyPathButton.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages").getString("LaunchConfigurationTab1.SelectTopologyPathButton.text"));
 
-        final Group grpOutputFiles = new Group(this.container, SWT.NONE);
+        final Group grpOutputFiles = new Group(container, SWT.NONE);
         final FormData fd_grpOutputFiles = new FormData();
         fd_grpOutputFiles.top = new FormAttachment(group, 6);
         fd_grpOutputFiles.left = new FormAttachment(0, 10);
@@ -118,11 +118,11 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
         SelectOutputPathButton.setBounds(569, 22, 141, 32);
         SelectOutputPathButton.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages").getString("LaunchConfigurationTab1.SelectOutputPathButton.text"));
 
-        this.outputTextbox = new Text(grpOutputFiles, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
-        this.outputTextbox.setBounds(10, 22, 553, 41);
-        this.outputTextbox.addModifyListener(e -> this.propertyChanged());
-        this.outputTextbox.setEditable(true);
-        this.outputTextbox.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages").getString("LaunchConfigurationTab1.inputTextbox.text"));
+        outputTextbox = new Text(grpOutputFiles, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
+        outputTextbox.setBounds(10, 22, 553, 41);
+        outputTextbox.addModifyListener(e -> propertyChanged());
+        outputTextbox.setEditable(true);
+        outputTextbox.setText(ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages").getString("LaunchConfigurationTab1.inputTextbox.text"));
 
         SelectOutputPathButton.addMouseListener(new MouseListener() {
 
@@ -137,7 +137,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
                 final String outputPath = LaunchConfigurationTab1.this.getFilePath(message, LaunchConfigurationTab1.OUTPUT_EXTENSION);
 
                 if (outputPath != null) {
-                    LaunchConfigurationTab1.this.outputTextbox.setText(outputPath);
+                    outputTextbox.setText(outputPath);
                 }
             }
 
@@ -158,7 +158,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
                 final String topologyPath = LaunchConfigurationTab1.this.getFilePath(message, LaunchConfigurationTab1.TOPO_EXTENSION);
 
                 if (topologyPath != null) {
-                    LaunchConfigurationTab1.this.topologyTextbox.setText(topologyPath);
+                    topologyTextbox.setText(topologyPath);
                 }
             }
 
@@ -180,7 +180,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
                 final String inputPath = LaunchConfigurationTab1.this.getFilePath(message, LaunchConfigurationTab1.INPUT_EXTENSION);
 
                 if (inputPath != null) {
-                    LaunchConfigurationTab1.this.inputTextbox.setText(inputPath);
+                    inputTextbox.setText(inputPath);
                 }
             }
 
@@ -195,7 +195,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
      */
     private String getFilePath(final String dialogMessage, final String extension) {
 
-        final FileDialog dialog = new FileDialog(this.container.getShell(), SWT.OPEN);
+        final FileDialog dialog = new FileDialog(container.getShell(), SWT.OPEN);
 
         dialog.setText(dialogMessage);
         final String extensionFilter = "*." + extension;
@@ -220,9 +220,9 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
             final String inpPath = configuration.getAttribute(INPUT_PATH_KEY, LaunchConfigurationTab1.DEFAULT_INPUT_PATH);
             final String outPath = configuration.getAttribute(OUTPUT_PATH_KEY, LaunchConfigurationTab1.DEFAULT_OUTPUT_PATH);
 
-            this.topologyTextbox.setText(topoPath);
-            this.inputTextbox.setText(inpPath);
-            this.outputTextbox.setText(outPath);
+            topologyTextbox.setText(topoPath);
+            inputTextbox.setText(inpPath);
+            outputTextbox.setText(outPath);
 
         } catch (final CoreException e) {
             e.printStackTrace();
@@ -231,9 +231,9 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
 
     @Override
     public void performApply(final ILaunchConfigurationWorkingCopy configuration) {
-        final String topoPath = this.topologyTextbox.getText();
-        final String inPath = this.inputTextbox.getText();
-        final String outPath = this.outputTextbox.getText();
+        final String topoPath = topologyTextbox.getText();
+        final String inPath = inputTextbox.getText();
+        final String outPath = outputTextbox.getText();
 
         // Add to config
         configuration.setAttribute(TOPOLOGY_PATH_KEY, topoPath);
@@ -248,9 +248,9 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
     // }
 
     private boolean areTextBoxesEmpty() {
-        final boolean topoEmpty = this.topologyTextbox.getText().equals("");
-        final boolean inEmpty = this.inputTextbox.getText().equals("");
-        final boolean outEmpty = this.outputTextbox.getText().equals("");
+        final boolean topoEmpty = topologyTextbox.getText().equals("");
+        final boolean inEmpty = inputTextbox.getText().equals("");
+        final boolean outEmpty = outputTextbox.getText().equals("");
         return topoEmpty || inEmpty || outEmpty;
     }
 
@@ -259,9 +259,9 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
      * @return True if topology or input or output file extensions are wrong
      */
     private boolean areFileExtensionsWrong() {
-        final boolean topoWrong = !this.topologyTextbox.getText().endsWith(LaunchConfigurationTab1.TOPO_EXTENSION);
-        final boolean inWrong = !this.inputTextbox.getText().endsWith(LaunchConfigurationTab1.INPUT_EXTENSION);
-        final boolean outWrong = !this.outputTextbox.getText().endsWith(LaunchConfigurationTab1.OUTPUT_EXTENSION);
+        final boolean topoWrong = !topologyTextbox.getText().endsWith(LaunchConfigurationTab1.TOPO_EXTENSION);
+        final boolean inWrong = !inputTextbox.getText().endsWith(LaunchConfigurationTab1.INPUT_EXTENSION);
+        final boolean outWrong = !outputTextbox.getText().endsWith(LaunchConfigurationTab1.OUTPUT_EXTENSION);
         return topoWrong || inWrong || outWrong;
     }
 
@@ -277,10 +277,10 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
 
         String Message = "";
 
-        if (this.areTextBoxesEmpty()) {
+        if (areTextBoxesEmpty()) {
             Message = ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages") //$NON-NLS-1$
                     .getString("LaunchConfigurationTab1.ErrorMessages.NO_PATH"); //$NON-NLS-1$
-        } else if (this.areFileExtensionsWrong()) {
+        } else if (areFileExtensionsWrong()) {
             Message = ResourceBundle.getBundle("smartgrid.impactanalysis.ui.messages") //$NON-NLS-1$
                     .getString("LaunchConfigurationTab1.ErrorMessages.WRONG_EXTENSIONS"); //$NON-NLS-1$
         } else {
@@ -299,7 +299,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
 
     @Override
     public boolean isValid(final ILaunchConfiguration launchConfig) {
-        return !this.areTextBoxesEmpty() && !this.areFileExtensionsWrong();
+        return !areTextBoxesEmpty() && !areFileExtensionsWrong();
     }
 
     @Override
@@ -315,7 +315,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
     }
 
     private void propertyChanged() {
-        this.updateLaunchConfigurationDialog();
+        updateLaunchConfigurationDialog();
     }
 
 }

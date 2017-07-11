@@ -49,8 +49,8 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
         LOG.debug("[LaunchConfiguration]: Input : " + inputPath);
         LOG.debug("[LaunchConfiguration]: Topology : " + topoPath);
 
-        final ScenarioState initialState = this.loadInput(inputPath);
-        final SmartGridTopology topo = this.loadScenario(topoPath);
+        final ScenarioState initialState = loadInput(inputPath);
+        final SmartGridTopology topo = loadScenario(topoPath);
 
         @SuppressWarnings("deprecation")
         final GraphAnalyzer ana = new GraphAnalyzer(outputPath);

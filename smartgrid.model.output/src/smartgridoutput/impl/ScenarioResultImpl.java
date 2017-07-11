@@ -89,9 +89,10 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
      * 
      * @generated
      */
+    @Override
     public EList<EntityState> getStates() {
         if (states == null) {
-            states = new EObjectContainmentEList<EntityState>(EntityState.class, this, SmartgridoutputPackage.SCENARIO_RESULT__STATES);
+            states = new EObjectContainmentEList<>(EntityState.class, this, SmartgridoutputPackage.SCENARIO_RESULT__STATES);
         }
         return states;
     }
@@ -101,9 +102,10 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
      * 
      * @generated
      */
+    @Override
     public EList<Cluster> getClusters() {
         if (clusters == null) {
-            clusters = new EObjectContainmentEList<Cluster>(Cluster.class, this, SmartgridoutputPackage.SCENARIO_RESULT__CLUSTERS);
+            clusters = new EObjectContainmentEList<>(Cluster.class, this, SmartgridoutputPackage.SCENARIO_RESULT__CLUSTERS);
         }
         return clusters;
     }
@@ -113,6 +115,7 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
      * 
      * @generated
      */
+    @Override
     public SmartGridTopology getScenario() {
         if (scenario != null && scenario.eIsProxy()) {
             InternalEObject oldScenario = (InternalEObject) scenario;
@@ -139,6 +142,7 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
      * 
      * @generated
      */
+    @Override
     public void setScenario(SmartGridTopology newScenario) {
         SmartGridTopology oldScenario = scenario;
         scenario = newScenario;

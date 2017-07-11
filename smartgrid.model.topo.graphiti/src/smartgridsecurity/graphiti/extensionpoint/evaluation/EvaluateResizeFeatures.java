@@ -31,7 +31,7 @@ public class EvaluateResizeFeatures {
     private final IFeatureProvider fp;
 
     public EvaluateResizeFeatures(final IFeatureProvider f) {
-        this.fp = f;
+        fp = f;
     }
 
     /**
@@ -42,7 +42,7 @@ public class EvaluateResizeFeatures {
      * @return all found feature extensions
      */
     public List<IResizeShapeFeature> evaluateFeatureExtension(final IExtensionRegistry registry) {
-        return this.evaluate(registry);
+        return evaluate(registry);
     }
 
     /**
@@ -57,8 +57,8 @@ public class EvaluateResizeFeatures {
 
         // define the thread pool
         final ExecutorService pool = Executors.newCachedThreadPool();
-        final List<Future<List<IResizeShapeFeature>>> list = new LinkedList<Future<List<IResizeShapeFeature>>>();
-        final List<IResizeShapeFeature> resizeShapeFeatureList = new LinkedList<IResizeShapeFeature>();
+        final List<Future<List<IResizeShapeFeature>>> list = new LinkedList<>();
+        final List<IResizeShapeFeature> resizeShapeFeatureList = new LinkedList<>();
 
         try {
             for (final IConfigurationElement e : config) {
@@ -66,7 +66,7 @@ public class EvaluateResizeFeatures {
                 final Object o = e.createExecutableExtension("class");
                 if (o instanceof IResizeFeatureResolver) {
                     // Executes the evaluation in a thread an returns the result in the future
-                    final Callable<List<IResizeShapeFeature>> callable = new EvaluateAbstractPattern((IResizeFeatureResolver) o, this.fp);
+                    final Callable<List<IResizeShapeFeature>> callable = new EvaluateAbstractPattern((IResizeFeatureResolver) o, fp);
                     final Future<List<IResizeShapeFeature>> future = pool.submit(callable);
                     list.add(future);
                 }
@@ -100,13 +100,13 @@ public class EvaluateResizeFeatures {
         private final IFeatureProvider provider;
 
         public EvaluateAbstractPattern(final IResizeFeatureResolver f, final IFeatureProvider fp) {
-            this.resolver = f;
-            this.provider = fp;
+            resolver = f;
+            provider = fp;
         }
 
         @Override
         public List<IResizeShapeFeature> call() throws Exception {
-            return this.resolver.getResizeShapeFeature(this.provider);
+            return resolver.getResizeShapeFeature(provider);
         }
 
     }

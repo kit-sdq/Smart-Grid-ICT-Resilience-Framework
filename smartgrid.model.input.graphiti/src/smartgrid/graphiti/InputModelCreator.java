@@ -42,7 +42,7 @@ public class InputModelCreator {
     private final IDiagramContainerUI diagramContainer;
 
     public InputModelCreator(final IDiagramContainerUI dc) {
-        this.diagramContainer = dc;
+        diagramContainer = dc;
     }
 
     /**
@@ -53,8 +53,8 @@ public class InputModelCreator {
      * @return return code which button was selected
      */
     public int createNewInputModel(final boolean isDefault) {
-        final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
-        final EList<EObject> boList = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
+        final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
+        final EList<EObject> boList = diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
 
         final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
         URI uri = null;
@@ -66,13 +66,13 @@ public class InputModelCreator {
                 return Window.CANCEL;
             }
 
-            uri = this.getCurrentUri().appendSegment(dialog.getValue() + ".smartgridinput");
+            uri = getCurrentUri().appendSegment(dialog.getValue() + ".smartgridinput");
         } else {
             // TODO clear button muss enabled werden -> schwierig -> deshalb
             // custom actions disabled
             // solange kein input modell geladen ist
-            uri = this.getCurrentUri().appendSegment("default.smartgridinput");
-            if (this.doesFileExist(uri.path(), shell)) {
+            uri = getCurrentUri().appendSegment("default.smartgridinput");
+            if (doesFileExist(uri.path(), shell)) {
                 return Window.CANCEL;
             }
         }
@@ -109,7 +109,7 @@ public class InputModelCreator {
                     }
                 }
 
-                final EList<Shape> shapes = InputModelCreator.this.diagramContainer.getDiagramTypeProvider().getDiagram().getChildren();
+                final EList<Shape> shapes = diagramContainer.getDiagramTypeProvider().getDiagram().getChildren();
                 for (final Shape shape : shapes) {
                     final EObject obj = shape.getLink().getBusinessObjects().get(0);
                     if (obj instanceof NetworkEntity) {
@@ -125,7 +125,7 @@ public class InputModelCreator {
                 }
 
                 rs.getContents().add(domainModel);
-                InputModelCreator.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().add(domainModel);
+                diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().add(domainModel);
                 try {
                     rs.save(InputModelCreator.this.createSaveOptions());
                 } catch (final IOException e) {
@@ -143,7 +143,7 @@ public class InputModelCreator {
      * @return the current uri
      */
     private URI getCurrentUri() {
-        return this.diagramContainer.getDiagramEditorInput().getUri().trimSegments(1);
+        return diagramContainer.getDiagramEditorInput().getUri().trimSegments(1);
     }
 
     /**
@@ -152,7 +152,7 @@ public class InputModelCreator {
      * @return the save options
      */
     private Map<?, ?> createSaveOptions() {
-        final HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+        final HashMap<String, Object> saveOptions = new HashMap<>();
         saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
         saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
         return saveOptions;

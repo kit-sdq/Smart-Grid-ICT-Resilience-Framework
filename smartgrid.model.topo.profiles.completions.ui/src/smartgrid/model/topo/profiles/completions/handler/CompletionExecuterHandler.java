@@ -62,7 +62,7 @@ public class CompletionExecuterHandler extends AbstractHandler {
     }
 
     private IFile copyIResource(IResource resource) throws ExecutionException {
-        IPath newPath = (IPath) resource.getFullPath();
+        IPath newPath = resource.getFullPath();
         newPath = newPath.removeFileExtension();
         String newLastSegment = newPath.lastSegment() + "_completed.smartgridtopo";
         newPath = newPath.removeLastSegments(1);

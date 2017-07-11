@@ -5,19 +5,14 @@ package topoextension.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import smartgridtopo.NetworkEntity;
-
 import topoextension.Completion;
 import topoextension.TopoextensionPackage;
 
@@ -68,9 +63,10 @@ public class CompletionImpl extends MinimalEObjectImpl.Container implements Comp
      * 
      * @generated
      */
+    @Override
     public EList<NetworkEntity> getNetworkentity() {
         if (networkentity == null) {
-            networkentity = new EObjectContainmentEList<NetworkEntity>(NetworkEntity.class, this, TopoextensionPackage.COMPLETION__NETWORKENTITY);
+            networkentity = new EObjectContainmentEList<>(NetworkEntity.class, this, TopoextensionPackage.COMPLETION__NETWORKENTITY);
         }
         return networkentity;
     }

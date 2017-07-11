@@ -89,6 +89,7 @@ public class SmartMeterTypeImpl extends MinimalEObjectImpl.Container implements 
      * 
      * @generated
      */
+    @Override
     public int getId() {
         return id;
     }
@@ -98,6 +99,7 @@ public class SmartMeterTypeImpl extends MinimalEObjectImpl.Container implements 
      * 
      * @generated
      */
+    @Override
     public void setId(int newId) {
         int oldId = id;
         id = newId;
@@ -110,6 +112,7 @@ public class SmartMeterTypeImpl extends MinimalEObjectImpl.Container implements 
      * 
      * @generated
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -119,6 +122,7 @@ public class SmartMeterTypeImpl extends MinimalEObjectImpl.Container implements 
      * 
      * @generated
      */
+    @Override
     public void setName(String newName) {
         String oldName = name;
         name = newName;

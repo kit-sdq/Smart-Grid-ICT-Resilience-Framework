@@ -36,7 +36,7 @@ public class ReportGenerator {
         String headlines = "";
         String content = "";
 
-        Map<String, Integer> stats = new HashMap<String, Integer>();
+        Map<String, Integer> stats = new HashMap<>();
         stats.put("Total", 0);
 
         for (EntityState state : scenarioResult.getStates()) {

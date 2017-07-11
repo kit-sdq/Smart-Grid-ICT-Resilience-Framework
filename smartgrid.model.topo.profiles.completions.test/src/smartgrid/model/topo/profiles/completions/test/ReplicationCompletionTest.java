@@ -13,7 +13,7 @@ public class ReplicationCompletionTest extends SmartGridCompletionTest {
     public void testReplicationCompletion() {
         SmartMeter smartMeter = getFirstSmartMeter();
         Replication replication = SmartGridStereotypesAPI.getReplicationStereotype(smartMeter);
-        long smartMetersBeforeReplication = AssertHelper.countSmartMetersInTopology(this.smartGridTopology);
+        long smartMetersBeforeReplication = AssertHelper.countSmartMetersInTopology(smartGridTopology);
 
         ReplicationCompletionForSmartMeter replicationCompletion = new ReplicationCompletionForSmartMeter();
         replicationCompletion.executeCompletion(smartMeter, replication);

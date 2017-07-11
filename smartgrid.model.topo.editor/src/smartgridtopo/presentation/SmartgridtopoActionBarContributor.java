@@ -19,7 +19,6 @@ import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IContributionManager;
-import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
@@ -183,11 +182,7 @@ public class SmartgridtopoActionBarContributor extends EditingDomainActionBarCon
 
         // Force an update because Eclipse hides empty menus now.
         //
-        submenuManager.addMenuListener(new IMenuListener() {
-            public void menuAboutToShow(IMenuManager menuManager) {
-                menuManager.updateAll(true);
-            }
-        });
+        submenuManager.addMenuListener(menuManager1 -> menuManager1.updateAll(true));
 
         addGlobalActions(submenuManager);
     }
@@ -230,6 +225,7 @@ public class SmartgridtopoActionBarContributor extends EditingDomainActionBarCon
      * 
      * @generated
      */
+    @Override
     public void selectionChanged(SelectionChangedEvent event) {
         // Remove any menu items for old selection.
         //
@@ -278,7 +274,7 @@ public class SmartgridtopoActionBarContributor extends EditingDomainActionBarCon
      * @generated
      */
     protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
-        Collection<IAction> actions = new ArrayList<IAction>();
+        Collection<IAction> actions = new ArrayList<>();
         if (descriptors != null) {
             for (Object descriptor : descriptors) {
                 actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
@@ -295,7 +291,7 @@ public class SmartgridtopoActionBarContributor extends EditingDomainActionBarCon
      * @generated
      */
     protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
-        Collection<IAction> actions = new ArrayList<IAction>();
+        Collection<IAction> actions = new ArrayList<>();
         if (descriptors != null) {
             for (Object descriptor : descriptors) {
                 actions.add(new CreateSiblingAction(activeEditorPart, selection, descriptor));
@@ -337,10 +333,10 @@ public class SmartgridtopoActionBarContributor extends EditingDomainActionBarCon
     protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
         if (actions != null) {
             IContributionItem[] items = manager.getItems();
-            for (int i = 0; i < items.length; i++) {
+            for (IContributionItem item : items) {
                 // Look into SubContributionItems
                 //
-                IContributionItem contributionItem = items[i];
+                IContributionItem contributionItem = item;
                 while (contributionItem instanceof SubContributionItem) {
                     contributionItem = ((SubContributionItem) contributionItem).getInnerItem();
                 }

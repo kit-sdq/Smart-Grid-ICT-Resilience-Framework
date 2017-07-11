@@ -6,36 +6,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-
 import org.eclipse.emf.edit.ui.action.ControlAction;
 import org.eclipse.emf.edit.ui.action.CreateChildAction;
 import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.action.ValidateAction;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IContributionManager;
-import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.SubContributionItem;
-
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.Viewer;
-
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
@@ -188,11 +182,7 @@ public class TopoextensionActionBarContributor extends EditingDomainActionBarCon
 
         // Force an update because Eclipse hides empty menus now.
         //
-        submenuManager.addMenuListener(new IMenuListener() {
-            public void menuAboutToShow(IMenuManager menuManager) {
-                menuManager.updateAll(true);
-            }
-        });
+        submenuManager.addMenuListener(menuManager1 -> menuManager1.updateAll(true));
 
         addGlobalActions(submenuManager);
     }
@@ -235,6 +225,7 @@ public class TopoextensionActionBarContributor extends EditingDomainActionBarCon
      * 
      * @generated
      */
+    @Override
     public void selectionChanged(SelectionChangedEvent event) {
         // Remove any menu items for old selection.
         //
@@ -283,7 +274,7 @@ public class TopoextensionActionBarContributor extends EditingDomainActionBarCon
      * @generated
      */
     protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
-        Collection<IAction> actions = new ArrayList<IAction>();
+        Collection<IAction> actions = new ArrayList<>();
         if (descriptors != null) {
             for (Object descriptor : descriptors) {
                 actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
@@ -300,7 +291,7 @@ public class TopoextensionActionBarContributor extends EditingDomainActionBarCon
      * @generated
      */
     protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
-        Collection<IAction> actions = new ArrayList<IAction>();
+        Collection<IAction> actions = new ArrayList<>();
         if (descriptors != null) {
             for (Object descriptor : descriptors) {
                 actions.add(new CreateSiblingAction(activeEditorPart, selection, descriptor));
@@ -342,10 +333,10 @@ public class TopoextensionActionBarContributor extends EditingDomainActionBarCon
     protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
         if (actions != null) {
             IContributionItem[] items = manager.getItems();
-            for (int i = 0; i < items.length; i++) {
+            for (IContributionItem item : items) {
                 // Look into SubContributionItems
                 //
-                IContributionItem contributionItem = items[i];
+                IContributionItem contributionItem = item;
                 while (contributionItem instanceof SubContributionItem) {
                     contributionItem = ((SubContributionItem) contributionItem).getInnerItem();
                 }

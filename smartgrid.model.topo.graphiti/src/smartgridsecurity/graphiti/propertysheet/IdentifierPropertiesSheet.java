@@ -9,8 +9,6 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -50,53 +48,49 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
     public void createControls(final Composite parent, final TabbedPropertySheetPage tabbedPropertySheetPage) {
         super.createControls(parent, tabbedPropertySheetPage);
 
-        final TabbedPropertySheetWidgetFactory factory = this.getWidgetFactory();
+        final TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
         final Composite composite = factory.createFlatFormComposite(parent);
 
         final GridLayout layout = new GridLayout(2, false);
         composite.setLayout(layout);
 
-        this.label = new Label(composite, SWT.NONE);
-        this.label.setText("Identifier: ");
+        label = new Label(composite, SWT.NONE);
+        label.setText("Identifier: ");
 
-        this.idWidget = new Text(composite, SWT.BORDER);
+        idWidget = new Text(composite, SWT.BORDER);
         final GridData gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
         gridData.grabExcessHorizontalSpace = true;
-        this.idWidget.setLayoutData(gridData);
-        this.idWidget.setText("0");
+        idWidget.setLayoutData(gridData);
+        idWidget.setText("0");
 
-        this.idWidget.addModifyListener(new ModifyListener() {
+        idWidget.addModifyListener(e -> {
+            final IFeature feature = new AbstractFeature(IdentifierPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
 
-            @Override
-            public void modifyText(final ModifyEvent e) {
-                final IFeature feature = new AbstractFeature(IdentifierPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
+                @Override
+                public void execute(final IContext context) {
+                    final PictogramElement pe = IdentifierPropertiesSheet.this.getSelectedPictogramElement();
+                    if (pe != null) {
+                        final Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+                        if (bo == null) {
+                            return;
+                        }
 
-                    @Override
-                    public void execute(final IContext context) {
-                        final PictogramElement pe = IdentifierPropertiesSheet.this.getSelectedPictogramElement();
-                        if (pe != null) {
-                            final Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-                            if (bo == null) {
-                                return;
-                            }
-
-                            final Identifier identifier = (Identifier) bo;
-                            final String id = IdentifierPropertiesSheet.this.idWidget.getText();
-                            if (!(id.equals(Integer.toString(identifier.getId())))) {
-                                identifier.setId(Integer.parseInt(id));
-                            }
+                        final Identifier identifier = (Identifier) bo;
+                        final String id = idWidget.getText();
+                        if (!id.equals(Integer.toString(identifier.getId()))) {
+                            identifier.setId(Integer.parseInt(id));
                         }
                     }
+                }
 
-                    @Override
-                    public boolean canExecute(final IContext context) {
-                        return true;
-                    }
-                };
-                IdentifierPropertiesSheet.this.execute(feature, new CustomContext());
+                @Override
+                public boolean canExecute(final IContext context) {
+                    return true;
+                }
+            };
+            IdentifierPropertiesSheet.this.execute(feature, new CustomContext());
 
-            }
         });
     }
 
@@ -107,7 +101,7 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
      */
     @Override
     public void refresh() {
-        final PictogramElement pe = this.getSelectedPictogramElement();
+        final PictogramElement pe = getSelectedPictogramElement();
         if (pe != null) {
 
             final EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
@@ -118,9 +112,9 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
             }
 
             if (((Identifier) bo).getId() != 0) {
-                this.idWidget.setText(Integer.toString(((Identifier) bo).getId()));
+                idWidget.setText(Integer.toString(((Identifier) bo).getId()));
             } else {
-                this.idWidget.setText("");
+                idWidget.setText("");
             }
         }
     }

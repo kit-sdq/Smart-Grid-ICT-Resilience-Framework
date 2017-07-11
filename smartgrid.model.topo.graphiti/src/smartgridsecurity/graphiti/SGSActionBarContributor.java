@@ -21,7 +21,7 @@ public class SGSActionBarContributor extends DiagramEditorActionBarContributor {
 
     public SGSActionBarContributor() {
         super();
-        this.addToolbarButtonActions();
+        addToolbarButtonActions();
     }
 
     /**
@@ -30,7 +30,7 @@ public class SGSActionBarContributor extends DiagramEditorActionBarContributor {
      */
     private void addToolbarButtonActions() {
         if (ExtensionPointRegistry.getInstance().getButtonActionsSize() == 0) {
-            final List<ToolbarButtonAction> extensionToolbarActions = (new EvaluateToolbarActions()).evaluateFeatureExtension(Platform.getExtensionRegistry());
+            final List<ToolbarButtonAction> extensionToolbarActions = new EvaluateToolbarActions().evaluateFeatureExtension(Platform.getExtensionRegistry());
             for (final ToolbarButtonAction t : extensionToolbarActions) {
                 ExtensionPointRegistry.getInstance().addActionToRegistry(t);
             }
@@ -43,7 +43,7 @@ public class SGSActionBarContributor extends DiagramEditorActionBarContributor {
         for (final ToolbarButtonAction toolbarAction : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
             final RetargetAction action = new RetargetAction(toolbarAction.ACTION_ID, toolbarAction.TOOL_TIP);
             action.setImageDescriptor(toolbarAction.getImageDescriptor());
-            this.addRetargetAction(action);
+            addRetargetAction(action);
         }
     }
 
@@ -52,7 +52,7 @@ public class SGSActionBarContributor extends DiagramEditorActionBarContributor {
         super.contributeToToolBar(tbm);
 
         for (final ToolbarButtonAction toolbarAction : ExtensionPointRegistry.getInstance().getAllToolbarActions()) {
-            tbm.add(this.getAction(toolbarAction.ACTION_ID));
+            tbm.add(getAction(toolbarAction.ACTION_ID));
         }
 
     }

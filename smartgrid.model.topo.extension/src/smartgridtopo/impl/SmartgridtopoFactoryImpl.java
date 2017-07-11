@@ -5,12 +5,24 @@ package smartgridtopo.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import smartgridtopo.*;
+import smartgridtopo.ConnectionType;
+import smartgridtopo.ControlCenter;
+import smartgridtopo.GenericController;
+import smartgridtopo.InterCom;
+import smartgridtopo.LogicalCommunication;
+import smartgridtopo.NetworkNode;
+import smartgridtopo.NetworkNodeType;
+import smartgridtopo.PhysicalConnection;
+import smartgridtopo.PowerGridNode;
+import smartgridtopo.Repository;
+import smartgridtopo.SmartGridTopology;
+import smartgridtopo.SmartMeter;
+import smartgridtopo.SmartMeterType;
+import smartgridtopo.SmartgridtopoFactory;
+import smartgridtopo.SmartgridtopoPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
@@ -88,6 +100,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public SmartGridTopology createSmartGridTopology() {
         SmartGridTopologyImpl smartGridTopology = new SmartGridTopologyImpl();
         return smartGridTopology;
@@ -98,6 +111,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public PowerGridNode createPowerGridNode() {
         PowerGridNodeImpl powerGridNode = new PowerGridNodeImpl();
         return powerGridNode;
@@ -108,6 +122,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public SmartMeter createSmartMeter() {
         SmartMeterImpl smartMeter = new SmartMeterImpl();
         return smartMeter;
@@ -118,6 +133,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public SmartMeterType createSmartMeterType() {
         SmartMeterTypeImpl smartMeterType = new SmartMeterTypeImpl();
         return smartMeterType;
@@ -128,6 +144,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public PhysicalConnection createPhysicalConnection() {
         PhysicalConnectionImpl physicalConnection = new PhysicalConnectionImpl();
         return physicalConnection;
@@ -138,6 +155,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public Repository createRepository() {
         RepositoryImpl repository = new RepositoryImpl();
         return repository;
@@ -148,6 +166,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public ConnectionType createConnectionType() {
         ConnectionTypeImpl connectionType = new ConnectionTypeImpl();
         return connectionType;
@@ -158,6 +177,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public NetworkNode createNetworkNode() {
         NetworkNodeImpl networkNode = new NetworkNodeImpl();
         return networkNode;
@@ -168,6 +188,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public NetworkNodeType createNetworkNodeType() {
         NetworkNodeTypeImpl networkNodeType = new NetworkNodeTypeImpl();
         return networkNodeType;
@@ -178,6 +199,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public ControlCenter createControlCenter() {
         ControlCenterImpl controlCenter = new ControlCenterImpl();
         return controlCenter;
@@ -188,6 +210,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public GenericController createGenericController() {
         GenericControllerImpl genericController = new GenericControllerImpl();
         return genericController;
@@ -198,6 +221,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public InterCom createInterCom() {
         InterComImpl interCom = new InterComImpl();
         return interCom;
@@ -208,6 +232,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public LogicalCommunication createLogicalCommunication() {
         LogicalCommunicationImpl logicalCommunication = new LogicalCommunicationImpl();
         return logicalCommunication;
@@ -218,6 +243,7 @@ public class SmartgridtopoFactoryImpl extends EFactoryImpl implements Smartgridt
      * 
      * @generated
      */
+    @Override
     public SmartgridtopoPackage getSmartgridtopoPackage() {
         return (SmartgridtopoPackage) getEPackage();
     }
