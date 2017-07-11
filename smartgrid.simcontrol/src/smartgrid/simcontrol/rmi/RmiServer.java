@@ -99,8 +99,12 @@ public class RmiServer implements ISimulationController {
             LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
             throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
         }
-        state = RmiServerState.NOT_INIT;
+        // shut down if reactive
+        else if (state == RmiServerState.REACTIVE) {
+            reactiveSimControl.shutDown();
+        }
+        // To-do here, the active simcontrol could be shutDown if there was a pointer (blocking sync required)
 
-        /* what to do here? */
+        state = RmiServerState.NOT_INIT;
     }
 }
