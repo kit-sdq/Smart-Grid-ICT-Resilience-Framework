@@ -207,13 +207,16 @@ public final class ReactiveSimulationController {
     /**
      * 
      * @param impactInput
+     *            The outdated ImpactAnalysis input data that should be updated
      * @param impactResult
+     *            The result from the last iteration. This also contains the hacked states, which
+     *            have to be transfered to impactInput
      * @param powerSupply
-     * @return
+     *            The output of the PowerLoad analysis, which has to be interpreted and transfered
+     *            to impactInput
      */
     private static void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, Map<String, Map<String, Double>> powerSupply) {
 
-        // TODO update to conform to new interfaces?
         //Transfer hacked state into next input
         for (final EntityState state : impactResult.getStates()) {
             final boolean hackedState = state instanceof On && ((On) state).isIsHacked();
@@ -228,17 +231,20 @@ public final class ReactiveSimulationController {
 
         //Transfer power supply state into next input
         for (final PowerState inputPowerState : impactInput.getPowerStates()) {
-            final String id = Integer.toString(inputPowerState.getOwner().getId());
+            final String prosumerId = Integer.toString(inputPowerState.getOwner().getId());
 
             // iterate over node entries
-            for (final Entry<String, Map<String, Double>> powerForNode : powerSupply.entrySet()) {
-                Map<String, Double> value = powerForNode.getValue();
-                Double supply = value.get(id);
-                if (supply != null) {
-                    inputPowerState.setPowerOutage(supply == 0.0d); //TODO when is there really a power outage? what todo with aggregated states?
-                }
+            for (final Map<String, Double> powerForProsumersOfNode : powerSupply.values()) {
+                Double supply = powerForProsumersOfNode.get(prosumerId);
+                assert supply != null;
+                inputPowerState.setPowerOutage(isOutage(supply));
             }
         }
+    }
+
+    public static boolean isOutage(double supply) {
+        // TODO is this really a power outage?
+        return supply == 0.0d;
     }
 
     public void init(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
