@@ -44,8 +44,7 @@ public final class SimulationController {
             timeProgressor.progress();
         }
 
-        LOG.info("Coupled simulation terminated");
-
+        LOG.info("Coupled simulation terminated internally");
         reactiveSimControl.shutDown();
     }
 
@@ -76,6 +75,11 @@ public final class SimulationController {
 
         reactiveSimControl = new ReactiveSimulationController();
         reactiveSimControl.init(outputPath, topoPath, inputPath);
+    }
+
+    public void shutDown() {
+        LOG.info("Coupled simulation terminated externally");
+        reactiveSimControl.shutDown();
     }
 
     /**
