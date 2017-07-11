@@ -73,7 +73,7 @@ public final class SimulationController {
         LOG.info("Running for " + maxTimeSteps + " time steps");
 
         // Retrieve simulations from extension points
-        loadCustomUserAnalysis(launchConfig);
+        initTimeProgressor(launchConfig);
 
         // Init time progressor
         timeProgressor.init(launchConfig);
@@ -86,7 +86,7 @@ public final class SimulationController {
     /**
      * @throws CoreException
      */
-    private void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException {
+    private void initTimeProgressor(final ILaunchConfiguration launchConfig) throws CoreException {
         final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
         final List<ITimeProgressor> time = helper.getProgressorExtensions();
