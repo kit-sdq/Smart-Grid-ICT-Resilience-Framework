@@ -65,11 +65,6 @@ public final class ReactiveSimulationController {
         timeStep = 0;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see smartgrid.simcontrol.ISimulationController#run(java.util.Map)
-     */
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
 
         // Compute Initial Impact Analysis Result
@@ -122,11 +117,6 @@ public final class ReactiveSimulationController {
         return powerSupply;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see smartgrid.simcontrol.ISimulationController#shutDown()
-     */
     public void shutDown() {
         // remove file appender of this run
         Logger.getRootLogger().removeAppender(fileAppender);
@@ -207,17 +197,6 @@ public final class ReactiveSimulationController {
         }
     }
 
-    /*
-     * Inits some things for all runs. Not for Interface based hook in !
-     *
-     * Does: # Generates Output Path String # Inits the Simulations
-     */
-    /*
-     * (non-Javadoc)
-     * 
-     * @see smartgrid.simcontrol.ISimulationController#init(java.lang.String, java.lang.String,
-     * java.lang.String)
-     */
     public void init(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
 
         LoggingInitializer.initialize();

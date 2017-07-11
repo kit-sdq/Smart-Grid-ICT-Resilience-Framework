@@ -49,11 +49,6 @@ public final class SimulationController {
         reactiveSimControl.shutDown();
     }
 
-    /*
-     * Inits some things for all runs. Not for Interface based hook in !
-     *
-     * Does: # Generates Output Path String # Inits the Simulations
-     */
     public void init(final ILaunchConfiguration launchConfig) throws CoreException, SimcontrolException {
 
         LoggingInitializer.initialize();
