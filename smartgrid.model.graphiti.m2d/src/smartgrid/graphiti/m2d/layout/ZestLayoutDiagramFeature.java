@@ -277,9 +277,8 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
             final SimpleNode targetEntity = map.get(target);
 
             if (source != target) { // we don't add self relations to avoid
-                                    // Cycle errors
-                final SimpleRelationship relationship = new SimpleRelationship(sourceEntity, targetEntity,
-                        (source != target));
+                                        // Cycle errors
+                final SimpleRelationship relationship = new SimpleRelationship(sourceEntity, targetEntity, (source != target));
                 relationship.setGraphData(connection);
                 relationship.clearBendPoints();
                 relationship.setLabel(label);
@@ -348,18 +347,15 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
             LOG.info("Using DirectedGraphLayoutAlgorithm");
             break;
         case 9:
-            layout = new CompositeLayoutAlgorithm(
-                    new LayoutAlgorithm[] { new DirectedGraphLayoutAlgorithm(style), new HorizontalShift(style) });
+            layout = new CompositeLayoutAlgorithm(new LayoutAlgorithm[] { new DirectedGraphLayoutAlgorithm(style), new HorizontalShift(style) });
             LOG.info("Using CompositeLayoutAlgorithm [DirectedGraphLayoutAlgorithm+HorizontalShift]");
             break;
         case 10:
-            layout = new CompositeLayoutAlgorithm(
-                    new LayoutAlgorithm[] { new SpringLayoutAlgorithm(style), new HorizontalShift(style) });
+            layout = new CompositeLayoutAlgorithm(new LayoutAlgorithm[] { new SpringLayoutAlgorithm(style), new HorizontalShift(style) });
             LOG.info("Using CompositeLayoutAlgorithm [SpringLayoutAlgorithm+HorizontalShift]");
             break;
         case 11:
-            layout = new CompositeLayoutAlgorithm(
-                    new LayoutAlgorithm[] { new RadialLayoutAlgorithm(style), new HorizontalShift(style) });
+            layout = new CompositeLayoutAlgorithm(new LayoutAlgorithm[] { new RadialLayoutAlgorithm(style), new HorizontalShift(style) });
             LOG.info("Using CompositeLayoutAlgorithm [RadialLayoutAlgorithm+HorizontalShift]");
             break;
         case 12:
@@ -367,8 +363,7 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
             LOG.info("Using HorizontalShift");
             break;
         default:
-            layout = new CompositeLayoutAlgorithm(
-                    new LayoutAlgorithm[] { new TreeLayoutAlgorithm(style), new HorizontalShift(style) });
+            layout = new CompositeLayoutAlgorithm(new LayoutAlgorithm[] { new TreeLayoutAlgorithm(style), new HorizontalShift(style) });
             LOG.info("Using CompositeLayoutAlgorithm [TreeLayoutAlgorithm+HorizontalShift]");
         }
         return layout;
@@ -382,8 +377,7 @@ public class ZestLayoutDiagramFeature extends AbstractCustomFeature {
 
         private Object graphData;
 
-        public SimpleRelationship(final LayoutEntity sourceEntity, final LayoutEntity destinationEntity,
-                final boolean bidirectional) {
+        public SimpleRelationship(final LayoutEntity sourceEntity, final LayoutEntity destinationEntity, final boolean bidirectional) {
             super(sourceEntity, destinationEntity, bidirectional);
         }
 

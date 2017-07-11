@@ -27,8 +27,7 @@ public class SmartMeterPattern extends AbstractFormPattern {
     @Override
     public Object[] create(final ICreateContext context) {
         this.addScenario();
-        final SmartGridTopology container = (SmartGridTopology) this
-                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final SmartGridTopology container = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
         final SmartMeter node = SmartgridtopoFactory.eINSTANCE.createSmartMeter();
         node.setId(UIDHelper.generateUID());
 
@@ -47,8 +46,7 @@ public class SmartMeterPattern extends AbstractFormPattern {
 
     @Override
     protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
-        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(140, 0, 0)),
-                this.manageColor(new ColorConstant(255, 0, 0)));
+        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(255, 0, 0)));
     }
 
     @Override

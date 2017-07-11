@@ -61,8 +61,7 @@ public class EvaluateToolbarActions {
                 if (o instanceof IToolbarButtonActionResolver) {
                     // Executes the evaluation in a thread an returns the result
                     // in the future
-                    final Callable<List<ToolbarButtonAction>> callable = new EvaluateAbstractPattern(
-                            (IToolbarButtonActionResolver) o);
+                    final Callable<List<ToolbarButtonAction>> callable = new EvaluateAbstractPattern((IToolbarButtonActionResolver) o);
                     final Future<List<ToolbarButtonAction>> future = pool.submit(callable);
                     list.add(future);
                 }

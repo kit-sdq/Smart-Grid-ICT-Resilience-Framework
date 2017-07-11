@@ -12,13 +12,12 @@ import topoextension.Replication;
 
 public class SmartGridAPITest extends SmartGridCompletionTest {
 
-	@Test
-	public void testEnsureProfileAndStereotype() {
-		assertTrue("SmartGridProfileAPI is not applied",
-				SmartGridProfilesAPI.isSmartGridProfileApplied(smartGridTopology.eResource()));
-		SmartMeter smartMeter = getFirstSmartMeter();
-		Replication replication = SmartGridStereotypesAPI.getReplicationStereotype(smartMeter);
-		assertTrue("replication should not be a proxy", !replication.eIsProxy());
-		assertEquals("Nr of replication does not match expected replications", replication.getNrOfReplicas(), 4);
-	}
+    @Test
+    public void testEnsureProfileAndStereotype() {
+        assertTrue("SmartGridProfileAPI is not applied", SmartGridProfilesAPI.isSmartGridProfileApplied(smartGridTopology.eResource()));
+        SmartMeter smartMeter = getFirstSmartMeter();
+        Replication replication = SmartGridStereotypesAPI.getReplicationStereotype(smartMeter);
+        assertTrue("replication should not be a proxy", !replication.eIsProxy());
+        assertEquals("Nr of replication does not match expected replications", replication.getNrOfReplicas(), 4);
+    }
 }

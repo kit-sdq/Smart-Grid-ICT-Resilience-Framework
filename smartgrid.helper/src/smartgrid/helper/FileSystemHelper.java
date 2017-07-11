@@ -63,8 +63,7 @@ public final class FileSystemHelper {
      * @param path
      *            Path there the File will be written to
      */
-    public static void saveToFileSystemAll(final String dirPath, final EObject result, final EObject topo,
-            final EObject input) {
+    public static void saveToFileSystemAll(final String dirPath, final EObject result, final EObject topo, final EObject input) {
         /*
          * Save Data as Smartgridoutput on HDD under "path" location
          */

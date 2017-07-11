@@ -77,8 +77,7 @@ public final class ModelToDiagram {
      */
     public void initializeDiagram(final SmartGridTopology scenario) {
         final String diagramPath = this.pathToModel.substring(0, this.pathToModel.lastIndexOf("/") + 1);
-        final String diagramName = this.pathToModel.substring(this.pathToModel.lastIndexOf("/") + 1,
-                this.pathToModel.lastIndexOf("."));
+        final String diagramName = this.pathToModel.substring(this.pathToModel.lastIndexOf("/") + 1, this.pathToModel.lastIndexOf("."));
         final Resource diagramRes = this.createDiagram(diagramPath, diagramName, scenario);
 
         // First, start with reading and adding the nodes to the diagram
@@ -102,8 +101,7 @@ public final class ModelToDiagram {
                 ModelToDiagram.this.addPEs((Diagram) diagramRes.getContents().get(0), scenario);
 
                 LOG.info("[ModelToDiagram]: Applying a layout to the diagram");
-                final ZestLayoutDiagramFeature layout = new ZestLayoutDiagramFeature(
-                        GraphitiHelper.getInstance().getFeatureProvider());
+                final ZestLayoutDiagramFeature layout = new ZestLayoutDiagramFeature(GraphitiHelper.getInstance().getFeatureProvider());
                 layout.execute(null);
                 try {
                     diagramRes.save(ModelToDiagram.this.createSaveOptions());
@@ -114,18 +112,15 @@ public final class ModelToDiagram {
                     e.printStackTrace();
                 }
 
-                PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-                        .closeEditor((IEditorPart) ModelToDiagram.this.part, false);
+                PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor((IEditorPart) ModelToDiagram.this.part, false);
             }
         });
     }
 
-    private Resource createDiagram(final String diagramPath, final String diagramName,
-            final SmartGridTopology scenario) {
+    private Resource createDiagram(final String diagramPath, final String diagramName, final SmartGridTopology scenario) {
         LOG.info("[ModelToDiagram]: Creating diagram...");
 
-        final URI diagramURI = URI.createPlatformResourceURI(
-                this.project.getFullPath().toString() + "/" + diagramPath + diagramName + F_DIAGRAM, true);
+        final URI diagramURI = URI.createPlatformResourceURI(this.project.getFullPath().toString() + "/" + diagramPath + diagramName + F_DIAGRAM, true);
         final IFile diagramFile = this.project.getFile(diagramPath + diagramName + F_DIAGRAM);
 
         try {
@@ -134,8 +129,7 @@ public final class ModelToDiagram {
             }
 
         } catch (final CoreException e) {
-            LOG.error("[ModelToDiagram]: Failed to delete old diagram. Path is "
-                    + diagramFile.getFullPath().toOSString());
+            LOG.error("[ModelToDiagram]: Failed to delete old diagram. Path is " + diagramFile.getFullPath().toOSString());
             e.printStackTrace();
         }
 
@@ -151,8 +145,7 @@ public final class ModelToDiagram {
                 // create resources for the diagram and domain model files
 
                 diagramResource.setTrackingModification(true);
-                final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + this.hashCode(),
-                        diagramName, 10, true);
+                final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + this.hashCode(), diagramName, 10, true);
                 diagram.setDiagramTypeId("SmartGridSecurityDiagramType");
                 // link model and diagram
                 final PictogramLink link = PictogramsFactory.eINSTANCE.createPictogramLink();
@@ -172,17 +165,14 @@ public final class ModelToDiagram {
         }
         GraphitiHelper.getInstance().setDiagram((Diagram) diagramResource.getContents().get((0)));
         final Diagram diagram = GraphitiHelper.getInstance().getDiagram();
-        this.diagramPathFile = ResourcesPlugin.getWorkspace().getRoot()
-                .getFile(new Path(diagramResource.getURI().toPlatformString(true)));
+        this.diagramPathFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(diagramResource.getURI().toPlatformString(true)));
 
         // Adding relevant objects to the graphiti helper
         final SGSDiagramTypeProvider provider = new SGSDiagramTypeProvider();
 
         try {
-            BasicNewResourceWizard.selectAndReveal(this.diagramPathFile,
-                    PlatformUI.getWorkbench().getActiveWorkbenchWindow());
-            this.part = (SGSDiagramEditor) IDE.openEditor(
-                    PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), this.diagramPathFile);
+            BasicNewResourceWizard.selectAndReveal(this.diagramPathFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
+            this.part = (SGSDiagramEditor) IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), this.diagramPathFile);
 
             provider.init(diagram, this.part.getDiagramBehavior());
 
@@ -219,8 +209,7 @@ public final class ModelToDiagram {
         for (final NetworkEntity network : scenario.getContainsNE()) {
             this.addElements(diagram, network);
             if (!network.getConnectedTo().isEmpty()) {
-                this.addNetworkEntityWithPowerConnections(diagram, this.getPeFromBusiness(diagram, network),
-                        network.getConnectedTo());
+                this.addNetworkEntityWithPowerConnections(diagram, this.getPeFromBusiness(diagram, network), network.getConnectedTo());
             }
         }
         LOG.debug("[ModelToDiagram]: Adding PhysicalConnections to the diagram");
@@ -234,8 +223,7 @@ public final class ModelToDiagram {
         }
     }
 
-    private void addNetworkEntityWithPowerConnections(final Diagram diagram, final Shape entity,
-            final List<PowerGridNode> connections) {
+    private void addNetworkEntityWithPowerConnections(final Diagram diagram, final Shape entity, final List<PowerGridNode> connections) {
 
         final CommandStack commandStack = this.editingDomain.getCommandStack();
         commandStack.execute(new RecordingCommand(this.editingDomain) {
@@ -249,8 +237,7 @@ public final class ModelToDiagram {
                         for (final PowerGridNode compare : connections) {
                             if (power.getId() == compare.getId()) {
 
-                                final AddConnectionContext connContext = new AddConnectionContext(
-                                        entity.getAnchors().get(0), shape.getAnchors().get(0));
+                                final AddConnectionContext connContext = new AddConnectionContext(entity.getAnchors().get(0), shape.getAnchors().get(0));
 
                                 // In this case the AddPowerConnectionFeature
                                 // has to be used to
@@ -259,8 +246,7 @@ public final class ModelToDiagram {
                                 // addIfPossible(context) cannot now the
                                 // businessObject
                                 // "PowerConnection"
-                                final AddPowerConnectionFeature feature = new AddPowerConnectionFeature(
-                                        GraphitiHelper.getInstance().getFeatureProvider());
+                                final AddPowerConnectionFeature feature = new AddPowerConnectionFeature(GraphitiHelper.getInstance().getFeatureProvider());
                                 feature.add(connContext).setVisible(true);
                                 break;
                             }

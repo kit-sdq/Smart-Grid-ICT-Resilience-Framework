@@ -76,26 +76,19 @@ public class OutputNetworkEntityAddFeature extends AbstractAddFeature {
      */
     private GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
         if (((EntityState) this.bo).getOwner() instanceof SmartMeter) {
-            return FeatureRepresentationHelper.createEllipse(containerShape,
-                    this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(225, 200, 200)));
+            return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(225, 200, 200)));
         }
         if (((EntityState) this.bo).getOwner() instanceof ControlCenter) {
-            return FeatureRepresentationHelper.createEllipse(containerShape,
-                    this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(124, 154, 139)));
+            return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(124, 154, 139)));
         }
         if (((EntityState) this.bo).getOwner() instanceof GenericController) {
-            return FeatureRepresentationHelper.createEllipse(containerShape,
-                    this.manageColor(new ColorConstant(210, 60, 0)),
-                    this.manageColor(new ColorConstant(200, 188, 168)));
+            return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(210, 60, 0)), this.manageColor(new ColorConstant(200, 188, 168)));
         }
         if (((EntityState) this.bo).getOwner() instanceof InterCom) {
-            return FeatureRepresentationHelper.createEllipse(containerShape,
-                    this.manageColor(new ColorConstant(0, 139, 0)), this.manageColor(new ColorConstant(199, 212, 139)));
+            return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 139, 0)), this.manageColor(new ColorConstant(199, 212, 139)));
         }
         if (((EntityState) this.bo).getOwner() instanceof NetworkNode) {
-            return FeatureRepresentationHelper.createRect(containerShape,
-                    this.manageColor(new ColorConstant(0, 51, 102)),
-                    this.manageColor(new ColorConstant(182, 191, 204)));
+            return FeatureRepresentationHelper.createRect(containerShape, this.manageColor(new ColorConstant(0, 51, 102)), this.manageColor(new ColorConstant(182, 191, 204)));
         }
 //		}
         return null;
@@ -115,7 +108,7 @@ public class OutputNetworkEntityAddFeature extends AbstractAddFeature {
 //        int xy[] = new int[] {4, 8, 12, 4, 8, 12, 8, 8, 8, 12, 12, 12 };
         final int xy[] = new int[] { 4, 2, 14, 2, 14, 8, 6, 8, 6, 15, 16, 15 };// , 8, 12, 8, 8, 8,
                                                                                // 12,
-        // 12, 12 };
+                                                                               // 12, 12 };
         final Polyline p = gaService.createPolyline(lineShape, xy);
         p.setForeground(this.manageColor(new ColorConstant(0, 0, 0)));
         p.setLineWidth(ConstantProvider.questionMarkLineWidth);

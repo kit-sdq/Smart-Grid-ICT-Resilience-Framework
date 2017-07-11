@@ -67,8 +67,7 @@ public class EvaluateContextButtons {
                 if (o instanceof IContextButtonResolver) {
                     // Executes the evaluation in a thread an returns the result
                     // in the future
-                    final Callable<List<AbstractCustomFeature>> callable = new EvaluateAbstractPattern(
-                            (IContextButtonResolver) o, this.fp);
+                    final Callable<List<AbstractCustomFeature>> callable = new EvaluateAbstractPattern((IContextButtonResolver) o, this.fp);
                     final Future<List<AbstractCustomFeature>> future = pool.submit(callable);
                     list.add(future);
                 }

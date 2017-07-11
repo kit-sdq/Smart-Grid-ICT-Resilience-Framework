@@ -24,15 +24,13 @@ public class LoadInputModelConformityHelper {
         final boolean result = checkInputModelConformitySimple(state, current);
 
         if (result) {
-            return compareAndCountPowerStates(state.getPowerStates(), current.getContainsPGN())
-                    && compareAndCountEntityStates(state.getEntityStates(), current.getContainsNE());
+            return compareAndCountPowerStates(state.getPowerStates(), current.getContainsPGN()) && compareAndCountEntityStates(state.getEntityStates(), current.getContainsNE());
         }
 
         return result;
     }
 
-    private static boolean compareAndCountEntityStates(final List<EntityState> states,
-            final List<NetworkEntity> entities) {
+    private static boolean compareAndCountEntityStates(final List<EntityState> states, final List<NetworkEntity> entities) {
         boolean result = true;
 
         final List<EntityState> noZombies = getListWithoutZombies(states);
@@ -69,8 +67,7 @@ public class LoadInputModelConformityHelper {
         return noZombies;
     }
 
-    private static boolean compareAndCountPowerStates(final List<PowerState> states,
-            final List<PowerGridNode> current) {
+    private static boolean compareAndCountPowerStates(final List<PowerState> states, final List<PowerGridNode> current) {
         boolean result = true;
 
         final List<PowerState> noZombies = getListWithoutZombiesPower(states);

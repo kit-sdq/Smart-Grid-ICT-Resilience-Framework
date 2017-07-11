@@ -69,8 +69,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
         final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
         // check if an output model is loaded
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects()) {
+        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
                 final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot open new input model while output model is loaded");
@@ -93,8 +92,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
             LOG.info("Selected file: " + fileSelected);
             final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
 
-            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-                    .put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 
             // load the resource and resolve the proxies
             final File source = new File(fileSelected);
@@ -111,19 +109,16 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                 final RecordingCommand cmd = new RecordingCommand(domain) {
                     @Override
                     protected void doExecute() {
-                        final EList<EObject> boList = LoadToolbarButtonAction.this.diagramContainer
-                                .getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
+                        final EList<EObject> boList = LoadToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
 
                         // Conformity check
                         for (final EObject current : boList) {
                             if (current instanceof SmartGridTopology) {
-                                if (!(LoadInputModelConformityHelper.checkInputModelConformitySimple(
-                                        (ScenarioState) obj, (SmartGridTopology) current))) {
+                                if (!(LoadInputModelConformityHelper.checkInputModelConformitySimple((ScenarioState) obj, (SmartGridTopology) current))) {
                                     final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                                     messageBox.setMessage("Input model is not conform to the current topo model");
                                     messageBox.open();
-                                    LOG.info(
-                                            "[LoadToolbarButtonAction]: Loading failed since input model is not conform to topo model");
+                                    LOG.info("[LoadToolbarButtonAction]: Loading failed since input model is not conform to topo model");
                                     LoadToolbarButtonAction.this.loadSuccessful = false;
                                     return;
                                 }
@@ -132,13 +127,11 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 
                         for (final EObject tmp : boList) {
                             if (tmp instanceof ScenarioState) {
-                                final TransactionalEditingDomain domain = LoadToolbarButtonAction.this.diagramContainer
-                                        .getDiagramBehavior().getEditingDomain();
+                                final TransactionalEditingDomain domain = LoadToolbarButtonAction.this.diagramContainer.getDiagramBehavior().getEditingDomain();
                                 final RecordingCommand c = new RecordingCommand(domain) {
                                     @Override
                                     protected void doExecute() {
-                                        LoadToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider()
-                                                .getDiagram().getLink().getBusinessObjects().remove(tmp);
+                                        LoadToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().remove(tmp);
                                     }
                                 };
                                 domain.getCommandStack().execute(c);
@@ -146,18 +139,15 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                             }
                         }
 
-                        final Shape[] shapes = (Shape[]) LoadToolbarButtonAction.this.diagramContainer
-                                .getDiagramTypeProvider().getDiagram().getChildren().toArray();
+                        final Shape[] shapes = (Shape[]) LoadToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getChildren().toArray();
 
-                        final ManageNodeAppearances manager = new ManageNodeAppearances(
-                                LoadToolbarButtonAction.this.diagramContainer);
+                        final ManageNodeAppearances manager = new ManageNodeAppearances(LoadToolbarButtonAction.this.diagramContainer);
                         LOG.info("[LoadToolbarButtonAction]: Applying input model to topo model");
                         for (final Shape containerShape : shapes) {
                             final Object o = containerShape.getLink().getBusinessObjects().get(0);
 
                             if (o instanceof PowerGridNode) {
-                                final Object ob = LoadToolbarButtonAction.this.resolveBOfromPowergridNode(
-                                        (PowerGridNode) containerShape.getLink().getBusinessObjects().get(0),
+                                final Object ob = LoadToolbarButtonAction.this.resolveBOfromPowergridNode((PowerGridNode) containerShape.getLink().getBusinessObjects().get(0),
                                         ((ScenarioState) obj).getPowerStates());
 
                                 containerShape.getGraphicsAlgorithm().setForeground(manager.manageForeground());
@@ -165,22 +155,20 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                                     containerShape.getGraphicsAlgorithm().setBackground(manager.manageBackground(true));
 
                                 } else if (ob instanceof PowerState) {
-                                    containerShape.getGraphicsAlgorithm()
-                                            .setBackground(manager.manageBackground(false));
+                                    containerShape.getGraphicsAlgorithm().setBackground(manager.manageBackground(false));
                                 }
                             } else if (o instanceof NetworkEntity) {
-                                final Object ob = LoadToolbarButtonAction.this.resolveBOfromNetworkEntity(
-                                        (NetworkEntity) containerShape.getLink().getBusinessObjects().get(0),
+                                final Object ob = LoadToolbarButtonAction.this.resolveBOfromNetworkEntity((NetworkEntity) containerShape.getLink().getBusinessObjects().get(0),
                                         ((ScenarioState) obj).getEntityStates());
-                                if(ob != null && ob instanceof EntityState && containerShape instanceof ContainerShape) {
-	                                if (((EntityState) ob).isIsDestroyed()) {
-	                                    manager.drawDestroyed((ContainerShape) containerShape);
-	                                } else if(((EntityState) ob).isIsHacked()){
-	                                	//hacked but not destroyed
-	                                	manager.drawHacked((ContainerShape) containerShape);
-	                                } else {
-	                                    manager.removeChildren((ContainerShape) containerShape);
-	                                }
+                                if (ob != null && ob instanceof EntityState && containerShape instanceof ContainerShape) {
+                                    if (((EntityState) ob).isIsDestroyed()) {
+                                        manager.drawDestroyed((ContainerShape) containerShape);
+                                    } else if (((EntityState) ob).isIsHacked()) {
+                                        //hacked but not destroyed
+                                        manager.drawHacked((ContainerShape) containerShape);
+                                    } else {
+                                        manager.removeChildren((ContainerShape) containerShape);
+                                    }
                                 }
                             }
                         }

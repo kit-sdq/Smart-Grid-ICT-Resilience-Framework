@@ -19,7 +19,7 @@ public class AggregatedSmartMeterStates implements ISmartMeterState {
         states.put(SmartMeterState.DEFECT, defectCount);
         totalCount = onlineCount + onlineHackedCount + noUplinkCount + noUplinkHackedCount + noPowerCount + defectCount;
     }
-    
+
     public String getId() {
         return nodeId;
     }

@@ -27,8 +27,7 @@ public class ControlCenterPattern extends AbstractFormPattern {
     @Override
     public Object[] create(final ICreateContext context) {
         this.addScenario();
-        final SmartGridTopology container = (SmartGridTopology) this
-                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final SmartGridTopology container = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
         final ControlCenter node = SmartgridtopoFactory.eINSTANCE.createControlCenter();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
@@ -52,8 +51,7 @@ public class ControlCenterPattern extends AbstractFormPattern {
 
     @Override
     protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
-        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 0, 0)),
-                this.manageColor(new ColorConstant(51, 102, 0)));
+        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(51, 102, 0)));
     }
 
     @Override

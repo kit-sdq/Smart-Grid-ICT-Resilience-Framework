@@ -51,8 +51,7 @@ public class LogicalCommunicationPattern extends AbstractConnection {
         final LogicalCommunication newRole = SmartgridtopoFactory.eINSTANCE.createLogicalCommunication();
 
         // add to resources
-        final SmartGridTopology scenario = (SmartGridTopology) this
-                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final SmartGridTopology scenario = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
         scenario.getContainsLC().add(newRole);
 
         // Get anchors

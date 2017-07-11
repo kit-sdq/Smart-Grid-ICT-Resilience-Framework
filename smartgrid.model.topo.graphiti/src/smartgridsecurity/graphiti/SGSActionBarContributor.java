@@ -30,8 +30,7 @@ public class SGSActionBarContributor extends DiagramEditorActionBarContributor {
      */
     private void addToolbarButtonActions() {
         if (ExtensionPointRegistry.getInstance().getButtonActionsSize() == 0) {
-            final List<ToolbarButtonAction> extensionToolbarActions = (new EvaluateToolbarActions())
-                    .evaluateFeatureExtension(Platform.getExtensionRegistry());
+            final List<ToolbarButtonAction> extensionToolbarActions = (new EvaluateToolbarActions()).evaluateFeatureExtension(Platform.getExtensionRegistry());
             for (final ToolbarButtonAction t : extensionToolbarActions) {
                 ExtensionPointRegistry.getInstance().addActionToRegistry(t);
             }

@@ -33,8 +33,7 @@ public class InputGenerator implements IInputGenerator {
     }
 
     @Override
-    public InputModelDTO generate(final GenerationStyle desiredStyle, final int SmartMeterCount,
-            final int ControlCenterCount) {
+    public InputModelDTO generate(final GenerationStyle desiredStyle, final int SmartMeterCount, final int ControlCenterCount) {
 
         // Init Scenario State
         SmartgridinputPackageImpl.init();

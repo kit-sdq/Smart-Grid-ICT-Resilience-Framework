@@ -39,8 +39,7 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
         this.setToolTipText(this.TOOL_TIP);
         this.setId(this.ACTION_ID);
         this.addPropertyChangeListener(this);
-        this.setImageDescriptor(
-                this.createImage("icons" + File.separator + "clear_output.png", "smartgrid.model.output"));
+        this.setImageDescriptor(this.createImage("icons" + File.separator + "clear_output.png", "smartgrid.model.output"));
     }
 
     @Override
@@ -53,8 +52,7 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
      * This method checks if there is an output model. If true, the action will be enabled.
      */
     private void checkOutputModel() {
-        final EList<EObject> list = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects();
+        final EList<EObject> list = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
         for (final EObject model : list) {
             if (model instanceof ScenarioResult) {
                 this.setEnabled(true);
@@ -72,37 +70,31 @@ public class ClearOutputButtonAction extends ToolbarButtonAction implements IPro
             @Override
             protected void doExecute() {
                 ScenarioResult result = null;
-                final EObject[] objects = (EObject[]) ClearOutputButtonAction.this.diagramContainer
-                        .getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().toArray();
+                final EObject[] objects = (EObject[]) ClearOutputButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().toArray();
                 for (final EObject object : objects) {
                     if (object instanceof ScenarioResult) {
                         result = (ScenarioResult) object;
                     }
                 }
 
-                final ManageNodeAppearances manager = new ManageNodeAppearances(
-                        ClearOutputButtonAction.this.diagramContainer);
+                final ManageNodeAppearances manager = new ManageNodeAppearances(ClearOutputButtonAction.this.diagramContainer);
                 // copy list to array -> otherwise you'll get a concurrency
                 // exception
-                final Shape[] shapes = (Shape[]) ClearOutputButtonAction.this.diagramContainer.getDiagramTypeProvider()
-                        .getDiagram().getChildren().toArray();
+                final Shape[] shapes = (Shape[]) ClearOutputButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getChildren().toArray();
                 LOG.debug("[ClearOutputButtonAction]: Clearing all nodes");
                 for (final Shape currentShape : shapes) {
                     // Clears the diagram from all output entities
                     if ((currentShape.getLink().getBusinessObjects().get(0) instanceof NetworkEntity)) {
                         currentShape.setVisible(true);
                         manager.manageGraphicalPatternRepresentation((ContainerShape) currentShape, true);
-                        final Object bo = manager.resolveBOfromNetworkEntity(
-                                (NetworkEntity) currentShape.getLink().getBusinessObjects().get(0), result.getStates());
+                        final Object bo = manager.resolveBOfromNetworkEntity((NetworkEntity) currentShape.getLink().getBusinessObjects().get(0), result.getStates());
 
-                        if (bo != null
-                                && (bo instanceof NoUplink || (bo instanceof Online && ((Online) bo).isIsHacked()))) {
+                        if (bo != null && (bo instanceof NoUplink || (bo instanceof Online && ((Online) bo).isIsHacked()))) {
                             manager.removeChildren((ContainerShape) currentShape);
                         }
                     }
                 }
-                ClearOutputButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                        .getBusinessObjects().remove(result);
+                ClearOutputButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().remove(result);
 
             }
         };

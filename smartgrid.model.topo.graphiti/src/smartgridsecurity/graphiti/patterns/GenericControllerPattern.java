@@ -27,8 +27,7 @@ public class GenericControllerPattern extends AbstractFormPattern {
     @Override
     public Object[] create(final ICreateContext context) {
         this.addScenario();
-        final SmartGridTopology container = (SmartGridTopology) this
-                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final SmartGridTopology container = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
         final GenericController node = SmartgridtopoFactory.eINSTANCE.createGenericController();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
@@ -52,8 +51,7 @@ public class GenericControllerPattern extends AbstractFormPattern {
 
     @Override
     protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
-        return FeatureRepresentationHelper.createEllipse(containerShape,
-                this.manageColor(new ColorConstant(210, 60, 0)), this.manageColor(new ColorConstant(255, 140, 0)));
+        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(210, 60, 0)), this.manageColor(new ColorConstant(255, 140, 0)));
     }
 
     @Override

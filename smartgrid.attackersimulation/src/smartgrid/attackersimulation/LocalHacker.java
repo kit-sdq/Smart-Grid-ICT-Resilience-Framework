@@ -288,8 +288,7 @@ public class LocalHacker implements IAttackerSimulation {
          * Reads from Scenario so this List don't respects changes in States of the Entities -->
          * It's only the "hardwired" logical Connection neighbors
          */
-        final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper
-                .genNeighborMapbyID(this.mySmartGridTopo);
+        final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(this.mySmartGridTopo);
 
         // Root is in cluster to hack --> so Root is StartNode
         currentLayer.add(this.rootNode);
@@ -309,8 +308,7 @@ public class LocalHacker implements IAttackerSimulation {
                      * Here it Filters the hardwired Logical Connections of the Neighbors out that
                      * because of their State (e.g. destroyed) don't functions
                      */
-                    final LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack,
-                            neighborIDList);
+                    final LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack, neighborIDList);
 
                     /*
                      * Now I have my alive (in my Cluster) Neighbor OnState List
@@ -360,8 +358,7 @@ public class LocalHacker implements IAttackerSimulation {
          * Reads from Scenario so this List don't respects changes in States of the Entities -->
          * It's only the "hardwired" logical Connection neighbors
          */
-        final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper
-                .genNeighborMapbyID(this.mySmartGridTopo);
+        final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(this.mySmartGridTopo);
 
         this.dfs(clusterToHack, Node, IDtoHisNeighborLinks, hackCount);
 
@@ -377,8 +374,7 @@ public class LocalHacker implements IAttackerSimulation {
      *
      * @param IDtoHisNeighborLinks
      */
-    private void dfs(final Cluster clusterToHack, final On Node,
-            final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks, int hackCount) {
+    private void dfs(final Cluster clusterToHack, final On Node, final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks, int hackCount) {
         // getting Neighbors
         final int nodeID = ScenarioModelHelper.getIDfromEntityOnState(Node);
 
@@ -391,8 +387,7 @@ public class LocalHacker implements IAttackerSimulation {
              * Here it Filters the hardwired Logical Connections of the Neighbors out that because
              * of their State (e.g. destroyed) don't functions
              */
-            final LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack,
-                    neighborIDList);
+            final LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack, neighborIDList);
 
             /* Now I have my alive (in my Cluster) Neighbor OnState List */
             for (final On neighbor : neighborOnList) {
@@ -497,8 +492,7 @@ public class LocalHacker implements IAttackerSimulation {
     private void invalidRootNodeIdDialog() {
         LOG.warn("[Local Hacker]: Root node with ID " + this.rootNode.getOwner().getId() + " is invalid");
         // TODO: Find better solution than swing Dialog
-        JOptionPane.showMessageDialog(null,
-                "The root node ID you've entered is not valid. Remember not to use NetworkNodes as root node. Simulation will be aborted");
+        JOptionPane.showMessageDialog(null, "The root node ID you've entered is not valid. Remember not to use NetworkNodes as root node. Simulation will be aborted");
     }
 
     @Override

@@ -123,8 +123,7 @@ public final class ScenarioModelHelper {
         // foreach Loop!)
         for (final smartgridoutput.EntityState currentNode : myScenarioResult.getStates()) {
             // Using only Entities that is On
-            if (currentNode.getOwner().getId() == entityID && currentNode instanceof On
-                    && !(currentNode.getOwner() instanceof NetworkNode)) {
+            if (currentNode.getOwner().getId() == entityID && currentNode instanceof On && !(currentNode.getOwner() instanceof NetworkNode)) {
                 foundEntity = (On) currentNode;
                 foundNodeID = true;
 
@@ -168,8 +167,7 @@ public final class ScenarioModelHelper {
      * @return Nodes that are in the intersection of the above Container --> These are my direct
      *         alive Neighbors
      */
-    public static LinkedList<On> getNeighborsFromCluster(final Cluster clusterToHack,
-            final LinkedList<Integer> neighborIDList) {
+    public static LinkedList<On> getNeighborsFromCluster(final Cluster clusterToHack, final LinkedList<Integer> neighborIDList) {
 
         final LinkedList<On> neighborOnList = new LinkedList<On>();
 

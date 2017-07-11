@@ -27,8 +27,7 @@ public class NetworkNodePattern extends AbstractFormPattern {
     @Override
     public Object[] create(final ICreateContext context) {
         this.addScenario();
-        final SmartGridTopology container = (SmartGridTopology) this
-                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final SmartGridTopology container = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
         final NetworkNode node = SmartgridtopoFactory.eINSTANCE.createNetworkNode();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
@@ -52,8 +51,7 @@ public class NetworkNodePattern extends AbstractFormPattern {
 
     @Override
     protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
-        return FeatureRepresentationHelper.createRect(containerShape, this.manageColor(new ColorConstant(0, 51, 102)),
-                this.manageColor(new ColorConstant(0, 102, 204)));
+        return FeatureRepresentationHelper.createRect(containerShape, this.manageColor(new ColorConstant(0, 51, 102)), this.manageColor(new ColorConstant(0, 102, 204)));
     }
 
     @Override

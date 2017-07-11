@@ -35,8 +35,7 @@ public class SGSDiagramBehavior extends DiagramBehavior {
      */
     private void initListeners() {
         ExtensionPointRegistry.getInstance().clearResourceListeners();
-        final List<ResourceSetListener> resListeners = (new EvaluateDomainModelChangeListeners(this))
-                .evaluateFeatureExtension(Platform.getExtensionRegistry());
+        final List<ResourceSetListener> resListeners = (new EvaluateDomainModelChangeListeners(this)).evaluateFeatureExtension(Platform.getExtensionRegistry());
         ExtensionPointRegistry.getInstance().addResourceListenersToRegistry(resListeners);
         if (ExtensionPointRegistry.getInstance().getResourceListenersSize() > 0) {
             this.listener = ExtensionPointRegistry.getInstance().getAllResourceListeners().get(0);

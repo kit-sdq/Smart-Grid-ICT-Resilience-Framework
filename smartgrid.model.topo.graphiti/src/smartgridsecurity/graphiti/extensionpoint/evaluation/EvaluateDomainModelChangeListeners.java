@@ -67,8 +67,7 @@ public class EvaluateDomainModelChangeListeners {
                 if (o instanceof IDomainModelChangeListenerResolver) {
                     // Executes the evaluation in a thread an returns the result
                     // in the future
-                    final Callable<List<ResourceSetListener>> callable = new EvaluateAbstractPattern(
-                            (IDomainModelChangeListenerResolver) o, this.db);
+                    final Callable<List<ResourceSetListener>> callable = new EvaluateAbstractPattern((IDomainModelChangeListenerResolver) o, this.db);
                     final Future<List<ResourceSetListener>> future = pool.submit(callable);
                     list.add(future);
                 }

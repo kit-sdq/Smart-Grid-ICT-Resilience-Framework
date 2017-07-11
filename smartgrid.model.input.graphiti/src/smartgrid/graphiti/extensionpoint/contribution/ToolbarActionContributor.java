@@ -21,8 +21,7 @@ public class ToolbarActionContributor implements IToolbarButtonActionResolver {
     public List<ToolbarButtonAction> getToolbarButtons() {
         final ClearButtonAction enableAction = new ClearButtonAction();
         // EnableButtonAction is a Listener who listens to changes in new and load action
-        final ToolbarButtonAction[] actions = { new NewToolbarButtonAction(enableAction),
-                new LoadToolbarButtonAction(enableAction), enableAction };
+        final ToolbarButtonAction[] actions = { new NewToolbarButtonAction(enableAction), new LoadToolbarButtonAction(enableAction), enableAction };
         return Arrays.asList(actions);
     }
 

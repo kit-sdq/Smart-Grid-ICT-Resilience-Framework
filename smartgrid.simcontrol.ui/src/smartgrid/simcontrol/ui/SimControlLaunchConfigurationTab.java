@@ -111,8 +111,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         fd_group.bottom = new FormAttachment(0, 123);
         group.setLayoutData(fd_group);
 
-        group.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.group.text"));
+        group.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.group.text"));
 
         this.inputTextbox = new Text(group, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         this.inputTextbox.setTouchEnabled(true);
@@ -120,15 +119,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         this.inputTextbox.setBounds(10, 22, 553, 41);
         this.inputTextbox.addModifyListener(e -> this.propertyChanged());
         this.inputTextbox.setEditable(true);
-        this.inputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
-        final org.eclipse.swt.widgets.Button SelectInputPathButton = new org.eclipse.swt.widgets.Button(group,
-                SWT.TOGGLE);
+        this.inputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
+        final org.eclipse.swt.widgets.Button SelectInputPathButton = new org.eclipse.swt.widgets.Button(group, SWT.TOGGLE);
         SelectInputPathButton.setTouchEnabled(true);
         SelectInputPathButton.setBounds(569, 22, 146, 32);
 
-        SelectInputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.SelectInputPathButton.text"));
+        SelectInputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectInputPathButton.text"));
 
         this.topologyTextbox = new Text(group, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         this.topologyTextbox.setTouchEnabled(true);
@@ -138,8 +134,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         this.topologyTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.inputTextbox.text")); //$NON-NLS-1$
 
-        final org.eclipse.swt.widgets.Button SelectTopologyPathButton = new org.eclipse.swt.widgets.Button(group,
-                SWT.TOGGLE);
+        final org.eclipse.swt.widgets.Button SelectTopologyPathButton = new org.eclipse.swt.widgets.Button(group, SWT.TOGGLE);
         SelectTopologyPathButton.setTouchEnabled(true);
         SelectTopologyPathButton.setBounds(569, 69, 146, 32);
         SelectTopologyPathButton.addSelectionListener(new SelectionAdapter() {
@@ -147,8 +142,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void widgetSelected(final SelectionEvent e) {
             }
         });
-        SelectTopologyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.SelectTopologyPathButton.text"));
+        SelectTopologyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectTopologyPathButton.text"));
 
         final Group grpOutputFiles = new Group(this.container, SWT.NONE);
         final FormData fd_grpOutputFiles = new FormData();
@@ -158,22 +152,18 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         fd_grpOutputFiles.right = new FormAttachment(group, 0, SWT.RIGHT);
         grpOutputFiles.setLayoutData(fd_grpOutputFiles);
 
-        grpOutputFiles.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.grpOutputFiles.text"));
-        final org.eclipse.swt.widgets.Button SelectOutputPathButton = new org.eclipse.swt.widgets.Button(grpOutputFiles,
-                SWT.TOGGLE);
+        grpOutputFiles.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpOutputFiles.text"));
+        final org.eclipse.swt.widgets.Button SelectOutputPathButton = new org.eclipse.swt.widgets.Button(grpOutputFiles, SWT.TOGGLE);
         SelectOutputPathButton.setTouchEnabled(true);
         SelectOutputPathButton.setBounds(569, 22, 145, 32);
-        SelectOutputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.SelectOutputPathButton.text"));
+        SelectOutputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectOutputPathButton.text"));
 
         this.outputTextbox = new Text(grpOutputFiles, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         this.outputTextbox.setTouchEnabled(true);
         this.outputTextbox.setEditable(true);
         this.outputTextbox.setBounds(10, 22, 553, 41);
         this.outputTextbox.addModifyListener(e -> this.propertyChanged());
-        this.outputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
+        this.outputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
 
         final Group optionsGroup = new Group(this.container, SWT.NONE);
 
@@ -188,8 +178,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDown(final MouseEvent e) {
 
                 // Copy Inputpath as Output Dir
-                SimControlLaunchConfigurationTab.this.outputTextbox
-                        .setText(new File(SimControlLaunchConfigurationTab.this.inputTextbox.getText()).getParent());
+                SimControlLaunchConfigurationTab.this.outputTextbox.setText(new File(SimControlLaunchConfigurationTab.this.inputTextbox.getText()).getParent());
             }
         });
         copyPathButton.setBounds(569, 60, 145, 32);
@@ -216,8 +205,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 SimControlLaunchConfigurationTab.this.propertyChanged();
 
                 if (SimControlLaunchConfigurationTab.this.ignoreLogicalConButton.getSelection()) {
-                    SimControlLaunchConfigurationTab.this.hackingStyleCombo
-                            .setText(HackingStyle.FULLY_MESHED_HACKING.name());
+                    SimControlLaunchConfigurationTab.this.hackingStyleCombo.setText(HackingStyle.FULLY_MESHED_HACKING.name());
                 }
 
             }
@@ -229,16 +217,14 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         final Group grpCyberAttackSimulation = new Group(optionsGroup, SWT.NONE);
         grpCyberAttackSimulation.setBounds(10, 54, 698, 120);
-        grpCyberAttackSimulation.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.grpCyberAttackSimulation.text"));
+        grpCyberAttackSimulation.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpCyberAttackSimulation.text"));
 
         final Composite HackingStyleComposite = new Composite(grpCyberAttackSimulation, SWT.NONE);
         HackingStyleComposite.setBounds(10, 24, 660, 24);
 
         final Label hackingStyleLabel = new Label(HackingStyleComposite, SWT.NONE);
         hackingStyleLabel.setBounds(0, 0, 131, 24);
-        hackingStyleLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.hackingStyleLabel.text"));
+        hackingStyleLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.hackingStyleLabel.text"));
 
         this.hackingStyleCombo = new Combo(HackingStyleComposite, SWT.READ_ONLY);
         this.hackingStyleCombo.setBounds(193, 0, 202, 23);
@@ -302,8 +288,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         this.iterationCountTextbox.setText("2");
         final Label iterationCountLabel = new Label(terminationConditionGroup, SWT.NONE);
         iterationCountLabel.setBounds(10, 54, 121, 24);
-        iterationCountLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                .getString("SimControlLaunchConfigurationTab.IterationCount.text"));
+        iterationCountLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.IterationCount.text"));
         this.iterationCountTextbox.addModifyListener(e6 -> this.propertyChanged());
         this.timeStepsTextBox.addModifyListener(e3 -> this.propertyChanged());
 
@@ -434,8 +419,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                     final List<IAttackerSimulation> list = helper.getAttackerSimulationExtensions();
                     IAttackerSimulation sim = null;
                     for (final IAttackerSimulation attack : list) {
-                        if (attack.getName().equals(SimControlLaunchConfigurationTab.this.comboAttackSimulation.getItem(
-                                SimControlLaunchConfigurationTab.this.comboAttackSimulation.getSelectionIndex()))) {
+                        if (attack.getName()
+                                .equals(SimControlLaunchConfigurationTab.this.comboAttackSimulation.getItem(SimControlLaunchConfigurationTab.this.comboAttackSimulation.getSelectionIndex()))) {
                             sim = attack;
                             break;
                         }
@@ -483,8 +468,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             @Override
             public void mouseDown(final MouseEvent e) {
                 // Get Text to show in Open File Dialog from Resource File
-                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                        .getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_OUTPUT_PATH");
+                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_OUTPUT_PATH");
                 // String outputPath = getFilePath(message,
                 // Constants.OUTPUT_EXTENSION);
                 final String outputPath = SimControlLaunchConfigurationTab.this.getDirPath(message);
@@ -507,10 +491,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             @Override
             public void mouseDown(final MouseEvent e) {
                 // Get Text to show in Open File Dialog from Resource File
-                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                        .getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_INPUT_TOPOLOGY_PATH");
-                final String topologyPath = SimControlLaunchConfigurationTab.this.getFilePath(message,
-                        Constants.TOPO_EXTENSION);
+                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_INPUT_TOPOLOGY_PATH");
+                final String topologyPath = SimControlLaunchConfigurationTab.this.getFilePath(message, Constants.TOPO_EXTENSION);
 
                 if (topologyPath != null) {
                     SimControlLaunchConfigurationTab.this.topologyTextbox.setText(topologyPath);
@@ -531,10 +513,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDown(final MouseEvent e) {
                 // Get Text to show in Open File Dialog from Resource File
                 // Gets the Filepath
-                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
-                        .getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_INPUT_PATH");
-                final String inputPath = SimControlLaunchConfigurationTab.this.getFilePath(message,
-                        Constants.INPUT_EXTENSION);
+                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_INPUT_PATH");
+                final String inputPath = SimControlLaunchConfigurationTab.this.getFilePath(message, Constants.INPUT_EXTENSION);
 
                 if (inputPath != null) {
                     SimControlLaunchConfigurationTab.this.inputTextbox.setText(inputPath);
@@ -573,36 +553,21 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     @Override
     public void initializeFrom(final ILaunchConfiguration configuration) {
         try {
-            this.hackingSpeedText
-                    .setText(configuration.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
-            this.topologyTextbox
-                    .setText(configuration.getAttribute(Constants.TOPOLOGY_PATH_KEY, Constants.DEFAULT_TOPO_PATH));
-            this.inputTextbox
-                    .setText(configuration.getAttribute(Constants.INPUT_PATH_KEY, Constants.DEFAULT_INPUT_PATH));
-            this.outputTextbox
-                    .setText(configuration.getAttribute(Constants.OUTPUT_PATH_KEY, Constants.DEFAULT_OUTPUT_PATH));
-            this.timeStepsTextBox
-                    .setText(configuration.getAttribute(Constants.TIMESTEPS_KEY, Constants.DEFAULT_TIME_STEPS));
-            this.iterationCountTextbox.setText(
-                    configuration.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
-            this.rootNodeTextbox
-                    .setText(configuration.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID));
-            this.hackingStyleCombo
-                    .setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
-            this.generationStyleCombo.setText(
-                    configuration.getAttribute(Constants.GENERATION_STYLE_KEY, Constants.DEFAULT_GENERATION_STYLE));
-            this.smartMeterCountTextBox.setText(
-                    configuration.getAttribute(Constants.SMART_METER_COUNT_KEY, Constants.DEFAULT_ROOT_NODE_ID));
-            this.controlCenterCountTextBox.setText(configuration.getAttribute(Constants.CONTROL_CENTER_COUNT_KEY,
-                    Constants.DEFAULT_CONTROL_CENTER_COUNT));
+            this.hackingSpeedText.setText(configuration.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
+            this.topologyTextbox.setText(configuration.getAttribute(Constants.TOPOLOGY_PATH_KEY, Constants.DEFAULT_TOPO_PATH));
+            this.inputTextbox.setText(configuration.getAttribute(Constants.INPUT_PATH_KEY, Constants.DEFAULT_INPUT_PATH));
+            this.outputTextbox.setText(configuration.getAttribute(Constants.OUTPUT_PATH_KEY, Constants.DEFAULT_OUTPUT_PATH));
+            this.timeStepsTextBox.setText(configuration.getAttribute(Constants.TIMESTEPS_KEY, Constants.DEFAULT_TIME_STEPS));
+            this.iterationCountTextbox.setText(configuration.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
+            this.rootNodeTextbox.setText(configuration.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID));
+            this.hackingStyleCombo.setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
+            this.generationStyleCombo.setText(configuration.getAttribute(Constants.GENERATION_STYLE_KEY, Constants.DEFAULT_GENERATION_STYLE));
+            this.smartMeterCountTextBox.setText(configuration.getAttribute(Constants.SMART_METER_COUNT_KEY, Constants.DEFAULT_ROOT_NODE_ID));
+            this.controlCenterCountTextBox.setText(configuration.getAttribute(Constants.CONTROL_CENTER_COUNT_KEY, Constants.DEFAULT_CONTROL_CENTER_COUNT));
 
-            this.ignoreLogicalConButton.setSelection(
-                    configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON)
-                            .contentEquals(Constants.TRUE));
+            this.ignoreLogicalConButton.setSelection(configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON).contentEquals(Constants.TRUE));
 
-            this.generateInputCheckBox.setSelection(
-                    configuration.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.DEFAULT_GEN_SYNTHETIC_INPUT)
-                            .contentEquals(Constants.TRUE));
+            this.generateInputCheckBox.setSelection(configuration.getAttribute(Constants.GEN_SYNTHETIC_INPUT_KEY, Constants.DEFAULT_GEN_SYNTHETIC_INPUT).contentEquals(Constants.TRUE));
 
             final String attackSimulationString = configuration.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "");
             for (int i = 0; i < this.comboAttackSimulation.getItems().length; i++) {
@@ -611,24 +576,21 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                     break;
                 }
             }
-            final String powerLoadSimulationString = configuration.getAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG,
-                    "");
+            final String powerLoadSimulationString = configuration.getAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, "");
             for (int i = 0; i < this.comboPowerLoadSimulation.getItems().length; i++) {
                 if (this.comboPowerLoadSimulation.getItem(i).equals(powerLoadSimulationString)) {
                     this.comboPowerLoadSimulation.select(i);
                     break;
                 }
             }
-            final String impactAnalysisString = configuration.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG,
-                    "");
+            final String impactAnalysisString = configuration.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, "");
             for (int i = 0; i < this.comboImpactAnalysis.getItems().length; i++) {
                 if (this.comboImpactAnalysis.getItem(i).equals(impactAnalysisString)) {
                     this.comboImpactAnalysis.select(i);
                     break;
                 }
             }
-            final String terminationConditionString = configuration
-                    .getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, "");
+            final String terminationConditionString = configuration.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, "");
             for (int i = 0; i < this.comboTerminationCondition.getItems().length; i++) {
                 if (this.comboTerminationCondition.getItem(i).equals(terminationConditionString)) {
                     this.comboTerminationCondition.select(i);
@@ -688,8 +650,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         final String hackingStyleString = this.hackingStyleCombo.getItem(this.hackingStyleCombo.getSelectionIndex());
 
-        final String generationStyleString = this.generationStyleCombo
-                .getItem(this.generationStyleCombo.getSelectionIndex());
+        final String generationStyleString = this.generationStyleCombo.getItem(this.generationStyleCombo.getSelectionIndex());
 
         // Add to config
         configuration.setAttribute(Constants.TOPOLOGY_PATH_KEY, topoPath);
@@ -707,28 +668,22 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         configuration.setAttribute(Constants.ITERATION_COUNT_KEY, this.iterationCountTextbox.getText());
 
         if (this.comboAttackSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.ATTACKER_SIMULATION_CONFIG,
-                    this.comboAttackSimulation.getItem(this.comboAttackSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.ATTACKER_SIMULATION_CONFIG, this.comboAttackSimulation.getItem(this.comboAttackSimulation.getSelectionIndex()));
         }
         if (this.comboPowerLoadSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG,
-                    this.comboPowerLoadSimulation.getItem(this.comboPowerLoadSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, this.comboPowerLoadSimulation.getItem(this.comboPowerLoadSimulation.getSelectionIndex()));
         }
         if (this.comboTerminationCondition.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG,
-                    this.comboTerminationCondition.getItem(this.comboTerminationCondition.getSelectionIndex()));
+            configuration.setAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, this.comboTerminationCondition.getItem(this.comboTerminationCondition.getSelectionIndex()));
         }
         if (this.comboProgressor.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG,
-                    this.comboProgressor.getItem(this.comboProgressor.getSelectionIndex()));
+            configuration.setAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, this.comboProgressor.getItem(this.comboProgressor.getSelectionIndex()));
         }
         if (this.comboImpactAnalysis.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG,
-                    this.comboImpactAnalysis.getItem(this.comboImpactAnalysis.getSelectionIndex()));
+            configuration.setAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, this.comboImpactAnalysis.getItem(this.comboImpactAnalysis.getSelectionIndex()));
         }
         if (this.comboKritisSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.KRITIS_SIMULATION_CONFIG,
-                    this.comboKritisSimulation.getItem(this.comboKritisSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.KRITIS_SIMULATION_CONFIG, this.comboKritisSimulation.getItem(this.comboKritisSimulation.getSelectionIndex()));
         }
 
         // Now Tab is Clean again
@@ -860,8 +815,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
          * --> Check wheter Output path is the same as inputpath So the Input Files and Output are
          * on the same branch Needed because otherwise the Output Model gets broken
          */
-        final boolean outWrong = !this.outputTextbox.getText()
-                .contains(new File(this.inputTextbox.getText()).getParent());
+        final boolean outWrong = !this.outputTextbox.getText().contains(new File(this.inputTextbox.getText()).getParent());
 
         return topoWrong || inWrong || outWrong;
         // return false;
@@ -871,8 +825,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     private boolean areOptionsWrong() {
         // TODO Add coming checks for the options section of the Ui here
         final boolean timeStepsWrong = !this.isUInt(this.timeStepsTextBox.getText());
-        final boolean rootNodeWrong = !(this.isUInt(this.rootNodeTextbox.getText())
-                || this.rootNodeTextbox.getText().equals(Constants.DEFAULT_ROOT_NODE_ID));
+        final boolean rootNodeWrong = !(this.isUInt(this.rootNodeTextbox.getText()) || this.rootNodeTextbox.getText().equals(Constants.DEFAULT_ROOT_NODE_ID));
         final boolean smartCountWrong = !this.isUInt(this.smartMeterCountTextBox.getText());
 
         final boolean controlCountWrong = !this.isUInt(this.controlCenterCountTextBox.getText());

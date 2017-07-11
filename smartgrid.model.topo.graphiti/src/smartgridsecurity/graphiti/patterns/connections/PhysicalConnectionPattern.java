@@ -51,8 +51,7 @@ public class PhysicalConnectionPattern extends AbstractConnection {
         final PhysicalConnection newRole = SmartgridtopoFactory.eINSTANCE.createPhysicalConnection();
 
         // add to resources
-        final SmartGridTopology scenario = (SmartGridTopology) this
-                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final SmartGridTopology scenario = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
         scenario.getContainsPC().add(newRole);
 
         // Get anchors

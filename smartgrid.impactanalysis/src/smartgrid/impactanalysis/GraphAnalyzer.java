@@ -252,8 +252,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
         for (final EntityState s : state.getEntityStates()) {
 
-            LOG.debug("Class " + s.getOwner().getClass() + " ID " + s.getOwner().getId() + " destroyed? "
-                    + s.isIsDestroyed() + " powersource " + s.getOwner().getConnectedTo().toString());
+            LOG.debug("Class " + s.getOwner().getClass() + " ID " + s.getOwner().getId() + " destroyed? " + s.isIsDestroyed() + " powersource " + s.getOwner().getConnectedTo().toString());
 
             this.entityStates.put(s.getOwner().getId(), s);
             // if ((s.getOwner() instanceof ControlCenter) || (s.getOwner()
@@ -275,8 +274,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
             }
         }
         for (final PowerState p : state.getPowerStates()) {
-            LOG.debug("Entity " + p.getOwner().getName() + " ID " + p.getOwner().getId() + " powerOutage? "
-                    + p.isPowerOutage());
+            LOG.debug("Entity " + p.getOwner().getName() + " ID " + p.getOwner().getId() + " powerOutage? " + p.isPowerOutage());
             this.powerStates.put(p.getOwner().getId(), p);
         }
         LOG.debug("[Graph Analyzer]: End readStates");
@@ -438,8 +436,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
      * @param factory
      * @param result
      */
-    private void clusterCleaning(final SmartgridoutputFactory factory, final ScenarioResult result,
-            final List<List<Integer>> clusterToClean) {
+    private void clusterCleaning(final SmartgridoutputFactory factory, final ScenarioResult result, final List<List<Integer>> clusterToClean) {
 
         for (final List<Integer> c : clusterToClean) {
             final Cluster cluster = factory.createCluster();
@@ -482,8 +479,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
                 }
             }
         } catch (final NullPointerException e) {
-            LOG.error(
-                    "Your input model may be not conform to the current topo model but hasn't set its Scenario attribute to a valid value");
+            LOG.error("Your input model may be not conform to the current topo model but hasn't set its Scenario attribute to a valid value");
         }
         return connected;
     }

@@ -53,8 +53,7 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
         this.setToolTipText(this.TOOL_TIP);
         this.setId(this.ACTION_ID);
         this.addPropertyChangeListener(listener);
-        this.setImageDescriptor(
-                this.createImage("icons" + File.separator + "load_output.png", "smartgrid.model.output"));
+        this.setImageDescriptor(this.createImage("icons" + File.separator + "load_output.png", "smartgrid.model.output"));
     }
 
     @Override
@@ -67,16 +66,13 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
         LOG.info("[LoadOutputToolbarButtonAction]: Start loading output model");
         final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects()) {
+        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             // no input loaded
-            if ((obj instanceof SmartGridTopology) && this.diagramContainer.getDiagramTypeProvider().getDiagram()
-                    .getLink().getBusinessObjects().size() == 1) {
+            if ((obj instanceof SmartGridTopology) && this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().size() == 1) {
                 final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot load output model without input model");
                 messageBox.open();
-                LOG.info(
-                        "[LoadOutputToolbarButtonAction]: Loading output model failed due to non existent input model");
+                LOG.info("[LoadOutputToolbarButtonAction]: Loading output model failed due to non existent input model");
                 return;
             }
         }
@@ -93,8 +89,7 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
             LOG.info("Selected file: " + fileSelected);
             final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
 
-            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-                    .put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 
             // load the resource and resolve the proxies
             final File source = new File(fileSelected);
@@ -108,24 +103,20 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
                 final RecordingCommand cmd = new RecordingCommand(domain) {
                     @Override
                     protected void doExecute() {
-                        final ManageNodeAppearances manager = new ManageNodeAppearances(
-                                LoadOutputToolbarButtonAction.this.diagramContainer);
+                        final ManageNodeAppearances manager = new ManageNodeAppearances(LoadOutputToolbarButtonAction.this.diagramContainer);
                         // is input loaded?
                         boolean hasOutput = false;
-                        final EList<EObject> boList = LoadOutputToolbarButtonAction.this.diagramContainer
-                                .getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
+                        final EList<EObject> boList = LoadOutputToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
 
                         // Conformity check
                         for (final EObject current : boList) {
                             if (current instanceof SmartGridTopology) {
-                                if (!(LoadOutputModelConformityHelper.checkOutputModelConformitySimple(
-                                        (ScenarioResult) obj, (SmartGridTopology) current))) {
+                                if (!(LoadOutputModelConformityHelper.checkOutputModelConformitySimple((ScenarioResult) obj, (SmartGridTopology) current))) {
                                     final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                                     messageBox.setMessage("Output model is not conform to the current topo model");
                                     messageBox.open();
                                     LoadOutputToolbarButtonAction.this.loadSuccessful = false;
-                                    LOG.info(
-                                            "[LoadOutputToolbarButtonAction]: Loading output model failed since it is not conform to the topo model");
+                                    LOG.info("[LoadOutputToolbarButtonAction]: Loading output model failed since it is not conform to the topo model");
                                     return;
                                 }
                             }
@@ -140,8 +131,7 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
                             }
                         }
 
-                        final Shape[] shapes = (Shape[]) LoadOutputToolbarButtonAction.this.diagramContainer
-                                .getDiagramTypeProvider().getDiagram().getChildren().toArray();
+                        final Shape[] shapes = (Shape[]) LoadOutputToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getChildren().toArray();
                         LOG.debug("[LoadOutputToolbarButtonAction]: Applying output elements to the diagram");
                         if (hasOutput) {
                             // Clear all output Elements
@@ -150,26 +140,20 @@ public class LoadOutputToolbarButtonAction extends ToolbarButtonAction {
                                 if ((currentShape.getLink().getBusinessObjects().get(0) instanceof NetworkEntity)) {
                                     currentShape.setVisible(true);
                                     manager.manageGraphicalPatternRepresentation((ContainerShape) currentShape, true);
-                                    final Object bo = manager.resolveBOfromNetworkEntity(
-                                            (NetworkEntity) currentShape.getLink().getBusinessObjects().get(0),
-                                            result.getStates());
+                                    final Object bo = manager.resolveBOfromNetworkEntity((NetworkEntity) currentShape.getLink().getBusinessObjects().get(0), result.getStates());
 
                                     if (bo != null && bo instanceof NoUplink) {
                                         manager.removeChildren((ContainerShape) currentShape);
                                     }
                                 }
                             }
-                            LoadOutputToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram()
-                                    .getLink().getBusinessObjects().remove(result);
+                            LoadOutputToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().remove(result);
                         }
                         for (final Shape containerShape : shapes) {
                             if (containerShape.getLink().getBusinessObjects().get(0) instanceof NetworkEntity) {
-                                final Object ob = manager.resolveBOfromNetworkEntity(
-                                        (NetworkEntity) containerShape.getLink().getBusinessObjects().get(0),
-                                        ((ScenarioResult) obj).getStates());
+                                final Object ob = manager.resolveBOfromNetworkEntity((NetworkEntity) containerShape.getLink().getBusinessObjects().get(0), ((ScenarioResult) obj).getStates());
                                 if (ob != null && !(ob instanceof Online) && !(ob instanceof Defect)) {
-                                    manager.manageGraphicalPatternRepresentation((ContainerShape) containerShape,
-                                            false);
+                                    manager.manageGraphicalPatternRepresentation((ContainerShape) containerShape, false);
                                 }
                                 if (ob != null && ob instanceof NoUplink) {
                                     if (((NoUplink) ob).isIsHacked()) {

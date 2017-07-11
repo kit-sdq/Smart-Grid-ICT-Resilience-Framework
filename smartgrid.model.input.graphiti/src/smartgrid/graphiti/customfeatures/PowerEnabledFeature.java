@@ -41,13 +41,11 @@ public class PowerEnabledFeature extends AbstractCustomFeature {
 
             @Override
             protected void doExecute() {
-                final ManageNodeAppearances manager = new ManageNodeAppearances(
-                        PowerEnabledFeature.this.getDiagramBehavior().getDiagramContainer());
+                final ManageNodeAppearances manager = new ManageNodeAppearances(PowerEnabledFeature.this.getDiagramBehavior().getDiagramContainer());
                 final EObject obj = pe.getLink().getBusinessObjects().get(0);
 
                 EObject states = null;
-                for (final EObject tmp : PowerEnabledFeature.this.getDiagramBehavior().getDiagramContainer()
-                        .getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+                for (final EObject tmp : PowerEnabledFeature.this.getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
                     if (tmp instanceof ScenarioState) {
                         states = tmp;
                         break;
@@ -58,8 +56,7 @@ public class PowerEnabledFeature extends AbstractCustomFeature {
                 if (states != null) {
                     for (final PowerState power : ((ScenarioState) states).getPowerStates()) {
                         if ((obj instanceof PowerGridNode && ((PowerGridNode) obj).getId() == power.getOwner().getId())
-                                || (obj instanceof PowerState
-                                        && ((PowerState) obj).getOwner().getId() == power.getOwner().getId())) {
+                                || (obj instanceof PowerState && ((PowerState) obj).getOwner().getId() == power.getOwner().getId())) {
 
                             if (!power.isPowerOutage()) {
                                 power.setPowerOutage(!power.isPowerOutage());
@@ -85,8 +82,7 @@ public class PowerEnabledFeature extends AbstractCustomFeature {
      * @return true if loaded, false otherwise
      */
     private boolean isInputModelAlreadyCreated() {
-        for (final EObject obj : this.getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram()
-                .getLink().getBusinessObjects()) {
+        for (final EObject obj : this.getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (obj instanceof ScenarioState) {
                 return true;
             }

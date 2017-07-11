@@ -61,22 +61,25 @@ public class ManageNodeAppearances {
         poly.setForeground(this.manageColor(ConstantProvider.FOREGROUND_BLACK));
         poly.setLineWidth(ConstantProvider.shapeLineWidth);
     }
+
     /**
      * Method to draw exclamation mark. This is used to show that a network entity is hacked
      * 
      * @param containerShape
-     * 			the current container shape
+     *            the current container shape
      */
-    public void drawHacked(final ContainerShape containerShape){
-    	drawExclamationMark(containerShape);
+    public void drawHacked(final ContainerShape containerShape) {
+        drawExclamationMark(containerShape);
     }
+
     public void drawExclamationMark(final ContainerShape shape) {
-    	//Code copied from smartgrid.model.output.features.ManageNodeAppearances maybe refactoring could resolve code duplications
+        //Code copied from smartgrid.model.output.features.ManageNodeAppearances maybe refactoring could resolve code duplications
         final int xy[] = new int[] { 9, 2, 9, 15 };
         this.drawMark(shape, xy);
     }
+
     private void drawMark(final ContainerShape containerShape, final int[] xy) {
-    	//Code copied from smartgrid.model.output.features.ManageNodeAppearances maybe refactoring could resolve code duplications
+        //Code copied from smartgrid.model.output.features.ManageNodeAppearances maybe refactoring could resolve code duplications
         final IPeCreateService peCreateService = Graphiti.getPeCreateService();
         final IGaService gaService = Graphiti.getGaService();
         // create line
@@ -97,8 +100,7 @@ public class ManageNodeAppearances {
     }
 
     public Color manageBackground(final boolean powerOutage) {
-        return powerOutage ? this.manageColor(new ColorConstant(220, 220, 220))
-                : this.manageColor(ConstantProvider.POWER_GRID_NODE_BACKGROUND);
+        return powerOutage ? this.manageColor(new ColorConstant(220, 220, 220)) : this.manageColor(ConstantProvider.POWER_GRID_NODE_BACKGROUND);
     }
 
     public Color manageForeground() {
@@ -115,8 +117,7 @@ public class ManageNodeAppearances {
     private Color manageColor(final IColorConstant constant) {
         final Collection<Color> colors = this.diagramContainer.getDiagramTypeProvider().getDiagram().getColors();
         for (final Color existingColor : colors) {
-            if (existingColor.getRed() == constant.getRed() && existingColor.getGreen() == constant.getGreen()
-                    && existingColor.getBlue() == constant.getBlue()) {
+            if (existingColor.getRed() == constant.getRed() && existingColor.getGreen() == constant.getGreen() && existingColor.getBlue() == constant.getBlue()) {
                 return existingColor;
             }
         }

@@ -70,8 +70,7 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
 
             @Override
             public void modifyText(final ModifyEvent e) {
-                final IFeature feature = new AbstractFeature(
-                        IdentifierPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
+                final IFeature feature = new AbstractFeature(IdentifierPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
 
                     @Override
                     public void execute(final IContext context) {

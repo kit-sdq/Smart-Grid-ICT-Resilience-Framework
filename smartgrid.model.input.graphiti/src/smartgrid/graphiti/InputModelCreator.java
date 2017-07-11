@@ -54,14 +54,12 @@ public class InputModelCreator {
      */
     public int createNewInputModel(final boolean isDefault) {
         final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
-        final EList<EObject> boList = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects();
+        final EList<EObject> boList = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
 
         final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
         URI uri = null;
         if (!isDefault) {
-            final InputDialog dialog = new InputDialog(shell, "Create new scenario state model", "Type your model name",
-                    "", null);
+            final InputDialog dialog = new InputDialog(shell, "Create new scenario state model", "Type your model name", "", null);
             final int returnCode = dialog.open();
 
             if (returnCode == Window.CANCEL) {
@@ -111,8 +109,7 @@ public class InputModelCreator {
                     }
                 }
 
-                final EList<Shape> shapes = InputModelCreator.this.diagramContainer.getDiagramTypeProvider()
-                        .getDiagram().getChildren();
+                final EList<Shape> shapes = InputModelCreator.this.diagramContainer.getDiagramTypeProvider().getDiagram().getChildren();
                 for (final Shape shape : shapes) {
                     final EObject obj = shape.getLink().getBusinessObjects().get(0);
                     if (obj instanceof NetworkEntity) {
@@ -128,8 +125,7 @@ public class InputModelCreator {
                 }
 
                 rs.getContents().add(domainModel);
-                InputModelCreator.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                        .getBusinessObjects().add(domainModel);
+                InputModelCreator.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().add(domainModel);
                 try {
                     rs.save(InputModelCreator.this.createSaveOptions());
                 } catch (final IOException e) {

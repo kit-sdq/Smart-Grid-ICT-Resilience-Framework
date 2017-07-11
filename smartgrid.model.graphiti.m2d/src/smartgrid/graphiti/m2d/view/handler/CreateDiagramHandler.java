@@ -28,8 +28,7 @@ public class CreateDiagramHandler extends AbstractHandler {
 
         final Resource resource = impl.getResource(URI.createFileURI(emfFile.getFullPath().toString()), true);
 
-        new ModelToDiagram(emfFile.getProjectRelativePath().toString(), emfFile.getProject())
-                .initializeDiagram((SmartGridTopology) resource.getContents().get(0));
+        new ModelToDiagram(emfFile.getProjectRelativePath().toString(), emfFile.getProject()).initializeDiagram((SmartGridTopology) resource.getContents().get(0));
         return null;
     }
 

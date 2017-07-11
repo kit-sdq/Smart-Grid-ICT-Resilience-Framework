@@ -13,8 +13,7 @@ public final class LoadOutputModelConformityHelper {
     private LoadOutputModelConformityHelper() {
     }
 
-    public static boolean checkOutputModelConformitySimple(final ScenarioResult result,
-            final SmartGridTopology current) {
+    public static boolean checkOutputModelConformitySimple(final ScenarioResult result, final SmartGridTopology current) {
         if (result.getScenario() == null) {
             return true;
         }
@@ -34,8 +33,7 @@ public final class LoadOutputModelConformityHelper {
         return result;
     }
 
-    private static boolean compareAndCountEntityStates(final List<EntityState> states,
-            final List<NetworkEntity> entities) {
+    private static boolean compareAndCountEntityStates(final List<EntityState> states, final List<NetworkEntity> entities) {
         boolean result = true;
 
         final List<EntityState> noZombies = getListWithoutZombies(states);

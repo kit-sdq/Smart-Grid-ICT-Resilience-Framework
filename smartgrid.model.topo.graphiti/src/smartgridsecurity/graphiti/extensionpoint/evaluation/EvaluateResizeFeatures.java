@@ -66,8 +66,7 @@ public class EvaluateResizeFeatures {
                 final Object o = e.createExecutableExtension("class");
                 if (o instanceof IResizeFeatureResolver) {
                     // Executes the evaluation in a thread an returns the result in the future
-                    final Callable<List<IResizeShapeFeature>> callable = new EvaluateAbstractPattern(
-                            (IResizeFeatureResolver) o, this.fp);
+                    final Callable<List<IResizeShapeFeature>> callable = new EvaluateAbstractPattern((IResizeFeatureResolver) o, this.fp);
                     final Future<List<IResizeShapeFeature>> future = pool.submit(callable);
                     list.add(future);
                 }

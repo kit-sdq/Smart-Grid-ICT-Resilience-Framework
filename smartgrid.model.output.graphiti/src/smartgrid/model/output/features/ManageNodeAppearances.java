@@ -96,48 +96,27 @@ public class ManageNodeAppearances {
 
         if (bo instanceof SmartMeter) {
             ga = original
-                    ? FeatureRepresentationHelper.createEllipse(containerShape,
-                            this.manageColor(ConstantProvider.SMART_METER_FOREGROUND),
-                            this.manageColor(ConstantProvider.SMART_METER_BACKGROUND))
-                    : FeatureRepresentationHelper.createEllipse(containerShape,
-                            this.manageColor(new ColorConstant(140, 0, 0)),
-                            this.manageColor(new ColorConstant(225, 200, 200)));
+                    ? FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(ConstantProvider.SMART_METER_FOREGROUND), this.manageColor(ConstantProvider.SMART_METER_BACKGROUND))
+                    : FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(225, 200, 200)));
         }
         if (bo instanceof ControlCenter) {
-            ga = original
-                    ? FeatureRepresentationHelper.createEllipse(containerShape,
-                            this.manageColor(ConstantProvider.FOREGROUND_BLACK),
-                            this.manageColor(ConstantProvider.CONTROL_CENTER_BACKGROUND))
-                    : FeatureRepresentationHelper.createEllipse(containerShape,
-                            this.manageColor(new ColorConstant(0, 0, 0)),
-                            this.manageColor(new ColorConstant(124, 154, 139)));
+            ga = original ? FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(ConstantProvider.FOREGROUND_BLACK), this.manageColor(ConstantProvider.CONTROL_CENTER_BACKGROUND))
+                    : FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(124, 154, 139)));
         }
         if (bo instanceof GenericController) {
             ga = original
-                    ? FeatureRepresentationHelper.createEllipse(containerShape,
-                            this.manageColor(ConstantProvider.GENERIC_CONTROLLER_FOREGROUND),
+                    ? FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(ConstantProvider.GENERIC_CONTROLLER_FOREGROUND),
                             this.manageColor(ConstantProvider.GENERIC_CONTROLLER_BACKGROUND))
-                    : FeatureRepresentationHelper.createEllipse(containerShape,
-                            this.manageColor(new ColorConstant(210, 60, 0)),
-                            this.manageColor(new ColorConstant(200, 188, 168)));
+                    : FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(210, 60, 0)), this.manageColor(new ColorConstant(200, 188, 168)));
         }
         if (bo instanceof InterCom) {
-            ga = original
-                    ? FeatureRepresentationHelper.createEllipse(containerShape,
-                            this.manageColor(ConstantProvider.INTER_COM_FOREGROUND),
-                            this.manageColor(ConstantProvider.INTER_COM_BACKGROUND))
-                    : FeatureRepresentationHelper.createEllipse(containerShape,
-                            this.manageColor(new ColorConstant(0, 139, 0)),
-                            this.manageColor(new ColorConstant(199, 212, 139)));
+            ga = original ? FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(ConstantProvider.INTER_COM_FOREGROUND), this.manageColor(ConstantProvider.INTER_COM_BACKGROUND))
+                    : FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 139, 0)), this.manageColor(new ColorConstant(199, 212, 139)));
         }
         if (bo instanceof NetworkNode) {
             ga = original
-                    ? FeatureRepresentationHelper.createRect(containerShape,
-                            this.manageColor(ConstantProvider.NETWORK_NODE_FOREGROUND),
-                            this.manageColor(ConstantProvider.NETWORK_NODE_BACKGROUND))
-                    : FeatureRepresentationHelper.createRect(containerShape,
-                            this.manageColor(new ColorConstant(0, 51, 102)),
-                            this.manageColor(new ColorConstant(182, 191, 204)));
+                    ? FeatureRepresentationHelper.createRect(containerShape, this.manageColor(ConstantProvider.NETWORK_NODE_FOREGROUND), this.manageColor(ConstantProvider.NETWORK_NODE_BACKGROUND))
+                    : FeatureRepresentationHelper.createRect(containerShape, this.manageColor(new ColorConstant(0, 51, 102)), this.manageColor(new ColorConstant(182, 191, 204)));
         }
         final IGaService gaService = Graphiti.getGaService();
         gaService.setLocationAndSize(ga, locationX, locationY, width, height);
@@ -173,8 +152,7 @@ public class ManageNodeAppearances {
     private Color manageColor(final IColorConstant constant) {
         final Collection<Color> colors = this.diagramContainer.getDiagramTypeProvider().getDiagram().getColors();
         for (final Color existingColor : colors) {
-            if (existingColor.getRed() == constant.getRed() && existingColor.getGreen() == constant.getGreen()
-                    && existingColor.getBlue() == constant.getBlue()) {
+            if (existingColor.getRed() == constant.getRed() && existingColor.getGreen() == constant.getGreen() && existingColor.getBlue() == constant.getBlue()) {
                 return existingColor;
             }
         }

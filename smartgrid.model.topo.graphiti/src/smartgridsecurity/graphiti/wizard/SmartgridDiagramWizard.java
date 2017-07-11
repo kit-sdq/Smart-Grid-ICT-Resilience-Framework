@@ -80,18 +80,15 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
     @Override
     public boolean performFinish() {
         final String fileName = this.newDiagramPage.getFileName();
-        final URI uri = URI.createPlatformResourceURI(this.getCurrentProjectPath() + "/" + fileName + ".sgdiagram",
-                true);
-        final URI modelUri = URI
-                .createPlatformResourceURI(this.getCurrentProjectPath() + "/" + fileName + ".smartgridtopo", true);
+        final URI uri = URI.createPlatformResourceURI(this.getCurrentProjectPath() + "/" + fileName + ".sgdiagram", true);
+        final URI modelUri = URI.createPlatformResourceURI(this.getCurrentProjectPath() + "/" + fileName + ".smartgridtopo", true);
 
         // create diagram and open it
         final IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 
             @Override
             protected void execute(final IProgressMonitor monitor) throws CoreException, InterruptedException {
-                final Resource diagramResource = SmartgridDiagramWizard.this.createDiagram(uri, fileName, modelUri,
-                        monitor);
+                final Resource diagramResource = SmartgridDiagramWizard.this.createDiagram(uri, fileName, modelUri, monitor);
                 if (diagramResource != null && SmartgridDiagramWizard.this.editorId != null) {
                     try {
                         SmartgridDiagramWizard.this.openDiagram(diagramResource);
@@ -127,8 +124,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
      *            the process monitor
      * @return the created diagram
      */
-    private Resource createDiagram(final URI diagramURI, final String name, final URI modelURI,
-            final IProgressMonitor progressMonitor) {
+    private Resource createDiagram(final URI diagramURI, final String name, final URI modelURI, final IProgressMonitor progressMonitor) {
         progressMonitor.beginTask("Creating diagram and model files", 2);
         final TransactionalEditingDomain editingDomain = GraphitiUi.getEmfService().createResourceSetAndEditingDomain();
         final ResourceSet resourceSet = editingDomain.getResourceSet();
@@ -141,8 +137,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
                 @Override
                 protected void doExecute() {
                     // create diagram and business models
-                    SmartgridDiagramWizard.this.createModel(diagramResource, name, modelResource,
-                            modelURI.lastSegment());
+                    SmartgridDiagramWizard.this.createModel(diagramResource, name, modelResource, modelURI.lastSegment());
                 }
             });
         }
@@ -196,8 +191,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
      * @param modelName
      *            the model name
      */
-    private void createModel(final Resource diagramResource, final String diagramName, final Resource modelResource,
-            final String modelName) {
+    private void createModel(final Resource diagramResource, final String diagramName, final Resource modelResource, final String modelName) {
         // create model resource
         modelResource.setTrackingModification(true);
         final EObject domainModel = SmartgridtopoFactory.eINSTANCE.createSmartGridTopology();
@@ -205,8 +199,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
 
         // create diagram resource
         diagramResource.setTrackingModification(true);
-        final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + this.hashCode(), diagramName,
-                10, true);
+        final Diagram diagram = Graphiti.getPeCreateService().createDiagram(diagramName + this.hashCode(), diagramName, 10, true);
         diagram.setDiagramTypeId(this.editorId);
 
         // link model and diagram
@@ -260,8 +253,7 @@ public class SmartgridDiagramWizard extends Wizard implements INewWizard {
         shell.getDisplay().asyncExec(new Runnable() {
             @Override
             public void run() {
-                final IWorkbenchPage page = SmartgridDiagramWizard.this.workbench.getActiveWorkbenchWindow()
-                        .getActivePage();
+                final IWorkbenchPage page = SmartgridDiagramWizard.this.workbench.getActiveWorkbenchWindow().getActivePage();
                 try {
                     IDE.openEditor(page, file, true);
                 } catch (final PartInitException e) {

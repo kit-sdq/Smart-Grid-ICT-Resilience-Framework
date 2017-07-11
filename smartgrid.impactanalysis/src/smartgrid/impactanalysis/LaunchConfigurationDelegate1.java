@@ -38,8 +38,7 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
      * Details about the Analysis
      */
     @Override
-    public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
-            final IProgressMonitor monitor) throws CoreException {
+    public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch, final IProgressMonitor monitor) throws CoreException {
 
         LOG.debug("[LaunchConfiguration]: Loaded");
         LOG.debug("[LaunchConfiguration]: Find parameters");

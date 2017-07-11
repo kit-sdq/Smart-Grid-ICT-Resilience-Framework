@@ -30,8 +30,7 @@ public class CreatePowerConnectionFeature extends AbstractCreateConnectionFeatur
             final Object target = this.getBoFromAnchor(targetAnchor);
             final Object source = this.getBoFromAnchor(sourceAnchor);
 
-            if (source != null && target != null && source instanceof NetworkEntity
-                    && target instanceof PowerGridNode) {
+            if (source != null && target != null && source instanceof NetworkEntity && target instanceof PowerGridNode) {
                 final NetworkEntity sourceNetworkEntity = (NetworkEntity) source;
                 if (!sourceNetworkEntity.getConnectedTo().contains(target)) {
                     return true;
@@ -67,8 +66,7 @@ public class CreatePowerConnectionFeature extends AbstractCreateConnectionFeatur
         source.getConnectedTo().add(target);
 
         // add connection for business object
-        final AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(),
-                context.getTargetAnchor());
+        final AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
         final Object[] newObject = new Object[] { source, target };
         addContext.setNewObject(newObject);
 

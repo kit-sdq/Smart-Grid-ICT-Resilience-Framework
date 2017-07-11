@@ -35,8 +35,7 @@ public class NodeDestoryedFeature extends AbstractCustomFeature {
      * @return true if loaded, false otherwise
      */
     private boolean isInputModelAlreadyCreated() {
-        for (final EObject obj : this.getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram()
-                .getLink().getBusinessObjects()) {
+        for (final EObject obj : this.getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (obj instanceof ScenarioState) {
                 return true;
             }
@@ -57,14 +56,12 @@ public class NodeDestoryedFeature extends AbstractCustomFeature {
 
             @Override
             protected void doExecute() {
-                final ManageNodeAppearances manager = new ManageNodeAppearances(
-                        NodeDestoryedFeature.this.getDiagramBehavior().getDiagramContainer());
+                final ManageNodeAppearances manager = new ManageNodeAppearances(NodeDestoryedFeature.this.getDiagramBehavior().getDiagramContainer());
                 // get location of the current topo pe
                 final EObject obj = pe.getLink().getBusinessObjects().get(0);
 
                 EObject states = null;
-                for (final EObject tmp : NodeDestoryedFeature.this.getDiagramBehavior().getDiagramContainer()
-                        .getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
+                for (final EObject tmp : NodeDestoryedFeature.this.getDiagramBehavior().getDiagramContainer().getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
                     if (tmp instanceof ScenarioState) {
                         states = tmp;
                         break;
@@ -75,8 +72,7 @@ public class NodeDestoryedFeature extends AbstractCustomFeature {
                 if (states != null) {
                     for (final EntityState entity : ((ScenarioState) states).getEntityStates()) {
                         if ((obj instanceof NetworkEntity && ((NetworkEntity) obj).getId() == entity.getOwner().getId())
-                                || (obj instanceof EntityState
-                                        && ((EntityState) obj).getOwner().getId() == entity.getOwner().getId())) {
+                                || (obj instanceof EntityState && ((EntityState) obj).getOwner().getId() == entity.getOwner().getId())) {
                             // if (obj.equals(entity.getOwner()) || obj
                             // instanceof EntityState) {
 

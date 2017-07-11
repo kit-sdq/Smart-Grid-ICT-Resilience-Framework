@@ -77,8 +77,7 @@ public class SGSFeatureProvider extends DefaultFeatureProviderWithPatterns {
      */
     private void addContextButtons() {
         ExtensionPointRegistry.getInstance().clearContextButtons();
-        final List<AbstractCustomFeature> extensionCustomButtons = (new EvaluateContextButtons(this))
-                .evaluateFeatureExtension(Platform.getExtensionRegistry());
+        final List<AbstractCustomFeature> extensionCustomButtons = (new EvaluateContextButtons(this)).evaluateFeatureExtension(Platform.getExtensionRegistry());
         ExtensionPointRegistry.getInstance().addContextButtonsToRegistry(extensionCustomButtons);
     }
 

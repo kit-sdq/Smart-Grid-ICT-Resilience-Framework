@@ -70,8 +70,7 @@ public class NamedEntityPropertiesSheet extends GFPropertySection implements ITa
 
             @Override
             public void modifyText(final ModifyEvent e) {
-                final IFeature feature = new AbstractFeature(
-                        NamedEntityPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
+                final IFeature feature = new AbstractFeature(NamedEntityPropertiesSheet.this.getDiagramTypeProvider().getFeatureProvider()) {
 
                     @Override
                     public void execute(final IContext context) {

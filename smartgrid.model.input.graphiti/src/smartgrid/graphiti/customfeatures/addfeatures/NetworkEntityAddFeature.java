@@ -79,24 +79,19 @@ public class NetworkEntityAddFeature extends AbstractAddFeature {
      */
     private GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
         if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof SmartMeter) {
-            return FeatureRepresentationHelper.createEllipse(containerShape,
-                    this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(255, 0, 0)));
+            return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(140, 0, 0)), this.manageColor(new ColorConstant(255, 0, 0)));
         }
         if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof ControlCenter) {
-            return FeatureRepresentationHelper.createEllipse(containerShape,
-                    this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(51, 102, 0)));
+            return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 0, 0)), this.manageColor(new ColorConstant(51, 102, 0)));
         }
         if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof GenericController) {
-            return FeatureRepresentationHelper.createEllipse(containerShape,
-                    this.manageColor(new ColorConstant(210, 60, 0)), this.manageColor(new ColorConstant(255, 140, 0)));
+            return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(210, 60, 0)), this.manageColor(new ColorConstant(255, 140, 0)));
         }
         if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof InterCom) {
-            return FeatureRepresentationHelper.createEllipse(containerShape,
-                    this.manageColor(new ColorConstant(0, 139, 0)), this.manageColor(new ColorConstant(127, 255, 0)));
+            return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 139, 0)), this.manageColor(new ColorConstant(127, 255, 0)));
         }
         if (this.bo instanceof EntityState && ((EntityState) this.bo).getOwner() instanceof NetworkNode) {
-            return FeatureRepresentationHelper.createRect(containerShape,
-                    this.manageColor(new ColorConstant(0, 51, 102)), this.manageColor(new ColorConstant(0, 102, 204)));
+            return FeatureRepresentationHelper.createRect(containerShape, this.manageColor(new ColorConstant(0, 51, 102)), this.manageColor(new ColorConstant(0, 102, 204)));
         }
         return null;
     }

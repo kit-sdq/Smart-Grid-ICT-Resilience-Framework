@@ -42,8 +42,7 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
         this.setToolTipText(this.TOOL_TIP);
         this.setId(this.ACTION_ID);
         this.addPropertyChangeListener(this);
-        this.setImageDescriptor(
-                this.createImage("icons" + File.separator + "clear_input.png", "smartgrid.model.input"));
+        this.setImageDescriptor(this.createImage("icons" + File.separator + "clear_input.png", "smartgrid.model.input"));
     }
 
     @Override
@@ -56,8 +55,7 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
      * This method checks if there is an input model. If true, the action will be enabled.
      */
     private void checkInputModel() {
-        final EList<EObject> list = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects();
+        final EList<EObject> list = this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
         for (final EObject model : list) {
             if (model instanceof ScenarioState) {
                 this.setEnabled(true);
@@ -73,11 +71,9 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
     @Override
     public void run() {
         LOG.info("[ClearButtonAction]: Start clearing input model from diagram");
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects()) {
+        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
-                final MessageBox messageBox = new MessageBox(
-                        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.ICON_ERROR);
+                final MessageBox messageBox = new MessageBox(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot clear input model while output model is loaded");
                 messageBox.open();
                 LOG.info("[ClearButtonAction]: End clearing due to failure");
@@ -88,12 +84,10 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
         final RecordingCommand c = new RecordingCommand(domain) {
             @Override
             protected void doExecute() {
-                final ManageNodeAppearances manager = new ManageNodeAppearances(
-                        ClearButtonAction.this.diagramContainer);
+                final ManageNodeAppearances manager = new ManageNodeAppearances(ClearButtonAction.this.diagramContainer);
                 // copy list to array -> otherwise you'll get a concurrency
                 // exception
-                final Shape[] shapes = (Shape[]) ClearButtonAction.this.diagramContainer.getDiagramTypeProvider()
-                        .getDiagram().getChildren().toArray();
+                final Shape[] shapes = (Shape[]) ClearButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getChildren().toArray();
                 LOG.debug("[ClearButtonAction]: Clearing all nodes");
                 for (final Shape currentShape : shapes) {
                     if (currentShape.getLink().getBusinessObjects().get(0) instanceof PowerGridNode) {
@@ -111,19 +105,15 @@ public class ClearButtonAction extends ToolbarButtonAction implements IPropertyC
                 // remove input model from boList so that node destroyed and
                 // power enabled buttons
                 // are disabled again
-                final EList<EObject> boList = ClearButtonAction.this.diagramContainer.getDiagramTypeProvider()
-                        .getDiagram().getLink().getBusinessObjects();
-                LOG.debug(
-                        "[ClearButtonAction]: Remove link between SmartGridTopology and ScenarioState in the diagram");
+                final EList<EObject> boList = ClearButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects();
+                LOG.debug("[ClearButtonAction]: Remove link between SmartGridTopology and ScenarioState in the diagram");
                 for (final EObject tmp : boList) {
                     if (tmp instanceof ScenarioState) {
-                        final TransactionalEditingDomain domain = ClearButtonAction.this.diagramContainer
-                                .getDiagramBehavior().getEditingDomain();
+                        final TransactionalEditingDomain domain = ClearButtonAction.this.diagramContainer.getDiagramBehavior().getEditingDomain();
                         final RecordingCommand c = new RecordingCommand(domain) {
                             @Override
                             protected void doExecute() {
-                                ClearButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                                        .getBusinessObjects().remove(tmp);
+                                ClearButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().remove(tmp);
                             }
                         };
                         domain.getCommandStack().execute(c);

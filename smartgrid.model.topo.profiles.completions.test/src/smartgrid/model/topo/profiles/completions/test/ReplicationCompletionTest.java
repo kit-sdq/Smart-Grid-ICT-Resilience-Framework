@@ -9,17 +9,16 @@ import topoextension.Replication;
 
 public class ReplicationCompletionTest extends SmartGridCompletionTest {
 
-	@Test
-	public void testReplicationCompletion() {
-		SmartMeter smartMeter = getFirstSmartMeter();
-		Replication replication = SmartGridStereotypesAPI.getReplicationStereotype(smartMeter);
-		long smartMetersBeforeReplication = AssertHelper.countSmartMetersInTopology(this.smartGridTopology);
+    @Test
+    public void testReplicationCompletion() {
+        SmartMeter smartMeter = getFirstSmartMeter();
+        Replication replication = SmartGridStereotypesAPI.getReplicationStereotype(smartMeter);
+        long smartMetersBeforeReplication = AssertHelper.countSmartMetersInTopology(this.smartGridTopology);
 
-		ReplicationCompletionForSmartMeter replicationCompletion = new ReplicationCompletionForSmartMeter();
-		replicationCompletion.executeCompletion(smartMeter, replication);
+        ReplicationCompletionForSmartMeter replicationCompletion = new ReplicationCompletionForSmartMeter();
+        replicationCompletion.executeCompletion(smartMeter, replication);
 
-		AssertHelper.assertReplicationCompletion(smartGridTopology, smartMeter, replication, smartMetersBeforeReplication);
-	}
-
+        AssertHelper.assertReplicationCompletion(smartGridTopology, smartMeter, replication, smartMetersBeforeReplication);
+    }
 
 }

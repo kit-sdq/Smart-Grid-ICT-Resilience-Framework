@@ -43,19 +43,16 @@ public class NewToolbarButtonAction extends ToolbarButtonAction {
 
     @Override
     public void run() {
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects()) {
+        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (!(obj instanceof ScenarioState) && !(obj instanceof SmartGridTopology)) {
-                final MessageBox messageBox = new MessageBox(
-                        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.ICON_ERROR);
+                final MessageBox messageBox = new MessageBox(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot create new input model while output model is loaded");
                 messageBox.open();
                 return;
             }
         }
 
-        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink()
-                .getBusinessObjects()) {
+        for (final EObject obj : this.diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects()) {
             if (obj instanceof ScenarioState) {
 
                 final TransactionalEditingDomain domain = this.diagramContainer.getDiagramBehavior().getEditingDomain();
@@ -64,12 +61,10 @@ public class NewToolbarButtonAction extends ToolbarButtonAction {
                     protected void doExecute() {
                         // copy list to array -> otherwise you'll get a
                         // concurrency exception
-                        final Shape[] shapes = (Shape[]) NewToolbarButtonAction.this.diagramContainer
-                                .getDiagramTypeProvider().getDiagram().getChildren().toArray();
+                        final Shape[] shapes = (Shape[]) NewToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getChildren().toArray();
 
                         // First, clear all states if there are any
-                        final ManageNodeAppearances manager = new ManageNodeAppearances(
-                                NewToolbarButtonAction.this.diagramContainer);
+                        final ManageNodeAppearances manager = new ManageNodeAppearances(NewToolbarButtonAction.this.diagramContainer);
                         for (final Shape currentShape : shapes) {
                             if (currentShape.getLink().getBusinessObjects().get(0) instanceof PowerGridNode) {
                                 currentShape.setVisible(true);

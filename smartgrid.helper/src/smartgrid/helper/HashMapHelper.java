@@ -13,9 +13,13 @@ public final class HashMapHelper {
 
     /**
      * Creates a new HashMap instance, which is optimized for a constant size.
-     * @param <K> type of keys
-     * @param <V> type of values
-     * @param capacity Expected max capacity
+     * 
+     * @param <K>
+     *            type of keys
+     * @param <V>
+     *            type of values
+     * @param capacity
+     *            Expected max capacity
      * @return Empty HashMap
      */
     public static <K, V> HashMap<K, V> createOptimalFixedSizeHashMap(int capacity) {

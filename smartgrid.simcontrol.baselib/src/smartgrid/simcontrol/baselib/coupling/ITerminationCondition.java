@@ -26,8 +26,7 @@ public interface ITerminationCondition {
      * @param impactResultOld
      * @return
      */
-    boolean evaluate(int iterationCount, ScenarioState impactInput, ScenarioState impactInputOld,
-            ScenarioResult impactResult, ScenarioResult impactResultOld);
+    boolean evaluate(int iterationCount, ScenarioState impactInput, ScenarioState impactInputOld, ScenarioResult impactResult, ScenarioResult impactResultOld);
 
     /**
      * If using ExtensionPoints and so 0-parameter Constructor pass the config from Simcontrol UI to

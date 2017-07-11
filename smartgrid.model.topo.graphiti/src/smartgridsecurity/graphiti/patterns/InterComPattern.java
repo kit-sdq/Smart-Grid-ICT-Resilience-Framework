@@ -27,8 +27,7 @@ public class InterComPattern extends AbstractFormPattern {
     @Override
     public Object[] create(final ICreateContext context) {
         this.addScenario();
-        final SmartGridTopology container = (SmartGridTopology) this
-                .getBusinessObjectForPictogramElement(this.getDiagram());
+        final SmartGridTopology container = (SmartGridTopology) this.getBusinessObjectForPictogramElement(this.getDiagram());
         final InterCom node = SmartgridtopoFactory.eINSTANCE.createInterCom();
         // Add model element to resource.
         // We add the model element to the resource of the diagram for
@@ -52,8 +51,7 @@ public class InterComPattern extends AbstractFormPattern {
 
     @Override
     protected GraphicsAlgorithm getGraphicalPatternRepresentation(final ContainerShape containerShape) {
-        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 139, 0)),
-                this.manageColor(new ColorConstant(127, 255, 0)));
+        return FeatureRepresentationHelper.createEllipse(containerShape, this.manageColor(new ColorConstant(0, 139, 0)), this.manageColor(new ColorConstant(127, 255, 0)));
     }
 
     @Override
