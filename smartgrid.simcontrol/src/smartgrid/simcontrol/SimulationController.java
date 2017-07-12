@@ -1,11 +1,13 @@
 package smartgrid.simcontrol;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
@@ -61,6 +63,19 @@ public final class SimulationController {
 
         reactiveSimControl = new ReactiveSimulationController();
         reactiveSimControl.init(outputPath, topoPath, inputPath);
+
+        final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
+        final List<IKritisSimulationWrapper> time = helper.getKritisSimulationExtensions();
+        for (final IKritisSimulationWrapper e : time) {
+
+            if (launchConfig.getAttribute(Constants.KRITIS_SIMULATION_CONFIG, "").equals(e.getName())) {
+                kritisSimulation = e;
+            }
+        }
+
+        kritisSimulation.init(launchConfig);
+
+        LOG.info("Using KRITIS simulation: " + kritisSimulation.getName());
     }
 
     public void shutDown() {
