@@ -28,6 +28,8 @@ public class BlockingKritisDataExchanger {
         // wait for data
         while (bufferedDemand == null) {
             LOG.debug("SimControl is waiting for data of Kritis simulation.");
+            System.out.println("SimControl is waiting for data of Kritis simulation."); //TODO remove
+            System.out.flush();
             try {
                 BlockingKritisDataExchanger.class.wait();
             } catch (InterruptedException e) {
@@ -39,6 +41,8 @@ public class BlockingKritisDataExchanger {
         Map<String, Map<String, PowerSpec>> tempDemand = bufferedDemand;
         bufferedDemand = null;
         LOG.info("SimControl has finished its exchange.");
+        System.out.println("SimControl has finished its exchange."); //TODO remove
+        System.out.flush();
         return tempDemand;
     }
 
@@ -52,6 +56,8 @@ public class BlockingKritisDataExchanger {
         // wait for data
         while (bufferedPower == null) {
             LOG.debug("The Kritis simulation is waiting for data of SimControl.");
+            System.out.println("The Kritis simulation is waiting for data of SimControl."); //TODO remove
+            System.out.flush();
             try {
                 BlockingKritisDataExchanger.class.wait();
             } catch (InterruptedException e) {
@@ -63,6 +69,8 @@ public class BlockingKritisDataExchanger {
         Map<String, Map<String, Double>> tempPower = bufferedPower;
         bufferedPower = null;
         LOG.info("The Kritis simulation has finished its exchange.");
+        System.out.println("The Kritis simulation has finished its exchange."); //TODO remove
+        System.out.flush();
         return tempPower;
     }
 }
