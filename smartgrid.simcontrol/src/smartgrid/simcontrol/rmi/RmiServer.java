@@ -94,6 +94,7 @@ public class RmiServer implements ISimulationController {
         } else if (state == RmiServerState.REACTIVE) {
             powerSupply = reactiveSimControl.run(kritisPowerDemand);
         } else {
+            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
             throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
         }
         return powerSupply;
