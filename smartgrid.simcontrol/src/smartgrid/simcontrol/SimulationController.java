@@ -63,6 +63,7 @@ public final class SimulationController {
 
         reactiveSimControl = new ReactiveSimulationController();
         reactiveSimControl.init(outputPath, topoPath, inputPath);
+        reactiveSimControl.loadCustomUserAnalysis(launchConfig);
 
         final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
         final List<IKritisSimulationWrapper> time = helper.getKritisSimulationExtensions();
