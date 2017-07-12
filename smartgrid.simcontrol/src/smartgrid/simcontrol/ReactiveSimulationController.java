@@ -166,7 +166,7 @@ public final class ReactiveSimulationController {
             if (stateOwner instanceof SmartMeter) {
                 final String prosumerId = Integer.toString(stateOwner.getId());
                 String nodeId = findNodeId(prosumerId);
-                powerLoadInput.get(nodeId).put(prosumerId, stateToEnum(state));
+                powerLoadInput.get(nodeId).put(prosumerId, stateToEnum(state)); //TODO fix nullpointer (log error!)
             }
         }
         return powerLoadInput;
