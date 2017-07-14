@@ -18,6 +18,7 @@ public final class LoggingInitializer {
             final URL url = LoggingInitializer.class.getResource("/log4j/log4j.properties");
             PropertyConfigurator.configure(url);
             LOG.debug("Log4j Logger initialized");
+            isInitialized = true;
         }
     }
 }
