@@ -50,7 +50,12 @@ public final class ScenarioModelHelper {
 
     public static ScenarioState loadInput(final String path) {
         ScenarioState input = null;
-        SmartgridinputPackageImpl.init();
+        try {
+            SmartgridinputPackageImpl.init();
+        } catch (Exception e) {
+            LOG.warn("Exception thrown in SmartgridinputPackageImpl.init();", e);
+            //LOG.warn("Exception thrown in SmartgridinputPackageImpl.init();"); // use this if you want the stack trace
+        }
 
         final ResourceSet resSet = new ResourceSetImpl();
         final Resource resource = resSet.getResource(URI.createFileURI(path), true);
