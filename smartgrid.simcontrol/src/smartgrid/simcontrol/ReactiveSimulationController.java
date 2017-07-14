@@ -166,7 +166,12 @@ public final class ReactiveSimulationController {
             if (stateOwner instanceof SmartMeter) {
                 final String prosumerId = Integer.toString(stateOwner.getId());
                 String nodeId = findNodeId(prosumerId);
-                powerLoadInput.get(nodeId).put(prosumerId, stateToEnum(state)); //TODO fix nullpointer (log error!)
+                Map<String, ISmartMeterState> statesForNode = powerLoadInput.get(nodeId);
+                if (statesForNode == null) {
+                    LOG.error("Could not find node ID (" + nodeId + ") from the ICT Topo in KRITIS data.");
+                } else {
+                    statesForNode.put(prosumerId, stateToEnum(state));
+                }
             }
         }
         return powerLoadInput;
