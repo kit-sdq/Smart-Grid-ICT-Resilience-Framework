@@ -414,8 +414,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 final List<IAttackerSimulation> list = helper.getAttackerSimulationExtensions();
                 IAttackerSimulation sim = null;
                 for (final IAttackerSimulation attack : list) {
-                    if (attack.getName()
-                            .equals(comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()))) {
+                    if (attack.getName().equals(comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()))) {
                         sim = attack;
                         break;
                     }
@@ -782,11 +781,15 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         // For User Convinience jump to Input Files Location
         if (!inputTextbox.getText().isEmpty()) {
             dialog.setFilterPath(new File(inputTextbox.getText()).getParent());
-
         }
 
-        final String dirName = new File(dialog.open()).getPath();
+        /*
+         * removed by Misha: this seems unnecessary, as dialog.open() already returns a String. It
+         * is also prone to NP exceptions
+         */
+//        final String dirName = new File(dialog.open()).getPath(); // 
 
+        final String dirName = dialog.open();
         return dirName;
     }
 
