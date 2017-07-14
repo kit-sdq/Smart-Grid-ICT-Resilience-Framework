@@ -52,8 +52,6 @@ public final class ScenarioModelHelper {
         ScenarioState input = null;
         SmartgridinputPackageImpl.init();
 
-        // Code Removed - Christian
-
         final ResourceSet resSet = new ResourceSetImpl();
         final Resource resource = resSet.getResource(URI.createFileURI(path), true);
 
