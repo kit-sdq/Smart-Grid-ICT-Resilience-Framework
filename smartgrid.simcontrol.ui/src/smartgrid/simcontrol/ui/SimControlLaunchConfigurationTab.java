@@ -462,8 +462,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDown(final MouseEvent e) {
                 // Get Text to show in Open File Dialog from Resource File
                 final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_OUTPUT_PATH");
-                // String outputPath = getFilePath(message,
-                // Constants.OUTPUT_EXTENSION);
                 final String outputPath = SimControlLaunchConfigurationTab.this.getDirPath(message);
 
                 if (outputPath != null) {
