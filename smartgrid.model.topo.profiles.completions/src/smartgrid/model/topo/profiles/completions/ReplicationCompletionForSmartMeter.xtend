@@ -1,10 +1,10 @@
 package smartgrid.model.topo.profiles.completions
 
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import smartgridtopo.SmartGridTopology
 import smartgridtopo.SmartMeter
 import topoextension.Replication
-import org.eclipse.emf.ecore.EObject
 
 class ReplicationCompletionForSmartMeter extends AbstractCompletion<SmartMeter, Replication> {
 	
@@ -35,9 +35,23 @@ class ReplicationCompletionForSmartMeter extends AbstractCompletion<SmartMeter, 
 	}
 	
 	def SmartMeter duplicateSmartMeter(SmartMeter smartMeter) {
-		//TODO: also duplicate references to the smart meter
 		//TODO: generate new IDs
-		return EcoreUtil.copy(smartMeter)
+		//TODO: reference to original aggregation SmartMeter
+		
+		val clone = EcoreUtil.copy(smartMeter) as SmartMeter;
+		for (element : smartMeter.connectedTo) {
+			clone.connectedTo.add(element);
+			//if connectedTo is bidirectional adding the other direction is missing
+		}
+		for (element : smartMeter.linkedBy) {
+			clone.linkedBy.add(element)
+			element.links.add(clone);
+		}
+		for (element : smartMeter.communicatesBy) {
+			clone.communicatesBy.add(element);
+			element.links.add(clone);
+		}
+		return clone;
 	}
 	
 }
