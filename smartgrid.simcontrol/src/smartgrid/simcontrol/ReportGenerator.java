@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import smartgridoutput.EntityState;
+import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
 
 public class ReportGenerator {
@@ -35,20 +36,25 @@ public class ReportGenerator {
         final String total = "Total";
         String headlines = "";
         String content = "";
+        String hackedTitle = "Hacked";
 
         Map<String, Integer> stats = new HashMap<>();
         stats.put("Total", 0);
+        stats.put(hackedTitle, 0);
 
         for (EntityState state : scenarioResult.getStates()) {
             String name = state.getClass().getSimpleName();
-
             if (stats.get(name) == null) {
                 stats.put(name, 0);
             }
-            stats.put(name, stats.get(name).intValue() + 1);
-
+            stats.replace(name, stats.get(name).intValue() + 1);
+            
+            //Count hacked
+			if(state instanceof On && ((On)state).isIsHacked()){
+				stats.replace(hackedTitle, stats.get(hackedTitle) + 1);
+			}
             //Count Total
-            stats.put(total, stats.get(total).intValue() + 1);
+            stats.replace(total, stats.get(total).intValue() + 1);
         }
         for (String key : stats.keySet()) {
             if (content != "" && headlines != "") {
