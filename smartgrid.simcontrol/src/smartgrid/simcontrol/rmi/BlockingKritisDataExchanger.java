@@ -27,7 +27,7 @@ public class BlockingKritisDataExchanger {
 
         // wait for data
         while (bufferedDemand == null) {
-            LOG.debug("SimControl is waiting for data of Kritis simulation.");
+            LOG.info("SimControl is waiting for data of Kritis simulation.");
             try {
                 BlockingKritisDataExchanger.class.wait();
             } catch (InterruptedException e) {
@@ -51,7 +51,7 @@ public class BlockingKritisDataExchanger {
 
         // wait for data
         while (bufferedPower == null) {
-            LOG.debug("The Kritis simulation is waiting for data of SimControl.");
+            LOG.info("The Kritis simulation is waiting for data of SimControl.");
             try {
                 BlockingKritisDataExchanger.class.wait();
             } catch (InterruptedException e) {
