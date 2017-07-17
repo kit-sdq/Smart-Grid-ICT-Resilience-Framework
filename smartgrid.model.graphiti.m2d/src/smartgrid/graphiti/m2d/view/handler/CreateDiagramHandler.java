@@ -2,7 +2,6 @@ package smartgrid.graphiti.m2d.view.handler;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.internal.resources.File;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,7 +20,7 @@ public class CreateDiagramHandler extends AbstractHandler {
     }
 
     @Override
-    public Object execute(final ExecutionEvent event) throws ExecutionException {
+    public Object execute(final ExecutionEvent event) {
         final TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
         final File emfFile = (File) selection.getFirstElement();
         final ResourceSet impl = new ResourceSetImpl();
