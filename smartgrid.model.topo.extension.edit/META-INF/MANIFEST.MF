@@ -8,9 +8,10 @@ Bundle-Activator: topoextension.provider.TopoextensionEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: smartgridtopo.provider,
- topoextension.provider
+Export-Package: topoextension.provider
 Require-Bundle: org.eclipse.core.runtime,
  smartgrid.model.topo.extension;visibility:=reexport,
- org.eclipse.emf.edit;visibility:=reexport
+ org.eclipse.emf.edit;visibility:=reexport,
+ smartgrid.model.topo;visibility:=reexport,
+ smartgrid.model.topo.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy

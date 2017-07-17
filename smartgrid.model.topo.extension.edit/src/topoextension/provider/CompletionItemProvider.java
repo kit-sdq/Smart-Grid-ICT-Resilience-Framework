@@ -2,13 +2,17 @@
  */
 package topoextension.provider;
 
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -19,21 +23,28 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import smartgridtopo.SmartgridtopoFactory;
+
 import topoextension.Completion;
 import topoextension.TopoextensionPackage;
 
 /**
- * This is the item provider adapter for a {@link topoextension.Completion} object. <!--
- * begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link topoextension.Completion} object.
+ * <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * @generated
  */
-public class CompletionItemProvider extends ItemProviderAdapter
-        implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class CompletionItemProvider 
+    extends ItemProviderAdapter
+    implements
+        IEditingDomainItemProvider,
+        IStructuredItemContentProvider,
+        ITreeItemContentProvider,
+        IItemLabelProvider,
+        IItemPropertySource {
     /**
-     * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * 
+     * This constructs an instance from a factory and a notifier.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     public CompletionItemProvider(AdapterFactory adapterFactory) {
@@ -41,9 +52,9 @@ public class CompletionItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * 
+     * This returns the property descriptors for the adapted class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -56,12 +67,11 @@ public class CompletionItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
-     * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
-     * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-     * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+     * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+     * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -74,8 +84,8 @@ public class CompletionItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -87,8 +97,9 @@ public class CompletionItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns Completion.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This returns Completion.gif.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -97,21 +108,22 @@ public class CompletionItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns the label text for the adapted class. <!-- begin-user-doc --> <!-- end-user-doc
-     * -->
-     * 
+     * This returns the label text for the adapted class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
     public String getText(Object object) {
         return getString("_UI_Completion_type");
     }
+    
 
     /**
      * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to
-     * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -119,38 +131,54 @@ public class CompletionItemProvider extends ItemProviderAdapter
         updateChildren(notification);
 
         switch (notification.getFeatureID(Completion.class)) {
-        case TopoextensionPackage.COMPLETION__NETWORKENTITY:
-            fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-            return;
+            case TopoextensionPackage.COMPLETION__NETWORKENTITY:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+                return;
         }
         super.notifyChanged(notification);
     }
 
     /**
-     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-     * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+     * that can be created under this object.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
         super.collectNewChildDescriptors(newChildDescriptors, object);
 
-        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createSmartMeter()));
+        newChildDescriptors.add
+            (createChildParameter
+                (TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY,
+                 SmartgridtopoFactory.eINSTANCE.createSmartMeter()));
 
-        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createNetworkNode()));
+        newChildDescriptors.add
+            (createChildParameter
+                (TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY,
+                 SmartgridtopoFactory.eINSTANCE.createNetworkNode()));
 
-        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createControlCenter()));
+        newChildDescriptors.add
+            (createChildParameter
+                (TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY,
+                 SmartgridtopoFactory.eINSTANCE.createControlCenter()));
 
-        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createGenericController()));
+        newChildDescriptors.add
+            (createChildParameter
+                (TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY,
+                 SmartgridtopoFactory.eINSTANCE.createGenericController()));
 
-        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createInterCom()));
+        newChildDescriptors.add
+            (createChildParameter
+                (TopoextensionPackage.Literals.COMPLETION__NETWORKENTITY,
+                 SmartgridtopoFactory.eINSTANCE.createInterCom()));
     }
 
     /**
-     * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * 
+     * Return the resource locator for this item provider's resources.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
