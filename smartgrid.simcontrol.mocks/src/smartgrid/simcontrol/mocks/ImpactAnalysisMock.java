@@ -3,7 +3,6 @@
  */
 package smartgrid.simcontrol.mocks;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
@@ -78,7 +77,7 @@ public class ImpactAnalysisMock implements IImpactAnalysis {
      *
      */
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
+    public ErrorCodeEnum init(final ILaunchConfiguration config) {
         return ErrorCodeEnum.SUCCESS;
     }
 
