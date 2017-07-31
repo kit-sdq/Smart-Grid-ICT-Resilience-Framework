@@ -19,8 +19,6 @@ import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.model.topo.profiles.completions.CompletionExecuter;
-import smartgrid.model.topo.profiles.completions.ReplicationCompletionForSmartMeter;
 import smartgrid.model.topo.profiles.completions.SmartGridCompletionExecuter;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
@@ -76,8 +74,8 @@ public final class ReactiveSimulationController {
 
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
 
-        ensureEmptyPowerInput(kritisPowerDemand);        
-        
+        ensureEmptyPowerInput(kritisPowerDemand);
+
         // Compute Initial Impact Analysis Result
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
 
@@ -167,19 +165,32 @@ public final class ReactiveSimulationController {
         for (final EntityState state : impactResult.getStates()) {
             final NetworkEntity stateOwner = state.getOwner();
             if (stateOwner instanceof SmartMeter) {
+                // smart meter id from our topo model
                 final String prosumerId = Integer.toString(stateOwner.getId());
+
+                // get the id of the node the smart meter is located in
                 String nodeId = findNodeId(prosumerId);
-                Map<String, ISmartMeterState> statesForNode = powerLoadInput.get(nodeId);
-                if (statesForNode == null) {
-                    LOG.error("Could not find node ID (" + nodeId + ") from the ICT Topo in KRITIS data.");
-                } else {
-                    statesForNode.put(prosumerId, stateToEnum(state));
+                if (nodeId == null) {
+                    LOG.error("Could not locate the node of prosumer (" + prosumerId + ") from the ICT Topo in KRITIS data.");
+                    continue;
                 }
+
+                // get the node and store the smart meter state
+                Map<String, ISmartMeterState> statesForNode = powerLoadInput.get(nodeId);
+                statesForNode.put(prosumerId, stateToEnum(state));
             }
         }
         return powerLoadInput;
     }
 
+    /**
+     * Find the ID of the node in which the prosumer is located. (Currently the data of the first
+     * KRITIS response is used)
+     * 
+     * @param prosumerId
+     *            the ID of the prosumer
+     * @return the ID of the node the prosumer is located at
+     */
     private String findNodeId(String prosumerId) {
         for (Entry<String, Map<String, ISmartMeterState>> nodeEntry : emptyPowerLoadInput.entrySet()) {
             Map<String, ISmartMeterState> mapOfProsumersInNode = nodeEntry.getValue();
@@ -278,7 +289,7 @@ public final class ReactiveSimulationController {
         // load models
         initialState = ScenarioModelHelper.loadInput(inputStatePath);
         impactInput = initialState;
-        topo = ScenarioModelHelper.loadScenario(topoPath);        
+        topo = ScenarioModelHelper.loadScenario(topoPath);
         LOG.info("Scenario input state: " + inputStatePath);
         LOG.info("Topology: " + topoPath);
 
@@ -287,8 +298,7 @@ public final class ReactiveSimulationController {
         completionExecuter.executeCompletions(topo);
         FileSystemHelper.saveToFileSystem(topo, topoPath + ".completion.smartgridtopo");
         //EndCompletion
-        
-        
+
         // Retrieve simulations from extension points
         try {
             loadDefaultAnalyses();
