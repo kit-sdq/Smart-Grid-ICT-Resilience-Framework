@@ -18,17 +18,17 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import topoextension.ExtensionRepository;
-import topoextension.TopoextensionFactory;
+import smartgridtopo.SmartgridtopoFactory;
+import topoextension.Aggregation;
 import topoextension.TopoextensionPackage;
 
 /**
- * This is the item provider adapter for a {@link topoextension.ExtensionRepository} object. <!--
+ * This is the item provider adapter for a {@link topoextension.Aggregation} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ExtensionRepositoryItemProvider extends ItemProviderAdapter
+public class AggregationItemProvider extends ItemProviderAdapter
         implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
     /**
      * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
@@ -36,7 +36,7 @@ public class ExtensionRepositoryItemProvider extends ItemProviderAdapter
      * 
      * @generated
      */
-    public ExtensionRepositoryItemProvider(AdapterFactory adapterFactory) {
+    public AggregationItemProvider(AdapterFactory adapterFactory) {
         super(adapterFactory);
     }
 
@@ -68,8 +68,7 @@ public class ExtensionRepositoryItemProvider extends ItemProviderAdapter
     public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
         if (childrenFeatures == null) {
             super.getChildrenFeatures(object);
-            childrenFeatures.add(TopoextensionPackage.Literals.EXTENSION_REPOSITORY__REPLICATIONS);
-            childrenFeatures.add(TopoextensionPackage.Literals.EXTENSION_REPOSITORY__AGGREGATIONS);
+            childrenFeatures.add(TopoextensionPackage.Literals.AGGREGATION__NETWORKENTITY);
         }
         return childrenFeatures;
     }
@@ -88,13 +87,13 @@ public class ExtensionRepositoryItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns ExtensionRepository.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * This returns Aggregation.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      */
     @Override
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ExtensionRepository"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/Aggregation"));
     }
 
     /**
@@ -105,7 +104,7 @@ public class ExtensionRepositoryItemProvider extends ItemProviderAdapter
      */
     @Override
     public String getText(Object object) {
-        return getString("_UI_ExtensionRepository_type");
+        return getString("_UI_Aggregation_type");
     }
 
     /**
@@ -119,9 +118,8 @@ public class ExtensionRepositoryItemProvider extends ItemProviderAdapter
     public void notifyChanged(Notification notification) {
         updateChildren(notification);
 
-        switch (notification.getFeatureID(ExtensionRepository.class)) {
-        case TopoextensionPackage.EXTENSION_REPOSITORY__REPLICATIONS:
-        case TopoextensionPackage.EXTENSION_REPOSITORY__AGGREGATIONS:
+        switch (notification.getFeatureID(Aggregation.class)) {
+        case TopoextensionPackage.AGGREGATION__NETWORKENTITY:
             fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
             return;
         }
@@ -138,9 +136,15 @@ public class ExtensionRepositoryItemProvider extends ItemProviderAdapter
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
         super.collectNewChildDescriptors(newChildDescriptors, object);
 
-        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.EXTENSION_REPOSITORY__REPLICATIONS, TopoextensionFactory.eINSTANCE.createReplication()));
+        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.AGGREGATION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createSmartMeter()));
 
-        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.EXTENSION_REPOSITORY__AGGREGATIONS, TopoextensionFactory.eINSTANCE.createAggregation()));
+        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.AGGREGATION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createNetworkNode()));
+
+        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.AGGREGATION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createControlCenter()));
+
+        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.AGGREGATION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createGenericController()));
+
+        newChildDescriptors.add(createChildParameter(TopoextensionPackage.Literals.AGGREGATION__NETWORKENTITY, SmartgridtopoFactory.eINSTANCE.createInterCom()));
     }
 
     /**
