@@ -6,6 +6,7 @@
     <semanticResources>platform:/resource/smartgrid.model.output/model/smartgridoutput.ecore</semanticResources>
     <semanticResources>platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore</semanticResources>
     <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
+    <semanticResources>platform:/resource/smartgrid.model.topo/model/smartgridtopo.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_oc_88BB1EeeA863J7caVIQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_5rYD0DlOEeeCur8jM1r8aQ" name="topoextension class diagram" representation="_5rYD0TlOEeeCur8jM1r8aQ">
@@ -221,9 +222,9 @@
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_DfEUEE6bEeer_73lxvxExA" name="Completion" tooltipText="" outgoingEdges="_LuE84E6bEeer_73lxvxExA" incomingEdges="_pqfSwE9KEee-stxdLqFdig" width="12" height="10">
-      <target xmi:type="ecore:EClass" href="topoextension.ecore#//Completion"/>
-      <semanticElements xmi:type="ecore:EClass" href="topoextension.ecore#//Completion"/>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_DfEUEE6bEeer_73lxvxExA" name="Aggregation" tooltipText="" outgoingEdges="_LuE84E6bEeer_73lxvxExA" incomingEdges="_pqfSwE9KEee-stxdLqFdig" width="12" height="10">
+      <target xmi:type="ecore:EClass" href="topoextension.ecore#//Aggregation"/>
+      <semanticElements xmi:type="ecore:EClass" href="topoextension.ecore#//Aggregation"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -233,8 +234,8 @@
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_LuE84E6bEeer_73lxvxExA" name="[1..*] networkentity" sourceNode="_DfEUEE6bEeer_73lxvxExA" targetNode="_CxbyAE6bEeer_73lxvxExA">
-      <target xmi:type="ecore:EReference" href="topoextension.ecore#//Completion/networkentity"/>
-      <semanticElements xmi:type="ecore:EReference" href="topoextension.ecore#//Completion/networkentity"/>
+      <target xmi:type="ecore:EReference" href="topoextension.ecore#//Aggregation/networkentity"/>
+      <semanticElements xmi:type="ecore:EReference" href="topoextension.ecore#//Aggregation/networkentity"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_N0ZwME6bEeer_73lxvxExA" description="_N0ZJIE6bEeer_73lxvxExA" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_N0ZwMU6bEeer_73lxvxExA" showIcon="false">
           <labelFormat>bold</labelFormat>
@@ -243,9 +244,9 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_pqfSwE9KEee-stxdLqFdig" name="[0..*] completion" sourceNode="_6FsoUDlOEeeCur8jM1r8aQ" targetNode="_DfEUEE6bEeer_73lxvxExA">
-      <target xmi:type="ecore:EReference" href="topoextension.ecore#//ExtensionRepository/completion"/>
-      <semanticElements xmi:type="ecore:EReference" href="topoextension.ecore#//ExtensionRepository/completion"/>
+    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_pqfSwE9KEee-stxdLqFdig" name="[0..*] aggregations" sourceNode="_6FsoUDlOEeeCur8jM1r8aQ" targetNode="_DfEUEE6bEeer_73lxvxExA">
+      <target xmi:type="ecore:EReference" href="topoextension.ecore#//ExtensionRepository/aggregations"/>
+      <semanticElements xmi:type="ecore:EReference" href="topoextension.ecore#//ExtensionRepository/aggregations"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_pqiWEE9KEee-stxdLqFdig" description="_6F-VIDlOEeeCur8jM1r8aQ" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_pqiWEU9KEee-stxdLqFdig" showIcon="false">
           <customFeatures>labelSize</customFeatures>

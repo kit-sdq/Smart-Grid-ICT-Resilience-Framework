@@ -5,13 +5,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExtensionRepository">
     <eStructuralFeatures xsi:type="ecore:EReference" name="replications" upperBound="-1"
         eType="#//Replication" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="completion" upperBound="-1"
-        eType="#//Completion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregations" upperBound="-1"
+        eType="#//Aggregation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Replication">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nrOfReplicas" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Completion">
+  <eClassifiers xsi:type="ecore:EClass" name="Aggregation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="networkentity" lowerBound="1"
         upperBound="-1" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity"
         containment="true"/>
