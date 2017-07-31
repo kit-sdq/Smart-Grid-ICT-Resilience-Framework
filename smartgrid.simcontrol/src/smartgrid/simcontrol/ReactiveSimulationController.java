@@ -274,7 +274,6 @@ public final class ReactiveSimulationController {
 
         LOG.info("Output: " + outputPath);
         workingDirPath = determineWorkingDirPath(outputPath);
-        LOG.info("Working directory: " + workingDirPath);
 
         // add fileappender for local logs
         final Logger rootLogger = Logger.getRootLogger();
