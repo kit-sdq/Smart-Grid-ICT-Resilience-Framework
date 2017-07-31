@@ -19,6 +19,9 @@ import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
+import smartgrid.model.topo.profiles.completions.CompletionExecuter;
+import smartgrid.model.topo.profiles.completions.ReplicationCompletionForSmartMeter;
+import smartgrid.model.topo.profiles.completions.SmartGridCompletionExecuter;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
@@ -73,8 +76,8 @@ public final class ReactiveSimulationController {
 
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
 
-        ensureEmptyPowerInput(kritisPowerDemand);
-
+        ensureEmptyPowerInput(kritisPowerDemand);        
+        
         // Compute Initial Impact Analysis Result
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
 
@@ -275,10 +278,17 @@ public final class ReactiveSimulationController {
         // load models
         initialState = ScenarioModelHelper.loadInput(inputStatePath);
         impactInput = initialState;
-        topo = ScenarioModelHelper.loadScenario(topoPath);
+        topo = ScenarioModelHelper.loadScenario(topoPath);        
         LOG.info("Scenario input state: " + inputStatePath);
         LOG.info("Topology: " + topoPath);
 
+        //Completion
+        SmartGridCompletionExecuter completionExecuter = new SmartGridCompletionExecuter();
+        completionExecuter.executeCompletions(topo);
+        FileSystemHelper.saveToFileSystem(topo, topoPath + ".completion.smartgridtopo");
+        //EndCompletion
+        
+        
         // Retrieve simulations from extension points
         try {
             loadDefaultAnalyses();

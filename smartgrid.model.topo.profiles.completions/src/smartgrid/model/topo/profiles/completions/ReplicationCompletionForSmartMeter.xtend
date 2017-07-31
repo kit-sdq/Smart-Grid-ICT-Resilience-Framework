@@ -5,6 +5,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import smartgridtopo.SmartGridTopology
 import smartgridtopo.SmartMeter
 import topoextension.Replication
+import topoextension.ExtensionRepository
+import java.util.ArrayList
+import topoextension.Aggregation
+import topoextension.impl.AggregationImpl
+import topoextension.TopoextensionFactory
 
 class ReplicationCompletionForSmartMeter extends AbstractCompletion<SmartMeter, Replication> {
 	
@@ -25,18 +30,30 @@ class ReplicationCompletionForSmartMeter extends AbstractCompletion<SmartMeter, 
 	
 	
 	override executeCompletion(EObject objectToComplete, EObject completionObject) {
+		
+		val replicaList = new ArrayList<SmartMeter>()
 		val smartMeter = objectToComplete as SmartMeter
 		val replication = completionObject as Replication
 		val smartGridTopology = smartMeter.eContainer as SmartGridTopology
 		for(var i = 0; i < replication.nrOfReplicas; i++){
 			val smartMeterReplica = smartMeter.duplicateSmartMeter()
 			smartGridTopology.containsNE.add(smartMeterReplica) 
+			replicaList.add(smartMeterReplica);
 		}
+		val extRepository = replication.eContainer as ExtensionRepository;
+		
+		//creating a new aggregation
+		
+		//TODO: fix this line
+		val aggregation = TopoextensionFactory.eINSTANCE.createAggregation();
+		
+		//adding all duplicates to the aggregation
+		aggregation.networkentity.addAll(replicaList);
+		extRepository.aggregations.add(aggregation)
 	}
 	
 	def SmartMeter duplicateSmartMeter(SmartMeter smartMeter) {
 		//TODO: generate new IDs
-		//TODO: reference to original aggregation SmartMeter
 		
 		val clone = EcoreUtil.copy(smartMeter) as SmartMeter;
 		for (element : smartMeter.connectedTo) {
