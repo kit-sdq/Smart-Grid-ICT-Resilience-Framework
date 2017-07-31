@@ -1,14 +1,12 @@
 package smartgrid.model.topo.profiles.completions
 
+import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import smartgridtopo.SmartGridTopology
 import smartgridtopo.SmartMeter
-import topoextension.Replication
 import topoextension.ExtensionRepository
-import java.util.ArrayList
-import topoextension.Aggregation
-import topoextension.impl.AggregationImpl
+import topoextension.Replication
 import topoextension.TopoextensionFactory
 
 class ReplicationCompletionForSmartMeter extends AbstractCompletion<SmartMeter, Replication> {
