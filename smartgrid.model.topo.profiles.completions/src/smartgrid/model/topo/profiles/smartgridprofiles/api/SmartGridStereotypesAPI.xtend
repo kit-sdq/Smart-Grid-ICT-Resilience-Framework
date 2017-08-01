@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EObjectResolvingEList
 
 import static extension org.palladiosimulator.mdsdprofiles.api.StereotypeAPI.*
+import topoextension.Replication
 
 class SmartGridStereotypesAPI {
 
@@ -29,17 +30,17 @@ class SmartGridStereotypesAPI {
 		return ensureSingleTaggedValueFromType(taggedValue as EObjectResolvingEList<?>, eObject, t)
 	}
 
-//	def public static getReplication(EObject eObject) {
-//		return getStereotype(eObject, REPLICATIONS_REFERENCE_NAME, REPLICATION_STEREOTYPE_NAME, Replication)
-//	}
+	def public static getReplicationStereotype(EObject eObject) {
+		return getStereotype(eObject, REPLICATIONS_REFERENCE_NAME, REPLICATION_STEREOTYPE_NAME, Replication)
+	}
 
 	def public static boolean hasStereotype(EObject eObject, String stereotypeName) {
 		return eObject.isStereotypeApplied(stereotypeName)
 	}
 
-//	def public static boolean hasReplication(EObject eObject) {
-//		return eObject.isStereotypeApplied(REPLICATION_STEREOTYPE_NAME)
-//	}
+	def public static boolean hasReplicationStereotype(EObject eObject) {
+		return eObject.isStereotypeApplied(REPLICATION_STEREOTYPE_NAME)
+	}
 
 	def private static <T> T ensureSingleTaggedValueFromType(EObjectResolvingEList<?> taggedValue, EObject eObject,
 		Class<T> t) {
