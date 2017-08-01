@@ -3,7 +3,6 @@ package smartgrid.model.topo.profiles.smartgridprofiles.api
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EObjectResolvingEList
-import topoextension.Replication
 
 import static extension org.palladiosimulator.mdsdprofiles.api.StereotypeAPI.*
 
@@ -15,10 +14,6 @@ class SmartGridStereotypesAPI {
 	val public static String REPLICATION_STEREOTYPE_NAME = "Replication"
 
 	private new() {
-	}
-
-	def public static getReplicationStereotype(EObject eObject) {
-		return getStereotype(eObject, REPLICATIONS_REFERENCE_NAME, REPLICATION_STEREOTYPE_NAME, Replication)
 	}
 
 	def public static <T> T getStereotype(EObject eObject, String referenceName, String stereotypeName, Class<T> t) {
@@ -34,9 +29,17 @@ class SmartGridStereotypesAPI {
 		return ensureSingleTaggedValueFromType(taggedValue as EObjectResolvingEList<?>, eObject, t)
 	}
 
+//	def public static getReplication(EObject eObject) {
+//		return getStereotype(eObject, REPLICATIONS_REFERENCE_NAME, REPLICATION_STEREOTYPE_NAME, Replication)
+//	}
+
 	def public static boolean hasStereotype(EObject eObject, String stereotypeName) {
 		return eObject.isStereotypeApplied(stereotypeName)
 	}
+
+//	def public static boolean hasReplication(EObject eObject) {
+//		return eObject.isStereotypeApplied(REPLICATION_STEREOTYPE_NAME)
+//	}
 
 	def private static <T> T ensureSingleTaggedValueFromType(EObjectResolvingEList<?> taggedValue, EObject eObject,
 		Class<T> t) {
