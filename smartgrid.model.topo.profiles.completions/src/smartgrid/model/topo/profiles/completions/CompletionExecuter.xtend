@@ -30,12 +30,22 @@ class CompletionExecuter {
 		val completionsToExecute = new ArrayList<ExecutableCompletion>
 		contents.forEach [ eObj |
 			for (completion : completions) {
+				
+				// is completion applicable?
 				if (completion.typeToComplete.isInstance(eObj)) {
-//					val isApplied = SmartGridStereotypesAPI.hasStereotype() TODO improve check if stereotype is present
-					val completionObject = SmartGridStereotypesAPI.getStereotype(eObj, completion.referenceName,
-						completion.stereotypeName, completion.typeOfCompletionObject)
-					if (completionObject !== null) // TODO Hack
-						completionsToExecute.add(new ExecutableCompletion(completion, eObj, completionObject))
+
+					// is necessary stereotype applied?
+					if (SmartGridStereotypesAPI.hasStereotype(eObj, completion.stereotypeName)) {
+
+						// get stereotype
+						val completionObject = SmartGridStereotypesAPI.getStereotype(eObj, completion.referenceName,
+							completion.stereotypeName, completion.typeOfCompletionObject)
+
+						// schedule completion for execution
+						completionsToExecute.add(
+							new ExecutableCompletion(completion, eObj, completionObject)
+						)
+					}
 				}
 			}
 		]
