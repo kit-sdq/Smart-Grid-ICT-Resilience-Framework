@@ -52,9 +52,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="NetworkNode" eSuperTypes="#//NetworkEntity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="IsA" eType="#//NetworkNodeType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NetworkNodeType" eSuperTypes="#//NamedIdentifier">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="IsA" lowerBound="1" eType="#//SmartMeterType"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NetworkNodeType" eSuperTypes="#//NamedIdentifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="ControlCenter" eSuperTypes="#//CommunicatingEntity"/>
   <eClassifiers xsi:type="ecore:EClass" name="GenericController" eSuperTypes="#//CommunicatingEntity"/>
   <eClassifiers xsi:type="ecore:EClass" name="CommunicatingEntity" abstract="true"

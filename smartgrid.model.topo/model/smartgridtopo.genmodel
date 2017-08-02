@@ -43,9 +43,7 @@
     <genClasses ecoreClass="smartgridtopo.ecore#//NetworkNode">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//NetworkNode/IsA"/>
     </genClasses>
-    <genClasses ecoreClass="smartgridtopo.ecore#//NetworkNodeType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//NetworkNodeType/IsA"/>
-    </genClasses>
+    <genClasses ecoreClass="smartgridtopo.ecore#//NetworkNodeType"/>
     <genClasses ecoreClass="smartgridtopo.ecore#//ControlCenter"/>
     <genClasses ecoreClass="smartgridtopo.ecore#//GenericController"/>
     <genClasses image="false" ecoreClass="smartgridtopo.ecore#//CommunicatingEntity">
