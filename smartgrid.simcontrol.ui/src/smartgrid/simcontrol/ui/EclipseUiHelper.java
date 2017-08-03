@@ -1,10 +1,17 @@
 package smartgrid.simcontrol.ui;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * @author Misha
+ */
 public class EclipseUiHelper {
+
+    private static final Logger LOG = Logger.getLogger(EclipseUiHelper.class);
+
     private EclipseUiHelper() {
     }
 
@@ -14,6 +21,6 @@ public class EclipseUiHelper {
 
     public static void prompt(String message, Shell shell) {
         MessageDialog.openInformation(shell, "Metamodel Assessor", message);
-        System.out.println(message);
+        LOG.info("Prompt: " + message);
     }
 }

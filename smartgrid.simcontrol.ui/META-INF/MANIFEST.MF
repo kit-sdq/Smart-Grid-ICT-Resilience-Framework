@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.ui,
  smartgrid.simcontrol.baselib,
  smartgrid.helper,
  org.eclipse.debug.ui,
- smartgrid.simcontrol
+ smartgrid.simcontrol,
+ org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
