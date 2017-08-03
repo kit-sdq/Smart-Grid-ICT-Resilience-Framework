@@ -29,6 +29,7 @@
                id="smartgrid.simcontrol.ui.toolbar">
             <command
                   commandId="smartgrid.simcontrol.ui.interruptCommand"
+                  icon="icons/skull.gif"
                   style="push">
             </command>
          </toolbar>
