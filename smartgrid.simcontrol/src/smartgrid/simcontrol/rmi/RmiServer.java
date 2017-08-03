@@ -95,7 +95,7 @@ public class RmiServer implements ISimulationController {
     }
 
     @Override
-    public Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws SimcontrolException {
+    public Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws SimcontrolException, InterruptedException {
         LOG.info("run was called remotely");
         Map<String, Map<String, Double>> powerSupply;
         if (state == RmiServerState.ACTIVE) {

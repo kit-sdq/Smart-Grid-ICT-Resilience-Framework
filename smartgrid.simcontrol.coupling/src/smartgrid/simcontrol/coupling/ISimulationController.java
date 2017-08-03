@@ -21,7 +21,7 @@ public interface ISimulationController extends Remote {
     void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData) throws RemoteException, SimcontrolException;
 
     //receiving calculated suppliable power
-    Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException, SimcontrolException;
+    Map<String, Map<String, Double>> runAndGetPowerSupplied(Map<String, Map<String, PowerSpec>> kritisPowerDemand) throws RemoteException, SimcontrolException, InterruptedException;
 
     void shutDown() throws RemoteException, SimcontrolException;
 }

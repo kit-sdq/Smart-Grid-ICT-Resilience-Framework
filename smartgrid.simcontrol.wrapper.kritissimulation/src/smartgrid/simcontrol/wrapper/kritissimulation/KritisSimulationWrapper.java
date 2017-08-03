@@ -17,12 +17,12 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
     private static final Logger LOG = Logger.getLogger(KritisSimulationWrapper.class);
 
     @Override
-    public Map<String, Map<String, PowerSpec>> run(Map<String, Map<String, Double>> power) {
+    public Map<String, Map<String, PowerSpec>> run(Map<String, Map<String, Double>> power) throws InterruptedException {
         return BlockingKritisDataExchanger.passDataToKritisSim(power);
     }
 
     @Override
-    public Map<String, Map<String, PowerSpec>> getDefaultDemand() {
+    public Map<String, Map<String, PowerSpec>> getDefaultDemand() throws InterruptedException {
         // TODO implement?
         return BlockingKritisDataExchanger.passDataToKritisSim(new HashMap<String, Map<String, Double>>());
     }

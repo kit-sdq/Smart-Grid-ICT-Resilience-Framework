@@ -23,7 +23,7 @@ public final class SimulationController {
 
     private int maxTimeSteps;
 
-    public void run() {
+    public void run() throws InterruptedException {
         Map<String, Map<String, PowerSpec>> kritisPowerDemand;
         Map<String, Map<String, Double>> powerSupply = null;
 

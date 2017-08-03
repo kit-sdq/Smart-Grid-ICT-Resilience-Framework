@@ -18,7 +18,6 @@ import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
  */
 public class SimcontroLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
 
-    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(SimcontroLaunchConfigurationDelegate.class);
 
     /**
@@ -36,6 +35,10 @@ public class SimcontroLaunchConfigurationDelegate implements ILaunchConfiguratio
         } catch (SimcontrolException e) {
             throw new RuntimeException("Could not initiate SimControl", e); // TODO here, a dialog should be used
         }
-        simControl.run();
+        try {
+            simControl.run();
+        } catch (InterruptedException e) {
+            LOG.info("The simulation was interrupted.");
+        }
     }
 }

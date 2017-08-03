@@ -18,7 +18,7 @@ public class BlockingKritisDataExchanger {
     private static Map<String, Map<String, PowerSpec>> bufferedDemand;
     private static Map<String, Map<String, Double>> bufferedPower;
 
-    public static synchronized Map<String, Map<String, PowerSpec>> passDataToKritisSim(Map<String, Map<String, Double>> power) {
+    public static synchronized Map<String, Map<String, PowerSpec>> passDataToKritisSim(Map<String, Map<String, Double>> power) throws InterruptedException {
         assert bufferedPower == null;
 
         // provide own data
@@ -28,11 +28,7 @@ public class BlockingKritisDataExchanger {
         // wait for data
         while (bufferedDemand == null) {
             LOG.info("SimControl is waiting for data of Kritis simulation.");
-            try {
-                BlockingKritisDataExchanger.class.wait();
-            } catch (InterruptedException e) {
-                LOG.warn("Interrupted while waiting for data. This is unexpected.", e);
-            }
+            BlockingKritisDataExchanger.class.wait();
         }
 
         // consume data
@@ -42,7 +38,7 @@ public class BlockingKritisDataExchanger {
         return tempDemand;
     }
 
-    public static synchronized Map<String, Map<String, Double>> getDataFromCoupling(Map<String, Map<String, PowerSpec>> demand) {
+    public static synchronized Map<String, Map<String, Double>> getDataFromCoupling(Map<String, Map<String, PowerSpec>> demand) throws InterruptedException {
         assert bufferedDemand == null;
 
         // provide own data
@@ -52,11 +48,7 @@ public class BlockingKritisDataExchanger {
         // wait for data
         while (bufferedPower == null) {
             LOG.info("The Kritis simulation is waiting for data of SimControl.");
-            try {
-                BlockingKritisDataExchanger.class.wait();
-            } catch (InterruptedException e) {
-                LOG.warn("Interrupted while waiting for data. This is unexpected.", e);
-            }
+            BlockingKritisDataExchanger.class.wait();
         }
 
         // consume data
