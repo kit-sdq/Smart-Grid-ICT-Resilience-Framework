@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis xmi:id="_leZpQHytEeWTvaavZGKdCg" selectedViews="_bOUEEHyuEeWskIAP1FG4Ig _birxkHyuEeWskIAP1FG4Ig _bjGBQHyuEeWskIAP1FG4Ig _bl-WIHyuEeWskIAP1FG4Ig" version="11.1.0.201608251200">
+  <viewpoint:DAnalysis xmi:id="_leZpQHytEeWTvaavZGKdCg" selectedViews="_bOUEEHyuEeWskIAP1FG4Ig _birxkHyuEeWskIAP1FG4Ig _bjGBQHyuEeWskIAP1FG4Ig _bl-WIHyuEeWskIAP1FG4Ig" version="12.0.0.201704271200">
     <semanticResources>model/smartgridoutput.ecore</semanticResources>
     <semanticResources>platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore</semanticResources>
     <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
@@ -9,11 +9,11 @@
     <semanticResources>platform:/resource/smartgrid.model.topo/model/smartgridtopo.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_bOUEEHyuEeWskIAP1FG4Ig">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_E8WloDlLEeeCur8jM1r8aQ" name="smartgridtopo class diagram" representation="_bh5HYHyuEeWskIAP1FG4Ig">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_E8WloDlLEeeCur8jM1r8aQ" name="smartgridtopo class diagram" repPath="#_bh5HYHyuEeWskIAP1FG4Ig">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#/"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_E8WloTlLEeeCur8jM1r8aQ" name="smartgridoutput class diagram" representation="_eKGfwHyuEeWskIAP1FG4Ig">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_E8WloTlLEeeCur8jM1r8aQ" name="smartgridoutput class diagram" repPath="#_eKGfwHyuEeWskIAP1FG4Ig">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="model/smartgridoutput.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -628,8 +628,7 @@
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_3k--sHyuEeWskIAP1FG4Ig" sourceNode="_3j9rAHyuEeWskIAP1FG4Ig" targetNode="_3j_gMHyuEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//Defect"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//Defect/@eGenericSuperTypes.0"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//Defect/@eGenericSuperTypes.1"/>
+      <semanticElements xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//Defect"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_3k_lwHyuEeWskIAP1FG4Ig" targetArrow="InputClosedArrow" routingStyle="manhattan">
         <customFeatures>routingStyle</customFeatures>
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
@@ -642,8 +641,7 @@
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_3lAM0HyuEeWskIAP1FG4Ig" sourceNode="_3j9rAHyuEeWskIAP1FG4Ig" targetNode="_3kDKkHyuEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//Defect"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//Defect/@eGenericSuperTypes.0"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//Defect/@eGenericSuperTypes.1"/>
+      <semanticElements xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//Defect"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_3lAz4HyuEeWskIAP1FG4Ig" targetArrow="InputClosedArrow" routingStyle="manhattan">
         <customFeatures>routingStyle</customFeatures>
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
@@ -656,8 +654,7 @@
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_3lBa8HyuEeWskIAP1FG4Ig" sourceNode="_3kAuUHyuEeWskIAP1FG4Ig" targetNode="_3j_gMHyuEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//NoPower"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//NoPower/@eGenericSuperTypes.0"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//NoPower/@eGenericSuperTypes.1"/>
+      <semanticElements xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//NoPower"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_3lCCAHyuEeWskIAP1FG4Ig" targetArrow="InputClosedArrow" routingStyle="manhattan">
         <customFeatures>routingStyle</customFeatures>
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
@@ -670,8 +667,7 @@
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_3lD3MHyuEeWskIAP1FG4Ig" sourceNode="_3kAuUHyuEeWskIAP1FG4Ig" targetNode="_3kDKkHyuEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//NoPower"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//NoPower/@eGenericSuperTypes.0"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//NoPower/@eGenericSuperTypes.1"/>
+      <semanticElements xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//NoPower"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_3lEeQHyuEeWskIAP1FG4Ig" targetArrow="InputClosedArrow" routingStyle="manhattan">
         <customFeatures>routingStyle</customFeatures>
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
@@ -684,8 +680,7 @@
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_3lFFUHyuEeWskIAP1FG4Ig" sourceNode="_3kB8cHyuEeWskIAP1FG4Ig" targetNode="_3kDKkHyuEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//NoUplink"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//NoUplink/@eGenericSuperTypes.0"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//NoUplink/@eGenericSuperTypes.1"/>
+      <semanticElements xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//NoUplink"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_3lFsYHyuEeWskIAP1FG4Ig" targetArrow="InputClosedArrow" routingStyle="manhattan">
         <customFeatures>routingStyle</customFeatures>
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
@@ -698,8 +693,7 @@
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_3lGTcHyuEeWskIAP1FG4Ig" sourceNode="_3kB8cHyuEeWskIAP1FG4Ig" targetNode="_3kEYsHyuEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//NoUplink"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//NoUplink/@eGenericSuperTypes.0"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//NoUplink/@eGenericSuperTypes.1"/>
+      <semanticElements xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//NoUplink"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_3lG6gHyuEeWskIAP1FG4Ig" targetArrow="InputClosedArrow" routingStyle="manhattan">
         <customFeatures>routingStyle</customFeatures>
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
@@ -712,7 +706,7 @@
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_3lHhkHyuEeWskIAP1FG4Ig" sourceNode="_3kEYsHyuEeWskIAP1FG4Ig" targetNode="_3j_gMHyuEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//On"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//On/@eGenericSuperTypes.0"/>
+      <semanticElements xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//On"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_3lHhkXyuEeWskIAP1FG4Ig" targetArrow="InputClosedArrow" routingStyle="manhattan">
         <customFeatures>routingStyle</customFeatures>
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
@@ -725,7 +719,7 @@
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_3lIIonyuEeWskIAP1FG4Ig" sourceNode="_3kGN4HyuEeWskIAP1FG4Ig" targetNode="_3kEYsHyuEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//Online"/>
-      <semanticElements xmi:type="ecore:EGenericType" href="model/smartgridoutput.ecore#//Online/@eGenericSuperTypes.0"/>
+      <semanticElements xmi:type="ecore:EClass" href="model/smartgridoutput.ecore#//Online"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_3lIvsHyuEeWskIAP1FG4Ig" targetArrow="InputClosedArrow" routingStyle="manhattan">
         <customFeatures>routingStyle</customFeatures>
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
