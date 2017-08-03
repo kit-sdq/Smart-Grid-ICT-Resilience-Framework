@@ -24,8 +24,6 @@ public class RmiServer implements ISimulationController {
 
     private static final String ERROR_SERVER_NOT_INITIALIZED = "The SimControl RMI server is not initialized.";
     private static final String ERROR_SERVER_ALREADY_INITIALIZED = "The SimControl RMI server is already initialized.";
-    @SuppressWarnings("unused")
-    private static final String ERROR_NOT_IMPLEMENTED = "Not yet implemented.";
 
     private ReactiveSimulationController reactiveSimControl;
     private Registry registry;
