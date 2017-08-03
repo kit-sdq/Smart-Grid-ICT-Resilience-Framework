@@ -8,6 +8,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  smartgrid.simcontrol.baselib,
  smartgrid.helper,
- org.eclipse.debug.ui
+ org.eclipse.debug.ui,
+ smartgrid.simcontrol
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
