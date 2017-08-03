@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.ui;
+package smartgrid.simcontrol.ui.launchconfig;
 
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;

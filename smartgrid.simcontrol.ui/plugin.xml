@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="smartgrid.simcontrol.ui.AbstractSimcontrolTabGroup"
+            class="smartgrid.simcontrol.ui.launchconfig.AbstractSimcontrolTabGroup"
             id="smartgrid.simcontrol.ui.AbstractSimcontrolTabGroup"
             type="smartgrid.simcontrol.SimcontrolLaunchConfigurationType">
             

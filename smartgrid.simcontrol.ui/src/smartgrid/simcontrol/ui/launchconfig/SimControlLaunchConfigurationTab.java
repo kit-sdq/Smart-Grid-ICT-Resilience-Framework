@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.ui;
+package smartgrid.simcontrol.ui.launchconfig;
 
 import java.io.File;
 import java.util.List;
