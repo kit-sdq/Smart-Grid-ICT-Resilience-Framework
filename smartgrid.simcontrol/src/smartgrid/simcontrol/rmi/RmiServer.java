@@ -1,5 +1,7 @@
 package smartgrid.simcontrol.rmi;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -25,28 +27,36 @@ public class RmiServer implements ISimulationController {
     @SuppressWarnings("unused")
     private static final String ERROR_NOT_IMPLEMENTED = "Not yet implemented.";
 
+    private ReactiveSimulationController reactiveSimControl;
+    private Registry registry;
     private RmiServerState state = RmiServerState.NOT_INIT;
 
     private enum RmiServerState {
         NOT_INIT, ACTIVE, REACTIVE;
     }
 
-    private ReactiveSimulationController reactiveSimControl;
-
     public void startServer() {
         try {
             ISimulationController stub = (ISimulationController) UnicastRemoteObject.exportObject(this, 0);
-            Registry registry = LocateRegistry.createRegistry(1099);
+            registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             registry.bind("ISimulationController", stub);
             LOG.info("RMI server running");
         } catch (Exception e) {
-            LOG.error("Could not start RMI server");
-            e.printStackTrace();
+            LOG.error("Could not start RMI server", e);
         }
     }
 
     public void shutDownServer() {
-        // TODO properly shut down this server
+        if (registry != null) {
+            try {
+                registry.unbind("ISimulationController");
+            } catch (RemoteException e) {
+                LOG.error("SimControl RMI server shutdown failed", e);
+            } catch (NotBoundException e) {
+                LOG.warn("SimControl RMI server shutdown failed: port was unbound. This is unexpected but harmless.", e);
+            }
+            registry = null;
+        }
     }
 
     @Override
