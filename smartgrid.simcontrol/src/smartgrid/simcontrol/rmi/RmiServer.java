@@ -10,12 +10,27 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import smartgrid.simcontrol.ReactiveSimulationController;
+import smartgrid.simcontrol.SimcontroLaunchConfigurationDelegate;
+import smartgrid.simcontrol.SimulationController;
 import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.SmartMeterGeoData;
 import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
 
 /**
+ * This class acts as RMI Server for the KRITIS simulation of the IKET. The server is always
+ * registered when Eclipse starts by the early {@link Startup} hook of the plugin. It also
+ * implements the RMI Interface of the simulation coupling. The server delegates to the simulation
+ * coupling either in active or reactive mode.
+ * 
+ * In <b>active mode</b>, the {@link SimulationController} has to be started via the
+ * {@link SimcontroLaunchConfigurationDelegate}. The simulation coupling and the KRITIS simulation
+ * will synchronize and exchange data using the {@link BlockingKritisDataExchanger}.
+ * 
+ * In <b>reactive mode</b>, the {@link ReactiveSimulationController} will be used. All control flow
+ * will originate from the KRITIS simulation, thus no synchronization is required. However, all
+ * configuration must also be passed in via the KRITIS simulation.
+ * 
  * @author Misha
  */
 public class RmiServer implements ISimulationController {
@@ -25,14 +40,28 @@ public class RmiServer implements ISimulationController {
     private static final String ERROR_SERVER_NOT_INITIALIZED = "The SimControl RMI server is not initialized.";
     private static final String ERROR_SERVER_ALREADY_INITIALIZED = "The SimControl RMI server is already initialized.";
 
+    /**
+     * The {@link ReactiveSimulationController} is only initialized and used in reactive mode.
+     */
     private ReactiveSimulationController reactiveSimControl;
+
+    /**
+     * The registry is used to bind and unbind the server (on start and shutdown).
+     */
     private Registry registry;
+
+    /**
+     * This state of the server enforces a meaningful call sequence protocol.
+     */
     private RmiServerState state = RmiServerState.NOT_INIT;
 
     private enum RmiServerState {
         NOT_INIT, ACTIVE, REACTIVE;
     }
 
+    /**
+     * Binds the server to port 1099 ({@link java.rmi.registry.Registry.REGISTRY_PORT}).
+     */
     public void startServer() {
         try {
             ISimulationController stub = (ISimulationController) UnicastRemoteObject.exportObject(this, 0);
@@ -44,6 +73,9 @@ public class RmiServer implements ISimulationController {
         }
     }
 
+    /**
+     * Properly unbinds the server from the port.
+     */
     public void shutDownServer() {
         if (registry != null) {
             try {
