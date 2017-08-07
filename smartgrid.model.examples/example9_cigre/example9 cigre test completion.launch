@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="smartgrid.simcontrol.SimcontrolLaunchConfigurationType">
+<stringAttribute key="ControlCenterCount" value="21"/>
+<stringAttribute key="GenStyle" value="BIG_CLUSTERS"/>
+<stringAttribute key="SmartmeterCount" value="42"/>
+<stringAttribute key="attackerSimulationConfiguration" value="No Attack Simulation"/>
+<stringAttribute key="desiredHackingStyle" value="FULLY_MESHED_HACKING"/>
+<stringAttribute key="genInput" value="false"/>
+<stringAttribute key="hackingSpeed" value="10"/>
+<stringAttribute key="impactAnalysisConfiguration" value="Mock"/>
+<stringAttribute key="inputPath" value="D:\eclipse_oxygen\ws-runtime\smartgrid.model.examples\example6_small\example6.smartgridinput"/>
+<stringAttribute key="iterationCount" value="1"/>
+<stringAttribute key="kritisSimulationConfiguration" value="Mock"/>
+<stringAttribute key="logicalCon" value="true"/>
+<stringAttribute key="outputPath" value="D:\eclipse_oxygen\ws-runtime\smartgrid.model.examples\example6_small\output"/>
+<stringAttribute key="powerLoadConfiguration" value="Mock"/>
+<stringAttribute key="rootNodeID" value="1303261153"/>
+<stringAttribute key="terminationConditionConfiguration" value="Iteration Count"/>
+<stringAttribute key="timeProgressorConfiguration" value="No Operation"/>
+<stringAttribute key="timeSteps" value="2"/>
+<stringAttribute key="topologyPath" value="D:\eclipse_oxygen\ws-runtime\smartgrid.model.examples\example6_small\example6.smartgridtopo"/>
+</launchConfiguration>
