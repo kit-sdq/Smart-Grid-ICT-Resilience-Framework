@@ -12,8 +12,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nrOfReplicas" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Aggregation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="networkentity" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="smartMeterReplicas" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity"/>
   </eClassifiers>
 </ecore:EPackage>
