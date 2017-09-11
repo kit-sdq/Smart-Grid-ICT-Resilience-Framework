@@ -125,6 +125,7 @@ public final class ReactiveSimulationController {
 
         // modify the scenario between time steps
         timeProgressor.progress();
+        timeStep++;
 
         return powerSupply;
     }
@@ -273,7 +274,7 @@ public final class ReactiveSimulationController {
         LOG.debug("init reactive launch config");
 
         LOG.info("Output: " + outputPath);
-        workingDirPath = determineWorkingDirPath(outputPath);
+        workingDirPath = determineWorkingDirPath(outputPath + "\\Analyse");
 
         // add fileappender for local logs
         final Logger rootLogger = Logger.getRootLogger();
