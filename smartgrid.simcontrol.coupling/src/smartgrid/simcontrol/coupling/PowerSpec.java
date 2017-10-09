@@ -9,25 +9,21 @@ public class PowerSpec implements Serializable {
     private String ciType; //CI, -component ID
     private String ciName; //CI, -component name
     private String ciSmartID; //Smart meter agent-ID
+    private int powerDistrictId;
     private int aggregation;
     private double optDemand; //optimal demand
     private double minReqDemand; //Minimum required power
     private double criticality; //1 = human casualties (has to be supplied)
 
-    public PowerSpec(String ciType, String ciName, String ciSmartID, double optDemand, double minReqDemand, double criticality) {
-        this.ciType = ciType;
-        this.ciName = ciName;
-        this.ciSmartID = ciSmartID;
-        aggregation = 1;
-        this.optDemand = optDemand;
-        this.minReqDemand = minReqDemand;
-        this.criticality = criticality;
+    public PowerSpec(String ciType, String ciName, String ciSmartID, int _powerDistrictId, double optDemand, double minReqDemand, double criticality) {
+      this(ciType, ciName, ciSmartID, _powerDistrictId, 1, optDemand, minReqDemand, criticality);
     }
 
-    public PowerSpec(String ciType, String ciName, String ciSmartID, int aggregation, double optDemand, double minReqDemand, double criticality) {
+    public PowerSpec(String ciType, String ciName, String ciSmartID, int _powerDistrictHFId, int aggregation, double optDemand, double minReqDemand, double criticality) {
         this.ciType = ciType;
         this.ciName = ciName;
         this.ciSmartID = ciSmartID;
+        this.powerDistrictId = _powerDistrictHFId;
         this.aggregation = aggregation;
         this.optDemand = optDemand;
         this.minReqDemand = minReqDemand;
@@ -53,6 +49,20 @@ public class PowerSpec implements Serializable {
      */
     public String getCiSmartID() {
         return ciSmartID;
+    }
+
+    /**
+     * @return the powerDistrictId
+     */
+    public int getPowerDistrictId() {
+      return powerDistrictId;
+    }
+
+    /**
+     * @param _powerDistrictId the powerDistrictId to set
+     */
+    public void setPowerDistrictId(int _powerDistrictId) {
+      this.powerDistrictId = _powerDistrictId;
     }
 
     /**
