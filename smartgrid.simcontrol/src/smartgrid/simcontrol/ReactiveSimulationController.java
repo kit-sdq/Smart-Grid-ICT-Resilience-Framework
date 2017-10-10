@@ -29,7 +29,6 @@ import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.SmartMeterState;
-import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
 import smartgridoutput.Defect;
@@ -267,7 +266,7 @@ public final class ReactiveSimulationController {
         return supply == 0.0d;
     }
 
-    public void init(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
+    public void init(String outputPath, String topoPath, String inputStatePath) {
 
         LoggingInitializer.initialize();
 

@@ -12,7 +12,6 @@ import smartgrid.log4j.LoggingInitializer;
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.coupling.PowerSpec;
-import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
 
 public final class SimulationController {
 
@@ -43,7 +42,7 @@ public final class SimulationController {
         reactiveSimControl.shutDown();
     }
 
-    public void init(final ILaunchConfiguration launchConfig) throws CoreException, SimcontrolException {
+    public void init(final ILaunchConfiguration launchConfig) throws CoreException {
 
         LoggingInitializer.initialize();
 
