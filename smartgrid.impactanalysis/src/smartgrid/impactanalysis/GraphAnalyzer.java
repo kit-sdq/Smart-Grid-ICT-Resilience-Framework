@@ -12,10 +12,6 @@ import org.apache.log4j.Logger;
 // import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.model.helper.input.LoadInputModelConformityHelper;
@@ -113,9 +109,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
         ignoreLogicalConnections = false;
     }
 
-    /**
-     *
-     */
     @Override
     public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
 
@@ -153,32 +146,17 @@ public class GraphAnalyzer implements IImpactAnalysis {
         return myError;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     *
-     *
-     *
-     */
     @Override
     public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioState impactAnalysisInput) {
 
         assert initDone : "Init wasn't run! Run init() first !";
 
-        LOG.debug("[GraphAnalyzer]: Start impact analysis");
+        LOG.debug("Start impact analysis");
 
         clearAll();
 
         if (!LoadInputModelConformityHelper.checkInputModelConformity(impactAnalysisInput, smartGridTopo)) {
-
-            PlatformUI.getWorkbench().getDisplay().asyncExec(() -> {
-                final Shell activeShell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-                final MessageBox messageBox = new MessageBox(activeShell, SWT.ICON_ERROR);
-                messageBox.setMessage("Input model is not conform to the current topo model");
-                messageBox.open();
-            });
-
-            return null;
+            LOG.error("Input model is not conform to the current topo model");
         }
 
         // Szenario einlesen
@@ -234,10 +212,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
         }
     }
 
-    /*
-     * Private Methods
-     */
-
     private int getInternID() {
         final int result = internalMaxID;
         internalMaxID++;
@@ -245,7 +219,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
     }
 
     private void readStates(final SmartGridTopology scenario, final ScenarioState state) {
-        LOG.debug("[Graph Analyzer]: Start readStates");
+        LOG.debug("Start readStates");
 
         for (final EntityState s : state.getEntityStates()) {
 
@@ -274,12 +248,12 @@ public class GraphAnalyzer implements IImpactAnalysis {
             LOG.debug("Entity " + p.getOwner().getName() + " ID " + p.getOwner().getId() + " powerOutage? " + p.isPowerOutage());
             powerStates.put(p.getOwner().getId(), p);
         }
-        LOG.debug("[Graph Analyzer]: End readStates");
+        LOG.debug("End readStates");
     }
 
     private void readPhysicalConnections(final SmartGridTopology scenario, final ScenarioState state) {
 
-        LOG.debug("[Graph Analyzer]: Start readPhysicalConnections");
+        LOG.debug("Start readPhysicalConnections");
 
         final List<PhysicalConnection> pConns = scenario.getContainsPC();
 
@@ -300,12 +274,12 @@ public class GraphAnalyzer implements IImpactAnalysis {
         LOG.debug("Validate clusteralgorithm");
         physicalClusters = Tarjan.getClusters(adjacentMatrix, internalToExternalID);
 
-        LOG.debug("[Graph Analyzer]: End readPhysicalConnections");
+        LOG.debug("End readPhysicalConnections");
     }
 
     private void readLogicalConnections(final SmartGridTopology scenario, final ScenarioState state) {
 
-        LOG.debug("[Graph Analyzer]: Start readLogicalConnections");
+        LOG.debug("Start readLogicalConnections");
 
         // set logical adjacent
         final List<LogicalCommunication> lConns = scenario.getContainsLC();
@@ -361,7 +335,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
             }
             controlCenterConnectivity.put(controlID, connectionAvailable);
         }
-        LOG.debug("[Graph Analyzer]: End readLogicalConnections");
+        LOG.debug("End readLogicalConnections");
     }
 
     private ScenarioResult genOutputResult() {
@@ -381,7 +355,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
         // Generate output for every node depending on connection status
         for (final int nodeID : logicalNodes) {
-            LOG.debug("[Graph Analyzer]: Generate output for node with id " + nodeID);
+            LOG.debug("Generate output for node with id " + nodeID);
             smartgridoutput.EntityState state = null;
 
             final int internalNode = externalToInternalID.get(nodeID);
@@ -429,10 +403,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
     }
 
-    /**
-     * @param factory
-     * @param result
-     */
     private void clusterCleaning(final SmartgridoutputFactory factory, final ScenarioResult result, final List<List<Integer>> clusterToClean) {
 
         for (final List<Integer> c : clusterToClean) {
