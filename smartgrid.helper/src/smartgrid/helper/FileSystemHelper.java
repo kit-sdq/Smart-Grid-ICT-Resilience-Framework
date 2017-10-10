@@ -35,9 +35,13 @@ public final class FileSystemHelper {
      *            Path there the File will be written to
      */
     public static void saveToFileSystem(final EObject result, final String path) {
-        /*
-         * Save Data as Smartgridoutput on HDD under "path" location
-         */
+
+        if (result == null) {
+            LOG.error("Cannot persist a model with the content of \"null\". Something went wrong.");
+            return;
+        }
+
+        //Save Data as Smartgridoutput on HDD under "path" location
         final ResourceSet resSet = new ResourceSetImpl();
 
         final Resource resource = resSet.createResource(URI.createFileURI(path));
@@ -47,8 +51,7 @@ public final class FileSystemHelper {
         try {
             resource.save(Collections.EMPTY_MAP);
         } catch (final IOException e) {
-            LOG.error("IOException occured when performing method \"FileSystemHelper.saveToFileSystem\"");
-            e.printStackTrace();
+            LOG.error("Could not save to file.", e);
         }
     }
 
