@@ -8,15 +8,15 @@ import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
-import smartgrid.simcontrol.iip.PowerLoadSimulationDummy;
+import smartgrid.simcontrol.iip.PowerLoadSimulation;
 
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
-    private PowerLoadSimulationDummy powerSim;
+    private PowerLoadSimulation powerSim;
 
     @Override
     public ErrorCodeEnum init(final ILaunchConfiguration config) {
-        powerSim = new PowerLoadSimulationDummy();
+        powerSim = new PowerLoadSimulation();
         return ErrorCodeEnum.SUCCESS;
     }
 
