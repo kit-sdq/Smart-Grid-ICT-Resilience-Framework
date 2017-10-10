@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.CoreException;
 
 import smartgrid.simcontrol.ReactiveSimulationController;
 import smartgrid.simcontrol.SimcontroLaunchConfigurationDelegate;
@@ -16,6 +17,7 @@ import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.SmartMeterGeoData;
 import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
+import smartgrid.simcontrol.coupling.Exceptions.SimcontrolInitializationException;
 
 /**
  * This class acts as RMI Server for the KRITIS simulation of the IKET. The server is always
@@ -111,6 +113,13 @@ public class RmiServer implements ISimulationController {
 
         reactiveSimControl = new ReactiveSimulationController();
         reactiveSimControl.init(outputPath, topoPath, inputStatePath);
+        try {
+            // To-do initiator (KRITIS Sim) should be able to choose analyses
+            // To-do initiator should send init data
+            reactiveSimControl.loadDefaultAnalyses();
+        } catch (CoreException e) {
+            throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.", e);
+        }
     }
 
     @Override

@@ -298,13 +298,6 @@ public final class ReactiveSimulationController {
         completionExecuter.executeCompletions(topo);
         FileSystemHelper.saveToFileSystem(topo, topoPath + ".completion.smartgridtopo");
         //EndCompletion
-
-        // Retrieve simulations from extension points
-        try {
-            loadDefaultAnalyses();
-        } catch (CoreException e) {
-            throw new SimcontrolException("Individual simulations could not be created", e);
-        }
     }
 
     private String determineWorkingDirPath(String initialPath) {
@@ -328,10 +321,9 @@ public final class ReactiveSimulationController {
         return initialPath;
     }
 
-    private void loadDefaultAnalyses() throws CoreException {
+    public void loadDefaultAnalyses() throws CoreException {
         final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
-        // TODO init which attack simulation should be used and initialize it
         final List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
         for (final IAttackerSimulation e : attack) {
 
