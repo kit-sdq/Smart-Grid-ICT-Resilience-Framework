@@ -10,7 +10,7 @@
     <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1900085142" name="SmNode10" ConnectedTo="1083884110" LinkedBy="/0/@ContainsPC.14" CommunicatesBy="/0/@ContainsLC.5"/>
     <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1583516156" name="SmNode11" ConnectedTo="1377554286" LinkedBy="/0/@ContainsPC.15" CommunicatesBy="/0/@ContainsLC.4"/>
     <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="595040528" name="SmNode3" ConnectedTo="1766854756" LinkedBy="/0/@ContainsPC.12" CommunicatesBy="/0/@ContainsLC.0"/>
-    <ContainsNE xsi:type="smartgridtopo:ControlCenter" id="909650707" name="ControlCenter" LinkedBy="/0/@ContainsPC.0" CommunicatesBy="/0/@ContainsLC.1 /0/@ContainsLC.10 /0/@ContainsLC.11"/>
+    <ContainsNE xsi:type="smartgridtopo:ControlCenter" id="909650707" name="ControlCenter" ConnectedTo="1766854756" LinkedBy="/0/@ContainsPC.0" CommunicatesBy="/0/@ContainsLC.1 /0/@ContainsLC.10 /0/@ContainsLC.11"/>
     <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="661022293" name="NetworkNode3" ConnectedTo="1766854756" LinkedBy="/0/@ContainsPC.0 /0/@ContainsPC.1 /0/@ContainsPC.2"/>
     <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="1799498139" name="NetworkNode4" ConnectedTo="1116017742" LinkedBy="/0/@ContainsPC.1 /0/@ContainsPC.3 /0/@ContainsPC.11 /0/@ContainsPC.12 /0/@ContainsPC.16 /0/@ContainsPC.18"/>
     <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="1412249218" name="NetworkNode9" ConnectedTo="711038434" LinkedBy="/0/@ContainsPC.13 /0/@ContainsPC.14 /0/@ContainsPC.15 /0/@ContainsPC.16 /0/@ContainsPC.17 /0/@ContainsPC.19"/>

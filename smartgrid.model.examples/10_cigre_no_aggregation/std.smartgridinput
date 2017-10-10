@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#1853135405"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#1259763947"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#731243059"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#139183333"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#300030748"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#1407817927"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#1900085142"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#1583516156"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="cigre1.smartgridtopo#595040528"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="cigre1.smartgridtopo#909650707"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="cigre1.smartgridtopo#661022293"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="cigre1.smartgridtopo#1799498139"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="cigre1.smartgridtopo#1412249218"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="cigre1.smartgridtopo#705120909"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="cigre1.smartgridtopo#2123563179"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="cigre1.smartgridtopo#1875716647"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:InterCom" href="cigre1.smartgridtopo#1980206987"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:InterCom" href="cigre1.smartgridtopo#1061630349"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:InterCom" href="cigre1.smartgridtopo#1702039383"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#1766854756"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#1537697963"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#995201981"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#1116017742"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#650898077"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#1703964796"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#711038434"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#1083884110"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="cigre1.smartgridtopo#1377554286"/>
+  </PowerStates>
+  <Scenario href="cigre1.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>
