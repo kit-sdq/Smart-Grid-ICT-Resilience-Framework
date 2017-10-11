@@ -28,12 +28,8 @@ public class SimcontroLaunchConfigurationDelegate implements ILaunchConfiguratio
     public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch, final IProgressMonitor monitor) throws CoreException {
 
         SimulationController simControl = new SimulationController();
-//        try {
-        simControl.init(configuration);
-//        } catch (SimcontrolException e) {
-//            throw new RuntimeException("Could not initiate SimControl", e); // To-do here, a dialog should be used
-//        }
         try {
+            simControl.init(configuration);
             simControl.run();
         } catch (InterruptedException e) {
             LOG.info("The simulation was interrupted.");

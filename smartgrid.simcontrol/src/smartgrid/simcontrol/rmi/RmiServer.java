@@ -112,7 +112,8 @@ public class RmiServer implements ISimulationController {
         state = RmiServerState.REACTIVE;
 
         reactiveSimControl = new ReactiveSimulationController();
-        reactiveSimControl.init(outputPath, topoPath, inputStatePath);
+        reactiveSimControl.init(outputPath);
+        reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath); // To-do conditional auto generation
         try {
             // To-do initiator (KRITIS Sim) should be able to choose analyses
             // To-do initiator should send init data
@@ -126,14 +127,6 @@ public class RmiServer implements ISimulationController {
     public void initTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
         LOG.info("init topo called remotely");
         BlockingKritisDataExchanger.storeGeoData(smartMeterGeoData);
-//        if (state == RmiServerState.NOT_INIT) {
-//            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
-//            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
-//        } else if (state == RmiServerState.REACTIVE) {
-//            // To-do implement
-//        } else {
-//            // To-do implement
-//        }
     }
 
     @Override
