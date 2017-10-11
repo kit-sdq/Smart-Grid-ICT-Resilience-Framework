@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.SmartMeterGeoData;
 
 /**
  * This is basically an exchanger for two different datatypes.
@@ -63,6 +64,33 @@ public class BlockingKritisDataExchanger {
         kritisThread = null;
         LOG.info("The Kritis simulation has finished its exchange.");
         return tempPower;
+    }
+
+    private static Map<String, Map<String, SmartMeterGeoData>> geoData;
+
+    public static synchronized void storeGeoData(Map<String, Map<String, SmartMeterGeoData>> geoData) {
+        if (geoData != null) {
+            LOG.error("There was already geo data present. This data is now overwritten.");
+        }
+        BlockingKritisDataExchanger.geoData = geoData;
+        BlockingKritisDataExchanger.class.notifyAll();
+    }
+
+    public static synchronized Map<String, Map<String, SmartMeterGeoData>> getGeoData() throws InterruptedException {
+        couplingThread = Thread.currentThread();
+
+        // wait for data
+        while (geoData == null) {
+            LOG.info("SimControl is waiting for topo data from the Kritis simulation.");
+            BlockingKritisDataExchanger.class.wait();
+        }
+
+        // consume data
+        Map<String, Map<String, SmartMeterGeoData>> tempGeoData = geoData;
+        geoData = null;
+        couplingThread = null;
+        LOG.info("SimControl got geo data from the Kritis simulation.");
+        return tempGeoData;
     }
 
     public static synchronized boolean freeAll() {

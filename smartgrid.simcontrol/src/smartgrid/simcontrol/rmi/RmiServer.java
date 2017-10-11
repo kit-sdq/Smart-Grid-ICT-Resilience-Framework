@@ -125,6 +125,7 @@ public class RmiServer implements ISimulationController {
     @Override
     public void initTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
         LOG.info("init topo called remotely");
+        BlockingKritisDataExchanger.storeGeoData(smartMeterGeoData);
 //        if (state == RmiServerState.NOT_INIT) {
 //            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
 //            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
