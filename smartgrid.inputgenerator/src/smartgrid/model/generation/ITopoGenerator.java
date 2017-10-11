@@ -1,4 +1,4 @@
-package smartgrid.topogeneration;
+package smartgrid.model.generation;
 
 import java.util.Map;
 

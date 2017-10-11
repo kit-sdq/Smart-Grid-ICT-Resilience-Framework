@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.ui,
  smartgrid.simcontrol.baselib,
  org.apache.log4j;bundle-version="1.2.15",
  smartgrid.log4starter,
- smartgrid.topogeneration,
+ smartgrid.model.generation,
  smartgrid.simcontrol.coupling;bundle-version="1.0.0",
  smartgrid.model.topo.profiles.completions;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

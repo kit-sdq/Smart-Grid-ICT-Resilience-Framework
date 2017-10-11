@@ -9,4 +9,4 @@ Require-Bundle: smartgrid.simcontrol.baselib;bundle-version="1.0.0",
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Export-Package: smartgrid.topogeneration
+Export-Package: smartgrid.model.generation
