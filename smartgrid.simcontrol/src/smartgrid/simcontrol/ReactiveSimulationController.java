@@ -19,6 +19,7 @@ import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
+import smartgrid.model.generation.DefaultInputGenerator;
 import smartgrid.model.generation.ITopoGenerator;
 import smartgrid.model.generation.TrivialTopoGenerator;
 import smartgrid.simcontrol.baselib.Constants;
@@ -308,7 +309,8 @@ public final class ReactiveSimulationController {
         Map<String, Map<String, SmartMeterGeoData>> geoData = BlockingKritisDataExchanger.getGeoData();
         ITopoGenerator generator = new TrivialTopoGenerator();
         topo = generator.generateTopo(geoData);
-//        initialState = ScenarioModelHelper.loadInput(inputStatePath); //TODO generate input!
+        DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
+        initialState = defaultInputGenerator.generateInput(topo);
         impactInput = initialState;
     }
 
