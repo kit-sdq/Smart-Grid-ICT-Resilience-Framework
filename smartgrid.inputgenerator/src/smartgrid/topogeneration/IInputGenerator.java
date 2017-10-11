@@ -1,7 +1,7 @@
 /**
  *
  */
-package smartgrid.inputgenerator;
+package smartgrid.topogeneration;
 
 import smartgrid.simcontrol.baselib.GenerationStyle;
 
