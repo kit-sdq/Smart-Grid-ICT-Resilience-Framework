@@ -7,23 +7,25 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.RegistryFactory;
+import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
+import smartgrid.simcontrol.baselib.coupling.ISimulationComponent;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 
 public class SimulationExtensionPointHelper {
 
-    private final IExtensionRegistry registry = RegistryFactory.getRegistry();
+    private static final IExtensionRegistry registry = RegistryFactory.getRegistry();
 
-    public SimulationExtensionPointHelper() {
+    private SimulationExtensionPointHelper() {
     }
 
-    public List<IPowerLoadSimulationWrapper> getPowerLoadSimulationExtensions() throws CoreException {
+    public static List<IPowerLoadSimulationWrapper> getPowerLoadSimulationExtensions() throws CoreException {
         final List<IPowerLoadSimulationWrapper> list = new ArrayList<>();
         final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.POWER_LOAD_SIMULATION_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
@@ -35,7 +37,7 @@ public class SimulationExtensionPointHelper {
         return list;
     }
 
-    public List<IAttackerSimulation> getAttackerSimulationExtensions() throws CoreException {
+    public static List<IAttackerSimulation> getAttackerSimulationExtensions() throws CoreException {
         final List<IAttackerSimulation> list = new ArrayList<>();
         final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.ATTACKER_SIMULATION_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
@@ -47,7 +49,7 @@ public class SimulationExtensionPointHelper {
         return list;
     }
 
-    public List<ITerminationCondition> getTerminationConditionExtensions() throws CoreException {
+    public static List<ITerminationCondition> getTerminationConditionExtensions() throws CoreException {
         final List<ITerminationCondition> list = new ArrayList<>();
         final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.TERMINATION_CONDITION_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
@@ -59,7 +61,7 @@ public class SimulationExtensionPointHelper {
         return list;
     }
 
-    public List<ITimeProgressor> getProgressorExtensions() throws CoreException {
+    public static List<ITimeProgressor> getProgressorExtensions() throws CoreException {
         final List<ITimeProgressor> list = new ArrayList<>();
         final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.TIME_PROGRESSOR_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
@@ -71,7 +73,7 @@ public class SimulationExtensionPointHelper {
         return list;
     }
 
-    public List<IImpactAnalysis> getImpactAnalysisExtensions() throws CoreException {
+    public static List<IImpactAnalysis> getImpactAnalysisExtensions() throws CoreException {
         final List<IImpactAnalysis> list = new ArrayList<>();
         final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.IMPACT_ANALYSIS_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
@@ -83,7 +85,7 @@ public class SimulationExtensionPointHelper {
         return list;
     }
 
-    public List<IKritisSimulationWrapper> getKritisSimulationExtensions() throws CoreException {
+    public static List<IKritisSimulationWrapper> getKritisSimulationExtensions() throws CoreException {
         final List<IKritisSimulationWrapper> list = new ArrayList<>();
         final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.KRITIS_SIMULATION_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
@@ -93,5 +95,18 @@ public class SimulationExtensionPointHelper {
             }
         }
         return list;
+    }
+
+    public static boolean isExtensionSelected(final ILaunchConfiguration launchConfig, final ISimulationComponent kritisSimExtension, String key) throws CoreException {
+        return launchConfig.getAttribute(key, "").equals(kritisSimExtension.getName());
+    }
+
+    public static <T extends ISimulationComponent> T findExtension(final ILaunchConfiguration launchConfig, final List<T> simComponents, String key, Class<T> type) throws CoreException {
+        for (final T simComponent : simComponents) {
+            if (isExtensionSelected(launchConfig, simComponent, key)) {
+                return simComponent;
+            }
+        }
+        return null;
     }
 }

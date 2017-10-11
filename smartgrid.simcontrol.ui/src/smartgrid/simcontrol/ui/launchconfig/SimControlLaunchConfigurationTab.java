@@ -408,10 +408,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         comboAttackSimulation = new Combo(grpAnalyses, SWT.READ_ONLY);
         comboAttackSimulation.setBounds(213, 108, 202, 23);
         comboAttackSimulation.addModifyListener(e -> {
-            final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
             try {
-                final List<IAttackerSimulation> list = helper.getAttackerSimulationExtensions();
+                final List<IAttackerSimulation> list = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
                 IAttackerSimulation sim = null;
                 for (final IAttackerSimulation attack : list) {
                     if (attack.getName().equals(comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()))) {
@@ -851,22 +850,21 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     }
 
     private void addElementsToCombos() {
-        final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
         try {
-            addPowerLoadElements(helper);
-            addAttackerSimulationElements(helper);
-            addKritisSimulationElements(helper);
-            addTerminationConditionElements(helper);
-            addProgressorElements(helper);
-            addImpactAnalysisElements(helper);
+            addPowerLoadElements();
+            addAttackerSimulationElements();
+            addKritisSimulationElements();
+            addTerminationConditionElements();
+            addProgressorElements();
+            addImpactAnalysisElements();
         } catch (final CoreException e) {
             e.printStackTrace();
         }
     }
 
-    private void addPowerLoadElements(final SimulationExtensionPointHelper helper) throws CoreException {
-        final List<IPowerLoadSimulationWrapper> list = helper.getPowerLoadSimulationExtensions();
+    private void addPowerLoadElements() throws CoreException {
+        final List<IPowerLoadSimulationWrapper> list = SimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
         for (final IPowerLoadSimulationWrapper ele : list) {
             comboPowerLoadSimulation.add(ele.getName());
         }
@@ -875,8 +873,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addAttackerSimulationElements(final SimulationExtensionPointHelper helper) throws CoreException {
-        final List<IAttackerSimulation> list = helper.getAttackerSimulationExtensions();
+    private void addAttackerSimulationElements() throws CoreException {
+        final List<IAttackerSimulation> list = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
         for (final IAttackerSimulation ele : list) {
             comboAttackSimulation.add(ele.getName());
         }
@@ -885,8 +883,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addKritisSimulationElements(final SimulationExtensionPointHelper helper) throws CoreException {
-        final List<IKritisSimulationWrapper> list = helper.getKritisSimulationExtensions();
+    private void addKritisSimulationElements() throws CoreException {
+        final List<IKritisSimulationWrapper> list = SimulationExtensionPointHelper.getKritisSimulationExtensions();
         for (final IKritisSimulationWrapper ele : list) {
             comboKritisSimulation.add(ele.getName());
         }
@@ -895,8 +893,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addTerminationConditionElements(final SimulationExtensionPointHelper helper) throws CoreException {
-        final List<ITerminationCondition> list = helper.getTerminationConditionExtensions();
+    private void addTerminationConditionElements() throws CoreException {
+        final List<ITerminationCondition> list = SimulationExtensionPointHelper.getTerminationConditionExtensions();
         for (final ITerminationCondition ele : list) {
             comboTerminationCondition.add(ele.getName());
         }
@@ -905,8 +903,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addProgressorElements(final SimulationExtensionPointHelper helper) throws CoreException {
-        final List<ITimeProgressor> list = helper.getProgressorExtensions();
+    private void addProgressorElements() throws CoreException {
+        final List<ITimeProgressor> list = SimulationExtensionPointHelper.getProgressorExtensions();
         for (final ITimeProgressor ele : list) {
             comboProgressor.add(ele.getName());
         }
@@ -915,8 +913,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    private void addImpactAnalysisElements(final SimulationExtensionPointHelper helper) throws CoreException {
-        final List<IImpactAnalysis> list = helper.getImpactAnalysisExtensions();
+    private void addImpactAnalysisElements() throws CoreException {
+        final List<IImpactAnalysis> list = SimulationExtensionPointHelper.getImpactAnalysisExtensions();
         for (final IImpactAnalysis ele : list) {
             comboImpactAnalysis.add(ele.getName());
         }

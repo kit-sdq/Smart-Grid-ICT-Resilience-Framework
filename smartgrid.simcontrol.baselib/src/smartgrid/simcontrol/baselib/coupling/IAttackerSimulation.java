@@ -7,29 +7,13 @@ import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
 
-// TODO JavaDoc
-/**
- * Interface for the Attacker Simulation
- *
- */
-public interface IAttackerSimulation {
+public interface IAttackerSimulation extends ISimulationComponent {
 
-    // TODO JavaDoc
-    /**
-     * Runs the Attacker Simulation
-     *
-     * @param smartGridTopo
-     * @param impactAnalysisOutput
-     * @return
-     */
     public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioResult impactAnalysisOutput);
 
     /**
      * If using ExtensionPoints and so 0-parameter Constructor pass the config from Simcontrol UI to
      * this Method to build the desired AttackerSimulation ("Factory Method")
-     *
-     *
-     *
      *
      * @param config
      *            behavior for the Attacker
@@ -38,8 +22,6 @@ public interface IAttackerSimulation {
      *             If ILaunchConfiguration.getAttribute fails
      */
     public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
-
-    public String getName();
 
     /**
      * Should return true if hacking speed should be considered during the attack simulation

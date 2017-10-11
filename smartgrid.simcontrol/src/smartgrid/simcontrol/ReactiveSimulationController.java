@@ -319,9 +319,8 @@ public final class ReactiveSimulationController {
     }
 
     public void loadDefaultAnalyses() throws CoreException {
-        final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
-        final List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
+        final List<IAttackerSimulation> attack = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
         for (final IAttackerSimulation e : attack) {
 
             if (e.getName().equals("No Attack Simulation")) {
@@ -330,7 +329,7 @@ public final class ReactiveSimulationController {
         }
 
         // To-do at some point, IIP might want some init data
-        final List<IPowerLoadSimulationWrapper> power = helper.getPowerLoadSimulationExtensions();
+        final List<IPowerLoadSimulationWrapper> power = SimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
         for (final IPowerLoadSimulationWrapper e : power) {
 
             if (e.getName().equals("Power Load Simulation Wrapper")) {
@@ -339,7 +338,7 @@ public final class ReactiveSimulationController {
         }
 
         // TODO init! (with number of iterations)
-        final List<ITerminationCondition> termination = helper.getTerminationConditionExtensions();
+        final List<ITerminationCondition> termination = SimulationExtensionPointHelper.getTerminationConditionExtensions();
         for (final ITerminationCondition e : termination) {
 
             if (e.getName().equals("Iteration Count")) {
@@ -348,7 +347,7 @@ public final class ReactiveSimulationController {
         }
 
         // TODO init?
-        final List<IImpactAnalysis> impact = helper.getImpactAnalysisExtensions();
+        final List<IImpactAnalysis> impact = SimulationExtensionPointHelper.getImpactAnalysisExtensions();
         for (final IImpactAnalysis e : impact) {
 
             if (e.getName().equals("Graph Analyzer Impact Analysis")) {
@@ -356,7 +355,7 @@ public final class ReactiveSimulationController {
             }
         }
 
-        final List<ITimeProgressor> time = helper.getProgressorExtensions();
+        final List<ITimeProgressor> time = SimulationExtensionPointHelper.getProgressorExtensions();
         for (final ITimeProgressor e : time) {
 
             if (e.getName().equals("No Operation")) {
@@ -372,47 +371,17 @@ public final class ReactiveSimulationController {
     }
 
     public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException {
-        final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
 
-        final List<IAttackerSimulation> attack = helper.getAttackerSimulationExtensions();
-        for (final IAttackerSimulation e : attack) {
-
-            if (launchConfig.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "").equals(e.getName())) {
-                attackerSimulation = e;
-            }
-        }
-
-        final List<IPowerLoadSimulationWrapper> power = helper.getPowerLoadSimulationExtensions();
-        for (final IPowerLoadSimulationWrapper e : power) {
-
-            if (launchConfig.getAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, "").equals(e.getName())) {
-                powerLoadSimulation = e;
-            }
-        }
-
-        final List<ITerminationCondition> termination = helper.getTerminationConditionExtensions();
-        for (final ITerminationCondition e : termination) {
-
-            if (launchConfig.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, "").equals(e.getName())) {
-                terminationCondition = e;
-            }
-        }
-
-        final List<IImpactAnalysis> impact = helper.getImpactAnalysisExtensions();
-        for (final IImpactAnalysis e : impact) {
-
-            if (launchConfig.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, "").equals(e.getName())) {
-                impactAnalsis = e;
-            }
-        }
-
-        final List<ITimeProgressor> time = helper.getProgressorExtensions();
-        for (final ITimeProgressor e : time) {
-
-            if (launchConfig.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, "").equals(e.getName())) {
-                timeProgressor = e;
-            }
-        }
+        attackerSimulation = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_CONFIG,
+                IAttackerSimulation.class);
+        powerLoadSimulation = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getPowerLoadSimulationExtensions(), Constants.POWER_LOAD_SIMULATION_CONFIG,
+                IPowerLoadSimulationWrapper.class);
+        terminationCondition = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getTerminationConditionExtensions(),
+                Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, ITerminationCondition.class);
+        impactAnalsis = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getImpactAnalysisExtensions(), Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG,
+                IImpactAnalysis.class);
+        timeProgressor = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_CONFIG,
+                ITimeProgressor.class);
 
         powerLoadSimulation.init(launchConfig);
         impactAnalsis.init(launchConfig);

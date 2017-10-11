@@ -1,6 +1,5 @@
 package smartgrid.simcontrol;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -64,17 +63,9 @@ public final class SimulationController {
         reactiveSimControl.init(outputPath, topoPath, inputPath);
         reactiveSimControl.loadCustomUserAnalysis(launchConfig);
 
-        final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
-        final List<IKritisSimulationWrapper> kritisSimExtensions = helper.getKritisSimulationExtensions();
-        for (final IKritisSimulationWrapper kritisSimExtension : kritisSimExtensions) {
-            if (LaunchConfigHelper.isExtensionSelected(launchConfig, kritisSimExtension, Constants.KRITIS_SIMULATION_CONFIG)) {
-                kritisSimulation = kritisSimExtension;
-                break;
-            }
-        }
-
+        kritisSimulation = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getKritisSimulationExtensions(), Constants.KRITIS_SIMULATION_CONFIG,
+                IKritisSimulationWrapper.class);
         kritisSimulation.init(launchConfig);
-
         LOG.info("Using KRITIS simulation: " + kritisSimulation.getName());
     }
 

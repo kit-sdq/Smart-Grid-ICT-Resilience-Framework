@@ -6,9 +6,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.coupling.IKritisSimulation;
 
-public interface IKritisSimulationWrapper extends IKritisSimulation {
+public interface IKritisSimulationWrapper extends IKritisSimulation, ISimulationComponent {
 
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
-
-    public String getName();
+    ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
 }

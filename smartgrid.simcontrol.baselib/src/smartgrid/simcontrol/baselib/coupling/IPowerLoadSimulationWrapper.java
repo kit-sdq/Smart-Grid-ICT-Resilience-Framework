@@ -6,12 +6,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.coupling.IPowerLoadSimulation;
 
-/**
- *
- * Interface for the PowerLoad Simulation
- *
- */
-public interface IPowerLoadSimulationWrapper extends IPowerLoadSimulation {
+public interface IPowerLoadSimulationWrapper extends IPowerLoadSimulation, ISimulationComponent {
 
     /**
      * If using ExtensionPoints and so 0-parameter Constructor pass the config from Simcontrol UI to
@@ -24,6 +19,4 @@ public interface IPowerLoadSimulationWrapper extends IPowerLoadSimulation {
      *             If ILaunchConfiguration.getAttribute fails
      */
     public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
-
-    public String getName();
 }
