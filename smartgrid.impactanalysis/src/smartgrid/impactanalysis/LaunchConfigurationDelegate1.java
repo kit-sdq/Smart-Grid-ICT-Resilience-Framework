@@ -40,14 +40,14 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
     @Override
     public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch, final IProgressMonitor monitor) throws CoreException {
 
-        LOG.debug("[LaunchConfiguration]: Loaded");
-        LOG.debug("[LaunchConfiguration]: Find parameters");
+        LOG.debug("Loaded");
+        LOG.debug("Find parameters");
 
         final String inputPath = configuration.getAttribute("inputPath", "");
         final String outputPath = configuration.getAttribute("outputPath", "");
         final String topoPath = configuration.getAttribute("topologyPath", "");
-        LOG.debug("[LaunchConfiguration]: Input : " + inputPath);
-        LOG.debug("[LaunchConfiguration]: Topology : " + topoPath);
+        LOG.debug("Input : " + inputPath);
+        LOG.debug("Topology : " + topoPath);
 
         final ScenarioState initialState = loadInput(inputPath);
         final SmartGridTopology topo = loadScenario(topoPath);
@@ -66,7 +66,7 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
 
         try {
             final EObject r = resource.getContents().get(0);
-            LOG.debug("[LaunchConfiguration]: class: " + r.getClass());
+            LOG.debug("class: " + r.getClass());
             s = (SmartGridTopology) resource.getContents().get(0);
 
         } catch (final Exception e) {
@@ -83,7 +83,7 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
         final Resource resource = resSet.getResource(URI.createFileURI(path), true);
 
         final EObject r = resource.getContents().get(0);
-        LOG.debug("[LaunchConfiguration]: class: " + r.getClass());
+        LOG.debug("class: " + r.getClass());
         input = (ScenarioState) resource.getContents().get(0);
 
         return input;
