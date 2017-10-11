@@ -13,7 +13,7 @@
 <stringAttribute key="kritisSimulationConfiguration" value="KRITIS Remote Simulation Wrapper"/>
 <stringAttribute key="logicalCon" value="true"/>
 <stringAttribute key="outputPath" value="D:\eclipse_oxygen\ws-runtime\smartgrid.model.examples\example6_small\output"/>
-<stringAttribute key="powerLoadConfiguration" value="Power Load Simulation Wrapper"/>
+<stringAttribute key="powerLoadConfiguration" value="Mock"/>
 <stringAttribute key="rootNodeID" value="1303261153"/>
 <stringAttribute key="terminationConditionConfiguration" value="Iteration Count"/>
 <stringAttribute key="timeProgressorConfiguration" value="No Operation"/>
