@@ -1,6 +1,3 @@
-/**
- *
- */
 package smartgrid.helper;
 
 import java.util.ArrayList;
@@ -29,14 +26,12 @@ import smartgridtopo.impl.SmartgridtopoPackageImpl;
 
 /**
  * @author Christian
- *
  */
 public final class ScenarioModelHelper {
 
     private static Logger LOG = Logger.getLogger(ScenarioModelHelper.class);
 
     public static SmartGridTopology loadScenario(final String path) {
-        SmartGridTopology s = null;
         SmartgridtopoPackageImpl.init();
 
         final ResourceSet resSet = new ResourceSetImpl();
@@ -44,17 +39,14 @@ public final class ScenarioModelHelper {
 
         final EObject r = resource.getContents().get(0);
         LOG.debug("Class: " + r.getClass());
-        s = (SmartGridTopology) resource.getContents().get(0);
-        return s;
+        return (SmartGridTopology) resource.getContents().get(0);
     }
 
     public static ScenarioState loadInput(final String path) {
-        ScenarioState input = null;
         try {
             SmartgridinputPackageImpl.init();
         } catch (Exception e) {
-            LOG.warn("Exception thrown in SmartgridinputPackageImpl.init();", e);
-            //LOG.warn("Exception thrown in SmartgridinputPackageImpl.init();"); // use this if you want the stack trace
+            LOG.warn("Exception thrown in SmartgridinputPackageImpl.init", e);
         }
 
         final ResourceSet resSet = new ResourceSetImpl();
@@ -62,9 +54,7 @@ public final class ScenarioModelHelper {
 
         final EObject r = resource.getContents().get(0);
         LOG.debug("Class: " + r.getClass());
-        input = (ScenarioState) resource.getContents().get(0);
-
-        return input;
+        return (ScenarioState) resource.getContents().get(0);
     }
 
     /**
@@ -108,7 +98,6 @@ public final class ScenarioModelHelper {
 
     /**
      * Searches in all EntityStates that On State that has the given NetworkEntity ID
-     *
      *
      * @param entityID
      *            The Id for that to search the On State
@@ -160,8 +149,6 @@ public final class ScenarioModelHelper {
      * Filters the hardwired Logical Connections of the Neighbors out that because of their State
      * (e.g. destroyed) don't functions
      *
-     *
-     *
      * @param clusterToHack
      *            the Target Cluster in which are all Nodes located that have a (transitive)
      *            Connection between them
@@ -188,16 +175,17 @@ public final class ScenarioModelHelper {
         return neighborOnList;
     }
 
-    /* *** Private Methods ***** */
-
-    /*
+    /**
      * Add another Value (Neighbor) to keys (Node) list
      *
-     * @param IDLinks Reference to the List Nodes and their Neighbors
+     * @param IDLinks
+     *            Reference to the List Nodes and their Neighbors
      *
-     * @param key the Node
+     * @param key
+     *            the Node
      *
-     * @param value the Neighbor from "Key" Node
+     * @param value
+     *            the Neighbor from "Key" Node
      */
     private static void addNeighbors(final Map<Integer, LinkedList<Integer>> IDLinks, final int key, final int value) {
         // Search "Key" --> Neighbor List "Values"
