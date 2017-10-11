@@ -9,14 +9,13 @@
 <stringAttribute key="hackingSpeed" value="1"/>
 <stringAttribute key="impactAnalysisConfiguration" value="Graph Analyzer Impact Analysis"/>
 <stringAttribute key="inputPath" value="C:\Users\Misha\Desktop\SmartGrid\smartgrid.model.examples\example7\example7.smartgridinput"/>
-<stringAttribute key="iterationCount" value="2"/>
-<stringAttribute key="kritisSimulationConfiguration" value="KRITIS Remote Simulation Wrapper"/>
+<stringAttribute key="kritisSimulationConfiguration" value="Kritis Simulation Mock"/>
 <stringAttribute key="logicalCon" value="true"/>
 <stringAttribute key="outputPath" value="C:\Users\Misha\Desktop\SmartGrid\smartgrid.model.examples\example7\"/>
-<stringAttribute key="powerLoadConfiguration" value="Power Load Simulation Wrapper"/>
+<stringAttribute key="powerLoadConfiguration" value="Powerload Simulation Mock"/>
 <stringAttribute key="rootNodeID" value="1303261153"/>
-<stringAttribute key="terminationConditionConfiguration" value="Iteration Count"/>
-<stringAttribute key="timeProgressorConfiguration" value="No Operation"/>
+<stringAttribute key="terminationConditionConfiguration" value="Termination Condition Mock"/>
+<stringAttribute key="timeProgressorConfiguration" value="Time Progessor Mock"/>
 <stringAttribute key="timeSteps" value="5"/>
 <stringAttribute key="topologyPath" value="C:\Users\Misha\Desktop\SmartGrid\smartgrid.model.examples\example7\example7.smartgridtopo"/>
 </launchConfiguration>
