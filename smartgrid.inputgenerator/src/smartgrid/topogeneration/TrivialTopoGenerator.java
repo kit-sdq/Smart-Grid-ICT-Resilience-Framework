@@ -9,6 +9,7 @@ import smartgrid.simcontrol.coupling.SmartMeterGeoData;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.LogicalCommunication;
 import smartgridtopo.NamedIdentifier;
+import smartgridtopo.NetworkEntity;
 import smartgridtopo.NetworkNode;
 import smartgridtopo.PhysicalConnection;
 import smartgridtopo.PowerGridNode;
@@ -21,6 +22,7 @@ public class TrivialTopoGenerator implements ITopoGenerator {
 
     private static final Logger LOG = Logger.getLogger(TrivialTopoGenerator.class);
 
+    @Override
     public void generateTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
 
         // create root container
@@ -33,23 +35,33 @@ public class TrivialTopoGenerator implements ITopoGenerator {
         topo.getContainsNE().add(controlCenter);
 
         // create network node for command center and connect
-        NetworkNode networkNode = topoFactory.createNetworkNode();
+        NetworkNode controlCenterNetworkNode = topoFactory.createNetworkNode();
+        topo.getContainsNE().add(controlCenterNetworkNode);
+        createPhysicalConnection(topoFactory, topo, controlCenterNetworkNode, controlCenter);
 
-//      NetworkNode lastNetworkNode = topo
+        // keep track of the network node of last iteration so that network nodes can be chained
+        NetworkNode lastNetworkNode = controlCenterNetworkNode;
 
         // iterate nodes
         for (Entry<String, Map<String, SmartMeterGeoData>> nodeEntry : smartMeterGeoData.entrySet()) {
+
             // create node
             PowerGridNode powerGridNode = topoFactory.createPowerGridNode();
             if (!setNameAndId(nodeEntry, powerGridNode))
                 continue;
             topo.getContainsPGN().add(powerGridNode);
 
-            // create netork node
-            networkNode = topoFactory.createNetworkNode();
+            // create network node
+            NetworkNode networkNode = topoFactory.createNetworkNode();
+            topo.getContainsNE().add(networkNode);
 
-            // iterate smart meter
+            // chain the network
+            createPhysicalConnection(topoFactory, topo, lastNetworkNode, networkNode);
+            lastNetworkNode = networkNode;
+
+            // iterate smart meters
             for (Entry<String, SmartMeterGeoData> smartMeterEntry : nodeEntry.getValue().entrySet()) {
+
                 // create smart meter
                 SmartMeter smartMeter = topoFactory.createSmartMeter();
                 if (!setNameAndId(smartMeterEntry, smartMeter))
@@ -62,15 +74,13 @@ public class TrivialTopoGenerator implements ITopoGenerator {
                 // connect the smart meter
                 createPhysicalConnection(topoFactory, topo, networkNode, smartMeter);
                 createLogicalConnection(topoFactory, topo, controlCenter, smartMeter);
-
             }
         }
 
-        // connect command center to power
+        // connect command center and its network node to power
         PowerGridNode firstNode = topo.getContainsPGN().get(0);
         controlCenter.getConnectedTo().add(firstNode);
-
-        // connect command center to the network
+        controlCenterNetworkNode.getConnectedTo().add(firstNode);
 
 //        // Init Scenario State
 //        SmartgridinputPackageImpl.init();
@@ -78,20 +88,18 @@ public class TrivialTopoGenerator implements ITopoGenerator {
 //        final ScenarioState input = inputFactory.createScenarioState();
     }
 
-    public LogicalCommunication createLogicalConnection(final SmartgridtopoFactory topoFactory, final SmartGridTopology topo, ControlCenter controlCenter, SmartMeter smartMeter) {
+    public void createLogicalConnection(final SmartgridtopoFactory topoFactory, final SmartGridTopology topo, ControlCenter controlCenter, SmartMeter smartMeter) {
         LogicalCommunication logicalCommunication = topoFactory.createLogicalCommunication();
         smartMeter.getCommunicatesBy().add(logicalCommunication);
         controlCenter.getCommunicatesBy().add(logicalCommunication);
         topo.getContainsLC().add(logicalCommunication);
-        return logicalCommunication;
     }
 
-    public PhysicalConnection createPhysicalConnection(final SmartgridtopoFactory topoFactory, final SmartGridTopology topo, NetworkNode networkNode, SmartMeter smartMeter) {
+    public void createPhysicalConnection(final SmartgridtopoFactory topoFactory, final SmartGridTopology topo, NetworkEntity networkNode, NetworkEntity smartMeter) {
         PhysicalConnection physicalConnection = topoFactory.createPhysicalConnection();
         smartMeter.getLinkedBy().add(physicalConnection);
         networkNode.getLinkedBy().add(physicalConnection);
         topo.getContainsPC().add(physicalConnection);
-        return physicalConnection;
     }
 
     public boolean setNameAndId(Entry<String, ?> nodeEntry, NamedIdentifier entity) {
