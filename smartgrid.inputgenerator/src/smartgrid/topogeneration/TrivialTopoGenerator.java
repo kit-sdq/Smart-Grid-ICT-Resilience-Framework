@@ -23,7 +23,7 @@ public class TrivialTopoGenerator implements ITopoGenerator {
     private static final Logger LOG = Logger.getLogger(TrivialTopoGenerator.class);
 
     @Override
-    public void generateTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
+    public SmartGridTopology generateTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
 
         // create root container
         SmartgridtopoPackageImpl.init();
@@ -81,6 +81,8 @@ public class TrivialTopoGenerator implements ITopoGenerator {
         PowerGridNode firstNode = topo.getContainsPGN().get(0);
         controlCenter.getConnectedTo().add(firstNode);
         controlCenterNetworkNode.getConnectedTo().add(firstNode);
+
+        return topo;
 
 //        // Init Scenario State
 //        SmartgridinputPackageImpl.init();
