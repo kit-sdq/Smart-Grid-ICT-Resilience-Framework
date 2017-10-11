@@ -65,11 +65,11 @@ public final class SimulationController {
         reactiveSimControl.loadCustomUserAnalysis(launchConfig);
 
         final SimulationExtensionPointHelper helper = new SimulationExtensionPointHelper();
-        final List<IKritisSimulationWrapper> time = helper.getKritisSimulationExtensions();
-        for (final IKritisSimulationWrapper e : time) {
-
-            if (launchConfig.getAttribute(Constants.KRITIS_SIMULATION_CONFIG, "").equals(e.getName())) {
-                kritisSimulation = e;
+        final List<IKritisSimulationWrapper> kritisSimExtensions = helper.getKritisSimulationExtensions();
+        for (final IKritisSimulationWrapper kritisSimExtension : kritisSimExtensions) {
+            if (LaunchConfigHelper.isExtensionSelected(launchConfig, kritisSimExtension, Constants.KRITIS_SIMULATION_CONFIG)) {
+                kritisSimulation = kritisSimExtension;
+                break;
             }
         }
 
