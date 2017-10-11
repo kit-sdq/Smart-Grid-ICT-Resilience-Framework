@@ -4,7 +4,9 @@ Bundle-Name: Inputgenerator
 Bundle-SymbolicName: smartgrid.topogeneration
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: smartgrid.simcontrol.baselib;bundle-version="1.0.0",
- smartgrid.model.input
+ smartgrid.model.input,
+ smartgrid.simcontrol.coupling,
+ org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: smartgrid.topogeneration
