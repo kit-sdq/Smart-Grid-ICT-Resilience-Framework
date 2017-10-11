@@ -17,9 +17,9 @@ import smartgridtopo.SmartMeter;
 import smartgridtopo.SmartgridtopoFactory;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
 
-public class InputGenerator {
+public class TrivialTopoGenerator implements ITopoGenerator {
 
-    private static final Logger LOG = Logger.getLogger(InputGenerator.class);
+    private static final Logger LOG = Logger.getLogger(TrivialTopoGenerator.class);
 
     public void generateTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
 
