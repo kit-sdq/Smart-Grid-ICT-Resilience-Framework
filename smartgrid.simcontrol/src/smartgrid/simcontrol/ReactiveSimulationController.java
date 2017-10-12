@@ -142,6 +142,13 @@ public final class ReactiveSimulationController {
 
         emptyPowerLoadInput = new HashMap<>();
 
+        // TODO Hack: remove this
+        ITopoGenerator generator = new TrivialTopoGenerator();
+        topo = generator.generateTopo(kritisPowerDemand);
+        DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
+        initialState = defaultInputGenerator.generateInput(topo);
+        impactInput = initialState;
+
         // copy the structure of the input
         for (Entry<String, Map<String, PowerSpec>> nodeEntry : kritisPowerDemand.entrySet()) {
             HashMap<String, ISmartMeterState> prosumerMap = new HashMap<>();

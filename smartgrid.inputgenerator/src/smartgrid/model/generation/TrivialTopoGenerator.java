@@ -5,7 +5,6 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import smartgrid.simcontrol.coupling.SmartMeterGeoData;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.LogicalCommunication;
 import smartgridtopo.NamedIdentifier;
@@ -23,7 +22,9 @@ public class TrivialTopoGenerator implements ITopoGenerator {
     private static final Logger LOG = Logger.getLogger(TrivialTopoGenerator.class);
 
     @Override
-    public SmartGridTopology generateTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
+    public SmartGridTopology generateTopo(Object _smartMeterGeoData) {
+
+        Map<String, Map<String, ?>> smartMeterGeoData = (Map<String, Map<String, ?>>) _smartMeterGeoData;
 
         // create root container
         SmartgridtopoPackageImpl.init();
@@ -43,7 +44,7 @@ public class TrivialTopoGenerator implements ITopoGenerator {
         NetworkNode lastNetworkNode = controlCenterNetworkNode;
 
         // iterate nodes
-        for (Entry<String, Map<String, SmartMeterGeoData>> nodeEntry : smartMeterGeoData.entrySet()) {
+        for (Entry<String, Map<String, ?>> nodeEntry : smartMeterGeoData.entrySet()) {
 
             // create node
             PowerGridNode powerGridNode = topoFactory.createPowerGridNode();
@@ -60,7 +61,7 @@ public class TrivialTopoGenerator implements ITopoGenerator {
             lastNetworkNode = networkNode;
 
             // iterate smart meters
-            for (Entry<String, SmartMeterGeoData> smartMeterEntry : nodeEntry.getValue().entrySet()) {
+            for (Entry<String, ?> smartMeterEntry : nodeEntry.getValue().entrySet()) {
 
                 // create smart meter
                 SmartMeter smartMeter = topoFactory.createSmartMeter();
