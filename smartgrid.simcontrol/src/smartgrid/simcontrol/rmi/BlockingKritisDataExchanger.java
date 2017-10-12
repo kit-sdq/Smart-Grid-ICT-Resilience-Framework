@@ -66,13 +66,13 @@ public class BlockingKritisDataExchanger {
         return tempPower;
     }
 
-    private static Map<String, Map<String, SmartMeterGeoData>> geoData;
+    private static Map<String, Map<String, SmartMeterGeoData>> bufferedGeoData;
 
     public static synchronized void storeGeoData(Map<String, Map<String, SmartMeterGeoData>> geoData) {
         if (geoData != null) {
             LOG.error("There was already geo data present. This data is now overwritten.");
         }
-        BlockingKritisDataExchanger.geoData = geoData;
+        BlockingKritisDataExchanger.bufferedGeoData = geoData;
         BlockingKritisDataExchanger.class.notifyAll();
     }
 
@@ -80,20 +80,22 @@ public class BlockingKritisDataExchanger {
         couplingThread = Thread.currentThread();
 
         // wait for data
-        while (geoData == null) {
+        while (bufferedGeoData == null) {
             LOG.info("SimControl is waiting for topo data from the Kritis simulation.");
             BlockingKritisDataExchanger.class.wait();
         }
 
         // consume data
-        Map<String, Map<String, SmartMeterGeoData>> tempGeoData = geoData;
-        geoData = null;
+        Map<String, Map<String, SmartMeterGeoData>> tempGeoData = bufferedGeoData;
+        bufferedGeoData = null;
         couplingThread = null;
         LOG.info("SimControl got geo data from the Kritis simulation.");
         return tempGeoData;
     }
 
     public static synchronized boolean freeAll() {
+
+        // free threads
         boolean threadFreed = couplingThread != null || kritisThread != null;
         if (couplingThread != null) {
             couplingThread.interrupt();
@@ -103,6 +105,12 @@ public class BlockingKritisDataExchanger {
             kritisThread.interrupt();
             kritisThread = null;
         }
+
+        // clear all buffered data
+        bufferedDemand = null;
+        bufferedPower = null;
+        bufferedGeoData = null;
+
         return threadFreed;
     }
 }
