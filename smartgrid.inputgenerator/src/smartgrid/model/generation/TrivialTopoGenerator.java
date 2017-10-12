@@ -24,6 +24,7 @@ public class TrivialTopoGenerator implements ITopoGenerator {
     @Override
     public SmartGridTopology generateTopo(Object _smartMeterGeoData) {
 
+        //TODO hack: remove
         Map<String, Map<String, ?>> smartMeterGeoData = (Map<String, Map<String, ?>>) _smartMeterGeoData;
 
         // create root container
@@ -78,17 +79,16 @@ public class TrivialTopoGenerator implements ITopoGenerator {
             }
         }
 
-        // connect command center and its network node to power
-        PowerGridNode firstNode = topo.getContainsPGN().get(0);
-        controlCenter.getConnectedTo().add(firstNode);
-        controlCenterNetworkNode.getConnectedTo().add(firstNode);
+        if (topo.getContainsPGN().size() > 0) {
+            // connect command center and its network node to power
+            PowerGridNode firstNode = topo.getContainsPGN().get(0);
+            controlCenter.getConnectedTo().add(firstNode);
+            controlCenterNetworkNode.getConnectedTo().add(firstNode);
+        } else {
+            LOG.error("The generated topology does not have any power nodes. No meaningful results will be produced.");
+        }
 
         return topo;
-
-//        // Init Scenario State
-//        SmartgridinputPackageImpl.init();
-//        final SmartgridinputFactory inputFactory = SmartgridinputFactory.eINSTANCE;
-//        final ScenarioState input = inputFactory.createScenarioState();
     }
 
     public void createLogicalConnection(final SmartgridtopoFactory topoFactory, final SmartGridTopology topo, ControlCenter controlCenter, SmartMeter smartMeter) {
@@ -107,6 +107,7 @@ public class TrivialTopoGenerator implements ITopoGenerator {
 
     public boolean setNameAndId(Entry<String, ?> nodeEntry, NamedIdentifier entity) {
         String nodeKey = nodeEntry.getKey();
+        nodeKey = nodeKey.split("_")[1]; // only take the number of the ID
         entity.setName(nodeKey);
         int nodeId;
         try {
