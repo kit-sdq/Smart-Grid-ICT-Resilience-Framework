@@ -78,8 +78,8 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
 
                         final Identifier identifier = (Identifier) bo;
                         final String id = idWidget.getText();
-                        if (!id.equals(Integer.toString(identifier.getId()))) {
-                            identifier.setId(Integer.parseInt(id));
+                        if (!id.equals(identifier.getId())) {
+                            identifier.setId(id);
                         }
                     }
                 }
@@ -111,11 +111,8 @@ public class IdentifierPropertiesSheet extends GFPropertySection implements ITab
                 return;
             }
 
-            if (((Identifier) bo).getId() != 0) {
-                idWidget.setText(Integer.toString(((Identifier) bo).getId()));
-            } else {
-                idWidget.setText("");
-            }
+            String id = ((Identifier) bo).getId();
+            idWidget.setText(id);
         }
     }
 }

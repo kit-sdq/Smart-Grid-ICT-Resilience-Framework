@@ -15,13 +15,13 @@ public final class UIDHelper {
      *
      * @return the new id
      */
-    public static int generateUID() {
+    public static String generateUID() {
         final UUID idOne = UUID.randomUUID();
-        String str = "" + idOne;
+        String str = idOne.toString();
         final int uid = str.hashCode();
         final String filterStr = "" + uid;
         str = filterStr.replaceAll("-", "");
-        return Integer.parseInt(str);
+        return str;
     }
 
 }
