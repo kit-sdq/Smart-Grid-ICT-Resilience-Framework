@@ -100,10 +100,12 @@ public class BlockingKritisDataExchanger {
         if (couplingThread != null) {
             couplingThread.interrupt();
             couplingThread = null;
+            LOG.info("The SimControl thread was interrupted and freed from the data exchange sync.");
         }
         if (kritisThread != null) {
             kritisThread.interrupt();
             kritisThread = null;
+            LOG.info("The Kritis simulation thread was interrupted and freed from the data exchange sync.");
         }
 
         // clear all buffered data

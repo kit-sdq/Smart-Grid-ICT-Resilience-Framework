@@ -31,7 +31,7 @@ public class DummySimulationController implements ISimulationController {
      * @see smartgrid.simcontrol.coupling.ISimulationController#shutDown()
      */
     @Override
-    public void shutDown() {
+    public void terminate() {
         System.out.println("RMI: shutdown called");
     }
 

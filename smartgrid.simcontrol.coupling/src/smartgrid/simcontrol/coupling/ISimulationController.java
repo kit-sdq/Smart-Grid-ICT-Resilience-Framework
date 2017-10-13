@@ -40,6 +40,6 @@ public interface ISimulationController extends Remote {
      * @throws RemoteException
      * @throws SimcontrolException
      */
-    void shutDown() throws RemoteException, SimcontrolException;
+    void terminate() throws RemoteException, SimcontrolException;
 
 }

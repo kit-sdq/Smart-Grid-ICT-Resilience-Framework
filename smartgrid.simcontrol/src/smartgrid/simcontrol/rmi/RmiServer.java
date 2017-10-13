@@ -42,6 +42,29 @@ public class RmiServer implements ISimulationController {
     private static final String ERROR_SERVER_NOT_INITIALIZED = "The SimControl RMI server is not initialized.";
     private static final String ERROR_SERVER_ALREADY_INITIALIZED = "The SimControl RMI server is already initialized.";
 
+    private static RmiServer instance;
+
+    public static synchronized void ensureRunning() {
+        if (instance == null) {
+            instance = new RmiServer();
+            instance.startServer();
+        }
+    }
+
+    public static synchronized void resetState() {
+        if (instance != null) {
+            instance.state = RmiServerState.NOT_INIT; // TODO what about SimControl?
+            LOG.info("The state of the RMI Server was reset to \"not initiated\".");
+        }
+    }
+
+    public static synchronized void shutDown() {
+        if (instance != null) {
+            instance.shutDownServer();
+            instance = null;
+        }
+    }
+
     /**
      * The {@link ReactiveSimulationController} is only initialized and used in reactive mode.
      */
@@ -64,7 +87,7 @@ public class RmiServer implements ISimulationController {
     /**
      * Binds the server to port 1099 ({@link java.rmi.registry.Registry.REGISTRY_PORT}).
      */
-    public void startServer() {
+    private void startServer() {
         try {
             ISimulationController stub = (ISimulationController) UnicastRemoteObject.exportObject(this, 0);
             registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
@@ -78,7 +101,7 @@ public class RmiServer implements ISimulationController {
     /**
      * Properly unbinds the server from the port.
      */
-    public void shutDownServer() {
+    private void shutDownServer() {
         if (registry != null) {
             try {
                 registry.unbind("ISimulationController");
@@ -145,7 +168,7 @@ public class RmiServer implements ISimulationController {
     }
 
     @Override
-    public void shutDown() throws SimcontrolException {
+    public void terminate() throws SimcontrolException {
         LOG.info("shutDown was called remotely");
         if (state == RmiServerState.NOT_INIT) {
             LOG.warn(ERROR_SERVER_NOT_INITIALIZED);

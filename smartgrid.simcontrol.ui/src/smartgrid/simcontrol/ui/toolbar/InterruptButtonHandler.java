@@ -4,11 +4,13 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 
 import smartgrid.simcontrol.rmi.BlockingKritisDataExchanger;
+import smartgrid.simcontrol.rmi.RmiServer;
 
 public class InterruptButtonHandler extends AbstractHandler {
 
     @Override
     public Object execute(ExecutionEvent event) {
+        RmiServer.resetState();
         BlockingKritisDataExchanger.freeAll();
 
         /* This code shows a popup that is not really necessary anymore */

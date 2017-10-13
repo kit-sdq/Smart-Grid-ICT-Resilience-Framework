@@ -4,7 +4,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.simcontrol.rmi.Startup;
+import smartgrid.simcontrol.rmi.BlockingKritisDataExchanger;
+import smartgrid.simcontrol.rmi.RmiServer;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -33,7 +34,7 @@ public class Activator extends AbstractUIPlugin {
         super.start(context);
         plugin = this;
         LoggingInitializer.initialize();
-        Startup.ensureServerRunning();
+        RmiServer.ensureRunning();
     }
 
     /*
@@ -44,7 +45,8 @@ public class Activator extends AbstractUIPlugin {
     @Override
     public void stop(final BundleContext context) throws Exception {
         plugin = null;
-        Startup.shutDown();
+        BlockingKritisDataExchanger.freeAll();
+        RmiServer.shutDown();
         super.stop(context);
     }
 
