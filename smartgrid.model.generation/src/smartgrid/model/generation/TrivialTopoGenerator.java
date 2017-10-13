@@ -20,6 +20,8 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
     @Override
     public SmartGridTopology generateTopo(Object _smartMeterGeoData) {
 
+        LOG.error("Starting generation of trivial ICT topology.");
+
         //TODO hack: remove
         Map<String, Map<String, ?>> smartMeterGeoData = (Map<String, Map<String, ?>>) _smartMeterGeoData;
 
@@ -83,6 +85,8 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
         } else {
             LOG.error("The generated topology does not have any power nodes. No meaningful results will be produced.");
         }
+
+        LOG.info("Trivial ICT topology was successfully generated.");
 
         return topo;
     }
