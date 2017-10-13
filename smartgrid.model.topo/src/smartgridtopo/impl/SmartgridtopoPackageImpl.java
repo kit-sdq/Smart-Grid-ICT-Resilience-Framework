@@ -206,7 +206,8 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
 
         // Obtain or create and register package
         SmartgridtopoPackageImpl theSmartgridtopoPackage = (SmartgridtopoPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SmartgridtopoPackageImpl
-                ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SmartgridtopoPackageImpl());
+                ? EPackage.Registry.INSTANCE.get(eNS_URI)
+                : new SmartgridtopoPackageImpl());
 
         isInited = true;
 
@@ -520,16 +521,6 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * @generated
      */
     @Override
-    public EReference getNetworkNodeType_IsA() {
-        return (EReference) networkNodeTypeEClass.getEStructuralFeatures().get(0);
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
     public EClass getControlCenter() {
         return controlCenterEClass;
     }
@@ -664,7 +655,6 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         createEReference(networkNodeEClass, NETWORK_NODE__IS_A);
 
         networkNodeTypeEClass = createEClass(NETWORK_NODE_TYPE);
-        createEReference(networkNodeTypeEClass, NETWORK_NODE_TYPE__IS_A);
 
         controlCenterEClass = createEClass(CONTROL_CENTER);
 
@@ -741,7 +731,7 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
                 !IS_DERIVED, IS_ORDERED);
 
         initEClass(identifierEClass, Identifier.class, "Identifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIdentifier_Id(), ecorePackage.getEInt(), "id", "0", 1, 1, Identifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED,
+        initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", "0", 1, 1, Identifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED,
                 !IS_ORDERED);
 
         initEClass(namedIdentifierEClass, NamedIdentifier.class, "NamedIdentifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -783,8 +773,6 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
                 !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(networkNodeTypeEClass, NetworkNodeType.class, "NetworkNodeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getNetworkNodeType_IsA(), getSmartMeterType(), null, "IsA", null, 1, 1, NetworkNodeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(controlCenterEClass, ControlCenter.class, "ControlCenter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

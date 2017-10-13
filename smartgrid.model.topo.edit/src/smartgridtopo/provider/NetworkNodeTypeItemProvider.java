@@ -54,7 +54,6 @@ public class NetworkNodeTypeItemProvider extends ItemProviderAdapter
 
             addIdPropertyDescriptor(object);
             addNamePropertyDescriptor(object);
-            addIsAPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
     }
@@ -68,7 +67,7 @@ public class NetworkNodeTypeItemProvider extends ItemProviderAdapter
     protected void addIdPropertyDescriptor(Object object) {
         itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_Identifier_id_feature"),
                 getString("_UI_PropertyDescriptor_description", "_UI_Identifier_id_feature", "_UI_Identifier_type"), SmartgridtopoPackage.Literals.IDENTIFIER__ID, true, false, false,
-                ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+                ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
     }
 
     /**
@@ -81,18 +80,6 @@ public class NetworkNodeTypeItemProvider extends ItemProviderAdapter
         itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_NamedEntity_name_feature"),
                 getString("_UI_PropertyDescriptor_description", "_UI_NamedEntity_name_feature", "_UI_NamedEntity_type"), SmartgridtopoPackage.Literals.NAMED_ENTITY__NAME, true, false, false,
                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-    }
-
-    /**
-     * This adds a property descriptor for the Is A feature. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * 
-     * @generated
-     */
-    protected void addIsAPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-                getString("_UI_NetworkNodeType_IsA_feature"), getString("_UI_PropertyDescriptor_description", "_UI_NetworkNodeType_IsA_feature", "_UI_NetworkNodeType_type"),
-                SmartgridtopoPackage.Literals.NETWORK_NODE_TYPE__IS_A, true, false, true, null, null, null));
     }
 
     /**

@@ -69,7 +69,7 @@ public class NetworkEntityItemProvider extends ItemProviderAdapter
     protected void addIdPropertyDescriptor(Object object) {
         itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_Identifier_id_feature"),
                 getString("_UI_PropertyDescriptor_description", "_UI_Identifier_id_feature", "_UI_Identifier_type"), SmartgridtopoPackage.Literals.IDENTIFIER__ID, true, false, false,
-                ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+                ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
     }
 
     /**

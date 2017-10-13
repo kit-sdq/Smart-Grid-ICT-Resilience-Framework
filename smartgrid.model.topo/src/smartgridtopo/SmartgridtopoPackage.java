@@ -850,22 +850,13 @@ public interface SmartgridtopoPackage extends EPackage {
     int NETWORK_NODE_TYPE__NAME = NAMED_IDENTIFIER__NAME;
 
     /**
-     * The feature id for the '<em><b>Is A</b></em>' reference. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     * 
-     * @generated
-     * @ordered
-     */
-    int NETWORK_NODE_TYPE__IS_A = NAMED_IDENTIFIER_FEATURE_COUNT + 0;
-
-    /**
      * The number of structural features of the '<em>Network Node Type</em>' class. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      * @ordered
      */
-    int NETWORK_NODE_TYPE_FEATURE_COUNT = NAMED_IDENTIFIER_FEATURE_COUNT + 1;
+    int NETWORK_NODE_TYPE_FEATURE_COUNT = NAMED_IDENTIFIER_FEATURE_COUNT + 0;
 
     /**
      * The number of operations of the '<em>Network Node Type</em>' class. <!-- begin-user-doc -->
@@ -1461,17 +1452,6 @@ public interface SmartgridtopoPackage extends EPackage {
     EClass getNetworkNodeType();
 
     /**
-     * Returns the meta object for the reference '{@link smartgridtopo.NetworkNodeType#getIsA <em>Is
-     * A</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @return the meta object for the reference '<em>Is A</em>'.
-     * @see smartgridtopo.NetworkNodeType#getIsA()
-     * @see #getNetworkNodeType()
-     * @generated
-     */
-    EReference getNetworkNodeType_IsA();
-
-    /**
      * Returns the meta object for class '{@link smartgridtopo.ControlCenter <em>Control
      * Center</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
      * 
@@ -1825,14 +1805,6 @@ public interface SmartgridtopoPackage extends EPackage {
          * @generated
          */
         EClass NETWORK_NODE_TYPE = eINSTANCE.getNetworkNodeType();
-
-        /**
-         * The meta object literal for the '<em><b>Is A</b></em>' reference feature. <!--
-         * begin-user-doc --> <!-- end-user-doc -->
-         * 
-         * @generated
-         */
-        EReference NETWORK_NODE_TYPE__IS_A = eINSTANCE.getNetworkNodeType_IsA();
 
         /**
          * The meta object literal for the '{@link smartgridtopo.impl.ControlCenterImpl <em>Control

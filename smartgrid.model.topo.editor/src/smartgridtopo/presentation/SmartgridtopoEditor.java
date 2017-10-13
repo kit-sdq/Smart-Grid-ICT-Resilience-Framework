@@ -1,5 +1,3 @@
-/**
- */
 package smartgridtopo.presentation;
 
 import java.io.IOException;
@@ -46,7 +44,6 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
@@ -115,7 +112,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
-import org.palladiosimulator.mdsdprofiles.provider.StereotypableElementDecoratorAdapterFactory;
 
 import smartgridtopo.provider.SmartgridtopoItemProviderAdapterFactory;
 
@@ -137,9 +133,9 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
      * This is the one adapter factory used for providing views of the model. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
      * 
-     * @generated NOT
+     * @generated
      */
-    protected AdapterFactory adapterFactory;
+    protected ComposedAdapterFactory adapterFactory;
 
     /**
      * This is the content outline page. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -354,6 +350,8 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
      * @generated
      */
     protected EContentAdapter problemIndicationAdapter = new EContentAdapter() {
+        protected boolean dispatching;
+
         @Override
         public void notifyChanged(Notification notification) {
             if (notification.getNotifier() instanceof Resource) {
@@ -368,15 +366,22 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
                     } else {
                         resourceToDiagnosticMap.remove(resource);
                     }
-
-                    if (updateProblemIndication) {
-                        getSite().getShell().getDisplay().asyncExec(() -> updateProblemIndication());
-                    }
+                    dispatchUpdateProblemIndication();
                     break;
                 }
                 }
             } else {
                 super.notifyChanged(notification);
+            }
+        }
+
+        protected void dispatchUpdateProblemIndication() {
+            if (updateProblemIndication && !dispatching) {
+                dispatching = true;
+                getSite().getShell().getDisplay().asyncExec(() -> {
+                    dispatching = false;
+                    updateProblemIndication();
+                });
             }
         }
 
@@ -389,9 +394,7 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
         protected void unsetTarget(Resource target) {
             basicUnsetTarget(target);
             resourceToDiagnosticMap.remove(target);
-            if (updateProblemIndication) {
-                getSite().getShell().getDisplay().asyncExec(() -> updateProblemIndication());
-            }
+            dispatchUpdateProblemIndication();
         }
     };
 
@@ -566,13 +569,10 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
             }
 
             if (markerHelper.hasMarkers(editingDomain.getResourceSet())) {
-                markerHelper.deleteMarkers(editingDomain.getResourceSet());
-                if (diagnostic.getSeverity() != Diagnostic.OK) {
-                    try {
-                        markerHelper.createMarkers(diagnostic);
-                    } catch (CoreException exception) {
-                        SmartgridtopoEditorPlugin.INSTANCE.log(exception);
-                    }
+                try {
+                    markerHelper.updateMarkers(diagnostic);
+                } catch (CoreException exception) {
+                    SmartgridtopoEditorPlugin.INSTANCE.log(exception);
                 }
             }
         }
@@ -602,18 +602,16 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
      * This sets up the editing domain for the model editor. <!-- begin-user-doc --> <!--
      * end-user-doc -->
      * 
-     * @generated NOT
+     * @generated
      */
     protected void initializeEditingDomain() {
         // Create an adapter factory that yields item providers.
         //
-        final ComposedAdapterFactory compAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+        adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
-        compAdapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-        compAdapterFactory.addAdapterFactory(new SmartgridtopoItemProviderAdapterFactory());
-        compAdapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-
-        adapterFactory = new StereotypableElementDecoratorAdapterFactory(compAdapterFactory);
+        adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+        adapterFactory.addAdapterFactory(new SmartgridtopoItemProviderAdapterFactory());
+        adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
         // Create the command stack that will notify this editor as commands are executed.
         //
@@ -917,6 +915,7 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
 
                 selectionViewer = (TreeViewer) viewerPane.getViewer();
                 selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+                selectionViewer.setUseHashlookup(true);
 
                 selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
                 selectionViewer.setInput(editingDomain.getResourceSet());
@@ -1173,7 +1172,7 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
      * 
      * @generated
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings("rawtypes")
     @Override
     public Object getAdapter(Class key) {
         if (key.equals(IContentOutlinePage.class)) {
@@ -1206,6 +1205,7 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
 
                     // Set up the tree viewer.
                     //
+                    contentOutlineViewer.setUseHashlookup(true);
                     contentOutlineViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
                     contentOutlineViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
                     contentOutlineViewer.setInput(editingDomain.getResourceSet());
@@ -1343,7 +1343,9 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
                 // Save the resources to the file system.
                 //
                 boolean first = true;
-                for (Resource resource : editingDomain.getResourceSet().getResources()) {
+                List<Resource> resources = editingDomain.getResourceSet().getResources();
+                for (int i = 0; i < resources.size(); ++i) {
+                    Resource resource = resources.get(i);
                     if ((first || !resource.getContents().isEmpty() || isPersisted(resource)) && !editingDomain.isReadOnly(resource)) {
                         try {
                             long timeStamp = resource.getTimeStamp();
@@ -1627,7 +1629,7 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * 
-     * @generated NOT
+     * @generated
      */
     @Override
     public void dispose() {
@@ -1637,7 +1639,7 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
 
         getSite().getPage().removePartListener(partListener);
 
-        ((IDisposable) adapterFactory).dispose();
+        adapterFactory.dispose();
 
         if (getActionBarContributor().getActiveEditor() == this) {
             getActionBarContributor().setActiveEditor(null);

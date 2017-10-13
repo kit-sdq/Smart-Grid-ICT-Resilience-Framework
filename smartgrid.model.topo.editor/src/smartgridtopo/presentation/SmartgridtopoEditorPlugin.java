@@ -1,5 +1,3 @@
-/**
- */
 package smartgridtopo.presentation;
 
 import org.eclipse.emf.common.EMFPlugin;

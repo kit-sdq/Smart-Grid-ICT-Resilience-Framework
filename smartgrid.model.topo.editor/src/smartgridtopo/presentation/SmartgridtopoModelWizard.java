@@ -1,5 +1,3 @@
-/**
- */
 package smartgridtopo.presentation;
 
 import java.util.ArrayList;

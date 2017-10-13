@@ -48,7 +48,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * @generated
      * @ordered
      */
-    protected static final int ID_EDEFAULT = 0;
+    protected static final String ID_EDEFAULT = "0";
 
     /**
      * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc -->
@@ -58,7 +58,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * @generated
      * @ordered
      */
-    protected int id = ID_EDEFAULT;
+    protected String id = ID_EDEFAULT;
 
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc
@@ -145,7 +145,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * @generated
      */
     @Override
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -155,8 +155,8 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
      * @generated
      */
     @Override
-    public void setId(int newId) {
-        int oldId = id;
+    public void setId(String newId) {
+        String oldId = id;
         id = newId;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, SmartgridtopoPackage.SMART_GRID_TOPOLOGY__ID, oldId, id));
@@ -291,7 +291,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
         case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__ID:
-            setId((Integer) newValue);
+            setId((String) newValue);
             return;
         case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__NAME:
             setName((String) newValue);
@@ -355,7 +355,7 @@ public class SmartGridTopologyImpl extends MinimalEObjectImpl.Container implemen
     public boolean eIsSet(int featureID) {
         switch (featureID) {
         case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__ID:
-            return id != ID_EDEFAULT;
+            return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
         case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__NAME:
             return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
         case SmartgridtopoPackage.SMART_GRID_TOPOLOGY__CONTAINS_NE:

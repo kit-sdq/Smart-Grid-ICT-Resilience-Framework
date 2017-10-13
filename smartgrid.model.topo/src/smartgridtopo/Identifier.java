@@ -30,12 +30,12 @@ public interface Identifier extends EObject {
      * <!-- end-user-doc -->
      * 
      * @return the value of the '<em>Id</em>' attribute.
-     * @see #setId(int)
+     * @see #setId(String)
      * @see smartgridtopo.SmartgridtopoPackage#getIdentifier_Id()
      * @model default="0" unique="false" id="true" required="true" ordered="false"
      * @generated
      */
-    int getId();
+    String getId();
 
     /**
      * Sets the value of the '{@link smartgridtopo.Identifier#getId <em>Id</em>}' attribute. <!--
@@ -46,6 +46,6 @@ public interface Identifier extends EObject {
      * @see #getId()
      * @generated
      */
-    void setId(int value);
+    void setId(String value);
 
 } // Identifier
