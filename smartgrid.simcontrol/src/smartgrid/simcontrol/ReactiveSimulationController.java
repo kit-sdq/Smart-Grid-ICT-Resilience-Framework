@@ -179,7 +179,7 @@ public final class ReactiveSimulationController {
             final NetworkEntity stateOwner = state.getOwner();
             if (stateOwner instanceof SmartMeter) {
                 // smart meter id from our topo model
-                final String prosumerId = Integer.toString(stateOwner.getId());
+                final String prosumerId = stateOwner.getId();
 
                 // get the id of the node the smart meter is located in
                 String nodeId = findNodeId(prosumerId);
@@ -263,7 +263,7 @@ public final class ReactiveSimulationController {
 
         //Transfer power supply state into next input
         for (final PowerState inputPowerState : impactInput.getPowerStates()) {
-            final String prosumerId = Integer.toString(inputPowerState.getOwner().getId());
+            final String prosumerId = inputPowerState.getOwner().getId();
 
             // iterate over node entries
             for (final Map<String, Double> powerForProsumersOfNode : powerSupply.values()) {
