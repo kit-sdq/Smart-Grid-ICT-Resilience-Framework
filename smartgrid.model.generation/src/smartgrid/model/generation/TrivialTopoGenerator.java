@@ -13,7 +13,7 @@ import smartgridtopo.SmartMeter;
 import smartgridtopo.SmartgridtopoFactory;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
 
-public class TrivialTopoGenerator extends AbstractTopoGenerator implements ITopoGenerator {
+public class TrivialTopoGenerator extends AbstractTopoGenerator {
 
     private static final Logger LOG = Logger.getLogger(TrivialTopoGenerator.class);
 

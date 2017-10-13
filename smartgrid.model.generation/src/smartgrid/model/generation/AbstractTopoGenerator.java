@@ -13,11 +13,9 @@ import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 import smartgridtopo.SmartgridtopoFactory;
 
-public abstract class AbstractTopoGenerator {
+public abstract class AbstractTopoGenerator implements ITopoGenerator {
 
     static final Logger LOG = Logger.getLogger(AbstractTopoGenerator.class);
-
-    public abstract SmartGridTopology generateTopo(Object _smartMeterGeoData);
 
     public void createLogicalConnection(final SmartgridtopoFactory topoFactory, final SmartGridTopology topo, ControlCenter controlCenter, SmartMeter smartMeter) {
         LogicalCommunication logicalCommunication = topoFactory.createLogicalCommunication();
