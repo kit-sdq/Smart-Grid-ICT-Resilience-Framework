@@ -52,10 +52,6 @@ public final class SimulationController {
         String inputPath = launchConfig.getAttribute(Constants.INPUT_PATH_KEY, "");
         String topoPath = launchConfig.getAttribute(Constants.TOPOLOGY_PATH_KEY, "");
 
-        /*
-         * Check whether this is really an Integer already done in
-         * smartgrid.simcontrol.ui.SimControlLaunchConfigurationTab. So just parsing to Int
-         */
         maxTimeSteps = Integer.parseUnsignedInt(launchConfig.getAttribute(Constants.TIMESTEPS_KEY, ""));
         LOG.info("Running for " + maxTimeSteps + " time steps");
 

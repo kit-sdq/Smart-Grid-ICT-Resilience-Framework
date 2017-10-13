@@ -53,7 +53,7 @@ public class RmiServer implements ISimulationController {
 
     public static synchronized void resetState() {
         if (instance != null) {
-            instance.state = RmiServerState.NOT_INIT; // TODO what about SimControl?
+            instance.state = RmiServerState.NOT_INIT;
             LOG.info("The state of the RMI Server was reset to \"not initiated\".");
         }
     }
