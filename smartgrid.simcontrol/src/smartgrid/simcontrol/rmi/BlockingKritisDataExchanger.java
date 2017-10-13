@@ -69,7 +69,7 @@ public class BlockingKritisDataExchanger {
     private static Map<String, Map<String, SmartMeterGeoData>> bufferedGeoData;
 
     public static synchronized void storeGeoData(Map<String, Map<String, SmartMeterGeoData>> geoData) {
-        if (geoData != null) {
+        if (bufferedGeoData != null) {
             LOG.error("There was already geo data present. This data is now overwritten.");
         }
         BlockingKritisDataExchanger.bufferedGeoData = geoData;
