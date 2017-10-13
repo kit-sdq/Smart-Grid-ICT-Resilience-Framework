@@ -17,7 +17,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Identifier" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" ordered="false" unique="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="0" iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedIdentifier" abstract="true" interface="true"
