@@ -47,8 +47,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
 
             // create node
             PowerGridNode powerGridNode = topoFactory.createPowerGridNode();
-            if (!setNameAndId(nodeEntry, powerGridNode))
-                continue;
+            setNameAndId(nodeEntry, powerGridNode);
             topo.getContainsPGN().add(powerGridNode);
 
             // create network node
@@ -64,8 +63,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
 
                 // create smart meter
                 SmartMeter smartMeter = topoFactory.createSmartMeter();
-                if (!setNameAndId(smartMeterEntry, smartMeter))
-                    continue;
+                setNameAndId(smartMeterEntry, smartMeter);
                 topo.getContainsNE().add(smartMeter);
 
                 // connect to power

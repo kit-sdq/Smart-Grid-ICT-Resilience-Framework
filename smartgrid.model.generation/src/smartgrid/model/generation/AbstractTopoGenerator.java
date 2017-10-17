@@ -31,24 +31,9 @@ public abstract class AbstractTopoGenerator implements ITopoGenerator {
         topo.getContainsPC().add(physicalConnection);
     }
 
-    public boolean setNameAndId(Entry<String, ?> nodeEntry, NamedIdentifier entity) {
+    public void setNameAndId(Entry<String, ?> nodeEntry, NamedIdentifier entity) {
         String nodeKey = nodeEntry.getKey();
-
-        String idString = nodeKey;
-        if (idString.contains("_")) {
-            idString = idString.split("_")[1]; // only take the number of the ID            
-        }
-
         entity.setName(nodeKey);
-        int nodeId;
-        try {
-            nodeId = Integer.parseInt(idString);
-        } catch (NumberFormatException e) {
-            LOG.error("Could not convert node key to int (" + nodeKey + "). Skipping this node.");
-            return false;
-        }
-        entity.setId(nodeId);
-        return true;
+        entity.setId(nodeKey);
     }
-
 }
