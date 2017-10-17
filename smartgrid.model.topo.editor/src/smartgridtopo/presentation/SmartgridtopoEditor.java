@@ -1172,7 +1172,7 @@ public class SmartgridtopoEditor extends MultiPageEditorPart implements IEditing
      * 
      * @generated
      */
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public Object getAdapter(Class key) {
         if (key.equals(IContentOutlinePage.class)) {
