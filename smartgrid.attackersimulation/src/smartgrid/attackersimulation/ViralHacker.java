@@ -42,7 +42,7 @@ public class ViralHacker implements IAttackerSimulation {
     private int hackingSpeed;
     private HackingStyle usedHackingStyle;
 
-    private List<Integer> seedNodeIDs;
+    private List<String> seedNodeIDs;
 
     private NodeMode mode;
 
@@ -77,7 +77,7 @@ public class ViralHacker implements IAttackerSimulation {
      * @param seedNodeID
      *
      */
-    public ViralHacker(final int hackingSpeed, final List<Integer> seedNodeIDs) {
+    public ViralHacker(final int hackingSpeed, final List<String> seedNodeIDs) {
 
         this(hackingSpeed);
 
@@ -140,18 +140,19 @@ public class ViralHacker implements IAttackerSimulation {
         case NodeIDs:
 
             final List<String> fail = new LinkedList<>();
-            fail.add(Constants.FAIL);
 
             // Getting NodeID
             final List<String> nodeIDStrings = config.getAttribute(Constants.ROOT_NODE_ID_KEY, fail);
 
+            // did it fail?
+            if (nodeIDStrings == fail) {
+                defaultUsed = true;
+                mode = NodeMode.RandomNode;
+                break;
+            }
+
             for (final String idStrings : nodeIDStrings) {
-                if (idStrings.equals(Constants.FAIL)) {
-                    defaultUsed = true;
-                    mode = NodeMode.RandomNode;
-                    break;
-                }
-                seedNodeIDs.add(Integer.parseInt(idStrings));
+                seedNodeIDs.add(idStrings);
             }
 
             break;
@@ -250,9 +251,6 @@ public class ViralHacker implements IAttackerSimulation {
         } // End FirstRun
     }
 
-    /*
-     *
-     */
     private void startHacking() {
         // Switch Hacking Modes here
         LOG.debug("Start Hacking with Viral Hacker");
@@ -290,7 +288,7 @@ public class ViralHacker implements IAttackerSimulation {
              * Reads from Scenario so this List don't respects changes in States of the Entities -->
              * It's only the "hardwired" logical Connection neighbors
              */
-            final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(myScenario);
+            final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(myScenario);
 
             dfs(clusterToHack, node, IDtoHisNeighborLinks, hackCount, freshHackedNodes);
 
@@ -309,14 +307,14 @@ public class ViralHacker implements IAttackerSimulation {
      *
      * @param IDtoHisNeighborLinks
      */
-    private int dfs(final Cluster clusterToHack, final On node, final Map<Integer, LinkedList<Integer>> iDtoHisNeighborLinks, int hackCount, final List<On> freshHackedNodes) {
+    private int dfs(final Cluster clusterToHack, final On node, final Map<String, LinkedList<String>> iDtoHisNeighborLinks, int hackCount, final List<On> freshHackedNodes) {
 
         // getting Neighbors
-        final int nodeID = ScenarioModelHelper.getIDfromEntityOnState(node);
+        final String nodeID = ScenarioModelHelper.getIDfromEntityOnState(node);
 
         // Getting Neighbor List with ID from Node
         // These Nodes could be in my Cluster but not sure
-        final LinkedList<Integer> neighborIDList = iDtoHisNeighborLinks.get(nodeID);
+        final LinkedList<String> neighborIDList = iDtoHisNeighborLinks.get(nodeID);
 
         if (neighborIDList == null) {
             return hackingSpeed;
@@ -372,7 +370,7 @@ public class ViralHacker implements IAttackerSimulation {
              * Reads from Scenario so this List don't respects changes in States of the Entities -->
              * It's only the "hardwired" logical Connection neighbors
              */
-            final Map<Integer, LinkedList<Integer>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(myScenario);
+            final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(myScenario);
 
             // Root is in cluster to hack --> so Root is StartNode
             currentLayer.add(hackedNode);
@@ -382,11 +380,11 @@ public class ViralHacker implements IAttackerSimulation {
                 for (final On Node : currentLayer) {
 
                     // getting Neighbors
-                    final int nodeID = ScenarioModelHelper.getIDfromEntityOnState(Node);
+                    final String nodeID = ScenarioModelHelper.getIDfromEntityOnState(Node);
 
                     // Getting Neighbor List with ID from Node
                     // These Nodes could be in my Cluster but not sure
-                    final LinkedList<Integer> neighborIDList = IDtoHisNeighborLinks.get(nodeID);
+                    final LinkedList<String> neighborIDList = IDtoHisNeighborLinks.get(nodeID);
 
                     if (neighborIDList == null) {
                         return;
@@ -444,7 +442,7 @@ public class ViralHacker implements IAttackerSimulation {
     private void buildSeedNodesList() {
         seedNodes = new LinkedList<>();
 
-        for (final int id : seedNodeIDs) {
+        for (final String id : seedNodeIDs) {
             final On node = ScenarioModelHelper.findEntityOnStateFromID(id, myResult);
             seedNodes.add(node);
         }
@@ -457,7 +455,7 @@ public class ViralHacker implements IAttackerSimulation {
         seedNodeIDs = new LinkedList<>();
 
         for (final On node : seedNodes) {
-            final int id = ScenarioModelHelper.getIDfromEntityOnState(node);
+            final String id = ScenarioModelHelper.getIDfromEntityOnState(node);
             seedNodeIDs.add(id);
         }
     }
@@ -508,7 +506,7 @@ public class ViralHacker implements IAttackerSimulation {
 
         boolean iDsValid;
 
-        for (final Integer seedNodeId : seedNodeIDs) {
+        for (final String seedNodeId : seedNodeIDs) {
 
             for (final Cluster myCluster : myResult.getClusters()) {
                 for (final On myNode : myCluster.getHasEntities()) {
