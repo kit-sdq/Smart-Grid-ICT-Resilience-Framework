@@ -49,13 +49,13 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
     private static final Logger LOG = Logger.getLogger(GraphAnalyzer.class);
 
-    private Map<Integer, PowerState> powerStates;
-    private Map<Integer, EntityState> entityStates;
+    private Map<String, PowerState> powerStates;
+    private Map<String, EntityState> entityStates;
 
-    private Map<Integer, Integer> externalToInternalID;
-    private Map<Integer, Integer> internalToExternalID;
+    private Map<String, Integer> externalToInternalID;
+    private Map<Integer, String> internalToExternalID;
     private Map<Integer, Cluster> internalToCluster;
-    private Map<Integer, Double[]> controlCenterConnectivity;
+    private Map<String, Double[]> controlCenterConnectivity;
 
     private String outputPath;
     private boolean initDone = false;
@@ -65,11 +65,10 @@ public class GraphAnalyzer implements IImpactAnalysis {
     List<List<Integer>> logicalClusters;
 
     // Die Adjazenzmatrizen waren noch vom vorherigen Ansatz
-    int maxID = -1;
     double[][] adjacentMatrix;
     double[][] logicalAdjacentMatrix;
-    List<Integer> logicalNodes;
-    List<Integer> controlCenters;
+    List<String> logicalNodes;
+    List<String> controlCenters;
     int internalMaxID;
 
     /**
@@ -235,9 +234,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
             externalToInternalID.put(s.getOwner().getId(), internalID);
             internalToExternalID.put(internalID, s.getOwner().getId());
 
-            if (s.getOwner().getId() > maxID) {
-                maxID = s.getOwner().getId();
-            }
             if (s.getOwner() instanceof ControlCenter) {
                 controlCenters.add(s.getOwner().getId());
 
@@ -284,8 +280,8 @@ public class GraphAnalyzer implements IImpactAnalysis {
         // set logical adjacent
         final List<LogicalCommunication> lConns = scenario.getContainsLC();
         for (final LogicalCommunication l : lConns) {
-            final int id1 = l.getLinks().get(0).getId();
-            final int id2 = l.getLinks().get(1).getId();
+            final String id1 = l.getLinks().get(0).getId();
+            final String id2 = l.getLinks().get(1).getId();
             final int internal1 = externalToInternalID.get(id1);
             final int internal2 = externalToInternalID.get(id2);
 
@@ -320,7 +316,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
         logicalClusters = newClusters;
 
-        for (final Integer controlID : controlCenters) {
+        for (final String controlID : controlCenters) {
             final int internalControlID = externalToInternalID.get(controlID);
             final Double[] connectionAvailable = new Double[internalMaxID + 1];
             for (int i = 0; i < connectionAvailable.length; i++) {
@@ -354,14 +350,14 @@ public class GraphAnalyzer implements IImpactAnalysis {
         }
 
         // Generate output for every node depending on connection status
-        for (final int nodeID : logicalNodes) {
+        for (final String nodeID : logicalNodes) {
             LOG.debug("Generate output for node with id " + nodeID);
             smartgridoutput.EntityState state = null;
 
             final int internalNode = externalToInternalID.get(nodeID);
 
-            final List<Integer> connectedCCs = new LinkedList<>();
-            for (final int ccID : controlCenters) {
+            final List<String> connectedCCs = new LinkedList<>();
+            for (final String ccID : controlCenters) {
 
                 if (controlCenterConnectivity.get(ccID)[internalNode] > 0) {
                     connectedCCs.add(ccID);
@@ -415,7 +411,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
                     internalToCluster.put(i, cluster);
                     // check if its a controlCenter and increase
                     // controlCentersInCluster-Count
-                    final int externalID = internalToExternalID.get(i);
+                    final String externalID = internalToExternalID.get(i);
                     if (externalNodeIsWorking(externalID)) {
                         if (controlCenters.contains(externalID)) {
                             controlCentersInCluster++;
@@ -433,11 +429,11 @@ public class GraphAnalyzer implements IImpactAnalysis {
         }
     }
 
-    private boolean externalNodeIsWorking(final int id) {
+    private boolean externalNodeIsWorking(final String id) {
         return externalNodeHasPower(id) && !externalNodeIsDestroyed(id);
     }
 
-    private boolean externalNodeHasPower(final int id) {
+    private boolean externalNodeHasPower(final String id) {
         boolean connected = false;
         try {
             for (final PowerGridNode pgn : entityStates.get(id).getOwner().getConnectedTo()) {
@@ -451,11 +447,11 @@ public class GraphAnalyzer implements IImpactAnalysis {
         return connected;
     }
 
-    private boolean externalNodeIsDestroyed(final int id) {
+    private boolean externalNodeIsDestroyed(final String id) {
         return entityStates.get(id).isIsDestroyed();
     }
 
-    private boolean externalNodeIsHacked(final int id) {
+    private boolean externalNodeIsHacked(final String id) {
         return entityStates.get(id).isIsHacked();
     }
 

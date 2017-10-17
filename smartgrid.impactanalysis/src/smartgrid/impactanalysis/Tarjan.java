@@ -16,7 +16,7 @@ public class Tarjan {
      * @param adjacentMatrix
      * @return
      */
-    public static List<List<Integer>> getClusters(final double[][] adjacentMatrix, final Map<Integer, Integer> internalToExternal) {
+    public static List<List<Integer>> getClusters(final double[][] adjacentMatrix, final Map<Integer, String> internalToExternal) {
         final List<List<Integer>> result = new LinkedList<>();
         final LinkedList<Integer> unprogressedNodes = new LinkedList<>();
         final boolean[] visited = new boolean[adjacentMatrix.length];
@@ -61,7 +61,7 @@ public class Tarjan {
         return result;
     }
 
-    static String printConvertedList(final List<Integer> l, final Map<Integer, Integer> internalToExternal) {
+    static String printConvertedList(final List<Integer> l, final Map<Integer, String> internalToExternal) {
         String s = "";
 
         for (final Integer i : l) {
