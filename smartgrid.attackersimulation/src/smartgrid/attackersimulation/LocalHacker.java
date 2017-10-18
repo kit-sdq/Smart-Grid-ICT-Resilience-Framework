@@ -1,6 +1,3 @@
-/**
- *
- */
 package smartgrid.attackersimulation;
 
 import java.util.Iterator;
@@ -33,7 +30,6 @@ import smartgridtopo.SmartGridTopology;
  * Connection to his "root" Node
  *
  * @author Christian
- *
  */
 public class LocalHacker implements IAttackerSimulation {
 
@@ -198,8 +194,6 @@ public class LocalHacker implements IAttackerSimulation {
             rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
         }
 
-        // Each TimeStep Case
-
         if (rootNode != null) {
             /* ** At this Point we have valid RootNodeID and rootNode !! ** */
             assert rootNode.getOwner().getId() == rootNodeID : "Root Node Not Valid !";
@@ -215,15 +209,11 @@ public class LocalHacker implements IAttackerSimulation {
             myScenarioResult = null;
             rootNodeValid = true;
         }
-        LOG.info("[Local Hacker]: Hacking done");
+        LOG.info("Hacking done");
         return myScenarioResult;
     }
 
     private void hackNext(final Cluster clusterToHack) {
-        // Debug
-        // usedHackingStyle = HackingStyle.BFS_HACKING;
-        // usedHackingStyle = HackingStyle.DFS_HACKING;
-        // usedHackingStyle = HackingStyle.FULLY_MESHED_HACKING;
 
         switch (usedHackingStyle) {
         case BFS_HACKING:
@@ -256,7 +246,6 @@ public class LocalHacker implements IAttackerSimulation {
      * if(hackedNodeCount > HackingSpeed) --> BREAK from All Loops!
      *
      * Add neighbor in Q'; } else { Add neighbor in Q'; }
-     *
      *
      *
      * } Q := Q' Q' := Clear
@@ -305,9 +294,7 @@ public class LocalHacker implements IAttackerSimulation {
                      */
                     final LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack, neighborIDList);
 
-                    /*
-                     * Now I have my alive (in my Cluster) Neighbor OnState List
-                     */
+                    // Now I have my alive (in my Cluster) Neighbor OnState List
                     for (final On neighbor : neighborOnList) {
 
                         if (!(neighbor.getOwner() instanceof NetworkNode) && !neighbor.isIsHacked()) {
@@ -325,19 +312,17 @@ public class LocalHacker implements IAttackerSimulation {
                         // Found an hacked Node that can hack in the next Layer
                         else {
                             nextLayer.add(neighbor);
-
                         }
                     }
-                } // Current Layer Loop
+                }
             }
-            /*
-             * Q := Q' Q' := Clear
-             */
+
+            // Q := Q' Q' := Clear
             currentLayer = nextLayer;
             nextLayer = new LinkedList<>();
-        } // Layer Loop most outer
-        LOG.info("[Local Hacker]: Done hacking with BFS");
-    }// End Method
+        }
+        LOG.info("Done hacking with BFS");
+    }
 
     /*
      * Modified from Wikipedia http://en.wikipedia.org/wiki/Depth-first_search
@@ -360,7 +345,6 @@ public class LocalHacker implements IAttackerSimulation {
 
     /**
      * Helper Method for the DFS Hacking
-     *
      *
      * @param clusterToHack
      *
@@ -406,7 +390,7 @@ public class LocalHacker implements IAttackerSimulation {
         LOG.info("[Local Hacker] Done hacking with DFS");
     }
 
-    /*
+    /**
      * hack every Node in the the given Cluster without respecting logical Connections
      */
     private void fullMeshedHacking(final Cluster clusterToHack) {
@@ -478,7 +462,7 @@ public class LocalHacker implements IAttackerSimulation {
     }
 
     private void invalidRootNodeIdDialog() {
-        LOG.warn("[Local Hacker]: Root node with ID " + rootNode.getOwner().getId() + " is invalid");
+        LOG.warn("Root node with ID " + rootNode.getOwner().getId() + " is invalid");
         // TODO: Find better solution than swing Dialog
         JOptionPane.showMessageDialog(null, "The root node ID you've entered is not valid. Remember not to use NetworkNodes as root node. Simulation will be aborted");
     }
