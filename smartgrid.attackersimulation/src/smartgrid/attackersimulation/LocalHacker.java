@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -38,8 +36,6 @@ public class LocalHacker implements IAttackerSimulation {
     // private Fields
     private HackingStyle usedHackingStyle;
 
-    private boolean rootNodeValid = true;
-
     /*
      * From this Node the Hacker operates. So he can only attack Nodes that have a Logical
      * Connection to that Node => Same Cluster Only
@@ -51,18 +47,11 @@ public class LocalHacker implements IAttackerSimulation {
 
     private int hackingSpeed;
 
-    // Flags
     private boolean firstRun = true;
     private boolean initDone = false;
 
     private SmartGridTopology mySmartGridTopo;
     private ScenarioResult myScenarioResult;
-
-    /**
-     * For ExtensionPoints .. use this together with the init() Method
-     */
-    public LocalHacker() {
-    }
 
     /**
      * Constructs an Local Hacker with the desired Hacking Style and hacking Speed.
@@ -78,15 +67,12 @@ public class LocalHacker implements IAttackerSimulation {
 
         usedHackingStyle = desiredHackingStyle;
 
-        // It's 0 Based --> 0 means 1 Node will be hacked. No negative Value
-        // allowed !
+        // It's 0 Based --> 0 means 1 Node will be hacked. No negative Value allowed !
 
         assert hackingSpeed >= 0 : "HackingSpeed is 0 Based --> No negative Value allowed !";
         setHackingSpeed(hackingSpeed - 1);
 
         rootNodeID = null; // Means No Root provided
-        initDone = true;
-        rootNodeValid = true;
     }
 
     /**
@@ -105,15 +91,10 @@ public class LocalHacker implements IAttackerSimulation {
         this(desiredHackingStyle, hackingSpeed);
 
         this.rootNodeID = rootNodeID;
-
-        initDone = true;
-        rootNodeValid = true;
     }
 
     @Override
     public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
-
-        // They are used in relevant branches perhaps compiler doesn't notice?
 
         HackingStyle desiredHackingStyle = null;
         String rootNodeID = null;
@@ -125,7 +106,6 @@ public class LocalHacker implements IAttackerSimulation {
         String hackingSpeedString;
 
         // Extracting Parameters from Config
-
         desiredHackingStyleString = config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.FAIL);
 
         rootNodeIDString = config.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.FAIL);
@@ -177,16 +157,13 @@ public class LocalHacker implements IAttackerSimulation {
     @Override
     public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioResult impactAnalysisOutput) {
 
-        assert initDone : "Init wasn't run! Run init() first !";
+        assert initDone : "Init was not run! Run init() first!";
 
         // Copy Input in own Variables
         mySmartGridTopo = smartGridTopo;
         myScenarioResult = impactAnalysisOutput;
 
         if (firstRun) {
-
-            // Uses ID from Constructor (calls findEntityOnStateFromID() in this
-            // case) or if not chooses Random Node
             setHackingRootOnEntityState();
             firstRun = false;
         } else {
@@ -195,7 +172,7 @@ public class LocalHacker implements IAttackerSimulation {
         }
 
         if (rootNode != null) {
-            /* ** At this Point we have valid RootNodeID and rootNode !! ** */
+            // At this Point we have valid RootNodeID and rootNode
             assert rootNode.getOwner().getId() == rootNodeID : "Root Node Not Valid !";
             // Hack Root just in case its not hacked
             // this.rootNode.setIsHacked(true);
@@ -203,12 +180,9 @@ public class LocalHacker implements IAttackerSimulation {
             // Starting hacking according to the desired hacking Style
             hackNext(rootNode.getBelongsToCluster());
         }
-        if (rootNodeValid) {
-            myScenarioResult.setScenario(smartGridTopo);
-        } else {
-            myScenarioResult = null;
-            rootNodeValid = true;
-        }
+
+        myScenarioResult.setScenario(smartGridTopo);
+
         LOG.info("Hacking done");
         return myScenarioResult;
     }
@@ -387,7 +361,7 @@ public class LocalHacker implements IAttackerSimulation {
 
             }
         }
-        LOG.info("[Local Hacker] Done hacking with DFS");
+        LOG.info("Done hacking with DFS");
     }
 
     /**
@@ -419,7 +393,6 @@ public class LocalHacker implements IAttackerSimulation {
         final int clusterCount = myScenarioResult.getClusters().size();
 
         // Choose Random Cluster with Entries
-
         do {
             // [0 - clusterCount) Exclusive upper bound
             final int myClusterNumber = myRandom.nextInt(clusterCount);
@@ -445,26 +418,23 @@ public class LocalHacker implements IAttackerSimulation {
     }
 
     private void setHackingRootOnEntityState() {
+
         if (rootNodeID == null) {
-            // Choose Root - Root ID not set
             chooseRootIDByRandom();
         } else {
             rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
+
+            // root node not found
             if (rootNode == null) {
-                invalidRootNodeIdDialog();
-                rootNodeValid = false;
+                LOG.warn("Could not find root node with ID " + rootNodeID + ". Using random root.");
+                chooseRootIDByRandom();
             }
         }
 
-        if (rootNodeValid && !rootNode.isIsHacked()) {
+        // set root node infected if not already
+        if (!rootNode.isIsHacked()) {
             rootNode.setIsHacked(true);
         }
-    }
-
-    private void invalidRootNodeIdDialog() {
-        LOG.warn("Root node with ID " + rootNode.getOwner().getId() + " is invalid");
-        // TODO: Find better solution than swing Dialog
-        JOptionPane.showMessageDialog(null, "The root node ID you've entered is not valid. Remember not to use NetworkNodes as root node. Simulation will be aborted");
     }
 
     @Override
