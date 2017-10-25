@@ -24,10 +24,10 @@ public abstract class AbstractTopoGenerator implements ITopoGenerator {
         topo.getContainsLC().add(logicalCommunication);
     }
 
-    public void createPhysicalConnection(final SmartgridtopoFactory topoFactory, final SmartGridTopology topo, NetworkEntity networkNode, NetworkEntity smartMeter) {
+    public void createPhysicalConnection(final SmartgridtopoFactory topoFactory, final SmartGridTopology topo, NetworkEntity networkEntity1, NetworkEntity networkEntity2) {
         PhysicalConnection physicalConnection = topoFactory.createPhysicalConnection();
-        smartMeter.getLinkedBy().add(physicalConnection);
-        networkNode.getLinkedBy().add(physicalConnection);
+        networkEntity2.getLinkedBy().add(physicalConnection);
+        networkEntity1.getLinkedBy().add(physicalConnection);
         topo.getContainsPC().add(physicalConnection);
     }
 
