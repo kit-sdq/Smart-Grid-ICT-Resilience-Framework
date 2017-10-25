@@ -54,6 +54,12 @@ public class LocalHacker implements IAttackerSimulation {
     private ScenarioResult myScenarioResult;
 
     /**
+     * Default constructor is needed by the OSGi framework to be able to use the extension point
+     */
+    public LocalHacker() {
+    }
+
+    /**
      * Constructs an Local Hacker with the desired Hacking Style and hacking Speed.
      *
      * The Root Node will be set by Random
