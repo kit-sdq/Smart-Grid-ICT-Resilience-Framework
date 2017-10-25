@@ -124,7 +124,7 @@ public final class ScenarioModelHelper {
         }
         // ID don't exists or found Entity has no On State
         if (!foundNodeID) {
-            LOG.info("[Hacker] provided ID not found or found Entity has no On State");
+            LOG.info("Provided ID not found or found Entity has no On State");
         }
 
         return foundEntity;
