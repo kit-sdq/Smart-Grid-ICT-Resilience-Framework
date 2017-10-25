@@ -105,7 +105,7 @@ public class RmiServer implements ISimulationController {
         if (registry != null) {
             try {
                 registry.unbind("ISimulationController");
-                LOG.info("SimControl RMI server shutdown successfull");
+                LOG.info("SimControl RMI server shutdown successful");
             } catch (RemoteException e) {
                 LOG.error("SimControl RMI server shutdown failed", e);
             } catch (NotBoundException e) {
