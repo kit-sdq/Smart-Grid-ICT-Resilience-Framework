@@ -5,8 +5,8 @@ import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.util.ColorConstant;
 
+import smartgrid.helper.UIDHelper;
 import smartgridsecurity.graphiti.helper.FeatureRepresentationHelper;
-import smartgridsecurity.graphiti.helper.UIDHelper;
 import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartgridtopoFactory;

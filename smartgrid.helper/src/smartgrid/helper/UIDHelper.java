@@ -1,4 +1,4 @@
-package smartgridsecurity.graphiti.helper;
+package smartgrid.helper;
 
 import java.util.UUID;
 
