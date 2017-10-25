@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
+import smartgrid.helper.UIDHelper;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.NetworkNode;
 import smartgridtopo.PowerGridNode;
@@ -29,13 +30,16 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
         SmartgridtopoPackageImpl.init();
         final SmartgridtopoFactory topoFactory = SmartgridtopoFactory.eINSTANCE;
         final SmartGridTopology topo = topoFactory.createSmartGridTopology();
+        topo.setId(UIDHelper.generateUID());
 
         // create command center
         ControlCenter controlCenter = topoFactory.createControlCenter();
+        controlCenter.setId(UIDHelper.generateUID());
         topo.getContainsNE().add(controlCenter);
 
         // create network node for command center and connect
         NetworkNode controlCenterNetworkNode = topoFactory.createNetworkNode();
+        controlCenterNetworkNode.setId(UIDHelper.generateUID());
         topo.getContainsNE().add(controlCenterNetworkNode);
         createPhysicalConnection(topoFactory, topo, controlCenterNetworkNode, controlCenter);
 
@@ -52,6 +56,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
 
             // create network node
             NetworkNode networkNode = topoFactory.createNetworkNode();
+            networkNode.setId(UIDHelper.generateUID());
             topo.getContainsNE().add(networkNode);
 
             // chain the network
@@ -84,7 +89,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
             LOG.error("The generated topology does not have any power nodes. No meaningful results will be produced.");
         }
 
-        LOG.info("Trivial ICT topology was successfully generated.");
+        LOG.info("Generation of trivial ICT topology finished.");
 
         return topo;
     }
