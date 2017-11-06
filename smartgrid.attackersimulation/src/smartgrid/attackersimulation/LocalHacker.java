@@ -42,7 +42,7 @@ public class LocalHacker implements IAttackerSimulation {
      */
     private String rootNodeID; // IDs stay the same over the whole Analysis
 
-    private On rootNode; // Reference Changes between runs!
+    private On rootNodeState; // Reference Changes between runs!
     /* End Hacking Root Variables */
 
     private int hackingSpeed;
@@ -174,17 +174,17 @@ public class LocalHacker implements IAttackerSimulation {
             firstRun = false;
         } else {
             // Find Root On Entity using ID I already know
-            rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
+            rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
         }
 
-        if (rootNode != null) {
+        if (rootNodeState != null) {
             // At this Point we have valid RootNodeID and rootNode
-            assert rootNode.getOwner().getId() == rootNodeID : "Root Node Not Valid !";
+            assert rootNodeState.getOwner().getId() == rootNodeID : "Root Node Not Valid !";
             // Hack Root just in case its not hacked
             // this.rootNode.setIsHacked(true);
 
             // Starting hacking according to the desired hacking Style
-            hackNext(rootNode.getBelongsToCluster());
+            hackNext(rootNodeState.getBelongsToCluster());
         }
 
         myScenarioResult.setScenario(smartGridTopo);
@@ -255,7 +255,7 @@ public class LocalHacker implements IAttackerSimulation {
         final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(mySmartGridTopo);
 
         // Root is in cluster to hack --> so Root is StartNode
-        currentLayer.add(rootNode);
+        currentLayer.add(rootNodeState);
 
         // Starting BFS Algorithm
         hackingDone: for (layerCount = 0; !currentLayer.isEmpty(); layerCount++) {
@@ -311,7 +311,7 @@ public class LocalHacker implements IAttackerSimulation {
 
         final int hackCount = 0;
 
-        final On Node = rootNode;
+        final On Node = rootNodeState;
 
         /*
          * Reads from Scenario so this List don't respects changes in States of the Entities -->
@@ -404,21 +404,18 @@ public class LocalHacker implements IAttackerSimulation {
             final int myClusterNumber = myRandom.nextInt(clusterCount);
             myCluster = myScenarioResult.getClusters().get(myClusterNumber);
 
-        } while (myCluster.getHasEntities().isEmpty()); // Or threshold of
-                                                        // Entities in
-                                                        // Cluster ?
+        } while (myCluster.getHasEntities().isEmpty()); // Or threshold of Entities in Cluster ?
 
         // Get the Count of ON EntityStates in choosen Cluster
         final int entityCount = myCluster.getHasEntities().size();
 
         // Choose one by Random and make it the hacking Root Node
 
-        final int myEntityNumber = myRandom.nextInt(entityCount); // [0 -
-        // entityCount)
+        final int myEntityNumber = myRandom.nextInt(entityCount); // [0 - entityCount)
 
-        rootNode = myCluster.getHasEntities().get(myEntityNumber);
-        rootNodeID = rootNode.getOwner().getId();
-        if (rootNode.getOwner() instanceof NetworkNode) { //To-do: this could be improved
+        rootNodeState = myCluster.getHasEntities().get(myEntityNumber);
+        rootNodeID = rootNodeState.getOwner().getId();
+        if (rootNodeState.getOwner() instanceof NetworkNode) { //To-do: this could be improved
             chooseRootIDByRandom();
         } else {
             LOG.info("Using random root with ID: " + rootNodeID);
@@ -431,18 +428,19 @@ public class LocalHacker implements IAttackerSimulation {
             chooseRootIDByRandom();
             LOG.info("No root node set.");
         } else {
-            rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
+            rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
 
-            // root node not found
-            if (rootNode == null) {
+            if (rootNodeState != null) {
+                rootNodeID = rootNodeState.getOwner().getId();
+            } else {
                 LOG.warn("Could not find root node with ID " + rootNodeID);
                 chooseRootIDByRandom();
             }
         }
 
         // set root node infected if not already
-        if (!rootNode.isIsHacked()) {
-            rootNode.setIsHacked(true);
+        if (!rootNodeState.isIsHacked()) {
+            rootNodeState.setIsHacked(true);
         }
     }
 
