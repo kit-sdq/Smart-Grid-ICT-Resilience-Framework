@@ -75,8 +75,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     private Combo comboProgressor;
     private Text hackingSpeedText;
     private Button btnGenerateTopo;
-    private Button SelectInputPathButton;
-    private Button SelectTopologyPathButton;
+    private Button selectInputPathButton;
+    private Button selectTopologyPathButton;
 
     /**
      * Creates the UI Control
@@ -106,29 +106,29 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         setControl(container);
         container.setLayout(new FormLayout());
 
-        Group groupInput = new Group(container, SWT.NONE);
-        final FormData fd_groupInput = new FormData();
-        fd_groupInput.left = new FormAttachment(0, 10);
-        fd_groupInput.top = new FormAttachment(0, 10);
-        fd_groupInput.bottom = new FormAttachment(0, 123);
-        groupInput.setLayoutData(fd_groupInput);
+        Group inputGroup = new Group(container, SWT.NONE);
+        final FormData fd_inputGroup = new FormData();
+        fd_inputGroup.left = new FormAttachment(0, 10);
+        fd_inputGroup.top = new FormAttachment(0, 10);
+        fd_inputGroup.bottom = new FormAttachment(0, 123);
+        inputGroup.setLayoutData(fd_inputGroup);
 
-        groupInput.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.group.text"));
+        inputGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.group.text"));
 
-        inputTextbox = new Text(groupInput, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
+        inputTextbox = new Text(inputGroup, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         inputTextbox.setTouchEnabled(true);
 
         inputTextbox.setBounds(10, 22, 553, 41);
         inputTextbox.addModifyListener(e -> propertyChanged());
         inputTextbox.setEditable(true);
         inputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
-        SelectInputPathButton = new org.eclipse.swt.widgets.Button(groupInput, SWT.TOGGLE);
-        SelectInputPathButton.setTouchEnabled(true);
-        SelectInputPathButton.setBounds(569, 22, 146, 32);
+        selectInputPathButton = new org.eclipse.swt.widgets.Button(inputGroup, SWT.TOGGLE);
+        selectInputPathButton.setTouchEnabled(true);
+        selectInputPathButton.setBounds(569, 22, 146, 32);
 
-        SelectInputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectInputPathButton.text"));
+        selectInputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectInputPathButton.text"));
 
-        topologyTextbox = new Text(groupInput, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
+        topologyTextbox = new Text(inputGroup, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         topologyTextbox.setTouchEnabled(true);
         topologyTextbox.setBounds(10, 69, 553, 41);
         topologyTextbox.addModifyListener(e -> propertyChanged());
@@ -136,31 +136,31 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         topologyTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.inputTextbox.text")); //$NON-NLS-1$
 
-        SelectTopologyPathButton = new org.eclipse.swt.widgets.Button(groupInput, SWT.TOGGLE);
-        SelectTopologyPathButton.setTouchEnabled(true);
-        SelectTopologyPathButton.setBounds(569, 69, 146, 32);
-        SelectTopologyPathButton.addSelectionListener(new SelectionAdapter() {
+        selectTopologyPathButton = new org.eclipse.swt.widgets.Button(inputGroup, SWT.TOGGLE);
+        selectTopologyPathButton.setTouchEnabled(true);
+        selectTopologyPathButton.setBounds(569, 69, 146, 32);
+        selectTopologyPathButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent e) {
             }
         });
-        SelectTopologyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectTopologyPathButton.text"));
+        selectTopologyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectTopologyPathButton.text"));
 
-        final Group grpOutputFiles = new Group(container, SWT.NONE);
-        final FormData fd_grpOutputFiles = new FormData();
-        fd_grpOutputFiles.left = new FormAttachment(groupInput, 0, SWT.LEFT);
-        fd_grpOutputFiles.bottom = new FormAttachment(groupInput, 103, SWT.BOTTOM);
-        fd_grpOutputFiles.top = new FormAttachment(groupInput, 6);
-        fd_grpOutputFiles.right = new FormAttachment(groupInput, 0, SWT.RIGHT);
-        grpOutputFiles.setLayoutData(fd_grpOutputFiles);
+        final Group outputGroup = new Group(container, SWT.NONE);
+        final FormData fd_outputGroup = new FormData();
+        fd_outputGroup.left = new FormAttachment(inputGroup, 0, SWT.LEFT);
+        fd_outputGroup.bottom = new FormAttachment(inputGroup, 103, SWT.BOTTOM);
+        fd_outputGroup.top = new FormAttachment(inputGroup, 6);
+        fd_outputGroup.right = new FormAttachment(inputGroup, 0, SWT.RIGHT);
+        outputGroup.setLayoutData(fd_outputGroup);
 
-        grpOutputFiles.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpOutputFiles.text"));
-        final org.eclipse.swt.widgets.Button SelectOutputPathButton = new org.eclipse.swt.widgets.Button(grpOutputFiles, SWT.TOGGLE);
+        outputGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpOutputFiles.text"));
+        final org.eclipse.swt.widgets.Button SelectOutputPathButton = new org.eclipse.swt.widgets.Button(outputGroup, SWT.TOGGLE);
         SelectOutputPathButton.setTouchEnabled(true);
         SelectOutputPathButton.setBounds(569, 22, 145, 32);
         SelectOutputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectOutputPathButton.text"));
 
-        outputTextbox = new Text(grpOutputFiles, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
+        outputTextbox = new Text(outputGroup, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         outputTextbox.setTouchEnabled(true);
         outputTextbox.setEditable(true);
         outputTextbox.setBounds(10, 22, 553, 41);
@@ -169,7 +169,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         final Group optionsGroup = new Group(container, SWT.NONE);
 
-        final Button copyPathButton = new Button(grpOutputFiles, SWT.NONE);
+        final Button copyPathButton = new Button(outputGroup, SWT.NONE);
         copyPathButton.setTouchEnabled(true);
         copyPathButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -188,7 +188,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 .getString("SimControlLaunchConfigurationTab.copyPathButton.text"));
         optionsGroup.setLayout(new RowLayout(SWT.VERTICAL));
         final FormData fd_OptionsGroup = new FormData();
-        fd_OptionsGroup.right = new FormAttachment(groupInput, 0, SWT.RIGHT);
+        fd_OptionsGroup.right = new FormAttachment(inputGroup, 0, SWT.RIGHT);
         fd_OptionsGroup.left = new FormAttachment(0, 10);
         fd_OptionsGroup.bottom = new FormAttachment(100, -180);
         optionsGroup.setLayoutData(fd_OptionsGroup);
@@ -224,19 +224,19 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 //                propertyChanged();
                 boolean inputEnabled = !btnGenerateTopo.getSelection();
                 inputTextbox.setEnabled(inputEnabled);
-                SelectInputPathButton.setEnabled(inputEnabled);
+                selectInputPathButton.setEnabled(inputEnabled);
                 topologyTextbox.setEnabled(inputEnabled);
-                SelectTopologyPathButton.setEnabled(inputEnabled);
+                selectTopologyPathButton.setEnabled(inputEnabled);
                 System.out.println("Selection changed (topo checkbox)");
             }
         });
         btnGenerateTopo.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnGenerateTopo.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
         btnGenerateTopo.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
 
-        final Group grpCyberAttackSimulation = new Group(optionsGroup, SWT.NONE);
-        grpCyberAttackSimulation.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpCyberAttackSimulation.text"));
+        final Group cyberAttackSimulationGroup = new Group(optionsGroup, SWT.NONE);
+        cyberAttackSimulationGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpCyberAttackSimulation.text"));
 
-        final Composite HackingStyleComposite = new Composite(grpCyberAttackSimulation, SWT.NONE);
+        final Composite HackingStyleComposite = new Composite(cyberAttackSimulationGroup, SWT.NONE);
         HackingStyleComposite.setBounds(10, 24, 660, 24);
 
         final Label hackingStyleLabel = new Label(HackingStyleComposite, SWT.NONE);
@@ -249,7 +249,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         hackingStyleCombo.setItems(hackinStyleEnumStrings);
 
-        final Composite RootNodeComposite = new Composite(grpCyberAttackSimulation, SWT.NONE);
+        final Composite RootNodeComposite = new Composite(cyberAttackSimulationGroup, SWT.NONE);
         RootNodeComposite.setBounds(10, 54, 660, 24);
 
         rootNodeTextbox = new Text(RootNodeComposite, SWT.BORDER);
@@ -262,7 +262,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         rootNodeLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.rootNodeLabel.text")); //$NON-NLS-1$
 
-        final Composite hackingSpeedComposite = new Composite(grpCyberAttackSimulation, SWT.NONE);
+        final Composite hackingSpeedComposite = new Composite(cyberAttackSimulationGroup, SWT.NONE);
         hackingSpeedComposite.setBounds(10, 84, 660, 24);
 
         final Label labelHackingSpeed = new Label(hackingSpeedComposite, SWT.NONE);
@@ -311,12 +311,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         final Group grpAnalyses = new Group(container, SWT.NONE);
         fd_OptionsGroup.top = new FormAttachment(grpAnalyses, 6);
 
-        final Group GenerateGroup = new Group(optionsGroup, SWT.NONE);
-        GenerateGroup.setEnabled(false);
-        GenerateGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        final Group generateGroup = new Group(optionsGroup, SWT.NONE);
+        generateGroup.setEnabled(false);
+        generateGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.GenerateGroup.text"));
 
-        generateInputCheckBox = new Button(GenerateGroup, SWT.CHECK | SWT.CENTER);
+        generateInputCheckBox = new Button(generateGroup, SWT.CHECK | SWT.CENTER);
         generateInputCheckBox.setAlignment(SWT.LEFT);
         generateInputCheckBox.setEnabled(false);
         generateInputCheckBox.setLocation(10, 24);
@@ -324,7 +324,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         generateInputCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.GenerateInputCheckBox.text")); //$NON-NLS-1$
 
-        final Composite GenerarationStyleComposite = new Composite(GenerateGroup, SWT.NONE);
+        final Composite GenerarationStyleComposite = new Composite(generateGroup, SWT.NONE);
         GenerarationStyleComposite.setLocation(10, 54);
         GenerarationStyleComposite.setSize(660, 24);
 
@@ -341,7 +341,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         GenerationStyleLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.GenerationStyleLabel.text")); //$NON-NLS-1$
 
-        final Composite SMCountComposite = new Composite(GenerateGroup, SWT.NONE);
+        final Composite SMCountComposite = new Composite(generateGroup, SWT.NONE);
         SMCountComposite.setLocation(10, 84);
         SMCountComposite.setSize(660, 24);
 
@@ -356,7 +356,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         smartMeterCountTextBox.setBounds(193, 0, 202, 24);
         smartMeterCountTextBox.setEnabled(false);
 
-        final Composite CCCountComposite = new Composite(GenerateGroup, SWT.NONE);
+        final Composite CCCountComposite = new Composite(generateGroup, SWT.NONE);
         CCCountComposite.setLocation(10, 114);
         CCCountComposite.setSize(660, 24);
 
@@ -374,9 +374,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 .getString("SimControlLaunchConfigurationTab.grpAnalyses.text")); //$NON-NLS-1$
 
         final FormData fd_grpAnalyses = new FormData();
-        fd_grpAnalyses.right = new FormAttachment(groupInput, 0, SWT.RIGHT);
-        fd_grpAnalyses.bottom = new FormAttachment(grpOutputFiles, 209, SWT.BOTTOM);
-        fd_grpAnalyses.top = new FormAttachment(grpOutputFiles, 6);
+        fd_grpAnalyses.right = new FormAttachment(inputGroup, 0, SWT.RIGHT);
+        fd_grpAnalyses.bottom = new FormAttachment(outputGroup, 209, SWT.BOTTOM);
+        fd_grpAnalyses.top = new FormAttachment(outputGroup, 6);
         fd_grpAnalyses.left = new FormAttachment(0, 10);
         grpAnalyses.setLayoutData(fd_grpAnalyses);
 
@@ -436,10 +436,10 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                     }
                 }
                 if (sim.enableLogicalConnections()) {
-                    grpCyberAttackSimulation.setEnabled(true);
+                    cyberAttackSimulationGroup.setEnabled(true);
                     ignoreLogicalConButton.setEnabled(true);
                 } else {
-                    grpCyberAttackSimulation.setEnabled(false);
+                    cyberAttackSimulationGroup.setEnabled(false);
                     ignoreLogicalConButton.setEnabled(false);
                 }
                 if (sim.enableRootNode()) {
@@ -489,7 +489,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDoubleClick(final MouseEvent e) {
             }
         });
-        SelectTopologyPathButton.addMouseListener(new MouseListener() {
+        selectTopologyPathButton.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseUp(final MouseEvent e) {
@@ -510,7 +510,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDoubleClick(final MouseEvent e) {
             }
         });
-        SelectInputPathButton.addMouseListener(new MouseListener() {
+        selectInputPathButton.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseUp(final MouseEvent e) {
