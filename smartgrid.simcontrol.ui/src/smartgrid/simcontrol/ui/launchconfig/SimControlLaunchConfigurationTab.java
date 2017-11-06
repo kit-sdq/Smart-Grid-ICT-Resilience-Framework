@@ -56,7 +56,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     private Text iterationCountTextbox;
     // private boolean ignoreLogicalConnections;
     private Text rootNodeTextbox;
-    private Button ignoreLogicalConButton;
+    private Button ignoreLogicalConCheckBox;
     private Combo hackingStyleCombo;
 
     // Comboboxes for Simulation settings
@@ -67,7 +67,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     private Combo comboTerminationCondition;
     private Combo comboProgressor;
     private Text hackingSpeedText;
-    private Button btnGenerateTopo;
+    private Button generateTopoCheckBox;
     private Button selectInputPathButton;
     private Button selectTopologyPathButton;
     private Group cyberAttackSimulationGroup;
@@ -208,10 +208,10 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 }
                 if (sim.enableLogicalConnections()) {
                     cyberAttackSimulationGroup.setEnabled(true);
-                    ignoreLogicalConButton.setEnabled(true);
+                    ignoreLogicalConCheckBox.setEnabled(true);
                 } else {
                     cyberAttackSimulationGroup.setEnabled(false);
-                    ignoreLogicalConButton.setEnabled(false);
+                    ignoreLogicalConCheckBox.setEnabled(false);
                 }
                 if (sim.enableRootNode()) {
                     rootNodeTextbox.setEnabled(true);
@@ -262,42 +262,49 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         optionsGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.OptionsGroup.text")); //$NON-NLS-1$
 
-        ignoreLogicalConButton = new Button(optionsGroup, SWT.CHECK | SWT.CENTER);
-        ignoreLogicalConButton.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.ignoreLogicalConButton.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
-        ignoreLogicalConButton.setAlignment(SWT.LEFT);
-        ignoreLogicalConButton.setTouchEnabled(true);
+        ignoreLogicalConCheckBox = new Button(optionsGroup, SWT.CHECK | SWT.CENTER);
+        ignoreLogicalConCheckBox.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.ignoreLogicalConButton.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
+        ignoreLogicalConCheckBox.setAlignment(SWT.LEFT);
+        ignoreLogicalConCheckBox.setTouchEnabled(true);
 
-        ignoreLogicalConButton.addSelectionListener(new SelectionAdapter() {
+        ignoreLogicalConCheckBox.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent e) {
                 propertyChanged();
 
-                if (ignoreLogicalConButton.getSelection()) {
+                if (ignoreLogicalConCheckBox.getSelection()) {
                     hackingStyleCombo.setText(HackingStyle.FULLY_MESHED_HACKING.name());
                 }
-
             }
         });
-        ignoreLogicalConButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        ignoreLogicalConCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.ignoreLogicalConButton.text")); //$NON-NLS-1$
 
-        Button btnCompletion = new Button(optionsGroup, SWT.CHECK);
-        btnCompletion.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton.text")); //$NON-NLS-1$ //$NON-NLS-2$
-
-        btnGenerateTopo = new Button(optionsGroup, SWT.CHECK);
-        btnGenerateTopo.addSelectionListener(new SelectionAdapter() {
+        Button completionCheckBox = new Button(optionsGroup, SWT.CHECK);
+        completionCheckBox.setTouchEnabled(true);
+        completionCheckBox.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-//                propertyChanged();
-                boolean inputEnabled = !btnGenerateTopo.getSelection();
+                propertyChanged();
+            }
+        });
+        completionCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton.text")); //$NON-NLS-1$ //$NON-NLS-2$
+
+        generateTopoCheckBox = new Button(optionsGroup, SWT.CHECK);
+        generateTopoCheckBox.setTouchEnabled(true);
+        generateTopoCheckBox.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                propertyChanged();
+                boolean inputEnabled = !generateTopoCheckBox.getSelection();
                 inputTextbox.setEnabled(inputEnabled);
                 selectInputPathButton.setEnabled(inputEnabled);
                 topologyTextbox.setEnabled(inputEnabled);
                 selectTopologyPathButton.setEnabled(inputEnabled);
             }
         });
-        btnGenerateTopo.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnGenerateTopo.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
-        btnGenerateTopo.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        generateTopoCheckBox.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnGenerateTopo.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
+        generateTopoCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
 
         cyberAttackSimulationGroup = new Group(optionsGroup, SWT.NONE);
         cyberAttackSimulationGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpCyberAttackSimulation.text"));
@@ -472,7 +479,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             iterationCountTextbox.setText(configuration.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
             rootNodeTextbox.setText(configuration.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID));
             hackingStyleCombo.setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
-            ignoreLogicalConButton.setSelection(configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON).contentEquals(Constants.TRUE));
+            ignoreLogicalConCheckBox.setSelection(configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON).contentEquals(Constants.TRUE));
 
             final String attackSimulationString = configuration.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "");
             for (int i = 0; i < comboAttackSimulation.getItems().length; i++) {
@@ -536,7 +543,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         // Check Box Parsing
         String logiCon;
-        if (ignoreLogicalConButton.getSelection()) {
+        if (ignoreLogicalConCheckBox.getSelection()) {
             logiCon = Constants.TRUE;
         } else {
             logiCon = Constants.FALSE;
@@ -640,7 +647,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     void propertyChanged() {
         setDirty(true);
         updateLaunchConfigurationDialog();
-
     }
 
     /**
