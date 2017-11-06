@@ -261,7 +261,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         copyPathButton.setBounds(569, 60, 145, 32);
         copyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.copyPathButton.text"));
-        optionsGroup.setLayout(new RowLayout(SWT.VERTICAL));
+        RowLayout rl_optionsGroup = new RowLayout(SWT.VERTICAL);
+        rl_optionsGroup.fill = true;
+        optionsGroup.setLayout(rl_optionsGroup);
         optionsGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.OptionsGroup.text")); //$NON-NLS-1$
 
