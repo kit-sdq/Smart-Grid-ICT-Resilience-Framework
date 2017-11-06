@@ -130,11 +130,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         selectTopologyPathButton = new org.eclipse.swt.widgets.Button(inputGroup, SWT.TOGGLE);
         selectTopologyPathButton.setTouchEnabled(true);
         selectTopologyPathButton.setBounds(569, 69, 146, 32);
-        selectTopologyPathButton.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(final SelectionEvent e) {
-            }
-        });
         selectTopologyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectTopologyPathButton.text"));
 
         final Group outputGroup = new Group(container, SWT.NONE);
@@ -299,7 +294,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 selectInputPathButton.setEnabled(inputEnabled);
                 topologyTextbox.setEnabled(inputEnabled);
                 selectTopologyPathButton.setEnabled(inputEnabled);
-                System.out.println("Selection changed (topo checkbox)");
             }
         });
         btnGenerateTopo.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnGenerateTopo.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
