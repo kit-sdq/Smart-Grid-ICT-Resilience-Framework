@@ -418,8 +418,10 @@ public class LocalHacker implements IAttackerSimulation {
 
         rootNode = myCluster.getHasEntities().get(myEntityNumber);
         rootNodeID = rootNode.getOwner().getId();
-        if (rootNode.getOwner() instanceof NetworkNode) {
+        if (rootNode.getOwner() instanceof NetworkNode) { //To-do: this could be improved
             chooseRootIDByRandom();
+        } else {
+            LOG.info("Using random root with ID: " + rootNodeID);
         }
     }
 
@@ -427,12 +429,13 @@ public class LocalHacker implements IAttackerSimulation {
 
         if (rootNodeID == null) {
             chooseRootIDByRandom();
+            LOG.info("No root node set.");
         } else {
             rootNode = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
 
             // root node not found
             if (rootNode == null) {
-                LOG.warn("Could not find root node with ID " + rootNodeID + ". Using random root.");
+                LOG.warn("Could not find root node with ID " + rootNodeID);
                 chooseRootIDByRandom();
             }
         }
