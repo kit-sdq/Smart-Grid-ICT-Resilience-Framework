@@ -164,50 +164,6 @@ public final class Constants {
      */
     public static final String NODE_MODE = "nodeMode"; //$NON-NLS-1$
 
-    /*
-     * Constants for Input Model Generation
-     */
-
-    /**
-     * Defines GEN_SYNTHETIC_INPUT_KEY
-     */
-    public static final String GEN_SYNTHETIC_INPUT_KEY = "genInput";
-
-    /**
-     * Defines DEFAULT_GEN_SYNTHETIC_INPUT
-     */
-    public static final String DEFAULT_GEN_SYNTHETIC_INPUT = Constants.FALSE;
-
-    /**
-     * Defines GENERATION_STYLE_KEY
-     */
-    public static final String GENERATION_STYLE_KEY = "GenStyle"; //$NON-NLS-1$
-
-    /**
-     * Defines DEFAULT_GENERATION_STYLE
-     */
-    public static final String DEFAULT_GENERATION_STYLE = "BIG_CLUSTERS"; //$NON-NLS-1$
-
-    /**
-     * Defines SMART_METER_COUNT_KEY
-     */
-    public static final String SMART_METER_COUNT_KEY = "SmartmeterCount"; //$NON-NLS-1$
-
-    /**
-     * Defines DEFAULT_SMART_METER_COUNT
-     */
-    public static final String DEFAULT_SMART_METER_COUNT = "42"; //$NON-NLS-1$
-
-    /**
-     * Defines CONTROL_CENTER_COUNT_KEY
-     */
-    public static final String CONTROL_CENTER_COUNT_KEY = "ControlCenterCount"; //$NON-NLS-1$
-
-    /**
-     * Defines DEFAULT_CONTROL_CENTER_COUNT
-     */
-    public static final String DEFAULT_CONTROL_CENTER_COUNT = "21"; //$NON-NLS-1$
-
     /**
      * Constants for Extension Point ID's
      */
