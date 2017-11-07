@@ -2,7 +2,6 @@ package smartgrid.simcontrol.ui.launchconfig;
 
 import java.io.File;
 import java.util.List;
-// Resource Files
 import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.CoreException;
@@ -20,7 +19,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
-// OpenFile Diolog MS Style
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -54,12 +52,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     private Text topologyTextbox;
     private Text timeStepsTextBox;
     private Text iterationCountTextbox;
-    // private boolean ignoreLogicalConnections;
     private Text rootNodeTextbox;
     private Button ignoreLogicalConCheckBox;
     private Combo hackingStyleCombo;
-
-    // Comboboxes for Simulation settings
     private Combo comboPowerLoadSimulation;
     private Combo comboKritisSimulation;
     private Combo comboImpactAnalysis;
