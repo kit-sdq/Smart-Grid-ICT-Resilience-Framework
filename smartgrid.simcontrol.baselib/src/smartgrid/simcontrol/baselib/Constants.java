@@ -28,7 +28,9 @@ public final class Constants {
     public static final String ITERATION_COUNT_KEY = "iterationCount";
     public static final String DEFAULT_ITERATION_COUNT = "2";
 
-    public static final String NODE_PATH_KEY = "nodepath"; // The path to File on Disk with a On EntityStates List
+    // The path to File on Disk with a On EntityStates List
+    // TODO is this setting broken, dead or not correctly implemented?
+    public static final String NODE_PATH_KEY = "nodepath";
 
     // local hacker
     public static final String HACKING_STYLE_KEY = "desiredHackingStyle"; //$NON-NLS-1$
