@@ -498,12 +498,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         final String rNodeID = rootNodeTextbox.getText();
 
         // Check Box Parsing
-        String logiCon;
-        if (ignoreLogicalConCheckBox.getSelection()) {
-            logiCon = Constants.TRUE;
-        } else {
-            logiCon = Constants.FALSE;
-        }
+        String ignoreLogicalConnections = parseCheckBox(ignoreLogicalConCheckBox);
+        String smartMeterCompletion = parseCheckBox(completionCheckBox);
+        String generateTopo = parseCheckBox(generateTopoCheckBox);
 
         // Combo Box Parsing
         final String hackingStyleString = hackingStyleCombo.getItem(hackingStyleCombo.getSelectionIndex());
@@ -513,11 +510,13 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         configuration.setAttribute(Constants.INPUT_PATH_KEY, inPath);
         configuration.setAttribute(Constants.OUTPUT_PATH_KEY, outPath);
         configuration.setAttribute(Constants.TIME_STEPS_KEY, timeSteps);
-        configuration.setAttribute(Constants.IGNORE_LOC_CON_KEY, logiCon);
+        configuration.setAttribute(Constants.IGNORE_LOC_CON_KEY, ignoreLogicalConnections);
         configuration.setAttribute(Constants.ROOT_NODE_ID_KEY, rNodeID);
         configuration.setAttribute(Constants.HACKING_STYLE_KEY, hackingStyleString);
         configuration.setAttribute(Constants.HACKING_SPEED_KEY, hackingSpeedText.getText());
         configuration.setAttribute(Constants.ITERATION_COUNT_KEY, iterationCountTextbox.getText());
+        configuration.setAttribute(Constants.SMARTMETER_COMPLETION_KEY, smartMeterCompletion);
+        configuration.setAttribute(Constants.TOPO_GENERATION_KEY, generateTopo);
 
         if (comboAttackSimulation.getSelectionIndex() != -1) {
             configuration.setAttribute(Constants.ATTACKER_SIMULATION_KEY, comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()));
@@ -542,13 +541,20 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         setDirty(false);
     }
 
-    /**
-     *
-     */
+    public String parseCheckBox(Button checkBox) {
+        String logiCon;
+        if (checkBox.getSelection()) {
+            logiCon = Constants.TRUE;
+        } else {
+            logiCon = Constants.FALSE;
+        }
+        return logiCon;
+    }
+
     @Override
     public String getErrorMessage() {
 
-        String Message = "";
+        String Message;
 
         if (areTextBoxesEmpty()) {
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
@@ -557,15 +563,11 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_EXTENSIONS"); //$NON-NLS-1$
         } else if (areOptionsWrong()) {
-
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_OPTIONS"); //$NON-NLS-1$
-
         } else {
-
-            // NO Error Case !!
+            // everything ok
             return null;
-            // NO Error Case
         }
 
         return Message;
@@ -579,8 +581,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
     @Override
     public boolean canSave() {
-
-        return validateInput();
+        return true;
     }
 
     @Override
@@ -590,11 +591,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 .getString("SimControlLaunchConfigurationTab.Tab.RegisterText"); //$NON-NLS-1$
     }
 
-    /**
-     * property Changed
-     */
-    /* Visibility package to avoid synthetic methods */
-    void propertyChanged() {
+    private void propertyChanged() {
         setDirty(true);
         updateLaunchConfigurationDialog();
     }
@@ -606,7 +603,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         return !areTextBoxesEmpty() && !areFileExtensionsWrong() && !areOptionsWrong();
     }
 
-    /*
+    /**
      * Opens OpenFileDialog und returns the Filepath as String
      */
     private String getFilePath(final String dialogMessage, final String extension) {
@@ -621,7 +618,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         return filename;
     }
 
-    /*
+    /**
      * Opens the Directory Dialog Chooser
      */
     private String getDirPath(final String dialogMessage) {
@@ -653,7 +650,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     }
 
     /*
-     *
      * @return True if topology or input or output file extensions are wrong
      */
     private boolean areFileExtensionsWrong() {
@@ -682,7 +678,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     }
 
     /*
-     *
      * @param possibleInt the string to be tested to be an positive Integer
      *
      * @return true if the string can be parsed as positive Integer
@@ -705,13 +700,33 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         try {
             addPowerLoadElements();
+        } catch (final CoreException e) {
+            LOG.error("Could not read Power Load Simulation extensions.", e);
+        }
+        try {
             addAttackerSimulationElements();
+        } catch (final CoreException e) {
+            LOG.error("Could not read Attack Simulation extensions.", e);
+        }
+        try {
             addKritisSimulationElements();
+        } catch (final CoreException e) {
+            LOG.error("Could not read KRITIS Simulation extensions.", e);
+        }
+        try {
             addTerminationConditionElements();
+        } catch (final CoreException e) {
+            LOG.error("Could not read Termination Condition extensions.", e);
+        }
+        try {
             addProgressorElements();
+        } catch (final CoreException e) {
+            LOG.error("Could not read Time Progressor extensions.", e);
+        }
+        try {
             addImpactAnalysisElements();
         } catch (final CoreException e) {
-            e.printStackTrace();
+            LOG.error("Could not read Impact Analysis extensions.", e);
         }
     }
 
