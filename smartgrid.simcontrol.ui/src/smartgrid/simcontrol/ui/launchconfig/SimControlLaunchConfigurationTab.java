@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
@@ -35,17 +36,10 @@ import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 
-/**
- * This Class provides the SimController Configuration Tab
- *
- * @author Christian (Modified by)
- * @extends {@link AbstractLaunchConfigurationTab}
- */
 public class SimControlLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 
-    /*
-     * UI Variables
-     */
+    private static final Logger LOG = Logger.getLogger(SimControlLaunchConfigurationTab.class);
+
     private Composite container;
     private Text outputTextbox;
     private Text inputTextbox;
@@ -66,10 +60,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     private Button selectInputPathButton;
     private Button selectTopologyPathButton;
     private Group cyberAttackSimulationGroup;
+    private Button completionCheckBox;
 
     /**
-     * Creates the UI Control
-     *
      * @wbp.parser.entryPoint
      */
     @Override
@@ -275,7 +268,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         ignoreLogicalConCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.ignoreLogicalConButton.text")); //$NON-NLS-1$
 
-        Button completionCheckBox = new Button(optionsGroup, SWT.CHECK);
+        completionCheckBox = new Button(optionsGroup, SWT.CHECK);
         completionCheckBox.setTouchEnabled(true);
         completionCheckBox.addSelectionListener(new SelectionAdapter() {
             @Override
@@ -444,10 +437,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         });
     }
 
-    /**
-     *
-     *
-     */
     @Override
     public void setDefaults(final ILaunchConfigurationWorkingCopy configuration) {
         configuration.setAttribute(Constants.TOPO_PATH_KEY, Constants.DEFAULT_TOPO_PATH);
@@ -458,11 +447,10 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         configuration.setAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
         configuration.setAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED);
         configuration.setAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT);
+        configuration.setAttribute(Constants.SMARTMETER_COMPLETION_KEY, Constants.DEFAULT_SMARTMETER_COMPLETION);
+        configuration.setAttribute(Constants.TOPO_GENERATION_KEY, Constants.DEFAULT_TOPO_GENERATION);
     }
 
-    /**
-     *
-     */
     @Override
     public void initializeFrom(final ILaunchConfiguration configuration) {
         try {
@@ -475,57 +463,30 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             rootNodeTextbox.setText(configuration.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID));
             hackingStyleCombo.setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
             ignoreLogicalConCheckBox.setSelection(configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON).contentEquals(Constants.TRUE));
+            generateTopoCheckBox.setSelection(configuration.getAttribute(Constants.TOPO_GENERATION_KEY, Constants.DEFAULT_TOPO_GENERATION).contentEquals(Constants.TRUE));
+            completionCheckBox.setSelection(configuration.getAttribute(Constants.SMARTMETER_COMPLETION_KEY, Constants.DEFAULT_SMARTMETER_COMPLETION).contentEquals(Constants.TRUE));
 
-            final String attackSimulationString = configuration.getAttribute(Constants.ATTACKER_SIMULATION_KEY, "");
-            for (int i = 0; i < comboAttackSimulation.getItems().length; i++) {
-                if (comboAttackSimulation.getItem(i).equals(attackSimulationString)) {
-                    comboAttackSimulation.select(i);
-                    break;
-                }
-            }
-            final String powerLoadSimulationString = configuration.getAttribute(Constants.POWER_LOAD_SIMULATION_KEY, "");
-            for (int i = 0; i < comboPowerLoadSimulation.getItems().length; i++) {
-                if (comboPowerLoadSimulation.getItem(i).equals(powerLoadSimulationString)) {
-                    comboPowerLoadSimulation.select(i);
-                    break;
-                }
-            }
-            final String impactAnalysisString = configuration.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_KEY, "");
-            for (int i = 0; i < comboImpactAnalysis.getItems().length; i++) {
-                if (comboImpactAnalysis.getItem(i).equals(impactAnalysisString)) {
-                    comboImpactAnalysis.select(i);
-                    break;
-                }
-            }
-            final String terminationConditionString = configuration.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_KEY, "");
-            for (int i = 0; i < comboTerminationCondition.getItems().length; i++) {
-                if (comboTerminationCondition.getItem(i).equals(terminationConditionString)) {
-                    comboTerminationCondition.select(i);
-                    break;
-                }
-            }
-            final String progressorString = configuration.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_KEY, "");
-            for (int i = 0; i < comboProgressor.getItems().length; i++) {
-                if (comboProgressor.getItem(i).equals(progressorString)) {
-                    comboProgressor.select(i);
-                    break;
-                }
-            }
-            final String kritisString = configuration.getAttribute(Constants.KRITIS_SIMULATION_KEY, "");
-            for (int i = 0; i < comboKritisSimulation.getItems().length; i++) {
-                if (comboKritisSimulation.getItem(i).equals(kritisString)) {
-                    comboKritisSimulation.select(i);
-                    break;
-                }
-            }
+            setSelectionOfComboBox(comboAttackSimulation, configuration, Constants.ATTACKER_SIMULATION_KEY);
+            setSelectionOfComboBox(comboPowerLoadSimulation, configuration, Constants.POWER_LOAD_SIMULATION_KEY);
+            setSelectionOfComboBox(comboImpactAnalysis, configuration, Constants.IMPACT_ANALYSIS_SIMULATION_KEY);
+            setSelectionOfComboBox(comboTerminationCondition, configuration, Constants.TERMINATION_CONDITION_SIMULATION_KEY);
+            setSelectionOfComboBox(comboProgressor, configuration, Constants.TIME_PROGRESSOR_SIMULATION_KEY);
+            setSelectionOfComboBox(comboKritisSimulation, configuration, Constants.KRITIS_SIMULATION_KEY);
         } catch (final CoreException e) {
-            e.printStackTrace();
+            LOG.error("An error occured when trying to read the launch configuration.", e);
         }
     }
 
-    /**
-     *
-     */
+    public void setSelectionOfComboBox(Combo comboBox, final ILaunchConfiguration configuration, String simulationModuleKey) throws CoreException {
+        final String configValue = configuration.getAttribute(simulationModuleKey, "");
+        for (int i = 0; i < comboBox.getItems().length; i++) {
+            if (comboBox.getItem(i).equals(configValue)) {
+                comboBox.select(i);
+                break;
+            }
+        }
+    }
+
     @Override
     public void performApply(final ILaunchConfigurationWorkingCopy configuration) {
 
@@ -610,18 +571,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         return Message;
     }
 
-    /**
-     *
-     */
     @Override
     public boolean isValid(final ILaunchConfiguration launchConfig) {
         // Add launchConfig Validation Checks here if needed
         return validateInput();
     }
 
-    /**
-     *
-     */
     @Override
     public boolean canSave() {
 
