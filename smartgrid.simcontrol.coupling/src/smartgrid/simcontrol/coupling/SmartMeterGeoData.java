@@ -24,4 +24,5 @@ public class SmartMeterGeoData implements Serializable {
     public void setLon(double _lon) {
         lon = _lon;
     }
+    
 }

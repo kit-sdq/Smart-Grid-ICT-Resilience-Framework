@@ -19,11 +19,11 @@ public class PowerSpec implements Serializable {
       this(ciType, ciName, ciSmartID, _powerDistrictId, 1, optDemand, minReqDemand, criticality);
     }
 
-    public PowerSpec(String ciType, String ciName, String ciSmartID, int _powerDistrictHFId, int aggregation, double optDemand, double minReqDemand, double criticality) {
+    public PowerSpec(String ciType, String ciName, String ciSmartID, int _powerDistrictId, int aggregation, double optDemand, double minReqDemand, double criticality) {
         this.ciType = ciType;
         this.ciName = ciName;
         this.ciSmartID = ciSmartID;
-        this.powerDistrictId = _powerDistrictHFId;
+        this.powerDistrictId = _powerDistrictId;
         this.aggregation = aggregation;
         this.optDemand = optDemand;
         this.minReqDemand = minReqDemand;
