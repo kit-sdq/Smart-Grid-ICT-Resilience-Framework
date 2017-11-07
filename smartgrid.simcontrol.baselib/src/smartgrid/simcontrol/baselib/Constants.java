@@ -4,6 +4,7 @@ public final class Constants {
     // Boolean Strings
     public static final String TRUE = "true"; //$NON-NLS-1$
     public static final String FALSE = "false"; //$NON-NLS-1$
+
     public static final String FAIL = "fail"; //$NON-NLS-1$
 
     // default input/output file paths
@@ -27,6 +28,10 @@ public final class Constants {
     public static final String DEFAULT_TIME_STEPS = "1";
     public static final String ITERATION_COUNT_KEY = "iterationCount";
     public static final String DEFAULT_ITERATION_COUNT = "2";
+    public static final String SMARTMETER_COMPLETION_KEY = "smartmeter completion";
+    public static final String DEFAULT_SMARTMETER_COMPLETION = FALSE;
+    public static final String TOPO_GENERATION_KEY = "topo generation";
+    public static final String DEFAULT_TOPO_GENERATION = FALSE;
 
     // The path to File on Disk with a On EntityStates List
     // TODO is this setting broken, dead or not correctly implemented?
