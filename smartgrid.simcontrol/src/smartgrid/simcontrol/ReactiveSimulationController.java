@@ -142,14 +142,14 @@ public final class ReactiveSimulationController {
 
         emptyPowerLoadInput = new HashMap<>();
 
-        // TODO Hack: remove this
-        ITopoGenerator generator = new TrivialTopoGenerator();
-        topo = generator.generateTopo(kritisPowerDemand);
-        FileSystemHelper.saveToFileSystem(topo, workingDirPath + "\\generated.smartgridtopo");
-        DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
-        initialState = defaultInputGenerator.generateInput(topo);
-        FileSystemHelper.saveToFileSystem(initialState, workingDirPath + "\\generated.smartgridinput");
-        impactInput = initialState;
+        // TODO Hack: remove this (only used to test/trigger Topo generation as long as initTopo)
+//        ITopoGenerator generator = new TrivialTopoGenerator();
+//        topo = generator.generateTopo(kritisPowerDemand);
+//        FileSystemHelper.saveToFileSystem(topo, workingDirPath + "\\generated.smartgridtopo");
+//        DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
+//        initialState = defaultInputGenerator.generateInput(topo);
+//        FileSystemHelper.saveToFileSystem(initialState, workingDirPath + "\\generated.smartgridinput");
+//        impactInput = initialState;
 
         // copy the structure of the input
         for (Entry<String, Map<String, PowerSpec>> nodeEntry : kritisPowerDemand.entrySet()) {
@@ -405,15 +405,15 @@ public final class ReactiveSimulationController {
 
     public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException {
 
-        attackerSimulation = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_CONFIG,
+        attackerSimulation = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_KEY,
                 IAttackerSimulation.class);
-        powerLoadSimulation = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getPowerLoadSimulationExtensions(), Constants.POWER_LOAD_SIMULATION_CONFIG,
+        powerLoadSimulation = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getPowerLoadSimulationExtensions(), Constants.POWER_LOAD_SIMULATION_KEY,
                 IPowerLoadSimulationWrapper.class);
         terminationCondition = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getTerminationConditionExtensions(),
-                Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, ITerminationCondition.class);
-        impactAnalsis = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getImpactAnalysisExtensions(), Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG,
+                Constants.TERMINATION_CONDITION_SIMULATION_KEY, ITerminationCondition.class);
+        impactAnalsis = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getImpactAnalysisExtensions(), Constants.IMPACT_ANALYSIS_SIMULATION_KEY,
                 IImpactAnalysis.class);
-        timeProgressor = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_CONFIG,
+        timeProgressor = SimulationExtensionPointHelper.findExtension(launchConfig, SimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
                 ITimeProgressor.class);
 
         powerLoadSimulation.init(launchConfig);

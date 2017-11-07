@@ -450,10 +450,10 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
      */
     @Override
     public void setDefaults(final ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(Constants.TOPOLOGY_PATH_KEY, Constants.DEFAULT_TOPO_PATH);
+        configuration.setAttribute(Constants.TOPO_PATH_KEY, Constants.DEFAULT_TOPO_PATH);
         configuration.setAttribute(Constants.INPUT_PATH_KEY, Constants.DEFAULT_INPUT_PATH);
         configuration.setAttribute(Constants.OUTPUT_PATH_KEY, Constants.DEFAULT_OUTPUT_PATH);
-        configuration.setAttribute(Constants.TIMESTEPS_KEY, Constants.DEFAULT_TIME_STEPS);
+        configuration.setAttribute(Constants.TIME_STEPS_KEY, Constants.DEFAULT_TIME_STEPS);
         configuration.setAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON);
         configuration.setAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
         configuration.setAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED);
@@ -467,51 +467,51 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     public void initializeFrom(final ILaunchConfiguration configuration) {
         try {
             hackingSpeedText.setText(configuration.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
-            topologyTextbox.setText(configuration.getAttribute(Constants.TOPOLOGY_PATH_KEY, Constants.DEFAULT_TOPO_PATH));
+            topologyTextbox.setText(configuration.getAttribute(Constants.TOPO_PATH_KEY, Constants.DEFAULT_TOPO_PATH));
             inputTextbox.setText(configuration.getAttribute(Constants.INPUT_PATH_KEY, Constants.DEFAULT_INPUT_PATH));
             outputTextbox.setText(configuration.getAttribute(Constants.OUTPUT_PATH_KEY, Constants.DEFAULT_OUTPUT_PATH));
-            timeStepsTextBox.setText(configuration.getAttribute(Constants.TIMESTEPS_KEY, Constants.DEFAULT_TIME_STEPS));
+            timeStepsTextBox.setText(configuration.getAttribute(Constants.TIME_STEPS_KEY, Constants.DEFAULT_TIME_STEPS));
             iterationCountTextbox.setText(configuration.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
             rootNodeTextbox.setText(configuration.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID));
             hackingStyleCombo.setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
             ignoreLogicalConCheckBox.setSelection(configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON).contentEquals(Constants.TRUE));
 
-            final String attackSimulationString = configuration.getAttribute(Constants.ATTACKER_SIMULATION_CONFIG, "");
+            final String attackSimulationString = configuration.getAttribute(Constants.ATTACKER_SIMULATION_KEY, "");
             for (int i = 0; i < comboAttackSimulation.getItems().length; i++) {
                 if (comboAttackSimulation.getItem(i).equals(attackSimulationString)) {
                     comboAttackSimulation.select(i);
                     break;
                 }
             }
-            final String powerLoadSimulationString = configuration.getAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, "");
+            final String powerLoadSimulationString = configuration.getAttribute(Constants.POWER_LOAD_SIMULATION_KEY, "");
             for (int i = 0; i < comboPowerLoadSimulation.getItems().length; i++) {
                 if (comboPowerLoadSimulation.getItem(i).equals(powerLoadSimulationString)) {
                     comboPowerLoadSimulation.select(i);
                     break;
                 }
             }
-            final String impactAnalysisString = configuration.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, "");
+            final String impactAnalysisString = configuration.getAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_KEY, "");
             for (int i = 0; i < comboImpactAnalysis.getItems().length; i++) {
                 if (comboImpactAnalysis.getItem(i).equals(impactAnalysisString)) {
                     comboImpactAnalysis.select(i);
                     break;
                 }
             }
-            final String terminationConditionString = configuration.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, "");
+            final String terminationConditionString = configuration.getAttribute(Constants.TERMINATION_CONDITION_SIMULATION_KEY, "");
             for (int i = 0; i < comboTerminationCondition.getItems().length; i++) {
                 if (comboTerminationCondition.getItem(i).equals(terminationConditionString)) {
                     comboTerminationCondition.select(i);
                     break;
                 }
             }
-            final String progressorString = configuration.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, "");
+            final String progressorString = configuration.getAttribute(Constants.TIME_PROGRESSOR_SIMULATION_KEY, "");
             for (int i = 0; i < comboProgressor.getItems().length; i++) {
                 if (comboProgressor.getItem(i).equals(progressorString)) {
                     comboProgressor.select(i);
                     break;
                 }
             }
-            final String kritisString = configuration.getAttribute(Constants.KRITIS_SIMULATION_CONFIG, "");
+            final String kritisString = configuration.getAttribute(Constants.KRITIS_SIMULATION_KEY, "");
             for (int i = 0; i < comboKritisSimulation.getItems().length; i++) {
                 if (comboKritisSimulation.getItem(i).equals(kritisString)) {
                     comboKritisSimulation.select(i);
@@ -548,10 +548,10 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         final String hackingStyleString = hackingStyleCombo.getItem(hackingStyleCombo.getSelectionIndex());
 
         // Add to config
-        configuration.setAttribute(Constants.TOPOLOGY_PATH_KEY, topoPath);
+        configuration.setAttribute(Constants.TOPO_PATH_KEY, topoPath);
         configuration.setAttribute(Constants.INPUT_PATH_KEY, inPath);
         configuration.setAttribute(Constants.OUTPUT_PATH_KEY, outPath);
-        configuration.setAttribute(Constants.TIMESTEPS_KEY, timeSteps);
+        configuration.setAttribute(Constants.TIME_STEPS_KEY, timeSteps);
         configuration.setAttribute(Constants.IGNORE_LOC_CON_KEY, logiCon);
         configuration.setAttribute(Constants.ROOT_NODE_ID_KEY, rNodeID);
         configuration.setAttribute(Constants.HACKING_STYLE_KEY, hackingStyleString);
@@ -559,22 +559,22 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         configuration.setAttribute(Constants.ITERATION_COUNT_KEY, iterationCountTextbox.getText());
 
         if (comboAttackSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.ATTACKER_SIMULATION_CONFIG, comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.ATTACKER_SIMULATION_KEY, comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()));
         }
         if (comboPowerLoadSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.POWER_LOAD_SIMULATION_CONFIG, comboPowerLoadSimulation.getItem(comboPowerLoadSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.POWER_LOAD_SIMULATION_KEY, comboPowerLoadSimulation.getItem(comboPowerLoadSimulation.getSelectionIndex()));
         }
         if (comboTerminationCondition.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.TERMINATION_CONDITION_SIMULATION_CONFIG, comboTerminationCondition.getItem(comboTerminationCondition.getSelectionIndex()));
+            configuration.setAttribute(Constants.TERMINATION_CONDITION_SIMULATION_KEY, comboTerminationCondition.getItem(comboTerminationCondition.getSelectionIndex()));
         }
         if (comboProgressor.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.TIME_PROGRESSOR_SIMULATION_CONFIG, comboProgressor.getItem(comboProgressor.getSelectionIndex()));
+            configuration.setAttribute(Constants.TIME_PROGRESSOR_SIMULATION_KEY, comboProgressor.getItem(comboProgressor.getSelectionIndex()));
         }
         if (comboImpactAnalysis.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_CONFIG, comboImpactAnalysis.getItem(comboImpactAnalysis.getSelectionIndex()));
+            configuration.setAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_KEY, comboImpactAnalysis.getItem(comboImpactAnalysis.getSelectionIndex()));
         }
         if (comboKritisSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.KRITIS_SIMULATION_CONFIG, comboKritisSimulation.getItem(comboKritisSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.KRITIS_SIMULATION_KEY, comboKritisSimulation.getItem(comboKritisSimulation.getSelectionIndex()));
         }
 
         // Now Tab is Clean again

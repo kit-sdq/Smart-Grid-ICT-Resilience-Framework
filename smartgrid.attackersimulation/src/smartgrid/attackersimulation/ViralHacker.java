@@ -154,11 +154,11 @@ public class ViralHacker implements IAttackerSimulation {
             for (final String idStrings : nodeIDStrings) {
                 seedNodeIDs.add(idStrings);
             }
-
             break;
+
         case Nodes:
 
-            final String nodePath = config.getAttribute(Constants.NODE_PATH, Constants.FAIL);
+            final String nodePath = config.getAttribute(Constants.NODE_PATH_KEY, Constants.FAIL);
 
             if (nodePath.equals(Constants.FAIL)) {
                 defaultUsed = true;
@@ -168,12 +168,10 @@ public class ViralHacker implements IAttackerSimulation {
 
             // TODO Implement in ScenarioModelHelper !
             // this.seedNodes = ScenarioModelHelper.loadNodes(nodePath);
-
             break;
 
         default:
             myError = ErrorCodeEnum.FAIL;
-
             break;
         }
 

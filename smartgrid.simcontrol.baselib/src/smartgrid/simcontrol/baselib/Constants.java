@@ -12,7 +12,7 @@ public final class Constants {
     public static final String DEFAULT_INPUT_PATH = DEFAULT_PATH;
     public static final String OUTPUT_PATH_KEY = "outputPath"; //$NON-NLS-1$
     public static final String DEFAULT_OUTPUT_PATH = DEFAULT_PATH;
-    public static final String TOPOLOGY_PATH_KEY = "topologyPath"; //$NON-NLS-1$
+    public static final String TOPO_PATH_KEY = "topologyPath"; //$NON-NLS-1$
     public static final String DEFAULT_TOPO_PATH = DEFAULT_PATH;
 
     // file extensions
@@ -23,12 +23,12 @@ public final class Constants {
     // further settings
     public static final String IGNORE_LOC_CON_KEY = "logicalCon"; //$NON-NLS-1$
     public static final String DEFAULT_IGNORE_LOC_CON = Constants.TRUE;
-    public static final String TIMESTEPS_KEY = "timeSteps"; //$NON-NLS-1$
+    public static final String TIME_STEPS_KEY = "timeSteps"; //$NON-NLS-1$
     public static final String DEFAULT_TIME_STEPS = "1";
     public static final String ITERATION_COUNT_KEY = "iterationCount";
     public static final String DEFAULT_ITERATION_COUNT = "2";
 
-    public static final String NODE_PATH = "nodepath"; // The path to File on Disk with a On EntityStates List
+    public static final String NODE_PATH_KEY = "nodepath"; // The path to File on Disk with a On EntityStates List
 
     // local hacker
     public static final String HACKING_STYLE_KEY = "desiredHackingStyle"; //$NON-NLS-1$
@@ -52,11 +52,10 @@ public final class Constants {
     public static final String KRITIS_SIMULATION_EXTENSION_POINT = "smartgrid.simucontrol.extensionpoints.kritisSimulation";
 
     // extension point keys
-    public static final String POWER_LOAD_SIMULATION_CONFIG = "powerLoadConfiguration";
-    public static final String ATTACKER_SIMULATION_CONFIG = "attackerSimulationConfiguration";
-    public static final String IMPACT_ANALYSIS_SIMULATION_CONFIG = "impactAnalysisConfiguration";
-    public static final String TERMINATION_CONDITION_SIMULATION_CONFIG = "terminationConditionConfiguration";
-    public static final String TIME_PROGRESSOR_SIMULATION_CONFIG = "timeProgressorConfiguration";
-    public static final String INPUT_GENERATOR_SIMULATION_CONFIG = "inputGeneratorConfiguration";
-    public static final String KRITIS_SIMULATION_CONFIG = "kritisSimulationConfiguration";
+    public static final String POWER_LOAD_SIMULATION_KEY = "powerLoadConfiguration";
+    public static final String ATTACKER_SIMULATION_KEY = "attackerSimulationConfiguration";
+    public static final String IMPACT_ANALYSIS_SIMULATION_KEY = "impactAnalysisConfiguration";
+    public static final String TERMINATION_CONDITION_SIMULATION_KEY = "terminationConditionConfiguration";
+    public static final String TIME_PROGRESSOR_SIMULATION_KEY = "timeProgressorConfiguration";
+    public static final String KRITIS_SIMULATION_KEY = "kritisSimulationConfiguration";
 }
