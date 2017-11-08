@@ -33,6 +33,7 @@ import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
+import smartgrid.simcontrol.baselib.coupling.ISimulationComponent;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 
@@ -649,7 +650,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         return topoEmpty || inEmpty || outEmpty;
     }
 
-    /*
+    /**
      * @return True if topology or input or output file extensions are wrong
      */
     private boolean areFileExtensionsWrong() {
@@ -677,8 +678,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         return false;
     }
 
-    /*
-     * @param possibleInt the string to be tested to be an positive Integer
+    /**
+     * @param possibleInt
+     *            the string to be tested to be an positive Integer
      *
      * @return true if the string can be parsed as positive Integer
      */
@@ -699,94 +701,54 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     private void addElementsToCombos() {
 
         try {
-            addPowerLoadElements();
+            final List<IPowerLoadSimulationWrapper> powerLoadExtensions = SimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
+            fillSimulationComboBox(powerLoadExtensions, comboPowerLoadSimulation);
         } catch (final CoreException e) {
             LOG.error("Could not read Power Load Simulation extensions.", e);
         }
+
         try {
-            addAttackerSimulationElements();
+            final List<IAttackerSimulation> attackSimExtensions = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
+            fillSimulationComboBox(attackSimExtensions, comboAttackSimulation);
         } catch (final CoreException e) {
             LOG.error("Could not read Attack Simulation extensions.", e);
         }
+
         try {
-            addKritisSimulationElements();
+            final List<IKritisSimulationWrapper> kritisSimExtensions = SimulationExtensionPointHelper.getKritisSimulationExtensions();
+            fillSimulationComboBox(kritisSimExtensions, comboKritisSimulation);
         } catch (final CoreException e) {
             LOG.error("Could not read KRITIS Simulation extensions.", e);
         }
+
         try {
-            addTerminationConditionElements();
+            final List<ITerminationCondition> terminationConditionExtensions = SimulationExtensionPointHelper.getTerminationConditionExtensions();
+            fillSimulationComboBox(terminationConditionExtensions, comboTerminationCondition);
         } catch (final CoreException e) {
             LOG.error("Could not read Termination Condition extensions.", e);
         }
+
         try {
-            addProgressorElements();
+            final List<ITimeProgressor> progressorExtensions = SimulationExtensionPointHelper.getProgressorExtensions();
+            fillSimulationComboBox(progressorExtensions, comboProgressor);
         } catch (final CoreException e) {
             LOG.error("Could not read Time Progressor extensions.", e);
         }
+
         try {
-            addImpactAnalysisElements();
+            final List<IImpactAnalysis> impactAnalysisExtensions = SimulationExtensionPointHelper.getImpactAnalysisExtensions();
+            fillSimulationComboBox(impactAnalysisExtensions, comboImpactAnalysis);
         } catch (final CoreException e) {
             LOG.error("Could not read Impact Analysis extensions.", e);
         }
     }
 
-    private void addPowerLoadElements() throws CoreException {
-        final List<IPowerLoadSimulationWrapper> list = SimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
-        for (final IPowerLoadSimulationWrapper ele : list) {
-            comboPowerLoadSimulation.add(ele.getName());
+    public void fillSimulationComboBox(final List<? extends ISimulationComponent> simulationComponents, Combo comboBox) {
+        for (final ISimulationComponent ele : simulationComponents) {
+            comboBox.add(ele.getName());
         }
-        if (comboPowerLoadSimulation.getItemCount() > 0) {
-            comboPowerLoadSimulation.select(0);
-        }
-    }
-
-    private void addAttackerSimulationElements() throws CoreException {
-        final List<IAttackerSimulation> list = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
-        for (final IAttackerSimulation ele : list) {
-            comboAttackSimulation.add(ele.getName());
-        }
-        if (comboAttackSimulation.getItemCount() > 0) {
-            comboAttackSimulation.select(0);
-        }
-    }
-
-    private void addKritisSimulationElements() throws CoreException {
-        final List<IKritisSimulationWrapper> list = SimulationExtensionPointHelper.getKritisSimulationExtensions();
-        for (final IKritisSimulationWrapper ele : list) {
-            comboKritisSimulation.add(ele.getName());
-        }
-        if (comboKritisSimulation.getItemCount() > 0) {
-            comboKritisSimulation.select(0);
-        }
-    }
-
-    private void addTerminationConditionElements() throws CoreException {
-        final List<ITerminationCondition> list = SimulationExtensionPointHelper.getTerminationConditionExtensions();
-        for (final ITerminationCondition ele : list) {
-            comboTerminationCondition.add(ele.getName());
-        }
-        if (comboTerminationCondition.getItemCount() > 0) {
-            comboTerminationCondition.select(0);
-        }
-    }
-
-    private void addProgressorElements() throws CoreException {
-        final List<ITimeProgressor> list = SimulationExtensionPointHelper.getProgressorExtensions();
-        for (final ITimeProgressor ele : list) {
-            comboProgressor.add(ele.getName());
-        }
-        if (comboProgressor.getItemCount() > 0) {
-            comboProgressor.select(0);
-        }
-    }
-
-    private void addImpactAnalysisElements() throws CoreException {
-        final List<IImpactAnalysis> list = SimulationExtensionPointHelper.getImpactAnalysisExtensions();
-        for (final IImpactAnalysis ele : list) {
-            comboImpactAnalysis.add(ele.getName());
-        }
-        if (comboImpactAnalysis.getItemCount() > 0) {
-            comboImpactAnalysis.select(0);
+        if (comboBox.getItemCount() > 0) {
+            comboBox.select(0);
         }
     }
 }
