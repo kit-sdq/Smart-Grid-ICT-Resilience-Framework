@@ -18,7 +18,8 @@ public interface ISimulationController extends Remote {
     void initReactive(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException;
 
     //input data for initializing ICT/power grid -topology
-    void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData) throws RemoteException, SimcontrolException;
+    //void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData) throws RemoteException, SimcontrolException;
+    void initTopo(TopologyContainer _topologyContainer) throws RemoteException, SimcontrolException;
 
     /**
      * Get a list of power supplied to ... Remotely aborting leaves an undefined state and requires

@@ -245,7 +245,7 @@ public class HighVoltageNodeConnection {
     this.ith = _ith;
   }
   
-  public String getHeader() {
+  public static String getHeader() {
     return "ID,von_ID,von_Standort,nach_ID,nach_Standort,Spannungslevel,Typ,R',XL',BC',geom. L [km],Länge,Ith";
   }
 

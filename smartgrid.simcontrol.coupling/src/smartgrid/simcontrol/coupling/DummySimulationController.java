@@ -65,7 +65,7 @@ public class DummySimulationController implements ISimulationController {
     }
 
     @Override
-    public void initTopo(Map<String, Map<String, SmartMeterGeoData>> _smartMeterGeoData) {
+    public void initTopo(TopologyContainer _topologyContainer) {
         // TODO Auto-generated method stub
 
     }

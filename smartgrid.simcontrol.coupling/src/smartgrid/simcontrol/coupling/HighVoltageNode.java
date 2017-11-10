@@ -245,7 +245,7 @@ public class HighVoltageNode {
     return __connected;
    }
   
-  public String getHeader() {
+  public static String getHeader() {
     return "standort_ID,name_kurz,name_lang,latitude,longitude,gemeindekennziffer_REF,postleitzahl_REF,hat_mittelspannung,p_max [MW],p_min [MW],kommentar";
   }
     
