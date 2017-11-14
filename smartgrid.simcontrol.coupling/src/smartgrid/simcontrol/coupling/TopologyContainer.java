@@ -10,7 +10,9 @@ public class TopologyContainer {
 
   private HashMap<Integer,HighVoltageNode> highVoltageNodes;
   
-  private HashMap<String, Map<String, SmartMeterGeoData>> mapCItoHVN; 
+  private HashMap<String, Map<String, SmartMeterGeoData>> mapCItoHVN;
+  
+  private String opfConfig;
   
   private TopologyContainer() {
   }
@@ -24,6 +26,13 @@ public class TopologyContainer {
   }
   public void setMapCItoHVN(Map<String, Map<String, SmartMeterGeoData>> _mapCItoHVN) {
     this.mapCItoHVN = new HashMap<>(_mapCItoHVN);
+  }
+  
+  public String getOpfConfig() {
+    return opfConfig;
+  }
+  public void setOpfConfig(String _opfConfig) {
+    this.opfConfig = _opfConfig;
   }
   
   public String toStringHighVoltageNodes() {
