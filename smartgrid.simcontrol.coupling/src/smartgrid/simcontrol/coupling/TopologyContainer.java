@@ -74,11 +74,12 @@ public class TopologyContainer {
     return builder.toString();
   }
   
-  public static TopologyContainer build(File _highVoltageNodesFile, File _highVoltageNodeConnectionsFile) {
+  public static TopologyContainer build(File _highVoltageNodesFile, File _highVoltageNodeConnectionsFile, File _opfConfigFile) {
     TopologyContainer __topologyContainer;
     //
     __topologyContainer = new TopologyContainer();
     __topologyContainer.highVoltageNodes = loadHighVoltageNodes(_highVoltageNodesFile, _highVoltageNodeConnectionsFile);
+    __topologyContainer.opfConfig = loadOpfConfig(_opfConfigFile);
     //
     return __topologyContainer;
   }
@@ -120,6 +121,23 @@ public class TopologyContainer {
     }    
     //
     return __nodes;
+  }
+
+  public static String loadOpfConfig(File _opfConfigFile) {
+    String line;
+    StringBuilder builder;
+    //
+    builder = new StringBuilder();
+    try (BufferedReader opfConfigReader = new BufferedReader(new FileReader(_opfConfigFile))) {
+      while((line = opfConfigReader.readLine()) != null) {
+        builder.append(line);
+        builder.append("\n");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }    
+    //
+    return builder.toString();
   }
   
 }
