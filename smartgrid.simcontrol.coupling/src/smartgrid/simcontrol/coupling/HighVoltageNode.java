@@ -1,10 +1,6 @@
 package smartgrid.simcontrol.coupling;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class HighVoltageNode {
 
@@ -12,31 +8,32 @@ public class HighVoltageNode {
 //constants definitions
 ////////////////////////////////////////////////////////////////////////////////
   /** A logger used to redirect debug output. */
-  // private static final Logger LOG = LogManager.getLogger(HighVoltageNode.class);
+  // private static final Logger LOG =
+  // LogManager.getLogger(HighVoltageNode.class);
 
 ////////////////////////////////////////////////////////////////////////////////
 // field definitions
 ////////////////////////////////////////////////////////////////////////////////
   private int id;
-  
+
   private String shortName;
-  
+
   private String longName;
-  
+
   private double lat;
-  
+
   private double lon;
-  
+
   private boolean hasMediumVoltage;
-  
+
   private double p_max;
-  
+
   private double p_min;
 
   private String comment;
-  
+
   private ArrayList<HighVoltageNodeConnection> connections;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // constructor, main and initialization
 ////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +92,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _id the id to set
+   * @param _id
+   *          the id to set
    */
   public void setId(int _id) {
     this.id = _id;
@@ -109,7 +107,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _shortName the shortName to set
+   * @param _shortName
+   *          the shortName to set
    */
   public void setShortName(String _shortName) {
     this.shortName = _shortName;
@@ -123,7 +122,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _longName the longName to set
+   * @param _longName
+   *          the longName to set
    */
   public void setLongName(String _longName) {
     this.longName = _longName;
@@ -137,7 +137,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _lat the lat to set
+   * @param _lat
+   *          the lat to set
    */
   public void setLat(double _lat) {
     this.lat = _lat;
@@ -151,7 +152,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _lon the lon to set
+   * @param _lon
+   *          the lon to set
    */
   public void setLon(double _lon) {
     this.lon = _lon;
@@ -165,7 +167,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _hasMediumVoltage the hasMediumVoltage to set
+   * @param _hasMediumVoltage
+   *          the hasMediumVoltage to set
    */
   public void setHasMediumVoltage(boolean _hasMediumVoltage) {
     this.hasMediumVoltage = _hasMediumVoltage;
@@ -179,7 +182,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _p_max the p_max to set
+   * @param _p_max
+   *          the p_max to set
    */
   public void setP_max(double _p_max) {
     this.p_max = _p_max;
@@ -193,7 +197,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _p_min the p_min to set
+   * @param _p_min
+   *          the p_min to set
    */
   public void setP_min(double _p_min) {
     this.p_min = _p_min;
@@ -207,7 +212,8 @@ public class HighVoltageNode {
   }
 
   /**
-   * @param _comment the comment to set
+   * @param _comment
+   *          the comment to set
    */
   public void setComment(String _comment) {
     this.comment = _comment;
@@ -216,21 +222,27 @@ public class HighVoltageNode {
   public void addConnection(HighVoltageNodeConnection _connection) {
     connections.add(_connection);
   }
+
   public HighVoltageNodeConnection getConnection(int _index) {
     return connections.get(_index);
   }
+
   public void removeConnection(HighVoltageNodeConnection _connection) {
     connections.remove(_connection);
   }
+
   public void clearConnections() {
     connections.clear();
   }
+
   public int getConnectionsCount() {
     return connections.size();
   }
+
   public boolean hasConnections() {
-    return ! connections.isEmpty();
+    return !connections.isEmpty();
   }
+
   public boolean isConnectioned(HighVoltageNode _node) {
     boolean __connected;
     //
@@ -243,13 +255,13 @@ public class HighVoltageNode {
     }
     //
     return __connected;
-   }
-  
+  }
+
   public static String getHeader() {
     return "standort_ID,name_kurz,name_lang,latitude,longitude,gemeindekennziffer_REF,postleitzahl_REF,hat_mittelspannung,p_max [MW],p_min [MW],kommentar";
   }
-    
-  public String toString() {
+
+  @Override public String toString() {
     StringBuilder builder;
     String separator;
     //
@@ -270,16 +282,16 @@ public class HighVoltageNode {
     builder.append("");
     builder.append(separator);
     builder.append(hasMediumVoltage ? "1" : "0");
-    builder.append(separator);    
+    builder.append(separator);
     builder.append(p_max);
-    builder.append(separator);    
+    builder.append(separator);
     builder.append(p_min);
-    builder.append(separator);    
+    builder.append(separator);
     builder.append(comment);
     //
     return builder.toString();
   }
-  
+
   public static HighVoltageNode parse(String _line) {
     HighVoltageNode __node;
     String[] split;
@@ -298,5 +310,5 @@ public class HighVoltageNode {
     //
     return __node;
   }
-  
+
 }
