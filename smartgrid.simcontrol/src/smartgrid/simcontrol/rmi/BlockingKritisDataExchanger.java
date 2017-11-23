@@ -76,7 +76,7 @@ public class BlockingKritisDataExchanger {
         BlockingKritisDataExchanger.class.notifyAll();
     }
 
-    public static synchronized TopologyContainer getGeoData() throws InterruptedException {
+    public static synchronized TopologyContainer getTopoData() throws InterruptedException {
         couplingThread = Thread.currentThread();
 
         // wait for data
