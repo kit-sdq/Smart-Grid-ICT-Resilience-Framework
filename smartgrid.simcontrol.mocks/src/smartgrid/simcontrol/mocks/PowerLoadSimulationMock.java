@@ -1,9 +1,7 @@
-/**
- *
- */
 package smartgrid.simcontrol.mocks;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -13,10 +11,6 @@ import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
 
-/**
- * @author Christian
- *
- */
 public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
 
     /**
@@ -37,5 +31,9 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
     @Override
     public String getName() {
         return "Mock";
+    }
+
+    @Override
+    public void initData(String gridFileContent, List<String> nodeIDs) {
     }
 }
