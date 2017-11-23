@@ -1,11 +1,14 @@
 package smartgrid.model.generation;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
 import smartgrid.helper.UIDHelper;
+import smartgrid.simcontrol.coupling.SmartMeterGeoData;
+import smartgrid.simcontrol.coupling.TopologyContainer;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.NetworkNode;
 import smartgridtopo.PowerGridNode;
@@ -19,12 +22,11 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
     private static final Logger LOG = Logger.getLogger(TrivialTopoGenerator.class);
 
     @Override
-    public SmartGridTopology generateTopo(Object _smartMeterGeoData) {
+    public SmartGridTopology generateTopo(TopologyContainer topoData) {
 
         LOG.error("Starting generation of trivial ICT topology.");
 
-        //TODO hack: remove
-        Map<String, Map<String, ?>> smartMeterGeoData = (Map<String, Map<String, ?>>) _smartMeterGeoData;
+        HashMap<String, Map<String, SmartMeterGeoData>> smartMeterGeoData = topoData.getMapCItoHVN();
 
         // create root container
         SmartgridtopoPackageImpl.init();
@@ -47,7 +49,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
         NetworkNode lastNetworkNode = controlCenterNetworkNode;
 
         // iterate nodes
-        for (Entry<String, Map<String, ?>> nodeEntry : smartMeterGeoData.entrySet()) {
+        for (Entry<String, Map<String, SmartMeterGeoData>> nodeEntry : smartMeterGeoData.entrySet()) {
 
             // create node
             PowerGridNode powerGridNode = topoFactory.createPowerGridNode();

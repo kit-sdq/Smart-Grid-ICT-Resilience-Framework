@@ -1,7 +1,8 @@
 package smartgrid.model.generation;
 
+import smartgrid.simcontrol.coupling.TopologyContainer;
 import smartgridtopo.SmartGridTopology;
 
 public interface ITopoGenerator {
-    SmartGridTopology generateTopo(Object smartMeterGeoData);
+    SmartGridTopology generateTopo(TopologyContainer topoData);
 }
