@@ -15,7 +15,7 @@ import smartgrid.simcontrol.SimcontroLaunchConfigurationDelegate;
 import smartgrid.simcontrol.SimulationController;
 import smartgrid.simcontrol.coupling.ISimulationController;
 import smartgrid.simcontrol.coupling.PowerSpec;
-import smartgrid.simcontrol.coupling.SmartMeterGeoData;
+import smartgrid.simcontrol.coupling.TopologyContainer;
 import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
 import smartgrid.simcontrol.coupling.Exceptions.SimcontrolInitializationException;
 
@@ -147,9 +147,9 @@ public class RmiServer implements ISimulationController {
     }
 
     @Override
-    public void initTopo(Map<String, Map<String, SmartMeterGeoData>> smartMeterGeoData) {
+    public void initTopo(TopologyContainer topo) {
         LOG.info("init topo called remotely");
-        BlockingKritisDataExchanger.storeGeoData(smartMeterGeoData);
+        BlockingKritisDataExchanger.storeGeoData(topo);
     }
 
     @Override

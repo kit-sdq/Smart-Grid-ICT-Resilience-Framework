@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import smartgrid.simcontrol.coupling.PowerSpec;
-import smartgrid.simcontrol.coupling.SmartMeterGeoData;
+import smartgrid.simcontrol.coupling.TopologyContainer;
 
 /**
  * This is basically an exchanger for two different datatypes.
@@ -66,28 +66,28 @@ public class BlockingKritisDataExchanger {
         return tempPower;
     }
 
-    private static Map<String, Map<String, SmartMeterGeoData>> bufferedGeoData;
+    private static TopologyContainer bufferedTopoData;
 
-    public static synchronized void storeGeoData(Map<String, Map<String, SmartMeterGeoData>> geoData) {
-        if (bufferedGeoData != null) {
+    public static synchronized void storeGeoData(TopologyContainer topoData) {
+        if (bufferedTopoData != null) {
             LOG.error("There was already geo data present. This data is now overwritten.");
         }
-        BlockingKritisDataExchanger.bufferedGeoData = geoData;
+        BlockingKritisDataExchanger.bufferedTopoData = topoData;
         BlockingKritisDataExchanger.class.notifyAll();
     }
 
-    public static synchronized Map<String, Map<String, SmartMeterGeoData>> getGeoData() throws InterruptedException {
+    public static synchronized TopologyContainer getGeoData() throws InterruptedException {
         couplingThread = Thread.currentThread();
 
         // wait for data
-        while (bufferedGeoData == null) {
+        while (bufferedTopoData == null) {
             LOG.info("SimControl is waiting for topo data from the Kritis simulation.");
             BlockingKritisDataExchanger.class.wait();
         }
 
         // consume data
-        Map<String, Map<String, SmartMeterGeoData>> tempGeoData = bufferedGeoData;
-        bufferedGeoData = null;
+        TopologyContainer tempGeoData = bufferedTopoData;
+        bufferedTopoData = null;
         couplingThread = null;
         LOG.info("SimControl got geo data from the Kritis simulation.");
         return tempGeoData;
@@ -111,7 +111,7 @@ public class BlockingKritisDataExchanger {
         // clear all buffered data
         bufferedDemand = null;
         bufferedPower = null;
-        bufferedGeoData = null;
+        bufferedTopoData = null;
 
         return threadFreed;
     }
