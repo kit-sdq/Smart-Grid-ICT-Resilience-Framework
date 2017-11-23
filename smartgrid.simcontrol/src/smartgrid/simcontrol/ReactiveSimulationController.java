@@ -142,15 +142,6 @@ public final class ReactiveSimulationController {
 
         emptyPowerLoadInput = new HashMap<>();
 
-        // TODO Hack: remove this (only used to test/trigger Topo generation as long as initTopo)
-//        ITopoGenerator generator = new TrivialTopoGenerator();
-//        topo = generator.generateTopo(kritisPowerDemand);
-//        FileSystemHelper.saveToFileSystem(topo, workingDirPath + "\\generated.smartgridtopo");
-//        DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
-//        initialState = defaultInputGenerator.generateInput(topo);
-//        FileSystemHelper.saveToFileSystem(initialState, workingDirPath + "\\generated.smartgridinput");
-//        impactInput = initialState;
-
         // copy the structure of the input
         for (Entry<String, Map<String, PowerSpec>> nodeEntry : kritisPowerDemand.entrySet()) {
             HashMap<String, ISmartMeterState> prosumerMap = new HashMap<>();
@@ -297,6 +288,8 @@ public final class ReactiveSimulationController {
             throw new RuntimeException("Error creating local log appender in the working directory. Most likely there are problems with access rights.");
         }
 
+        // TODO this should be done after models were loaded/generated
+        // TODO read option from launch config
 //        //Completion
 //        SmartGridCompletionExecuter completionExecuter = new SmartGridCompletionExecuter();
 //        completionExecuter.executeCompletions(topo);
