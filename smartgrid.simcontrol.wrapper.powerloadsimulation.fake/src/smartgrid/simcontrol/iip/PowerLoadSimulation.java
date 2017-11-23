@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.iip.PowerLoadSimulation;
+package smartgrid.simcontrol.iip;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +15,9 @@ import smartgrid.simcontrol.coupling.PowerSpec;
  * @author Misha
  */
 public class PowerLoadSimulation implements IPowerLoadSimulation {
+
+    public PowerLoadSimulation(String gridFileContent) {
+    }
 
     @Override
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisDemands, Map<String, Map<String, ISmartMeterState>> smartMeterStates) {
