@@ -41,11 +41,12 @@ public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
     @Override
     public void initData(TopologyContainer topoData) {
+
         powerSim = new PowerLoadSimulation(topoData.getOpfConfig());
-        List<String> nodeIds = new ArrayList<String>();
+
+        List<String> nodeIds = new ArrayList<>();
         topoData.getHighVoltageNodes().forEach((id, hvn) -> nodeIds.add(id));
-        //.values().stream().map(HighVoltageNode::getId).collect(Collectors.toList());
-        LOG.info(nodeIds);
+        LOG.info("Passing node ids to the power load simulation: " + nodeIds);
         powerSim.initializeNodeIDs(nodeIds);
     }
 }
