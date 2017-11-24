@@ -33,6 +33,9 @@ public class SimcontroLaunchConfigurationDelegate implements ILaunchConfiguratio
             simControl.run();
         } catch (InterruptedException e) {
             LOG.info("The simulation was interrupted.");
+        } catch (Exception e) {
+            LOG.fatal("An unexpected exception occured.", e);
+            throw e;
         }
     }
 }
