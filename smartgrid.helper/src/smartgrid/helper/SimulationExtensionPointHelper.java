@@ -97,8 +97,8 @@ public class SimulationExtensionPointHelper {
         return list;
     }
 
-    public static boolean isExtensionSelected(final ILaunchConfiguration launchConfig, final ISimulationComponent kritisSimExtension, String key) throws CoreException {
-        return launchConfig.getAttribute(key, "").equals(kritisSimExtension.getName());
+    public static boolean isExtensionSelected(final ILaunchConfiguration launchConfig, final ISimulationComponent simComponent, String key) throws CoreException {
+        return launchConfig.getAttribute(key, "").equals(simComponent.getName());
     }
 
     public static <T extends ISimulationComponent> T findExtension(final ILaunchConfiguration launchConfig, final List<T> simComponents, String key, Class<T> type) throws CoreException {
