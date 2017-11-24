@@ -60,6 +60,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
             NetworkNode networkNode = topoFactory.createNetworkNode();
             networkNode.setId(UIDHelper.generateUID());
             topo.getContainsNE().add(networkNode);
+            networkNode.getConnectedTo().add(powerGridNode);
 
             // chain the network
             createPhysicalConnection(topoFactory, topo, lastNetworkNode, networkNode);
