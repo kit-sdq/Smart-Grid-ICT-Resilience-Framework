@@ -3,10 +3,11 @@ package smartgrid.simcontrol.coupling;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class HighVoltageNode
-  implements Serializable {
+public class HighVoltageNode implements Serializable {
 
-////////////////////////////////////////////////////////////////////////////////
+  private static final long serialVersionUID = 2568281063442704648L;
+
+  ////////////////////////////////////////////////////////////////////////////////
 //constants definitions
 ////////////////////////////////////////////////////////////////////////////////
   /** A logger used to redirect debug output. */

@@ -4,40 +4,42 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TopologyContainer
-  implements Serializable {
+public class TopologyContainer implements Serializable {
+
+  private static final long serialVersionUID = -6585199296553098329L;
 
   private LinkedHashMap<String,HighVoltageNode> highVoltageNodes;
-  
+
   private LinkedHashMap<String,Map<String,SmartMeterGeoData>> mapCItoHVN;
-  
+
   private String opfConfig;
-  
+
   private TopologyContainer() {
   }
- 
+
   public LinkedHashMap<String,HighVoltageNode> getHighVoltageNodes() {
     return new LinkedHashMap<>(highVoltageNodes);
   }
-  
-  public LinkedHashMap<String, Map<String, SmartMeterGeoData>> getMapCItoHVN() {
+
+  public LinkedHashMap<String,Map<String,SmartMeterGeoData>> getMapCItoHVN() {
     return mapCItoHVN;
   }
-  public void setMapCItoHVN(LinkedHashMap<String, Map<String, SmartMeterGeoData>> _mapCItoHVN) {
+
+  public void setMapCItoHVN(LinkedHashMap<String,Map<String,SmartMeterGeoData>> _mapCItoHVN) {
     this.mapCItoHVN = new LinkedHashMap<>(_mapCItoHVN);
   }
-  
+
   public String getOpfConfig() {
     return opfConfig;
   }
+
   public void setOpfConfig(String _opfConfig) {
     this.opfConfig = _opfConfig;
   }
-  
+
   public String toStringHighVoltageNodes() {
     StringBuilder builder;
     //
@@ -76,7 +78,7 @@ public class TopologyContainer
     //
     return builder.toString();
   }
-  
+
   public static TopologyContainer build(File _highVoltageNodesFile, File _highVoltageNodeConnectionsFile, File _opfConfigFile) {
     TopologyContainer __topologyContainer;
     //
@@ -86,7 +88,7 @@ public class TopologyContainer
     //
     return __topologyContainer;
   }
-  
+
   public static LinkedHashMap<String,HighVoltageNode> loadHighVoltageNodes(File _highVoltageNodesFile, File _highVoltageNodeConnectionsFile) {
     LinkedHashMap<String,HighVoltageNode> __nodes;
     String line;
@@ -101,13 +103,13 @@ public class TopologyContainer
       for (int i = 0; i < linesToSkip; i++) {
         line = highVoltageNodesReader.readLine();
       }
-      while((line = highVoltageNodesReader.readLine()) != null) {
+      while ((line = highVoltageNodesReader.readLine()) != null) {
         node = HighVoltageNode.parse(line);
         __nodes.put(node.getId(), node);
       }
     } catch (Exception e) {
       e.printStackTrace();
-    }    
+    }
     // establish connections
     try (BufferedReader highVoltageConnectionsReader = new BufferedReader(new FileReader(_highVoltageNodeConnectionsFile))) {
       // skip X initial lines
@@ -115,13 +117,13 @@ public class TopologyContainer
       for (int i = 0; i < linesToSkip; i++) {
         line = highVoltageConnectionsReader.readLine();
       }
-      while((line = highVoltageConnectionsReader.readLine()) != null) {
+      while ((line = highVoltageConnectionsReader.readLine()) != null) {
         connection = HighVoltageNodeConnection.parse(line);
         __nodes.get(connection.getFromNodeId()).addConnection(connection);
       }
     } catch (Exception e) {
       e.printStackTrace();
-    }    
+    }
     //
     return __nodes;
   }
@@ -132,15 +134,15 @@ public class TopologyContainer
     //
     builder = new StringBuilder();
     try (BufferedReader opfConfigReader = new BufferedReader(new FileReader(_opfConfigFile))) {
-      while((line = opfConfigReader.readLine()) != null) {
+      while ((line = opfConfigReader.readLine()) != null) {
         builder.append(line);
         builder.append("\n");
       }
     } catch (Exception e) {
       e.printStackTrace();
-    }    
+    }
     //
     return builder.toString();
   }
-  
+
 }

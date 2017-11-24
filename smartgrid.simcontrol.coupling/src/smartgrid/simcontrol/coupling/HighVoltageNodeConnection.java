@@ -2,37 +2,39 @@ package smartgrid.simcontrol.coupling;
 
 import java.io.Serializable;
 
-public class HighVoltageNodeConnection
-  implements Serializable {
+public class HighVoltageNodeConnection implements Serializable {
 
-////////////////////////////////////////////////////////////////////////////////
+  private static final long serialVersionUID = -8150893989493366034L;
+
+  ////////////////////////////////////////////////////////////////////////////////
 //constants definitions
 ////////////////////////////////////////////////////////////////////////////////
   /** A logger used to redirect debug output. */
-  // private static final Logger LOG = LogManager.getLogger(JAreaHandling.class);
+  // private static final Logger LOG =
+  // LogManager.getLogger(JAreaHandling.class);
 
 ////////////////////////////////////////////////////////////////////////////////
 // field definitions
 ////////////////////////////////////////////////////////////////////////////////
   private int id;
-  
+
   private String fromNodeId;
-  
+
   private String toNodeId;
-  
+
   private double voltageLevel;
-  
+
   private double r;
   private double xl;
   private double bc;
 
   private String type;
-  
+
   private double geomLength;
   private double length;
-  
-  private double ith;  
-  
+
+  private double ith;
+
 ////////////////////////////////////////////////////////////////////////////////
 // constructor, main and initialization
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +50,6 @@ public class HighVoltageNodeConnection
     postInit();
   }
 
-  
   /**
    * Initializations before main initialization (of components).
    */
@@ -72,9 +73,8 @@ public class HighVoltageNodeConnection
    * Initializations of the default values
    */
   private void initDefaults() {
-    
-  }
 
+  }
 
   /**
    * @return the id
@@ -83,9 +83,9 @@ public class HighVoltageNodeConnection
     return id;
   }
 
-
   /**
-   * @param _id the id to set
+   * @param _id
+   *          the id to set
    */
   public void setId(int _id) {
     this.id = _id;
@@ -98,14 +98,13 @@ public class HighVoltageNodeConnection
     return fromNodeId;
   }
 
-
   /**
-   * @param _fromNodeId the fromNodeId to set
+   * @param _fromNodeId
+   *          the fromNodeId to set
    */
   public void setFromNodeId(String _fromNodeId) {
     this.fromNodeId = _fromNodeId;
   }
-
 
   /**
    * @return the toNodeId
@@ -114,14 +113,13 @@ public class HighVoltageNodeConnection
     return toNodeId;
   }
 
-
   /**
-   * @param _toNodeId the toNodeId to set
+   * @param _toNodeId
+   *          the toNodeId to set
    */
   public void setToNodeId(String _toNodeId) {
     this.toNodeId = _toNodeId;
   }
-
 
   /**
    * @return the voltageLevel
@@ -130,14 +128,13 @@ public class HighVoltageNodeConnection
     return voltageLevel;
   }
 
-
   /**
-   * @param _voltageLevel the voltageLevel to set
+   * @param _voltageLevel
+   *          the voltageLevel to set
    */
   public void setVoltageLevel(double _voltageLevel) {
     this.voltageLevel = _voltageLevel;
   }
-
 
   /**
    * @return the type
@@ -146,14 +143,13 @@ public class HighVoltageNodeConnection
     return type;
   }
 
-
   /**
-   * @param _type the type to set
+   * @param _type
+   *          the type to set
    */
   public void setType(String _type) {
     this.type = _type;
   }
-
 
   /**
    * @return the geomLength
@@ -162,14 +158,13 @@ public class HighVoltageNodeConnection
     return geomLength;
   }
 
-
   /**
-   * @param _geomLength the geomLength to set
+   * @param _geomLength
+   *          the geomLength to set
    */
   public void setGeomLength(double _geomLength) {
     this.geomLength = _geomLength;
   }
-
 
   /**
    * @return the length
@@ -178,9 +173,9 @@ public class HighVoltageNodeConnection
     return length;
   }
 
-
   /**
-   * @param _length the length to set
+   * @param _length
+   *          the length to set
    */
   public void setLength(double _length) {
     this.length = _length;
@@ -193,14 +188,13 @@ public class HighVoltageNodeConnection
     return r;
   }
 
-
   /**
-   * @param _r the r to set
+   * @param _r
+   *          the r to set
    */
   public void setR(double _r) {
     this.r = _r;
   }
-
 
   /**
    * @return the xl
@@ -209,9 +203,9 @@ public class HighVoltageNodeConnection
     return xl;
   }
 
-
   /**
-   * @param _xl the xl to set
+   * @param _xl
+   *          the xl to set
    */
   public void setXl(double _xl) {
     this.xl = _xl;
@@ -224,14 +218,13 @@ public class HighVoltageNodeConnection
     return bc;
   }
 
-
   /**
-   * @param _bc the bc to set
+   * @param _bc
+   *          the bc to set
    */
   public void setBc(double _bc) {
     this.bc = _bc;
   }
-
 
   /**
    * @return the ith
@@ -240,19 +233,19 @@ public class HighVoltageNodeConnection
     return ith;
   }
 
-
   /**
-   * @param _ith the ith to set
+   * @param _ith
+   *          the ith to set
    */
   public void setIth(double _ith) {
     this.ith = _ith;
   }
-  
+
   public static String getHeader() {
     return "ID,von_ID,von_Standort,nach_ID,nach_Standort,Spannungslevel,Typ,R',XL',BC',geom. L [km],Länge,Ith";
   }
 
-  public String toString() {
+  @Override public String toString() {
     StringBuilder builder;
     String separator;
     //
@@ -286,7 +279,7 @@ public class HighVoltageNodeConnection
     //
     return builder.toString();
   }
-  
+
   public static HighVoltageNodeConnection parse(String _line) {
     HighVoltageNodeConnection __connection;
     String[] split;
@@ -307,5 +300,5 @@ public class HighVoltageNodeConnection
     //
     return __connection;
   }
-  
+
 }
