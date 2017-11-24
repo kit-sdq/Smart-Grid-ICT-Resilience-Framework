@@ -288,10 +288,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void widgetSelected(SelectionEvent e) {
                 propertyChanged();
                 boolean inputEnabled = !generateTopoCheckBox.getSelection();
-                inputTextbox.setEnabled(inputEnabled);
-                selectInputPathButton.setEnabled(inputEnabled);
-                topologyTextbox.setEnabled(inputEnabled);
-                selectTopologyPathButton.setEnabled(inputEnabled);
+                setPathTextFieldsEnabled(inputEnabled);
             }
         });
         generateTopoCheckBox.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnGenerateTopo.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -457,6 +454,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     @Override
     public void initializeFrom(final ILaunchConfiguration configuration) {
         try {
+            boolean generateTopo = configuration.getAttribute(Constants.TOPO_GENERATION_KEY, Constants.DEFAULT_TOPO_GENERATION);
+            setPathTextFieldsEnabled(!generateTopo);
+
             hackingSpeedText.setText(configuration.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
             topologyTextbox.setText(configuration.getAttribute(Constants.TOPO_PATH_KEY, Constants.DEFAULT_TOPO_PATH));
             inputTextbox.setText(configuration.getAttribute(Constants.INPUT_PATH_KEY, Constants.DEFAULT_INPUT_PATH));
@@ -466,7 +466,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             rootNodeTextbox.setText(configuration.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID));
             hackingStyleCombo.setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
             ignoreLogicalConCheckBox.setSelection(configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON).contentEquals(Constants.TRUE));
-            generateTopoCheckBox.setSelection(configuration.getAttribute(Constants.TOPO_GENERATION_KEY, Constants.DEFAULT_TOPO_GENERATION));
+            generateTopoCheckBox.setSelection(generateTopo);
             completionCheckBox.setSelection(configuration.getAttribute(Constants.SMARTMETER_COMPLETION_KEY, Constants.DEFAULT_SMARTMETER_COMPLETION).contentEquals(Constants.TRUE));
 
             setSelectionOfComboBox(comboAttackSimulation, configuration, Constants.ATTACKER_SIMULATION_KEY);
@@ -475,6 +475,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             setSelectionOfComboBox(comboTerminationCondition, configuration, Constants.TERMINATION_CONDITION_SIMULATION_KEY);
             setSelectionOfComboBox(comboProgressor, configuration, Constants.TIME_PROGRESSOR_SIMULATION_KEY);
             setSelectionOfComboBox(comboKritisSimulation, configuration, Constants.KRITIS_SIMULATION_KEY);
+
         } catch (final CoreException e) {
             LOG.error("An error occured when trying to read the launch configuration.", e);
         }
@@ -506,7 +507,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         boolean generateTopo = generateTopoCheckBox.getSelection();
 
         // Combo Box Parsing
-        final String hackingStyleString = hackingStyleCombo.getItem(hackingStyleCombo.getSelectionIndex());
+        final String hackingStyleString = getSelectionOfComboBox(hackingStyleCombo);
 
         // Add to config
         configuration.setAttribute(Constants.TOPO_PATH_KEY, topoPath);
@@ -522,26 +523,35 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         configuration.setAttribute(Constants.TOPO_GENERATION_KEY, generateTopo);
 
         if (comboAttackSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.ATTACKER_SIMULATION_KEY, comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.ATTACKER_SIMULATION_KEY, getSelectionOfComboBox(comboAttackSimulation));
         }
         if (comboPowerLoadSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.POWER_LOAD_SIMULATION_KEY, comboPowerLoadSimulation.getItem(comboPowerLoadSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.POWER_LOAD_SIMULATION_KEY, getSelectionOfComboBox(comboPowerLoadSimulation));
         }
         if (comboTerminationCondition.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.TERMINATION_CONDITION_SIMULATION_KEY, comboTerminationCondition.getItem(comboTerminationCondition.getSelectionIndex()));
+            configuration.setAttribute(Constants.TERMINATION_CONDITION_SIMULATION_KEY, getSelectionOfComboBox(comboTerminationCondition));
         }
         if (comboProgressor.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.TIME_PROGRESSOR_SIMULATION_KEY, comboProgressor.getItem(comboProgressor.getSelectionIndex()));
+            configuration.setAttribute(Constants.TIME_PROGRESSOR_SIMULATION_KEY, getSelectionOfComboBox(comboProgressor));
         }
         if (comboImpactAnalysis.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_KEY, comboImpactAnalysis.getItem(comboImpactAnalysis.getSelectionIndex()));
+            configuration.setAttribute(Constants.IMPACT_ANALYSIS_SIMULATION_KEY, getSelectionOfComboBox(comboImpactAnalysis));
         }
         if (comboKritisSimulation.getSelectionIndex() != -1) {
-            configuration.setAttribute(Constants.KRITIS_SIMULATION_KEY, comboKritisSimulation.getItem(comboKritisSimulation.getSelectionIndex()));
+            configuration.setAttribute(Constants.KRITIS_SIMULATION_KEY, getSelectionOfComboBox(comboKritisSimulation));
         }
 
         // Now Tab is Clean again
         setDirty(false);
+    }
+
+    private String getSelectionOfComboBox(Combo comboBox) {
+        int selectionIndex = comboBox.getSelectionIndex();
+        if (selectionIndex == -1) {
+            return null;
+        } else {
+            return comboBox.getItem(selectionIndex);
+        }
     }
 
     private String parseCheckBox(Button checkBox) {
@@ -750,5 +760,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         if (comboBox.getItemCount() > 0) {
             comboBox.select(0);
         }
+    }
+
+    private void setPathTextFieldsEnabled(boolean inputEnabled) {
+        inputTextbox.setEnabled(inputEnabled);
+        selectInputPathButton.setEnabled(inputEnabled);
+        topologyTextbox.setEnabled(inputEnabled);
+        selectTopologyPathButton.setEnabled(inputEnabled);
     }
 }
