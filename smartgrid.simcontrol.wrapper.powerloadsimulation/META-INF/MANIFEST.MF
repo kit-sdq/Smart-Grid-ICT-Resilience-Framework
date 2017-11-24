@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  smartgrid.model.output,
  org.eclipse.debug.core,
  smartgrid.simcontrol.baselib;bundle-version="1.0.0",
- smartgrid.simcontrol.coupling;bundle-version="1.0.0"
+ smartgrid.simcontrol.coupling;bundle-version="1.0.0",
+ org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
