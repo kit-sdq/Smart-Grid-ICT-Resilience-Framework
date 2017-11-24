@@ -321,6 +321,9 @@ public final class ReactiveSimulationController {
         initialState = defaultInputGenerator.generateInput(topo);
         FileSystemHelper.saveToFileSystem(initialState, workingDirPath + "\\generated.smartgridinput");
         impactInput = initialState;
+
+        // pass data to power load sim
+        powerLoadSimulation.initData(topoData);
     }
 
     private String determineWorkingDirPath(String initialPath) {

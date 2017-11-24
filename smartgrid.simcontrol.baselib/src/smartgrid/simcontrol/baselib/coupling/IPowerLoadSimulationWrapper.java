@@ -1,6 +1,5 @@
 package smartgrid.simcontrol.baselib.coupling;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
@@ -9,6 +8,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.TopologyContainer;
 
 public interface IPowerLoadSimulationWrapper extends ISimulationComponent {
 
@@ -24,7 +24,7 @@ public interface IPowerLoadSimulationWrapper extends ISimulationComponent {
      */
     public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
 
-    void initData(String gridFileContent, List<String> nodeIDs);
+    public void initData(TopologyContainer topoData);
 
     /**
      * @param kritisDemands

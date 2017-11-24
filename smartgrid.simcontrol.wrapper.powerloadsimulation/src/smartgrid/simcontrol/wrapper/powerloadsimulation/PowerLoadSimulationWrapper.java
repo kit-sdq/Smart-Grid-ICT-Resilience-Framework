@@ -1,6 +1,6 @@
 package smartgrid.simcontrol.wrapper.powerloadsimulation;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -10,6 +10,7 @@ import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.coupling.IPowerLoadSimulation;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
+import smartgrid.simcontrol.coupling.TopologyContainer;
 import smartgrid.simcontrol.iip.PowerLoadSimulation;
 
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
@@ -35,8 +36,8 @@ public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
     }
 
     @Override
-    public void initData(String gridFileContent, List<String> nodeIDs) {
-        powerSim = new PowerLoadSimulation(gridFileContent);
-        powerSim.initializeNodeIDs(nodeIDs);
+    public void initData(TopologyContainer topoData) {
+        powerSim = new PowerLoadSimulation(topoData.getOpfConfig());
+        powerSim.initializeNodeIDs(new ArrayList<String>(topoData.getMapCItoHVN().keySet()));
     }
 }
