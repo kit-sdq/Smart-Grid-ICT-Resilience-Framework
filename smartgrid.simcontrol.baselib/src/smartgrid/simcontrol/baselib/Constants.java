@@ -68,4 +68,5 @@ public final class Constants {
 
     // shared simulation component names
     public static final String IIP_OPF_NAME = "Power Load Simulation Wrapper";
+    public static final String KRITIS_SIMULATION_NAME = "KRITIS Remote Simulation Wrapper";
 }

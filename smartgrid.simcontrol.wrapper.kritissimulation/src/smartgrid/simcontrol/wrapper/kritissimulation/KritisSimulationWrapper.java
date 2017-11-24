@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.coupling.PowerSpec;
@@ -34,6 +35,6 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
 
     @Override
     public String getName() {
-        return "KRITIS Remote Simulation Wrapper";
+        return Constants.KRITIS_SIMULATION_NAME;
     }
 }
