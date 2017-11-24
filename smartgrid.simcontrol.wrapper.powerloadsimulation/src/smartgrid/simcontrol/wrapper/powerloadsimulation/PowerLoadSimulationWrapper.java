@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.coupling.IPowerLoadSimulation;
@@ -24,7 +25,7 @@ public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
 
     @Override
     public String getName() {
-        return "Power Load Simulation Wrapper";
+        return Constants.IIP_OPF_NAME;
     }
 
     @Override

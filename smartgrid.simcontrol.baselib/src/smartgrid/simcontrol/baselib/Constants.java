@@ -65,4 +65,7 @@ public final class Constants {
     public static final String TERMINATION_CONDITION_SIMULATION_KEY = "terminationConditionConfiguration";
     public static final String TIME_PROGRESSOR_SIMULATION_KEY = "timeProgressorConfiguration";
     public static final String KRITIS_SIMULATION_KEY = "kritisSimulationConfiguration";
+
+    // shared simulation component names
+    public static final String IIP_OPF_NAME = "Power Load Simulation Wrapper";
 }
