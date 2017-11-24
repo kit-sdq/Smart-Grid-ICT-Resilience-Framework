@@ -3,10 +3,12 @@ package smartgrid.simcontrol.coupling;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TopologyContainer {
+public class TopologyContainer
+  implements Serializable {
 
   private HashMap<Integer,HighVoltageNode> highVoltageNodes;
   

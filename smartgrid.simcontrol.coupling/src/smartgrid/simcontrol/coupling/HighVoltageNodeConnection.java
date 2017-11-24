@@ -1,6 +1,9 @@
 package smartgrid.simcontrol.coupling;
 
-public class HighVoltageNodeConnection {
+import java.io.Serializable;
+
+public class HighVoltageNodeConnection
+  implements Serializable {
 
 ////////////////////////////////////////////////////////////////////////////////
 //constants definitions

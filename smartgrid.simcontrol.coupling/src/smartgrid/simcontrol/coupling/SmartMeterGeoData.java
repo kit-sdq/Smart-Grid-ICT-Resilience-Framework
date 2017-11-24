@@ -5,7 +5,8 @@ import java.io.Serializable;
 /*
  Smart meter geo information for constructing reasonable ICT-topology
  */
-public class SmartMeterGeoData implements Serializable {
+public class SmartMeterGeoData
+  implements Serializable {
 
 	private static final long serialVersionUID = -1219989950279411992L;
 
