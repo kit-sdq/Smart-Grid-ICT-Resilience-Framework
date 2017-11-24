@@ -173,6 +173,16 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         comboPowerLoadSimulation = new Combo(grpAnalyses, SWT.READ_ONLY);
         comboPowerLoadSimulation.setBounds(213, 21, 202, 23);
         comboPowerLoadSimulation.addModifyListener(e -> {
+
+            // iip opf simulation has special needs
+            String selectedPowerLoadSim = getSelectionOfComboBox(comboPowerLoadSimulation);
+            if (selectedPowerLoadSim.equals(Constants.IIP_OPF_NAME)) {
+
+                // select kritis simulation
+                int indexOfKritisSim = comboKritisSimulation.indexOf(Constants.KRITIS_SIMULATION_NAME);
+                if (indexOfKritisSim != -1)
+                    comboKritisSimulation.select(indexOfKritisSim);
+            }
             propertyChanged();
         });
 
@@ -671,10 +681,13 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
          * --> Check wheter Output path is the same as inputpath So the Input Files and Output are
          * on the same branch Needed because otherwise the Output Model gets broken
          */
-        final boolean outWrong = !outputTextbox.getText().contains(new File(inputTextbox.getText()).getParent());
+        String parentOfInput = new File(inputTextbox.getText()).getParent();
+        if (parentOfInput == null) {
+            return true;
+        }
+        final boolean outWrong = !outputTextbox.getText().contains(parentOfInput);
 
         return topoWrong || inWrong || outWrong;
-        // return false;
     }
 
     @SuppressWarnings("unused")
