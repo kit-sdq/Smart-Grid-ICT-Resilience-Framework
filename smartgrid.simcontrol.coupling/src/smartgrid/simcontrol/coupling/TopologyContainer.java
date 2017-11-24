@@ -5,29 +5,30 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TopologyContainer
   implements Serializable {
 
-  private HashMap<Integer,HighVoltageNode> highVoltageNodes;
+  private LinkedHashMap<String,HighVoltageNode> highVoltageNodes;
   
-  private HashMap<String, Map<String, SmartMeterGeoData>> mapCItoHVN;
+  private LinkedHashMap<String,Map<String,SmartMeterGeoData>> mapCItoHVN;
   
   private String opfConfig;
   
   private TopologyContainer() {
   }
  
-  public HashMap<Integer,HighVoltageNode> getHighVoltageNodes() {
-    return new HashMap<>(highVoltageNodes);
+  public LinkedHashMap<String,HighVoltageNode> getHighVoltageNodes() {
+    return new LinkedHashMap<>(highVoltageNodes);
   }
   
-  public HashMap<String, Map<String, SmartMeterGeoData>> getMapCItoHVN() {
+  public LinkedHashMap<String, Map<String, SmartMeterGeoData>> getMapCItoHVN() {
     return mapCItoHVN;
   }
-  public void setMapCItoHVN(Map<String, Map<String, SmartMeterGeoData>> _mapCItoHVN) {
-    this.mapCItoHVN = new HashMap<>(_mapCItoHVN);
+  public void setMapCItoHVN(LinkedHashMap<String, Map<String, SmartMeterGeoData>> _mapCItoHVN) {
+    this.mapCItoHVN = new LinkedHashMap<>(_mapCItoHVN);
   }
   
   public String getOpfConfig() {
@@ -86,13 +87,13 @@ public class TopologyContainer
     return __topologyContainer;
   }
   
-  public static HashMap<Integer,HighVoltageNode> loadHighVoltageNodes(File _highVoltageNodesFile, File _highVoltageNodeConnectionsFile) {
-    HashMap<Integer,HighVoltageNode> __nodes;
+  public static LinkedHashMap<String,HighVoltageNode> loadHighVoltageNodes(File _highVoltageNodesFile, File _highVoltageNodeConnectionsFile) {
+    LinkedHashMap<String,HighVoltageNode> __nodes;
     String line;
     HighVoltageNode node;
     HighVoltageNodeConnection connection;
     //
-    __nodes = new HashMap<>();
+    __nodes = new LinkedHashMap<>();
     // establish nodes
     try (BufferedReader highVoltageNodesReader = new BufferedReader(new FileReader(_highVoltageNodesFile))) {
       // skip X initial lines

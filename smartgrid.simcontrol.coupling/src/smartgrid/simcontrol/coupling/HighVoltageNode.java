@@ -16,7 +16,7 @@ public class HighVoltageNode
 ////////////////////////////////////////////////////////////////////////////////
 // field definitions
 ////////////////////////////////////////////////////////////////////////////////
-  private int id;
+  private String id;
 
   private String shortName;
 
@@ -74,7 +74,7 @@ public class HighVoltageNode
    * Initializations of the default values
    */
   private void initDefaults() {
-    id = -1;
+    id = "-1";
     shortName = "";
     longName = "";
     lat = 0.0;
@@ -89,7 +89,7 @@ public class HighVoltageNode
   /**
    * @return the id
    */
-  public int getId() {
+  public String getId() {
     return id;
   }
 
@@ -97,7 +97,7 @@ public class HighVoltageNode
    * @param _id
    *          the id to set
    */
-  public void setId(int _id) {
+  public void setId(String _id) {
     this.id = _id;
   }
 
@@ -245,12 +245,12 @@ public class HighVoltageNode
     return !connections.isEmpty();
   }
 
-  public boolean isConnectioned(HighVoltageNode _node) {
+  public boolean isConnected(HighVoltageNode _node) {
     boolean __connected;
     //
     __connected = false;
     for (HighVoltageNodeConnection tmpConnection : connections) {
-      if (tmpConnection.getToNodeId() == _node.getId()) {
+      if (_node.getId().equals(tmpConnection.getToNodeId())) {
         __connected = true;
         break;
       }
@@ -300,7 +300,7 @@ public class HighVoltageNode
     //
     split = _line.split(",", -1);
     __node = new HighVoltageNode();
-    __node.setId(Integer.parseInt(split[0]));
+    __node.setId(split[0]);
     __node.setShortName(split[1]);
     __node.setLongName(split[2]);
     __node.setLat(Double.parseDouble(split[3]));

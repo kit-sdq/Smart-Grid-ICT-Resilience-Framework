@@ -16,9 +16,9 @@ public class HighVoltageNodeConnection
 ////////////////////////////////////////////////////////////////////////////////
   private int id;
   
-  private int fromNodeId;
+  private String fromNodeId;
   
-  private int toNodeId;
+  private String toNodeId;
   
   private double voltageLevel;
   
@@ -94,7 +94,7 @@ public class HighVoltageNodeConnection
   /**
    * @return the fromNodeId
    */
-  public int getFromNodeId() {
+  public String getFromNodeId() {
     return fromNodeId;
   }
 
@@ -102,7 +102,7 @@ public class HighVoltageNodeConnection
   /**
    * @param _fromNodeId the fromNodeId to set
    */
-  public void setFromNodeId(int _fromNodeId) {
+  public void setFromNodeId(String _fromNodeId) {
     this.fromNodeId = _fromNodeId;
   }
 
@@ -110,7 +110,7 @@ public class HighVoltageNodeConnection
   /**
    * @return the toNodeId
    */
-  public int getToNodeId() {
+  public String getToNodeId() {
     return toNodeId;
   }
 
@@ -118,7 +118,7 @@ public class HighVoltageNodeConnection
   /**
    * @param _toNodeId the toNodeId to set
    */
-  public void setToNodeId(int _toNodeId) {
+  public void setToNodeId(String _toNodeId) {
     this.toNodeId = _toNodeId;
   }
 
@@ -294,8 +294,8 @@ public class HighVoltageNodeConnection
     split = _line.split(",", -1);
     __connection = new HighVoltageNodeConnection();
     __connection.setId(Integer.parseInt(split[0]));
-    __connection.setFromNodeId(Integer.parseInt(split[1]));
-    __connection.setToNodeId(Integer.parseInt(split[3]));
+    __connection.setFromNodeId(split[1]);
+    __connection.setToNodeId(split[3]);
     __connection.setVoltageLevel(Double.parseDouble(split[5]));
     __connection.setType(split[6]);
     __connection.setR(Double.parseDouble(split[7]));
