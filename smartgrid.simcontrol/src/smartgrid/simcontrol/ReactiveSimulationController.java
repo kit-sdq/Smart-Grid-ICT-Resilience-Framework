@@ -48,6 +48,8 @@ import smartgridtopo.SmartMeter;
 
 public final class ReactiveSimulationController {
 
+    private static final String POWER_LOAD_SIMULATION_WRAPPER_NAME = "Power Load Simulation Wrapper";
+
     private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
     private IPowerLoadSimulationWrapper powerLoadSimulation;
@@ -356,7 +358,7 @@ public final class ReactiveSimulationController {
         final List<IPowerLoadSimulationWrapper> power = SimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
         for (final IPowerLoadSimulationWrapper e : power) {
 
-            if (e.getName().equals("Power Load Simulation Wrapper")) {
+            if (e.getName().equals(POWER_LOAD_SIMULATION_WRAPPER_NAME)) {
                 powerLoadSimulation = e;
             }
         }
@@ -421,7 +423,7 @@ public final class ReactiveSimulationController {
 
         // get topology data if needed
         boolean generateTopo = launchConfig.getAttribute(Constants.TOPO_GENERATION_KEY, false);
-        boolean usingPowerLoadWrapper = powerLoadSimulation.getName().equals("Power Load Simulation Wrapper");
+        boolean usingPowerLoadWrapper = powerLoadSimulation.getName().equals(POWER_LOAD_SIMULATION_WRAPPER_NAME);
         boolean needTopoData = generateTopo || usingPowerLoadWrapper;
         if (needTopoData) {
             topoData = BlockingKritisDataExchanger.getTopoData();
