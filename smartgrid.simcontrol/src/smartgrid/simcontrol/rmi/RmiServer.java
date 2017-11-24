@@ -116,11 +116,10 @@ public class RmiServer implements ISimulationController {
     }
 
     @Override
-    public void initActive() throws SimcontrolException {
+    public void initActive() {
         LOG.info("init active called remotely");
         if (state != RmiServerState.NOT_INIT) {
             LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
-            throw new SimcontrolException(ERROR_SERVER_ALREADY_INITIALIZED);
         }
         state = RmiServerState.ACTIVE;
     }
@@ -130,7 +129,6 @@ public class RmiServer implements ISimulationController {
         LOG.info("init reactive called remotely");
         if (state != RmiServerState.NOT_INIT) {
             LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
-            throw new SimcontrolException(ERROR_SERVER_ALREADY_INITIALIZED);
         }
         state = RmiServerState.REACTIVE;
 
