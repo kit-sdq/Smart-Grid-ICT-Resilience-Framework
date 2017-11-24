@@ -464,7 +464,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             rootNodeTextbox.setText(configuration.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID));
             hackingStyleCombo.setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
             ignoreLogicalConCheckBox.setSelection(configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON).contentEquals(Constants.TRUE));
-            generateTopoCheckBox.setSelection(configuration.getAttribute(Constants.TOPO_GENERATION_KEY, Constants.DEFAULT_TOPO_GENERATION).contentEquals(Constants.TRUE));
+            generateTopoCheckBox.setSelection(configuration.getAttribute(Constants.TOPO_GENERATION_KEY, Constants.DEFAULT_TOPO_GENERATION));
             completionCheckBox.setSelection(configuration.getAttribute(Constants.SMARTMETER_COMPLETION_KEY, Constants.DEFAULT_SMARTMETER_COMPLETION).contentEquals(Constants.TRUE));
 
             setSelectionOfComboBox(comboAttackSimulation, configuration, Constants.ATTACKER_SIMULATION_KEY);
@@ -501,7 +501,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         // Check Box Parsing
         String ignoreLogicalConnections = parseCheckBox(ignoreLogicalConCheckBox);
         String smartMeterCompletion = parseCheckBox(completionCheckBox);
-        String generateTopo = parseCheckBox(generateTopoCheckBox);
+        boolean generateTopo = generateTopoCheckBox.getSelection();
 
         // Combo Box Parsing
         final String hackingStyleString = hackingStyleCombo.getItem(hackingStyleCombo.getSelectionIndex());

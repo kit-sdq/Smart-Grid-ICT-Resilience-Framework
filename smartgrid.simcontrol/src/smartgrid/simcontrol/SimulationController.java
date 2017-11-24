@@ -51,7 +51,16 @@ public final class SimulationController {
         String outputPath = launchConfig.getAttribute(Constants.OUTPUT_PATH_KEY, "");
         String inputPath = launchConfig.getAttribute(Constants.INPUT_PATH_KEY, "");
         String topoPath = launchConfig.getAttribute(Constants.TOPO_PATH_KEY, "");
+
         boolean generateTopo = launchConfig.getAttribute(Constants.TOPO_GENERATION_KEY, false);
+//        String generateTopoString = launchConfig.getAttribute(Constants.TOPO_GENERATION_KEY, Constants.FAIL);
+//        boolean generateTopo;
+//        if (generateTopoString.equals(Constants.FAIL)) {
+//            throw new RuntimeException("Could not read attribute " + Constants.TOPO_GENERATION_KEY + " from the launch config.");
+//        } else {
+//            generateTopo = generateTopoString.equals(Constants.TRUE);
+//        }
+
         maxTimeSteps = Integer.parseUnsignedInt(launchConfig.getAttribute(Constants.TIME_STEPS_KEY, ""));
 
         LOG.info("Running for " + maxTimeSteps + " time steps");
