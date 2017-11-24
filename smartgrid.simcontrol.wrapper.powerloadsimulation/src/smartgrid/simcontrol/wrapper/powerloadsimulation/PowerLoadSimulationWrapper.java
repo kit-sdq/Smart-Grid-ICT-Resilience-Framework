@@ -4,17 +4,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.Constants;
 import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
+import smartgrid.simcontrol.coupling.HighVoltageNode;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.TopologyContainer;
 import smartgrid.simcontrol.iip.PowerLoadSimulation;
 
 public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
+
+    private static final Logger LOG = Logger.getLogger(PowerLoadSimulationWrapper.class);
 
     private PowerLoadSimulation powerSim;
 
@@ -39,7 +43,8 @@ public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
     @Override
     public void initData(TopologyContainer topoData) {
         powerSim = new PowerLoadSimulation(topoData.getOpfConfig());
-        List<String> listOfStringIds = topoData.getHighVoltageNodes().keySet().stream().map(key -> key.toString()).collect(Collectors.toList());
-        powerSim.initializeNodeIDs(listOfStringIds);
+        List<String> nodeIds = topoData.getHighVoltageNodes().values().stream().map(HighVoltageNode::getId).collect(Collectors.toList());
+        LOG.info(nodeIds);
+        powerSim.initializeNodeIDs(nodeIds);
     }
 }
