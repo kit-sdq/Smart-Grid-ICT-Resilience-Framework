@@ -172,7 +172,9 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         comboPowerLoadSimulation = new Combo(grpAnalyses, SWT.READ_ONLY);
         comboPowerLoadSimulation.setBounds(213, 21, 202, 23);
-        comboPowerLoadSimulation.addModifyListener(e -> propertyChanged());
+        comboPowerLoadSimulation.addModifyListener(e -> {
+            propertyChanged();
+        });
 
         comboKritisSimulation = new Combo(grpAnalyses, SWT.READ_ONLY);
         comboKritisSimulation.setBounds(213, 50, 202, 23);
@@ -478,7 +480,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    public void setSelectionOfComboBox(Combo comboBox, final ILaunchConfiguration configuration, String simulationModuleKey) throws CoreException {
+    private void setSelectionOfComboBox(Combo comboBox, final ILaunchConfiguration configuration, String simulationModuleKey) throws CoreException {
         final String configValue = configuration.getAttribute(simulationModuleKey, "");
         for (int i = 0; i < comboBox.getItems().length; i++) {
             if (comboBox.getItem(i).equals(configValue)) {
@@ -542,14 +544,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         setDirty(false);
     }
 
-    public String parseCheckBox(Button checkBox) {
-        String logiCon;
+    private String parseCheckBox(Button checkBox) {
         if (checkBox.getSelection()) {
-            logiCon = Constants.TRUE;
+            return Constants.TRUE;
         } else {
-            logiCon = Constants.FALSE;
+            return Constants.FALSE;
         }
-        return logiCon;
     }
 
     @Override
@@ -743,7 +743,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         }
     }
 
-    public void fillSimulationComboBox(final List<? extends ISimulationComponent> simulationComponents, Combo comboBox) {
+    private void fillSimulationComboBox(final List<? extends ISimulationComponent> simulationComponents, Combo comboBox) {
         for (final ISimulationComponent ele : simulationComponents) {
             comboBox.add(ele.getName());
         }
