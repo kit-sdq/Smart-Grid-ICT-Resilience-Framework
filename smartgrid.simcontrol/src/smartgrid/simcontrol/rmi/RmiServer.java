@@ -155,7 +155,15 @@ public class RmiServer implements ISimulationController {
         LOG.info("run was called remotely");
         Map<String, Map<String, Double>> powerSupply;
         if (state == RmiServerState.ACTIVE) {
-            powerSupply = BlockingKritisDataExchanger.getDataFromCoupling(kritisPowerDemand);
+            try {
+                powerSupply = BlockingKritisDataExchanger.getDataFromCoupling(kritisPowerDemand);
+            } catch (InterruptedException e) {
+                throw e;
+            } catch (Exception e) {
+                resetState();
+                BlockingKritisDataExchanger.freeAll();
+                throw new SimcontrolException("There was an exception in SimControl. The RMI server has now been reset to 'uninitialized'.", e);
+            }
         } else if (state == RmiServerState.REACTIVE) {
             powerSupply = reactiveSimControl.run(kritisPowerDemand);
         } else {

@@ -7,6 +7,8 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 
+import smartgrid.simcontrol.rmi.BlockingKritisDataExchanger;
+
 /**
  * This class provides the Delegate for the SimControl Approach of the Smartgrid Analysis'
  *
@@ -35,6 +37,7 @@ public class SimcontroLaunchConfigurationDelegate implements ILaunchConfiguratio
             LOG.info("The simulation was interrupted.");
         } catch (Exception e) {
             LOG.fatal("An unexpected exception occured.", e);
+            BlockingKritisDataExchanger.storeException(e);
             throw e;
         }
     }
