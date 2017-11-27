@@ -44,10 +44,12 @@ public class SimcontroLaunchConfigurationDelegate implements ILaunchConfiguratio
 
             if (attempt < maxAttempts) {
                 attempt++;
+                LOG.info("Attempting another run (" + (attempt + 1) + '/' + (maxAttempts + 1) + ')');
                 this.launch(configuration, mode, launch, monitor);
+            } else {
+                LOG.info("The maximal amount of attempts failed (" + (maxAttempts + 1) + "). Terminating.");
+                throw e;
             }
-
-            throw e;
         }
     }
 }

@@ -162,6 +162,7 @@ public class RmiServer implements ISimulationController {
             } catch (Throwable e) {
                 resetState();
                 BlockingKritisDataExchanger.freeAll();
+                LOG.info("The stored exception that originally occured in SimControl was passed to the remote KRITIS simulation. The RMI server and data exchange are now reset.");
                 throw new SimcontrolException("There was an exception in SimControl. The RMI server has now been reset to 'uninitialized'.", e);
             }
         } else if (state == RmiServerState.REACTIVE) {

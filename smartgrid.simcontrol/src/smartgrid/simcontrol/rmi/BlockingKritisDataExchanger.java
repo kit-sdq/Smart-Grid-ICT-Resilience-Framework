@@ -137,6 +137,7 @@ public class BlockingKritisDataExchanger {
         bufferedPower = null;
         bufferedTopoData = null;
         storedException = null;
+        LOG.info("All data was cleared.");
 
         return threadFreed;
     }
