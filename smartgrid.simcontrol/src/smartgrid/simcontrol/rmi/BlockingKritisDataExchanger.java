@@ -49,10 +49,7 @@ public class BlockingKritisDataExchanger {
     public static synchronized Map<String, Map<String, Double>> getDataFromCoupling(Map<String, Map<String, PowerSpec>> demand) throws Exception {
         assert bufferedDemand == null;
 
-        if (storedException != null) {
-            LOG.info("Passing exception to KRITIS simulation.");
-            throw storedException;
-        }
+        hasExceptionOccured();
 
         // provide own data
         bufferedDemand = demand;
@@ -61,9 +58,12 @@ public class BlockingKritisDataExchanger {
 
         // wait for data
         while (bufferedPower == null) {
+            hasExceptionOccured();
             LOG.info("The Kritis simulation is waiting for data of SimControl.");
             BlockingKritisDataExchanger.class.wait();
         }
+
+        hasExceptionOccured();
 
         // consume data
         Map<String, Map<String, Double>> tempPower = bufferedPower;
@@ -73,8 +73,16 @@ public class BlockingKritisDataExchanger {
         return tempPower;
     }
 
+    private static void hasExceptionOccured() throws Exception {
+        if (storedException != null) {
+            LOG.info("Passing exception to KRITIS simulation.");
+            throw storedException;
+        }
+    }
+
     public static synchronized void storeException(Exception e) {
         storedException = e;
+        BlockingKritisDataExchanger.class.notifyAll();
     }
 
     private static TopologyContainer bufferedTopoData;
@@ -115,11 +123,13 @@ public class BlockingKritisDataExchanger {
             LOG.info("The SimControl thread was interrupted and freed from the data exchange sync.");
         }
 
-        // only free kritisThread if there was no exception (the kritis thread will be freed by the exception throw)
-        if (storedException == null && kritisThread != null) {
-            kritisThread.interrupt();
+        if (kritisThread != null) {
+            // only free kritisThread if there was no exception (the KRITIS thread will be freed by the exception throw)
+            if (storedException == null) {
+                kritisThread.interrupt();
+                LOG.info("The Kritis simulation thread was interrupted and freed from the data exchange sync.");
+            }
             kritisThread = null;
-            LOG.info("The Kritis simulation thread was interrupted and freed from the data exchange sync.");
         }
 
         // clear all buffered data
