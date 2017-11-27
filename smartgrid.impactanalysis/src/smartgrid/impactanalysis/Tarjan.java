@@ -24,7 +24,7 @@ public class Tarjan {
             unprogressedNodes.add(i);
             visited[i] = false;
         }
-        LOG.debug("[Tarjan]: Algorithm starts with");
+        LOG.debug("Algorithm starts with");
 
         LOG.debug(printConvertedList(unprogressedNodes, internalToExternal));
         LOG.debug(Arrays.toString(unprogressedNodes.toArray()));
@@ -34,19 +34,19 @@ public class Tarjan {
             final int starter = unprogressedNodes.pollFirst();
             nodesToCheck.add(starter);
             visited[starter] = true;
-            LOG.debug("[Tarjan]: New cluster with " + internalToExternal.get(starter));
+            LOG.debug("New cluster with " + internalToExternal.get(starter));
 
             final LinkedList<Integer> cluster = new LinkedList<>();
             while (nodesToCheck.size() > 0) {
                 final int n = nodesToCheck.pollFirst();
                 cluster.add(n);
-                LOG.debug("[Tarjan]: Find neighbor of: " + internalToExternal.get(n));
+                LOG.debug("Find neighbor of: " + internalToExternal.get(n));
                 for (int i = 0; i < adjacentMatrix.length; i++) {
                     if (adjacentMatrix[n][i] > 0) {
-                        LOG.debug("[Tarjan]: Found neighbor: " + internalToExternal.get(i));
+                        LOG.debug("Found neighbor: " + internalToExternal.get(i));
                     }
                     if (adjacentMatrix[n][i] > 0 && !visited[i]) {
-                        LOG.debug("[Tarjan]: Unvisited neighbor: " + internalToExternal.get(i));
+                        LOG.debug("Unvisited neighbor: " + internalToExternal.get(i));
                         final int m = i;
 
                         visited[m] = true;
