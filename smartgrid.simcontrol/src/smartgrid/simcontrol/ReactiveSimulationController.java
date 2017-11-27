@@ -326,7 +326,7 @@ public final class ReactiveSimulationController {
         String currentPath = initialPath;
         int runningNumber = 0;
         while (new File(currentPath).exists()) {
-            LOG.info("Exists already: " + currentPath);
+            LOG.debug("Exists already: " + currentPath);
 
             currentPath = initialPath + runningNumber + '\\';
             runningNumber++;
