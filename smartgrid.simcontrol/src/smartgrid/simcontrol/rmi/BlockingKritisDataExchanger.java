@@ -22,7 +22,7 @@ public class BlockingKritisDataExchanger {
     private static Map<String, Map<String, Double>> bufferedPower;
     private static Thread couplingThread;
 
-    private static Exception storedException;
+    private static Throwable storedException;
 
     public static synchronized Map<String, Map<String, PowerSpec>> passDataToKritisSim(Map<String, Map<String, Double>> power) throws InterruptedException {
         assert bufferedPower == null;
@@ -46,7 +46,7 @@ public class BlockingKritisDataExchanger {
         return tempDemand;
     }
 
-    public static synchronized Map<String, Map<String, Double>> getDataFromCoupling(Map<String, Map<String, PowerSpec>> demand) throws Exception {
+    public static synchronized Map<String, Map<String, Double>> getDataFromCoupling(Map<String, Map<String, PowerSpec>> demand) throws Throwable {
         assert bufferedDemand == null;
 
         hasExceptionOccured();
@@ -73,14 +73,14 @@ public class BlockingKritisDataExchanger {
         return tempPower;
     }
 
-    private static void hasExceptionOccured() throws Exception {
+    private static void hasExceptionOccured() throws Throwable {
         if (storedException != null) {
             LOG.info("Passing exception to KRITIS simulation.");
             throw storedException;
         }
     }
 
-    public static synchronized void storeException(Exception e) {
+    public static synchronized void storeException(Throwable e) {
         storedException = e;
         BlockingKritisDataExchanger.class.notifyAll();
     }

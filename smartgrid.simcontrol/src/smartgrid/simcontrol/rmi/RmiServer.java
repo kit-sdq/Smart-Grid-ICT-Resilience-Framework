@@ -159,7 +159,7 @@ public class RmiServer implements ISimulationController {
                 powerSupply = BlockingKritisDataExchanger.getDataFromCoupling(kritisPowerDemand);
             } catch (InterruptedException e) {
                 throw e;
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 resetState();
                 BlockingKritisDataExchanger.freeAll();
                 throw new SimcontrolException("There was an exception in SimControl. The RMI server has now been reset to 'uninitialized'.", e);
