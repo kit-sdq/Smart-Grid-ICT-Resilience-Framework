@@ -20,6 +20,9 @@ public class SimcontroLaunchConfigurationDelegate implements ILaunchConfiguratio
 
     private static final Logger LOG = Logger.getLogger(SimcontroLaunchConfigurationDelegate.class);
 
+    private int attempt = 0;
+    private int maxAttempts = 5;
+
     /**
      * {@inheritDoc}
      * <P>
@@ -38,6 +41,12 @@ public class SimcontroLaunchConfigurationDelegate implements ILaunchConfiguratio
         } catch (Exception e) {
             LOG.fatal("An unexpected exception occured.", e);
             BlockingKritisDataExchanger.storeException(e);
+
+            if (attempt < maxAttempts) {
+                attempt++;
+                this.launch(configuration, mode, launch, monitor);
+            }
+
             throw e;
         }
     }
