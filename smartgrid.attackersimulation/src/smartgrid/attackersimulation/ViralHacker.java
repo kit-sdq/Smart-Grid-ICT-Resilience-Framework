@@ -1,6 +1,3 @@
-/**
- *
- */
 package smartgrid.attackersimulation;
 
 import java.util.LinkedList;
@@ -55,41 +52,25 @@ public class ViralHacker implements IAttackerSimulation {
      * For ExtensionPoints .. use this together with the init() Method
      */
     public ViralHacker() {
-
         // Init Lists
         seedNodeIDs = new LinkedList<>();
         seedNodes = new LinkedList<>();
     }
 
-    /**
-     *
-     * @param hackingSpeed
-     */
     public ViralHacker(final int hackingSpeed) {
 
         this.hackingSpeed = hackingSpeed;
         mode = NodeMode.RandomNode;
-        initDone = true;
     }
 
-    /**
-     * @param hackingSpeed
-     * @param seedNodeID
-     *
-     */
     public ViralHacker(final int hackingSpeed, final List<String> seedNodeIDs) {
 
         this(hackingSpeed);
 
         this.seedNodeIDs = seedNodeIDs;
         mode = NodeMode.NodeIDs;
-        initDone = true;
     }
 
-    /**
-     * @param seedNode
-     * @param hackingSpeed
-     */
     public ViralHacker(final List<On> seedNodes, final int hackingSpeed) {
 
         this(hackingSpeed);
@@ -238,15 +219,14 @@ public class ViralHacker implements IAttackerSimulation {
             case Nodes: // --> Get NodeIDs
                 buildSeedNodeIDsList();
                 break;
-            }// End Swtich
+            }
 
             // Hack Seed Nodes
             assert !seedNodes.isEmpty();
 
             // Done First Run operations
             firstRun = false;
-
-        } // End FirstRun
+        }
     }
 
     private void startHacking() {
