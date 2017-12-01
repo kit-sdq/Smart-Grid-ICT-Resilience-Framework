@@ -253,6 +253,11 @@ public final class ReactiveSimulationController {
             }
         }
 
+        if(powerSupply == null) {
+        	LOG.error("Power Load Simulation returned null. Cannot convert results for ICT Impact Analysis.");
+        	return;
+        }
+        
         //Transfer power supply state into next input
         for (final PowerState inputPowerState : impactInput.getPowerStates()) {
             final String prosumerId = inputPowerState.getOwner().getId();
