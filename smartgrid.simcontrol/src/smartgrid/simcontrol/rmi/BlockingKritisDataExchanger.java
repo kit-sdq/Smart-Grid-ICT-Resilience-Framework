@@ -26,6 +26,7 @@ public class BlockingKritisDataExchanger {
 
     public static synchronized Map<String, Map<String, PowerSpec>> passDataToKritisSim(Map<String, Map<String, Double>> power) throws InterruptedException {
         assert bufferedPower == null;
+        assert power != null; // TODO: abfangen
 
         // provide own data
         bufferedPower = power;
@@ -48,6 +49,7 @@ public class BlockingKritisDataExchanger {
 
     public static synchronized Map<String, Map<String, Double>> getDataFromCoupling(Map<String, Map<String, PowerSpec>> demand) throws Throwable {
         assert bufferedDemand == null;
+        assert demand != null; // TODO: abfangen
 
         hasExceptionOccured();
 
