@@ -97,17 +97,17 @@ public final class ModelToDiagram {
 
             @Override
             protected void doExecute() {
-                LOG.info("[ModelToDiagram]: Adding nodes and egdes to the diagram");
+                LOG.info("Adding nodes and egdes to the diagram");
                 ModelToDiagram.this.addPEs((Diagram) diagramRes.getContents().get(0), scenario);
 
-                LOG.info("[ModelToDiagram]: Applying a layout to the diagram");
+                LOG.info("Applying a layout to the diagram");
                 final ZestLayoutDiagramFeature layout = new ZestLayoutDiagramFeature(GraphitiHelper.getInstance().getFeatureProvider());
                 layout.execute(null);
                 try {
                     diagramRes.save(ModelToDiagram.this.createSaveOptions());
 
                 } catch (final IOException e) {
-                    LOG.error("[ModelToDiagram]: Saving new diagram went wrong, see StackTrace");
+                    LOG.error("Saving new diagram went wrong, see StackTrace");
                     LOG.error(e.getMessage());
                     e.printStackTrace();
                 }
@@ -118,7 +118,7 @@ public final class ModelToDiagram {
     }
 
     private Resource createDiagram(final String diagramPath, final String diagramName, final SmartGridTopology scenario) {
-        LOG.info("[ModelToDiagram]: Creating diagram...");
+        LOG.info("Creating diagram...");
 
         final URI diagramURI = URI.createPlatformResourceURI(project.getFullPath().toString() + "/" + diagramPath + diagramName + F_DIAGRAM, true);
         final IFile diagramFile = project.getFile(diagramPath + diagramName + F_DIAGRAM);
@@ -129,7 +129,7 @@ public final class ModelToDiagram {
             }
 
         } catch (final CoreException e) {
-            LOG.error("[ModelToDiagram]: Failed to delete old diagram. Path is " + diagramFile.getFullPath().toOSString());
+            LOG.error("Failed to delete old diagram. Path is " + diagramFile.getFullPath().toOSString());
             e.printStackTrace();
         }
 
@@ -159,7 +159,7 @@ public final class ModelToDiagram {
         try {
             diagramResource.save(createSaveOptions());
         } catch (final IOException e) {
-            LOG.error("[ModelToDiagram]: Saving new diagram went wrong, see StackTrace");
+            LOG.error("Saving new diagram went wrong, see StackTrace");
             LOG.error(e.getMessage());
             e.printStackTrace();
         }
@@ -181,10 +181,10 @@ public final class ModelToDiagram {
 
         } catch (final PartInitException e1) {
             e1.printStackTrace();
-            LOG.error("[ModelToDiagram]: Could not assign new diagram to editor part. Message is " + e1.getMessage());
+            LOG.error("Could not assign new diagram to editor part. Message is " + e1.getMessage());
         }
 
-        LOG.info("[ModelToDiagram]: Finished creating diagram");
+        LOG.info("Finished creating diagram");
         return diagramResource;
     }
 
@@ -201,23 +201,23 @@ public final class ModelToDiagram {
     }
 
     private void addPEs(final Diagram diagram, final SmartGridTopology scenario) {
-        LOG.debug("[ModelToDiagram]: Adding PowerGridNodes to the diagram");
+        LOG.debug("Adding PowerGridNodes to the diagram");
         for (final PowerGridNode power : scenario.getContainsPGN()) {
             addElements(diagram, power);
         }
-        LOG.debug("[ModelToDiagram]: Adding NetworkEntities to the diagram");
+        LOG.debug("Adding NetworkEntities to the diagram");
         for (final NetworkEntity network : scenario.getContainsNE()) {
             addElements(diagram, network);
             if (!network.getConnectedTo().isEmpty()) {
                 addNetworkEntityWithPowerConnections(diagram, getPeFromBusiness(diagram, network), network.getConnectedTo());
             }
         }
-        LOG.debug("[ModelToDiagram]: Adding PhysicalConnections to the diagram");
+        LOG.debug("Adding PhysicalConnections to the diagram");
         for (final PhysicalConnection connection : scenario.getContainsPC()) {
             addConnection(diagram, connection);
 
         }
-        LOG.debug("[ModelToDiagram]: Adding LogicalCommunications to the diagram");
+        LOG.debug("Adding LogicalCommunications to the diagram");
         for (final LogicalCommunication communication : scenario.getContainsLC()) {
             addConnection(diagram, communication);
         }
