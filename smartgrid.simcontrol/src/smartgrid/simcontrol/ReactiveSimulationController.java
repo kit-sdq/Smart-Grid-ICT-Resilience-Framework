@@ -241,7 +241,7 @@ public final class ReactiveSimulationController {
      */
     private static void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, Map<String, Map<String, Double>> powerSupply) {
 
-        //Transfer hacked state into next input
+        // transfer hacked state into next input
         for (final EntityState state : impactResult.getStates()) {
             final boolean hackedState = state instanceof On && ((On) state).isIsHacked();
             final NetworkEntity owner = state.getOwner();
@@ -253,20 +253,25 @@ public final class ReactiveSimulationController {
             }
         }
 
-        if(powerSupply == null) {
-        	LOG.error("Power Load Simulation returned null. Cannot convert results for ICT Impact Analysis.");
-        	return;
+        if (powerSupply == null) {
+            // TODO improve error handling (at least return empty structure?)
+            LOG.error("Power Load Simulation returned null. Cannot convert results for ICT Impact Analysis.");
+            return;
         }
-        
-        //Transfer power supply state into next input
+
+        // transfer power supply state into next input
         for (final PowerState inputPowerState : impactInput.getPowerStates()) {
             final String prosumerId = inputPowerState.getOwner().getId();
 
             // iterate over node entries
             for (final Map<String, Double> powerForProsumersOfNode : powerSupply.values()) {
                 Double supply = powerForProsumersOfNode.get(prosumerId);
-                assert supply != null;
-                inputPowerState.setPowerOutage(isOutage(supply));
+                if (supply == null) {
+                    LOG.error("There is no power supply for CI " + prosumerId + ". Assuming no power.");
+                    inputPowerState.setPowerOutage(true);
+                } else {
+                    inputPowerState.setPowerOutage(isOutage(supply));
+                }
             }
         }
     }
