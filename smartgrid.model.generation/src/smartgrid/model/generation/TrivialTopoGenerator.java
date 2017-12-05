@@ -42,6 +42,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
         // create network node for command center and connect
         NetworkNode controlCenterNetworkNode = topoFactory.createNetworkNode();
         controlCenterNetworkNode.setId(UIDHelper.generateUID());
+        controlCenterNetworkNode.setName("NetworkOf_ControlCenter");
         topo.getContainsNE().add(controlCenterNetworkNode);
         createPhysicalConnection(topoFactory, topo, controlCenterNetworkNode, controlCenter);
 
@@ -59,6 +60,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
             // create network node
             NetworkNode networkNode = topoFactory.createNetworkNode();
             networkNode.setId(UIDHelper.generateUID());
+            networkNode.setName("NetworkOfNode_" + nodeEntry.getKey());
             topo.getContainsNE().add(networkNode);
             networkNode.getConnectedTo().add(powerGridNode);
 
