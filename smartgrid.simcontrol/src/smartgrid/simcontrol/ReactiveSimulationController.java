@@ -253,7 +253,6 @@ public final class ReactiveSimulationController {
         }
 
         if (powerSupply == null) {
-            // TODO improve error handling (at least return empty structure?)
             LOG.error("Power Load Simulation returned null. Power supply remains unchanged.");
             return;
         }
