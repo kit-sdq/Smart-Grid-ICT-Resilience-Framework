@@ -30,14 +30,14 @@ public class BlockingKritisDataExchanger {
      * This method should only be called from the coupling thread.
      * 
      * @param power
-     *            supply that was determined by the OPF analysis
+     *            supply that was determined by the OPF analysis. Cannot be null.
      * @return the demanded power that was buffered by the KRITIS simulation
      * @throws InterruptedException
      *             if the simulation is interrupted by the user
      */
     public static synchronized Map<String, Map<String, PowerSpec>> bufferSupplyGetDemand(Map<String, Map<String, Double>> power) throws InterruptedException {
         assert bufferedPower == null;
-        assert power != null; // TODO: abfangen
+        assert power != null;
 
         // provide own data
         bufferedPower = power;
@@ -63,7 +63,7 @@ public class BlockingKritisDataExchanger {
      * method should only be called from the coupling thread.
      * 
      * @param demand
-     *            the requested power from the KRITIS simulation
+     *            the requested power from the KRITIS simulation. Cannot be null.
      * @return supply that was determined by the OPF analysis
      * @throws InterruptedException
      *             if the simulation is interrupted by the user
