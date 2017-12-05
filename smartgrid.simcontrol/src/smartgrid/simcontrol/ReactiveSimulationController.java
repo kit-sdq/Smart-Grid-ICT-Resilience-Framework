@@ -131,6 +131,11 @@ public final class ReactiveSimulationController {
         timeProgressor.progress();
         timeStep++;
 
+        // if OPF analysis fails, return empty results (null deadlocks the synchronization)
+        if (powerSupply == null) {
+            powerSupply = new HashMap<>();
+        }
+
         return powerSupply;
     }
 
