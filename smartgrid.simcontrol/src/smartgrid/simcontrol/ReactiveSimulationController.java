@@ -254,7 +254,7 @@ public final class ReactiveSimulationController {
 
         if (powerSupply == null) {
             // TODO improve error handling (at least return empty structure?)
-            LOG.error("Power Load Simulation returned null. Cannot convert results for ICT Impact Analysis.");
+            LOG.error("Power Load Simulation returned null. Power supply remains unchanged.");
             return;
         }
 
@@ -266,8 +266,7 @@ public final class ReactiveSimulationController {
             for (final Map<String, Double> powerForProsumersOfNode : powerSupply.values()) {
                 Double supply = powerForProsumersOfNode.get(prosumerId);
                 if (supply == null) {
-                    LOG.error("There is no power supply for CI " + prosumerId + ". Assuming no power.");
-                    inputPowerState.setPowerOutage(true);
+                    LOG.error("There is no power supply for CI " + prosumerId + ". Power supply remains unchanged.");
                 } else {
                     inputPowerState.setPowerOutage(isOutage(supply));
                 }
