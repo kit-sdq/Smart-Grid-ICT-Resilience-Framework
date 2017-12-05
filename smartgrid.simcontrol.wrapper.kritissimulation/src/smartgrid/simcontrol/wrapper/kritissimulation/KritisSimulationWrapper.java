@@ -19,13 +19,13 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
 
     @Override
     public Map<String, Map<String, PowerSpec>> run(Map<String, Map<String, Double>> power) throws InterruptedException {
-        return BlockingKritisDataExchanger.passDataToKritisSim(power);
+        return BlockingKritisDataExchanger.bufferSupplyGetDemand(power);
     }
 
     @Override
     public Map<String, Map<String, PowerSpec>> getDefaultDemand() throws InterruptedException {
         // TODO implement?
-        return BlockingKritisDataExchanger.passDataToKritisSim(new HashMap<String, Map<String, Double>>());
+        return BlockingKritisDataExchanger.bufferSupplyGetDemand(new HashMap<String, Map<String, Double>>());
     }
 
     @Override
