@@ -6,9 +6,10 @@ import org.apache.log4j.Logger;
 
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.coupling.TopologyContainer;
+import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
 
 /**
- * This is basically an exchanger for two different datatypes.
+ * This is basically an exchanger for two different data types.
  * 
  * @author Misha
  */
@@ -24,7 +25,17 @@ public class BlockingKritisDataExchanger {
 
     private static Throwable storedException;
 
-    public static synchronized Map<String, Map<String, PowerSpec>> passDataToKritisSim(Map<String, Map<String, Double>> power) throws InterruptedException {
+    /**
+     * Buffers the power supply and retrieves the demanded power. Waits if no demand is buffered.
+     * This method should only be called from the coupling thread.
+     * 
+     * @param power
+     *            supply that was determined by the OPF analysis
+     * @return the demanded power that was buffered by the KRITIS simulation
+     * @throws InterruptedException
+     *             if the simulation is interrupted by the user
+     */
+    public static synchronized Map<String, Map<String, PowerSpec>> bufferSupplyGetDemand(Map<String, Map<String, Double>> power) throws InterruptedException {
         assert bufferedPower == null;
         assert power != null; // TODO: abfangen
 
@@ -47,10 +58,23 @@ public class BlockingKritisDataExchanger {
         return tempDemand;
     }
 
-    public static synchronized Map<String, Map<String, Double>> getDataFromCoupling(Map<String, Map<String, PowerSpec>> demand) throws Throwable {
+    /**
+     * Buffers the power demand and retrieves the power supply. Waits if no demand is buffered. This
+     * method should only be called from the coupling thread.
+     * 
+     * @param demand
+     *            the requested power from the KRITIS simulation
+     * @return supply that was determined by the OPF analysis
+     * @throws InterruptedException
+     *             if the simulation is interrupted by the user
+     * @throws Throwable
+     */
+    public static synchronized Map<String, Map<String, Double>> bufferDemandGetSupply(Map<String, Map<String, PowerSpec>> demand) throws Throwable {
         assert bufferedDemand == null;
-        assert demand != null; // TODO: abfangen
 
+        if (demand == null) {
+            throw new SimcontrolException("Power demand cannot be null.");
+        }
         hasExceptionOccured();
 
         // provide own data

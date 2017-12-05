@@ -156,7 +156,7 @@ public class RmiServer implements ISimulationController {
         Map<String, Map<String, Double>> powerSupply;
         if (state == RmiServerState.ACTIVE) {
             try {
-                powerSupply = BlockingKritisDataExchanger.getDataFromCoupling(kritisPowerDemand);
+                powerSupply = BlockingKritisDataExchanger.bufferDemandGetSupply(kritisPowerDemand);
             } catch (InterruptedException e) {
                 throw e;
             } catch (Throwable e) {
