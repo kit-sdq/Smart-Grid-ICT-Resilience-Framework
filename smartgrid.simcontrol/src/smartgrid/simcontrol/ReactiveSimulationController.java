@@ -229,7 +229,6 @@ public final class ReactiveSimulationController {
     }
 
     /**
-     * 
      * @param impactInput
      *            The outdated ImpactAnalysis input data that should be updated
      * @param impactResult

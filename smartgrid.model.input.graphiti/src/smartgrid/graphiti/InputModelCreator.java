@@ -68,8 +68,7 @@ public class InputModelCreator {
 
             uri = getCurrentUri().appendSegment(dialog.getValue() + ".smartgridinput");
         } else {
-            // TODO clear button muss enabled werden -> schwierig -> deshalb
-            // custom actions disabled
+            // TODO clear button muss enabled werden -> schwierig -> deshalb custom actions disabled
             // solange kein input modell geladen ist
             uri = getCurrentUri().appendSegment("default.smartgridinput");
             if (doesFileExist(uri.path(), shell)) {

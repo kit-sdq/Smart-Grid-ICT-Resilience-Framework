@@ -16,7 +16,6 @@ import org.eclipse.graphiti.services.IPeCreateService;
  * Abstract pattern which implements common features of all patterns.
  *
  * @author mario
- *
  */
 public abstract class AbstractFormPattern extends AbstractPattern {
 

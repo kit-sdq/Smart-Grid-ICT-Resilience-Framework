@@ -100,8 +100,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
         logicalNodes = new LinkedList<>();
         controlCenterConnectivity = new HashMap<>();
 
-        // TODO Overload Contructor to have 2 one for SimController and one for
-        // ImpactAnalysis only?
         this.outputPath = outputPath;
         initDone = true;
         // Do it always with logical Connection
@@ -182,10 +180,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
         // Generates Result
         final ScenarioResult result = genOutputResult();
         result.setScenario(smartGridTopo);
-
-        // Saves to File System
-        // FileSystemHelper.saveToFileSystem(result, this.outputPath); //TODO For
-        // Debug purposes only can/should? be removed for SimController later
 
         LOG.debug("Working Directory = " + System.getProperty("user.dir"));
 

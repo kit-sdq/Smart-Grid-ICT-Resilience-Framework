@@ -1,6 +1,5 @@
 package smartgrid.impactanalysis.ui;
 
-//Resource Files
 import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.CoreException;
@@ -16,7 +15,6 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
-//OpenFile Diolog MS Style
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
@@ -27,34 +25,25 @@ import org.eclipse.swt.widgets.Text;
  */
 public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
 
-    /*
-     * Constants for the KEYs of the Working Copy Dict
-     */
-    // TODO Change to Dict implementation friendly keys?
+    // Constants for the KEYs of the Working Copy Dict
     private static final String OUTPUT_PATH_KEY = "outputPath";
     private static final String TOPOLOGY_PATH_KEY = "topologyPath";
     private static final String INPUT_PATH_KEY = "inputPath";
     private static final String TIMESTEPS_KEY = "timeSteps";
 
-    /*
-     * Constants for the Default Input/Output File Paths
-     */
+    // Constants for the Default Input/Output File Paths
     private static final String DEFAULT_PATH = "";
     private static final String DEFAULT_INPUT_PATH = DEFAULT_PATH;
     private static final String DEFAULT_OUTPUT_PATH = DEFAULT_PATH;
     private static final String DEFAULT_TOPO_PATH = DEFAULT_PATH;
     private static final String DEFAULT_TIME_STEPS = "2";
 
-    /*
-     * Constants for valid Extensions
-     */
+    // Constants for valid Extensions
     private static final String TOPO_EXTENSION = "smartgridtopo";
     private static final String INPUT_EXTENSION = "smartgridinput";
     private static final String OUTPUT_EXTENSION = "smartgridoutput";
 
-    /*
-     * UI Variables
-     */
+    // UI Variables
     private Composite container;
     private Text outputTextbox;
     private Text inputTextbox;
@@ -190,7 +179,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
         });
     }
 
-    /*
+    /**
      * Opens OpenFileDialog und returns the Filepath as String
      */
     private String getFilePath(final String dialogMessage, final String extension) {
@@ -242,11 +231,6 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
 
     }
 
-    // @Override
-    // public String getMessage() {
-    // return "42";
-    // }
-
     private boolean areTextBoxesEmpty() {
         final boolean topoEmpty = topologyTextbox.getText().equals("");
         final boolean inEmpty = inputTextbox.getText().equals("");
@@ -255,7 +239,6 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
     }
 
     /**
-     *
      * @return True if topology or input or output file extensions are wrong
      */
     private boolean areFileExtensionsWrong() {
@@ -266,7 +249,7 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
     }
 
     /*
-     * This Methods shows Error Messages AND NO Error Messages !!
+     * This Methods shows Error Messages AND NO Error Messages
      *
      * (non-Javadoc)
      *
@@ -317,5 +300,4 @@ public class LaunchConfigurationTab1 extends AbstractLaunchConfigurationTab {
     private void propertyChanged() {
         updateLaunchConfigurationDialog();
     }
-
 }
