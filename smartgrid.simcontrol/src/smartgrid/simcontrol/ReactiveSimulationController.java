@@ -78,6 +78,8 @@ public final class ReactiveSimulationController {
 
     public Map<String, Map<String, Double>> run(Map<String, Map<String, PowerSpec>> kritisPowerDemand) {
 
+        LOG.info("Starting time step " + timeStep);
+
         ensureEmptyPowerInput(kritisPowerDemand);
 
         // Compute Initial Impact Analysis Result
@@ -95,6 +97,8 @@ public final class ReactiveSimulationController {
         // impact and power may iterate several times
         int innerLoopIterationCount = 0;
         do {
+            LOG.info("Starting iteration " + innerLoopIterationCount + " of time step " + timeStep);
+
             final String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount).getPath();
 
             // run power load simulation
@@ -125,8 +129,6 @@ public final class ReactiveSimulationController {
             innerLoopIterationCount++;
         } while (terminationCondition.evaluate(innerLoopIterationCount, impactInput, impactInputOld, impactResult, impactResultOld));
 
-        LOG.info("Time step " + timeStep + " terminated after " + innerLoopIterationCount + " power/impact iterations");
-
         // modify the scenario between time steps
         timeProgressor.progress();
         timeStep++;
@@ -135,6 +137,8 @@ public final class ReactiveSimulationController {
         if (powerSupply == null) {
             powerSupply = new HashMap<>();
         }
+
+        LOG.info("Finished time step " + timeStep);
 
         return powerSupply;
     }
