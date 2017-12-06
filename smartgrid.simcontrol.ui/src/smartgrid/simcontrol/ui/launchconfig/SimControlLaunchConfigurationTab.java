@@ -177,11 +177,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             // iip opf simulation has special needs
             String selectedPowerLoadSim = getSelectionOfComboBox(comboPowerLoadSimulation);
             if (selectedPowerLoadSim.equals(Constants.IIP_OPF_NAME)) {
-
                 // select kritis simulation
-                int indexOfKritisSim = comboKritisSimulation.indexOf(Constants.KRITIS_SIMULATION_NAME);
-                if (indexOfKritisSim != -1)
-                    comboKritisSimulation.select(indexOfKritisSim);
+                setSelectionOfComboBox(comboKritisSimulation, Constants.KRITIS_SIMULATION_NAME);
             }
             propertyChanged();
         });
@@ -202,7 +199,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 final List<IAttackerSimulation> list = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
                 IAttackerSimulation sim = null;
                 for (final IAttackerSimulation attack : list) {
-                    if (attack.getName().equals(comboAttackSimulation.getItem(comboAttackSimulation.getSelectionIndex()))) {
+                    if (attack.getName().equals(getSelectionOfComboBox(comboAttackSimulation))) {
                         sim = attack;
                         break;
                     }
@@ -297,8 +294,11 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             @Override
             public void widgetSelected(SelectionEvent e) {
                 propertyChanged();
-                boolean inputEnabled = !generateTopoCheckBox.getSelection();
-                setPathTextFieldsEnabled(inputEnabled);
+                boolean generateTopo = generateTopoCheckBox.getSelection();
+                setPathTextFieldsEnabled(!generateTopo);
+                if (generateTopo) {
+                    setSelectionOfComboBox(comboKritisSimulation, Constants.KRITIS_SIMULATION_NAME);
+                }
             }
         });
         generateTopoCheckBox.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnGenerateTopo.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -445,6 +445,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDoubleClick(final MouseEvent e) {
             }
         });
+    }
+
+    private void setSelectionOfComboBox(Combo comboBox, String entry) {
+        int indexOfKritisSim = comboBox.indexOf(entry);
+        if (indexOfKritisSim != -1)
+            comboBox.select(indexOfKritisSim);
     }
 
     @Override
