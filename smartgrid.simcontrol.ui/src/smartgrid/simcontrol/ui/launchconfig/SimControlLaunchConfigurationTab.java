@@ -185,7 +185,17 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         comboKritisSimulation = new Combo(grpAnalyses, SWT.READ_ONLY);
         comboKritisSimulation.setBounds(213, 50, 202, 23);
-        comboKritisSimulation.addModifyListener(e -> propertyChanged());
+        comboKritisSimulation.addModifyListener(e -> {
+
+            // KRITIS Sim supports IIP OPF and topo generation
+            String selectedKtitisSim = getSelectionOfComboBox(comboKritisSimulation);
+            if (!selectedKtitisSim.equals(Constants.KRITIS_SIMULATION_NAME)) {
+                // select kritis simulation
+                setSelectionOfComboBoxToOther(comboPowerLoadSimulation, Constants.IIP_OPF_NAME);
+                generateTopoCheckBox.setSelection(false);
+            }
+            propertyChanged();
+        });
 
         comboImpactAnalysis = new Combo(grpAnalyses, SWT.READ_ONLY);
         comboImpactAnalysis.setBounds(213, 79, 202, 23);
@@ -445,6 +455,10 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDoubleClick(final MouseEvent e) {
             }
         });
+    }
+
+    private void setSelectionOfComboBoxToOther(Combo comboBox, String entry) {
+        comboBox.deselect(comboBox.indexOf(entry));
     }
 
     private void setSelectionOfComboBox(Combo comboBox, String entry) {
