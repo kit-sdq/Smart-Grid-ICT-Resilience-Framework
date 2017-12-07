@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.coupling.PowerSpec;
 import smartgrid.simcontrol.rmi.BlockingKritisDataExchanger;
@@ -29,8 +28,7 @@ public class KritisSimulationWrapper implements IKritisSimulationWrapper {
     }
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) {
-        return ErrorCodeEnum.SUCCESS;
+    public void init(final ILaunchConfiguration config) {
     }
 
     @Override

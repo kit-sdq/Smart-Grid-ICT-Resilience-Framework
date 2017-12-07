@@ -1,19 +1,9 @@
-/**
- *
- */
 package smartgrid.simcontrol.mocks;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
 
-/**
- * Mocks the TimeProgressor
- *
- * @author Christian
- *
- */
 public class NoOperationTimeProgressor implements ITimeProgressor {
 
     /**
@@ -26,14 +16,12 @@ public class NoOperationTimeProgressor implements ITimeProgressor {
     }
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) {
+    public void init(final ILaunchConfiguration config) {
         // Nothing to do here..
-        return ErrorCodeEnum.SUCCESS;
     }
 
     @Override
     public String getName() {
         return "No Operation";
     }
-
 }

@@ -3,7 +3,6 @@ package smartgrid.simcontrol.baselib.coupling;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
 
@@ -21,7 +20,7 @@ public interface IAttackerSimulation extends ISimulationComponent {
      * @throws CoreException
      *             If ILaunchConfiguration.getAttribute fails
      */
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
+    public void init(ILaunchConfiguration config) throws CoreException;
 
     /**
      * Should return true if hacking speed should be considered during the attack simulation

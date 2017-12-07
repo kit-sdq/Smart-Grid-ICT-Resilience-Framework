@@ -1,6 +1,3 @@
-/**
- *
- */
 package smartgrid.simcontrol.mocks;
 
 import org.apache.log4j.Logger;
@@ -8,7 +5,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
@@ -17,7 +13,6 @@ import smartgridoutput.ScenarioResult;
  * A fixed iteration count termination condition
  *
  * @author Christian
- *
  */
 public class IterationCountTerminationCondition implements ITerminationCondition {
 
@@ -45,7 +40,6 @@ public class IterationCountTerminationCondition implements ITerminationCondition
      * <p>
      *
      * Simply breaks after specified IterationCount from the Contructor
-     *
      */
     @Override
     public boolean evaluate(final int currentIteration, final ScenarioState impactInput, final ScenarioState impactInputOld, final ScenarioResult impactResult, final ScenarioResult impactResultOld) {
@@ -55,16 +49,13 @@ public class IterationCountTerminationCondition implements ITerminationCondition
     }
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
+    public void init(final ILaunchConfiguration config) throws CoreException {
         maxIterations = Integer.parseInt(config.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
         LOG.info("Performing at most " + maxIterations + " iterations between power/impact per time step");
-
-        return ErrorCodeEnum.SUCCESS;
     }
 
     @Override
     public String getName() {
         return "Iteration Count";
     }
-
 }

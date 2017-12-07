@@ -1,18 +1,13 @@
-/**
- *
- */
 package smartgrid.simcontrol.mocks;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
 
 /**
  * @author Christian
- *
  */
 public class NoAttackerSimulation implements IAttackerSimulation {
 
@@ -21,7 +16,6 @@ public class NoAttackerSimulation implements IAttackerSimulation {
      * <p>
      *
      * An attacker who doesn't attack
-     *
      */
     @Override
     public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioResult impactAnalysisOutput) {
@@ -30,9 +24,8 @@ public class NoAttackerSimulation implements IAttackerSimulation {
     }
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) {
+    public void init(final ILaunchConfiguration config) {
         // Nothing to do here
-        return ErrorCodeEnum.SUCCESS;
     }
 
     @Override
@@ -54,5 +47,4 @@ public class NoAttackerSimulation implements IAttackerSimulation {
     public boolean enableLogicalConnections() {
         return false;
     }
-
 }

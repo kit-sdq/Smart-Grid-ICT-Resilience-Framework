@@ -16,7 +16,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.model.helper.input.LoadInputModelConformityHelper;
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
@@ -107,9 +106,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
     }
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
-
-        ErrorCodeEnum myError = ErrorCodeEnum.NOT_SET;
+    public void init(final ILaunchConfiguration config) throws CoreException {
 
         internalMaxID = 0;
         powerStates = new HashMap<>();
@@ -124,14 +121,11 @@ public class GraphAnalyzer implements IImpactAnalysis {
         final String ignoreLogicalConnectionsString = config.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.FAIL);
 
         if (ignoreLogicalConnectionsString.equals(Constants.FAIL)) {
-            myError = ErrorCodeEnum.DEFAULT_VALUES_USED;
-
             // Checks whether DEFAULT_IGNORE_LOC_CON_KEY is true and assigns it
             ignoreLogicalConnections = Constants.TRUE.equals(Constants.DEFAULT_IGNORE_LOC_CON);
 
         } else {
-            // checks whether ignoreLogicalConnectionsString is true and assigns
-            // it
+            // checks whether ignoreLogicalConnectionsString is true and assigns it
             ignoreLogicalConnections = Constants.TRUE.equals(ignoreLogicalConnectionsString);
         }
 
@@ -139,8 +133,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
         LOG.debug("Init done");
         initDone = true;
-
-        return myError;
     }
 
     @Override

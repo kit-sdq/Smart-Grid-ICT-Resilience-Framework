@@ -12,7 +12,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.HackingStyle;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.Cluster;
@@ -43,7 +42,6 @@ public class LocalHacker implements IAttackerSimulation {
     private String rootNodeID; // IDs stay the same over the whole Analysis
 
     private On rootNodeState; // Reference Changes between runs!
-    /* End Hacking Root Variables */
 
     private int hackingSpeed;
 
@@ -59,53 +57,11 @@ public class LocalHacker implements IAttackerSimulation {
     public LocalHacker() {
     }
 
-    /**
-     * Constructs an Local Hacker with the desired Hacking Style and hacking Speed.
-     *
-     * The Root Node will be set by Random
-     *
-     * @param desiredHackingStyle
-     *            See {@link HackingStyle} description of the behavior
-     * @param hackingSpeed
-     *            how many Nodes will be hacked in the same Time Step. Minimum Value is 1.
-     */
-    public LocalHacker(final HackingStyle desiredHackingStyle, final int hackingSpeed) {
-
-        usedHackingStyle = desiredHackingStyle;
-
-        // It's 0 Based --> 0 means 1 Node will be hacked. No negative Value allowed !
-
-        assert hackingSpeed >= 0 : "HackingSpeed is 0 Based --> No negative Value allowed !";
-        setHackingSpeed(hackingSpeed - 1);
-
-        rootNodeID = null; // Means No Root provided
-    }
-
-    /**
-     * Constructs an Local Hacker with the desired Hacking Style, hacking Speed and root Node (the
-     * Node where the Hacker is connected to).
-     *
-     * @param usedHackingStyle
-     * @param rootNodeID
-     *            Set the Node by {@link smartgridtopo.Identifier} from which the Hacker operates
-     * @param hackingSpeed
-     *            how many Nodes will be hacked in the same Time Step. Minimum Value is 1.
-     */
-    public LocalHacker(final HackingStyle desiredHackingStyle, final String rootNodeID, final int hackingSpeed) {
-
-        // Call other Constructor
-        this(desiredHackingStyle, hackingSpeed);
-
-        this.rootNodeID = rootNodeID;
-    }
-
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
+    public void init(final ILaunchConfiguration config) throws CoreException {
 
         HackingStyle desiredHackingStyle = null;
         String rootNodeID = null;
-
-        ErrorCodeEnum errorCode = ErrorCodeEnum.NOT_SET;
 
         String desiredHackingStyleString;
         String rootNodeIDString;
@@ -119,8 +75,6 @@ public class LocalHacker implements IAttackerSimulation {
         hackingSpeedString = config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.FAIL);
 
         if (desiredHackingStyleString.equals(Constants.FAIL) || rootNodeIDString.equals(Constants.FAIL)) {
-
-            errorCode = ErrorCodeEnum.DEFAULT_VALUES_USED;
 
             if (desiredHackingStyleString.equals(Constants.FAIL)) {
                 desiredHackingStyle = HackingStyle.valueOf(Constants.DEFAULT_HACKING_STYLE);
@@ -137,8 +91,6 @@ public class LocalHacker implements IAttackerSimulation {
             rootNodeID = rootNodeIDString;
 
             hackingSpeed = Integer.parseInt(hackingSpeedString);
-
-            errorCode = ErrorCodeEnum.SUCCESS;
         }
 
         // Adding extracted Parameters
@@ -152,8 +104,6 @@ public class LocalHacker implements IAttackerSimulation {
         initDone = true;
 
         LOG.debug("Init done");
-
-        return errorCode;
     }
 
     /**

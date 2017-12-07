@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
 import smartgrid.simcontrol.coupling.PowerSpec;
 
@@ -22,8 +21,7 @@ public class KritisSimulationMock implements IKritisSimulationWrapper {
     }
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) {
-        return ErrorCodeEnum.SUCCESS;
+    public void init(final ILaunchConfiguration config) {
     }
 
     @Override

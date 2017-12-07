@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
@@ -22,8 +21,7 @@ public class PowerLoadSimulationWrapper implements IPowerLoadSimulationWrapper {
     private PowerLoadSimulation powerSim;
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) {
-        return ErrorCodeEnum.SUCCESS;
+    public void init(final ILaunchConfiguration config) {
     }
 
     @Override

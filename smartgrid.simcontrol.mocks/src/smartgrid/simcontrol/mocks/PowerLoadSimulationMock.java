@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.coupling.ISmartMeterState;
 import smartgrid.simcontrol.coupling.PowerSpec;
@@ -24,8 +23,7 @@ public class PowerLoadSimulationMock implements IPowerLoadSimulationWrapper {
     }
 
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) {
-        return ErrorCodeEnum.SUCCESS;
+    public void init(final ILaunchConfiguration config) {
     }
 
     @Override

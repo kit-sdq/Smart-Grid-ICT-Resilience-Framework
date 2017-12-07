@@ -11,7 +11,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.HackingStyle;
 import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.Cluster;
@@ -24,16 +23,14 @@ import smartgridtopo.SmartGridTopology;
  * This Class represents an viral operating Hacker.
  *
  * Viral hacking means that every Node that has been hacked can hack other Nodes that have a logical
- * Connction to them.
+ * Connection to them.
  *
  * @author Christian
- *
  */
 public class ViralHacker implements IAttackerSimulation {
 
     private static final Logger LOG = Logger.getLogger(ViralHacker.class);
 
-    // Private Fields
     private boolean firstRun = true;
     private boolean initDone = false;
     private int hackingSpeed;
@@ -52,52 +49,22 @@ public class ViralHacker implements IAttackerSimulation {
      * For ExtensionPoints .. use this together with the init() Method
      */
     public ViralHacker() {
-        // Init Lists
         seedNodeIDs = new LinkedList<>();
         seedNodes = new LinkedList<>();
-    }
-
-    public ViralHacker(final int hackingSpeed) {
-
-        this.hackingSpeed = hackingSpeed;
-        mode = NodeMode.RandomNode;
-    }
-
-    public ViralHacker(final int hackingSpeed, final List<String> seedNodeIDs) {
-
-        this(hackingSpeed);
-
-        this.seedNodeIDs = seedNodeIDs;
-        mode = NodeMode.NodeIDs;
-    }
-
-    public ViralHacker(final List<On> seedNodes, final int hackingSpeed) {
-
-        this(hackingSpeed);
-
-        this.seedNodes = seedNodes;
-        mode = NodeMode.Nodes;
     }
 
     /**
      * {@inheritDoc}
      * <p>
      *
-     * Remark Root NodeIDs {@link smartgrid.simcontrol.baselib.Constants} have to be List of String
-     * !
+     * Remark Root NodeIDs {@link smartgrid.simcontrol.baselib.Constants} have to be List of String!
      */
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) throws CoreException {
+    public void init(final ILaunchConfiguration config) throws CoreException {
 
-        String myModeString;
-        ErrorCodeEnum myError = ErrorCodeEnum.NOT_SET;
-        boolean defaultUsed = false;
-
-        myModeString = config.getAttribute(Constants.NODE_MODE, Constants.FAIL);
-
+        String myModeString = config.getAttribute(Constants.NODE_MODE, Constants.FAIL);
         if (myModeString.equals(Constants.FAIL)) {
             myModeString = Constants.DEFAULT_NODE_MODE;
-            defaultUsed = true;
         }
 
         // Set nodeMode for Viral Hacker
@@ -108,7 +75,6 @@ public class ViralHacker implements IAttackerSimulation {
         // Getting Hacking Style
         String hackingStyleString = config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.FAIL);
         if (hackingStyleString.equals(Constants.FAIL)) {
-            defaultUsed = true;
             hackingStyleString = Constants.DEFAULT_HACKING_STYLE;
         }
 
@@ -127,7 +93,6 @@ public class ViralHacker implements IAttackerSimulation {
 
             // did it fail?
             if (nodeIDStrings == fail) {
-                defaultUsed = true;
                 mode = NodeMode.RandomNode;
                 break;
             }
@@ -142,7 +107,6 @@ public class ViralHacker implements IAttackerSimulation {
             final String nodePath = config.getAttribute(Constants.NODE_PATH_KEY, Constants.FAIL);
 
             if (nodePath.equals(Constants.FAIL)) {
-                defaultUsed = true;
                 mode = NodeMode.RandomNode;
                 break;
             }
@@ -152,12 +116,7 @@ public class ViralHacker implements IAttackerSimulation {
             break;
 
         default:
-            myError = ErrorCodeEnum.FAIL;
-            break;
-        }
-
-        if (defaultUsed) {
-            myError = ErrorCodeEnum.DEFAULT_VALUES_USED;
+            throw new RuntimeException("Unknown mode.");
         }
 
         LOG.info("Hacking style is: " + usedHackingStyle);
@@ -166,7 +125,6 @@ public class ViralHacker implements IAttackerSimulation {
         LOG.debug("Init done");
 
         initDone = true;
-        return myError;
     }
 
     /*

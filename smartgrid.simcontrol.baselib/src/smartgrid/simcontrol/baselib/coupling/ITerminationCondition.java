@@ -3,7 +3,6 @@ package smartgrid.simcontrol.baselib.coupling;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
 
@@ -21,5 +20,5 @@ public interface ITerminationCondition extends ISimulationComponent {
      * @throws CoreException
      *             If ILaunchConfiguration.getAttribute fails
      */
-    ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
+    void init(ILaunchConfiguration config) throws CoreException;
 }

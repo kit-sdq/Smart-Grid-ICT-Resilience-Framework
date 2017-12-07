@@ -3,11 +3,8 @@ package smartgrid.simcontrol.baselib.coupling;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
-
 public interface ITimeProgressor extends ISimulationComponent {
 
-    //TODO Write JavaDoc
     public void progress();
 
     /**
@@ -20,5 +17,5 @@ public interface ITimeProgressor extends ISimulationComponent {
      * @throws CoreException
      *             If ILaunchConfiguration.getAttribute fails
      */
-    public ErrorCodeEnum init(ILaunchConfiguration config) throws CoreException;
+    public void init(ILaunchConfiguration config) throws CoreException;
 }

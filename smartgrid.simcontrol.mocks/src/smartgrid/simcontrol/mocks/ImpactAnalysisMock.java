@@ -1,11 +1,7 @@
-/**
- *
- */
 package smartgrid.simcontrol.mocks;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.ErrorCodeEnum;
 import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
 import smartgridinput.ScenarioState;
 import smartgridoutput.Cluster;
@@ -24,18 +20,9 @@ import smartgridtopo.SmartMeter;
  * is marked as 'Online' and all states are packed in one single cluster
  *
  * @author Christian, Michael
- *
  */
 public class ImpactAnalysisMock implements IImpactAnalysis {
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     *
-     *
-     * NOT yet implemented!
-     *
-     */
     @Override
     public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioState impactAnalysisInput) {
         SmartgridoutputPackageImpl.init();
@@ -71,19 +58,12 @@ public class ImpactAnalysisMock implements IImpactAnalysis {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     *
-     */
     @Override
-    public ErrorCodeEnum init(final ILaunchConfiguration config) {
-        return ErrorCodeEnum.SUCCESS;
+    public void init(final ILaunchConfiguration config) {
     }
 
     @Override
     public String getName() {
         return "Mock";
     }
-
 }
