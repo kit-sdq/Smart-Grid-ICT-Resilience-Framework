@@ -52,24 +52,18 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
         // iterate nodes
         for (Entry<String, Map<String, SmartMeterGeoData>> nodeEntry : smartMeterGeoData.entrySet()) {
 
-            // create node
-            PowerGridNode powerGridNode = topoFactory.createPowerGridNode();
-            setNameAndId(nodeEntry, powerGridNode);
-            topo.getContainsPGN().add(powerGridNode);
+            PowerGridNode powerGridNode = null;
 
             // create network node
             NetworkNode networkNode = topoFactory.createNetworkNode();
-            networkNode.setId(UIDHelper.generateUID());
-            networkNode.setName("NetworkOfNode_" + nodeEntry.getKey());
-            topo.getContainsNE().add(networkNode);
-            networkNode.getConnectedTo().add(powerGridNode);
-
-            // chain the network
-            createPhysicalConnection(topoFactory, topo, lastNetworkNode, networkNode);
-            lastNetworkNode = networkNode;
 
             // iterate smart meters
             for (Entry<String, ?> smartMeterEntry : nodeEntry.getValue().entrySet()) {
+
+                // create node
+                powerGridNode = topoFactory.createPowerGridNode();
+                setNameAndId(smartMeterEntry, powerGridNode);
+                topo.getContainsPGN().add(powerGridNode);
 
                 // create smart meter
                 SmartMeter smartMeter = topoFactory.createSmartMeter();
@@ -82,6 +76,19 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
                 // connect the smart meter
                 createPhysicalConnection(topoFactory, topo, networkNode, smartMeter);
                 createLogicalConnection(topoFactory, topo, controlCenter, smartMeter);
+            }
+
+            if (powerGridNode != null) {
+                networkNode.getConnectedTo().add(powerGridNode);
+                networkNode.setId(UIDHelper.generateUID());
+                networkNode.setName("NetworkOfNode_" + nodeEntry.getKey());
+                topo.getContainsNE().add(networkNode);
+
+                // chain the network
+                createPhysicalConnection(topoFactory, topo, lastNetworkNode, networkNode);
+                lastNetworkNode = networkNode;
+            } else {
+                LOG.warn("Node " + nodeEntry.getKey() + " has no prosumers. I will not create a NetworkNode.");
             }
         }
 
