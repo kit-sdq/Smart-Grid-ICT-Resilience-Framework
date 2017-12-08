@@ -268,16 +268,21 @@ public final class ReactiveSimulationController {
 
         // transfer power supply state into next input
         for (final PowerState inputPowerState : impactInput.getPowerStates()) {
-            final String prosumerId = inputPowerState.getOwner().getId();
+            final String nodeId = inputPowerState.getOwner().getId();
+            boolean foundSupply = false;
 
-            // iterate over node entries
-            for (final Map<String, Double> powerForProsumersOfNode : powerSupply.values()) {
-                Double supply = powerForProsumersOfNode.get(prosumerId);
-                if (supply == null) {
-                    LOG.error("There is no power supply for CI " + prosumerId + ". Power supply remains unchanged.");
-                } else {
+            // search this prosumer in the node map
+            for (final Map<String, Double> subNodePowerSupply : powerSupply.values()) {
+                Double supply = subNodePowerSupply.get(nodeId);
+                if (supply != null) {
                     inputPowerState.setPowerOutage(isOutage(supply));
+                    foundSupply = true;
+                    break;
                 }
+            }
+
+            if (!foundSupply) {
+                LOG.error("There is no power supply for CI " + nodeId + ". Power supply remains unchanged.");
             }
         }
     }
