@@ -14,4 +14,6 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
- smartgrid.simcontrol.iip.jar
+ smartgrid.simcontrol.iip.jar,
+ parallelcolt-0.10.1.jar
+Export-Package: smartgrid.simcontrol.iip
