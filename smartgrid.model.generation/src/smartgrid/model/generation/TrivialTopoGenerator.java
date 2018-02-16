@@ -24,7 +24,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
     @Override
     public SmartGridTopology generateTopo(TopologyContainer topoData) {
 
-        LOG.error("Starting generation of trivial ICT topology.");
+        LOG.info("Starting generation of trivial ICT topology.");
 
         HashMap<String, Map<String, SmartMeterGeoData>> smartMeterGeoData = topoData.getMapCItoHVN();
 
@@ -62,7 +62,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
 
                 // create node
                 powerGridNode = topoFactory.createPowerGridNode();
-                setNameAndId(smartMeterEntry, powerGridNode);
+                setNameAndId(smartMeterEntry, powerGridNode, "_PGN");
                 topo.getContainsPGN().add(powerGridNode);
 
                 // create smart meter
@@ -88,7 +88,7 @@ public class TrivialTopoGenerator extends AbstractTopoGenerator {
                 createPhysicalConnection(topoFactory, topo, lastNetworkNode, networkNode);
                 lastNetworkNode = networkNode;
             } else {
-                LOG.warn("Node " + nodeEntry.getKey() + " has no prosumers. I will not create a NetworkNode.");
+                LOG.info("Node " + nodeEntry.getKey() + " has no prosumers. I will not create a NetworkNode.");
             }
         }
 

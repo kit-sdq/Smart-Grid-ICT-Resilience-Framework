@@ -32,8 +32,12 @@ public abstract class AbstractTopoGenerator implements ITopoGenerator {
     }
 
     public void setNameAndId(Entry<String, ?> nodeEntry, NamedIdentifier entity) {
+        setNameAndId(nodeEntry, entity, "");
+    }
+
+    public void setNameAndId(Entry<String, ?> nodeEntry, NamedIdentifier entity, String prefix) {
         String nodeKey = nodeEntry.getKey();
-        entity.setName(nodeKey);
-        entity.setId(nodeKey);
+        entity.setName(nodeKey + prefix);
+        entity.setId(nodeKey + prefix);
     }
 }
