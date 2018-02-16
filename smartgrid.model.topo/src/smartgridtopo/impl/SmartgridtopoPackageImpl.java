@@ -721,17 +721,17 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getSmartGridTopology_ContainsPGN(), getPowerGridNode(), null, "ContainsPGN", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
                 !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getSmartGridTopology_ContainsPC(), getPhysicalConnection(), null, "ContainsPC", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-                IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getSmartGridTopology_ContainsLC(), getLogicalCommunication(), null, "ContainsLC", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-                IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getSmartGridTopology_ContainsPC(), getPhysicalConnection(), null, "ContainsPC", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getSmartGridTopology_ContainsLC(), getLogicalCommunication(), null, "ContainsLC", null, 0, -1, SmartGridTopology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(namedEntityEClass, NamedEntity.class, "NamedEntity", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getNamedEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
                 !IS_DERIVED, IS_ORDERED);
 
         initEClass(identifierEClass, Identifier.class, "Identifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", "0", 1, 1, Identifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED,
+        initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", "0", 1, 1, Identifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED,
                 !IS_ORDERED);
 
         initEClass(namedIdentifierEClass, NamedIdentifier.class, "NamedIdentifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -739,8 +739,8 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         initEClass(networkEntityEClass, NetworkEntity.class, "NetworkEntity", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEReference(getNetworkEntity_ConnectedTo(), getPowerGridNode(), null, "ConnectedTo", null, 1, -1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
                 IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNetworkEntity_LinkedBy(), getPhysicalConnection(), getPhysicalConnection_Links(), "LinkedBy", null, 0, -1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE,
-                IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getNetworkEntity_LinkedBy(), getPhysicalConnection(), getPhysicalConnection_Links(), "LinkedBy", null, 0, -1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+                !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(powerGridNodeEClass, PowerGridNode.class, "PowerGridNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -753,8 +753,8 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         initEClass(smartMeterTypeEClass, SmartMeterType.class, "SmartMeterType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(physicalConnectionEClass, PhysicalConnection.class, "PhysicalConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getPhysicalConnection_Links(), getNetworkEntity(), getNetworkEntity_LinkedBy(), "Links", null, 2, 2, PhysicalConnection.class, !IS_TRANSIENT, !IS_VOLATILE,
-                IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getPhysicalConnection_Links(), getNetworkEntity(), getNetworkEntity_LinkedBy(), "Links", null, 2, 2, PhysicalConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+                !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getPhysicalConnection_IsA(), getConnectionType(), null, "IsA", null, 0, 1, PhysicalConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
                 IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -779,14 +779,14 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         initEClass(genericControllerEClass, GenericController.class, "GenericController", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(communicatingEntityEClass, CommunicatingEntity.class, "CommunicatingEntity", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getCommunicatingEntity_CommunicatesBy(), getLogicalCommunication(), getLogicalCommunication_Links(), "CommunicatesBy", null, 0, -1, CommunicatingEntity.class,
-                !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getCommunicatingEntity_CommunicatesBy(), getLogicalCommunication(), getLogicalCommunication_Links(), "CommunicatesBy", null, 0, -1, CommunicatingEntity.class, !IS_TRANSIENT,
+                !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(interComEClass, InterCom.class, "InterCom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         initEClass(logicalCommunicationEClass, LogicalCommunication.class, "LogicalCommunication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getLogicalCommunication_Links(), getCommunicatingEntity(), getCommunicatingEntity_CommunicatesBy(), "Links", null, 2, 2, LogicalCommunication.class, !IS_TRANSIENT,
-                !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getLogicalCommunication_Links(), getCommunicatingEntity(), getCommunicatingEntity_CommunicatesBy(), "Links", null, 2, 2, LogicalCommunication.class, !IS_TRANSIENT, !IS_VOLATILE,
+                IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);
