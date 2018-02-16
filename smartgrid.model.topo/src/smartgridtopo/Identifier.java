@@ -32,7 +32,7 @@ public interface Identifier extends EObject {
      * @return the value of the '<em>Id</em>' attribute.
      * @see #setId(String)
      * @see smartgridtopo.SmartgridtopoPackage#getIdentifier_Id()
-     * @model default="0" unique="false" required="true" ordered="false"
+     * @model default="0" unique="false" id="true" required="true" ordered="false"
      * @generated
      */
     String getId();

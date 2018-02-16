@@ -124,7 +124,8 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
     @Override
     public EList<NetworkEntity> getLinks() {
         if (links == null) {
-            links = new EObjectWithInverseResolvingEList.ManyInverse<>(NetworkEntity.class, this, SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS, SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY);
+            links = new EObjectWithInverseResolvingEList.ManyInverse<>(NetworkEntity.class, this, SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS,
+                    SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY);
         }
         return links;
     }
