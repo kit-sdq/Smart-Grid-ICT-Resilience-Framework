@@ -16,7 +16,7 @@ public class LoadInputModelConformityHelper {
         if (state.getScenario() == null) {
             return true;
         }
-        return state.getScenario().getId() == current.getId();
+        return state.getScenario().getId().equals(current.getId());
     }
 
     public static boolean checkInputModelConformity(final ScenarioState state, final SmartGridTopology current) {

@@ -39,13 +39,12 @@ import smartgridtopo.SmartGridTopology;
  * This class defines an action which loads a specific input model.
  *
  * @author mario
- *
  */
 public class LoadToolbarButtonAction extends ToolbarButtonAction {
 
     private static final Logger LOG = Logger.getLogger(LoadToolbarButtonAction.class);
 
-    private boolean loadSuccessful = true;
+    private boolean loadSuccessful;
 
     public LoadToolbarButtonAction(final IPropertyChangeListener listener) {
         super();
@@ -64,7 +63,10 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
 
     @Override
     public void run() {
-        LOG.info("[LoadToolbarButtonAction]: Start loading input model into diagram");
+        LOG.info("Start loading input model into diagram");
+
+        loadSuccessful = true;
+
         // Retrieve the shell
         final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
@@ -74,7 +76,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                 final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                 messageBox.setMessage("Cannot open new input model while output model is loaded");
                 messageBox.open();
-                LOG.info("[LoadToolbarButtonAction]: Loading failed due to already loaded output model");
+                LOG.info("Loading failed due to already loaded output model");
                 return;
             }
         }
@@ -118,7 +120,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                                     final MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR);
                                     messageBox.setMessage("Input model is not conform to the current topo model");
                                     messageBox.open();
-                                    LOG.info("[LoadToolbarButtonAction]: Loading failed since input model is not conform to topo model");
+                                    LOG.info("Loading failed since input model is not conform to topo model");
                                     loadSuccessful = false;
                                     return;
                                 }
@@ -142,7 +144,7 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                         final Shape[] shapes = (Shape[]) LoadToolbarButtonAction.this.diagramContainer.getDiagramTypeProvider().getDiagram().getChildren().toArray();
 
                         final ManageNodeAppearances manager = new ManageNodeAppearances(LoadToolbarButtonAction.this.diagramContainer);
-                        LOG.info("[LoadToolbarButtonAction]: Applying input model to topo model");
+                        LOG.info("Applying input model to topo model");
                         for (final Shape containerShape : shapes) {
                             final Object o = containerShape.getLink().getBusinessObjects().get(0);
 
@@ -174,21 +176,22 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
                         }
 
                         boList.add(obj);
-
                     }
 
                 };
                 domain.getCommandStack().execute(cmd);
             } catch (final IOException e) {
-                LOG.error("[smartgrid.model.input.graphiti.LoadToolbarButtonAction]: IOException occured");
+                LOG.error("IOException occured");
                 e.printStackTrace();
             }
         }
+
         if (loadSuccessful) {
             this.firePropertyChange(StringProvider.ENABLE_CLEAR_BUTTON, null, null);
+            LOG.info("Successfully loaded input model");
+        } else {
+            LOG.info("Loading input model failed");
         }
-        loadSuccessful = true;
-        LOG.info("[LoadToolbarButtonAction]: Successfully loaded input model");
     }
 
     /**
@@ -232,5 +235,4 @@ public class LoadToolbarButtonAction extends ToolbarButtonAction {
         }
         return null;
     }
-
 }
