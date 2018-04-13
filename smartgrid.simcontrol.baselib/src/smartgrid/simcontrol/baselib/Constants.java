@@ -33,21 +33,14 @@ public final class Constants {
     public static final String TOPO_GENERATION_KEY = "topo generation";
     public static final boolean DEFAULT_TOPO_GENERATION = false;
 
-    // The path to File on Disk with a On EntityStates List
-    // TODO is this setting broken, dead or not correctly implemented?
-    public static final String NODE_PATH_KEY = "nodepath";
-
     // local hacker
     public static final String HACKING_STYLE_KEY = "desiredHackingStyle"; //$NON-NLS-1$
     public static final String DEFAULT_HACKING_STYLE = "BFS_HACKING"; //$NON-NLS-1$
     public static final String HACKING_SPEED_KEY = "hackingSpeed"; //$NON-NLS-1$
     public static final String DEFAULT_HACKING_SPEED = "1"; //$NON-NLS-1$
     public static final String ROOT_NODE_ID_KEY = "rootNodeID"; //$NON-NLS-1$
-    public static final String DEFAULT_ROOT_NODE_ID = "-1"; //$NON-NLS-1$
-
-    // viral hacker
-    public static final String DEFAULT_NODE_MODE = "RandomNode"; //$NON-NLS-1$
-    public static final String NODE_MODE = "nodeMode"; //$NON-NLS-1$
+    public static final String NO_ROOT_NODE_ID = ""; //$NON-NLS-1$
+    public static final String DEFAULT_ROOT_NODE_ID = NO_ROOT_NODE_ID; //$NON-NLS-1$
 
     // extension point IDs
     public static final String ATTACKER_SIMULATION_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.attackerSimulation";

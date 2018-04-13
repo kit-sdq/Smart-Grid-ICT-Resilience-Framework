@@ -139,7 +139,7 @@ public class LocalHacker implements IAttackerSimulation {
 
         myScenarioResult.setScenario(smartGridTopo);
 
-        LOG.info("Hacking done");
+        LOG.debug("Hacking done");
         return myScenarioResult;
     }
 
@@ -374,10 +374,11 @@ public class LocalHacker implements IAttackerSimulation {
 
     private void setHackingRootOnEntityState() {
 
-        if (rootNodeID == null) {
+        if (rootNodeID == null || rootNodeID.equalsIgnoreCase(Constants.NO_ROOT_NODE_ID)) {
+            LOG.info("No root node specified.");
             chooseRootIDByRandom();
-            LOG.info("No root node set.");
         } else {
+            // search root node state (if meaningful ID is specified)
             rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
 
             if (rootNodeState != null) {
