@@ -46,7 +46,7 @@ class ReplicationCompletionForSmartMeter extends AbstractCompletion<SmartMeter, 
 		val aggregation = TopoextensionFactory.eINSTANCE.createAggregation();
 		
 		//adding all duplicates to the aggregation
-		aggregation.networkentity.addAll(replicaList);
+		aggregation.smartMeterReplicas.addAll(replicaList);
 		extRepository.aggregations.add(aggregation)
 	}
 	
