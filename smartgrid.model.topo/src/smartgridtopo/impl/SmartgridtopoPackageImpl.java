@@ -361,6 +361,26 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
      * @generated
      */
     @Override
+    public EAttribute getNetworkEntity_XCoord() {
+        return (EAttribute) networkEntityEClass.getEStructuralFeatures().get(2);
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    @Override
+    public EAttribute getNetworkEntity_YCoord() {
+        return (EAttribute) networkEntityEClass.getEStructuralFeatures().get(3);
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    @Override
     public EClass getPowerGridNode() {
         return powerGridNodeEClass;
     }
@@ -631,6 +651,8 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
         networkEntityEClass = createEClass(NETWORK_ENTITY);
         createEReference(networkEntityEClass, NETWORK_ENTITY__CONNECTED_TO);
         createEReference(networkEntityEClass, NETWORK_ENTITY__LINKED_BY);
+        createEAttribute(networkEntityEClass, NETWORK_ENTITY__XCOORD);
+        createEAttribute(networkEntityEClass, NETWORK_ENTITY__YCOORD);
 
         powerGridNodeEClass = createEClass(POWER_GRID_NODE);
 
@@ -741,6 +763,10 @@ public class SmartgridtopoPackageImpl extends EPackageImpl implements Smartgridt
                 IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNetworkEntity_LinkedBy(), getPhysicalConnection(), getPhysicalConnection_Links(), "LinkedBy", null, 0, -1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE,
                 IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getNetworkEntity_XCoord(), ecorePackage.getEDouble(), "xCoord", null, 0, 1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+                !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getNetworkEntity_YCoord(), ecorePackage.getEDouble(), "yCoord", null, 0, 1, NetworkEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+                !IS_DERIVED, IS_ORDERED);
 
         initEClass(powerGridNodeEClass, PowerGridNode.class, "PowerGridNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

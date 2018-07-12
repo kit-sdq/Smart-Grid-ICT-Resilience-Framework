@@ -301,13 +301,31 @@ public interface SmartgridtopoPackage extends EPackage {
     int NETWORK_ENTITY__LINKED_BY = NAMED_IDENTIFIER_FEATURE_COUNT + 1;
 
     /**
+     * The feature id for the '<em><b>XCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int NETWORK_ENTITY__XCOORD = NAMED_IDENTIFIER_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>YCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int NETWORK_ENTITY__YCOORD = NAMED_IDENTIFIER_FEATURE_COUNT + 3;
+
+    /**
      * The number of structural features of the '<em>Network Entity</em>' class. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
      * 
      * @generated
      * @ordered
      */
-    int NETWORK_ENTITY_FEATURE_COUNT = NAMED_IDENTIFIER_FEATURE_COUNT + 2;
+    int NETWORK_ENTITY_FEATURE_COUNT = NAMED_IDENTIFIER_FEATURE_COUNT + 4;
 
     /**
      * The number of operations of the '<em>Network Entity</em>' class. <!-- begin-user-doc --> <!--
@@ -411,6 +429,24 @@ public interface SmartgridtopoPackage extends EPackage {
     int COMMUNICATING_ENTITY__LINKED_BY = NETWORK_ENTITY__LINKED_BY;
 
     /**
+     * The feature id for the '<em><b>XCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int COMMUNICATING_ENTITY__XCOORD = NETWORK_ENTITY__XCOORD;
+
+    /**
+     * The feature id for the '<em><b>YCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int COMMUNICATING_ENTITY__YCOORD = NETWORK_ENTITY__YCOORD;
+
+    /**
      * The feature id for the '<em><b>Communicates By</b></em>' reference list. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
      * 
@@ -482,6 +518,24 @@ public interface SmartgridtopoPackage extends EPackage {
      * @ordered
      */
     int SMART_METER__LINKED_BY = COMMUNICATING_ENTITY__LINKED_BY;
+
+    /**
+     * The feature id for the '<em><b>XCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int SMART_METER__XCOORD = COMMUNICATING_ENTITY__XCOORD;
+
+    /**
+     * The feature id for the '<em><b>YCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int SMART_METER__YCOORD = COMMUNICATING_ENTITY__YCOORD;
 
     /**
      * The feature id for the '<em><b>Communicates By</b></em>' reference list. <!-- begin-user-doc
@@ -795,6 +849,24 @@ public interface SmartgridtopoPackage extends EPackage {
     int NETWORK_NODE__LINKED_BY = NETWORK_ENTITY__LINKED_BY;
 
     /**
+     * The feature id for the '<em><b>XCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int NETWORK_NODE__XCOORD = NETWORK_ENTITY__XCOORD;
+
+    /**
+     * The feature id for the '<em><b>YCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int NETWORK_NODE__YCOORD = NETWORK_ENTITY__YCOORD;
+
+    /**
      * The feature id for the '<em><b>Is A</b></em>' reference. <!-- begin-user-doc --> <!--
      * end-user-doc -->
      * 
@@ -914,6 +986,24 @@ public interface SmartgridtopoPackage extends EPackage {
     int CONTROL_CENTER__LINKED_BY = COMMUNICATING_ENTITY__LINKED_BY;
 
     /**
+     * The feature id for the '<em><b>XCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int CONTROL_CENTER__XCOORD = COMMUNICATING_ENTITY__XCOORD;
+
+    /**
+     * The feature id for the '<em><b>YCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int CONTROL_CENTER__YCOORD = COMMUNICATING_ENTITY__YCOORD;
+
+    /**
      * The feature id for the '<em><b>Communicates By</b></em>' reference list. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
      * 
@@ -987,6 +1077,24 @@ public interface SmartgridtopoPackage extends EPackage {
     int GENERIC_CONTROLLER__LINKED_BY = COMMUNICATING_ENTITY__LINKED_BY;
 
     /**
+     * The feature id for the '<em><b>XCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int GENERIC_CONTROLLER__XCOORD = COMMUNICATING_ENTITY__XCOORD;
+
+    /**
+     * The feature id for the '<em><b>YCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int GENERIC_CONTROLLER__YCOORD = COMMUNICATING_ENTITY__YCOORD;
+
+    /**
      * The feature id for the '<em><b>Communicates By</b></em>' reference list. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
      * 
@@ -1058,6 +1166,24 @@ public interface SmartgridtopoPackage extends EPackage {
      * @ordered
      */
     int INTER_COM__LINKED_BY = COMMUNICATING_ENTITY__LINKED_BY;
+
+    /**
+     * The feature id for the '<em><b>XCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int INTER_COM__XCOORD = COMMUNICATING_ENTITY__XCOORD;
+
+    /**
+     * The feature id for the '<em><b>YCoord</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     * @ordered
+     */
+    int INTER_COM__YCOORD = COMMUNICATING_ENTITY__YCOORD;
 
     /**
      * The feature id for the '<em><b>Communicates By</b></em>' reference list. <!-- begin-user-doc
@@ -1275,6 +1401,28 @@ public interface SmartgridtopoPackage extends EPackage {
      * @generated
      */
     EReference getNetworkEntity_LinkedBy();
+
+    /**
+     * Returns the meta object for the attribute '{@link smartgridtopo.NetworkEntity#getXCoord
+     * <em>XCoord</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @return the meta object for the attribute '<em>XCoord</em>'.
+     * @see smartgridtopo.NetworkEntity#getXCoord()
+     * @see #getNetworkEntity()
+     * @generated
+     */
+    EAttribute getNetworkEntity_XCoord();
+
+    /**
+     * Returns the meta object for the attribute '{@link smartgridtopo.NetworkEntity#getYCoord
+     * <em>YCoord</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @return the meta object for the attribute '<em>YCoord</em>'.
+     * @see smartgridtopo.NetworkEntity#getYCoord()
+     * @see #getNetworkEntity()
+     * @generated
+     */
+    EAttribute getNetworkEntity_YCoord();
 
     /**
      * Returns the meta object for class '{@link smartgridtopo.PowerGridNode <em>Power Grid
@@ -1661,6 +1809,22 @@ public interface SmartgridtopoPackage extends EPackage {
          * @generated
          */
         EReference NETWORK_ENTITY__LINKED_BY = eINSTANCE.getNetworkEntity_LinkedBy();
+
+        /**
+         * The meta object literal for the '<em><b>XCoord</b></em>' attribute feature. <!--
+         * begin-user-doc --> <!-- end-user-doc -->
+         * 
+         * @generated
+         */
+        EAttribute NETWORK_ENTITY__XCOORD = eINSTANCE.getNetworkEntity_XCoord();
+
+        /**
+         * The meta object literal for the '<em><b>YCoord</b></em>' attribute feature. <!--
+         * begin-user-doc --> <!-- end-user-doc -->
+         * 
+         * @generated
+         */
+        EAttribute NETWORK_ENTITY__YCOORD = eINSTANCE.getNetworkEntity_YCoord();
 
         /**
          * The meta object literal for the '{@link smartgridtopo.impl.PowerGridNodeImpl <em>Power

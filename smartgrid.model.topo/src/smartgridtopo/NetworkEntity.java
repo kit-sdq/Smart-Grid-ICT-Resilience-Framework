@@ -14,6 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  * <li>{@link smartgridtopo.NetworkEntity#getConnectedTo <em>Connected To</em>}</li>
  * <li>{@link smartgridtopo.NetworkEntity#getLinkedBy <em>Linked By</em>}</li>
+ * <li>{@link smartgridtopo.NetworkEntity#getXCoord <em>XCoord</em>}</li>
+ * <li>{@link smartgridtopo.NetworkEntity#getYCoord <em>YCoord</em>}</li>
  * </ul>
  *
  * @see smartgridtopo.SmartgridtopoPackage#getNetworkEntity()
@@ -54,5 +56,59 @@ public interface NetworkEntity extends NamedIdentifier {
      * @generated
      */
     EList<PhysicalConnection> getLinkedBy();
+
+    /**
+     * Returns the value of the '<em><b>XCoord</b></em>' attribute. <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>XCoord</em>' attribute isn't clear, there really should be more of
+     * a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * 
+     * @return the value of the '<em>XCoord</em>' attribute.
+     * @see #setXCoord(double)
+     * @see smartgridtopo.SmartgridtopoPackage#getNetworkEntity_XCoord()
+     * @model
+     * @generated
+     */
+    double getXCoord();
+
+    /**
+     * Sets the value of the '{@link smartgridtopo.NetworkEntity#getXCoord <em>XCoord</em>}'
+     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @param value
+     *            the new value of the '<em>XCoord</em>' attribute.
+     * @see #getXCoord()
+     * @generated
+     */
+    void setXCoord(double value);
+
+    /**
+     * Returns the value of the '<em><b>YCoord</b></em>' attribute. <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>YCoord</em>' attribute isn't clear, there really should be more of
+     * a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * 
+     * @return the value of the '<em>YCoord</em>' attribute.
+     * @see #setYCoord(double)
+     * @see smartgridtopo.SmartgridtopoPackage#getNetworkEntity_YCoord()
+     * @model
+     * @generated
+     */
+    double getYCoord();
+
+    /**
+     * Sets the value of the '{@link smartgridtopo.NetworkEntity#getYCoord <em>YCoord</em>}'
+     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @param value
+     *            the new value of the '<em>YCoord</em>' attribute.
+     * @see #getYCoord()
+     * @generated
+     */
+    void setYCoord(double value);
 
 } // NetworkEntity

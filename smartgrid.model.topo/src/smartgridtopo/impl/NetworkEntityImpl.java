@@ -32,6 +32,8 @@ import smartgridtopo.SmartgridtopoPackage;
  * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getName <em>Name</em>}</li>
  * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getConnectedTo <em>Connected To</em>}</li>
  * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getLinkedBy <em>Linked By</em>}</li>
+ * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getXCoord <em>XCoord</em>}</li>
+ * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getYCoord <em>YCoord</em>}</li>
  * </ul>
  *
  * @generated
@@ -96,6 +98,46 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
      * @ordered
      */
     protected EList<PhysicalConnection> linkedBy;
+
+    /**
+     * The default value of the '{@link #getXCoord() <em>XCoord</em>}' attribute. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @see #getXCoord()
+     * @generated
+     * @ordered
+     */
+    protected static final double XCOORD_EDEFAULT = 0.0;
+
+    /**
+     * The cached value of the '{@link #getXCoord() <em>XCoord</em>}' attribute. <!-- begin-user-doc
+     * --> <!-- end-user-doc -->
+     * 
+     * @see #getXCoord()
+     * @generated
+     * @ordered
+     */
+    protected double xCoord = XCOORD_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getYCoord() <em>YCoord</em>}' attribute. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @see #getYCoord()
+     * @generated
+     * @ordered
+     */
+    protected static final double YCOORD_EDEFAULT = 0.0;
+
+    /**
+     * The cached value of the '{@link #getYCoord() <em>YCoord</em>}' attribute. <!-- begin-user-doc
+     * --> <!-- end-user-doc -->
+     * 
+     * @see #getYCoord()
+     * @generated
+     * @ordered
+     */
+    protected double yCoord = YCOORD_EDEFAULT;
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -194,6 +236,52 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
      * 
      * @generated
      */
+    @Override
+    public double getXCoord() {
+        return xCoord;
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    @Override
+    public void setXCoord(double newXCoord) {
+        double oldXCoord = xCoord;
+        xCoord = newXCoord;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SmartgridtopoPackage.NETWORK_ENTITY__XCOORD, oldXCoord, xCoord));
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    @Override
+    public double getYCoord() {
+        return yCoord;
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    @Override
+    public void setYCoord(double newYCoord) {
+        double oldYCoord = yCoord;
+        yCoord = newYCoord;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SmartgridtopoPackage.NETWORK_ENTITY__YCOORD, oldYCoord, yCoord));
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
     @SuppressWarnings("unchecked")
     @Override
     public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -234,6 +322,10 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
             return getConnectedTo();
         case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
             return getLinkedBy();
+        case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
+            return getXCoord();
+        case SmartgridtopoPackage.NETWORK_ENTITY__YCOORD:
+            return getYCoord();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -261,6 +353,12 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
             getLinkedBy().clear();
             getLinkedBy().addAll((Collection<? extends PhysicalConnection>) newValue);
             return;
+        case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
+            setXCoord((Double) newValue);
+            return;
+        case SmartgridtopoPackage.NETWORK_ENTITY__YCOORD:
+            setYCoord((Double) newValue);
+            return;
         }
         super.eSet(featureID, newValue);
     }
@@ -285,6 +383,12 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
         case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
             getLinkedBy().clear();
             return;
+        case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
+            setXCoord(XCOORD_EDEFAULT);
+            return;
+        case SmartgridtopoPackage.NETWORK_ENTITY__YCOORD:
+            setYCoord(YCOORD_EDEFAULT);
+            return;
         }
         super.eUnset(featureID);
     }
@@ -305,6 +409,10 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
             return connectedTo != null && !connectedTo.isEmpty();
         case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
             return linkedBy != null && !linkedBy.isEmpty();
+        case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
+            return xCoord != XCOORD_EDEFAULT;
+        case SmartgridtopoPackage.NETWORK_ENTITY__YCOORD:
+            return yCoord != YCOORD_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
@@ -360,6 +468,10 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
         result.append(id);
         result.append(", name: ");
         result.append(name);
+        result.append(", xCoord: ");
+        result.append(xCoord);
+        result.append(", yCoord: ");
+        result.append(yCoord);
         result.append(')');
         return result.toString();
     }

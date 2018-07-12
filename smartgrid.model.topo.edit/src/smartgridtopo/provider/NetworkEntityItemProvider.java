@@ -56,6 +56,8 @@ public class NetworkEntityItemProvider extends ItemProviderAdapter
             addNamePropertyDescriptor(object);
             addConnectedToPropertyDescriptor(object);
             addLinkedByPropertyDescriptor(object);
+            addXCoordPropertyDescriptor(object);
+            addYCoordPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
     }
@@ -109,6 +111,30 @@ public class NetworkEntityItemProvider extends ItemProviderAdapter
     }
 
     /**
+     * This adds a property descriptor for the XCoord feature. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     */
+    protected void addXCoordPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+                getString("_UI_NetworkEntity_xCoord_feature"), getString("_UI_PropertyDescriptor_description", "_UI_NetworkEntity_xCoord_feature", "_UI_NetworkEntity_type"),
+                SmartgridtopoPackage.Literals.NETWORK_ENTITY__XCOORD, true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null, null));
+    }
+
+    /**
+     * This adds a property descriptor for the YCoord feature. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     */
+    protected void addYCoordPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+                getString("_UI_NetworkEntity_yCoord_feature"), getString("_UI_PropertyDescriptor_description", "_UI_NetworkEntity_yCoord_feature", "_UI_NetworkEntity_type"),
+                SmartgridtopoPackage.Literals.NETWORK_ENTITY__YCOORD, true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null, null));
+    }
+
+    /**
      * This returns the label text for the adapted class. <!-- begin-user-doc --> <!-- end-user-doc
      * -->
      * 
@@ -134,6 +160,8 @@ public class NetworkEntityItemProvider extends ItemProviderAdapter
         switch (notification.getFeatureID(NetworkEntity.class)) {
         case SmartgridtopoPackage.NETWORK_ENTITY__ID:
         case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
+        case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
+        case SmartgridtopoPackage.NETWORK_ENTITY__YCOORD:
             fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
             return;
         }
