@@ -146,13 +146,13 @@ public interface TopoextensionPackage extends EPackage {
     int AGGREGATION = 2;
 
     /**
-     * The feature id for the '<em><b>Networkentity</b></em>' containment reference list. <!--
+     * The feature id for the '<em><b>Smart Meter Replicas</b></em>' reference list. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      * @ordered
      */
-    int AGGREGATION__NETWORKENTITY = 0;
+    int AGGREGATION__SMART_METER_REPLICAS = 0;
 
     /**
      * The number of structural features of the '<em>Aggregation</em>' class. <!-- begin-user-doc
@@ -238,16 +238,16 @@ public interface TopoextensionPackage extends EPackage {
     EClass getAggregation();
 
     /**
-     * Returns the meta object for the containment reference list
-     * '{@link topoextension.Aggregation#getNetworkentity <em>Networkentity</em>}'. <!--
+     * Returns the meta object for the reference list
+     * '{@link topoextension.Aggregation#getSmartMeterReplicas <em>Smart Meter Replicas</em>}'. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
-     * @return the meta object for the containment reference list '<em>Networkentity</em>'.
-     * @see topoextension.Aggregation#getNetworkentity()
+     * @return the meta object for the reference list '<em>Smart Meter Replicas</em>'.
+     * @see topoextension.Aggregation#getSmartMeterReplicas()
      * @see #getAggregation()
      * @generated
      */
-    EReference getAggregation_Networkentity();
+    EReference getAggregation_SmartMeterReplicas();
 
     /**
      * Returns the factory that creates the instances of the model. <!-- begin-user-doc --> <!--
@@ -327,12 +327,12 @@ public interface TopoextensionPackage extends EPackage {
         EClass AGGREGATION = eINSTANCE.getAggregation();
 
         /**
-         * The meta object literal for the '<em><b>Networkentity</b></em>' containment reference
-         * list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+         * The meta object literal for the '<em><b>Smart Meter Replicas</b></em>' reference list
+         * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
          * 
          * @generated
          */
-        EReference AGGREGATION__NETWORKENTITY = eINSTANCE.getAggregation_Networkentity();
+        EReference AGGREGATION__SMART_METER_REPLICAS = eINSTANCE.getAggregation_SmartMeterReplicas();
 
     }
 

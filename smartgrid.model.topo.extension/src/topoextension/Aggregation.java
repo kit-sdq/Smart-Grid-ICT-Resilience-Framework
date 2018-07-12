@@ -15,7 +15,7 @@ import smartgridtopo.NetworkEntity;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link topoextension.Aggregation#getNetworkentity <em>Networkentity</em>}</li>
+ * <li>{@link topoextension.Aggregation#getSmartMeterReplicas <em>Smart Meter Replicas</em>}</li>
  * </ul>
  *
  * @see topoextension.TopoextensionPackage#getAggregation()
@@ -24,19 +24,19 @@ import smartgridtopo.NetworkEntity;
  */
 public interface Aggregation extends EObject {
     /**
-     * Returns the value of the '<em><b>Networkentity</b></em>' containment reference list. The list
+     * Returns the value of the '<em><b>Smart Meter Replicas</b></em>' reference list. The list
      * contents are of type {@link smartgridtopo.NetworkEntity}. <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Networkentity</em>' containment reference list isn't clear, there
+     * If the meaning of the '<em>Smart Meter Replicas</em>' reference list isn't clear, there
      * really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * 
-     * @return the value of the '<em>Networkentity</em>' containment reference list.
-     * @see topoextension.TopoextensionPackage#getAggregation_Networkentity()
-     * @model containment="true" required="true"
+     * @return the value of the '<em>Smart Meter Replicas</em>' reference list.
+     * @see topoextension.TopoextensionPackage#getAggregation_SmartMeterReplicas()
+     * @model required="true"
      * @generated
      */
-    EList<NetworkEntity> getNetworkentity();
+    EList<NetworkEntity> getSmartMeterReplicas();
 
 } // Aggregation

@@ -175,7 +175,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
      * @generated
      */
     @Override
-    public EReference getAggregation_Networkentity() {
+    public EReference getAggregation_SmartMeterReplicas() {
         return (EReference) aggregationEClass.getEStructuralFeatures().get(0);
     }
 
@@ -216,7 +216,7 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
         createEAttribute(replicationEClass, REPLICATION__NR_OF_REPLICAS);
 
         aggregationEClass = createEClass(AGGREGATION);
-        createEReference(aggregationEClass, AGGREGATION__NETWORKENTITY);
+        createEReference(aggregationEClass, AGGREGATION__SMART_METER_REPLICAS);
     }
 
     /**
@@ -263,8 +263,8 @@ public class TopoextensionPackageImpl extends EPackageImpl implements Topoextens
                 IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(aggregationEClass, Aggregation.class, "Aggregation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getAggregation_Networkentity(), theSmartgridtopoPackage.getNetworkEntity(), null, "networkentity", null, 1, -1, Aggregation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-                IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getAggregation_SmartMeterReplicas(), theSmartgridtopoPackage.getNetworkEntity(), null, "smartMeterReplicas", null, 1, -1, Aggregation.class, !IS_TRANSIENT, !IS_VOLATILE,
+                IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);

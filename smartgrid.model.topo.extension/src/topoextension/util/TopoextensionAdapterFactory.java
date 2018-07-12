@@ -63,7 +63,7 @@ public class TopoextensionAdapterFactory extends AdapterFactoryImpl {
      * 
      * @generated
      */
-    protected TopoextensionSwitch<Adapter> modelSwitch = new TopoextensionSwitch<Adapter>() {
+    protected TopoextensionSwitch<Adapter> modelSwitch = new TopoextensionSwitch<>() {
         @Override
         public Adapter caseExtensionRepository(ExtensionRepository object) {
             return createExtensionRepositoryAdapter();

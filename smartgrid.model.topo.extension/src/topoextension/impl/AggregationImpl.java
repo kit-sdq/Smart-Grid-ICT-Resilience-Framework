@@ -4,13 +4,10 @@ package topoextension.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import smartgridtopo.NetworkEntity;
 import topoextension.Aggregation;
@@ -23,21 +20,22 @@ import topoextension.TopoextensionPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link topoextension.impl.AggregationImpl#getNetworkentity <em>Networkentity</em>}</li>
+ * <li>{@link topoextension.impl.AggregationImpl#getSmartMeterReplicas <em>Smart Meter
+ * Replicas</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class AggregationImpl extends MinimalEObjectImpl.Container implements Aggregation {
     /**
-     * The cached value of the '{@link #getNetworkentity() <em>Networkentity</em>}' containment
+     * The cached value of the '{@link #getSmartMeterReplicas() <em>Smart Meter Replicas</em>}'
      * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
      * 
-     * @see #getNetworkentity()
+     * @see #getSmartMeterReplicas()
      * @generated
      * @ordered
      */
-    protected EList<NetworkEntity> networkentity;
+    protected EList<NetworkEntity> smartMeterReplicas;
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -64,25 +62,11 @@ public class AggregationImpl extends MinimalEObjectImpl.Container implements Agg
      * @generated
      */
     @Override
-    public EList<NetworkEntity> getNetworkentity() {
-        if (networkentity == null) {
-            networkentity = new EObjectContainmentEList<>(NetworkEntity.class, this, TopoextensionPackage.AGGREGATION__NETWORKENTITY);
+    public EList<NetworkEntity> getSmartMeterReplicas() {
+        if (smartMeterReplicas == null) {
+            smartMeterReplicas = new EObjectResolvingEList<>(NetworkEntity.class, this, TopoextensionPackage.AGGREGATION__SMART_METER_REPLICAS);
         }
-        return networkentity;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-        case TopoextensionPackage.AGGREGATION__NETWORKENTITY:
-            return ((InternalEList<?>) getNetworkentity()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
+        return smartMeterReplicas;
     }
 
     /**
@@ -93,8 +77,8 @@ public class AggregationImpl extends MinimalEObjectImpl.Container implements Agg
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case TopoextensionPackage.AGGREGATION__NETWORKENTITY:
-            return getNetworkentity();
+        case TopoextensionPackage.AGGREGATION__SMART_METER_REPLICAS:
+            return getSmartMeterReplicas();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -108,9 +92,9 @@ public class AggregationImpl extends MinimalEObjectImpl.Container implements Agg
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case TopoextensionPackage.AGGREGATION__NETWORKENTITY:
-            getNetworkentity().clear();
-            getNetworkentity().addAll((Collection<? extends NetworkEntity>) newValue);
+        case TopoextensionPackage.AGGREGATION__SMART_METER_REPLICAS:
+            getSmartMeterReplicas().clear();
+            getSmartMeterReplicas().addAll((Collection<? extends NetworkEntity>) newValue);
             return;
         }
         super.eSet(featureID, newValue);
@@ -124,8 +108,8 @@ public class AggregationImpl extends MinimalEObjectImpl.Container implements Agg
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case TopoextensionPackage.AGGREGATION__NETWORKENTITY:
-            getNetworkentity().clear();
+        case TopoextensionPackage.AGGREGATION__SMART_METER_REPLICAS:
+            getSmartMeterReplicas().clear();
             return;
         }
         super.eUnset(featureID);
@@ -139,8 +123,8 @@ public class AggregationImpl extends MinimalEObjectImpl.Container implements Agg
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case TopoextensionPackage.AGGREGATION__NETWORKENTITY:
-            return networkentity != null && !networkentity.isEmpty();
+        case TopoextensionPackage.AGGREGATION__SMART_METER_REPLICAS:
+            return smartMeterReplicas != null && !smartMeterReplicas.isEmpty();
         }
         return super.eIsSet(featureID);
     }
