@@ -27,6 +27,8 @@
         upperBound="-1" eType="#//PowerGridNode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="LinkedBy" upperBound="-1"
         eType="#//PhysicalConnection" eOpposite="#//PhysicalConnection/Links"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xCoord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="yCoord" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PowerGridNode" eSuperTypes="#//NamedIdentifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="SmartMeter" eSuperTypes="#//CommunicatingEntity">

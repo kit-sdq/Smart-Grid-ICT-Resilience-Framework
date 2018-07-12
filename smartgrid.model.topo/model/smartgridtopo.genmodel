@@ -23,6 +23,8 @@
     <genClasses image="false" ecoreClass="smartgridtopo.ecore#//NetworkEntity">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//NetworkEntity/ConnectedTo"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridtopo.ecore#//NetworkEntity/LinkedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartgridtopo.ecore#//NetworkEntity/xCoord"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartgridtopo.ecore#//NetworkEntity/yCoord"/>
     </genClasses>
     <genClasses ecoreClass="smartgridtopo.ecore#//PowerGridNode"/>
     <genClasses ecoreClass="smartgridtopo.ecore#//SmartMeter">
