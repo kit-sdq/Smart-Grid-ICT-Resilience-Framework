@@ -1,8 +1,12 @@
 package smartgrid.simcontrol.ui.launchconfig;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.print.attribute.standard.OutputDeviceAssigned;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
@@ -41,6 +45,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
     private static final Logger LOG = Logger.getLogger(SimControlLaunchConfigurationTab.class);
 
+    private String noHackingChoice = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
+            .getString("SimControlLaunchConfigurationTab.NoHackingChoiceLabel.text");
+
+    private String[] localHackingStyles = new String[] {noHackingChoice, "BFS_HACKING", "DFS_HACKING", "FULLY_MESHED_HACKING"};
+    private String[] viralHackingStyles = new String[] {noHackingChoice, "STANDARD_HACKING", "FULLY_MESHED_HACKING"};
+
     private Composite container;
     private Text outputTextbox;
     private Text inputTextbox;
@@ -70,6 +80,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     public void createControl(final Composite parent) {
 
         // Building Items List for hackingStyleCombo
+        
+              
         final HackingStyle[] hackingStyles = HackingStyle.values();
         final String[] hackinStyleEnumStrings = new String[hackingStyles.length];
 
@@ -219,12 +231,19 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                     ignoreLogicalConCheckBox.setEnabled(true);
                 } else {
                     cyberAttackSimulationGroup.setEnabled(false);
-                    ignoreLogicalConCheckBox.setEnabled(false);
+                    setHackingStyleText("No Attacker Simulation");
                 }
                 if (sim.enableRootNode()) {
                     rootNodeTextbox.setEnabled(true);
                 } else {
                     rootNodeTextbox.setEnabled(false);
+                }
+                
+                if (sim.getName().equals("Local Hacker")) {
+                    setHackingStyleText("Local Hacker");
+                }
+                else if (sim.getName().equals("Viral Hacker")) {
+                    setHackingStyleText("Viral Hacker");
                 }
                 if (sim.enableHackingSpeed()) {
                     hackingSpeedText.setEnabled(true);
@@ -281,7 +300,18 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 propertyChanged();
 
                 if (ignoreLogicalConCheckBox.getSelection()) {
-                    hackingStyleCombo.setText(HackingStyle.FULLY_MESHED_HACKING.name());
+                    if (!comboAttackSimulation.getText().equals("No Attack Simulation")) {
+                        hackingStyleCombo.setText(HackingStyle.FULLY_MESHED_HACKING.name());
+                    }
+                    hackingStyleCombo.setEnabled(false);
+                } else {
+                     if (comboAttackSimulation.getText().equals("Local Hacker")) {
+                        setHackingStyleText("Local Hacker");
+                    } else if (comboAttackSimulation.getText().equals("Viral Hacker")) {
+                        setHackingStyleText("Viral Hacker");
+                    } else  {
+                        setHackingStyleText("No Attack Simulation");
+                    }
                 }
             }
         });
@@ -327,8 +357,14 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         hackingStyleCombo = new Combo(HackingStyleComposite, SWT.READ_ONLY);
         hackingStyleCombo.setBounds(193, 0, 202, 23);
         hackingStyleCombo.setTouchEnabled(true);
-
-        hackingStyleCombo.setItems(hackinStyleEnumStrings);
+        
+        if (comboAttackSimulation.getText().equals("Local Hacker")) {
+            setHackingStyleText("Local Hacker");
+        } else if (comboAttackSimulation.getText().equals("Viral Hacker")) {
+            setHackingStyleText("Viral Hacker");
+        } else  {
+            setHackingStyleText("No Attack Simulation");
+        }
 
         final Composite RootNodeComposite = new Composite(cyberAttackSimulationGroup, SWT.NONE);
         RootNodeComposite.setBounds(10, 54, 660, 24);
@@ -456,7 +492,20 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             }
         });
     }
-
+    private void setHackingStyleText(String comboAttacker) {
+        if (comboAttacker.equals("Local Hacker")) {
+            hackingStyleCombo.setItems(localHackingStyles);
+            hackingStyleCombo.setEnabled(true);
+            hackingStyleCombo.setText(noHackingChoice);
+        } else if (comboAttacker.equals("Viral Hacker")) {
+            hackingStyleCombo.setItems(viralHackingStyles);
+            hackingStyleCombo.setEnabled(true);
+            hackingStyleCombo.setText(noHackingChoice);
+        } else {
+            hackingStyleCombo.setItems(noHackingChoice);
+            hackingStyleCombo.setEnabled(false);
+        }
+    }
     private void setSelectionOfComboBoxToOther(Combo comboBox, String entry) {
         comboBox.deselect(comboBox.indexOf(entry));
     }
@@ -494,7 +543,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             timeStepsTextBox.setText(configuration.getAttribute(Constants.TIME_STEPS_KEY, Constants.DEFAULT_TIME_STEPS));
             iterationCountTextbox.setText(configuration.getAttribute(Constants.ITERATION_COUNT_KEY, Constants.DEFAULT_ITERATION_COUNT));
             rootNodeTextbox.setText(configuration.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID));
-            hackingStyleCombo.setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
+            
             ignoreLogicalConCheckBox.setSelection(configuration.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.DEFAULT_IGNORE_LOC_CON).contentEquals(Constants.TRUE));
             generateTopoCheckBox.setSelection(generateTopo);
             completionCheckBox.setSelection(configuration.getAttribute(Constants.SMARTMETER_COMPLETION_KEY, Constants.DEFAULT_SMARTMETER_COMPLETION).contentEquals(Constants.TRUE));
@@ -505,6 +554,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             setSelectionOfComboBox(comboTerminationCondition, configuration, Constants.TERMINATION_CONDITION_SIMULATION_KEY);
             setSelectionOfComboBox(comboProgressor, configuration, Constants.TIME_PROGRESSOR_SIMULATION_KEY);
             setSelectionOfComboBox(comboKritisSimulation, configuration, Constants.KRITIS_SIMULATION_KEY);
+            
+            hackingStyleCombo.setText(configuration.getAttribute(Constants.HACKING_STYLE_KEY, noHackingChoice));
 
         } catch (final CoreException e) {
             LOG.error("An error occured when trying to read the launch configuration.", e);
@@ -536,8 +587,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         String smartMeterCompletion = parseCheckBox(completionCheckBox);
         boolean generateTopo = generateTopoCheckBox.getSelection();
 
-        // Combo Box Parsing
-        final String hackingStyleString = getSelectionOfComboBox(hackingStyleCombo);
 
         // Add to config
         configuration.setAttribute(Constants.TOPO_PATH_KEY, topoPath);
@@ -546,12 +595,11 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         configuration.setAttribute(Constants.TIME_STEPS_KEY, timeSteps);
         configuration.setAttribute(Constants.IGNORE_LOC_CON_KEY, ignoreLogicalConnections);
         configuration.setAttribute(Constants.ROOT_NODE_ID_KEY, rNodeID);
-        configuration.setAttribute(Constants.HACKING_STYLE_KEY, hackingStyleString);
         configuration.setAttribute(Constants.HACKING_SPEED_KEY, hackingSpeedText.getText());
         configuration.setAttribute(Constants.ITERATION_COUNT_KEY, iterationCountTextbox.getText());
         configuration.setAttribute(Constants.SMARTMETER_COMPLETION_KEY, smartMeterCompletion);
         configuration.setAttribute(Constants.TOPO_GENERATION_KEY, generateTopo);
-
+        
         if (comboAttackSimulation.getSelectionIndex() != -1) {
             configuration.setAttribute(Constants.ATTACKER_SIMULATION_KEY, getSelectionOfComboBox(comboAttackSimulation));
         }
@@ -570,6 +618,10 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         if (comboKritisSimulation.getSelectionIndex() != -1) {
             configuration.setAttribute(Constants.KRITIS_SIMULATION_KEY, getSelectionOfComboBox(comboKritisSimulation));
         }
+
+        // Combo Box Parsing
+        final String hackingStyleString = getSelectionOfComboBox(hackingStyleCombo);
+        configuration.setAttribute(Constants.HACKING_STYLE_KEY, hackingStyleString);
 
         // Now Tab is Clean again
         setDirty(false);
@@ -603,9 +655,24 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         } else if (areFileExtensionsWrong()) {
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_EXTENSIONS"); //$NON-NLS-1$
-        } else if (areOptionsWrong()) {
+        } 
+        else if (areOptionsWrong()) {
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_OPTIONS"); //$NON-NLS-1$
+        } else if (inputNotExists()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.INPUT_PATH"); //$NON-NLS-1$
+        } else if (topoNotExists()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.TOPO_PATH"); //$NON-NLS-1$
+        } else if (outputNotExists()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.OUTPUT_PATH"); //$NON-NLS-1$
+        } else if (!outputIsParent()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.OutputIsNotParent.text"); //$NON-NLS-1$
+        } else if (hackingEmpty()) {
+            Message = noHackingChoice;
         } else {
             // everything ok
             return null;
@@ -641,7 +708,8 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
      * @return True if all Input Parameter are correct
      */
     private boolean validateInput() {
-        return !areTextBoxesEmpty() && !areFileExtensionsWrong() && !areOptionsWrong();
+        return !areTextBoxesEmpty() && !areFileExtensionsWrong() &&! hackingEmpty() && 
+                outputIsParent() && !areOptionsWrong() && !areFilesNotExisting();
     }
 
     /**
@@ -683,6 +751,39 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         return dirName;
     }
 
+    private boolean areFilesNotExisting() {
+        return outputNotExists() || topoNotExists() || outputNotExists();
+    }
+    
+    private boolean outputNotExists() {
+        String outputPath = outputTextbox.getText();
+        if (Files.notExists(Paths.get(outputPath))) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean topoNotExists() {
+        String topoPath = topologyTextbox.getText();
+        if (Files.notExists(Paths.get(topoPath))) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean inputNotExists() {
+        String inputPath = inputTextbox.getText();
+        if (Files.notExists(Paths.get(inputPath))) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hackingEmpty() {
+        return (hackingStyleCombo.getText().equals(noHackingChoice)
+                && !comboAttackSimulation.getText().equals("No Attack Simulation"));
+    }
+    
     private boolean areTextBoxesEmpty() {
         final boolean topoEmpty = topologyTextbox.getText().equals("");
         final boolean inEmpty = inputTextbox.getText().equals("");
@@ -705,11 +806,19 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         if (parentOfInput == null) {
             return true;
         }
-        final boolean outWrong = !outputTextbox.getText().contains(parentOfInput);
+        //final boolean outWrong = !outputTextbox.getText().contains(parentOfInput);
 
-        return topoWrong || inWrong || outWrong;
+        return topoWrong || inWrong ;
     }
 
+    private boolean outputIsParent() {
+        String parentOfInput = new File(inputTextbox.getText()).getParent();
+        if (parentOfInput == null) {
+            return true;
+        }
+        final boolean outWrong = outputTextbox.getText().contains(parentOfInput);
+        return outWrong;
+    }
     @SuppressWarnings("unused")
     private boolean areOptionsWrong() {
         // TODO Add coming checks for the options section of the Ui here

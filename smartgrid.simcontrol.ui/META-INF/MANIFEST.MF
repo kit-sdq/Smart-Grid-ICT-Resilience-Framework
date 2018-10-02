@@ -14,3 +14,4 @@ Require-Bundle: org.eclipse.ui,
  smartgrid.simcontrol.coupling;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Export-Package: smartgrid.simcontrol.ui
