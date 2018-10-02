@@ -1,5 +1,7 @@
 package smartgrid.attackersimulation;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,8 +42,8 @@ public class LocalHacker implements IAttackerSimulation {
      * Connection to that Node => Same Cluster Only
      */
     private String rootNodeID; // IDs stay the same over the whole Analysis
-
     private On rootNodeState; // Reference Changes between runs!
+    private Map<String, LinkedList<On>> neighborsInClusterMap;
 
     private int hackingSpeed;
 
@@ -61,7 +63,7 @@ public class LocalHacker implements IAttackerSimulation {
     public void init(final ILaunchConfiguration config) throws CoreException {
 
         HackingStyle desiredHackingStyle = null;
-        String rootNodeID = null;
+        String rootNodeId = null;
 
         String desiredHackingStyleString;
         String rootNodeIDString;
@@ -80,30 +82,43 @@ public class LocalHacker implements IAttackerSimulation {
                 desiredHackingStyle = HackingStyle.valueOf(Constants.DEFAULT_HACKING_STYLE);
             }
             if (rootNodeIDString.equals(Constants.FAIL)) {
-                rootNodeID = Constants.DEFAULT_ROOT_NODE_ID;
+                rootNodeId = Constants.DEFAULT_ROOT_NODE_ID;
             }
             if (hackingSpeedString.equals(Constants.FAIL)) {
-                hackingSpeed = Integer.parseInt(Constants.DEFAULT_HACKING_SPEED);
+                this.hackingSpeed = Integer.parseInt(Constants.DEFAULT_HACKING_SPEED);
             }
         } else {
             desiredHackingStyle = HackingStyle.valueOf(desiredHackingStyleString);
 
-            rootNodeID = rootNodeIDString;
+            rootNodeId = rootNodeIDString;
 
-            hackingSpeed = Integer.parseInt(hackingSpeedString);
+            this.hackingSpeed = Integer.parseInt(hackingSpeedString);
         }
 
         // Adding extracted Parameters
-        this.rootNodeID = rootNodeID;
-        usedHackingStyle = desiredHackingStyle;
-
-        LOG.info("Infection root node ID is: " + rootNodeID);
+        this.rootNodeID = rootNodeId;
+        this.usedHackingStyle = desiredHackingStyle;
+        LOG.info("Infection root node ID is: " + rootNodeId);
         LOG.info("Hacking style is: " + desiredHackingStyle);
-        LOG.info("Hacking speed is: " + hackingSpeed);
+        LOG.info("Hacking speed is: " + this.hackingSpeed);
 
-        initDone = true;
+        this.initDone = true;
 
         LOG.debug("Init done");
+    }
+
+    /**
+     * Method to make init without using a launch configuration for test purposes
+     *
+     * @param hackingStyle
+     * @param hackingspeed
+     * @param rootNode
+     */
+    public void initForTest(final String hackingStyle, final String hackingspeed, final String rootNode) {
+        this.hackingSpeed = Integer.parseInt(hackingspeed);
+        this.usedHackingStyle = HackingStyle.valueOf(hackingStyle);
+        this.rootNodeID = rootNode;
+        this.initDone = true;
     }
 
     /**
@@ -113,52 +128,85 @@ public class LocalHacker implements IAttackerSimulation {
     @Override
     public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioResult impactAnalysisOutput) {
 
-        assert initDone : "Init was not run! Run init() first!";
+        assert this.initDone : "Init was not run! Run init() first!";
 
         // Copy Input in own Variables
-        mySmartGridTopo = smartGridTopo;
-        myScenarioResult = impactAnalysisOutput;
+        this.mySmartGridTopo = smartGridTopo;
+        this.myScenarioResult = impactAnalysisOutput;
 
-        if (firstRun) {
-            setHackingRootOnEntityState();
-            firstRun = false;
+        if (this.firstRun) {
+            this.setHackingRootOnEntityState();
+            this.neighborsMapInit();
+            this.firstRun = false;
         } else {
             // Find Root On Entity using ID I already know
-            rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
+            this.rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.myScenarioResult);
         }
 
-        if (rootNodeState != null) {
+        if (this.rootNodeState != null) {
             // At this Point we have valid RootNodeID and rootNode
-            assert rootNodeState.getOwner().getId() == rootNodeID : "Root Node Not Valid !";
+            assert this.rootNodeState.getOwner().getId() == this.rootNodeID : "Root Node Not Valid !";
             // Hack Root just in case its not hacked
             // this.rootNode.setIsHacked(true);
 
             // Starting hacking according to the desired hacking Style
-            hackNext(rootNodeState.getBelongsToCluster());
+            this.hackNext(this.rootNodeState.getBelongsToCluster());
         }
 
-        myScenarioResult.setScenario(smartGridTopo);
+        this.myScenarioResult.setScenario(smartGridTopo);
 
         LOG.debug("Hacking done");
-        return myScenarioResult;
+        return this.myScenarioResult;
     }
 
-    private void hackNext(final Cluster clusterToHack) {
+    /**
+     * arranges the neighbours of every node randomly and put them in a list mapped to the node
+     */
+    private void neighborsMapInit() {
+        this.neighborsInClusterMap = new HashMap<String, LinkedList<On>>();
 
-        switch (usedHackingStyle) {
-        case BFS_HACKING:
-            bfsHacking(clusterToHack);
-            break;
-        case DFS_HACKING:
-            dfsHacking(clusterToHack);
-            break;
-        case FULLY_MESHED_HACKING:
-            fullMeshedHacking(clusterToHack);
-            break;
+        final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper
+                .genNeighborMapbyID(this.mySmartGridTopo);
+        for (final String iD : IDtoHisNeighborLinks.keySet()) {
+
+            final LinkedList<On> neighborOnList = new LinkedList<>();
+            for (final On clusterNode : this.rootNodeState.getBelongsToCluster().getHasEntities()) {
+                // Are my Neighbors at my Cluster ? Otherwise they are gone
+                // (Destroyed or something)
+                if (IDtoHisNeighborLinks.get(iD).contains(ScenarioModelHelper.getIDfromEntityOnState(clusterNode))) {
+                    neighborOnList.add(clusterNode);
+                }
+            }
+            Collections.shuffle(neighborOnList);
+            this.neighborsInClusterMap.put(iD, neighborOnList);
         }
     }
 
-    /*
+    /**
+     * begin hacking ; choose hacking style
+     *
+     * @param clusterToHack
+     */
+    private void hackNext(final Cluster clusterToHack) {
+
+        switch (this.usedHackingStyle) {
+        case BFS_HACKING:
+            this.bfsHacking(clusterToHack);
+            break;
+        case DFS_HACKING:
+            this.dfsHacking(clusterToHack);
+            break;
+        case FULLY_MESHED_HACKING:
+            this.fullMeshedHacking(clusterToHack);
+            break;
+        default:
+            throw new RuntimeException("Unknown hacking style: " + this.usedHackingStyle);
+
+        }
+
+    }
+
+    /**
      * Algo
      *
      * Q = <rootNode>, Q' = < > : Set of Nodes // current, next layer
@@ -180,11 +228,15 @@ public class LocalHacker implements IAttackerSimulation {
      *
      * } Q := Q' Q' := Clear
      *
-     * } Modified from Sanders Algorithm 1 Lecture BFS Algorithm @KIT. Also on Book
-     * "Algorithms and Data Structures" ISBN: 978-3-540-77977-3 (Print) 978-3-540-77978-0 (Online)
+     * } Modified from Sanders Algorithm 1 Lecture BFS Algorithm @KIT. Also on Book "Algorithms and
+     * Data Structures" ISBN: 978-3-540-77977-3 (Print) 978-3-540-77978-0 (Online)
+     *
+     * @param clusterToHack
      */
     private void bfsHacking(final Cluster clusterToHack) {
 
+        // visited nodes in this Time step
+        final List<On> visitedNodes = new LinkedList<On>();
         int hackedNodesCount = 0;
 
         // assert(this.rootNode.getBelongsToCluster() == clusterToHack);
@@ -202,14 +254,19 @@ public class LocalHacker implements IAttackerSimulation {
          * Reads from Scenario so this List don't respects changes in States of the Entities -->
          * It's only the "hardwired" logical Connection neighbors
          */
-        final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(mySmartGridTopo);
+        final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper
+                .genNeighborMapbyID(this.mySmartGridTopo);
 
         // Root is in cluster to hack --> so Root is StartNode
-        currentLayer.add(rootNodeState);
+        currentLayer.add(this.rootNodeState);
 
         // Starting BFS Algorithm
         hackingDone: for (layerCount = 0; !currentLayer.isEmpty(); layerCount++) {
+
             for (final On Node : currentLayer) {
+                if (!visitedNodes.contains(Node)) {
+                    visitedNodes.add(Node);
+                }
 
                 // getting Neighbors
                 final String nodeID = ScenarioModelHelper.getIDfromEntityOnState(Node);
@@ -222,31 +279,36 @@ public class LocalHacker implements IAttackerSimulation {
                      * Here it Filters the hardwired Logical Connections of the Neighbors out that
                      * because of their State (e.g. destroyed) don't functions
                      */
-                    final LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack, neighborIDList);
+                    final LinkedList<On> neighborOnList = this.neighborsInClusterMap.get(nodeID);
 
                     // Now I have my alive (in my Cluster) Neighbor OnState List
                     for (final On neighbor : neighborOnList) {
+                        // check if this node is not visited in this time step
+                        if (!visitedNodes.contains(neighbor)) {
+                            // TODO why check not being a networknode ?!
+                            if (!(neighbor.getOwner() instanceof NetworkNode) && !neighbor.isIsHacked()) {
+                                LOG.debug("Hacked with BFS node " + neighbor.getOwner().getId());
+                                neighbor.setIsHacked(true);
+                                visitedNodes.add(neighbor);
+                                hackedNodesCount++;
 
-                        if (!(neighbor.getOwner() instanceof NetworkNode) && !neighbor.isIsHacked()) {
-                            LOG.debug("Hacked with BFS node " + neighbor.getOwner().getId());
-                            neighbor.setIsHacked(true);
-                            hackedNodesCount++;
+                                if (hackedNodesCount >= this.hackingSpeed) {
+                                    break hackingDone;
+                                }
 
-                            if (hackedNodesCount > hackingSpeed) {
-                                break hackingDone;
+                                nextLayer.add(neighbor);
+
+                            } else {
+
+                                // Found an hacked Node that can hack in the next Layer
+                                visitedNodes.add(neighbor);
+                                nextLayer.add(neighbor);
+
                             }
-
-                            nextLayer.add(neighbor);
-
-                        }
-                        // Found an hacked Node that can hack in the next Layer
-                        else {
-                            nextLayer.add(neighbor);
                         }
                     }
                 }
             }
-
             // Q := Q' Q' := Clear
             currentLayer = nextLayer;
             nextLayer = new LinkedList<>();
@@ -254,22 +316,26 @@ public class LocalHacker implements IAttackerSimulation {
         LOG.info("Done hacking with BFS");
     }
 
-    /*
+    /**
      * Modified from Wikipedia http://en.wikipedia.org/wiki/Depth-first_search
+     *
+     * @param clusterToHack
      */
     private void dfsHacking(final Cluster clusterToHack) {
 
         final int hackCount = 0;
+        final List<On> visitedNodes = new LinkedList<On>();
 
-        final On Node = rootNodeState;
-
+        final On Node = this.rootNodeState;
+        visitedNodes.add(Node);
         /*
          * Reads from Scenario so this List don't respects changes in States of the Entities -->
          * It's only the "hardwired" logical Connection neighbors
          */
-        final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(mySmartGridTopo);
+        final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper
+                .genNeighborMapbyID(this.mySmartGridTopo);
 
-        dfs(clusterToHack, Node, IDtoHisNeighborLinks, hackCount);
+        this.dfs(clusterToHack, Node, IDtoHisNeighborLinks, hackCount, visitedNodes);
 
     }
 
@@ -277,55 +343,68 @@ public class LocalHacker implements IAttackerSimulation {
      * Helper Method for the DFS Hacking
      *
      * @param clusterToHack
-     *
-     * @param Node
-     *
-     * @param IDtoHisNeighborLinks
+     * @param node
+     * @param iDtoHisNeighborLinks
+     * @param visitedNodes
+     * @param hackCount
+     * @return number of hackedNodes
      */
-    private void dfs(final Cluster clusterToHack, final On Node, final Map<String, LinkedList<String>> IDtoHisNeighborLinks, int hackCount) {
+    private int dfs(final Cluster clusterToHack, final On node,
+            final Map<String, LinkedList<String>> iDtoHisNeighborLinks, int hackCount, final List<On> visitedNodes) {
+
         // getting Neighbors
-        final String nodeID = ScenarioModelHelper.getIDfromEntityOnState(Node);
+        final String nodeID = ScenarioModelHelper.getIDfromEntityOnState(node);
 
         // Getting Neighbor List with ID from Node
         // These Nodes could be in my Cluster but not sure
-        final LinkedList<String> neighborIDList = IDtoHisNeighborLinks.get(nodeID);
+        final LinkedList<String> neighborIDList = iDtoHisNeighborLinks.get(nodeID);
 
         if (neighborIDList != null) {
             /*
              * Here it Filters the hardwired Logical Connections of the Neighbors out that because
              * of their State (e.g. destroyed) don't functions
              */
-            final LinkedList<On> neighborOnList = ScenarioModelHelper.getNeighborsFromCluster(clusterToHack, neighborIDList);
+            final LinkedList<On> neighborOnList = this.neighborsInClusterMap.get(nodeID);
 
             /* Now I have my alive (in my Cluster) Neighbor OnState List */
             for (final On neighbor : neighborOnList) {
+                // check if this node is visited in this time step
+                if (!visitedNodes.contains(neighbor)) {
 
-                if (hackCount > hackingSpeed) {
-                    break; // Stopp hacking for this run
-                }
+                    if (hackCount >= this.hackingSpeed) {
+                        break; // Stopp hacking for this run
 
-                else if (neighbor.isIsHacked()) {
-                    dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, ++hackCount);
-                } else {
-                    if (!(neighbor.getOwner() instanceof NetworkNode)) {
+                    } else if (neighbor.isIsHacked() || (neighbor.getOwner() instanceof NetworkNode)) {
+                        visitedNodes.add(neighbor);
+                        hackCount = this.dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount, visitedNodes);
+
+                    } else {
                         LOG.debug("Hacked with BFS node " + neighbor.getOwner().getId());
                         neighbor.setIsHacked(true);
+                        visitedNodes.add(neighbor);
+                        hackCount++;
+                        hackCount = this.dfs(clusterToHack, neighbor, iDtoHisNeighborLinks, hackCount, visitedNodes);
                     }
-                    hackCount++;
-                    dfs(clusterToHack, neighbor, IDtoHisNeighborLinks, hackCount);
                 }
-
             }
         }
         LOG.info("Done hacking with DFS");
+        return hackCount;
     }
 
     /**
      * hack every Node in the the given Cluster without respecting logical Connections
+     *
+     * @param clusterToHack clusterToHack
      */
     private void fullMeshedHacking(final Cluster clusterToHack) {
 
-        final Iterator<On> myIter = clusterToHack.getHasEntities().iterator();
+        // getting the nodes in the cluster to hack and making thier order random
+        final LinkedList<On> entitiesInCluster = new LinkedList<On>();
+        entitiesInCluster.addAll(clusterToHack.getHasEntities());
+        Collections.shuffle(entitiesInCluster);
+
+        final Iterator<On> myIter = entitiesInCluster.iterator();
         int hackedNodesCount = 0;
 
         do {
@@ -338,21 +417,24 @@ public class LocalHacker implements IAttackerSimulation {
                 hackedNodesCount++;
             }
 
-        } while (hackedNodesCount < hackingSpeed && myIter.hasNext());
+        } while (hackedNodesCount < this.hackingSpeed && myIter.hasNext());
 
     }
 
+    /**
+     * choosing randomly a root when none is identified
+     */
     private void chooseRootIDByRandom() {
         Cluster myCluster;
         final Random myRandom = new Random();
 
-        final int clusterCount = myScenarioResult.getClusters().size();
+        final int clusterCount = this.myScenarioResult.getClusters().size();
 
         // Choose Random Cluster with Entries
         do {
             // [0 - clusterCount) Exclusive upper bound
             final int myClusterNumber = myRandom.nextInt(clusterCount);
-            myCluster = myScenarioResult.getClusters().get(myClusterNumber);
+            myCluster = this.myScenarioResult.getClusters().get(myClusterNumber);
 
         } while (myCluster.getHasEntities().isEmpty()); // Or threshold of Entities in Cluster ?
 
@@ -363,35 +445,38 @@ public class LocalHacker implements IAttackerSimulation {
 
         final int myEntityNumber = myRandom.nextInt(entityCount); // [0 - entityCount)
 
-        rootNodeState = myCluster.getHasEntities().get(myEntityNumber);
-        rootNodeID = rootNodeState.getOwner().getId();
-        if (rootNodeState.getOwner() instanceof NetworkNode) { //To-do: this could be improved
-            chooseRootIDByRandom();
+        this.rootNodeState = myCluster.getHasEntities().get(myEntityNumber);
+        this.rootNodeID = this.rootNodeState.getOwner().getId();
+        if (this.rootNodeState.getOwner() instanceof NetworkNode) { // To-do: this could be improved
+            this.chooseRootIDByRandom();
         } else {
-            LOG.info("Using random root with ID: " + rootNodeID);
+            LOG.info("Using random root with ID: " + this.rootNodeID);
         }
     }
 
+    /**
+     * setting the Root node
+     */
     private void setHackingRootOnEntityState() {
 
-        if (rootNodeID == null || rootNodeID.equalsIgnoreCase(Constants.NO_ROOT_NODE_ID)) {
+        if (this.rootNodeID == null || this.rootNodeID.equalsIgnoreCase(Constants.NO_ROOT_NODE_ID)) {
             LOG.info("No root node specified.");
-            chooseRootIDByRandom();
+            this.chooseRootIDByRandom();
         } else {
             // search root node state (if meaningful ID is specified)
-            rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(rootNodeID, myScenarioResult);
+            this.rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.myScenarioResult);
 
-            if (rootNodeState != null) {
-                rootNodeID = rootNodeState.getOwner().getId();
+            if (this.rootNodeState != null) {
+                this.rootNodeID = this.rootNodeState.getOwner().getId();
             } else {
-                LOG.warn("Could not find root node with ID " + rootNodeID);
-                chooseRootIDByRandom();
+                LOG.warn("Could not find root node with ID " + this.rootNodeID);
+                throw new RuntimeException("Falsch root node ID");
             }
         }
 
         // set root node infected if not already
-        if (!rootNodeState.isIsHacked()) {
-            rootNodeState.setIsHacked(true);
+        if (!this.rootNodeState.isIsHacked()) {
+            this.rootNodeState.setIsHacked(true);
         }
     }
 
@@ -419,7 +504,7 @@ public class LocalHacker implements IAttackerSimulation {
      * @return the usedHackingStyle
      */
     public HackingStyle getUsedHackingStyle() {
-        return usedHackingStyle;
+        return this.usedHackingStyle;
     }
 
     /**
@@ -434,7 +519,7 @@ public class LocalHacker implements IAttackerSimulation {
      * @return the rootNodeID
      */
     public String getRootNodeID() {
-        return rootNodeID;
+        return this.rootNodeID;
     }
 
     /**
@@ -449,7 +534,7 @@ public class LocalHacker implements IAttackerSimulation {
      * @return the hackingSpeed
      */
     public int getHackingSpeed() {
-        return hackingSpeed;
+        return this.hackingSpeed;
     }
 
     /**
