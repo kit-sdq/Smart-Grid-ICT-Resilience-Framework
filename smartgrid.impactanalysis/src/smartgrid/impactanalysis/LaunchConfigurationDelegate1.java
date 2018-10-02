@@ -38,7 +38,8 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
      * Details about the Analysis
      */
     @Override
-    public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch, final IProgressMonitor monitor) throws CoreException {
+    public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
+            final IProgressMonitor monitor) throws CoreException {
 
         LOG.debug("Loaded");
         LOG.debug("Find parameters");
@@ -49,8 +50,8 @@ public class LaunchConfigurationDelegate1 implements ILaunchConfigurationDelegat
         LOG.debug("Input : " + inputPath);
         LOG.debug("Topology : " + topoPath);
 
-        final ScenarioState initialState = loadInput(inputPath);
-        final SmartGridTopology topo = loadScenario(topoPath);
+        final ScenarioState initialState = this.loadInput(inputPath);
+        final SmartGridTopology topo = this.loadScenario(topoPath);
 
         @SuppressWarnings("deprecation")
         final GraphAnalyzer ana = new GraphAnalyzer(outputPath);

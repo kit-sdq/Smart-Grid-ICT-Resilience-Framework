@@ -32,6 +32,7 @@ import smartgridtopo.NetworkEntity;
 import smartgridtopo.PhysicalConnection;
 import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
+import smartgridtopo.SmartMeter;
 
 /**
  * This Class does an Impact Analysis.
@@ -89,88 +90,111 @@ public class GraphAnalyzer implements IImpactAnalysis {
     public GraphAnalyzer(final String outputPath) {
 
         // Attention cloned from init() to be downward compatible
-        internalMaxID = 0;
-        powerStates = new HashMap<>();
-        entityStates = new HashMap<>();
-        controlCenters = new LinkedList<>();
-        internalToExternalID = new HashMap<>();
-        externalToInternalID = new HashMap<>();
-        internalToCluster = new HashMap<>();
-        logicalNodes = new LinkedList<>();
-        controlCenterConnectivity = new HashMap<>();
+        this.internalMaxID = 0;
+        this.powerStates = new HashMap<>();
+        this.entityStates = new HashMap<>();
+        this.controlCenters = new LinkedList<>();
+        this.internalToExternalID = new HashMap<>();
+        this.externalToInternalID = new HashMap<>();
+        this.internalToCluster = new HashMap<>();
+        this.logicalNodes = new LinkedList<>();
+        this.controlCenterConnectivity = new HashMap<>();
 
         this.outputPath = outputPath;
-        initDone = true;
+        this.initDone = true;
         // Do it always with logical Connection
-        ignoreLogicalConnections = false;
+        this.ignoreLogicalConnections = false;
     }
 
     @Override
     public void init(final ILaunchConfiguration config) throws CoreException {
 
-        internalMaxID = 0;
-        powerStates = new HashMap<>();
-        entityStates = new HashMap<>();
-        controlCenters = new LinkedList<>();
-        internalToExternalID = new HashMap<>();
-        externalToInternalID = new HashMap<>();
-        internalToCluster = new HashMap<>();
-        logicalNodes = new LinkedList<>();
-        controlCenterConnectivity = new HashMap<>();
+        this.internalMaxID = 0;
+        this.powerStates = new HashMap<>();
+        this.entityStates = new HashMap<>();
+        this.controlCenters = new LinkedList<>();
+        this.internalToExternalID = new HashMap<>();
+        this.externalToInternalID = new HashMap<>();
+        this.internalToCluster = new HashMap<>();
+        this.logicalNodes = new LinkedList<>();
+        this.controlCenterConnectivity = new HashMap<>();
 
         final String ignoreLogicalConnectionsString = config.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.FAIL);
 
         if (ignoreLogicalConnectionsString.equals(Constants.FAIL)) {
             // Checks whether DEFAULT_IGNORE_LOC_CON_KEY is true and assigns it
-            ignoreLogicalConnections = Constants.TRUE.equals(Constants.DEFAULT_IGNORE_LOC_CON);
+            this.ignoreLogicalConnections = Constants.TRUE.equals(Constants.DEFAULT_IGNORE_LOC_CON);
 
         } else {
             // checks whether ignoreLogicalConnectionsString is true and assigns it
-            ignoreLogicalConnections = Constants.TRUE.equals(ignoreLogicalConnectionsString);
+            this.ignoreLogicalConnections = Constants.TRUE.equals(ignoreLogicalConnectionsString);
         }
 
+        LOG.info("Ignoring logical connections: " + this.ignoreLogicalConnections);
+
+        LOG.debug("Init done");
+        this.initDone = true;
+    }
+
+    /**
+     * for Test purposes
+     *
+     * @param ignoreLogicalConnections
+     *            whether to ignore logical connections or not
+     */
+    public void initForTesting(final boolean ignoreLogicalConnections) {
+        this.internalMaxID = 0;
+        this.powerStates = new HashMap<>();
+        this.entityStates = new HashMap<>();
+        this.controlCenters = new LinkedList<>();
+        this.internalToExternalID = new HashMap<>();
+        this.externalToInternalID = new HashMap<>();
+        this.internalToCluster = new HashMap<>();
+        this.logicalNodes = new LinkedList<>();
+        this.controlCenterConnectivity = new HashMap<>();
+        this.ignoreLogicalConnections = ignoreLogicalConnections;
         LOG.info("Ignoring logical connections: " + ignoreLogicalConnections);
 
         LOG.debug("Init done");
-        initDone = true;
+        this.initDone = true;
     }
 
     @Override
     public ScenarioResult run(final SmartGridTopology smartGridTopo, final ScenarioState impactAnalysisInput) {
 
-        assert initDone : "Init wasn't run! Run init() first !";
+        assert this.initDone : "Init wasn't run! Run init() first !";
 
         LOG.debug("Start impact analysis");
 
-        clearAll();
+        this.clearAll();
 
         if (!LoadInputModelConformityHelper.checkInputModelConformity(impactAnalysisInput, smartGridTopo)) {
             LOG.error("Input model is not conform to the current topo model");
         }
 
         // Szenario einlesen
-        readStates(smartGridTopo, impactAnalysisInput);
+        this.readStates(smartGridTopo, impactAnalysisInput);
         // now slowly build adjacent matrix
-        adjacentMatrix = new double[internalMaxID][internalMaxID];
-        logicalAdjacentMatrix = new double[internalMaxID][internalMaxID];
-        for (int i = 0; i < internalMaxID; i++) {
-            for (int j = 0; j < internalMaxID; j++) {
-                adjacentMatrix[i][j] = 0;
-                logicalAdjacentMatrix[i][j] = 0;
+        this.adjacentMatrix = new double[this.internalMaxID][this.internalMaxID];
+        this.logicalAdjacentMatrix = new double[this.internalMaxID][this.internalMaxID];
+        for (int i = 0; i < this.internalMaxID; i++) {
+            for (int j = 0; j < this.internalMaxID; j++) {
+                this.adjacentMatrix[i][j] = 0;
+                this.logicalAdjacentMatrix[i][j] = 0;
             }
         }
         // Es werden insgesamt 2 mal Cluster gebildet. Einmal �ber die
         // physikalischen Verbindungen, dann �ber die logischen
-        readPhysicalConnections(smartGridTopo, impactAnalysisInput);
+        this.readPhysicalConnections(smartGridTopo, impactAnalysisInput);
 
         // Run only if Not Ignore LogicalConnection ^= I want logical
         // Connections
         // if (!ignoreLogicalConnections) {
-        readLogicalConnections(smartGridTopo, impactAnalysisInput);
+        this.readLogicalConnections(smartGridTopo, impactAnalysisInput);
         // }//TODO Remove if for rollback
 
         // Generates Result
-        final ScenarioResult result = genOutputResult();
+        final ScenarioResult result = this.genOutputResult();
         result.setScenario(smartGridTopo);
 
         LOG.debug("Working Directory = " + System.getProperty("user.dir"));
@@ -189,46 +213,58 @@ public class GraphAnalyzer implements IImpactAnalysis {
     public void analyze(final SmartGridTopology scenario, final ScenarioState state) {
 
         // Generates Result
-        final ScenarioResult result = run(scenario, state);
+        final ScenarioResult result = this.run(scenario, state);
 
         if (result != null) {
             // Saves to File System
-            FileSystemHelper.saveToFileSystem(result, outputPath);
+            FileSystemHelper.saveToFileSystem(result, this.outputPath);
         }
     }
 
+    /**
+     *
+     * @return int
+     *
+     */
     private int getInternID() {
-        final int result = internalMaxID;
-        internalMaxID++;
+        final int result = this.internalMaxID;
+        this.internalMaxID++;
         return result;
     }
 
+    /**
+     *
+     * @param scenario
+     * @param state
+     */
     private void readStates(final SmartGridTopology scenario, final ScenarioState state) {
         LOG.debug("Start readStates");
 
         for (final EntityState s : state.getEntityStates()) {
 
-            LOG.debug("Class " + s.getOwner().getClass() + " ID " + s.getOwner().getId() + " destroyed? " + s.isIsDestroyed() + " powersource " + s.getOwner().getConnectedTo().toString());
+            LOG.debug("Class " + s.getOwner().getClass() + " ID " + s.getOwner().getId() + " destroyed? "
+                    + s.isIsDestroyed() + " powersource " + s.getOwner().getConnectedTo().toString());
 
-            entityStates.put(s.getOwner().getId(), s);
+            this.entityStates.put(s.getOwner().getId(), s);
             // if ((s.getOwner() instanceof ControlCenter) || (s.getOwner()
             // instanceof SmartMeter))
             // {
-            logicalNodes.add(s.getOwner().getId());
+            this.logicalNodes.add(s.getOwner().getId());
             // }
-            final int internalID = getInternID();
-            externalToInternalID.put(s.getOwner().getId(), internalID);
-            internalToExternalID.put(internalID, s.getOwner().getId());
+            final int internalID = this.getInternID();
+            this.externalToInternalID.put(s.getOwner().getId(), internalID);
+            this.internalToExternalID.put(internalID, s.getOwner().getId());
 
             if (s.getOwner() instanceof ControlCenter) {
-                controlCenters.add(s.getOwner().getId());
+                this.controlCenters.add(s.getOwner().getId());
 
                 LOG.debug("ControlCenter found: " + s.getOwner().getId());
             }
         }
         for (final PowerState p : state.getPowerStates()) {
-            LOG.debug("Entity " + p.getOwner().getName() + " ID " + p.getOwner().getId() + " powerOutage? " + p.isPowerOutage());
-            powerStates.put(p.getOwner().getId(), p);
+            LOG.debug("Entity " + p.getOwner().getName() + " ID " + p.getOwner().getId() + " powerOutage? "
+                    + p.isPowerOutage());
+            this.powerStates.put(p.getOwner().getId(), p);
         }
         LOG.debug("End readStates");
     }
@@ -242,19 +278,22 @@ public class GraphAnalyzer implements IImpactAnalysis {
         for (final PhysicalConnection p : pConns) {
             final NetworkEntity e1 = p.getLinks().get(0);
             final NetworkEntity e2 = p.getLinks().get(1);
-            if (externalNodeIsWorking(e1.getId()) && externalNodeIsWorking(e2.getId())) {
-                final int internal1 = externalToInternalID.get(e1.getId());
-                final int internal2 = externalToInternalID.get(e2.getId());
 
-                adjacentMatrix[internal1][internal2] = 1;
-                adjacentMatrix[internal2][internal1] = 1;
+            if (this.externalNodeIsWorking(e1.getId()) && this.externalNodeIsWorking(e2.getId())) {
+
+                final int internal1 = this.externalToInternalID.get(e1.getId());
+                final int internal2 = this.externalToInternalID.get(e2.getId());
+
+                this.adjacentMatrix[internal1][internal2] = 1;
+                this.adjacentMatrix[internal2][internal1] = 1;
             }
         }
 
         // Building physical Cluster
-        LOG.debug(Matrix.toString(adjacentMatrix));
+        LOG.debug(Matrix.toString(this.adjacentMatrix));
         LOG.debug("Validate clusteralgorithm");
-        physicalClusters = Tarjan.getClusters(adjacentMatrix, internalToExternalID);
+
+        this.physicalClusters = Tarjan.getClusters(this.adjacentMatrix, this.internalToExternalID);
 
         LOG.debug("End readPhysicalConnections");
     }
@@ -268,30 +307,30 @@ public class GraphAnalyzer implements IImpactAnalysis {
         for (final LogicalCommunication l : lConns) {
             final String id1 = l.getLinks().get(0).getId();
             final String id2 = l.getLinks().get(1).getId();
-            final int internal1 = externalToInternalID.get(id1);
-            final int internal2 = externalToInternalID.get(id2);
+            final int internal1 = this.externalToInternalID.get(id1);
+            final int internal2 = this.externalToInternalID.get(id2);
 
-            if (areInSameCluster(internal1, internal2, physicalClusters)) {
-                logicalAdjacentMatrix[internal1][internal2] = 1;
-                logicalAdjacentMatrix[internal2][internal1] = 1;
+            if (this.areInSameCluster(internal1, internal2, this.physicalClusters)) {
+                this.logicalAdjacentMatrix[internal1][internal2] = 1;
+                this.logicalAdjacentMatrix[internal2][internal1] = 1;
             }
         }
         // filthy Variant ! Better Solution?
-        if (!ignoreLogicalConnections) {
+        if (!this.ignoreLogicalConnections) {
             // find logical paths that work
-            logicalClusters = Tarjan.getClusters(logicalAdjacentMatrix, internalToExternalID);
+            this.logicalClusters = Tarjan.getClusters(this.logicalAdjacentMatrix, this.internalToExternalID);
         } else {
-            logicalClusters = physicalClusters;
+            this.logicalClusters = this.physicalClusters;
         }
 
         // remove nodes that are not logical
         final List<List<Integer>> newClusters = new LinkedList<>();
 
         // Not every time "logical" Clusters see above
-        for (final List<Integer> cluster : logicalClusters) {
+        for (final List<Integer> cluster : this.logicalClusters) {
             final List<Integer> newCluster = new LinkedList<>();
             for (final Integer i : cluster) {
-                if (logicalNodes.contains(internalToExternalID.get(i))) {
+                if (this.logicalNodes.contains(this.internalToExternalID.get(i))) {
                     newCluster.add(i);
                 }
             }
@@ -300,22 +339,22 @@ public class GraphAnalyzer implements IImpactAnalysis {
             }
         }
 
-        logicalClusters = newClusters;
+        this.logicalClusters = newClusters;
 
-        for (final String controlID : controlCenters) {
-            final int internalControlID = externalToInternalID.get(controlID);
-            final Double[] connectionAvailable = new Double[internalMaxID + 1];
+        for (final String controlID : this.controlCenters) {
+            final int internalControlID = this.externalToInternalID.get(controlID);
+            final Double[] connectionAvailable = new Double[this.internalMaxID + 1];
             for (int i = 0; i < connectionAvailable.length; i++) {
                 connectionAvailable[i] = 0.0;
             }
-            for (final List<Integer> l : logicalClusters) {
+            for (final List<Integer> l : this.logicalClusters) {
                 if (l.contains(internalControlID)) {
                     for (final Integer n : l) {
                         connectionAvailable[n] = 1.0;
                     }
                 }
             }
-            controlCenterConnectivity.put(controlID, connectionAvailable);
+            this.controlCenterConnectivity.put(controlID, connectionAvailable);
         }
         LOG.debug("End readLogicalConnections");
     }
@@ -327,56 +366,54 @@ public class GraphAnalyzer implements IImpactAnalysis {
         //
 
         // TODO Remove if/else for rollback
-        if (ignoreLogicalConnections) {
+        if (this.ignoreLogicalConnections) {
 
-            clusterCleaning(factory, result, physicalClusters);
+            this.clusterCleaning(factory, result, this.physicalClusters);
 
         } else {
-            clusterCleaning(factory, result, logicalClusters);
+
+            this.clusterCleaning(factory, result, this.logicalClusters);
         }
 
         // Generate output for every node depending on connection status
-        for (final String nodeID : logicalNodes) {
+        for (final String nodeID : this.logicalNodes) {
             LOG.debug("Generate output for node with id " + nodeID);
             smartgridoutput.EntityState state = null;
 
-            final int internalNode = externalToInternalID.get(nodeID);
+            final int internalNode = this.externalToInternalID.get(nodeID);
 
             final List<String> connectedCCs = new LinkedList<>();
-            for (final String ccID : controlCenters) {
+            for (final String ccID : this.controlCenters) {
 
-                if (controlCenterConnectivity.get(ccID)[internalNode] > 0) {
+                if (this.controlCenterConnectivity.get(ccID)[internalNode] > 0) {
                     connectedCCs.add(ccID);
                 }
             } // End Foreach ControlCenters
 
-            if (externalNodeIsDestroyed(nodeID)) {
+            if (this.externalNodeIsDestroyed(nodeID)) {
                 state = factory.createDefect();
-            } else if (!externalNodeHasPower(nodeID)) {
+            } else if (!this.externalNodeHasPower(nodeID)) {
                 state = factory.createNoPower();
             } else if (connectedCCs.size() == 0) {
                 final NoUplink n = factory.createNoUplink();
-                n.setBelongsToCluster(internalToCluster.get(internalNode));
-                internalToCluster.get(internalNode).getHasEntities().add(n);
-
+                n.setBelongsToCluster(this.internalToCluster.get(internalNode));
+                this.internalToCluster.get(internalNode).getHasEntities().add(n);
                 // Passthrough IsHacked State from input into Output
-                n.setIsHacked(externalNodeIsHacked(nodeID));
-
+                n.setIsHacked(this.externalNodeIsHacked(nodeID));
                 state = n;
             } else {
 
                 final Online s = factory.createOnline();
-                s.setBelongsToCluster(internalToCluster.get(internalNode));
-                internalToCluster.get(internalNode).getHasEntities().add(s);
+                s.setBelongsToCluster(this.internalToCluster.get(internalNode));
+                this.internalToCluster.get(internalNode).getHasEntities().add(s);
                 // s.setReachableControlCenters(connectedCCs.size()); - Thorsten
 
                 // Passthrough IsHacked State from input into Output
-                s.setIsHacked(externalNodeIsHacked(nodeID));
-
+                s.setIsHacked(this.externalNodeIsHacked(nodeID));
                 state = s;
             }
 
-            state.setOwner(entityStates.get(nodeID).getOwner());
+            state.setOwner(this.entityStates.get(nodeID).getOwner());
 
             result.getStates().add(state);
         } // End Foreach LogicalNodes
@@ -385,24 +422,31 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
     }
 
-    private void clusterCleaning(final SmartgridoutputFactory factory, final ScenarioResult result, final List<List<Integer>> clusterToClean) {
+    private void clusterCleaning(final SmartgridoutputFactory factory, final ScenarioResult result,
+            final List<List<Integer>> clusterToClean) {
 
         for (final List<Integer> c : clusterToClean) {
             final Cluster cluster = factory.createCluster();
             // cluster.setSmartMeterCount(c.size());
-            int smCount = 0;
+
+            // long smCount = cluster.getHasEntities().stream().filter(s -> s.getOwner() instanceof
+            // SmartMeter).count();
             int controlCentersInCluster = 0;
+            int smCount = 0;
             for (final Integer i : c) {
                 if (i != null) {
-                    internalToCluster.put(i, cluster);
+                    this.internalToCluster.put(i, cluster);
                     // check if its a controlCenter and increase
                     // controlCentersInCluster-Count
-                    final String externalID = internalToExternalID.get(i);
-                    if (externalNodeIsWorking(externalID)) {
-                        if (controlCenters.contains(externalID)) {
+                    final String externalID = this.internalToExternalID.get(i);
+                    if (this.externalNodeIsWorking(externalID)) {
+                        if (this.controlCenters.contains(externalID)) {
                             controlCentersInCluster++;
                         } else {
-                            smCount++;
+                            if (this.entityStates.get(externalID).getOwner() instanceof SmartMeter) {
+                                smCount++;
+                            }
+
                         }
                     }
                 }
@@ -416,29 +460,31 @@ public class GraphAnalyzer implements IImpactAnalysis {
     }
 
     private boolean externalNodeIsWorking(final String id) {
-        return externalNodeHasPower(id) && !externalNodeIsDestroyed(id);
+        return this.externalNodeHasPower(id) && !this.externalNodeIsDestroyed(id);
     }
 
     private boolean externalNodeHasPower(final String id) {
         boolean connected = false;
         try {
-            for (final PowerGridNode pgn : entityStates.get(id).getOwner().getConnectedTo()) {
-                if (!powerStates.get(pgn.getId()).isPowerOutage()) {
+            for (final PowerGridNode pgn : this.entityStates.get(id).getOwner().getConnectedTo()) {
+                if (!this.powerStates.get(pgn.getId()).isPowerOutage()) {
                     connected = true;
+
                 }
             }
         } catch (final NullPointerException e) {
-            LOG.error("Your input model may be not conform to the current topo model but hasn't set its Scenario attribute to a valid value");
+            LOG.error(
+                    "Your input model may be not conform to the current topo model but hasn't set its Scenario attribute to a valid value");
         }
         return connected;
     }
 
     private boolean externalNodeIsDestroyed(final String id) {
-        return entityStates.get(id).isIsDestroyed();
+        return this.entityStates.get(id).isIsDestroyed();
     }
 
     private boolean externalNodeIsHacked(final String id) {
-        return entityStates.get(id).isIsHacked();
+        return this.entityStates.get(id).isIsHacked();
     }
 
     private boolean areInSameCluster(final int n, final int m, final List<List<Integer>> clusterList) {
@@ -456,15 +502,15 @@ public class GraphAnalyzer implements IImpactAnalysis {
     }
 
     private void clearAll() {
-        entityStates.clear();
-        powerStates.clear();
-        controlCenters.clear();
-        internalToCluster.clear();
-        externalToInternalID.clear();
-        internalToExternalID.clear();
-        controlCenterConnectivity.clear();
-        logicalNodes.clear();
-        internalMaxID = 0;
+        this.entityStates.clear();
+        this.powerStates.clear();
+        this.controlCenters.clear();
+        this.internalToCluster.clear();
+        this.externalToInternalID.clear();
+        this.internalToExternalID.clear();
+        this.controlCenterConnectivity.clear();
+        this.logicalNodes.clear();
+        this.internalMaxID = 0;
     }
 
     @Override

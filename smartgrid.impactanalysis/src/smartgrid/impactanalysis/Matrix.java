@@ -32,7 +32,7 @@ public class Matrix {
     public static String toString(final double[][] m) {
         String result = "";
         for (final double[] element : m) {
-            for (double element2 : element) {
+            for (final double element2 : element) {
                 result += String.format("%11.2f", element2);
             }
             result += "\n";
