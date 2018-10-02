@@ -21,6 +21,13 @@ public enum HackingStyle {
      * With this Style the Attacker will hack every Node in the his Cluster without respecting
      * logical Connections
      */
-    FULLY_MESHED_HACKING
+    FULLY_MESHED_HACKING,
+    
+    /**
+     * for viralhacker instead of BFS_Hacking and DFS_hacking
+     */
+    STANDARD_HACKING
+    
+    
 
 }
