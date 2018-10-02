@@ -45,7 +45,7 @@ public final class ScenarioModelHelper {
     public static ScenarioState loadInput(final String path) {
         try {
             SmartgridinputPackageImpl.init();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             LOG.warn("Exception thrown in SmartgridinputPackageImpl.init", e);
         }
 
@@ -113,14 +113,18 @@ public final class ScenarioModelHelper {
 
         // Alternative with foreach Cluster foreach On Entities ?? (Double
         // foreach Loop!)
+
         for (final smartgridoutput.EntityState currentNode : myScenarioResult.getStates()) {
             // Using only Entities that is On
-            if (currentNode.getOwner().getId() == entityID && currentNode instanceof On && !(currentNode.getOwner() instanceof NetworkNode)) {
+
+            // TODO '==' to compare Strings ?
+            if (currentNode.getOwner().getId().equals(entityID) && currentNode instanceof On
+                    && !(currentNode.getOwner() instanceof NetworkNode)) {
                 foundEntity = (On) currentNode;
                 foundNodeID = true;
-
                 break;
             }
+
         }
         // ID don't exists or found Entity has no On State
         if (!foundNodeID) {
@@ -154,7 +158,8 @@ public final class ScenarioModelHelper {
      * @return Nodes that are in the intersection of the above Container --> These are my direct
      *         alive Neighbors
      */
-    public static LinkedList<On> getNeighborsFromCluster(final Cluster clusterToHack, final LinkedList<String> neighborIDList) {
+    public static LinkedList<On> getNeighborsFromCluster(final Cluster clusterToHack,
+            final LinkedList<String> neighborIDList) {
 
         final LinkedList<On> neighborOnList = new LinkedList<>();
 
@@ -184,7 +189,8 @@ public final class ScenarioModelHelper {
      * @param value
      *            the Neighbor from "Key" Node
      */
-    private static void addNeighbors(final Map<String, LinkedList<String>> IDLinks, final String key, final String value) {
+    private static void addNeighbors(final Map<String, LinkedList<String>> IDLinks, final String key,
+            final String value) {
         // Search "Key" --> Neighbor List "Values"
         LinkedList<String> myNeighbor = IDLinks.get(key);
 
