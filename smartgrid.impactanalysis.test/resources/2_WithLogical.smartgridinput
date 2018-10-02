@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2_WithLogical.smartgridtopo#564234962"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2_WithLogical.smartgridtopo#1612321207"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2_WithLogical.smartgridtopo#1086870502"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="2_WithLogical.smartgridtopo#786635300"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="2_WithLogical.smartgridtopo#1717619909"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2_WithLogical.smartgridtopo#644628936"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2_WithLogical.smartgridtopo#1063980439"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="2_WithLogical.smartgridtopo#1875278172"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2_WithLogical.smartgridtopo#195052986"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2_WithLogical.smartgridtopo#1688125413"/>
+  </PowerStates>
+  <Scenario href="2_WithLogical.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>
