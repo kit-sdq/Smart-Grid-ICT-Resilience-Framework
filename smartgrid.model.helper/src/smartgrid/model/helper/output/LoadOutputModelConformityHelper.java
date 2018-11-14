@@ -18,7 +18,7 @@ public final class LoadOutputModelConformityHelper {
             return true;
         }
 
-        return result.getScenario().getId() == current.getId();
+        return result.getScenario().getId().equals(current.getId());
     }
 
     public static boolean checkOutputModelConformity(final ScenarioResult output, final SmartGridTopology current) {
