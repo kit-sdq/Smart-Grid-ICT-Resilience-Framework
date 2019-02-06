@@ -27,7 +27,8 @@ public class SimulationExtensionPointHelper {
 
     public static List<IPowerLoadSimulationWrapper> getPowerLoadSimulationExtensions() throws CoreException {
         final List<IPowerLoadSimulationWrapper> list = new ArrayList<>();
-        final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.POWER_LOAD_SIMULATION_EXTENSION_POINT);
+        final IConfigurationElement[] elements = registry
+                .getConfigurationElementsFor(Constants.POWER_LOAD_SIMULATION_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
             final Object o = element.createExecutableExtension("powerLoadSimulation");
             if (o instanceof IPowerLoadSimulationWrapper) {
@@ -39,7 +40,8 @@ public class SimulationExtensionPointHelper {
 
     public static List<IAttackerSimulation> getAttackerSimulationExtensions() throws CoreException {
         final List<IAttackerSimulation> list = new ArrayList<>();
-        final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.ATTACKER_SIMULATION_EXTENSION_POINT);
+        final IConfigurationElement[] elements = registry
+                .getConfigurationElementsFor(Constants.ATTACKER_SIMULATION_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
             final Object o = element.createExecutableExtension("class");
             if (o instanceof IAttackerSimulation) {
@@ -51,7 +53,8 @@ public class SimulationExtensionPointHelper {
 
     public static List<ITerminationCondition> getTerminationConditionExtensions() throws CoreException {
         final List<ITerminationCondition> list = new ArrayList<>();
-        final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.TERMINATION_CONDITION_EXTENSION_POINT);
+        final IConfigurationElement[] elements = registry
+                .getConfigurationElementsFor(Constants.TERMINATION_CONDITION_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
             final Object o = element.createExecutableExtension("class");
             if (o instanceof ITerminationCondition) {
@@ -63,7 +66,8 @@ public class SimulationExtensionPointHelper {
 
     public static List<ITimeProgressor> getProgressorExtensions() throws CoreException {
         final List<ITimeProgressor> list = new ArrayList<>();
-        final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.TIME_PROGRESSOR_EXTENSION_POINT);
+        final IConfigurationElement[] elements = registry
+                .getConfigurationElementsFor(Constants.TIME_PROGRESSOR_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
             final Object o = element.createExecutableExtension("class");
             if (o instanceof ITimeProgressor) {
@@ -75,7 +79,8 @@ public class SimulationExtensionPointHelper {
 
     public static List<IImpactAnalysis> getImpactAnalysisExtensions() throws CoreException {
         final List<IImpactAnalysis> list = new ArrayList<>();
-        final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.IMPACT_ANALYSIS_EXTENSION_POINT);
+        final IConfigurationElement[] elements = registry
+                .getConfigurationElementsFor(Constants.IMPACT_ANALYSIS_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
             final Object o = element.createExecutableExtension("class");
             if (o instanceof IImpactAnalysis) {
@@ -87,7 +92,8 @@ public class SimulationExtensionPointHelper {
 
     public static List<IKritisSimulationWrapper> getKritisSimulationExtensions() throws CoreException {
         final List<IKritisSimulationWrapper> list = new ArrayList<>();
-        final IConfigurationElement[] elements = registry.getConfigurationElementsFor(Constants.KRITIS_SIMULATION_EXTENSION_POINT);
+        final IConfigurationElement[] elements = registry
+                .getConfigurationElementsFor(Constants.KRITIS_SIMULATION_EXTENSION_POINT);
         for (final IConfigurationElement element : elements) {
             final Object o = element.createExecutableExtension("class");
             if (o instanceof IKritisSimulationWrapper) {
@@ -97,11 +103,13 @@ public class SimulationExtensionPointHelper {
         return list;
     }
 
-    public static boolean isExtensionSelected(final ILaunchConfiguration launchConfig, final ISimulationComponent simComponent, String key) throws CoreException {
+    public static boolean isExtensionSelected(final ILaunchConfiguration launchConfig,
+            final ISimulationComponent simComponent, final String key) throws CoreException {
         return launchConfig.getAttribute(key, "").equals(simComponent.getName());
     }
 
-    public static <T extends ISimulationComponent> T findExtension(final ILaunchConfiguration launchConfig, final List<T> simComponents, String key, Class<T> type) throws CoreException {
+    public static <T extends ISimulationComponent> T findExtension(final ILaunchConfiguration launchConfig,
+            final List<T> simComponents, final String key, final Class<T> type) throws CoreException {
         for (final T simComponent : simComponents) {
             if (isExtensionSelected(launchConfig, simComponent, key)) {
                 return simComponent;
