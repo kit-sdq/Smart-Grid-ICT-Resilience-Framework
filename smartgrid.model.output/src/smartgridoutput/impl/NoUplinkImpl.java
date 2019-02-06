@@ -22,19 +22,18 @@ import smartgridtopo.NetworkEntity;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridoutput.impl.NoUplinkImpl#getOwner <em>Owner</em>}</li>
- * <li>{@link smartgridoutput.impl.NoUplinkImpl#getBelongsToCluster <em>Belongs To
- * Cluster</em>}</li>
- * <li>{@link smartgridoutput.impl.NoUplinkImpl#isIsHacked <em>Is Hacked</em>}</li>
+ *   <li>{@link smartgridoutput.impl.NoUplinkImpl#getOwner <em>Owner</em>}</li>
+ *   <li>{@link smartgridoutput.impl.NoUplinkImpl#getBelongsToCluster <em>Belongs To Cluster</em>}</li>
+ *   <li>{@link smartgridoutput.impl.NoUplinkImpl#isIsHacked <em>Is Hacked</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class NoUplinkImpl extends OfflineImpl implements NoUplink {
     /**
-     * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference. <!-- begin-user-doc
+     * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @see #getOwner()
      * @generated
      * @ordered
@@ -42,9 +41,8 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
     protected NetworkEntity owner;
 
     /**
-     * The cached value of the '{@link #getBelongsToCluster() <em>Belongs To Cluster</em>}'
-     * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The cached value of the '{@link #getBelongsToCluster() <em>Belongs To Cluster</em>}' reference.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see #getBelongsToCluster()
      * @generated
      * @ordered
@@ -73,7 +71,6 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected NoUplinkImpl() {
@@ -82,7 +79,6 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -92,14 +88,13 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NetworkEntity getOwner() {
         if (owner != null && owner.eIsProxy()) {
-            InternalEObject oldOwner = (InternalEObject) owner;
-            owner = (NetworkEntity) eResolveProxy(oldOwner);
+            InternalEObject oldOwner = (InternalEObject)owner;
+            owner = (NetworkEntity)eResolveProxy(oldOwner);
             if (owner != oldOwner) {
                 if (eNotificationRequired())
                     eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartgridoutputPackage.NO_UPLINK__OWNER, oldOwner, owner));
@@ -110,7 +105,6 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public NetworkEntity basicGetOwner() {
@@ -119,7 +113,6 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -132,14 +125,13 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Cluster getBelongsToCluster() {
         if (belongsToCluster != null && belongsToCluster.eIsProxy()) {
-            InternalEObject oldBelongsToCluster = (InternalEObject) belongsToCluster;
-            belongsToCluster = (Cluster) eResolveProxy(oldBelongsToCluster);
+            InternalEObject oldBelongsToCluster = (InternalEObject)belongsToCluster;
+            belongsToCluster = (Cluster)eResolveProxy(oldBelongsToCluster);
             if (belongsToCluster != oldBelongsToCluster) {
                 if (eNotificationRequired())
                     eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER, oldBelongsToCluster, belongsToCluster));
@@ -150,7 +142,6 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public Cluster basicGetBelongsToCluster() {
@@ -159,7 +150,6 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public NotificationChain basicSetBelongsToCluster(Cluster newBelongsToCluster, NotificationChain msgs) {
@@ -167,17 +157,13 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
         belongsToCluster = newBelongsToCluster;
         if (eNotificationRequired()) {
             ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER, oldBelongsToCluster, newBelongsToCluster);
-            if (msgs == null)
-                msgs = notification;
-            else
-                msgs.add(notification);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
         }
         return msgs;
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -185,19 +171,18 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
         if (newBelongsToCluster != belongsToCluster) {
             NotificationChain msgs = null;
             if (belongsToCluster != null)
-                msgs = ((InternalEObject) belongsToCluster).eInverseRemove(this, SmartgridoutputPackage.CLUSTER__HAS_ENTITIES, Cluster.class, msgs);
+                msgs = ((InternalEObject)belongsToCluster).eInverseRemove(this, SmartgridoutputPackage.CLUSTER__HAS_ENTITIES, Cluster.class, msgs);
             if (newBelongsToCluster != null)
-                msgs = ((InternalEObject) newBelongsToCluster).eInverseAdd(this, SmartgridoutputPackage.CLUSTER__HAS_ENTITIES, Cluster.class, msgs);
+                msgs = ((InternalEObject)newBelongsToCluster).eInverseAdd(this, SmartgridoutputPackage.CLUSTER__HAS_ENTITIES, Cluster.class, msgs);
             msgs = basicSetBelongsToCluster(newBelongsToCluster, msgs);
-            if (msgs != null)
-                msgs.dispatch();
-        } else if (eNotificationRequired())
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER, newBelongsToCluster, newBelongsToCluster));
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -207,7 +192,6 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -220,139 +204,125 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
-            if (belongsToCluster != null)
-                msgs = ((InternalEObject) belongsToCluster).eInverseRemove(this, SmartgridoutputPackage.CLUSTER__HAS_ENTITIES, Cluster.class, msgs);
-            return basicSetBelongsToCluster((Cluster) otherEnd, msgs);
+            case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
+                if (belongsToCluster != null)
+                    msgs = ((InternalEObject)belongsToCluster).eInverseRemove(this, SmartgridoutputPackage.CLUSTER__HAS_ENTITIES, Cluster.class, msgs);
+                return basicSetBelongsToCluster((Cluster)otherEnd, msgs);
         }
         return super.eInverseAdd(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
-            return basicSetBelongsToCluster(null, msgs);
+            case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
+                return basicSetBelongsToCluster(null, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridoutputPackage.NO_UPLINK__OWNER:
-            if (resolve)
-                return getOwner();
-            return basicGetOwner();
-        case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
-            if (resolve)
-                return getBelongsToCluster();
-            return basicGetBelongsToCluster();
-        case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
-            return isIsHacked();
+            case SmartgridoutputPackage.NO_UPLINK__OWNER:
+                if (resolve) return getOwner();
+                return basicGetOwner();
+            case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
+                if (resolve) return getBelongsToCluster();
+                return basicGetBelongsToCluster();
+            case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
+                return isIsHacked();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridoutputPackage.NO_UPLINK__OWNER:
-            setOwner((NetworkEntity) newValue);
-            return;
-        case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
-            setBelongsToCluster((Cluster) newValue);
-            return;
-        case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
-            setIsHacked((Boolean) newValue);
-            return;
+            case SmartgridoutputPackage.NO_UPLINK__OWNER:
+                setOwner((NetworkEntity)newValue);
+                return;
+            case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
+                setBelongsToCluster((Cluster)newValue);
+                return;
+            case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
+                setIsHacked((Boolean)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridoutputPackage.NO_UPLINK__OWNER:
-            setOwner((NetworkEntity) null);
-            return;
-        case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
-            setBelongsToCluster((Cluster) null);
-            return;
-        case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
-            setIsHacked(IS_HACKED_EDEFAULT);
-            return;
+            case SmartgridoutputPackage.NO_UPLINK__OWNER:
+                setOwner((NetworkEntity)null);
+                return;
+            case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
+                setBelongsToCluster((Cluster)null);
+                return;
+            case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
+                setIsHacked(IS_HACKED_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridoutputPackage.NO_UPLINK__OWNER:
-            return owner != null;
-        case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
-            return belongsToCluster != null;
-        case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
-            return isHacked != IS_HACKED_EDEFAULT;
+            case SmartgridoutputPackage.NO_UPLINK__OWNER:
+                return owner != null;
+            case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
+                return belongsToCluster != null;
+            case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
+                return isHacked != IS_HACKED_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
         if (baseClass == EntityState.class) {
             switch (derivedFeatureID) {
-            case SmartgridoutputPackage.NO_UPLINK__OWNER:
-                return SmartgridoutputPackage.ENTITY_STATE__OWNER;
-            default:
-                return -1;
+                case SmartgridoutputPackage.NO_UPLINK__OWNER: return SmartgridoutputPackage.ENTITY_STATE__OWNER;
+                default: return -1;
             }
         }
         if (baseClass == On.class) {
             switch (derivedFeatureID) {
-            case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER:
-                return SmartgridoutputPackage.ON__BELONGS_TO_CLUSTER;
-            case SmartgridoutputPackage.NO_UPLINK__IS_HACKED:
-                return SmartgridoutputPackage.ON__IS_HACKED;
-            default:
-                return -1;
+                case SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER: return SmartgridoutputPackage.ON__BELONGS_TO_CLUSTER;
+                case SmartgridoutputPackage.NO_UPLINK__IS_HACKED: return SmartgridoutputPackage.ON__IS_HACKED;
+                default: return -1;
             }
         }
         return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -360,27 +330,21 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
         if (baseClass == EntityState.class) {
             switch (baseFeatureID) {
-            case SmartgridoutputPackage.ENTITY_STATE__OWNER:
-                return SmartgridoutputPackage.NO_UPLINK__OWNER;
-            default:
-                return -1;
+                case SmartgridoutputPackage.ENTITY_STATE__OWNER: return SmartgridoutputPackage.NO_UPLINK__OWNER;
+                default: return -1;
             }
         }
         if (baseClass == On.class) {
             switch (baseFeatureID) {
-            case SmartgridoutputPackage.ON__BELONGS_TO_CLUSTER:
-                return SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER;
-            case SmartgridoutputPackage.ON__IS_HACKED:
-                return SmartgridoutputPackage.NO_UPLINK__IS_HACKED;
-            default:
-                return -1;
+                case SmartgridoutputPackage.ON__BELONGS_TO_CLUSTER: return SmartgridoutputPackage.NO_UPLINK__BELONGS_TO_CLUSTER;
+                case SmartgridoutputPackage.ON__IS_HACKED: return SmartgridoutputPackage.NO_UPLINK__IS_HACKED;
+                default: return -1;
             }
         }
         return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -388,15 +352,13 @@ public class NoUplinkImpl extends OfflineImpl implements NoUplink {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public String toString() {
-        if (eIsProxy())
-            return super.toString();
+        if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
+        StringBuilder result = new StringBuilder(super.toString());
         result.append(" (IsHacked: ");
         result.append(isHacked);
         result.append(')');

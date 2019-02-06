@@ -16,7 +16,6 @@ import smartgridtopo.SmartgridtopoPackage;
 public class GenericControllerImpl extends CommunicatingEntityImpl implements GenericController {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected GenericControllerImpl() {
@@ -25,7 +24,6 @@ public class GenericControllerImpl extends CommunicatingEntityImpl implements Ge
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override

@@ -19,16 +19,16 @@ import smartgridtopo.NetworkEntity;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridoutput.impl.EntityStateImpl#getOwner <em>Owner</em>}</li>
+ *   <li>{@link smartgridoutput.impl.EntityStateImpl#getOwner <em>Owner</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class EntityStateImpl extends MinimalEObjectImpl.Container implements EntityState {
     /**
-     * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference. <!-- begin-user-doc
+     * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @see #getOwner()
      * @generated
      * @ordered
@@ -37,7 +37,6 @@ public abstract class EntityStateImpl extends MinimalEObjectImpl.Container imple
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected EntityStateImpl() {
@@ -46,7 +45,6 @@ public abstract class EntityStateImpl extends MinimalEObjectImpl.Container imple
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -56,14 +54,13 @@ public abstract class EntityStateImpl extends MinimalEObjectImpl.Container imple
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NetworkEntity getOwner() {
         if (owner != null && owner.eIsProxy()) {
-            InternalEObject oldOwner = (InternalEObject) owner;
-            owner = (NetworkEntity) eResolveProxy(oldOwner);
+            InternalEObject oldOwner = (InternalEObject)owner;
+            owner = (NetworkEntity)eResolveProxy(oldOwner);
             if (owner != oldOwner) {
                 if (eNotificationRequired())
                     eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartgridoutputPackage.ENTITY_STATE__OWNER, oldOwner, owner));
@@ -74,7 +71,6 @@ public abstract class EntityStateImpl extends MinimalEObjectImpl.Container imple
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public NetworkEntity basicGetOwner() {
@@ -83,7 +79,6 @@ public abstract class EntityStateImpl extends MinimalEObjectImpl.Container imple
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -96,60 +91,55 @@ public abstract class EntityStateImpl extends MinimalEObjectImpl.Container imple
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridoutputPackage.ENTITY_STATE__OWNER:
-            if (resolve)
-                return getOwner();
-            return basicGetOwner();
+            case SmartgridoutputPackage.ENTITY_STATE__OWNER:
+                if (resolve) return getOwner();
+                return basicGetOwner();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridoutputPackage.ENTITY_STATE__OWNER:
-            setOwner((NetworkEntity) newValue);
-            return;
+            case SmartgridoutputPackage.ENTITY_STATE__OWNER:
+                setOwner((NetworkEntity)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridoutputPackage.ENTITY_STATE__OWNER:
-            setOwner((NetworkEntity) null);
-            return;
+            case SmartgridoutputPackage.ENTITY_STATE__OWNER:
+                setOwner((NetworkEntity)null);
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridoutputPackage.ENTITY_STATE__OWNER:
-            return owner != null;
+            case SmartgridoutputPackage.ENTITY_STATE__OWNER:
+                return owner != null;
         }
         return super.eIsSet(featureID);
     }

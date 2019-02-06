@@ -18,44 +18,42 @@ import org.eclipse.emf.ecore.EReference;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * 
  * @see smartgridoutput.SmartgridoutputFactory
  * @model kind="package"
  * @generated
  */
 public interface SmartgridoutputPackage extends EPackage {
     /**
-     * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The package name.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     String eNAME = "smartgridoutput";
 
     /**
-     * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The package namespace URI.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     String eNS_URI = "http://sdq.ipd.uka.de/smartgridoutput/1.0";
 
     /**
-     * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The package namespace name.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     String eNS_PREFIX = "smartgridoutput";
 
     /**
-     * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The singleton instance of the package.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     SmartgridoutputPackage eINSTANCE = smartgridoutput.impl.SmartgridoutputPackageImpl.init();
 
     /**
-     * The meta object id for the '{@link smartgridoutput.impl.ScenarioResultImpl <em>Scenario
-     * Result</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The meta object id for the '{@link smartgridoutput.impl.ScenarioResultImpl <em>Scenario Result</em>}' class.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see smartgridoutput.impl.ScenarioResultImpl
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getScenarioResult()
      * @generated
@@ -81,13 +79,22 @@ public interface SmartgridoutputPackage extends EPackage {
     int SCENARIO_RESULT__CLUSTERS = 1;
 
     /**
-     * The feature id for the '<em><b>Scenario</b></em>' reference. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Scenario</b></em>' reference.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int SCENARIO_RESULT__SCENARIO = 2;
+
+    /**
+     * The feature id for the '<em><b>Input</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCENARIO_RESULT__INPUT = 3;
 
     /**
      * The number of structural features of the '<em>Scenario Result</em>' class. <!--
@@ -96,21 +103,20 @@ public interface SmartgridoutputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_RESULT_FEATURE_COUNT = 3;
+    int SCENARIO_RESULT_FEATURE_COUNT = 4;
 
     /**
-     * The number of operations of the '<em>Scenario Result</em>' class. <!-- begin-user-doc -->
+     * The number of operations of the '<em>Scenario Result</em>' class.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int SCENARIO_RESULT_OPERATION_COUNT = 0;
 
     /**
-     * The meta object id for the '{@link smartgridoutput.impl.EntityStateImpl <em>Entity
-     * State</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The meta object id for the '{@link smartgridoutput.impl.EntityStateImpl <em>Entity State</em>}' class.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see smartgridoutput.impl.EntityStateImpl
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getEntityState()
      * @generated
@@ -118,27 +124,27 @@ public interface SmartgridoutputPackage extends EPackage {
     int ENTITY_STATE = 1;
 
     /**
-     * The feature id for the '<em><b>Owner</b></em>' reference. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Owner</b></em>' reference.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ENTITY_STATE__OWNER = 0;
 
     /**
-     * The number of structural features of the '<em>Entity State</em>' class. <!-- begin-user-doc
+     * The number of structural features of the '<em>Entity State</em>' class.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ENTITY_STATE_FEATURE_COUNT = 1;
 
     /**
-     * The number of operations of the '<em>Entity State</em>' class. <!-- begin-user-doc --> <!--
+     * The number of operations of the '<em>Entity State</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
@@ -155,45 +161,45 @@ public interface SmartgridoutputPackage extends EPackage {
     int ON = 8;
 
     /**
-     * The feature id for the '<em><b>Owner</b></em>' reference. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Owner</b></em>' reference.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ON__OWNER = ENTITY_STATE__OWNER;
 
     /**
-     * The feature id for the '<em><b>Belongs To Cluster</b></em>' reference. <!-- begin-user-doc
+     * The feature id for the '<em><b>Belongs To Cluster</b></em>' reference.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ON__BELONGS_TO_CLUSTER = ENTITY_STATE_FEATURE_COUNT + 0;
 
     /**
-     * The feature id for the '<em><b>Is Hacked</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Is Hacked</b></em>' attribute.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ON__IS_HACKED = ENTITY_STATE_FEATURE_COUNT + 1;
 
     /**
-     * The number of structural features of the '<em>On</em>' class. <!-- begin-user-doc --> <!--
+     * The number of structural features of the '<em>On</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ON_FEATURE_COUNT = ENTITY_STATE_FEATURE_COUNT + 2;
 
     /**
-     * The number of operations of the '<em>On</em>' class. <!-- begin-user-doc --> <!--
+     * The number of operations of the '<em>On</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
@@ -202,7 +208,6 @@ public interface SmartgridoutputPackage extends EPackage {
     /**
      * The meta object id for the '{@link smartgridoutput.impl.OnlineImpl <em>Online</em>}' class.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @see smartgridoutput.impl.OnlineImpl
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getOnline()
      * @generated
@@ -210,45 +215,45 @@ public interface SmartgridoutputPackage extends EPackage {
     int ONLINE = 2;
 
     /**
-     * The feature id for the '<em><b>Owner</b></em>' reference. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Owner</b></em>' reference.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ONLINE__OWNER = ON__OWNER;
 
     /**
-     * The feature id for the '<em><b>Belongs To Cluster</b></em>' reference. <!-- begin-user-doc
+     * The feature id for the '<em><b>Belongs To Cluster</b></em>' reference.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ONLINE__BELONGS_TO_CLUSTER = ON__BELONGS_TO_CLUSTER;
 
     /**
-     * The feature id for the '<em><b>Is Hacked</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Is Hacked</b></em>' attribute.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ONLINE__IS_HACKED = ON__IS_HACKED;
 
     /**
-     * The number of structural features of the '<em>Online</em>' class. <!-- begin-user-doc -->
+     * The number of structural features of the '<em>Online</em>' class.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int ONLINE_FEATURE_COUNT = ON_FEATURE_COUNT + 0;
 
     /**
-     * The number of operations of the '<em>Online</em>' class. <!-- begin-user-doc --> <!--
+     * The number of operations of the '<em>Online</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
@@ -257,7 +262,6 @@ public interface SmartgridoutputPackage extends EPackage {
     /**
      * The meta object id for the '{@link smartgridoutput.impl.DefectImpl <em>Defect</em>}' class.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @see smartgridoutput.impl.DefectImpl
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getDefect()
      * @generated
@@ -265,36 +269,35 @@ public interface SmartgridoutputPackage extends EPackage {
     int DEFECT = 3;
 
     /**
-     * The feature id for the '<em><b>Owner</b></em>' reference. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Owner</b></em>' reference.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int DEFECT__OWNER = ENTITY_STATE__OWNER;
 
     /**
-     * The number of structural features of the '<em>Defect</em>' class. <!-- begin-user-doc -->
+     * The number of structural features of the '<em>Defect</em>' class.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int DEFECT_FEATURE_COUNT = ENTITY_STATE_FEATURE_COUNT + 0;
 
     /**
-     * The number of operations of the '<em>Defect</em>' class. <!-- begin-user-doc --> <!--
+     * The number of operations of the '<em>Defect</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int DEFECT_OPERATION_COUNT = ENTITY_STATE_OPERATION_COUNT + 0;
 
     /**
-     * The meta object id for the '{@link smartgridoutput.impl.NoPowerImpl <em>No Power</em>}'
-     * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The meta object id for the '{@link smartgridoutput.impl.NoPowerImpl <em>No Power</em>}' class.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see smartgridoutput.impl.NoPowerImpl
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getNoPower()
      * @generated
@@ -302,27 +305,27 @@ public interface SmartgridoutputPackage extends EPackage {
     int NO_POWER = 4;
 
     /**
-     * The feature id for the '<em><b>Owner</b></em>' reference. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Owner</b></em>' reference.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int NO_POWER__OWNER = ENTITY_STATE__OWNER;
 
     /**
-     * The number of structural features of the '<em>No Power</em>' class. <!-- begin-user-doc -->
+     * The number of structural features of the '<em>No Power</em>' class.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int NO_POWER_FEATURE_COUNT = ENTITY_STATE_FEATURE_COUNT + 0;
 
     /**
-     * The number of operations of the '<em>No Power</em>' class. <!-- begin-user-doc --> <!--
+     * The number of operations of the '<em>No Power</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
@@ -331,7 +334,6 @@ public interface SmartgridoutputPackage extends EPackage {
     /**
      * The meta object id for the '{@link smartgridoutput.impl.OfflineImpl <em>Offline</em>}' class.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @see smartgridoutput.impl.OfflineImpl
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getOffline()
      * @generated
@@ -339,27 +341,26 @@ public interface SmartgridoutputPackage extends EPackage {
     int OFFLINE = 6;
 
     /**
-     * The number of structural features of the '<em>Offline</em>' class. <!-- begin-user-doc -->
+     * The number of structural features of the '<em>Offline</em>' class.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int OFFLINE_FEATURE_COUNT = 0;
 
     /**
-     * The number of operations of the '<em>Offline</em>' class. <!-- begin-user-doc --> <!--
+     * The number of operations of the '<em>Offline</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int OFFLINE_OPERATION_COUNT = 0;
 
     /**
-     * The meta object id for the '{@link smartgridoutput.impl.NoUplinkImpl <em>No Uplink</em>}'
-     * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The meta object id for the '{@link smartgridoutput.impl.NoUplinkImpl <em>No Uplink</em>}' class.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see smartgridoutput.impl.NoUplinkImpl
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getNoUplink()
      * @generated
@@ -367,45 +368,45 @@ public interface SmartgridoutputPackage extends EPackage {
     int NO_UPLINK = 5;
 
     /**
-     * The feature id for the '<em><b>Owner</b></em>' reference. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Owner</b></em>' reference.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int NO_UPLINK__OWNER = OFFLINE_FEATURE_COUNT + 0;
 
     /**
-     * The feature id for the '<em><b>Belongs To Cluster</b></em>' reference. <!-- begin-user-doc
+     * The feature id for the '<em><b>Belongs To Cluster</b></em>' reference.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int NO_UPLINK__BELONGS_TO_CLUSTER = OFFLINE_FEATURE_COUNT + 1;
 
     /**
-     * The feature id for the '<em><b>Is Hacked</b></em>' attribute. <!-- begin-user-doc --> <!--
+     * The feature id for the '<em><b>Is Hacked</b></em>' attribute.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int NO_UPLINK__IS_HACKED = OFFLINE_FEATURE_COUNT + 2;
 
     /**
-     * The number of structural features of the '<em>No Uplink</em>' class. <!-- begin-user-doc -->
+     * The number of structural features of the '<em>No Uplink</em>' class.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int NO_UPLINK_FEATURE_COUNT = OFFLINE_FEATURE_COUNT + 3;
 
     /**
-     * The number of operations of the '<em>No Uplink</em>' class. <!-- begin-user-doc --> <!--
+     * The number of operations of the '<em>No Uplink</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
@@ -414,7 +415,6 @@ public interface SmartgridoutputPackage extends EPackage {
     /**
      * The meta object id for the '{@link smartgridoutput.impl.ClusterImpl <em>Cluster</em>}' class.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @see smartgridoutput.impl.ClusterImpl
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getCluster()
      * @generated
@@ -422,54 +422,53 @@ public interface SmartgridoutputPackage extends EPackage {
     int CLUSTER = 7;
 
     /**
-     * The feature id for the '<em><b>Control Center Count</b></em>' attribute. <!-- begin-user-doc
+     * The feature id for the '<em><b>Control Center Count</b></em>' attribute.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int CLUSTER__CONTROL_CENTER_COUNT = 0;
 
     /**
-     * The feature id for the '<em><b>Smart Meter Count</b></em>' attribute. <!-- begin-user-doc -->
+     * The feature id for the '<em><b>Smart Meter Count</b></em>' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int CLUSTER__SMART_METER_COUNT = 1;
 
     /**
-     * The feature id for the '<em><b>Has Entities</b></em>' reference list. <!-- begin-user-doc -->
+     * The feature id for the '<em><b>Has Entities</b></em>' reference list.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int CLUSTER__HAS_ENTITIES = 2;
 
     /**
-     * The number of structural features of the '<em>Cluster</em>' class. <!-- begin-user-doc -->
+     * The number of structural features of the '<em>Cluster</em>' class.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int CLUSTER_FEATURE_COUNT = 3;
 
     /**
-     * The number of operations of the '<em>Cluster</em>' class. <!-- begin-user-doc --> <!--
+     * The number of operations of the '<em>Cluster</em>' class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      * @ordered
      */
     int CLUSTER_OPERATION_COUNT = 0;
 
     /**
-     * Returns the meta object for class '{@link smartgridoutput.ScenarioResult <em>Scenario
-     * Result</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Returns the meta object for class '{@link smartgridoutput.ScenarioResult <em>Scenario Result</em>}'.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @return the meta object for class '<em>Scenario Result</em>'.
      * @see smartgridoutput.ScenarioResult
      * @generated
@@ -477,10 +476,9 @@ public interface SmartgridoutputPackage extends EPackage {
     EClass getScenarioResult();
 
     /**
-     * Returns the meta object for the containment reference list
-     * '{@link smartgridoutput.ScenarioResult#getStates <em>States</em>}'. <!-- begin-user-doc -->
+     * Returns the meta object for the containment reference list '{@link smartgridoutput.ScenarioResult#getStates <em>States</em>}'.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @return the meta object for the containment reference list '<em>States</em>'.
      * @see smartgridoutput.ScenarioResult#getStates()
      * @see #getScenarioResult()
@@ -489,10 +487,9 @@ public interface SmartgridoutputPackage extends EPackage {
     EReference getScenarioResult_States();
 
     /**
-     * Returns the meta object for the containment reference list
-     * '{@link smartgridoutput.ScenarioResult#getClusters <em>Clusters</em>}'. <!-- begin-user-doc
+     * Returns the meta object for the containment reference list '{@link smartgridoutput.ScenarioResult#getClusters <em>Clusters</em>}'.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @return the meta object for the containment reference list '<em>Clusters</em>'.
      * @see smartgridoutput.ScenarioResult#getClusters()
      * @see #getScenarioResult()
@@ -501,9 +498,8 @@ public interface SmartgridoutputPackage extends EPackage {
     EReference getScenarioResult_Clusters();
 
     /**
-     * Returns the meta object for the reference '{@link smartgridoutput.ScenarioResult#getScenario
-     * <em>Scenario</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Returns the meta object for the reference '{@link smartgridoutput.ScenarioResult#getScenario <em>Scenario</em>}'.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Scenario</em>'.
      * @see smartgridoutput.ScenarioResult#getScenario()
      * @see #getScenarioResult()
@@ -512,9 +508,19 @@ public interface SmartgridoutputPackage extends EPackage {
     EReference getScenarioResult_Scenario();
 
     /**
-     * Returns the meta object for class '{@link smartgridoutput.EntityState <em>Entity
-     * State</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Returns the meta object for the reference '{@link smartgridoutput.ScenarioResult#getInput <em>Input</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Input</em>'.
+     * @see smartgridoutput.ScenarioResult#getInput()
+     * @see #getScenarioResult()
+     * @generated
+     */
+    EReference getScenarioResult_Input();
+
+    /**
+     * Returns the meta object for class '{@link smartgridoutput.EntityState <em>Entity State</em>}'.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @return the meta object for class '<em>Entity State</em>'.
      * @see smartgridoutput.EntityState
      * @generated
@@ -522,9 +528,8 @@ public interface SmartgridoutputPackage extends EPackage {
     EClass getEntityState();
 
     /**
-     * Returns the meta object for the reference '{@link smartgridoutput.EntityState#getOwner
-     * <em>Owner</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Returns the meta object for the reference '{@link smartgridoutput.EntityState#getOwner <em>Owner</em>}'.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Owner</em>'.
      * @see smartgridoutput.EntityState#getOwner()
      * @see #getEntityState()
@@ -605,9 +610,8 @@ public interface SmartgridoutputPackage extends EPackage {
     EAttribute getCluster_ControlCenterCount();
 
     /**
-     * Returns the meta object for the attribute '{@link smartgridoutput.Cluster#getSmartMeterCount
-     * <em>Smart Meter Count</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Returns the meta object for the attribute '{@link smartgridoutput.Cluster#getSmartMeterCount <em>Smart Meter Count</em>}'.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Smart Meter Count</em>'.
      * @see smartgridoutput.Cluster#getSmartMeterCount()
      * @see #getCluster()
@@ -616,9 +620,8 @@ public interface SmartgridoutputPackage extends EPackage {
     EAttribute getCluster_SmartMeterCount();
 
     /**
-     * Returns the meta object for the reference list '{@link smartgridoutput.Cluster#getHasEntities
-     * <em>Has Entities</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Returns the meta object for the reference list '{@link smartgridoutput.Cluster#getHasEntities <em>Has Entities</em>}'.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Has Entities</em>'.
      * @see smartgridoutput.Cluster#getHasEntities()
      * @see #getCluster()
@@ -637,9 +640,8 @@ public interface SmartgridoutputPackage extends EPackage {
     EClass getOn();
 
     /**
-     * Returns the meta object for the reference '{@link smartgridoutput.On#getBelongsToCluster
-     * <em>Belongs To Cluster</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Returns the meta object for the reference '{@link smartgridoutput.On#getBelongsToCluster <em>Belongs To Cluster</em>}'.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Belongs To Cluster</em>'.
      * @see smartgridoutput.On#getBelongsToCluster()
      * @see #getOn()
@@ -648,9 +650,8 @@ public interface SmartgridoutputPackage extends EPackage {
     EReference getOn_BelongsToCluster();
 
     /**
-     * Returns the meta object for the attribute '{@link smartgridoutput.On#isIsHacked <em>Is
-     * Hacked</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Returns the meta object for the attribute '{@link smartgridoutput.On#isIsHacked <em>Is Hacked</em>}'.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Is Hacked</em>'.
      * @see smartgridoutput.On#isIsHacked()
      * @see #getOn()
@@ -659,9 +660,9 @@ public interface SmartgridoutputPackage extends EPackage {
     EAttribute getOn_IsHacked();
 
     /**
-     * Returns the factory that creates the instances of the model. <!-- begin-user-doc --> <!--
+     * Returns the factory that creates the instances of the model.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @return the factory that creates the instances of the model.
      * @generated
      */
@@ -677,14 +678,12 @@ public interface SmartgridoutputPackage extends EPackage {
      * <li>and each data type</li>
      * </ul>
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     interface Literals {
         /**
-         * The meta object literal for the '{@link smartgridoutput.impl.ScenarioResultImpl
-         * <em>Scenario Result</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '{@link smartgridoutput.impl.ScenarioResultImpl <em>Scenario Result</em>}' class.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @see smartgridoutput.impl.ScenarioResultImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getScenarioResult()
          * @generated
@@ -692,17 +691,15 @@ public interface SmartgridoutputPackage extends EPackage {
         EClass SCENARIO_RESULT = eINSTANCE.getScenarioResult();
 
         /**
-         * The meta object literal for the '<em><b>States</b></em>' containment reference list
-         * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '<em><b>States</b></em>' containment reference list feature.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @generated
          */
         EReference SCENARIO_RESULT__STATES = eINSTANCE.getScenarioResult_States();
 
         /**
-         * The meta object literal for the '<em><b>Clusters</b></em>' containment reference list
-         * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '<em><b>Clusters</b></em>' containment reference list feature.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @generated
          */
         EReference SCENARIO_RESULT__CLUSTERS = eINSTANCE.getScenarioResult_Clusters();
@@ -716,9 +713,16 @@ public interface SmartgridoutputPackage extends EPackage {
         EReference SCENARIO_RESULT__SCENARIO = eINSTANCE.getScenarioResult_Scenario();
 
         /**
-         * The meta object literal for the '{@link smartgridoutput.impl.EntityStateImpl <em>Entity
-         * State</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '<em><b>Input</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference SCENARIO_RESULT__INPUT = eINSTANCE.getScenarioResult_Input();
+
+        /**
+         * The meta object literal for the '{@link smartgridoutput.impl.EntityStateImpl <em>Entity State</em>}' class.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @see smartgridoutput.impl.EntityStateImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getEntityState()
          * @generated
@@ -734,9 +738,8 @@ public interface SmartgridoutputPackage extends EPackage {
         EReference ENTITY_STATE__OWNER = eINSTANCE.getEntityState_Owner();
 
         /**
-         * The meta object literal for the '{@link smartgridoutput.impl.OnlineImpl <em>Online</em>}'
-         * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '{@link smartgridoutput.impl.OnlineImpl <em>Online</em>}' class.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @see smartgridoutput.impl.OnlineImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getOnline()
          * @generated
@@ -744,9 +747,8 @@ public interface SmartgridoutputPackage extends EPackage {
         EClass ONLINE = eINSTANCE.getOnline();
 
         /**
-         * The meta object literal for the '{@link smartgridoutput.impl.DefectImpl <em>Defect</em>}'
-         * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '{@link smartgridoutput.impl.DefectImpl <em>Defect</em>}' class.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @see smartgridoutput.impl.DefectImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getDefect()
          * @generated
@@ -754,9 +756,8 @@ public interface SmartgridoutputPackage extends EPackage {
         EClass DEFECT = eINSTANCE.getDefect();
 
         /**
-         * The meta object literal for the '{@link smartgridoutput.impl.NoPowerImpl <em>No
-         * Power</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '{@link smartgridoutput.impl.NoPowerImpl <em>No Power</em>}' class.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @see smartgridoutput.impl.NoPowerImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getNoPower()
          * @generated
@@ -764,9 +765,8 @@ public interface SmartgridoutputPackage extends EPackage {
         EClass NO_POWER = eINSTANCE.getNoPower();
 
         /**
-         * The meta object literal for the '{@link smartgridoutput.impl.NoUplinkImpl <em>No
-         * Uplink</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '{@link smartgridoutput.impl.NoUplinkImpl <em>No Uplink</em>}' class.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @see smartgridoutput.impl.NoUplinkImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getNoUplink()
          * @generated
@@ -774,9 +774,8 @@ public interface SmartgridoutputPackage extends EPackage {
         EClass NO_UPLINK = eINSTANCE.getNoUplink();
 
         /**
-         * The meta object literal for the '{@link smartgridoutput.impl.OfflineImpl
-         * <em>Offline</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '{@link smartgridoutput.impl.OfflineImpl <em>Offline</em>}' class.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @see smartgridoutput.impl.OfflineImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getOffline()
          * @generated
@@ -784,9 +783,8 @@ public interface SmartgridoutputPackage extends EPackage {
         EClass OFFLINE = eINSTANCE.getOffline();
 
         /**
-         * The meta object literal for the '{@link smartgridoutput.impl.ClusterImpl
-         * <em>Cluster</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * The meta object literal for the '{@link smartgridoutput.impl.ClusterImpl <em>Cluster</em>}' class.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @see smartgridoutput.impl.ClusterImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getCluster()
          * @generated
@@ -796,7 +794,6 @@ public interface SmartgridoutputPackage extends EPackage {
         /**
          * The meta object literal for the '<em><b>Control Center Count</b></em>' attribute feature.
          * <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
          * @generated
          */
         EAttribute CLUSTER__CONTROL_CENTER_COUNT = eINSTANCE.getCluster_ControlCenterCount();
@@ -804,7 +801,6 @@ public interface SmartgridoutputPackage extends EPackage {
         /**
          * The meta object literal for the '<em><b>Smart Meter Count</b></em>' attribute feature.
          * <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
          * @generated
          */
         EAttribute CLUSTER__SMART_METER_COUNT = eINSTANCE.getCluster_SmartMeterCount();
@@ -812,7 +808,6 @@ public interface SmartgridoutputPackage extends EPackage {
         /**
          * The meta object literal for the '<em><b>Has Entities</b></em>' reference list feature.
          * <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
          * @generated
          */
         EReference CLUSTER__HAS_ENTITIES = eINSTANCE.getCluster_HasEntities();
@@ -820,7 +815,6 @@ public interface SmartgridoutputPackage extends EPackage {
         /**
          * The meta object literal for the '{@link smartgridoutput.impl.OnImpl <em>On</em>}' class.
          * <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
          * @see smartgridoutput.impl.OnImpl
          * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getOn()
          * @generated
@@ -830,7 +824,6 @@ public interface SmartgridoutputPackage extends EPackage {
         /**
          * The meta object literal for the '<em><b>Belongs To Cluster</b></em>' reference feature.
          * <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
          * @generated
          */
         EReference ON__BELONGS_TO_CLUSTER = eINSTANCE.getOn_BelongsToCluster();

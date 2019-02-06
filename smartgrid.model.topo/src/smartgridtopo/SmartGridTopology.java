@@ -12,10 +12,10 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.SmartGridTopology#getContainsNE <em>Contains NE</em>}</li>
- * <li>{@link smartgridtopo.SmartGridTopology#getContainsPGN <em>Contains PGN</em>}</li>
- * <li>{@link smartgridtopo.SmartGridTopology#getContainsPC <em>Contains PC</em>}</li>
- * <li>{@link smartgridtopo.SmartGridTopology#getContainsLC <em>Contains LC</em>}</li>
+ *   <li>{@link smartgridtopo.SmartGridTopology#getContainsNE <em>Contains NE</em>}</li>
+ *   <li>{@link smartgridtopo.SmartGridTopology#getContainsPGN <em>Contains PGN</em>}</li>
+ *   <li>{@link smartgridtopo.SmartGridTopology#getContainsPC <em>Contains PC</em>}</li>
+ *   <li>{@link smartgridtopo.SmartGridTopology#getContainsLC <em>Contains LC</em>}</li>
  * </ul>
  *
  * @see smartgridtopo.SmartgridtopoPackage#getSmartGridTopology()
@@ -24,14 +24,14 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface SmartGridTopology extends NamedIdentifier {
     /**
-     * Returns the value of the '<em><b>Contains NE</b></em>' containment reference list. The list
-     * contents are of type {@link smartgridtopo.NetworkEntity}. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Contains NE</b></em>' containment reference list.
+     * The list contents are of type {@link smartgridtopo.NetworkEntity}.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Contains NE</em>' containment reference list isn't clear, there
      * really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Contains NE</em>' containment reference list.
      * @see smartgridtopo.SmartgridtopoPackage#getSmartGridTopology_ContainsNE()
      * @model containment="true"
@@ -40,14 +40,14 @@ public interface SmartGridTopology extends NamedIdentifier {
     EList<NetworkEntity> getContainsNE();
 
     /**
-     * Returns the value of the '<em><b>Contains PGN</b></em>' containment reference list. The list
-     * contents are of type {@link smartgridtopo.PowerGridNode}. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Contains PGN</b></em>' containment reference list.
+     * The list contents are of type {@link smartgridtopo.PowerGridNode}.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Contains PGN</em>' containment reference list isn't clear, there
      * really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Contains PGN</em>' containment reference list.
      * @see smartgridtopo.SmartgridtopoPackage#getSmartGridTopology_ContainsPGN()
      * @model containment="true"
@@ -56,14 +56,14 @@ public interface SmartGridTopology extends NamedIdentifier {
     EList<PowerGridNode> getContainsPGN();
 
     /**
-     * Returns the value of the '<em><b>Contains PC</b></em>' containment reference list. The list
-     * contents are of type {@link smartgridtopo.PhysicalConnection}. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Contains PC</b></em>' containment reference list.
+     * The list contents are of type {@link smartgridtopo.PhysicalConnection}.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Contains PC</em>' containment reference list isn't clear, there
      * really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Contains PC</em>' containment reference list.
      * @see smartgridtopo.SmartgridtopoPackage#getSmartGridTopology_ContainsPC()
      * @model containment="true"
@@ -72,14 +72,14 @@ public interface SmartGridTopology extends NamedIdentifier {
     EList<PhysicalConnection> getContainsPC();
 
     /**
-     * Returns the value of the '<em><b>Contains LC</b></em>' containment reference list. The list
-     * contents are of type {@link smartgridtopo.LogicalCommunication}. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Contains LC</b></em>' containment reference list.
+     * The list contents are of type {@link smartgridtopo.LogicalCommunication}.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Contains LC</em>' containment reference list isn't clear, there
      * really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Contains LC</em>' containment reference list.
      * @see smartgridtopo.SmartgridtopoPackage#getSmartGridTopology_ContainsLC()
      * @model containment="true"

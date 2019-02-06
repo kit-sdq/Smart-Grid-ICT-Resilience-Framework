@@ -11,6 +11,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridoutput.ecore#//ScenarioResult/States"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartgridoutput.ecore#//ScenarioResult/Clusters"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridoutput.ecore#//ScenarioResult/Scenario"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridoutput.ecore#//ScenarioResult/Input"/>
     </genClasses>
     <genClasses image="false" ecoreClass="smartgridoutput.ecore#//EntityState">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridoutput.ecore#//EntityState/Owner"/>
@@ -28,6 +29,22 @@
     <genClasses image="false" ecoreClass="smartgridoutput.ecore#//On">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartgridoutput.ecore#//On/BelongsToCluster"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartgridoutput.ecore#//On/IsHacked"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Smartgridinput" ecorePackage="../../smartgrid.model.input/model/smartgridinput.ecore#/">
+    <genClasses ecoreClass="../../smartgrid.model.input/model/smartgridinput.ecore#//ScenarioState">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../smartgrid.model.input/model/smartgridinput.ecore#//ScenarioState/EntityStates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../smartgrid.model.input/model/smartgridinput.ecore#//ScenarioState/PowerStates"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../smartgrid.model.input/model/smartgridinput.ecore#//ScenarioState/Scenario"/>
+    </genClasses>
+    <genClasses ecoreClass="../../smartgrid.model.input/model/smartgridinput.ecore#//EntityState">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../smartgrid.model.input/model/smartgridinput.ecore#//EntityState/IsDestroyed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../smartgrid.model.input/model/smartgridinput.ecore#//EntityState/IsHacked"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../smartgrid.model.input/model/smartgridinput.ecore#//EntityState/Owner"/>
+    </genClasses>
+    <genClasses ecoreClass="../../smartgrid.model.input/model/smartgridinput.ecore#//PowerState">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../smartgrid.model.input/model/smartgridinput.ecore#//PowerState/Owner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../smartgrid.model.input/model/smartgridinput.ecore#//PowerState/PowerOutage"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

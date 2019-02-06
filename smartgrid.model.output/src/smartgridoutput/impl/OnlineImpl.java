@@ -16,7 +16,6 @@ import smartgridoutput.SmartgridoutputPackage;
 public class OnlineImpl extends OnImpl implements Online {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected OnlineImpl() {
@@ -25,7 +24,6 @@ public class OnlineImpl extends OnImpl implements Online {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override

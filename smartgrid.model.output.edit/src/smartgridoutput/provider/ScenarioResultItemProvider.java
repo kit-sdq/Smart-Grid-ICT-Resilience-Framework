@@ -32,9 +32,9 @@ import smartgridoutput.SmartgridoutputPackage;
 public class ScenarioResultItemProvider extends ItemProviderAdapter
         implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
     /**
-     * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+     * This constructs an instance from a factory and a notifier.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     public ScenarioResultItemProvider(AdapterFactory adapterFactory) {
@@ -42,9 +42,9 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+     * This returns the property descriptors for the adapted class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -53,20 +53,53 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
             super.getPropertyDescriptors(object);
 
             addScenarioPropertyDescriptor(object);
+            addInputPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
     }
 
     /**
-     * This adds a property descriptor for the Scenario feature. <!-- begin-user-doc --> <!--
+     * This adds a property descriptor for the Scenario feature.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     protected void addScenarioPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-                getString("_UI_ScenarioResult_Scenario_feature"), getString("_UI_PropertyDescriptor_description", "_UI_ScenarioResult_Scenario_feature", "_UI_ScenarioResult_type"),
-                SmartgridoutputPackage.Literals.SCENARIO_RESULT__SCENARIO, true, false, true, null, null, null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_ScenarioResult_Scenario_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_ScenarioResult_Scenario_feature", "_UI_ScenarioResult_type"),
+                 SmartgridoutputPackage.Literals.SCENARIO_RESULT__SCENARIO,
+                 true,
+                 false,
+                 true,
+                 null,
+                 null,
+                 null));
+    }
+
+    /**
+     * This adds a property descriptor for the Input feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addInputPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_ScenarioResult_Input_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_ScenarioResult_Input_feature", "_UI_ScenarioResult_type"),
+                 SmartgridoutputPackage.Literals.SCENARIO_RESULT__INPUT,
+                 true,
+                 false,
+                 true,
+                 null,
+                 null,
+                 null));
     }
 
     /**
@@ -90,7 +123,6 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -102,8 +134,8 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns ScenarioResult.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This returns ScenarioResult.gif.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -124,9 +156,8 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
 
     /**
      * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to
-     * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -134,39 +165,54 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
         updateChildren(notification);
 
         switch (notification.getFeatureID(ScenarioResult.class)) {
-        case SmartgridoutputPackage.SCENARIO_RESULT__STATES:
-        case SmartgridoutputPackage.SCENARIO_RESULT__CLUSTERS:
-            fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-            return;
+            case SmartgridoutputPackage.SCENARIO_RESULT__STATES:
+            case SmartgridoutputPackage.SCENARIO_RESULT__CLUSTERS:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+                return;
         }
         super.notifyChanged(notification);
     }
 
     /**
-     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-     * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+     * that can be created under this object.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
         super.collectNewChildDescriptors(newChildDescriptors, object);
 
-        newChildDescriptors.add(createChildParameter(SmartgridoutputPackage.Literals.SCENARIO_RESULT__STATES, SmartgridoutputFactory.eINSTANCE.createOnline()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridoutputPackage.Literals.SCENARIO_RESULT__STATES,
+                 SmartgridoutputFactory.eINSTANCE.createOnline()));
 
-        newChildDescriptors.add(createChildParameter(SmartgridoutputPackage.Literals.SCENARIO_RESULT__STATES, SmartgridoutputFactory.eINSTANCE.createDefect()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridoutputPackage.Literals.SCENARIO_RESULT__STATES,
+                 SmartgridoutputFactory.eINSTANCE.createDefect()));
 
-        newChildDescriptors.add(createChildParameter(SmartgridoutputPackage.Literals.SCENARIO_RESULT__STATES, SmartgridoutputFactory.eINSTANCE.createNoPower()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridoutputPackage.Literals.SCENARIO_RESULT__STATES,
+                 SmartgridoutputFactory.eINSTANCE.createNoPower()));
 
-        newChildDescriptors.add(createChildParameter(SmartgridoutputPackage.Literals.SCENARIO_RESULT__STATES, SmartgridoutputFactory.eINSTANCE.createNoUplink()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridoutputPackage.Literals.SCENARIO_RESULT__STATES,
+                 SmartgridoutputFactory.eINSTANCE.createNoUplink()));
 
-        newChildDescriptors.add(createChildParameter(SmartgridoutputPackage.Literals.SCENARIO_RESULT__CLUSTERS, SmartgridoutputFactory.eINSTANCE.createCluster()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridoutputPackage.Literals.SCENARIO_RESULT__CLUSTERS,
+                 SmartgridoutputFactory.eINSTANCE.createCluster()));
     }
 
     /**
-     * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+     * Return the resource locator for this item provider's resources.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override

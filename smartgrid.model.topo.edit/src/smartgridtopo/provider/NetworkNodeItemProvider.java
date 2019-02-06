@@ -21,9 +21,9 @@ import smartgridtopo.SmartgridtopoPackage;
  */
 public class NetworkNodeItemProvider extends NetworkEntityItemProvider {
     /**
-     * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+     * This constructs an instance from a factory and a notifier.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     public NetworkNodeItemProvider(AdapterFactory adapterFactory) {
@@ -31,9 +31,9 @@ public class NetworkNodeItemProvider extends NetworkEntityItemProvider {
     }
 
     /**
-     * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+     * This returns the property descriptors for the adapted class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -47,20 +47,30 @@ public class NetworkNodeItemProvider extends NetworkEntityItemProvider {
     }
 
     /**
-     * This adds a property descriptor for the Is A feature. <!-- begin-user-doc --> <!--
+     * This adds a property descriptor for the Is A feature.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     protected void addIsAPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_NetworkNode_IsA_feature"),
-                getString("_UI_PropertyDescriptor_description", "_UI_NetworkNode_IsA_feature", "_UI_NetworkNode_type"), SmartgridtopoPackage.Literals.NETWORK_NODE__IS_A, true, false, true, null, null,
-                null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_NetworkNode_IsA_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_NetworkNode_IsA_feature", "_UI_NetworkNode_type"),
+                 SmartgridtopoPackage.Literals.NETWORK_NODE__IS_A,
+                 true,
+                 false,
+                 true,
+                 null,
+                 null,
+                 null));
     }
 
     /**
-     * This returns NetworkNode.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This returns NetworkNode.gif.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -76,15 +86,16 @@ public class NetworkNodeItemProvider extends NetworkEntityItemProvider {
      */
     @Override
     public String getText(Object object) {
-        String label = ((NetworkNode) object).getName();
-        return label == null || label.length() == 0 ? getString("_UI_NetworkNode_type") : getString("_UI_NetworkNode_type") + " " + label;
+        String label = ((NetworkNode)object).getName();
+        return label == null || label.length() == 0 ?
+            getString("_UI_NetworkNode_type") :
+            getString("_UI_NetworkNode_type") + " " + label;
     }
 
     /**
      * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to
-     * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -94,9 +105,9 @@ public class NetworkNodeItemProvider extends NetworkEntityItemProvider {
     }
 
     /**
-     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-     * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+     * that can be created under this object.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override

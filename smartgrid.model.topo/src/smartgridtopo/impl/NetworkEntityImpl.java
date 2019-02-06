@@ -28,10 +28,10 @@ import smartgridtopo.SmartgridtopoPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getId <em>Id</em>}</li>
- * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getName <em>Name</em>}</li>
- * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getConnectedTo <em>Connected To</em>}</li>
- * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getLinkedBy <em>Linked By</em>}</li>
+ *   <li>{@link smartgridtopo.impl.NetworkEntityImpl#getId <em>Id</em>}</li>
+ *   <li>{@link smartgridtopo.impl.NetworkEntityImpl#getName <em>Name</em>}</li>
+ *   <li>{@link smartgridtopo.impl.NetworkEntityImpl#getConnectedTo <em>Connected To</em>}</li>
+ *   <li>{@link smartgridtopo.impl.NetworkEntityImpl#getLinkedBy <em>Linked By</em>}</li>
  * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getXCoord <em>XCoord</em>}</li>
  * <li>{@link smartgridtopo.impl.NetworkEntityImpl#getYCoord <em>YCoord</em>}</li>
  * </ul>
@@ -40,9 +40,9 @@ import smartgridtopo.SmartgridtopoPackage;
  */
 public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container implements NetworkEntity {
     /**
-     * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc -->
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getId()
      * @generated
      * @ordered
@@ -50,9 +50,9 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
     protected static final String ID_EDEFAULT = "0";
 
     /**
-     * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc -->
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getId()
      * @generated
      * @ordered
@@ -60,9 +60,9 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
     protected String id = ID_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc
+     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @see #getName()
      * @generated
      * @ordered
@@ -70,9 +70,9 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
     protected static final String NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc -->
+     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getName()
      * @generated
      * @ordered
@@ -82,7 +82,6 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
     /**
      * The cached value of the '{@link #getConnectedTo() <em>Connected To</em>}' reference list.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @see #getConnectedTo()
      * @generated
      * @ordered
@@ -141,7 +140,6 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected NetworkEntityImpl() {
@@ -150,7 +148,6 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -160,7 +157,6 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -170,7 +166,6 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -183,7 +178,6 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -193,7 +187,6 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -206,34 +199,30 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EList<PowerGridNode> getConnectedTo() {
         if (connectedTo == null) {
-            connectedTo = new EObjectResolvingEList<>(PowerGridNode.class, this, SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO);
+            connectedTo = new EObjectResolvingEList<PowerGridNode>(PowerGridNode.class, this, SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO);
         }
         return connectedTo;
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EList<PhysicalConnection> getLinkedBy() {
         if (linkedBy == null) {
-            linkedBy = new EObjectWithInverseResolvingEList.ManyInverse<>(PhysicalConnection.class, this, SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY,
-                    SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS);
+            linkedBy = new EObjectWithInverseResolvingEList.ManyInverse<PhysicalConnection>(PhysicalConnection.class, this, SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY, SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS);
         }
         return linkedBy;
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -286,42 +275,40 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
     @Override
     public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getLinkedBy()).basicAdd(otherEnd, msgs);
+            case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
+                return ((InternalEList<InternalEObject>)(InternalEList<?>)getLinkedBy()).basicAdd(otherEnd, msgs);
         }
         return super.eInverseAdd(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
-            return ((InternalEList<?>) getLinkedBy()).basicRemove(otherEnd, msgs);
+            case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
+                return ((InternalEList<?>)getLinkedBy()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_ENTITY__ID:
-            return getId();
-        case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
-            return getName();
-        case SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO:
-            return getConnectedTo();
-        case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
-            return getLinkedBy();
+            case SmartgridtopoPackage.NETWORK_ENTITY__ID:
+                return getId();
+            case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
+                return getName();
+            case SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO:
+                return getConnectedTo();
+            case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
+                return getLinkedBy();
         case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
             return getXCoord();
         case SmartgridtopoPackage.NETWORK_ENTITY__YCOORD:
@@ -332,27 +319,26 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_ENTITY__ID:
-            setId((String) newValue);
-            return;
-        case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
-            setName((String) newValue);
-            return;
-        case SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO:
-            getConnectedTo().clear();
-            getConnectedTo().addAll((Collection<? extends PowerGridNode>) newValue);
-            return;
-        case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
-            getLinkedBy().clear();
-            getLinkedBy().addAll((Collection<? extends PhysicalConnection>) newValue);
-            return;
+            case SmartgridtopoPackage.NETWORK_ENTITY__ID:
+                setId((String)newValue);
+                return;
+            case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
+                setName((String)newValue);
+                return;
+            case SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO:
+                getConnectedTo().clear();
+                getConnectedTo().addAll((Collection<? extends PowerGridNode>)newValue);
+                return;
+            case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
+                getLinkedBy().clear();
+                getLinkedBy().addAll((Collection<? extends PhysicalConnection>)newValue);
+                return;
         case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
             setXCoord((Double) newValue);
             return;
@@ -365,24 +351,23 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_ENTITY__ID:
-            setId(ID_EDEFAULT);
-            return;
-        case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
-            setName(NAME_EDEFAULT);
-            return;
-        case SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO:
-            getConnectedTo().clear();
-            return;
-        case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
-            getLinkedBy().clear();
-            return;
+            case SmartgridtopoPackage.NETWORK_ENTITY__ID:
+                setId(ID_EDEFAULT);
+                return;
+            case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
+                setName(NAME_EDEFAULT);
+                return;
+            case SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO:
+                getConnectedTo().clear();
+                return;
+            case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
+                getLinkedBy().clear();
+                return;
         case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
             setXCoord(XCOORD_EDEFAULT);
             return;
@@ -395,20 +380,19 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_ENTITY__ID:
-            return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-        case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
-            return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-        case SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO:
-            return connectedTo != null && !connectedTo.isEmpty();
-        case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
-            return linkedBy != null && !linkedBy.isEmpty();
+            case SmartgridtopoPackage.NETWORK_ENTITY__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+            case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
+                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+            case SmartgridtopoPackage.NETWORK_ENTITY__CONNECTED_TO:
+                return connectedTo != null && !connectedTo.isEmpty();
+            case SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY:
+                return linkedBy != null && !linkedBy.isEmpty();
         case SmartgridtopoPackage.NETWORK_ENTITY__XCOORD:
             return xCoord != XCOORD_EDEFAULT;
         case SmartgridtopoPackage.NETWORK_ENTITY__YCOORD:
@@ -419,17 +403,14 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
         if (baseClass == NamedEntity.class) {
             switch (derivedFeatureID) {
-            case SmartgridtopoPackage.NETWORK_ENTITY__NAME:
-                return SmartgridtopoPackage.NAMED_ENTITY__NAME;
-            default:
-                return -1;
+                case SmartgridtopoPackage.NETWORK_ENTITY__NAME: return SmartgridtopoPackage.NAMED_ENTITY__NAME;
+                default: return -1;
             }
         }
         return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -437,17 +418,14 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
         if (baseClass == NamedEntity.class) {
             switch (baseFeatureID) {
-            case SmartgridtopoPackage.NAMED_ENTITY__NAME:
-                return SmartgridtopoPackage.NETWORK_ENTITY__NAME;
-            default:
-                return -1;
+                case SmartgridtopoPackage.NAMED_ENTITY__NAME: return SmartgridtopoPackage.NETWORK_ENTITY__NAME;
+                default: return -1;
             }
         }
         return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -455,15 +433,13 @@ public abstract class NetworkEntityImpl extends MinimalEObjectImpl.Container imp
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public String toString() {
-        if (eIsProxy())
-            return super.toString();
+        if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
+        StringBuilder result = new StringBuilder(super.toString());
         result.append(" (id: ");
         result.append(id);
         result.append(", name: ");

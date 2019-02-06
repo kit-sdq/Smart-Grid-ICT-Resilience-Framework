@@ -1,132 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="topo" version="10.1.3.201511131800">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" name="topo" version="12.0.0.2017041100">
   <ownedViewpoints name="Topology" modelFileExtension="smartgridtopo">
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="SmartGridTopology" domainClass="smartgridtopo.SmartGridTopology">
-      <metamodel href="http://sdq.ipd.uka.de/smartgridtopo/1.1#/"/>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="SmartGridTopology" initialisation="true" domainClass="smartgridtopo.SmartGridTopology">
+      <metamodel href="../../smartgrid.model.topo/model/smartgridtopo.ecore#/"/>
+      <diagramInitialisation>
+        <firstModelOperations xsi:type="tool:SetValue"/>
+      </diagramInitialisation>
       <defaultLayer name="EntityLayer">
-        <nodeMappings name="SmartMeter" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.SmartMeter">
+        <nodeMappings name="SmartMeter" deletionDescription="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@toolSections.0/@ownedTools[name='SmartMeterDelete']" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.SmartMeter">
           <style xsi:type="style:EllipseNodeDescription" borderSizeComputationExpression="3" showIcon="false" sizeComputationExpression="" horizontalDiameterComputationExpression="3" verticalDiameterComputationExpression="3">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_red']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="GenericController" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.GenericController">
+        <nodeMappings name="GenericController" deletionDescription="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@toolSections.0/@ownedTools[name='GenericControllerDelete']" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.GenericController">
           <style xsi:type="style:EllipseNodeDescription" borderSizeComputationExpression="3" showIcon="false" sizeComputationExpression="" horizontalDiameterComputationExpression="3" verticalDiameterComputationExpression="3">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_orange']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="InterCom" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.InterCom">
+        <nodeMappings name="InterCom" deletionDescription="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@toolSections.0/@ownedTools[name='InterComDelete']" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.InterCom">
           <style xsi:type="style:EllipseNodeDescription" borderSizeComputationExpression="3" showIcon="false" sizeComputationExpression="0" horizontalDiameterComputationExpression="3" verticalDiameterComputationExpression="3">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
           </style>
         </nodeMappings>
-        <containerMappings name="ControlCenter" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.ControlCenter">
-          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="&lt;&lt;ControlCenter>>">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+        <nodeMappings name="ControlCenter" deletionDescription="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@toolSections.0/@ownedTools[name='ControlCenterDelete']" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.ControlCenter">
+          <style xsi:type="style:EllipseNodeDescription" borderSizeComputationExpression="3" showIcon="false" sizeComputationExpression="" horizontalDiameterComputationExpression="3" verticalDiameterComputationExpression="3">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
           </style>
-        </containerMappings>
+        </nodeMappings>
         <toolSections name="Entities">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="SmartMeterCreation" label="Smart Meter" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter']">
+          <ownedTools xsi:type="tool_1:NodeCreationDescription" name="SmartMeterCreation" label="Smart Meter" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="smartgridtopo.SmartMeter" referenceName="ContainsNE">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="smartgridtopo.SmartMeter" referenceName="ContainsNE">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
                 </subModelOperations>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="checkInput" id="smartgrid.model.topo.sirius.CheckInputID"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="InterComCreation" label="Inter Com" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom']">
+          <ownedTools xsi:type="tool_1:NodeCreationDescription" name="InterComCreation" label="Inter Com" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="smartgridtopo.InterCom" referenceName="ContainsNE">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="smartgridtopo.InterCom" referenceName="ContainsNE">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
                 </subModelOperations>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="CheckInput2" id="smartgrid.model.topo.sirius.CheckInputID"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="GenericControllerCreation" label="Generic Controller" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController']">
+          <ownedTools xsi:type="tool_1:NodeCreationDescription" name="GenericControllerCreation" label="Generic Controller" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="smartgridtopo.GenericController" referenceName="ContainsNE">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="smartgridtopo.GenericController" referenceName="ContainsNE">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
                 </subModelOperations>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="CheckInput3" id="smartgrid.model.topo.sirius.CheckInputID"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="ControlCenterCreation" label="Control Center" containerMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@containerMappings[name='ControlCenter']">
+          <ownedTools xsi:type="tool_1:NodeCreationDescription" name="ControlCenterCreation" label="ControlCenter" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='ControlCenter']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="smartgridtopo.ControlCenter" referenceName="ContainsNE">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="smartgridtopo.ControlCenter" referenceName="ContainsNE">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
                 </subModelOperations>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="checkInput" id="smartgrid.model.topo.sirius.CheckInputID"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DeleteElementDescription" name="SmartMeterDelete" label="Smart Meter">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:RemoveElement"/>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="deleteElement" label="deleteElement" id="smartgrid.model.topo.sirius.delete"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DeleteElementDescription" name="InterComDelete" label="Inter Com">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:RemoveElement"/>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="deleteElement" label="deleteElement" id="smartgrid.model.topo.sirius.delete"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DeleteElementDescription" name="GenericControllerDelete" label="Generic Controller">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:RemoveElement"/>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="deleteElement" label="deleteElement" id="smartgrid.model.topo.sirius.delete"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DeleteElementDescription" name="ControlCenterDelete" label="Control Center">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:RemoveElement"/>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="deleteElement" label="deleteElement" id="smartgrid.model.topo.sirius.delete"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
         </toolSections>
       </defaultLayer>
       <additionalLayers name="PowerLayer" activeByDefault="true">
-        <nodeMappings name="PowerGridNode" semanticCandidatesExpression="feature:ContainsPGN" domainClass="smartgridtopo.PowerGridNode">
+        <nodeMappings name="PowerGridNode" deletionDescription="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PowerLayer']/@toolSections.0/@ownedTools[name='PowerNodeDelete']" semanticCandidatesExpression="feature:ContainsPGN" domainClass="smartgridtopo.PowerGridNode">
           <style xsi:type="style:LozengeNodeDescription" borderSizeComputationExpression="3" showIcon="false" sizeComputationExpression="" widthComputationExpression="3" heightComputationExpression="3">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='yellow']"/>
           </style>
         </nodeMappings>
-        <edgeMappings name="PowerConnection" sourceMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@containerMappings[name='ControlCenter']" targetMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PowerLayer']/@nodeMappings[name='PowerGridNode']" targetFinderExpression="feature:ConnectedTo">
+        <edgeMappings name="PowerConnection" sourceMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='ControlCenter']" targetMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PowerLayer']/@nodeMappings[name='PowerGridNode']" targetFinderExpression="feature:ConnectedTo">
           <style sizeComputationExpression="3" foldingStyle="SOURCE" endsCentering="Both">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='yellow']"/>
           </style>
         </edgeMappings>
         <toolSections name="Power">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="PowerNodeCreation" label="Power Grid Node" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PowerLayer']/@nodeMappings[name='PowerGridNode']">
+          <ownedTools xsi:type="tool_1:NodeCreationDescription" name="PowerNodeCreation" label="Power Grid Node" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PowerLayer']/@nodeMappings[name='PowerGridNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="smartgridtopo.PowerGridNode" referenceName="ContainsPGN">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="smartgridtopo.PowerGridNode" referenceName="ContainsPGN">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
                 </subModelOperations>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="CheckInput6" id="smartgrid.model.topo.sirius.CheckInputID"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="PowerConnectionCreation" label="Power Connection" edgeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PowerLayer']/@edgeMappings[name='PowerConnection']">
+          <ownedTools xsi:type="tool_1:EdgeCreationDescription" name="PowerConnectionCreation" label="Power Connection" edgeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PowerLayer']/@edgeMappings[name='PowerConnection']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="ConnectedTo" valueExpression="var:target"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool:SetValue" featureName="ConnectedTo" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DeleteElementDescription" name="PowerNodeDelete" label="Power Grid Node">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:RemoveElement"/>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="deleteElement" label="deleteElement" id="smartgrid.model.topo.sirius.delete"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
         </toolSections>
       </additionalLayers>
       <additionalLayers name="PhysicalLayer" activeByDefault="true">
-        <nodeMappings name="NetworkNode" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.NetworkNode">
+        <nodeMappings name="NetworkNode" deletionDescription="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@toolSections.0/@ownedTools[name='NetworkNodeDelete']" semanticCandidatesExpression="feature:ContainsNE" domainClass="smartgridtopo.NetworkNode">
           <style xsi:type="style:SquareDescription" borderSizeComputationExpression="3" showIcon="false" sizeComputationExpression="" width="2" height="2">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
           </style>
         </nodeMappings>
-        <edgeMappings name="PhysicalConnection" semanticCandidatesExpression="feature:ContainsPC" sourceMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@containerMappings[name='ControlCenter']" targetMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@containerMappings[name='ControlCenter']" targetFinderExpression="[Links->at(2)/]" sourceFinderExpression="[Links->at(1)/]" domainClass="smartgridtopo.PhysicalConnection" useDomainElement="true">
+        <edgeMappings name="PhysicalConnection" semanticCandidatesExpression="feature:ContainsPC" sourceMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='ControlCenter']" targetMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='ControlCenter']" targetFinderExpression="[Links->at(2)/]" sourceFinderExpression="[Links->at(1)/]" domainClass="smartgridtopo.PhysicalConnection" useDomainElement="true">
           <style targetArrow="NoDecoration" sizeComputationExpression="3" routingStyle="manhattan" endsCentering="Both">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="feature:name">
@@ -135,41 +197,53 @@
           </style>
         </edgeMappings>
         <toolSections name="Physical">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="NetworkNodeCreation" label="Network Node" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode']">
+          <ownedTools xsi:type="tool_1:NodeCreationDescription" name="NetworkNodeCreation" label="Network Node" nodeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="smartgridtopo.NetworkNode" referenceName="ContainsNE">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="smartgridtopo.NetworkNode" referenceName="ContainsNE">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="id" valueExpression="service:generateRandom()"/>
                 </subModelOperations>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="CheckInput5" id="smartgrid.model.topo.sirius.CheckInputID"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="PhysicalConnection" edgeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@edgeMappings[name='PhysicalConnection']">
+          <ownedTools xsi:type="tool_1:EdgeCreationDescription" name="PhysicalConnection" edgeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@edgeMappings[name='PhysicalConnection']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[target.eContainer()/]">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="smartgridtopo.PhysicalConnection" referenceName="ContainsPC">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Links" valueExpression="var:target"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Links" valueExpression="var:source"/>
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="LinkedBy" valueExpression="var:instance"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[target.eContainer()/]">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="smartgridtopo.PhysicalConnection" referenceName="ContainsPC">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="Links" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="Links" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="LinkedBy" valueExpression="var:instance"/>
                   </subModelOperations>
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="LinkedBy" valueExpression="var:instance"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="LinkedBy" valueExpression="var:instance"/>
                   </subModelOperations>
                 </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DeleteElementDescription" name="NetworkNodeDelete" label="Network Node">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:RemoveElement"/>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="deleteElement" label="deleteElement" id="smartgrid.model.topo.sirius.delete"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
         </toolSections>
       </additionalLayers>
       <additionalLayers name="LogicalLayer" activeByDefault="true">
-        <edgeMappings name="LogicalConnection" semanticCandidatesExpression="feature:ContainsLC" sourceMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@containerMappings[name='ControlCenter']" targetMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@containerMappings[name='ControlCenter']" targetFinderExpression="[Links->at(2)/]" sourceFinderExpression="[Links->at(1)/]" domainClass="smartgridtopo.LogicalCommunication" useDomainElement="true">
+        <edgeMappings name="LogicalConnection" semanticCandidatesExpression="feature:ContainsLC" sourceMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='ControlCenter']" targetMapping="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController'] //@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='ControlCenter']" targetFinderExpression="[Links->at(2)/]" sourceFinderExpression="[Links->at(1)/]" domainClass="smartgridtopo.LogicalCommunication" useDomainElement="true">
           <style targetArrow="NoDecoration" sizeComputationExpression="3" endsCentering="Both">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="feature:name">
@@ -178,21 +252,21 @@
           </style>
         </edgeMappings>
         <toolSections name="Logical">
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="LogicalCommunication" label="Logical Communication" edgeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='LogicalLayer']/@edgeMappings[name='LogicalConnection']">
+          <ownedTools xsi:type="tool_1:EdgeCreationDescription" name="LogicalCommunication" label="Logical Communication" edgeMappings="//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='LogicalLayer']/@edgeMappings[name='LogicalConnection']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[target.eContainer()/]">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="smartgridtopo.LogicalCommunication" referenceName="ContainsLC">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Links" valueExpression="var:target"/>
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="Links" valueExpression="var:source"/>
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="CommunicatesBy" valueExpression="var:instance"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[target.eContainer()/]">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="smartgridtopo.LogicalCommunication" referenceName="ContainsLC">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="Links" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="Links" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="CommunicatesBy" valueExpression="var:instance"/>
                   </subModelOperations>
-                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="CommunicatesBy" valueExpression="var:instance"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="CommunicatesBy" valueExpression="var:instance"/>
                   </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>

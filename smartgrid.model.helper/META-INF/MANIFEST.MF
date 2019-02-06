@@ -5,6 +5,12 @@ Bundle-SymbolicName: smartgrid.model.helper
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: smartgrid.model.output,
- smartgrid.model.input
+ smartgrid.model.input,
+ org.eclipse.swt,
+ org.eclipse.sirius.diagram.ui,
+ org.eclipse.core.commands,
+ org.eclipse.ui.workbench,
+ org.eclipse.emf.transaction
 Export-Package: smartgrid.model.helper.input,
- smartgrid.model.helper.output
+ smartgrid.model.helper.output,
+ smartgrid.model.helper.sirius

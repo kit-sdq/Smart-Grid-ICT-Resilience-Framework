@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: smartgrid.model.topo.editor;singleton:=true
+Automatic-Module-Name: smartgrid.model.topo.editor
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
@@ -15,6 +16,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
  org.palladiosimulator.mdsdprofiles.edit,
- org.eclipse.emf.edit
+ org.eclipse.emf.edit,
+ org.eclipse.ui.workbench,
+ org.eclipse.sirius.ui;bundle-version="6.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: smartgridtopo.presentation.SmartgridtopoEditorPlugin$Implementation
+Import-Package: org.eclipse.sirius.diagram.ui.tools.api.editor,
+ org.eclipse.sirius.viewpoint.description;version="4.0.0"

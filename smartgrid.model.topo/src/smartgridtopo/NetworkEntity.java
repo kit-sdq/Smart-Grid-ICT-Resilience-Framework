@@ -12,8 +12,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.NetworkEntity#getConnectedTo <em>Connected To</em>}</li>
- * <li>{@link smartgridtopo.NetworkEntity#getLinkedBy <em>Linked By</em>}</li>
+ *   <li>{@link smartgridtopo.NetworkEntity#getConnectedTo <em>Connected To</em>}</li>
+ *   <li>{@link smartgridtopo.NetworkEntity#getLinkedBy <em>Linked By</em>}</li>
  * <li>{@link smartgridtopo.NetworkEntity#getXCoord <em>XCoord</em>}</li>
  * <li>{@link smartgridtopo.NetworkEntity#getYCoord <em>YCoord</em>}</li>
  * </ul>
@@ -24,14 +24,14 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface NetworkEntity extends NamedIdentifier {
     /**
-     * Returns the value of the '<em><b>Connected To</b></em>' reference list. The list contents are
-     * of type {@link smartgridtopo.PowerGridNode}. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Connected To</b></em>' reference list.
+     * The list contents are of type {@link smartgridtopo.PowerGridNode}.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Connected To</em>' reference list isn't clear, there really should
      * be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Connected To</em>' reference list.
      * @see smartgridtopo.SmartgridtopoPackage#getNetworkEntity_ConnectedTo()
      * @model required="true"
@@ -40,15 +40,15 @@ public interface NetworkEntity extends NamedIdentifier {
     EList<PowerGridNode> getConnectedTo();
 
     /**
-     * Returns the value of the '<em><b>Linked By</b></em>' reference list. The list contents are of
-     * type {@link smartgridtopo.PhysicalConnection}. It is bidirectional and its opposite is
-     * '{@link smartgridtopo.PhysicalConnection#getLinks <em>Links</em>}'. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Linked By</b></em>' reference list.
+     * The list contents are of type {@link smartgridtopo.PhysicalConnection}.
+     * It is bidirectional and its opposite is '{@link smartgridtopo.PhysicalConnection#getLinks <em>Links</em>}'.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Linked By</em>' reference list isn't clear, there really should be
      * more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Linked By</em>' reference list.
      * @see smartgridtopo.SmartgridtopoPackage#getNetworkEntity_LinkedBy()
      * @see smartgridtopo.PhysicalConnection#getLinks

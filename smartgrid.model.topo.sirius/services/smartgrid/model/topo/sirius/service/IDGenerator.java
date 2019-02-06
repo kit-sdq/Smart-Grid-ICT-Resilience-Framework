@@ -9,8 +9,8 @@ public class IDGenerator {
 		
 	}
 	
-	public int generateRandom(EObject obj) {
+	public String generateRandom(EObject obj) {
 		Random rand = new Random();
-		return rand.nextInt(10000000);
+		return Integer.toString(rand.nextInt(10000000));
 	}
 }

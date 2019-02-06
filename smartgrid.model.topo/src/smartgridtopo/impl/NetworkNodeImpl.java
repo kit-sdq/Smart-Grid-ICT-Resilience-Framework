@@ -18,16 +18,16 @@ import smartgridtopo.SmartgridtopoPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.impl.NetworkNodeImpl#getIsA <em>Is A</em>}</li>
+ *   <li>{@link smartgridtopo.impl.NetworkNodeImpl#getIsA <em>Is A</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
     /**
-     * The cached value of the '{@link #getIsA() <em>Is A</em>}' reference. <!-- begin-user-doc -->
+     * The cached value of the '{@link #getIsA() <em>Is A</em>}' reference.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getIsA()
      * @generated
      * @ordered
@@ -36,7 +36,6 @@ public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected NetworkNodeImpl() {
@@ -45,7 +44,6 @@ public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -55,14 +53,13 @@ public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NetworkNodeType getIsA() {
         if (isA != null && isA.eIsProxy()) {
-            InternalEObject oldIsA = (InternalEObject) isA;
-            isA = (NetworkNodeType) eResolveProxy(oldIsA);
+            InternalEObject oldIsA = (InternalEObject)isA;
+            isA = (NetworkNodeType)eResolveProxy(oldIsA);
             if (isA != oldIsA) {
                 if (eNotificationRequired())
                     eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartgridtopoPackage.NETWORK_NODE__IS_A, oldIsA, isA));
@@ -73,7 +70,6 @@ public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public NetworkNodeType basicGetIsA() {
@@ -82,7 +78,6 @@ public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -95,60 +90,55 @@ public class NetworkNodeImpl extends NetworkEntityImpl implements NetworkNode {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_NODE__IS_A:
-            if (resolve)
-                return getIsA();
-            return basicGetIsA();
+            case SmartgridtopoPackage.NETWORK_NODE__IS_A:
+                if (resolve) return getIsA();
+                return basicGetIsA();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_NODE__IS_A:
-            setIsA((NetworkNodeType) newValue);
-            return;
+            case SmartgridtopoPackage.NETWORK_NODE__IS_A:
+                setIsA((NetworkNodeType)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_NODE__IS_A:
-            setIsA((NetworkNodeType) null);
-            return;
+            case SmartgridtopoPackage.NETWORK_NODE__IS_A:
+                setIsA((NetworkNodeType)null);
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_NODE__IS_A:
-            return isA != null;
+            case SmartgridtopoPackage.NETWORK_NODE__IS_A:
+                return isA != null;
         }
         return super.eIsSet(featureID);
     }

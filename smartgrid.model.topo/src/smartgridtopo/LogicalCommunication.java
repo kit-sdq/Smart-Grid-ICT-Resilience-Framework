@@ -12,7 +12,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.LogicalCommunication#getLinks <em>Links</em>}</li>
+ *   <li>{@link smartgridtopo.LogicalCommunication#getLinks <em>Links</em>}</li>
  * </ul>
  *
  * @see smartgridtopo.SmartgridtopoPackage#getLogicalCommunication()

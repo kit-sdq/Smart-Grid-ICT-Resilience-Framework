@@ -18,17 +18,17 @@ import smartgridtopo.SmartgridtopoPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.impl.NetworkNodeTypeImpl#getId <em>Id</em>}</li>
- * <li>{@link smartgridtopo.impl.NetworkNodeTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link smartgridtopo.impl.NetworkNodeTypeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link smartgridtopo.impl.NetworkNodeTypeImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements NetworkNodeType {
     /**
-     * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc -->
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getId()
      * @generated
      * @ordered
@@ -36,9 +36,9 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
     protected static final String ID_EDEFAULT = "0";
 
     /**
-     * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc -->
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getId()
      * @generated
      * @ordered
@@ -46,9 +46,9 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
     protected String id = ID_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc
+     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @see #getName()
      * @generated
      * @ordered
@@ -56,9 +56,9 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
     protected static final String NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc -->
+     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getName()
      * @generated
      * @ordered
@@ -67,7 +67,6 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected NetworkNodeTypeImpl() {
@@ -76,7 +75,6 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -86,7 +84,6 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -96,7 +93,6 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -109,7 +105,6 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -119,7 +114,6 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -132,85 +126,78 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
-            return getId();
-        case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
-            return getName();
+            case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
+                return getId();
+            case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
+                return getName();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
-            setId((String) newValue);
-            return;
-        case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
-            setName((String) newValue);
-            return;
+            case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
+                setId((String)newValue);
+                return;
+            case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
+                setName((String)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
-            setId(ID_EDEFAULT);
-            return;
-        case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
-            setName(NAME_EDEFAULT);
-            return;
+            case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
+                setId(ID_EDEFAULT);
+                return;
+            case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
+                setName(NAME_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
-            return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-        case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
-            return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+            case SmartgridtopoPackage.NETWORK_NODE_TYPE__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+            case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
+                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
         }
         return super.eIsSet(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
         if (baseClass == NamedEntity.class) {
             switch (derivedFeatureID) {
-            case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME:
-                return SmartgridtopoPackage.NAMED_ENTITY__NAME;
-            default:
-                return -1;
+                case SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME: return SmartgridtopoPackage.NAMED_ENTITY__NAME;
+                default: return -1;
             }
         }
         return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -218,17 +205,14 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
         if (baseClass == NamedEntity.class) {
             switch (baseFeatureID) {
-            case SmartgridtopoPackage.NAMED_ENTITY__NAME:
-                return SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME;
-            default:
-                return -1;
+                case SmartgridtopoPackage.NAMED_ENTITY__NAME: return SmartgridtopoPackage.NETWORK_NODE_TYPE__NAME;
+                default: return -1;
             }
         }
         return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -236,15 +220,13 @@ public class NetworkNodeTypeImpl extends MinimalEObjectImpl.Container implements
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public String toString() {
-        if (eIsProxy())
-            return super.toString();
+        if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
+        StringBuilder result = new StringBuilder(super.toString());
         result.append(" (id: ");
         result.append(id);
         result.append(", name: ");

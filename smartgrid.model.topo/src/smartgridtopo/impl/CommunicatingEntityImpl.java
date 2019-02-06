@@ -22,17 +22,15 @@ import smartgridtopo.SmartgridtopoPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.impl.CommunicatingEntityImpl#getCommunicatesBy <em>Communicates
- * By</em>}</li>
+ *   <li>{@link smartgridtopo.impl.CommunicatingEntityImpl#getCommunicatesBy <em>Communicates By</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class CommunicatingEntityImpl extends NetworkEntityImpl implements CommunicatingEntity {
     /**
-     * The cached value of the '{@link #getCommunicatesBy() <em>Communicates By</em>}' reference
-     * list. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The cached value of the '{@link #getCommunicatesBy() <em>Communicates By</em>}' reference list.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see #getCommunicatesBy()
      * @generated
      * @ordered
@@ -41,7 +39,6 @@ public abstract class CommunicatingEntityImpl extends NetworkEntityImpl implemen
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected CommunicatingEntityImpl() {
@@ -50,7 +47,6 @@ public abstract class CommunicatingEntityImpl extends NetworkEntityImpl implemen
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -60,103 +56,95 @@ public abstract class CommunicatingEntityImpl extends NetworkEntityImpl implemen
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EList<LogicalCommunication> getCommunicatesBy() {
         if (communicatesBy == null) {
-            communicatesBy = new EObjectWithInverseResolvingEList.ManyInverse<>(LogicalCommunication.class, this, SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY,
-                    SmartgridtopoPackage.LOGICAL_COMMUNICATION__LINKS);
+            communicatesBy = new EObjectWithInverseResolvingEList.ManyInverse<LogicalCommunication>(LogicalCommunication.class, this, SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY, SmartgridtopoPackage.LOGICAL_COMMUNICATION__LINKS);
         }
         return communicatesBy;
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @SuppressWarnings("unchecked")
     @Override
     public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getCommunicatesBy()).basicAdd(otherEnd, msgs);
+            case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
+                return ((InternalEList<InternalEObject>)(InternalEList<?>)getCommunicatesBy()).basicAdd(otherEnd, msgs);
         }
         return super.eInverseAdd(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
-            return ((InternalEList<?>) getCommunicatesBy()).basicRemove(otherEnd, msgs);
+            case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
+                return ((InternalEList<?>)getCommunicatesBy()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
-            return getCommunicatesBy();
+            case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
+                return getCommunicatesBy();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
-            getCommunicatesBy().clear();
-            getCommunicatesBy().addAll((Collection<? extends LogicalCommunication>) newValue);
-            return;
+            case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
+                getCommunicatesBy().clear();
+                getCommunicatesBy().addAll((Collection<? extends LogicalCommunication>)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
-            getCommunicatesBy().clear();
-            return;
+            case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
+                getCommunicatesBy().clear();
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
-            return communicatesBy != null && !communicatesBy.isEmpty();
+            case SmartgridtopoPackage.COMMUNICATING_ENTITY__COMMUNICATES_BY:
+                return communicatesBy != null && !communicatesBy.isEmpty();
         }
         return super.eIsSet(featureID);
     }

@@ -8,6 +8,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="Clusters" upperBound="-1"
         eType="#//Cluster" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Scenario" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//SmartGridTopology"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Input" eType="ecore:EClass ../../smartgrid.model.input/model/smartgridinput.ecore#//ScenarioState"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EntityState" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="Owner" lowerBound="1" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity"/>

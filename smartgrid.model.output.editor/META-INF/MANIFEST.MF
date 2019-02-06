@@ -2,13 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: smartgrid.model.output.editor;singleton:=true
+Automatic-Module-Name: smartgrid.model.output.editor
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: smartgridoutput.presentation.SmartgridoutputEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: smartgridoutput.presentation
+Export-Package: smartgridinput.presentation,
+ smartgridoutput.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
  smartgrid.model.output.edit;visibility:=reexport,

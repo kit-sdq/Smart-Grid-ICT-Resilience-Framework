@@ -29,7 +29,7 @@ public class LoadInputModelConformityHelper {
 //            boolean entityStatesConform = compareAndCountEntityStates(state.getEntityStates(), current.getContainsNE());
 //            return powerStatesConform && entityStatesConform;
 
-            return true; //TODO: remove when bug above is fixed
+            return updated(state,current);
         }
 
         return false;
@@ -107,5 +107,71 @@ public class LoadInputModelConformityHelper {
         }
 
         return noZombies;
+    }
+    
+    private static boolean updated(ScenarioState scenarioState, SmartGridTopology topology) {
+        //SmartGridTopology topology = (SmartGridTopology) diagramContainer.getTarget();
+        if (topology.getContainsNE().size() == scenarioState.getEntityStates().size()){ 
+            for (NetworkEntity networkEntity : topology.getContainsNE()) {
+                String id = networkEntity.getId();
+                boolean found = false;
+                for (EntityState state : scenarioState.getEntityStates()) {
+                    String ownerId = state.getOwner().getId();
+                    if (ownerId.equals(id)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    return false;
+            }
+            for (EntityState state : scenarioState.getEntityStates()) {
+                String id = state.getOwner().getId();
+                boolean found = false;
+                for (NetworkEntity networkEntity : topology.getContainsNE()) {
+                    String ownerId = networkEntity.getId();
+                    if (ownerId.equals(id)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    return false;
+            }
+        } else {
+            return false;
+        }
+        
+        if (topology.getContainsPGN().size() == scenarioState.getPowerStates().size()){
+            for (PowerGridNode powerGridNode : topology.getContainsPGN()) {
+                String id = powerGridNode.getId();
+                boolean found = false;
+                for (PowerState state : scenarioState.getPowerStates()) {
+                    String ownerId = state.getOwner().getId();
+                    if (ownerId.equals(id)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    return false;
+            }
+            for (PowerState state : scenarioState.getPowerStates()) {
+                String id = state.getOwner().getId();
+                boolean found = false;
+                for (PowerGridNode powerGridNode : topology.getContainsPGN()) {
+                    String ownerId = powerGridNode.getId();
+                    if (ownerId.equals(id)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
     }
 }

@@ -34,9 +34,9 @@ import smartgridtopo.SmartgridtopoPackage;
 public class RepositoryItemProvider extends ItemProviderAdapter
         implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
     /**
-     * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+     * This constructs an instance from a factory and a notifier.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     public RepositoryItemProvider(AdapterFactory adapterFactory) {
@@ -44,9 +44,9 @@ public class RepositoryItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+     * This returns the property descriptors for the adapted class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -67,21 +67,41 @@ public class RepositoryItemProvider extends ItemProviderAdapter
      * @generated
      */
     protected void addIdPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_Identifier_id_feature"),
-                getString("_UI_PropertyDescriptor_description", "_UI_Identifier_id_feature", "_UI_Identifier_type"), SmartgridtopoPackage.Literals.IDENTIFIER__ID, true, false, false,
-                ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_Identifier_id_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_Identifier_id_feature", "_UI_Identifier_type"),
+                 SmartgridtopoPackage.Literals.IDENTIFIER__ID,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
     }
 
     /**
-     * This adds a property descriptor for the Name feature. <!-- begin-user-doc --> <!--
+     * This adds a property descriptor for the Name feature.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     protected void addNamePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_NamedEntity_name_feature"),
-                getString("_UI_PropertyDescriptor_description", "_UI_NamedEntity_name_feature", "_UI_NamedEntity_type"), SmartgridtopoPackage.Literals.NAMED_ENTITY__NAME, true, false, false,
-                ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_NamedEntity_name_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_NamedEntity_name_feature", "_UI_NamedEntity_type"),
+                 SmartgridtopoPackage.Literals.NAMED_ENTITY__NAME,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
     }
 
     /**
@@ -106,7 +126,6 @@ public class RepositoryItemProvider extends ItemProviderAdapter
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -118,8 +137,8 @@ public class RepositoryItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns Repository.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This returns Repository.gif.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -135,15 +154,16 @@ public class RepositoryItemProvider extends ItemProviderAdapter
      */
     @Override
     public String getText(Object object) {
-        String label = ((Repository) object).getName();
-        return label == null || label.length() == 0 ? getString("_UI_Repository_type") : getString("_UI_Repository_type") + " " + label;
+        String label = ((Repository)object).getName();
+        return label == null || label.length() == 0 ?
+            getString("_UI_Repository_type") :
+            getString("_UI_Repository_type") + " " + label;
     }
 
     /**
      * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to
-     * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -151,45 +171,54 @@ public class RepositoryItemProvider extends ItemProviderAdapter
         updateChildren(notification);
 
         switch (notification.getFeatureID(Repository.class)) {
-        case SmartgridtopoPackage.REPOSITORY__ID:
-        case SmartgridtopoPackage.REPOSITORY__NAME:
-            fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-            return;
-        case SmartgridtopoPackage.REPOSITORY__CONTAINS_SMART_METER_TYPES:
-        case SmartgridtopoPackage.REPOSITORY__CONTAINS_CONNECTION_TYPE:
-        case SmartgridtopoPackage.REPOSITORY__CONTAINS_NETWORK_NODE_TYPES:
-            fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-            return;
+            case SmartgridtopoPackage.REPOSITORY__ID:
+            case SmartgridtopoPackage.REPOSITORY__NAME:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+                return;
+            case SmartgridtopoPackage.REPOSITORY__CONTAINS_SMART_METER_TYPES:
+            case SmartgridtopoPackage.REPOSITORY__CONTAINS_CONNECTION_TYPE:
+            case SmartgridtopoPackage.REPOSITORY__CONTAINS_NETWORK_NODE_TYPES:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+                return;
         }
         super.notifyChanged(notification);
     }
 
     /**
-     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-     * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+     * that can be created under this object.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
         super.collectNewChildDescriptors(newChildDescriptors, object);
 
-        newChildDescriptors.add(createChildParameter(SmartgridtopoPackage.Literals.REPOSITORY__CONTAINS_SMART_METER_TYPES, SmartgridtopoFactory.eINSTANCE.createSmartMeterType()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridtopoPackage.Literals.REPOSITORY__CONTAINS_SMART_METER_TYPES,
+                 SmartgridtopoFactory.eINSTANCE.createSmartMeterType()));
 
-        newChildDescriptors.add(createChildParameter(SmartgridtopoPackage.Literals.REPOSITORY__CONTAINS_CONNECTION_TYPE, SmartgridtopoFactory.eINSTANCE.createConnectionType()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridtopoPackage.Literals.REPOSITORY__CONTAINS_CONNECTION_TYPE,
+                 SmartgridtopoFactory.eINSTANCE.createConnectionType()));
 
-        newChildDescriptors.add(createChildParameter(SmartgridtopoPackage.Literals.REPOSITORY__CONTAINS_NETWORK_NODE_TYPES, SmartgridtopoFactory.eINSTANCE.createNetworkNodeType()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridtopoPackage.Literals.REPOSITORY__CONTAINS_NETWORK_NODE_TYPES,
+                 SmartgridtopoFactory.eINSTANCE.createNetworkNodeType()));
     }
 
     /**
-     * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+     * Return the resource locator for this item provider's resources.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public ResourceLocator getResourceLocator() {
-        return ((IChildCreationExtender) adapterFactory).getResourceLocator();
+        return ((IChildCreationExtender)adapterFactory).getResourceLocator();
     }
 
 }

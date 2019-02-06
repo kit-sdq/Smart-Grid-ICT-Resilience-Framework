@@ -16,7 +16,6 @@ import smartgridtopo.SmartgridtopoPackage;
 public class InterComImpl extends CommunicatingEntityImpl implements InterCom {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected InterComImpl() {
@@ -25,7 +24,6 @@ public class InterComImpl extends CommunicatingEntityImpl implements InterCom {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override

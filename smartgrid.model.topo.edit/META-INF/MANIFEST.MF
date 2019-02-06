@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: smartgrid.model.topo.edit;singleton:=true
+Automatic-Module-Name: smartgrid.model.topo.edit
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: smartgridtopo.provider.SmartgridtopoEditPlugin$Implementation

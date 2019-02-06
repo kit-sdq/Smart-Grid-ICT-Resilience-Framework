@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link smartgridoutput.Cluster#getControlCenterCount <em>Control Center Count</em>}</li>
- * <li>{@link smartgridoutput.Cluster#getSmartMeterCount <em>Smart Meter Count</em>}</li>
- * <li>{@link smartgridoutput.Cluster#getHasEntities <em>Has Entities</em>}</li>
+ *   <li>{@link smartgridoutput.Cluster#getControlCenterCount <em>Control Center Count</em>}</li>
+ *   <li>{@link smartgridoutput.Cluster#getSmartMeterCount <em>Smart Meter Count</em>}</li>
+ *   <li>{@link smartgridoutput.Cluster#getHasEntities <em>Has Entities</em>}</li>
  * </ul>
  *
  * @see smartgridoutput.SmartgridoutputPackage#getCluster()
@@ -41,25 +41,23 @@ public interface Cluster extends EObject {
     int getControlCenterCount();
 
     /**
-     * Sets the value of the '{@link smartgridoutput.Cluster#getControlCenterCount <em>Control
-     * Center Count</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Control Center Count</em>' attribute.
+     * Sets the value of the '{@link smartgridoutput.Cluster#getControlCenterCount <em>Control Center Count</em>}' attribute.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * @param value the new value of the '<em>Control Center Count</em>' attribute.
      * @see #getControlCenterCount()
      * @generated
      */
     void setControlCenterCount(int value);
 
     /**
-     * Returns the value of the '<em><b>Smart Meter Count</b></em>' attribute. <!-- begin-user-doc
+     * Returns the value of the '<em><b>Smart Meter Count</b></em>' attribute.
+     * <!-- begin-user-doc
      * -->
      * <p>
      * If the meaning of the '<em>Smart Meter Count</em>' attribute isn't clear, there really should
      * be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Smart Meter Count</em>' attribute.
      * @see #setSmartMeterCount(int)
      * @see smartgridoutput.SmartgridoutputPackage#getCluster_SmartMeterCount()
@@ -69,11 +67,9 @@ public interface Cluster extends EObject {
     int getSmartMeterCount();
 
     /**
-     * Sets the value of the '{@link smartgridoutput.Cluster#getSmartMeterCount <em>Smart Meter
-     * Count</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Smart Meter Count</em>' attribute.
+     * Sets the value of the '{@link smartgridoutput.Cluster#getSmartMeterCount <em>Smart Meter Count</em>}' attribute.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * @param value the new value of the '<em>Smart Meter Count</em>' attribute.
      * @see #getSmartMeterCount()
      * @generated
      */

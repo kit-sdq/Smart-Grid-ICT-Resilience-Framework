@@ -23,9 +23,9 @@ import smartgridtopo.SmartgridtopoPackage;
  */
 public class SmartMeterItemProvider extends CommunicatingEntityItemProvider {
     /**
-     * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+     * This constructs an instance from a factory and a notifier.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     public SmartMeterItemProvider(AdapterFactory adapterFactory) {
@@ -33,9 +33,9 @@ public class SmartMeterItemProvider extends CommunicatingEntityItemProvider {
     }
 
     /**
-     * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+     * This returns the property descriptors for the adapted class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -50,32 +50,52 @@ public class SmartMeterItemProvider extends CommunicatingEntityItemProvider {
     }
 
     /**
-     * This adds a property descriptor for the Is A feature. <!-- begin-user-doc --> <!--
+     * This adds a property descriptor for the Is A feature.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     protected void addIsAPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_SmartMeter_IsA_feature"),
-                getString("_UI_PropertyDescriptor_description", "_UI_SmartMeter_IsA_feature", "_UI_SmartMeter_type"), SmartgridtopoPackage.Literals.SMART_METER__IS_A, true, false, true, null, null,
-                null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_SmartMeter_IsA_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_SmartMeter_IsA_feature", "_UI_SmartMeter_type"),
+                 SmartgridtopoPackage.Literals.SMART_METER__IS_A,
+                 true,
+                 false,
+                 true,
+                 null,
+                 null,
+                 null));
     }
 
     /**
-     * This adds a property descriptor for the Aggregation feature. <!-- begin-user-doc --> <!--
+     * This adds a property descriptor for the Aggregation feature.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     protected void addAggregationPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-                getString("_UI_SmartMeter_Aggregation_feature"), getString("_UI_PropertyDescriptor_description", "_UI_SmartMeter_Aggregation_feature", "_UI_SmartMeter_type"),
-                SmartgridtopoPackage.Literals.SMART_METER__AGGREGATION, true, false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_SmartMeter_Aggregation_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_SmartMeter_Aggregation_feature", "_UI_SmartMeter_type"),
+                 SmartgridtopoPackage.Literals.SMART_METER__AGGREGATION,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+                 null,
+                 null));
     }
 
     /**
-     * This returns SmartMeter.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This returns SmartMeter.gif.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -91,15 +111,16 @@ public class SmartMeterItemProvider extends CommunicatingEntityItemProvider {
      */
     @Override
     public String getText(Object object) {
-        String label = ((SmartMeter) object).getName();
-        return label == null || label.length() == 0 ? getString("_UI_SmartMeter_type") : getString("_UI_SmartMeter_type") + " " + label;
+        String label = ((SmartMeter)object).getName();
+        return label == null || label.length() == 0 ?
+            getString("_UI_SmartMeter_type") :
+            getString("_UI_SmartMeter_type") + " " + label;
     }
 
     /**
      * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to
-     * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -107,17 +128,17 @@ public class SmartMeterItemProvider extends CommunicatingEntityItemProvider {
         updateChildren(notification);
 
         switch (notification.getFeatureID(SmartMeter.class)) {
-        case SmartgridtopoPackage.SMART_METER__AGGREGATION:
-            fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-            return;
+            case SmartgridtopoPackage.SMART_METER__AGGREGATION:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+                return;
         }
         super.notifyChanged(notification);
     }
 
     /**
-     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-     * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+     * that can be created under this object.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override

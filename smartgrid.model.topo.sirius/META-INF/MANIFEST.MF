@@ -7,6 +7,32 @@ Bundle-Activator: smartgrid.model.topo.sirius.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.sirius,
- smartgrid.model.topo
+ smartgrid.model.topo,
+ org.eclipse.core.resources,
+ org.eclipse.sirius.common.acceleo.aql,
+ smartgrid.model.topo.sirius;bundle-version="1.0.0",
+ smartgrid.model.input;bundle-version="1.0.0",
+ org.eclipse.sirius.diagram.ui,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ smartgrid.model.helper,
+ org.eclipse.core.expressions,
+ org.eclipse.sirius.ext.base,
+ org.eclipse.gmf.runtime.diagram.ui,
+ org.eclipse.gef,
+ org.eclipse.emf.transaction,
+ org.eclipse.jface,
+ org.eclipse.equinox.registry,
+ org.eclipse.sirius.diagram,
+ org.eclipse.ui.workbench
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.eclipse.emf.transaction,
+ org.eclipse.sirius.diagram.ui.tools.api.editor;version="2.2.0",
+ org.eclipse.ui.actions,
+ org.eclipse.ui.dialogs,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.wizards.newresource,
+ smartgridinput
+

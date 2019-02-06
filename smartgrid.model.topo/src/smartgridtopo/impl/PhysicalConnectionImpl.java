@@ -26,18 +26,18 @@ import smartgridtopo.SmartgridtopoPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.impl.PhysicalConnectionImpl#getName <em>Name</em>}</li>
- * <li>{@link smartgridtopo.impl.PhysicalConnectionImpl#getLinks <em>Links</em>}</li>
- * <li>{@link smartgridtopo.impl.PhysicalConnectionImpl#getIsA <em>Is A</em>}</li>
+ *   <li>{@link smartgridtopo.impl.PhysicalConnectionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link smartgridtopo.impl.PhysicalConnectionImpl#getLinks <em>Links</em>}</li>
+ *   <li>{@link smartgridtopo.impl.PhysicalConnectionImpl#getIsA <em>Is A</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container implements PhysicalConnection {
     /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc
+     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @see #getName()
      * @generated
      * @ordered
@@ -45,9 +45,9 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
     protected static final String NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc -->
+     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getName()
      * @generated
      * @ordered
@@ -65,9 +65,9 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
     protected EList<NetworkEntity> links;
 
     /**
-     * The cached value of the '{@link #getIsA() <em>Is A</em>}' reference. <!-- begin-user-doc -->
+     * The cached value of the '{@link #getIsA() <em>Is A</em>}' reference.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getIsA()
      * @generated
      * @ordered
@@ -76,7 +76,6 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected PhysicalConnectionImpl() {
@@ -85,7 +84,6 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -95,7 +93,6 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -105,7 +102,6 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -118,28 +114,25 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EList<NetworkEntity> getLinks() {
         if (links == null) {
-            links = new EObjectWithInverseResolvingEList.ManyInverse<>(NetworkEntity.class, this, SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS,
-                    SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY);
+            links = new EObjectWithInverseResolvingEList.ManyInverse<NetworkEntity>(NetworkEntity.class, this, SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS, SmartgridtopoPackage.NETWORK_ENTITY__LINKED_BY);
         }
         return links;
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public ConnectionType getIsA() {
         if (isA != null && isA.eIsProxy()) {
-            InternalEObject oldIsA = (InternalEObject) isA;
-            isA = (ConnectionType) eResolveProxy(oldIsA);
+            InternalEObject oldIsA = (InternalEObject)isA;
+            isA = (ConnectionType)eResolveProxy(oldIsA);
             if (isA != oldIsA) {
                 if (eNotificationRequired())
                     eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A, oldIsA, isA));
@@ -150,7 +143,6 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public ConnectionType basicGetIsA() {
@@ -159,7 +151,6 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -172,126 +163,117 @@ public class PhysicalConnectionImpl extends MinimalEObjectImpl.Container impleme
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @SuppressWarnings("unchecked")
     @Override
     public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getLinks()).basicAdd(otherEnd, msgs);
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
+                return ((InternalEList<InternalEObject>)(InternalEList<?>)getLinks()).basicAdd(otherEnd, msgs);
         }
         return super.eInverseAdd(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
-            return ((InternalEList<?>) getLinks()).basicRemove(otherEnd, msgs);
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
+                return ((InternalEList<?>)getLinks()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__NAME:
-            return getName();
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
-            return getLinks();
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A:
-            if (resolve)
-                return getIsA();
-            return basicGetIsA();
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__NAME:
+                return getName();
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
+                return getLinks();
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A:
+                if (resolve) return getIsA();
+                return basicGetIsA();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__NAME:
-            setName((String) newValue);
-            return;
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
-            getLinks().clear();
-            getLinks().addAll((Collection<? extends NetworkEntity>) newValue);
-            return;
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A:
-            setIsA((ConnectionType) newValue);
-            return;
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__NAME:
+                setName((String)newValue);
+                return;
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
+                getLinks().clear();
+                getLinks().addAll((Collection<? extends NetworkEntity>)newValue);
+                return;
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A:
+                setIsA((ConnectionType)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__NAME:
-            setName(NAME_EDEFAULT);
-            return;
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
-            getLinks().clear();
-            return;
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A:
-            setIsA((ConnectionType) null);
-            return;
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__NAME:
+                setName(NAME_EDEFAULT);
+                return;
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
+                getLinks().clear();
+                return;
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A:
+                setIsA((ConnectionType)null);
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__NAME:
-            return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
-            return links != null && !links.isEmpty();
-        case SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A:
-            return isA != null;
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__NAME:
+                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__LINKS:
+                return links != null && !links.isEmpty();
+            case SmartgridtopoPackage.PHYSICAL_CONNECTION__IS_A:
+                return isA != null;
         }
         return super.eIsSet(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public String toString() {
-        if (eIsProxy())
-            return super.toString();
+        if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
+        StringBuilder result = new StringBuilder(super.toString());
         result.append(" (name: ");
         result.append(name);
         result.append(')');

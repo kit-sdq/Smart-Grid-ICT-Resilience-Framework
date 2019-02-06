@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import smartgridoutput.Cluster;
 import smartgridoutput.Defect;
 import smartgridoutput.NoPower;
@@ -19,30 +18,30 @@ import smartgridoutput.SmartgridoutputPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
- * 
  * @generated
  */
 public class SmartgridoutputFactoryImpl extends EFactoryImpl implements SmartgridoutputFactory {
     /**
-     * Creates the default factory implementation. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     public static SmartgridoutputFactory init() {
         try {
-            SmartgridoutputFactory theSmartgridoutputFactory = (SmartgridoutputFactory) EPackage.Registry.INSTANCE.getEFactory(SmartgridoutputPackage.eNS_URI);
+            SmartgridoutputFactory theSmartgridoutputFactory = (SmartgridoutputFactory)EPackage.Registry.INSTANCE.getEFactory(SmartgridoutputPackage.eNS_URI);
             if (theSmartgridoutputFactory != null) {
                 return theSmartgridoutputFactory;
             }
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             EcorePlugin.INSTANCE.log(exception);
         }
         return new SmartgridoutputFactoryImpl();
     }
 
     /**
-     * Creates an instance of the factory. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     public SmartgridoutputFactoryImpl() {
@@ -51,32 +50,24 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EObject create(EClass eClass) {
         switch (eClass.getClassifierID()) {
-        case SmartgridoutputPackage.SCENARIO_RESULT:
-            return createScenarioResult();
-        case SmartgridoutputPackage.ONLINE:
-            return createOnline();
-        case SmartgridoutputPackage.DEFECT:
-            return createDefect();
-        case SmartgridoutputPackage.NO_POWER:
-            return createNoPower();
-        case SmartgridoutputPackage.NO_UPLINK:
-            return createNoUplink();
-        case SmartgridoutputPackage.CLUSTER:
-            return createCluster();
-        default:
-            throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+            case SmartgridoutputPackage.SCENARIO_RESULT: return createScenarioResult();
+            case SmartgridoutputPackage.ONLINE: return createOnline();
+            case SmartgridoutputPackage.DEFECT: return createDefect();
+            case SmartgridoutputPackage.NO_POWER: return createNoPower();
+            case SmartgridoutputPackage.NO_UPLINK: return createNoUplink();
+            case SmartgridoutputPackage.CLUSTER: return createCluster();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -87,7 +78,6 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -98,7 +88,6 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -109,7 +98,6 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -120,7 +108,6 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -131,7 +118,6 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -142,17 +128,15 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public SmartgridoutputPackage getSmartgridoutputPackage() {
-        return (SmartgridoutputPackage) getEPackage();
+        return (SmartgridoutputPackage)getEPackage();
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @deprecated
      * @generated
      */

@@ -17,7 +17,6 @@ import smartgridoutput.SmartgridoutputPackage;
 public abstract class OfflineImpl extends MinimalEObjectImpl.Container implements Offline {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected OfflineImpl() {
@@ -26,7 +25,6 @@ public abstract class OfflineImpl extends MinimalEObjectImpl.Container implement
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override

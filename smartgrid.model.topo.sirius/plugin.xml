@@ -7,4 +7,32 @@
 	       name="topo">
     </component>
   </extension>
+  <extension
+        point="org.eclipse.sirius.externalJavaAction">
+     <javaActions
+           actionClass="smartgrid.model.topo.sirius.CheckInput"
+           id="smartgrid.model.topo.sirius.CheckInputID">
+     </javaActions>
+  </extension>
+  <extension
+        point="org.eclipse.sirius.externalJavaAction">
+     <javaActions
+           actionClass="smartgrid.model.topo.sirius.DeleteElement"
+           id="smartgrid.model.topo.sirius.delete">
+     </javaActions>
+  </extension>
+  <extension
+        point="org.eclipse.ui.newWizards">
+     <category
+           id="smartgrid.model.topo.sirius.category1"
+           name="SGRF Project">
+     </category>
+     <wizard
+           category="smartgrid.model.topo.sirius.category1"
+           class="smartgrid.model.topo.sirius.wizard.SiriusSmartgridDiagramWizard"
+           id="smartgrid.model.topo.sirius.wizard1"
+           name="new SGRF Project"
+           project="false">
+     </wizard>
+  </extension>
 </plugin>

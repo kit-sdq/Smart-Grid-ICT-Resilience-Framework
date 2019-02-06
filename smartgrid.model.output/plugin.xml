@@ -14,4 +14,12 @@
             genModel="model/smartgridoutput.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated smartgridoutput -->
+      <package
+            uri="http://sdq.ipd.uka.de/smartgridinput/1.0"
+            class="smartgridinput.SmartgridinputPackage"
+            genModel="model/smartgridoutput.genmodel"/>
+   </extension>
+
 </plugin>

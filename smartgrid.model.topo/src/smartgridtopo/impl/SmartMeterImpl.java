@@ -18,17 +18,17 @@ import smartgridtopo.SmartgridtopoPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.impl.SmartMeterImpl#getIsA <em>Is A</em>}</li>
- * <li>{@link smartgridtopo.impl.SmartMeterImpl#getAggregation <em>Aggregation</em>}</li>
+ *   <li>{@link smartgridtopo.impl.SmartMeterImpl#getIsA <em>Is A</em>}</li>
+ *   <li>{@link smartgridtopo.impl.SmartMeterImpl#getAggregation <em>Aggregation</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMeter {
     /**
-     * The cached value of the '{@link #getIsA() <em>Is A</em>}' reference. <!-- begin-user-doc -->
+     * The cached value of the '{@link #getIsA() <em>Is A</em>}' reference.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getIsA()
      * @generated
      * @ordered
@@ -57,7 +57,6 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected SmartMeterImpl() {
@@ -66,7 +65,6 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -76,14 +74,13 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public SmartMeterType getIsA() {
         if (isA != null && isA.eIsProxy()) {
-            InternalEObject oldIsA = (InternalEObject) isA;
-            isA = (SmartMeterType) eResolveProxy(oldIsA);
+            InternalEObject oldIsA = (InternalEObject)isA;
+            isA = (SmartMeterType)eResolveProxy(oldIsA);
             if (isA != oldIsA) {
                 if (eNotificationRequired())
                     eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartgridtopoPackage.SMART_METER__IS_A, oldIsA, isA));
@@ -94,7 +91,6 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public SmartMeterType basicGetIsA() {
@@ -103,7 +99,6 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -116,7 +111,6 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -126,7 +120,6 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -139,85 +132,78 @@ public class SmartMeterImpl extends CommunicatingEntityImpl implements SmartMete
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridtopoPackage.SMART_METER__IS_A:
-            if (resolve)
-                return getIsA();
-            return basicGetIsA();
-        case SmartgridtopoPackage.SMART_METER__AGGREGATION:
-            return getAggregation();
+            case SmartgridtopoPackage.SMART_METER__IS_A:
+                if (resolve) return getIsA();
+                return basicGetIsA();
+            case SmartgridtopoPackage.SMART_METER__AGGREGATION:
+                return getAggregation();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridtopoPackage.SMART_METER__IS_A:
-            setIsA((SmartMeterType) newValue);
-            return;
-        case SmartgridtopoPackage.SMART_METER__AGGREGATION:
-            setAggregation((Integer) newValue);
-            return;
+            case SmartgridtopoPackage.SMART_METER__IS_A:
+                setIsA((SmartMeterType)newValue);
+                return;
+            case SmartgridtopoPackage.SMART_METER__AGGREGATION:
+                setAggregation((Integer)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.SMART_METER__IS_A:
-            setIsA((SmartMeterType) null);
-            return;
-        case SmartgridtopoPackage.SMART_METER__AGGREGATION:
-            setAggregation(AGGREGATION_EDEFAULT);
-            return;
+            case SmartgridtopoPackage.SMART_METER__IS_A:
+                setIsA((SmartMeterType)null);
+                return;
+            case SmartgridtopoPackage.SMART_METER__AGGREGATION:
+                setAggregation(AGGREGATION_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridtopoPackage.SMART_METER__IS_A:
-            return isA != null;
-        case SmartgridtopoPackage.SMART_METER__AGGREGATION:
-            return aggregation != AGGREGATION_EDEFAULT;
+            case SmartgridtopoPackage.SMART_METER__IS_A:
+                return isA != null;
+            case SmartgridtopoPackage.SMART_METER__AGGREGATION:
+                return aggregation != AGGREGATION_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public String toString() {
-        if (eIsProxy())
-            return super.toString();
+        if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
+        StringBuilder result = new StringBuilder(super.toString());
         result.append(" (Aggregation: ");
         result.append(aggregation);
         result.append(')');

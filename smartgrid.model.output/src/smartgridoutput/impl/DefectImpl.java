@@ -16,7 +16,6 @@ import smartgridoutput.SmartgridoutputPackage;
 public class DefectImpl extends EntityStateImpl implements Defect {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected DefectImpl() {
@@ -25,7 +24,6 @@ public class DefectImpl extends EntityStateImpl implements Defect {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override

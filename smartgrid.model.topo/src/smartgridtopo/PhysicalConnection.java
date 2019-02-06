@@ -12,8 +12,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.PhysicalConnection#getLinks <em>Links</em>}</li>
- * <li>{@link smartgridtopo.PhysicalConnection#getIsA <em>Is A</em>}</li>
+ *   <li>{@link smartgridtopo.PhysicalConnection#getLinks <em>Links</em>}</li>
+ *   <li>{@link smartgridtopo.PhysicalConnection#getIsA <em>Is A</em>}</li>
  * </ul>
  *
  * @see smartgridtopo.SmartgridtopoPackage#getPhysicalConnection()
@@ -22,15 +22,15 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface PhysicalConnection extends NamedEntity {
     /**
-     * Returns the value of the '<em><b>Links</b></em>' reference list. The list contents are of
-     * type {@link smartgridtopo.NetworkEntity}. It is bidirectional and its opposite is
-     * '{@link smartgridtopo.NetworkEntity#getLinkedBy <em>Linked By</em>}'. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Links</b></em>' reference list.
+     * The list contents are of type {@link smartgridtopo.NetworkEntity}.
+     * It is bidirectional and its opposite is '{@link smartgridtopo.NetworkEntity#getLinkedBy <em>Linked By</em>}'.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Links</em>' reference list isn't clear, there really should be
      * more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Links</em>' reference list.
      * @see smartgridtopo.SmartgridtopoPackage#getPhysicalConnection_Links()
      * @see smartgridtopo.NetworkEntity#getLinkedBy
@@ -40,13 +40,13 @@ public interface PhysicalConnection extends NamedEntity {
     EList<NetworkEntity> getLinks();
 
     /**
-     * Returns the value of the '<em><b>Is A</b></em>' reference. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Is A</b></em>' reference.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Is A</em>' reference isn't clear, there really should be more of a
      * description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Is A</em>' reference.
      * @see #setIsA(ConnectionType)
      * @see smartgridtopo.SmartgridtopoPackage#getPhysicalConnection_IsA()
@@ -56,11 +56,9 @@ public interface PhysicalConnection extends NamedEntity {
     ConnectionType getIsA();
 
     /**
-     * Sets the value of the '{@link smartgridtopo.PhysicalConnection#getIsA <em>Is A</em>}'
-     * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Is A</em>' reference.
+     * Sets the value of the '{@link smartgridtopo.PhysicalConnection#getIsA <em>Is A</em>}' reference.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * @param value the new value of the '<em>Is A</em>' reference.
      * @see #getIsA()
      * @generated
      */

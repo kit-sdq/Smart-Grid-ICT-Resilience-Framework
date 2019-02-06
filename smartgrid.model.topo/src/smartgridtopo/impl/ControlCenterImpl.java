@@ -16,7 +16,6 @@ import smartgridtopo.SmartgridtopoPackage;
 public class ControlCenterImpl extends CommunicatingEntityImpl implements ControlCenter {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected ControlCenterImpl() {
@@ -25,7 +24,6 @@ public class ControlCenterImpl extends CommunicatingEntityImpl implements Contro
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override

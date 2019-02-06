@@ -16,7 +16,6 @@ import smartgridoutput.SmartgridoutputPackage;
 public class NoPowerImpl extends EntityStateImpl implements NoPower {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected NoPowerImpl() {
@@ -25,7 +24,6 @@ public class NoPowerImpl extends EntityStateImpl implements NoPower {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override

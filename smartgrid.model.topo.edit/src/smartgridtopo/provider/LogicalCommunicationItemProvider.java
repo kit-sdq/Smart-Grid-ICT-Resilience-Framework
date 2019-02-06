@@ -32,9 +32,9 @@ import smartgridtopo.SmartgridtopoPackage;
 public class LogicalCommunicationItemProvider extends ItemProviderAdapter
         implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
     /**
-     * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+     * This constructs an instance from a factory and a notifier.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     public LogicalCommunicationItemProvider(AdapterFactory adapterFactory) {
@@ -42,9 +42,9 @@ public class LogicalCommunicationItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+     * This returns the property descriptors for the adapted class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -59,32 +59,52 @@ public class LogicalCommunicationItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This adds a property descriptor for the Name feature. <!-- begin-user-doc --> <!--
+     * This adds a property descriptor for the Name feature.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     protected void addNamePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_NamedEntity_name_feature"),
-                getString("_UI_PropertyDescriptor_description", "_UI_NamedEntity_name_feature", "_UI_NamedEntity_type"), SmartgridtopoPackage.Literals.NAMED_ENTITY__NAME, true, false, false,
-                ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_NamedEntity_name_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_NamedEntity_name_feature", "_UI_NamedEntity_type"),
+                 SmartgridtopoPackage.Literals.NAMED_ENTITY__NAME,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
     }
 
     /**
-     * This adds a property descriptor for the Links feature. <!-- begin-user-doc --> <!--
+     * This adds a property descriptor for the Links feature.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     protected void addLinksPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-                getString("_UI_LogicalCommunication_Links_feature"), getString("_UI_PropertyDescriptor_description", "_UI_LogicalCommunication_Links_feature", "_UI_LogicalCommunication_type"),
-                SmartgridtopoPackage.Literals.LOGICAL_COMMUNICATION__LINKS, true, false, true, null, null, null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_LogicalCommunication_Links_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_LogicalCommunication_Links_feature", "_UI_LogicalCommunication_type"),
+                 SmartgridtopoPackage.Literals.LOGICAL_COMMUNICATION__LINKS,
+                 true,
+                 false,
+                 true,
+                 null,
+                 null,
+                 null));
     }
 
     /**
-     * This returns LogicalCommunication.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This returns LogicalCommunication.gif.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -100,15 +120,16 @@ public class LogicalCommunicationItemProvider extends ItemProviderAdapter
      */
     @Override
     public String getText(Object object) {
-        String label = ((LogicalCommunication) object).getName();
-        return label == null || label.length() == 0 ? getString("_UI_LogicalCommunication_type") : getString("_UI_LogicalCommunication_type") + " " + label;
+        String label = ((LogicalCommunication)object).getName();
+        return label == null || label.length() == 0 ?
+            getString("_UI_LogicalCommunication_type") :
+            getString("_UI_LogicalCommunication_type") + " " + label;
     }
 
     /**
      * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to
-     * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -116,17 +137,17 @@ public class LogicalCommunicationItemProvider extends ItemProviderAdapter
         updateChildren(notification);
 
         switch (notification.getFeatureID(LogicalCommunication.class)) {
-        case SmartgridtopoPackage.LOGICAL_COMMUNICATION__NAME:
-            fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-            return;
+            case SmartgridtopoPackage.LOGICAL_COMMUNICATION__NAME:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+                return;
         }
         super.notifyChanged(notification);
     }
 
     /**
-     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-     * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+     * that can be created under this object.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -135,14 +156,14 @@ public class LogicalCommunicationItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+     * Return the resource locator for this item provider's resources.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public ResourceLocator getResourceLocator() {
-        return ((IChildCreationExtender) adapterFactory).getResourceLocator();
+        return ((IChildCreationExtender)adapterFactory).getResourceLocator();
     }
 
 }

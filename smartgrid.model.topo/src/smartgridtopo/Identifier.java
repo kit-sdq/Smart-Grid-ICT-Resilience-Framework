@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link smartgridtopo.Identifier#getId <em>Id</em>}</li>
+ *   <li>{@link smartgridtopo.Identifier#getId <em>Id</em>}</li>
  * </ul>
  *
  * @see smartgridtopo.SmartgridtopoPackage#getIdentifier()
@@ -21,14 +21,14 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Identifier extends EObject {
     /**
-     * Returns the value of the '<em><b>Id</b></em>' attribute. The default value is
-     * <code>"0"</code>. <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Id</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Id</em>' attribute isn't clear, there really should be more of a
      * description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
      * @return the value of the '<em>Id</em>' attribute.
      * @see #setId(String)
      * @see smartgridtopo.SmartgridtopoPackage#getIdentifier_Id()
