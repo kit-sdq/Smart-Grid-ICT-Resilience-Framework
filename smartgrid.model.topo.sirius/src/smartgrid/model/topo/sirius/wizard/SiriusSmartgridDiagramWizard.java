@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -35,6 +36,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.diagram.ui.tools.api.editor.DDiagramEditor;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelectionCallback;
 import org.eclipse.sirius.ui.tools.api.project.ModelingProjectManager;
 import org.eclipse.sirius.viewpoint.DView;
@@ -42,6 +44,7 @@ import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
@@ -66,6 +69,8 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
     private final String editorId;
     private final IWorkspace workspace;
     private final IWorkbench workbench;
+    private Resource classModelResource;
+    private Resource classInputResource;
     //protected SiriusCreateNewSmartgridDiagramPage newDiagramPage;
     protected WizardNewProjectCreationPage newProjectPage;
     protected SiriusCreateNewSmartgridDiagramPage newTopologyPage;
@@ -153,7 +158,9 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
                 final TransactionalEditingDomain editingDomain = session.getTransactionalEditingDomain();
                 final ResourceSet resourceSet = editingDomain.getResourceSet();
                 final Resource modelResource = resourceSet.createResource(modelUri);
+                classModelResource = modelResource;
                 final Resource inputResource = resourceSet.createResource(inputUri);
+                classInputResource = inputResource;
                 final CommandStack commandStack = editingDomain.getCommandStack();
                 commandStack.execute(new RecordingCommand(editingDomain) {
                     @Override
@@ -208,7 +215,7 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
                                 new ViewpointSelectionCallback().selectViewpoint(vp, session, monitor);
                         }   
                         final URI inputUri = URI.createPlatformResourceURI(project.getName() + "/" + topologyNameString + ".smartgridinput", true);
-                       
+                        assignInputToModel();
                     }
                     
                     
@@ -330,6 +337,15 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
         saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
         saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
         return saveOptions;
+    }
+    
+    private void assignInputToModel() {
+        Resource topoResource = classModelResource;
+        TreeIterator<EObject> part = topoResource.getAllContents();
+        ResourceSet part2 = topoResource.getResourceSet();
+        part2=part2;
+        
+            
     }
 
     
