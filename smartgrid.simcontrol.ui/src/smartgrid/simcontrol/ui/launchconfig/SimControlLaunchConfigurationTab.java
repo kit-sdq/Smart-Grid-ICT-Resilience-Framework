@@ -277,7 +277,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDown(final MouseEvent e) {
 
                 // Copy Inputpath as Output Dir
-                outputTextbox.setText(new File(inputTextbox.getText()).getParent());
+                outputTextbox.setText(new File(inputTextbox.getText()).getParent() + "/");
             }
         });
         copyPathButton.setBounds(569, 60, 145, 32);
@@ -648,15 +648,25 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     public String getErrorMessage() {
 
         String Message;
-
-        if (areTextBoxesEmpty()) {
+        if (inputBoxEmpty()) {
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
-                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.NO_PATH"); //$NON-NLS-1$
-        } else if (areFileExtensionsWrong()) {
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.NO_INPUT_PATH"); //$NON-NLS-1$
+        } else if (topoBoxEmpty()) {
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
-                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_EXTENSIONS"); //$NON-NLS-1$
-        } 
-        else if (areOptionsWrong()) {
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.NO_TOPO_PATH"); //$NON-NLS-1$
+        } else if (otuputBoxEmpty()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.NO_OUTPUT_PATH"); //$NON-NLS-1$
+        } else if (inputExtensionWrong()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_INPUT_EXTENSION"); //$NON-NLS-1$
+        } else if (topoExtensionWrong()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_TOPO_EXTENSION"); //$NON-NLS-1$
+        } else if (!outputIsParent()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.OutputIsNotParent.text"); //$NON-NLS-1$
+        } else if (areOptionsWrong()) {
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_OPTIONS"); //$NON-NLS-1$
         } else if (inputNotExists()) {
@@ -668,11 +678,21 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         } else if (outputNotExists()) {
             Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.OUTPUT_PATH"); //$NON-NLS-1$
-        } else if (!outputIsParent()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
-                    .getString("SimControlLaunchConfigurationTab.OutputIsNotParent.text"); //$NON-NLS-1$
         } else if (hackingEmpty()) {
-            Message = noHackingChoice;
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.NoHackingChoiceLabel.text"); //$NON-NLS-1$
+        } else if (roteIdIsNotNumeric()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.ROOTNODE_NOT_NUMERIC"); //$NON-NLS-1$
+        } else if (hackingSpeedIsNotNumeric()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.HACKINGSPEED_NOT_NUMERIC"); //$NON-NLS-1$
+        } else if (timeStepsIsNotNumeric()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.TIMESTEPS_NOT_NUMERIC"); //$NON-NLS-1$
+        } else if (iterationCountIsNotNumeric()) {
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+                    .getString("SimControlLaunchConfigurationTab.ErrorMessages.ITERATIONS_NOT_NUMERIC"); //$NON-NLS-1$
         } else {
             // everything ok
             return null;
@@ -709,7 +729,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
      */
     private boolean validateInput() {
         return !areTextBoxesEmpty() && !areFileExtensionsWrong() &&! hackingEmpty() && 
-                outputIsParent() && !areOptionsWrong() && !areFilesNotExisting();
+                outputIsParent() && !areOptionsWrong() && !areFilesNotExisting() && !checkNumericfails();
     }
 
     /**
@@ -790,6 +810,22 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         final boolean outEmpty = outputTextbox.getText().equals("");
         return topoEmpty || inEmpty || outEmpty;
     }
+    
+    private boolean inputBoxEmpty() {
+        final boolean inEmpty = inputTextbox.getText().equals("");
+        return inEmpty;
+    }
+    
+    private boolean topoBoxEmpty() {
+        final boolean inEmpty = topologyTextbox.getText().equals("");
+        return inEmpty;
+    }
+
+    private boolean otuputBoxEmpty() {
+        final boolean inEmpty = outputTextbox.getText().equals("");
+        return inEmpty;
+    }
+
 
     /**
      * @return True if topology or input or output file extensions are wrong
@@ -809,6 +845,16 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         //final boolean outWrong = !outputTextbox.getText().contains(parentOfInput);
 
         return topoWrong || inWrong ;
+    }
+    
+    private boolean topoExtensionWrong() {
+        final boolean topoWrong = !topologyTextbox.getText().endsWith(Constants.TOPO_EXTENSION);
+        return topoWrong;
+    }
+    
+    private boolean inputExtensionWrong() {
+        final boolean inputWrong = !inputTextbox.getText().endsWith(Constants.INPUT_EXTENSION);
+        return inputWrong;
     }
 
     private boolean outputIsParent() {
@@ -894,7 +940,75 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             LOG.error("Could not read Impact Analysis extensions.", e);
         }
     }
-
+    private boolean checkNumericfails() {
+        return roteIdIsNotNumeric() || hackingSpeedIsNotNumeric() ||
+                timeStepsIsNotNumeric() || iterationCountIsNotNumeric();
+    }
+    private boolean roteIdIsNotNumeric()  
+    {  
+      if (comboAttackSimulation.getText().equals("Local Hacker")){
+          try  
+          {  
+            @SuppressWarnings("unused")
+            double d = Double.parseDouble(rootNodeTextbox.getText());  
+          }  
+          catch(NumberFormatException nfe)  
+          {  
+            return true;  
+          }  
+      }
+      return false;  
+    }
+    
+    private boolean hackingSpeedIsNotNumeric()  
+    {  
+        if (!comboAttackSimulation.getText().equals("No Attack Simulation")){
+          try  
+          {  
+            @SuppressWarnings("unused")
+            double d = Double.parseDouble(hackingSpeedText.getText());  
+          }  
+          catch(NumberFormatException nfe)  
+          {  
+            return true;  
+          }  
+        }
+      return false;  
+    }
+    
+    private boolean timeStepsIsNotNumeric()  
+    {  
+        if (!comboAttackSimulation.getText().equals("No Attack Simulation")){
+          try  
+          {  
+            @SuppressWarnings("unused")
+            double d = Double.parseDouble(timeStepsTextBox.getText());  
+          }  
+          catch(NumberFormatException nfe)  
+          {  
+            return true;  
+          }  
+        }
+      return false;  
+    }
+    
+    private boolean iterationCountIsNotNumeric()  
+    {  
+        if (!comboAttackSimulation.getText().equals("No Attack Simulation")){
+          try  
+          {  
+            @SuppressWarnings("unused")
+            double d = Double.parseDouble(iterationCountTextbox.getText());  
+          }  
+          catch(NumberFormatException nfe)  
+          {  
+            return true;  
+          }  
+        }
+      return false;  
+    }
+    
+    
     private void fillSimulationComboBox(final List<? extends ISimulationComponent> simulationComponents, Combo comboBox) {
         for (final ISimulationComponent ele : simulationComponents) {
             comboBox.add(ele.getName());

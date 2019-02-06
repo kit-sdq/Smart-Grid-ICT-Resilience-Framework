@@ -86,12 +86,12 @@ public final class ReactiveSimulationController {
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
 
         // Generates Path with default System separators
-        final String timeStepPath = new File(workingDirPath + "\\Zeitschritt " + timeStep).getPath();
+        final String timeStepPath = new File(workingDirPath +File.pathSeparator+ "Zeitschritt " + timeStep).getPath();
 
         impactResult = attackerSimulation.run(topo, impactResult);
 
         // save attack result to file
-        final String attackResultFile = new File(timeStepPath + "\\AttackerSimulationResult.smartgridoutput").getPath();
+        final String attackResultFile = new File(timeStepPath + File.pathSeparator+"AttackerSimulationResult.smartgridoutput").getPath();
         FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
 
         // impact and power may iterate several times
@@ -99,7 +99,7 @@ public final class ReactiveSimulationController {
         do {
             LOG.info("Starting iteration " + innerLoopIterationCount + " of time step " + timeStep);
 
-            final String iterationPath = new File(timeStepPath + "\\Iteration " + innerLoopIterationCount).getPath();
+            final String iterationPath = new File(timeStepPath +File.pathSeparator+ "Iteration " + innerLoopIterationCount).getPath();
 
             // run power load simulation
             final Map<String, Map<String, ISmartMeterState>> smartMeterStates = convertToPowerLoadInput(impactResult, kritisPowerDemand);
@@ -112,18 +112,18 @@ public final class ReactiveSimulationController {
             updateImactAnalysisInput(impactInput, impactResult, powerSupply);
 
             // Save input to file
-            final String inputFile = new File(iterationPath + "\\PowerLoadResult.smartgridinput").getPath();
+            final String inputFile = new File(iterationPath + File.pathSeparator+"PowerLoadResult.smartgridinput").getPath();
             FileSystemHelper.saveToFileSystem(impactInput, inputFile);
 
             impactResultOld = impactResult;
             impactResult = impactAnalsis.run(topo, impactInput);
 
             // Save Result
-            final String resultFile = new File(iterationPath + "\\ImpactResult.smartgridoutput").getPath();
+            final String resultFile = new File(iterationPath + File.pathSeparator+"ImpactResult.smartgridoutput").getPath();
             FileSystemHelper.saveToFileSystem(impactResult, resultFile);
 
             //generate report
-            final File resultReportPath = new File(iterationPath + "\\ResultReport.csv");
+            final File resultReportPath = new File(iterationPath + File.pathSeparator+"ResultReport.csv");
             ReportGenerator.saveScenarioResult(resultReportPath, impactResult);
 
             innerLoopIterationCount++;
@@ -307,13 +307,13 @@ public final class ReactiveSimulationController {
         LOG.debug("init reactive launch config");
 
         LOG.info("Output: " + outputPath);
-        workingDirPath = determineWorkingDirPath(outputPath + "\\Analyse");
+        workingDirPath = determineWorkingDirPath(outputPath + File.pathSeparator+"Analyse");
 
         // add fileappender for local logs
         final Logger rootLogger = Logger.getRootLogger();
         try {
             Layout layout = ((Appender) rootLogger.getAllAppenders().nextElement()).getLayout();
-            fileAppender = new FileAppender(layout, workingDirPath + "\\log.log");
+            fileAppender = new FileAppender(layout, workingDirPath + File.pathSeparator+"log.log");
             rootLogger.addAppender(fileAppender);
         } catch (final IOException e) {
             throw new RuntimeException("Error creating local log appender in the working directory. Most likely there are problems with access rights.");
@@ -342,12 +342,12 @@ public final class ReactiveSimulationController {
         // generate and persist topo
         ITopoGenerator generator = new TrivialTopoGenerator();
         topo = generator.generateTopo(topoData);
-        FileSystemHelper.saveToFileSystem(topo, workingDirPath + "\\generated.smartgridtopo");
+        FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.pathSeparator+"generated.smartgridtopo");
 
         // generate and persist input
         DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
         initialState = defaultInputGenerator.generateInput(topo);
-        FileSystemHelper.saveToFileSystem(initialState, workingDirPath + "\\generated.smartgridinput");
+        FileSystemHelper.saveToFileSystem(initialState, workingDirPath + File.pathSeparator+"generated.smartgridinput");
         impactInput = initialState;
     }
 
@@ -366,7 +366,7 @@ public final class ReactiveSimulationController {
     }
 
     private String removeTrailingSeparator(String initialPath) {
-        if (initialPath.endsWith("\\")) {
+        if (initialPath.endsWith(File.pathSeparator)) {
             return initialPath.substring(0, initialPath.length() - 1);
         }
         return initialPath;
