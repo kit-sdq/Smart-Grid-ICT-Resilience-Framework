@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" name="input" version="12.0.0.2017041100">
+  <ownedViewpoints name="smartgridinput" modelFileExtension="*.smartgridinput">
+    <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="SmartGridInput" viewpointURI="viewpoint:/smartgrid.model.topo.sirius/Topology" representationName="SmartGridTopology">
+      <layers name="Input">
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="PowerGridNodeImport" semanticCandidatesExpression="[ContainsPGN/]">
+          <conditionnalStyles predicateExpression="service:isPowerOutage()">
+            <style xsi:type="style:LozengeNodeDescription" showIcon="false" labelExpression="" labelPosition="node">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <importedMapping href="../../smartgrid.model.topo.sirius/description/topo.odesign#//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PowerLayer']/@nodeMappings[name='PowerGridNode']"/>
+        </nodeMappings>
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="SmartMeterImport" semanticCandidatesExpression="[ContainsNE/]">
+          <conditionnalStyles predicateExpression="service:isNodeHackedAndDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="H" labelPosition="node" resizeKind="NSEW" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service:isNodeHacked()">
+            <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelExpression="H" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>underline</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service:isNodeDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="" tooltipExpression="Broken SmartMeter" labelPosition="node" resizeKind="NSEW" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <importedMapping href="../../smartgrid.model.topo.sirius/description/topo.odesign#//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='SmartMeter']"/>
+        </nodeMappings>
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="GenericControllerImport" semanticCandidatesExpression="[ContainsNE/]">
+          <conditionnalStyles predicateExpression="service:isNodeDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="" tooltipExpression="Broken GenericController" labelPosition="node" resizeKind="NSEW" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service:isNodeHacked()">
+            <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelExpression="H" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>underline</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service:isNodeHackedAndDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="H" labelPosition="node" resizeKind="NSEW" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <importedMapping href="../../smartgrid.model.topo.sirius/description/topo.odesign#//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='GenericController']"/>
+        </nodeMappings>
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="InterComImport" semanticCandidatesExpression="[ContainsNE/]">
+          <conditionnalStyles predicateExpression="service:isNodeDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="" tooltipExpression="Broken InterCom" labelPosition="node" resizeKind="NSEW" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service:isNodeHacked()">
+            <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelExpression="H" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+              <labelFormat>underline</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service:isNodeHackedAndDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="H" labelPosition="node" resizeKind="NSEW" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <importedMapping href="../../smartgrid.model.topo.sirius/description/topo.odesign#//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='InterCom']"/>
+        </nodeMappings>
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="NetworkNodeImport" semanticCandidatesExpression="[ContainsNE/]">
+          <conditionnalStyles predicateExpression="service:isNodeDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="" tooltipExpression="Broken NetworkNode" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <importedMapping href="../../smartgrid.model.topo.sirius/description/topo.odesign#//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@additionalLayers[name='PhysicalLayer']/@nodeMappings[name='NetworkNode']"/>
+        </nodeMappings>
+        <nodeMappings xsi:type="description_1:NodeMappingImport" name="ControlCenterImport" semanticCandidatesExpression="[ContainsNE/]" domainClass="smartgridtopo.ControlCenter">
+          <conditionnalStyles predicateExpression="service:isNodeHackedAndDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="H" labelPosition="node" resizeKind="NSEW" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service:isNodeHacked()">
+            <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelExpression="H" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+              <labelFormat>underline</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="service:isNodeDestroyed()">
+            <style xsi:type="style:BundledImageDescription" showIcon="false" labelExpression="" tooltipExpression="Broken ControlCenter" labelPosition="node" resizeKind="NSEW" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </conditionnalStyles>
+          <importedMapping href="../../smartgrid.model.topo.sirius/description/topo.odesign#//@ownedViewpoints[name='Topology']/@ownedRepresentations[name='SmartGridTopology']/@defaultLayer/@nodeMappings[name='ControlCenter']"/>
+        </nodeMappings>
+        <toolSections name="ChangeAppearances">
+          <ownedTools xsi:type="tool:PopupMenu" name="Input Model Changes">
+            <menuItemDescription xsi:type="tool:OperationAction" name="SetPowerStatus">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:SetValue" featureName="powerOutage" valueExpression="service:setPowerOutage()"/>
+              </initialOperation>
+            </menuItemDescription>
+            <menuItemDescription xsi:type="tool:OperationAction" name="SetDestroyedStatus">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:SetValue" featureName="IsDestroyed" valueExpression="service:setNodeBroken()"/>
+              </initialOperation>
+            </menuItemDescription>
+            <menuItemDescription xsi:type="tool:OperationAction" name="SetHackedStatus">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:SetValue" featureName="IsHacked" valueExpression="service:setNodeHacked()"/>
+              </initialOperation>
+            </menuItemDescription>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DirectEditLabel" name="EditHackedStatus">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ExternalJavaAction" name="EditHackedStatusAction" id="smartgrid.model.input.sirius.edithackedstatus">
+                <parameters name="name" value="var:0"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </layers>
+    </ownedRepresentationExtensions>
+    <ownedJavaExtensions qualifiedClassName="smartgrid.model.input.sirius.services.ShowInputNotationElements"/>
+  </ownedViewpoints>
+  <extensions xsi:type="properties:ViewExtensionDescription">
+    <categories>
+      <pages>
+        <extends href="platform:/plugin/org.eclipse.sirius.properties.defaultrules/model/properties.odesign#//@extensions.0/@categories.0/@pages.0"/>
+      </pages>
+      <groups labelExpression="Group" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" labelExpression="Owner" helpExpression="owner" isEnabledExpression="sql:true" valueExpression="feature:isHacked">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+      </groups>
+    </categories>
+  </extensions>
+</description:Group>

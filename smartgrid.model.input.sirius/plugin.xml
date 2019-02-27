@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension point="org.eclipse.sirius.componentization">
+    <component class="smartgrid.model.input.sirius.Activator"
+               id="smartgrid.model.input.sirius"
+	       name="input">
+    </component>
+  </extension>
+  
+  <extension point="org.eclipse.core.expressions.propertyTesters">
+   <propertyTester
+         class="smartgrid.model.input.sirius.test.EnableFunction"
+         id="smartgrid.model.input.sirius.test.CommunicatingNodeSelected"
+         namespace="smartgrid.model.input.sirius.test"
+         properties="isCommNode"
+         type="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+   </propertyTester>
+   <propertyTester
+         class="smartgrid.model.input.sirius.test.EnableFunction"
+         id="smartgrid.model.input.sirius.test.NetworkNodeSelected"
+         namespace="smartgrid.model.input.sirius.test"
+         properties="isNetworkNode"
+         type="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+   </propertyTester>
+   <propertyTester
+         class="smartgrid.model.input.sirius.test.EnableFunction"
+         id="smartgrid.model.input.sirius.test.PowerGridNodeSelected"
+         namespace="smartgrid.model.input.sirius.test"
+         properties="isPowerNode"
+         type="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+   </propertyTester>
+   <propertyTester
+         class="smartgrid.model.input.sirius.test.EnableFunction"
+         id="smartgrid.model.input.sirius.test.canGenerateOutput"
+         namespace="smartgrid.model.input.sirius.test"
+         properties="canGenerateOutput"
+         type="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+   </propertyTester>
+</extension>
+  
+  <extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.input.sirius.commands.GenerateOutput"
+           id="smartgrid.model.input.sirius.generateoutput"
+           name="generateOutput">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.generateoutput"
+              icon="icons/outputicon.png"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="org.eclipse.sirius.diagram.ui.isDDiagram"/>
+               </and>
+               <and>
+                  <test property="smartgrid.model.input.sirius.test.canGenerateOutput"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+
+ <extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.input.sirius.commands.LoadInputModel"
+           id="smartgrid.model.input.sirius.loadinputmodel"
+           name="LoadInputModel">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          id="smartgrid.model.input.sirius.loadinputmodel"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.loadinputmodel"
+              icon="icons/open-file-icon.png"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="org.eclipse.sirius.diagram.ui.isDDiagram"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+
+<extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.input.sirius.commands.ClearInputModel"
+           id="smartgrid.model.input.sirius.clearinputmodel"
+           name="ClearInputModel">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          id="smartgrid.model.input.sirius.clearinputmodel"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.clearinputmodel"
+              icon="icons/clear.png"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="org.eclipse.sirius.diagram.ui.isDDiagram"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+
+<extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.input.sirius.commands.RefreshInputModel"
+           id="smartgrid.model.input.sirius.refreshinputmodel"
+           name="RefreshInputModel">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.refreshinputmodel"
+              icon="icons/refreshInput.png"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement1">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="org.eclipse.sirius.diagram.ui.isDDiagram"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+
+  <extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.input.sirius.commands.SNewToolbarButtonAction"
+           id="smartgrid.model.input.sirius.snewtoolbarbuttonaction"
+           name="SNewToolbarButtonAction">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.snewtoolbarbuttonaction"
+              icon="icons/createInput.png"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement1">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="org.eclipse.sirius.diagram.ui.isDDiagram"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+
+<extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.input.sirius.commands.SetHacked"
+           id="smartgrid.model.input.sirius.sethacked"
+           name="SetHacked">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.sethacked"
+              icon="icons/hack.png"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement1">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="smartgrid.model.input.sirius.test.isCommNode"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+
+<extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.input.sirius.commands.SetPower"
+           id="smartgrid.model.input.sirius.setpower"
+           name="SetPower">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.setpower"
+              icon="icons/power.gif"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement1">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="smartgrid.model.input.sirius.test.isPowerNode"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+
+<extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.input.sirius.commands.SetDestroyed"
+           id="smartgrid.model.input.sirius.setdestroyed"
+           name="SetDestroyed">
+     </command>
+  </extension>
+  
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.setdestroyed"
+              icon="icons/destroy.png"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement1">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="smartgrid.model.input.sirius.test.isNetworkNode"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+
+
+
+</plugin>
