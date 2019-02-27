@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+  <extension point="org.eclipse.sirius.componentization">
+    <component class="smartgrid.model.output.sirius.Activator"
+               id="smartgrid.model.output.sirius"
+	       name="output">
+    </component>
+  </extension>
+  <extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.output.sirius.extensions.LoadOutputModel"
+           id="smartgrid.model.output.sirius.loadoutputmodel"
+           name="LoadOutputModel">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+     <menuContribution
+           allPopups="false"
+           locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.output.sirius.loadoutputmodel"
+              icon="icons/open-output.png"
+              style="push">
+          <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="org.eclipse.sirius.diagram.ui.isDDiagram"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+        </command>
+     </menuContribution>
+  </extension>
+  <extension
+        point="org.eclipse.ui.commands">
+     <command
+           defaultHandler="smartgrid.model.output.sirius.extensions.ClearOutputModel"
+           id="smartgrid.model.input.sirius.clearoutputmodel"
+           name="ClearOutputModel">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+          allPopups="false"
+          id="smartgrid.model.output.sirius.clearoutputmodel"
+          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+        <command
+              commandId="smartgrid.model.input.sirius.clearoutputmodel"
+              icon="icons/clear.png"
+              id="org.eclipse.sirius.diagram.tabbar.test.action.on.diagramelement">
+              <visibleWhen checkEnabled="false">
+      <and>
+         <with variable="activeEditorId">
+            <equals value="org.eclipse.sirius.diagram.ui.part.SiriusDiagramEditorID"/>
+         </with>
+         <with variable="selection">
+            <iterate ifEmpty="false" operator="or">
+               <and>
+                  <test property="org.eclipse.sirius.diagram.ui.isDDiagram"/>
+               </and>
+            </iterate>
+         </with>
+      </and>
+   </visibleWhen>
+         </command>
+    </menuContribution>
+</extension>
+</plugin>
