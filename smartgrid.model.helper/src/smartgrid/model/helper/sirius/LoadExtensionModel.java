@@ -58,6 +58,7 @@ public abstract class LoadExtensionModel extends AbstractHandler {
                         // Refresh editor in case certain layer is already
                         // active
                         //editor.getRepresentation().refresh();
+                        //test
                     }
                 };
                 domain.getCommandStack().execute(cmd);
