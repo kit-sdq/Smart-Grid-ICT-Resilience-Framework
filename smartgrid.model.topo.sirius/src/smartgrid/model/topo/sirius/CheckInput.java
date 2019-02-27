@@ -25,6 +25,7 @@ import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.ui.tools.api.editor.DDiagramEditor;
 import org.eclipse.sirius.tools.api.ui.IExternalJavaAction;
+import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
@@ -58,21 +59,15 @@ public class CheckInput implements IExternalJavaAction {
         LinkedList<SmartGridTopology> resulTopologies = getTopologies();
         resulTopologies.add(topology1);
         for ( SmartGridTopology topology : resulTopologies) {
-//            ScenarioState scenarioState = getAndCheckScnearioState(topology);
-//            if (scenarioState != null) {
-//              updateInput(topology, scenarioState);
-//            }
-            LinkedList<ScenarioState> states = getAndCheckAllScnearioState(topology);
-            if (states != null) {
-                for ( ScenarioState scenarioState : states) {
-                    updateInput(topology, scenarioState);
-                }
-            }
+            ScenarioState state = SiriusHelper.getAndCheckScnearioState(topology);
+            if (state != null)
+                updateInput(topology, state);
         }
-
     }
+
     
-    protected void updateInput(SmartGridTopology topology, ScenarioState scenarioState) {
+    
+    public void updateInput(SmartGridTopology topology, ScenarioState scenarioState) {
         IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
         DDiagramEditor editor = (DDiagramEditor) part;
         DSemanticDiagram rep = (DSemanticDiagram) editor.getRepresentation();
@@ -116,18 +111,25 @@ public class CheckInput implements IExternalJavaAction {
                             state.setOwner((NetworkEntity) obj);
                             String id = ((NetworkEntity) obj).getId();
                             boolean exists = false;
+                            boolean corrupted = false;
                             EntityState oldStateTemp = null;
                             for (EntityState oldState : scenarioState.getEntityStates()) {
-                                if (id.equals(oldState.getOwner().getId())) {
+                                if (oldState.getOwner() == null)
+                                    corrupted = true;
+                                else if (id.equals(oldState.getOwner().getId())) {
                                     exists = true;
                                     oldStateTemp = oldState;
                                 }
                             }
-                            
+                            if (corrupted){
+                                scenarioState.getEntityStates().remove(state);
+                            }
+                            else {
                             if (exists)
                                 domainModel.getEntityStates().add(oldStateTemp);
                             else 
                                 domainModel.getEntityStates().add(state);
+                            }
                  }
                 for (final PowerGridNode obj : topology.getContainsPGN()) {
                             final PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
@@ -169,27 +171,6 @@ public class CheckInput implements IExternalJavaAction {
     }
     
 
-    public String findFile(String name,File file)
-    {
-        String returnString = "";
-        File[] list = file.listFiles();
-        if(list!=null)
-        for (File fil : list)
-        {
-            if (fil.isDirectory())
-            {
-                returnString = findFile(name,fil);
-                if (returnString != "")
-                    break;
-            }
-            else if (fil.getPath().endsWith(name))
-            {
-                returnString = fil.getPath();
-                break;
-            }
-        }
-        return returnString;
-    }
     
     /**
      * Retrieves the current uri of the project.
@@ -199,8 +180,6 @@ public class CheckInput implements IExternalJavaAction {
     private URI getCurrentUri() {
         IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
         DDiagramEditor editor = (DDiagramEditor) part;
-        Collection<Viewpoint> selectedViewpoints = session.getSelectedViewpoints(false);
-        final Set<Viewpoint> registry = ViewpointRegistry.getInstance().getViewpoints();
         String session = editor.getSession().getSessionResource().getURI().toString();
         String[] partsStrings = session.split("/");
         String returnString = "/" + partsStrings[2] + "/" + partsStrings[3]; 
@@ -234,37 +213,8 @@ public class CheckInput implements IExternalJavaAction {
         }
         return resulTopologies;
     }
-
-    public ScenarioState getAndCheckScnearioState(SmartGridTopology topo) {
-        ScenarioState state = null;
-
-        // Needs sync execution, otherwise editor can not be found
-        Display.getDefault().syncExec(new Runnable() {
-            @Override
-            public void run() {
-                IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-                        .getActiveEditor();
-                DDiagramEditor editor = (DDiagramEditor) part;
-                session = editor.getSession();
-            }
-        });
-
-        Collection<Resource> coll = session.getSemanticResources();
-        Iterator<Resource> it = coll.iterator();
-        while (it.hasNext()) {
-            Resource sr = it.next();
-            if (sr.getContents().get(0) instanceof ScenarioState) {
-                state = (ScenarioState) sr.getContents().get(0);
-                if (LoadInputModelConformityHelper.checkInputModelConformity(state, topo)) {
-                    break;
-                }
-            }
-        }
-        if (state == null || !LoadInputModelConformityHelper.checkInputModelConformitySimple(state, topo)) {
-            return null;
-        }
-        return state;
-    }
+    
+   
     
     private URI getInputPath(ScenarioState state, SmartGridTopology topology) {
 
@@ -320,54 +270,6 @@ public class CheckInput implements IExternalJavaAction {
         }
         
         return null;
-    }
-    
-    private URI getURI(ScenarioState state, SmartGridTopology topology) {
-        IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-        DDiagramEditor editor = (DDiagramEditor) part;
-        EList<Resource> objects2 = editor.getSession().getSessionResource().getResourceSet().getResources();
-        for (Resource resource : objects2) {
-            URI uri = resource.getURI();
-            if (uri.toString().endsWith(".smartgridinput")) {
-                EList<EObject> objects = resource.getContents();
-                ScenarioState state2 = (ScenarioState)objects.get(0);
-                if (state2 == state && state2.getScenario().getId().equals(topology.getId())) {
-                    return uri;
-                }
-            }
-        }
-        return null;
-    }
-    public LinkedList<ScenarioState> getAndCheckAllScnearioState(SmartGridTopology topo) {
-        LinkedList<ScenarioState> list = new LinkedList<ScenarioState>();
-        ScenarioState state = null;
-
-        // Needs sync execution, otherwise editor can not be found
-        Display.getDefault().syncExec(new Runnable() {
-            @Override
-            public void run() {
-                IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-                        .getActiveEditor();
-                DDiagramEditor editor = (DDiagramEditor) part;
-                session = editor.getSession();
-            }
-        });
-
-        Collection<Resource> coll = session.getSemanticResources();
-        Iterator<Resource> it = coll.iterator();
-        while (it.hasNext()) {
-            Resource sr = it.next();
-            if (sr.getContents().get(0) instanceof ScenarioState) {
-                state = (ScenarioState) sr.getContents().get(0);
-                if (LoadInputModelConformityHelper.checkInputModelConformitySimple(state, topo)) {
-                    list.add(state);
-                }
-            }
-        }
-        if (state == null || !LoadInputModelConformityHelper.checkInputModelConformitySimple(state, topo)) {
-            return null;
-        }
-        return list;
     }
 
 }

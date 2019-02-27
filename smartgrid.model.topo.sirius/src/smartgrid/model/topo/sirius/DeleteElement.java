@@ -33,12 +33,9 @@ public class DeleteElement implements IExternalJavaAction {
         LinkedList<SmartGridTopology> resulTopologies = checkInput.getTopologies();
         resulTopologies.add(topology);
         for ( SmartGridTopology topology1 : resulTopologies) {
-            LinkedList<ScenarioState> states = checkInput.getAndCheckAllScnearioState(topology);
-            if (states != null) {
-                for ( ScenarioState scenarioState : states) {
-                    checkInput.updateInput(topology, scenarioState);
-                }
-            }
+            ScenarioState state = SiriusHelper.getAndCheckScnearioState(topology);
+            if (state != null)
+                checkInput.updateInput(topology, state);
         }
 
     }

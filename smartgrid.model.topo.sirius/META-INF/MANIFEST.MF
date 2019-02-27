@@ -35,4 +35,5 @@ Import-Package: org.apache.log4j;version="1.2.15",
  org.eclipse.ui.ide,
  org.eclipse.ui.wizards.newresource,
  smartgridinput
+Export-Package: smartgrid.model.topo.sirius
 
