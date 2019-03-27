@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: smartgrid.impactanalysis.ui
-Bundle-SymbolicName: smartgrid.impactanalysis.ui;singleton:=true
+Bundle-SymbolicName: deprecated.smartgrid.impactanalysis.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: smartgrid.impactanalysis.ui.Activator
 Require-Bundle: org.eclipse.ui,
