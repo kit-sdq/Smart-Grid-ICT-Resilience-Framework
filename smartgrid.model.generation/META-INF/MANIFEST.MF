@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Inputgenerator
-Bundle-SymbolicName: smartgrid.model.generation
+Bundle-SymbolicName: deprecated.smartgrid.model.generation
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: smartgrid.simcontrol.baselib;bundle-version="1.0.0",
  smartgrid.model.input,
