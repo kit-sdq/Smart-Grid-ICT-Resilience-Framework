@@ -196,6 +196,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
         // Generates Result
         final ScenarioResult result = this.genOutputResult();
         result.setScenario(smartGridTopo);
+        result.setInput(impactAnalysisInput);
 
         LOG.debug("Working Directory = " + System.getProperty("user.dir"));
 
