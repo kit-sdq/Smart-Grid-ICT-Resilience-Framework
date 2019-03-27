@@ -1,15 +1,11 @@
 package smartgrid.model.topo.sirius;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Set;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -18,20 +14,15 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.ui.tools.api.editor.DDiagramEditor;
 import org.eclipse.sirius.tools.api.ui.IExternalJavaAction;
-import org.eclipse.sirius.viewpoint.description.DAnnotation;
-import org.eclipse.sirius.viewpoint.description.Viewpoint;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
-import smartgrid.model.helper.input.LoadInputModelConformityHelper;
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
@@ -42,7 +33,6 @@ import smartgridtopo.SmartGridTopology;
 
 public class CheckInput implements IExternalJavaAction {
 
-    private static Session session;
     
     public CheckInput() {
     }
@@ -75,9 +65,6 @@ public class CheckInput implements IExternalJavaAction {
         URI sessionResourceURI = getCurrentUri();
         Session createdSession = SessionManager.INSTANCE.getExistingSession(sessionResourceURI);
         final TransactionalEditingDomain domain = createdSession.getTransactionalEditingDomain();
-
-        String uriSegments[]= sessionResourceURI.toString().split("/");
-        //URI uri = URI.createURI("/"+uriSegments[2]+"/").appendSegment("My" + ".smartgridinput");
        
         URI uri = getInputPath(scenarioState, (SmartGridTopology)rep.getTarget());
 
@@ -100,11 +87,9 @@ public class CheckInput implements IExternalJavaAction {
                 final Resource rs = set.createResource(currentUri);
                 rs.setTrackingModification(true);
                 final ScenarioState domainModel = SmartgridinputFactory.eINSTANCE.createScenarioState();
-
+                domainModel.setId(scenarioState.getId());
                 SmartGridTopology topology = (SmartGridTopology)rep.getTarget();
                 domainModel.setScenario(topology);
-
-                final EList<DDiagramElement> dDiagramElements = rep.getOwnedDiagramElements();
                 
                 for (final NetworkEntity obj : topology.getContainsNE()) {
                             final EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
@@ -241,19 +226,19 @@ public class CheckInput implements IExternalJavaAction {
         
         for (Resource resource : objects2) {
             URI uri = resource.getURI();
-            if (uri.toString().contains("User")) {
-                String temp = uri.toString();
-                uri=uri;
-            }
             
             if (uri.toString().endsWith(".smartgridinput")) {
                 if (!resource.getContents().isEmpty()){
                     EList<EObject> objects = resource.getContents();
                     ScenarioState state2 = (ScenarioState)objects.get(0);
-                    if (state2 == state && state2.getScenario().getId().equals(topology.getId())) {
+                    if (state2.getId().equals(state.getId()) && state2.getScenario().getId().equals(topology.getId())) {
                         String pathSegments[]= uri.toString().split("/");
                         String newPath = "/";
-                        int start = 2;
+                        int start = 0;
+                        if (uri.scheme() != null) {
+                            if (uri.scheme().equals("platform"))
+                                start = 2;
+                        }
                         for (int i=start; i<pathSegments.length; i++) {
                             if (i>start)
                                 newPath += "//"+pathSegments[i];

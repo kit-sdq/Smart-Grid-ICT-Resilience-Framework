@@ -19,13 +19,12 @@ public class SiriusHelper {
     private static Session session;
     
     public static ScenarioState getAndCheckScnearioState(SmartGridTopology topo) {
-        String outString = "";
-       
+        String attachedInputID = "";
         
         if (getAttachedInput() == null || getAttachedInput().equals("")) {
             return null;
         } else {
-            outString = getAttachedInput();
+            attachedInputID = getAttachedInput();
         }
         ScenarioState state = null;
 
@@ -47,24 +46,9 @@ public class SiriusHelper {
             Resource sr = it.next();
             if (sr.getContents().get(0) instanceof ScenarioState) {
                 state = (ScenarioState) sr.getContents().get(0);
-                if (LoadInputModelConformityHelper.checkInputModelConformitySimple(state, topo)) {
-                    String resourceUriString = sr.getURI().toString();
-
-                    String newPath = "";
-                    if (resourceUriString.split("/")[0].contains("platform")) {
-                        String pathSegments[]= resourceUriString.toString().split("/");
-                        for (int i=2; i<pathSegments.length; i++) {
-                            if (i==2)
-                                newPath += pathSegments[i];
-                            else
-                                newPath += "/"+pathSegments[i];
-                        }
-                    }
-                    if (!outString.equals("") && ( resourceUriString.split("/")[0].contains("platform") && outString.contains(newPath)) ||
-                            resourceUriString.equals(outString.replace("//", "/")) || resourceUriString.endsWith(outString.replace("//", "/"))) {
+                if (state.getId().equals(attachedInputID)) {
                     found = true;
-                    break;
-                    }
+                    break;          
                 }
             }
         }

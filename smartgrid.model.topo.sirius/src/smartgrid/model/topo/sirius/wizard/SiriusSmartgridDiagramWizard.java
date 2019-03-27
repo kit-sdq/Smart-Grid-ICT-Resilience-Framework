@@ -3,7 +3,6 @@ package smartgrid.model.topo.sirius.wizard;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +20,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,21 +28,19 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
-import org.eclipse.sirius.diagram.ui.tools.api.editor.DDiagramEditor;
+import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelectionCallback;
 import org.eclipse.sirius.ui.tools.api.project.ModelingProjectManager;
-import org.eclipse.sirius.viewpoint.DView;
+import org.eclipse.sirius.viewpoint.description.DAnnotation;
+import org.eclipse.sirius.viewpoint.description.DescriptionFactory;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
@@ -65,22 +61,16 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
 
     private IProject project;
     private IConfigurationElement config;
-    private ISelection selection;
-    private final String editorId;
-    private final IWorkspace workspace;
     private final IWorkbench workbench;
     private Resource classModelResource;
-    private Resource classInputResource;
-    //protected SiriusCreateNewSmartgridDiagramPage newDiagramPage;
     protected WizardNewProjectCreationPage newProjectPage;
     protected SiriusCreateNewSmartgridDiagramPage newTopologyPage;
     protected SmartGridTopology topology;
+    protected ScenarioState scenarioState;
     
     public SiriusSmartgridDiagramWizard() {
         super();
         setNeedsProgressMonitor(true);
-        workspace = ResourcesPlugin.getWorkspace();
-        editorId = "SmartGridSecurityDiagramType";
         workbench = PlatformUI.getWorkbench();
     }
     
@@ -99,7 +89,6 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
     
     @Override
     public void init(IWorkbench workbench, IStructuredSelection selection) {
-        this.selection = selection;
         setNeedsProgressMonitor(true);
     }
 
@@ -160,7 +149,6 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
                 final Resource modelResource = resourceSet.createResource(modelUri);
                 classModelResource = modelResource;
                 final Resource inputResource = resourceSet.createResource(inputUri);
-                classInputResource = inputResource;
                 final CommandStack commandStack = editingDomain.getCommandStack();
                 commandStack.execute(new RecordingCommand(editingDomain) {
                     @Override
@@ -214,7 +202,6 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
                             if (vpName.equalsIgnoreCase("topology") || vpName.toLowerCase().contains("smartgridinput"))
                                 new ViewpointSelectionCallback().selectViewpoint(vp, session, monitor);
                         }   
-                        final URI inputUri = URI.createPlatformResourceURI(project.getName() + "/" + topologyNameString + ".smartgridinput", true);
                         assignInputToModel();
                     }
                     
@@ -248,6 +235,7 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
         final EObject domainModel = SmartgridtopoFactory.eINSTANCE.createSmartGridTopology();
         final ScenarioState domainInput = SmartgridinputFactory.eINSTANCE.createScenarioState();
         domainInput.setScenario((SmartGridTopology)domainModel);
+        scenarioState = domainInput;
         modelResource.getContents().add(domainModel);
         inputResource.getContents().add(domainInput);
         
@@ -341,9 +329,22 @@ public class SiriusSmartgridDiagramWizard extends Wizard implements INewWizard {
     
     private void assignInputToModel() {
         Resource topoResource = classModelResource;
-        TreeIterator<EObject> part = topoResource.getAllContents();
+        String inputID = scenarioState.getId();
         ResourceSet part2 = topoResource.getResourceSet();
-        part2=part2;
+        List<Resource> resources = part2.getResources();
+        Resource resource = resources.get(0);
+        EObject resources2 = resource.getContents().get(1);
+        try {
+            DSemanticDiagram rep = (DSemanticDiagram) resources2;
+            DAnnotation inputModel = rep.getDAnnotation("attached");
+            if (inputModel == null ) {
+                inputModel = DescriptionFactory.eINSTANCE.createDAnnotation();
+                inputModel.setSource("attached");
+                rep.getEAnnotations().add(inputModel);
+                inputModel.getDetails().put("input", inputID);
+            }
+        } catch (Exception e) {
+        }
         
             
     }
