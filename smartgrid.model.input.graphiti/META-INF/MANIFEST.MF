@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Graphiti
-Bundle-SymbolicName: smartgrid.model.input.graphiti;singleton:=true
+Bundle-SymbolicName: deprecated.smartgrid.model.input.graphiti;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.emf.transaction;bundle-version="1.8.0",
  org.eclipse.graphiti;bundle-version="0.11.1",
  smartgrid.model.input;bundle-version="1.0.0",
- smartgrid.model.topo.graphiti;bundle-version="1.0.0",
+ deprecated.smartgrid.model.topo.graphiti;bundle-version="1.0.0",
  org.eclipse.graphiti.ui;bundle-version="0.11.1",
  org.eclipse.swt;bundle-version="3.103.1",
  org.eclipse.ui;bundle-version="3.106.0",

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Graphiti
-Bundle-SymbolicName: smartgrid.model.topo.graphiti;singleton:=true
+Bundle-SymbolicName: deprecated.smartgrid.model.topo.graphiti;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: smartgridsecurity.graphiti.Activator
 Require-Bundle: org.eclipse.graphiti;bundle-version="0.10.1",
