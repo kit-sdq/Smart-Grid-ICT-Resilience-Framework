@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="My.smartgridtopo#6942688"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="My.smartgridtopo#2659484"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="My.smartgridtopo#1156230"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="My.smartgridtopo#5808438"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="My.smartgridtopo#2637655"/>
+  </PowerStates>
+  <Scenario href="My.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

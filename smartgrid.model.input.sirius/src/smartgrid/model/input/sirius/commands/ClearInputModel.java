@@ -1,11 +1,6 @@
 package smartgrid.model.input.sirius.commands;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -22,7 +17,6 @@ import org.eclipse.sirius.viewpoint.description.DescriptionFactory;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
-import smartgridtopo.SmartGridTopology;
 
 public class ClearInputModel extends AbstractHandler {
 
@@ -32,14 +26,11 @@ public class ClearInputModel extends AbstractHandler {
         DDiagramEditor editor = (DDiagramEditor) part;
         DSemanticDiagram rep = (DSemanticDiagram) editor.getRepresentation();
         
-        String path = "/Users/mazenebada/runtime-New_configuration(2)/Sirius/";
-        path += "topology" + ((SmartGridTopology)rep.getTarget()).getId() + ".txt";
-        
         URI sessionResourceURI = getCurrentUri();
         Session createdSession = SessionManager.INSTANCE.getExistingSession(sessionResourceURI);
         final TransactionalEditingDomain domain = createdSession.getTransactionalEditingDomain();
 
-        final String uri = "";
+        final String emptyID = "";
             final RecordingCommand c = new RecordingCommand(domain) {
                 @Override
                 protected void doExecute() {
@@ -49,38 +40,19 @@ public class ClearInputModel extends AbstractHandler {
                         inputModel = DescriptionFactory.eINSTANCE.createDAnnotation();
                         inputModel.setSource("attached");
                         rep.getEAnnotations().add(inputModel);
-                        inputModel.getDetails().put("input", uri);
+                        inputModel.getDetails().put("input", emptyID);
                     } else {
                         
                         if (inputModel.getDetails().containsKey("input")) {
                             inputModel.getDetails().removeKey("input");
                         }
-                        inputModel.getDetails().put("input", uri);
+                        inputModel.getDetails().put("input", emptyID);
                     }
                 }
             };
             domain.getCommandStack().execute(c);
             
-        writing(path, uri);
         return null;
-    }
-
-    public void writing(String path, String text) {
-        try {
-            //Whatever the file path is.
-            File statText = new File(path);
-//            if (statText.exists()) {
-//                statText.delete();
-//            }
-            FileOutputStream is = new FileOutputStream(statText);
-            OutputStreamWriter osw = new OutputStreamWriter(is);    
-            Writer w = new BufferedWriter(osw);
-            w.write(text);
-            w.close();
-        } catch (IOException e) {
-            System.err.println("Problem writing to the file statsTest.txt");
-            e.printStackTrace();
-        }
     }
     
     

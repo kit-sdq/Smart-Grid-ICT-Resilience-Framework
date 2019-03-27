@@ -19,17 +19,17 @@ import smartgridtopo.PowerGridNode;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridinput.impl.PowerStateImpl#getOwner <em>Owner</em>}</li>
- * <li>{@link smartgridinput.impl.PowerStateImpl#isPowerOutage <em>Power Outage</em>}</li>
+ *   <li>{@link smartgridinput.impl.PowerStateImpl#getOwner <em>Owner</em>}</li>
+ *   <li>{@link smartgridinput.impl.PowerStateImpl#isPowerOutage <em>Power Outage</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PowerStateImpl extends MinimalEObjectImpl.Container implements PowerState {
     /**
-     * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference. <!-- begin-user-doc
+     * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
+     * <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     * 
      * @see #getOwner()
      * @generated
      * @ordered
@@ -58,7 +58,6 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected PowerStateImpl() {
@@ -67,7 +66,6 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -77,14 +75,13 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public PowerGridNode getOwner() {
         if (owner != null && owner.eIsProxy()) {
-            InternalEObject oldOwner = (InternalEObject) owner;
-            owner = (PowerGridNode) eResolveProxy(oldOwner);
+            InternalEObject oldOwner = (InternalEObject)owner;
+            owner = (PowerGridNode)eResolveProxy(oldOwner);
             if (owner != oldOwner) {
                 if (eNotificationRequired())
                     eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartgridinputPackage.POWER_STATE__OWNER, oldOwner, owner));
@@ -95,7 +92,6 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public PowerGridNode basicGetOwner() {
@@ -104,7 +100,6 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -117,7 +112,6 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -127,7 +121,6 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -140,85 +133,78 @@ public class PowerStateImpl extends MinimalEObjectImpl.Container implements Powe
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridinputPackage.POWER_STATE__OWNER:
-            if (resolve)
-                return getOwner();
-            return basicGetOwner();
-        case SmartgridinputPackage.POWER_STATE__POWER_OUTAGE:
-            return isPowerOutage();
+            case SmartgridinputPackage.POWER_STATE__OWNER:
+                if (resolve) return getOwner();
+                return basicGetOwner();
+            case SmartgridinputPackage.POWER_STATE__POWER_OUTAGE:
+                return isPowerOutage();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridinputPackage.POWER_STATE__OWNER:
-            setOwner((PowerGridNode) newValue);
-            return;
-        case SmartgridinputPackage.POWER_STATE__POWER_OUTAGE:
-            setPowerOutage((Boolean) newValue);
-            return;
+            case SmartgridinputPackage.POWER_STATE__OWNER:
+                setOwner((PowerGridNode)newValue);
+                return;
+            case SmartgridinputPackage.POWER_STATE__POWER_OUTAGE:
+                setPowerOutage((Boolean)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridinputPackage.POWER_STATE__OWNER:
-            setOwner((PowerGridNode) null);
-            return;
-        case SmartgridinputPackage.POWER_STATE__POWER_OUTAGE:
-            setPowerOutage(POWER_OUTAGE_EDEFAULT);
-            return;
+            case SmartgridinputPackage.POWER_STATE__OWNER:
+                setOwner((PowerGridNode)null);
+                return;
+            case SmartgridinputPackage.POWER_STATE__POWER_OUTAGE:
+                setPowerOutage(POWER_OUTAGE_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridinputPackage.POWER_STATE__OWNER:
-            return owner != null;
-        case SmartgridinputPackage.POWER_STATE__POWER_OUTAGE:
-            return powerOutage != POWER_OUTAGE_EDEFAULT;
+            case SmartgridinputPackage.POWER_STATE__OWNER:
+                return owner != null;
+            case SmartgridinputPackage.POWER_STATE__POWER_OUTAGE:
+                return powerOutage != POWER_OUTAGE_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public String toString() {
-        if (eIsProxy())
-            return super.toString();
+        if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
+        StringBuilder result = new StringBuilder(super.toString());
         result.append(" (PowerOutage: ");
         result.append(powerOutage);
         result.append(')');

@@ -16,6 +16,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -32,9 +33,9 @@ import smartgridinput.SmartgridinputPackage;
 public class ScenarioStateItemProvider extends ItemProviderAdapter
         implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
     /**
-     * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+     * This constructs an instance from a factory and a notifier.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     public ScenarioStateItemProvider(AdapterFactory adapterFactory) {
@@ -42,9 +43,9 @@ public class ScenarioStateItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+     * This returns the property descriptors for the adapted class.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -52,21 +53,54 @@ public class ScenarioStateItemProvider extends ItemProviderAdapter
         if (itemPropertyDescriptors == null) {
             super.getPropertyDescriptors(object);
 
+            addIdPropertyDescriptor(object);
             addScenarioPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
     }
 
     /**
-     * This adds a property descriptor for the Scenario feature. <!-- begin-user-doc --> <!--
+     * This adds a property descriptor for the Id feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addIdPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_Identifier_id_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_Identifier_id_feature", "_UI_Identifier_type"),
+                 SmartgridinputPackage.Literals.IDENTIFIER__ID,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
+    }
+
+    /**
+     * This adds a property descriptor for the Scenario feature.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     protected void addScenarioPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-                getString("_UI_ScenarioState_Scenario_feature"), getString("_UI_PropertyDescriptor_description", "_UI_ScenarioState_Scenario_feature", "_UI_ScenarioState_type"),
-                SmartgridinputPackage.Literals.SCENARIO_STATE__SCENARIO, true, false, true, null, null, null));
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_ScenarioState_Scenario_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_ScenarioState_Scenario_feature", "_UI_ScenarioState_type"),
+                 SmartgridinputPackage.Literals.SCENARIO_STATE__SCENARIO,
+                 true,
+                 false,
+                 true,
+                 null,
+                 null,
+                 null));
     }
 
     /**
@@ -90,7 +124,6 @@ public class ScenarioStateItemProvider extends ItemProviderAdapter
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -102,8 +135,8 @@ public class ScenarioStateItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This returns ScenarioState.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This returns ScenarioState.gif.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -119,14 +152,16 @@ public class ScenarioStateItemProvider extends ItemProviderAdapter
      */
     @Override
     public String getText(Object object) {
-        return getString("_UI_ScenarioState_type");
+        String label = ((ScenarioState)object).getId();
+        return label == null || label.length() == 0 ?
+            getString("_UI_ScenarioState_type") :
+            getString("_UI_ScenarioState_type") + " " + label;
     }
 
     /**
      * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to
-     * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
@@ -134,33 +169,42 @@ public class ScenarioStateItemProvider extends ItemProviderAdapter
         updateChildren(notification);
 
         switch (notification.getFeatureID(ScenarioState.class)) {
-        case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
-        case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
-            fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-            return;
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+                return;
+            case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
+            case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+                return;
         }
         super.notifyChanged(notification);
     }
 
     /**
-     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
-     * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+     * that can be created under this object.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
         super.collectNewChildDescriptors(newChildDescriptors, object);
 
-        newChildDescriptors.add(createChildParameter(SmartgridinputPackage.Literals.SCENARIO_STATE__ENTITY_STATES, SmartgridinputFactory.eINSTANCE.createEntityState()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridinputPackage.Literals.SCENARIO_STATE__ENTITY_STATES,
+                 SmartgridinputFactory.eINSTANCE.createEntityState()));
 
-        newChildDescriptors.add(createChildParameter(SmartgridinputPackage.Literals.SCENARIO_STATE__POWER_STATES, SmartgridinputFactory.eINSTANCE.createPowerState()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SmartgridinputPackage.Literals.SCENARIO_STATE__POWER_STATES,
+                 SmartgridinputFactory.eINSTANCE.createPowerState()));
     }
 
     /**
-     * Return the resource locator for this item provider's resources. <!-- begin-user-doc --> <!--
+     * Return the resource locator for this item provider's resources.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     @Override

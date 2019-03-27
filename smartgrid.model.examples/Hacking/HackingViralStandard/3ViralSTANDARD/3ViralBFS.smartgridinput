@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralBFS.smartgridtopo#210658029"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralBFS.smartgridtopo#2081541092"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralBFS.smartgridtopo#1318625049"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralBFS.smartgridtopo#435196693"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralBFS.smartgridtopo#1811934783"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralBFS.smartgridtopo#1844545366"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralBFS.smartgridtopo#489594540"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralBFS.smartgridtopo#462256016"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralBFS.smartgridtopo#96276411"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralBFS.smartgridtopo#165424166"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="3ViralBFS.smartgridtopo#1115851006"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralBFS.smartgridtopo#1227863002"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralBFS.smartgridtopo#549145267"/>
+  </PowerStates>
+  <Scenario href="3ViralBFS.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

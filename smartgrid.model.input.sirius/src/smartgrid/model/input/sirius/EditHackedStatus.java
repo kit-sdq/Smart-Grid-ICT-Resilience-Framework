@@ -22,7 +22,7 @@ public class EditHackedStatus implements IExternalJavaAction {
 
 	@Override
 	public void execute(Collection<? extends EObject> arg0, Map<String, Object> arg1) {
-		ControlCenter cc = (ControlCenter) ((List) arg0).get(0);
+		ControlCenter cc = (ControlCenter) ((List<? extends EObject>) arg0).get(0);
 		EntityState required = ScenarioStateHelper.getCorrectEntityState(cc);
 
 		String argument = (String) arg1.get("name");
@@ -32,6 +32,5 @@ public class EditHackedStatus implements IExternalJavaAction {
 				|| (!required.isIsHacked() && argument.toLowerCase().contains("true"))) {
 			required.setIsHacked(!required.isIsHacked());
 		}
-		ScenarioStateHelper.refreshDiagram();
 	}
 }

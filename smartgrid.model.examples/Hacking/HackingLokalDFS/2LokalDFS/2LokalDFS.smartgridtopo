@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartgridtopo:SmartGridTopology xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="60290462" ConnectedTo="1634355941" LinkedBy="//@ContainsPC.2" CommunicatesBy="//@ContainsLC.0 //@ContainsLC.1 //@ContainsLC.2"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1760136754" ConnectedTo="1634355941" LinkedBy="//@ContainsPC.3" CommunicatesBy="//@ContainsLC.2 //@ContainsLC.3"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="835768660" ConnectedTo="1634355941" LinkedBy="//@ContainsPC.4" CommunicatesBy="//@ContainsLC.3 //@ContainsLC.4"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="405101474" ConnectedTo="1634355941" LinkedBy="//@ContainsPC.5" CommunicatesBy="//@ContainsLC.4 //@ContainsLC.5 //@ContainsLC.6"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="789750590" ConnectedTo="2136121103" LinkedBy="//@ContainsPC.1" CommunicatesBy="//@ContainsLC.1"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="287949256" ConnectedTo="1636746755" LinkedBy="//@ContainsPC.0" CommunicatesBy="//@ContainsLC.0"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1589120546" ConnectedTo="1634355941" LinkedBy="//@ContainsPC.7" CommunicatesBy="//@ContainsLC.6"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="115519003" ConnectedTo="33635220" LinkedBy="//@ContainsPC.6" CommunicatesBy="//@ContainsLC.5"/>
+  <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="1887980333" ConnectedTo="1636746755" LinkedBy="//@ContainsPC.0 //@ContainsPC.1 //@ContainsPC.8"/>
+  <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="994351852" ConnectedTo="2136121103" LinkedBy="//@ContainsPC.2 //@ContainsPC.3 //@ContainsPC.4 //@ContainsPC.5 //@ContainsPC.9"/>
+  <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="427756107" ConnectedTo="1636746755" LinkedBy="//@ContainsPC.6 //@ContainsPC.7 //@ContainsPC.10"/>
+  <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="1133464030" ConnectedTo="1636746755 33635220" LinkedBy="//@ContainsPC.8 //@ContainsPC.9 //@ContainsPC.10"/>
+  <ContainsPGN id="1636746755"/>
+  <ContainsPGN id="1634355941"/>
+  <ContainsPGN id="2136121103"/>
+  <ContainsPGN id="33635220"/>
+  <ContainsPC Links="1887980333 287949256"/>
+  <ContainsPC Links="1887980333 789750590"/>
+  <ContainsPC Links="994351852 60290462"/>
+  <ContainsPC Links="994351852 1760136754"/>
+  <ContainsPC Links="994351852 835768660"/>
+  <ContainsPC Links="994351852 405101474"/>
+  <ContainsPC Links="115519003 427756107"/>
+  <ContainsPC Links="427756107 1589120546"/>
+  <ContainsPC Links="1887980333 1133464030"/>
+  <ContainsPC Links="1133464030 994351852"/>
+  <ContainsPC Links="1133464030 427756107"/>
+  <ContainsLC Links="60290462 287949256"/>
+  <ContainsLC Links="60290462 789750590"/>
+  <ContainsLC Links="60290462 1760136754"/>
+  <ContainsLC Links="1760136754 835768660"/>
+  <ContainsLC Links="835768660 405101474"/>
+  <ContainsLC Links="405101474 115519003"/>
+  <ContainsLC Links="405101474 1589120546"/>
+</smartgridtopo:SmartGridTopology>

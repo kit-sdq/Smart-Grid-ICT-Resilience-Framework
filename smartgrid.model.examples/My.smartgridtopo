@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartgridtopo:SmartGridTopology xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="6942688" ConnectedTo="2637655" LinkedBy="//@ContainsPC.0"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="2659484" ConnectedTo="2637655" LinkedBy="//@ContainsPC.0"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1156230" ConnectedTo="2637655" LinkedBy="//@ContainsPC.1"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="5808438" ConnectedTo="2637655" LinkedBy="//@ContainsPC.1"/>
+  <ContainsPGN id="2637655"/>
+  <ContainsPC Links="2659484 6942688"/>
+  <ContainsPC Links="1156230 5808438"/>
+</smartgridtopo:SmartGridTopology>

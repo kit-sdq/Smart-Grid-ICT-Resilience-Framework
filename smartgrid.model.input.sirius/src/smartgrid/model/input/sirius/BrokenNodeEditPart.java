@@ -12,7 +12,6 @@ import org.eclipse.sirius.diagram.ui.edit.api.part.AbstractNotSelectableShapeNod
 import org.eclipse.sirius.diagram.ui.edit.api.part.IStyleEditPart;
 import org.eclipse.sirius.diagram.ui.tools.api.figure.AirStyleDefaultSizeNodeFigure;
 import org.eclipse.sirius.viewpoint.SiriusPlugin;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 
 public class BrokenNodeEditPart extends AbstractNotSelectableShapeNodeEditPart implements IStyleEditPart {
@@ -53,8 +52,6 @@ public class BrokenNodeEditPart extends AbstractNotSelectableShapeNodeEditPart i
 	protected void refreshVisuals() {
 		CustomStyle customStyle = (CustomStyle) this.resolveSemanticElement();
 		if (customStyle.eContainer() instanceof DNode) {
-			Object obj = (SiriusPlugin.getDefault().getImage(((DNode) customStyle.eContainer()).getName()));
-			
 			this.primaryShape
 					.setImage((Image) SiriusPlugin.getDefault().getImage(((DNode) customStyle.eContainer()).getName()));
 		}

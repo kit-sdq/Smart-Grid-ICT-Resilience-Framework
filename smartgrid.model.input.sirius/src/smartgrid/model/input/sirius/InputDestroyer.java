@@ -31,7 +31,6 @@ public class InputDestroyer{
                         || (!required.isIsDestroyed())) {
                     required.setIsDestroyed(!required.isIsDestroyed());
                 }
-                ScenarioStateHelper.refreshDiagram();
             }
             
         };

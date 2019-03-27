@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#1996837252"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2ViralBFS.smartgridtopo#1080568640"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#1297359386"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#1866636555"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#1320992232"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2ViralBFS.smartgridtopo#1562003879"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#271357168"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#318283790"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#235823947"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#1182937025"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#1083901485"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#1779839586"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2ViralBFS.smartgridtopo#584475147"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralBFS.smartgridtopo#1764862482"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="2ViralBFS.smartgridtopo#1412680062"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2ViralBFS.smartgridtopo#864883164"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2ViralBFS.smartgridtopo#558496313"/>
+  </PowerStates>
+  <Scenario href="2ViralBFS.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

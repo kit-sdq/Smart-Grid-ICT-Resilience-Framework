@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import smartgridinput.EntityState;
+import smartgridinput.Identifier;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputFactory;
@@ -17,40 +18,43 @@ import smartgridtopo.SmartgridtopoPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
- * 
  * @generated
  */
 public class SmartgridinputPackageImpl extends EPackageImpl implements SmartgridinputPackage {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     private EClass scenarioStateEClass = null;
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     private EClass entityStateEClass = null;
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     private EClass powerStateEClass = null;
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass identifierEClass = null;
+
+    /**
      * Creates an instance of the model <b>Package</b>, registered with
-     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package package URI
-     * value.
-     * <p>
-     * Note: the correct way to create the package is via the static factory method {@link #init
-     * init()}, which also performs initialization of the package, or returns the registered
-     * package, if one already exists. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+     * package URI value.
+     * <p>Note: the correct way to create the package is via the static
+     * factory method {@link #init init()}, which also performs
+     * initialization of the package, or returns the registered package,
+     * if one already exists.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see org.eclipse.emf.ecore.EPackage.Registry
      * @see smartgridinput.SmartgridinputPackage#eNS_URI
      * @see #init()
@@ -62,32 +66,27 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     private static boolean isInited = false;
 
     /**
-     * Creates, registers, and initializes the <b>Package</b> for this model, and for any others
-     * upon which it depends.
-     * 
-     * <p>
-     * This method is used to initialize {@link SmartgridinputPackage#eINSTANCE} when that field is
-     * accessed. Clients should not invoke it directly. Instead, they should simply access that
-     * field to obtain the package. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+     *
+     * <p>This method is used to initialize {@link SmartgridinputPackage#eINSTANCE} when that field is accessed.
+     * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see #eNS_URI
      * @see #createPackageContents()
      * @see #initializePackageContents()
      * @generated
      */
     public static SmartgridinputPackage init() {
-        if (isInited)
-            return (SmartgridinputPackage) EPackage.Registry.INSTANCE.getEPackage(SmartgridinputPackage.eNS_URI);
+        if (isInited) return (SmartgridinputPackage)EPackage.Registry.INSTANCE.getEPackage(SmartgridinputPackage.eNS_URI);
 
         // Obtain or create and register package
-        SmartgridinputPackageImpl theSmartgridinputPackage = (SmartgridinputPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SmartgridinputPackageImpl
-                ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SmartgridinputPackageImpl());
+        Object registeredSmartgridinputPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+        SmartgridinputPackageImpl theSmartgridinputPackage = registeredSmartgridinputPackage instanceof SmartgridinputPackageImpl ? (SmartgridinputPackageImpl)registeredSmartgridinputPackage : new SmartgridinputPackageImpl();
 
         isInited = true;
 
@@ -110,7 +109,6 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -120,37 +118,33 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EReference getScenarioState_EntityStates() {
-        return (EReference) scenarioStateEClass.getEStructuralFeatures().get(0);
+        return (EReference)scenarioStateEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EReference getScenarioState_PowerStates() {
-        return (EReference) scenarioStateEClass.getEStructuralFeatures().get(1);
+        return (EReference)scenarioStateEClass.getEStructuralFeatures().get(1);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EReference getScenarioState_Scenario() {
-        return (EReference) scenarioStateEClass.getEStructuralFeatures().get(2);
+        return (EReference)scenarioStateEClass.getEStructuralFeatures().get(2);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -160,37 +154,33 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EAttribute getEntityState_IsDestroyed() {
-        return (EAttribute) entityStateEClass.getEStructuralFeatures().get(0);
+        return (EAttribute)entityStateEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EAttribute getEntityState_IsHacked() {
-        return (EAttribute) entityStateEClass.getEStructuralFeatures().get(1);
+        return (EAttribute)entityStateEClass.getEStructuralFeatures().get(1);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EReference getEntityState_Owner() {
-        return (EReference) entityStateEClass.getEStructuralFeatures().get(2);
+        return (EReference)entityStateEClass.getEStructuralFeatures().get(2);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -200,50 +190,63 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EReference getPowerState_Owner() {
-        return (EReference) powerStateEClass.getEStructuralFeatures().get(0);
+        return (EReference)powerStateEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EAttribute getPowerState_PowerOutage() {
-        return (EAttribute) powerStateEClass.getEStructuralFeatures().get(1);
+        return (EAttribute)powerStateEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getIdentifier() {
+        return identifierEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getIdentifier_Id() {
+        return (EAttribute)identifierEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public SmartgridinputFactory getSmartgridinputFactory() {
-        return (SmartgridinputFactory) getEFactoryInstance();
+        return (SmartgridinputFactory)getEFactoryInstance();
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     private boolean isCreated = false;
 
     /**
-     * Creates the meta-model objects for the package. This method is guarded to have no affect on
-     * any invocation but its first. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Creates the meta-model objects for the package.  This method is
+     * guarded to have no affect on any invocation but its first.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     public void createPackageContents() {
-        if (isCreated)
-            return;
+        if (isCreated) return;
         isCreated = true;
 
         // Create classes and their features
@@ -251,6 +254,9 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
         createEReference(scenarioStateEClass, SCENARIO_STATE__ENTITY_STATES);
         createEReference(scenarioStateEClass, SCENARIO_STATE__POWER_STATES);
         createEReference(scenarioStateEClass, SCENARIO_STATE__SCENARIO);
+
+        identifierEClass = createEClass(IDENTIFIER);
+        createEAttribute(identifierEClass, IDENTIFIER__ID);
 
         entityStateEClass = createEClass(ENTITY_STATE);
         createEAttribute(entityStateEClass, ENTITY_STATE__IS_DESTROYED);
@@ -264,20 +270,18 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     private boolean isInitialized = false;
 
     /**
-     * Complete the initialization of the package and its meta-model. This method is guarded to have
-     * no affect on any invocation but its first. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Complete the initialization of the package and its meta-model.  This
+     * method is guarded to have no affect on any invocation but its first.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     public void initializePackageContents() {
-        if (isInitialized)
-            return;
+        if (isInitialized) return;
         isInitialized = true;
 
         // Initialize package
@@ -286,36 +290,32 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
         setNsURI(eNS_URI);
 
         // Obtain other dependent packages
-        SmartgridtopoPackage theSmartgridtopoPackage = (SmartgridtopoPackage) EPackage.Registry.INSTANCE.getEPackage(SmartgridtopoPackage.eNS_URI);
+        SmartgridtopoPackage theSmartgridtopoPackage = (SmartgridtopoPackage)EPackage.Registry.INSTANCE.getEPackage(SmartgridtopoPackage.eNS_URI);
 
         // Create type parameters
 
         // Set bounds for type parameters
 
         // Add supertypes to classes
+        scenarioStateEClass.getESuperTypes().add(this.getIdentifier());
 
         // Initialize classes, features, and operations; add parameters
         initEClass(scenarioStateEClass, ScenarioState.class, "ScenarioState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getScenarioState_EntityStates(), getEntityState(), null, "EntityStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getScenarioState_PowerStates(), getPowerState(), null, "PowerStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getScenarioState_Scenario(), theSmartgridtopoPackage.getSmartGridTopology(), null, "Scenario", null, 0, 1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-                !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getScenarioState_EntityStates(), this.getEntityState(), null, "EntityStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getScenarioState_PowerStates(), this.getPowerState(), null, "PowerStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getScenarioState_Scenario(), theSmartgridtopoPackage.getSmartGridTopology(), null, "Scenario", null, 0, 1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(identifierEClass, Identifier.class, "Identifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", "0", 1, 1, Identifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
         initEClass(entityStateEClass, EntityState.class, "EntityState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getEntityState_IsDestroyed(), ecorePackage.getEBoolean(), "IsDestroyed", null, 1, 1, EntityState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-                IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getEntityState_IsHacked(), ecorePackage.getEBoolean(), "IsHacked", "false", 1, 1, EntityState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-                IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getEntityState_Owner(), theSmartgridtopoPackage.getNetworkEntity(), null, "Owner", null, 1, 1, EntityState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getEntityState_IsDestroyed(), ecorePackage.getEBoolean(), "IsDestroyed", null, 1, 1, EntityState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getEntityState_IsHacked(), ecorePackage.getEBoolean(), "IsHacked", "false", 1, 1, EntityState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getEntityState_Owner(), theSmartgridtopoPackage.getNetworkEntity(), null, "Owner", null, 1, 1, EntityState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(powerStateEClass, PowerState.class, "PowerState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getPowerState_Owner(), theSmartgridtopoPackage.getPowerGridNode(), null, "Owner", null, 1, 1, PowerState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getPowerState_PowerOutage(), ecorePackage.getEBoolean(), "PowerOutage", null, 1, 1, PowerState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-                IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getPowerState_Owner(), theSmartgridtopoPackage.getPowerGridNode(), null, "Owner", null, 1, 1, PowerState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getPowerState_PowerOutage(), ecorePackage.getEBoolean(), "PowerOutage", null, 1, 1, PowerState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);

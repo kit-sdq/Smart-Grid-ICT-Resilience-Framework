@@ -1,9 +1,7 @@
 package smartgrid.mode.input.sirius.help;
 
-import java.io.File;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
@@ -31,7 +29,7 @@ public class SiriusHelper {
      *            path of the ScenarioState to be used
      * @return The read ScenarioState file
      */
-    protected static ScenarioState loadInput(final String path) {
+    public static ScenarioState loadInput(final String path) {
 
         final ResourceSet resourceSet = new ResourceSetImpl();
 
@@ -51,7 +49,7 @@ public class SiriusHelper {
      *            path of the ScenarioTopology to be used
      * @return The read ScenarioTopology file
      */
-    protected static SmartGridTopology loadTopology(final String path) {
+    public static SmartGridTopology loadTopology(final String path) {
 
         final ResourceSet resourceSet = new ResourceSetImpl();
 
@@ -88,19 +86,6 @@ public class SiriusHelper {
         workingCopy.setAttribute(Constants.TIME_STEPS_KEY, "1");
         workingCopy.setAttribute(Constants.ATTACKER_SIMULATION_KEY, "No Attack Simulation");
         final ILaunchConfiguration config = workingCopy.doSave();
-//        analyzer.init(config);
-        //SubMonitor lmonitor = SubMonitor.convert(monitor, DebugCoreMessages.LaunchConfiguration_9, build ? 23 : 13);
-//        SimulationController simControl = new SimulationController();
-//        try {
-//            simControl.init(config);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            simControl.run();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         DebugUITools.openLaunchConfigurationDialog(
                 PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
                 config,

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralDFS.smartgridtopo#1528321596"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralDFS.smartgridtopo#1109941873"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralDFS.smartgridtopo#1248820089"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralDFS.smartgridtopo#1201667170"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralDFS.smartgridtopo#972168892"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralDFS.smartgridtopo#426484103"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralDFS.smartgridtopo#111794636"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2ViralDFS.smartgridtopo#1781705027"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2ViralDFS.smartgridtopo#769565224"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2ViralDFS.smartgridtopo#611434572"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2ViralDFS.smartgridtopo#1051838210"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="2ViralDFS.smartgridtopo#103162747"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2ViralDFS.smartgridtopo#390841098"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2ViralDFS.smartgridtopo#813686208"/>
+  </PowerStates>
+  <Scenario href="2ViralDFS.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

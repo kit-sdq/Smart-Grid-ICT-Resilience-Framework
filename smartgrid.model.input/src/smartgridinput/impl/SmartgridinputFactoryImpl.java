@@ -2,12 +2,13 @@
  */
 package smartgridinput.impl;
 
+import java.util.Random;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
@@ -16,30 +17,30 @@ import smartgridinput.SmartgridinputPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
- * 
  * @generated
  */
 public class SmartgridinputFactoryImpl extends EFactoryImpl implements SmartgridinputFactory {
     /**
-     * Creates the default factory implementation. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     public static SmartgridinputFactory init() {
         try {
-            SmartgridinputFactory theSmartgridinputFactory = (SmartgridinputFactory) EPackage.Registry.INSTANCE.getEFactory(SmartgridinputPackage.eNS_URI);
+            SmartgridinputFactory theSmartgridinputFactory = (SmartgridinputFactory)EPackage.Registry.INSTANCE.getEFactory(SmartgridinputPackage.eNS_URI);
             if (theSmartgridinputFactory != null) {
                 return theSmartgridinputFactory;
             }
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             EcorePlugin.INSTANCE.log(exception);
         }
         return new SmartgridinputFactoryImpl();
     }
 
     /**
-     * Creates an instance of the factory. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     public SmartgridinputFactoryImpl() {
@@ -48,37 +49,42 @@ public class SmartgridinputFactoryImpl extends EFactoryImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EObject create(EClass eClass) {
         switch (eClass.getClassifierID()) {
-        case SmartgridinputPackage.SCENARIO_STATE:
-            return createScenarioState();
-        case SmartgridinputPackage.ENTITY_STATE:
-            return createEntityState();
-        case SmartgridinputPackage.POWER_STATE:
-            return createPowerState();
-        default:
-            throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+            case SmartgridinputPackage.SCENARIO_STATE: return createScenarioState();
+            case SmartgridinputPackage.ENTITY_STATE: return createEntityState();
+            case SmartgridinputPackage.POWER_STATE: return createPowerState();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
+     * @generated NOT
      */
     @Override
     public ScenarioState createScenarioState() {
         ScenarioStateImpl scenarioState = new ScenarioStateImpl();
+        scenarioState.setId(generateRandom());
         return scenarioState;
+    }
+    
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated NOT
+     */
+    private String generateRandom() {
+        Random rand = new Random();
+        return Integer.toString(rand.nextInt(10000000));
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -89,7 +95,6 @@ public class SmartgridinputFactoryImpl extends EFactoryImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -100,17 +105,15 @@ public class SmartgridinputFactoryImpl extends EFactoryImpl implements Smartgrid
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public SmartgridinputPackage getSmartgridinputPackage() {
-        return (SmartgridinputPackage) getEPackage();
+        return (SmartgridinputPackage)getEPackage();
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @deprecated
      * @generated
      */

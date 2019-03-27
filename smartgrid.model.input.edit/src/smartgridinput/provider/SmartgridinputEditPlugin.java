@@ -8,39 +8,42 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import smartgridtopo.provider.SmartgridtopoEditPlugin;
 
 /**
- * This is the central singleton for the Smartgridinput edit plugin. <!-- begin-user-doc --> <!--
+ * This is the central singleton for the Smartgridinput edit plugin.
+ * <!-- begin-user-doc --> <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public final class SmartgridinputEditPlugin extends EMFPlugin {
     /**
-     * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Keep track of the singleton.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     public static final SmartgridinputEditPlugin INSTANCE = new SmartgridinputEditPlugin();
 
     /**
-     * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Keep track of the singleton.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     private static Implementation plugin;
 
     /**
-     * Create the instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * Create the instance.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
     public SmartgridinputEditPlugin() {
-        super(new ResourceLocator[] { SmartgridtopoEditPlugin.INSTANCE, });
+        super
+          (new ResourceLocator [] {
+             SmartgridtopoEditPlugin.INSTANCE,
+           });
     }
 
     /**
-     * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc --> <!--
+     * Returns the singleton instance of the Eclipse plugin.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @return the singleton instance.
      * @generated
      */
@@ -50,9 +53,9 @@ public final class SmartgridinputEditPlugin extends EMFPlugin {
     }
 
     /**
-     * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc --> <!--
+     * Returns the singleton instance of the Eclipse plugin.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @return the singleton instance.
      * @generated
      */
@@ -61,15 +64,15 @@ public final class SmartgridinputEditPlugin extends EMFPlugin {
     }
 
     /**
-     * The actual implementation of the Eclipse <b>Plugin</b>. <!-- begin-user-doc --> <!--
+     * The actual implementation of the Eclipse <b>Plugin</b>.
+     * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
      * @generated
      */
     public static class Implementation extends EclipsePlugin {
         /**
-         * Creates an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-         * 
+         * Creates an instance.
+         * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @generated
          */
         public Implementation() {

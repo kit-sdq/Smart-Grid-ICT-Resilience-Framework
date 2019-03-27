@@ -1,10 +1,7 @@
 package smartgrid.model.input.sirius.services;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 
-import smartgrid.model.input.sirius.InputModelHelper;
 import smartgrid.model.input.sirius.ScenarioStateHelper;
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
@@ -15,7 +12,6 @@ import smartgridtopo.SmartGridTopology;
 
 public class ShowInputNotationElements {
 
-	private ScenarioState state;
 
 	public ShowInputNotationElements() {
 
@@ -138,7 +134,6 @@ public class ShowInputNotationElements {
 
 		if (state != null) {
 			state.setIsDestroyed(!state.isIsDestroyed());
-			ScenarioStateHelper.refreshDiagram();
 			return state.isIsDestroyed();
 		}
 		return false;
@@ -149,7 +144,6 @@ public class ShowInputNotationElements {
 
 		if (state != null) {
 			state.setIsHacked(!state.isIsHacked());
-			ScenarioStateHelper.refreshDiagram();
 			return state.isIsHacked();
 		}
 		return false;
@@ -158,20 +152,6 @@ public class ShowInputNotationElements {
 	public void setPowerOutage(PowerGridNode node) {
 		PowerState state = ScenarioStateHelper.getCorrectPowerState(node);
 		state.setPowerOutage(!state.isPowerOutage());
-		ScenarioStateHelper.refreshDiagram();
 	}
 
-	/**
-	 * Old code, currently not used
-	 * 
-	 * @param topo
-	 * @return
-	 * @deprecated
-	 */
-	private ScenarioState getScenarioState(SmartGridTopology topo) {
-		URI uri = InputModelHelper.getStateURI();
-		Resource r = topo.eResource().getResourceSet().getResource(uri, true);
-		state = (ScenarioState) r.getContents().get(0);
-		return state;
-	}
 }

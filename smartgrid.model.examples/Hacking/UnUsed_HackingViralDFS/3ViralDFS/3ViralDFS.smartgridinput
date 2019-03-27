@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#1056676424"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#1347874617"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#421971596"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#430667820"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#2021900984"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#1631748407"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#550878095"/>
+  </EntityStates>
+  <EntityStates IsDestroyed="true">
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#546091115"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#1477425669"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#406514749"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralDFS.smartgridtopo#115275955"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralDFS.smartgridtopo#1696731263"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralDFS.smartgridtopo#267597945"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralDFS.smartgridtopo#617081098"/>
+  </EntityStates>
+  <PowerStates PowerOutage="true">
+    <Owner href="3ViralDFS.smartgridtopo#1089188469"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralDFS.smartgridtopo#221815156"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralDFS.smartgridtopo#1342727369"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralDFS.smartgridtopo#544820363"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralDFS.smartgridtopo#1423546835"/>
+  </PowerStates>
+  <Scenario href="3ViralDFS.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

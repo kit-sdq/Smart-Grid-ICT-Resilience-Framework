@@ -23,12 +23,14 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jface,
  org.eclipse.equinox.registry,
  org.eclipse.sirius.diagram,
- smartgrid.impactanalysis
+ smartgrid.impactanalysis,
+ org.eclipse.ui.navigator;bundle-version="3.7.100"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.debug.core,
  org.eclipse.debug.ui,
  org.eclipse.emf.common.ui,
  org.modelversioning.emfprofileapplication,
- smartgrid.simcontrol.baselib
+ smartgrid.simcontrol.baselib,
+ smartgridinput
 Export-Package: smartgrid.model.input.sirius

@@ -32,7 +32,6 @@ public class InputPowerChanger {
                         || (!required.isPowerOutage())) {
                     required.setPowerOutage(!required.isPowerOutage());
                 }
-                ScenarioStateHelper.refreshDiagram();
             }
             
         };

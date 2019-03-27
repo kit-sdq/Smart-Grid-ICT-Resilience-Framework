@@ -153,6 +153,21 @@
             </initialOperation>
           </ownedTools>
         </toolSections>
+        <toolSections name="General">
+          <ownedTools xsi:type="tool_1:ContainerDropDescription" name="Metamodel from Explorer into Layer" precondition="aql:true" dragSource="PROJECT_EXPLORER">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="new Sematic Expression">
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="Drop Metamodels" id="DropMetamodels">
+                  <parameters name="element" value="element"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
       </layers>
     </ownedRepresentationExtensions>
     <ownedJavaExtensions qualifiedClassName="smartgrid.model.input.sirius.services.ShowInputNotationElements"/>

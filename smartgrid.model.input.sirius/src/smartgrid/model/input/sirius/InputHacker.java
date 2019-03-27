@@ -5,7 +5,6 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
-import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.ui.tools.api.editor.DDiagramEditor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
@@ -32,7 +31,6 @@ public class InputHacker {
                         || (!required.isIsHacked())) {
                     required.setIsHacked(!required.isIsHacked());
                 }
-                ScenarioStateHelper.refreshDiagram();
             }
             
         };

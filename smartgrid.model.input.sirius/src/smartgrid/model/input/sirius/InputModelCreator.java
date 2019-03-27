@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -16,7 +14,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.gmf.runtime.emf.ui.services.modelingassistant.SelectExistingElementForSourceOperation;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.sirius.business.api.session.Session;
@@ -28,9 +25,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 
@@ -42,11 +36,12 @@ import smartgridtopo.NetworkEntity;
 import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
 
-public class SInputModelCreator {
+public class InputModelCreator {
 
     private final DSemanticDiagram diagramContainer;
+    private String returnInputID = null;
     
-    public SInputModelCreator(DSemanticDiagram rep) {
+    public InputModelCreator(DSemanticDiagram rep) {
         this.diagramContainer = rep;
     }
     
@@ -59,18 +54,7 @@ public class SInputModelCreator {
         IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
         DDiagramEditor editor = (DDiagramEditor) part;
         String session = editor.getSession().getSessionResource().getURI().toString();
-        String[] partsStrings = session.split("/");
-//        
-//        SmartGridTopology topology = (SmartGridTopology)diagramContainer.getTarget();
-//        String nameeditor=topology.getName();
-//        String string = diagramContainer.getUid();
-//        String string2 = diagramContainer.getDocumentation();
-//        String string3 = diagramContainer.getDescription().getRootExpression();
-//        String string4 = diagramContainer.getDescription().toString();
-//        IWorkbench string5 = PlatformUI.getWorkbench();
-//        IWorkbenchWindow window = string5.getActiveWorkbenchWindow();
-//        IWorkbenchPage page = window.getActivePage();
-        
+        String[] partsStrings = session.split("/");        
         String returnString = "/" + partsStrings[2] + "/" + partsStrings[3]; 
               
      return URI.createPlatformResourceURI(returnString, true);
@@ -113,14 +97,13 @@ public class SInputModelCreator {
      * Creates a new input model instance.
      *
      * @param isDefault
-     *            if parameter is true: a default model will becreated
+     *            if parameter is true: a default model will be created
      * @return return code which button was selected
      */
-    public URI createNewInputModel(final boolean isDefault) {
+    public String createNewInputModel(final boolean isDefault) {
         URI sessionResourceURI = getCurrentUri();
         Session createdSession = SessionManager.INSTANCE.getExistingSession(sessionResourceURI);
         final TransactionalEditingDomain domain = createdSession.getTransactionalEditingDomain();
-        //final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
         final EList<DDiagramElement> boList = diagramContainer.getDiagramElements();
         getCurrentUri();
         final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -138,10 +121,11 @@ public class SInputModelCreator {
             for (int i=2 ; i < uriSegments.length - 1; i++) {
                 path += uriSegments[i] + "/";
             }
+            
             uri = URI.createURI(path).appendSegment(dialog.getValue() + ".smartgridinput");
+            
         } else {
-            // TODO clear button muss enabled werden -> schwierig -> deshalb custom actions disabled
-            // solange kein input modell geladen ist
+            
             String uriSegments[]= sessionResourceURI.toString().split("/");
             uri = URI.createURI("/"+uriSegments[2]+"/").appendSegment("default.smartgridinput");
             if (doesFileExist(uri.path(), shell)) {
@@ -211,87 +195,21 @@ public class SInputModelCreator {
                 }
 
                 rs.getContents().add(domainModel);
-                IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-                DDiagramEditor editor = (DDiagramEditor) part;
-//                PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().get
-//                editor.
-//                diagramContainer.
-//                diagramContainer.getDiagramTypeProvider().getDiagram().getLink().getBusinessObjects().add(domainModel);
+                returnInputID = domainModel.getId();
                 try {
-                    rs.save(SInputModelCreator.this.createSaveOptions());
+                    rs.save(InputModelCreator.this.createSaveOptions());
                 } catch (final IOException e) {
                     e.printStackTrace();
                 }
             }
         };
         domain.getCommandStack().execute(c);
-        return uri;
+        
+        if (returnInputID == null) {
+            returnInputID = "";
+        }
+        return returnInputID;
     }
-    
-//    /**
-//     * Creates a new input model instance.
-//     *
-//     * @param isDefault
-//     *            if parameter is true: a default model will becreated
-//     * @return return code which button was selected
-//     */
-//    public int createNewInputModel1(final boolean isDefault) {
-//        //Session session = SessionManager.INSTANCE.getExistingSession(URI.createURI("/Users/mazenebada/runtime-Sirius10102018/Sirius"));
-//        //final TransactionalEditingDomain domain = session.getTransactionalEditingDomain();
-//        //final TransactionalEditingDomain domain = diagramContainer.getDiagramBehavior().getEditingDomain();
-//        final EList<DDiagramElement> boList = diagramContainer.getDiagramElements();
-//
-//        final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//        URI uri = null;
-//        if (!isDefault) {
-//            final InputDialog dialog = new InputDialog(shell, "Create new scenario state model", "Type your model name", "", null);
-//            final int returnCode = dialog.open();
-//
-//            if (returnCode == Window.CANCEL) {
-//                return Window.CANCEL;
-//            }
-//
-//            uri = URI.createURI("/Sirius/").appendSegment(dialog.getValue() + ".smartgridinput");
-//        } else {
-//            // TODO clear button muss enabled werden -> schwierig -> deshalb custom actions disabled
-//            // solange kein input modell geladen ist
-//            uri = URI.createURI("/Sirius/").appendSegment("default.smartgridinput");
-//            if (doesFileExist(uri.path(), shell)) {
-//                return Window.CANCEL;
-//            }
-//        }
-//
-//        // creates new input model depending on the current pictogram elements
-//
-//        final URI currentUri = uri;
-//        final ScenarioState domainModel = SmartgridinputFactory.eINSTANCE.createScenarioState();
-//        for (final EObject tmp : boList) {
-//            if (tmp instanceof SmartGridTopology) {
-//                domainModel.setScenario((SmartGridTopology) tmp);
-//            }
-//        }
-//
-//        final EList<DDiagramElement> dDiagramElements = diagramContainer.getOwnedDiagramElements();
-//        for (final DDiagramElement dDiagramElement : dDiagramElements) {
-//            final EObject obj = dDiagramElement.getSemanticElements().get(0);
-//            if (obj instanceof NetworkEntity) {
-//                final EntityState state = SmartgridinputFactory.eINSTANCE.createEntityState();
-//                state.setOwner((NetworkEntity) obj);
-//                domainModel.getEntityStates().add(state);
-//            }
-//            if (obj instanceof PowerGridNode) {
-//                final PowerState state = SmartgridinputFactory.eINSTANCE.createPowerState();
-//                state.setOwner((PowerGridNode) obj);
-//                domainModel.getPowerStates().add(state);
-//            }
-//        }
-//
-////            
-//
-//        
-//        return Window.OK;
-//    }
-    
    
 
 }

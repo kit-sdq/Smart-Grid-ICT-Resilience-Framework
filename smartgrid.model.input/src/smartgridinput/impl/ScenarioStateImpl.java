@@ -27,18 +27,38 @@ import smartgridtopo.SmartGridTopology;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link smartgridinput.impl.ScenarioStateImpl#getEntityStates <em>Entity States</em>}</li>
- * <li>{@link smartgridinput.impl.ScenarioStateImpl#getPowerStates <em>Power States</em>}</li>
- * <li>{@link smartgridinput.impl.ScenarioStateImpl#getScenario <em>Scenario</em>}</li>
+ *   <li>{@link smartgridinput.impl.ScenarioStateImpl#getId <em>Id</em>}</li>
+ *   <li>{@link smartgridinput.impl.ScenarioStateImpl#getEntityStates <em>Entity States</em>}</li>
+ *   <li>{@link smartgridinput.impl.ScenarioStateImpl#getPowerStates <em>Power States</em>}</li>
+ *   <li>{@link smartgridinput.impl.ScenarioStateImpl#getScenario <em>Scenario</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements ScenarioState {
     /**
-     * The cached value of the '{@link #getEntityStates() <em>Entity States</em>}' containment
-     * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
+    protected static final String ID_EDEFAULT = "0";
+
+    /**
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
+    protected String id = ID_EDEFAULT;
+
+    /**
+     * The cached value of the '{@link #getEntityStates() <em>Entity States</em>}' containment reference list.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see #getEntityStates()
      * @generated
      * @ordered
@@ -46,9 +66,8 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
     protected EList<EntityState> entityStates;
 
     /**
-     * The cached value of the '{@link #getPowerStates() <em>Power States</em>}' containment
-     * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
+     * The cached value of the '{@link #getPowerStates() <em>Power States</em>}' containment reference list.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see #getPowerStates()
      * @generated
      * @ordered
@@ -67,7 +86,6 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     protected ScenarioStateImpl() {
@@ -76,7 +94,6 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -85,41 +102,59 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setId(String newId) {
+        String oldId = id;
+        id = newId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SmartgridinputPackage.SCENARIO_STATE__ID, oldId, id));
+    }
+
+    /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EList<EntityState> getEntityStates() {
         if (entityStates == null) {
-            entityStates = new EObjectContainmentEList<>(EntityState.class, this, SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES);
+            entityStates = new EObjectContainmentEList<EntityState>(EntityState.class, this, SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES);
         }
         return entityStates;
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EList<PowerState> getPowerStates() {
         if (powerStates == null) {
-            powerStates = new EObjectContainmentEList<>(PowerState.class, this, SmartgridinputPackage.SCENARIO_STATE__POWER_STATES);
+            powerStates = new EObjectContainmentEList<PowerState>(PowerState.class, this, SmartgridinputPackage.SCENARIO_STATE__POWER_STATES);
         }
         return powerStates;
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public SmartGridTopology getScenario() {
         if (scenario != null && scenario.eIsProxy()) {
-            InternalEObject oldScenario = (InternalEObject) scenario;
-            scenario = (SmartGridTopology) eResolveProxy(oldScenario);
+            InternalEObject oldScenario = (InternalEObject)scenario;
+            scenario = (SmartGridTopology)eResolveProxy(oldScenario);
             if (scenario != oldScenario) {
                 if (eNotificationRequired())
                     eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartgridinputPackage.SCENARIO_STATE__SCENARIO, oldScenario, scenario));
@@ -130,7 +165,6 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     public SmartGridTopology basicGetScenario() {
@@ -139,7 +173,6 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -152,101 +185,121 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-        case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
-            return ((InternalEList<?>) getEntityStates()).basicRemove(otherEnd, msgs);
-        case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
-            return ((InternalEList<?>) getPowerStates()).basicRemove(otherEnd, msgs);
+            case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
+                return ((InternalEList<?>)getEntityStates()).basicRemove(otherEnd, msgs);
+            case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
+                return ((InternalEList<?>)getPowerStates()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-        case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
-            return getEntityStates();
-        case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
-            return getPowerStates();
-        case SmartgridinputPackage.SCENARIO_STATE__SCENARIO:
-            if (resolve)
-                return getScenario();
-            return basicGetScenario();
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                return getId();
+            case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
+                return getEntityStates();
+            case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
+                return getPowerStates();
+            case SmartgridinputPackage.SCENARIO_STATE__SCENARIO:
+                if (resolve) return getScenario();
+                return basicGetScenario();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-        case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
-            getEntityStates().clear();
-            getEntityStates().addAll((Collection<? extends EntityState>) newValue);
-            return;
-        case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
-            getPowerStates().clear();
-            getPowerStates().addAll((Collection<? extends PowerState>) newValue);
-            return;
-        case SmartgridinputPackage.SCENARIO_STATE__SCENARIO:
-            setScenario((SmartGridTopology) newValue);
-            return;
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                setId((String)newValue);
+                return;
+            case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
+                getEntityStates().clear();
+                getEntityStates().addAll((Collection<? extends EntityState>)newValue);
+                return;
+            case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
+                getPowerStates().clear();
+                getPowerStates().addAll((Collection<? extends PowerState>)newValue);
+                return;
+            case SmartgridinputPackage.SCENARIO_STATE__SCENARIO:
+                setScenario((SmartGridTopology)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-        case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
-            getEntityStates().clear();
-            return;
-        case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
-            getPowerStates().clear();
-            return;
-        case SmartgridinputPackage.SCENARIO_STATE__SCENARIO:
-            setScenario((SmartGridTopology) null);
-            return;
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                setId(ID_EDEFAULT);
+                return;
+            case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
+                getEntityStates().clear();
+                return;
+            case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
+                getPowerStates().clear();
+                return;
+            case SmartgridinputPackage.SCENARIO_STATE__SCENARIO:
+                setScenario((SmartGridTopology)null);
+                return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-        case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
-            return entityStates != null && !entityStates.isEmpty();
-        case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
-            return powerStates != null && !powerStates.isEmpty();
-        case SmartgridinputPackage.SCENARIO_STATE__SCENARIO:
-            return scenario != null;
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+            case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
+                return entityStates != null && !entityStates.isEmpty();
+            case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
+                return powerStates != null && !powerStates.isEmpty();
+            case SmartgridinputPackage.SCENARIO_STATE__SCENARIO:
+                return scenario != null;
         }
         return super.eIsSet(featureID);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
+
+        StringBuilder result = new StringBuilder(super.toString());
+        result.append(" (id: ");
+        result.append(id);
+        result.append(')');
+        return result.toString();
     }
 
 } //ScenarioStateImpl
