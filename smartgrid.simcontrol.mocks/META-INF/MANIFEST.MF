@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: smartgrid.simcontrol.mocks
-Bundle-SymbolicName: smartgrid.simcontrol.mocks;singleton:=true
+Bundle-SymbolicName: deprecated.smartgrid.simcontrol.mocks;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
@@ -9,5 +9,5 @@ Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  org.eclipse.debug.core,
  org.eclipse.core.runtime;bundle-version="3.10.0",
  org.apache.log4j,
- smartgrid.simcontrol.baselib;bundle-version="1.0.0",
- smartgrid.simcontrol.coupling;bundle-version="1.0.0"
+ deprecated.smartgrid.simcontrol.baselib;bundle-version="1.0.0",
+ deprecated.smartgrid.simcontrol.coupling;bundle-version="1.0.0"

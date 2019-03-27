@@ -8,6 +8,6 @@ Export-Package: smartgrid.helper
 Require-Bundle: smartgrid.model.output,
  smartgrid.model.input,
  org.eclipse.equinox.registry,
- smartgrid.simcontrol.baselib,
+ deprecated.smartgrid.simcontrol.baselib,
  org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.debug.core

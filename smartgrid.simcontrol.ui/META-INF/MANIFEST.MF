@@ -1,17 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: simcontrol.UI
-Bundle-SymbolicName: smartgrid.simcontrol.ui;singleton:=true
+Bundle-SymbolicName: deprecated.smartgrid.simcontrol.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: smartgrid.simcontrol.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- smartgrid.simcontrol.baselib,
+ deprecated.smartgrid.simcontrol.baselib,
  smartgrid.helper,
  org.eclipse.debug.ui,
- smartgrid.simcontrol,
+ deprecated.smartgrid.simcontrol,
  org.apache.log4j,
- smartgrid.simcontrol.coupling;bundle-version="1.0.0"
+ deprecated.smartgrid.simcontrol.coupling;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: smartgrid.simcontrol.ui
