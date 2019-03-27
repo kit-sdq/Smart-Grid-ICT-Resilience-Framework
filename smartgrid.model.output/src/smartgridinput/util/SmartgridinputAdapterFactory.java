@@ -72,6 +72,10 @@ public class SmartgridinputAdapterFactory extends AdapterFactoryImpl {
                 return createScenarioStateAdapter();
             }
             @Override
+            public Adapter caseIdentifier(Identifier object) {
+                return createIdentifierAdapter();
+            }
+            @Override
             public Adapter caseEntityState(EntityState object) {
                 return createEntityStateAdapter();
             }
@@ -110,6 +114,20 @@ public class SmartgridinputAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createScenarioStateAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link smartgridinput.Identifier <em>Identifier</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see smartgridinput.Identifier
+     * @generated
+     */
+    public Adapter createIdentifierAdapter() {
         return null;
     }
 

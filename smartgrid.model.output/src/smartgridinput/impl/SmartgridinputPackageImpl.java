@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import smartgridinput.EntityState;
+import smartgridinput.Identifier;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputFactory;
@@ -34,6 +35,13 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * @generated
      */
     private EClass scenarioStateEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass identifierEClass = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -160,6 +168,24 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getIdentifier() {
+        return identifierEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getIdentifier_Id() {
+        return (EAttribute)identifierEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EClass getEntityState() {
         return entityStateEClass;
     }
@@ -251,6 +277,9 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
         createEReference(scenarioStateEClass, SCENARIO_STATE__POWER_STATES);
         createEReference(scenarioStateEClass, SCENARIO_STATE__SCENARIO);
 
+        identifierEClass = createEClass(IDENTIFIER);
+        createEAttribute(identifierEClass, IDENTIFIER__ID);
+
         entityStateEClass = createEClass(ENTITY_STATE);
         createEAttribute(entityStateEClass, ENTITY_STATE__IS_DESTROYED);
         createEAttribute(entityStateEClass, ENTITY_STATE__IS_HACKED);
@@ -292,12 +321,16 @@ public class SmartgridinputPackageImpl extends EPackageImpl implements Smartgrid
         // Set bounds for type parameters
 
         // Add supertypes to classes
+        scenarioStateEClass.getESuperTypes().add(this.getIdentifier());
 
         // Initialize classes, features, and operations; add parameters
         initEClass(scenarioStateEClass, ScenarioState.class, "ScenarioState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEReference(getScenarioState_EntityStates(), this.getEntityState(), null, "EntityStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getScenarioState_PowerStates(), this.getPowerState(), null, "PowerStates", null, 0, -1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getScenarioState_Scenario(), theSmartgridtopoPackage.getSmartGridTopology(), null, "Scenario", null, 0, 1, ScenarioState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(identifierEClass, Identifier.class, "Identifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", "0", 1, 1, Identifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
         initEClass(entityStateEClass, EntityState.class, "EntityState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getEntityState_IsDestroyed(), ecorePackage.getEBoolean(), "IsDestroyed", null, 1, 1, EntityState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

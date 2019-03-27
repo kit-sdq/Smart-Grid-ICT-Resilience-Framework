@@ -10,8 +10,6 @@ import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.ui.tools.api.editor.DDiagramEditor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 
 import smartgrid.model.helper.output.LoadOutputModelConformityHelper;
@@ -22,61 +20,38 @@ import smartgridtopo.SmartGridTopology;
 
 public final class ScenarioResultHelper {
 
+    private static DDiagramEditor editor;
 	private static Session session;
 
 	public static ScenarioResult getAndCheckScnearioResult(SmartGridTopology topo) {
+	    initalizeEditor();
 		ScenarioResult result = null;
-		String outString="";
+
+		String attachedOutputID = "";
+        
+        if (getAttachedOutput() == null || getAttachedOutput().equals("")) {
+            return null;
+        } else {
+            attachedOutputID = getAttachedOutput();
+        }
 		
-//		if (getAttachedOutput().equals("")) {
-//            return null;
-//        } else if (getAttachedOutput() == null) {
-//        } 
-//		else {
-//            outString = getAttachedOutput();
-//        }
-		
-		// Needs sync execution, otherwise editor can not be found
-		Display.getDefault().syncExec(new Runnable() {
-			@Override
-			public void run() {
-				IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-						.getActiveEditor();
-				DDiagramEditor editor = (DDiagramEditor) part;
-				session = editor.getSession();
-			}
-		});
 		Collection<Resource> coll = session.getSemanticResources();
 		Iterator<Resource> it = coll.iterator();
+		boolean found = false;
 		while (it.hasNext()) {
-			Resource sr = it.next();
-			if (sr.getContents().get(0) instanceof ScenarioResult) {
-				result = (ScenarioResult) sr.getContents().get(0);
-				if (LoadOutputModelConformityHelper.checkOutputModelConformity(result, topo)) {
-				    String resourceUriString = sr.getURI().toString();
-				    String newPath = "";
-				    if (resourceUriString.split("/")[0].contains("platform")) {
-                        String pathSegments[]= resourceUriString.toString().split("/");
-                        for (int i=2; i<pathSegments.length; i++) {
-                            if (i==2)
-                                newPath += pathSegments[i];
-                            else
-                                newPath += "/"+pathSegments[i];
-                        }
-                    }
-				    
-				        if ((( resourceUriString.split("/")[0].contains("platform") && outString.contains(newPath)) ||
-	                            resourceUriString.equals(outString.replace("//", "/")) || resourceUriString.endsWith(outString.replace("//", "/")))) {
-				            break;
-				        }
-				    
-				}
-			}
-		}
-		if (result == null || !LoadOutputModelConformityHelper.checkOutputModelConformitySimple(result, topo)) {
-			return null;
-		}
-		return result;
+            Resource sr = it.next();
+            if (sr.getContents().get(0) instanceof ScenarioResult) {
+                result = (ScenarioResult) sr.getContents().get(0);
+                if (result.getId().equals(attachedOutputID)) {
+                    found = true;
+                    break;          
+                }
+            }
+        }
+        if (found == false || result == null || !LoadOutputModelConformityHelper.checkOutputModelConformitySimple(result, topo)) {
+            return null;
+        }
+        return result;
 	}
 
 	public static EntityState getCorrectEntityState(NetworkEntity node) {
@@ -92,27 +67,32 @@ public final class ScenarioResultHelper {
 		}
 		return required;
 	}
-
-	public static void refreshDiagram() {
-		IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		DDiagramEditor editor = (DDiagramEditor) part;
-		DSemanticDiagram rep = (DSemanticDiagram) editor.getRepresentation();
-		//rep.refresh();
-	}
 	
+	
+   private static void initalizeEditor() {
+        // Needs sync execution, otherwise editor can not be found
+        Display.getDefault().syncExec(new Runnable() {
+            @Override
+            public void run() {
+                IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+                        .getActiveEditor();
+                DDiagramEditor deditor = (DDiagramEditor) part;
+                editor = deditor;
+                session = deditor.getSession();
+
+            }
+        });
+        
+   }
+
     public static String getAttachedOutput() {
-        IWorkbench part1 = PlatformUI.getWorkbench();
-        IWorkbenchPage part2 = part1.getActiveWorkbenchWindow().getActivePage();
-        IEditorPart part = part2.getActiveEditor();
-        DDiagramEditor editor = (DDiagramEditor) part;
         DSemanticDiagram rep = (DSemanticDiagram) editor.getRepresentation();
         String returnString;
         try {
             returnString = rep.getDAnnotation("attached").getDetails().get("output");
         } catch (Exception e) {
             return null;
-        }
-        
+        }      
         return returnString;
     }
 }

@@ -12,14 +12,10 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -40,6 +36,7 @@ import org.eclipse.ui.PlatformUI;
 import org.modelversioning.emfprofileapplication.EMFProfileApplicationPackage;
 
 import smartgrid.model.helper.sirius.LoadExtensionModel;
+import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
 import smartgridoutput.SmartgridoutputPackage;
 import smartgridtopo.SmartGridTopology;
@@ -47,6 +44,7 @@ import smartgridtopo.SmartGridTopology;
 public class LoadOutputModel extends LoadExtensionModel {
 
 	private Session session;
+	protected String outputID;
 
 	public LoadOutputModel() {
 	}
@@ -79,7 +77,7 @@ public class LoadOutputModel extends LoadExtensionModel {
 			Iterator<Resource> it = coll.iterator();
 			while (it.hasNext()) {
 				Resource sr = it.next();
-				if (sr.getContents().get(0) instanceof ScenarioResult) {
+				if (sr.getContents().get(0) instanceof ScenarioState) {
 					result = true;
 					break;
 				}
@@ -103,12 +101,12 @@ public class LoadOutputModel extends LoadExtensionModel {
         final String fileSelected = dialog.open();
         String ScenarioTopologieId = "";
         boolean inWorkSpace = false;
-        String path="";
-        String uriString="";
+
         if (fileSelected != null) {
             try {
                 ScenarioResult uploadedScenarioResult = loadOutput(fileSelected);
                 result=uploadedScenarioResult;
+                outputID = result.getId();
                 ScenarioTopologieId = uploadedScenarioResult.getScenario().getId();
                 if (!ScenarioTopologieId.equals(getCurrentId())) {
                     MessageDialog.openError(shell, "Error", "The chosen Output doesn't conform to this topologie");
@@ -119,7 +117,6 @@ public class LoadOutputModel extends LoadExtensionModel {
                 String pString = workspaceDirectory.getPath();
 
                 if (fileSelected.contains(pString)) { //means that it is in the workspace
-                    uriString = getOutputPath(uploadedScenarioResult, uploadedScenarioResult.getScenario(),fileSelected);
                     inWorkSpace = true;
                 }
             } catch (Exception e) {
@@ -134,14 +131,13 @@ public class LoadOutputModel extends LoadExtensionModel {
             String dest = workspaceDirectory.getPath();
             dest = dest + "/" + getCurrentProject() + "/" + src.getName();
 
-            ResourceSet set = new ResourceSetImpl();
-            final Resource r = set.createResource(URI.createFileURI(dest));
+
+
 
             final String dess  = dest;
             IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
                     .getActiveEditor();
             editor = (DDiagramEditor) part;
-            final Session session = editor.getSession();
             TransactionalEditingDomain domain = (TransactionalEditingDomain) editor.getEditingDomain();
             final RecordingCommand cmd = new RecordingCommand(domain) {
             final ResourceSet set = domain.getResourceSet();
@@ -161,6 +157,7 @@ public class LoadOutputModel extends LoadExtensionModel {
                     final ScenarioResult domainModel = result;
                     domainModel.setScenario((SmartGridTopology)((DSemanticDiagram) editor.getRepresentation()).getTarget());
                     rs.getContents().add(domainModel);
+                    outputID = domainModel.getId();
                     try {
                         rs.save(LoadOutputModel.this.createSaveOptions());
                     } catch (final IOException e) {
@@ -169,12 +166,8 @@ public class LoadOutputModel extends LoadExtensionModel {
                 }
             };
             domain.getCommandStack().execute(cmd);
-                uriString = dest;
             }
             
-            
-            path = "/Users/mazenebada/runtime-New_configuration(2)/Sirius/";
-            path += "topology" + ScenarioTopologieId + ".txt";
 
             URI sessionResourceURI = getCurrentUri();
             Session createdSession = SessionManager.INSTANCE.getExistingSession(sessionResourceURI);
@@ -183,7 +176,7 @@ public class LoadOutputModel extends LoadExtensionModel {
             IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
             DDiagramEditor editor = (DDiagramEditor) part;
             DSemanticDiagram rep = (DSemanticDiagram) editor.getRepresentation();
-            final String uri = uriString;
+
                 final RecordingCommand c = new RecordingCommand(domain) {
                     @Override
                     protected void doExecute() {
@@ -193,13 +186,13 @@ public class LoadOutputModel extends LoadExtensionModel {
                             outputModel = DescriptionFactory.eINSTANCE.createDAnnotation();
                             outputModel.setSource("attached");
                             rep.getEAnnotations().add(outputModel);
-                            outputModel.getDetails().put("output", uri);
+                            outputModel.getDetails().put("output", outputID);
                         } else {
                             
                             if (outputModel.getDetails().containsKey("output")) {
                                 outputModel.getDetails().removeKey("output");
                             }
-                            outputModel.getDetails().put("output", uri);
+                            outputModel.getDetails().put("output", outputID);
                         }
                     }
                 };
@@ -237,40 +230,8 @@ public class LoadOutputModel extends LoadExtensionModel {
         return ((SmartGridTopology)rep.getTarget()).getId();
     }
  
-    private String getOutputPath(ScenarioResult result, SmartGridTopology topology, String fileSelectedPath) {
-
-        IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-        DDiagramEditor editor = (DDiagramEditor) part;
-        EList<Resource> objects2 = editor.getSession().getSessionResource().getResourceSet().getResources();
-        for (Resource resource : objects2) {
-            URI uri = resource.getURI();
-            if (uri.toString().endsWith(".smartgridoutput")) {
-                EList<EObject> objects = resource.getContents();
-                ScenarioResult result2 = (ScenarioResult)objects.get(0);
-                String path = uri.toString().replace("//", "/");
-                String pathSegments[]= path.toString().split("/");
-                String newPath = "/";
-                for (int i=2; i<pathSegments.length; i++) {
-                    if (i==2)
-                        newPath += pathSegments[i];
-                    else
-                        newPath += "/"+pathSegments[i];
-                }
-                if(path.contains("platform")) {
-                    path=newPath;
-                }
-                if (fileSelectedPath.contains(path) && result2.getScenario().getId().equals(topology.getId())) {
-                    return path;
-                }
-            }
-           
-        }
-        
-        return null;
-    }
-    
+   
     private String getCurrentProject() {
-        String urlString = getCurrentUri().toString();
         String projectString = getCurrentUri().segment(1);
         return projectString;
     }

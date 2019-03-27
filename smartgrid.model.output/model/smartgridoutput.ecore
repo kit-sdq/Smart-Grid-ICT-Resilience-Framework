@@ -2,13 +2,18 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smartgridoutput" nsURI="http://sdq.ipd.uka.de/smartgridoutput/1.0"
     nsPrefix="smartgridoutput">
-  <eClassifiers xsi:type="ecore:EClass" name="ScenarioResult">
+  <eClassifiers xsi:type="ecore:EClass" name="ScenarioResult" eSuperTypes="#//Identifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="States" upperBound="-1"
         eType="#//EntityState" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Clusters" upperBound="-1"
         eType="#//Cluster" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Scenario" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//SmartGridTopology"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Input" eType="ecore:EClass ../../smartgrid.model.input/model/smartgridinput.ecore#//ScenarioState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Identifier" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0" iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EntityState" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="Owner" lowerBound="1" eType="ecore:EClass ../../smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity"/>

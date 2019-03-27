@@ -13,6 +13,7 @@ import smartgridinput.impl.SmartgridinputPackageImpl;
 import smartgridoutput.Cluster;
 import smartgridoutput.Defect;
 import smartgridoutput.EntityState;
+import smartgridoutput.Identifier;
 import smartgridoutput.NoPower;
 import smartgridoutput.NoUplink;
 import smartgridoutput.Offline;
@@ -33,6 +34,13 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
      * @generated
      */
     private EClass scenarioResultEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass identifierEClass = null;
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -195,6 +203,24 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getIdentifier() {
+        return identifierEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getIdentifier_Id() {
+        return (EAttribute)identifierEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
@@ -352,6 +378,9 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
         createEReference(scenarioResultEClass, SCENARIO_RESULT__SCENARIO);
         createEReference(scenarioResultEClass, SCENARIO_RESULT__INPUT);
 
+        identifierEClass = createEClass(IDENTIFIER);
+        createEAttribute(identifierEClass, IDENTIFIER__ID);
+
         entityStateEClass = createEClass(ENTITY_STATE);
         createEReference(entityStateEClass, ENTITY_STATE__OWNER);
 
@@ -405,6 +434,7 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
         // Set bounds for type parameters
 
         // Add supertypes to classes
+        scenarioResultEClass.getESuperTypes().add(this.getIdentifier());
         onlineEClass.getESuperTypes().add(this.getOn());
         defectEClass.getESuperTypes().add(this.getEntityState());
         defectEClass.getESuperTypes().add(this.getOffline());
@@ -420,6 +450,9 @@ public class SmartgridoutputPackageImpl extends EPackageImpl implements Smartgri
         initEReference(getScenarioResult_Clusters(), this.getCluster(), null, "Clusters", null, 0, -1, ScenarioResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getScenarioResult_Scenario(), theSmartgridtopoPackage.getSmartGridTopology(), null, "Scenario", null, 0, 1, ScenarioResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getScenarioResult_Input(), theSmartgridinputPackage.getScenarioState(), null, "Input", null, 0, 1, ScenarioResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(identifierEClass, Identifier.class, "Identifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", "0", 1, 1, Identifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
         initEClass(entityStateEClass, EntityState.class, "EntityState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEReference(getEntityState_Owner(), theSmartgridtopoPackage.getNetworkEntity(), null, "Owner", null, 1, 1, EntityState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

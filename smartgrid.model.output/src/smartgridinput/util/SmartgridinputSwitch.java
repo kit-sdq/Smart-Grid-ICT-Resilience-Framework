@@ -69,6 +69,13 @@ public class SmartgridinputSwitch<T> extends Switch<T> {
             case SmartgridinputPackage.SCENARIO_STATE: {
                 ScenarioState scenarioState = (ScenarioState)theEObject;
                 T result = caseScenarioState(scenarioState);
+                if (result == null) result = caseIdentifier(scenarioState);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case SmartgridinputPackage.IDENTIFIER: {
+                Identifier identifier = (Identifier)theEObject;
+                T result = caseIdentifier(identifier);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -100,6 +107,21 @@ public class SmartgridinputSwitch<T> extends Switch<T> {
      * @generated
      */
     public T caseScenarioState(ScenarioState object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Identifier</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Identifier</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseIdentifier(Identifier object) {
         return null;
     }
 

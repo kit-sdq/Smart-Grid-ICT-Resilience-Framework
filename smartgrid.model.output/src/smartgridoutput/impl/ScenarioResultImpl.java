@@ -28,6 +28,7 @@ import smartgridtopo.SmartGridTopology;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link smartgridoutput.impl.ScenarioResultImpl#getId <em>Id</em>}</li>
  *   <li>{@link smartgridoutput.impl.ScenarioResultImpl#getStates <em>States</em>}</li>
  *   <li>{@link smartgridoutput.impl.ScenarioResultImpl#getClusters <em>Clusters</em>}</li>
  *   <li>{@link smartgridoutput.impl.ScenarioResultImpl#getScenario <em>Scenario</em>}</li>
@@ -37,6 +38,26 @@ import smartgridtopo.SmartGridTopology;
  * @generated
  */
 public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements ScenarioResult {
+    /**
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
+    protected static final String ID_EDEFAULT = "0";
+
+    /**
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
+    protected String id = ID_EDEFAULT;
+
     /**
      * The cached value of the '{@link #getStates() <em>States</em>}' containment reference list.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -90,6 +111,27 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
     @Override
     protected EClass eStaticClass() {
         return SmartgridoutputPackage.Literals.SCENARIO_RESULT;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setId(String newId) {
+        String oldId = id;
+        id = newId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SmartgridoutputPackage.SCENARIO_RESULT__ID, oldId, id));
     }
 
     /**
@@ -213,6 +255,8 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
+            case SmartgridoutputPackage.SCENARIO_RESULT__ID:
+                return getId();
             case SmartgridoutputPackage.SCENARIO_RESULT__STATES:
                 return getStates();
             case SmartgridoutputPackage.SCENARIO_RESULT__CLUSTERS:
@@ -235,6 +279,9 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
+            case SmartgridoutputPackage.SCENARIO_RESULT__ID:
+                setId((String)newValue);
+                return;
             case SmartgridoutputPackage.SCENARIO_RESULT__STATES:
                 getStates().clear();
                 getStates().addAll((Collection<? extends EntityState>)newValue);
@@ -260,6 +307,9 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
+            case SmartgridoutputPackage.SCENARIO_RESULT__ID:
+                setId(ID_EDEFAULT);
+                return;
             case SmartgridoutputPackage.SCENARIO_RESULT__STATES:
                 getStates().clear();
                 return;
@@ -283,6 +333,8 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
+            case SmartgridoutputPackage.SCENARIO_RESULT__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
             case SmartgridoutputPackage.SCENARIO_RESULT__STATES:
                 return states != null && !states.isEmpty();
             case SmartgridoutputPackage.SCENARIO_RESULT__CLUSTERS:
@@ -293,6 +345,22 @@ public class ScenarioResultImpl extends MinimalEObjectImpl.Container implements 
                 return input != null;
         }
         return super.eIsSet(featureID);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
+
+        StringBuilder result = new StringBuilder(super.toString());
+        result.append(" (id: ");
+        result.append(id);
+        result.append(')');
+        return result.toString();
     }
 
 } //ScenarioResultImpl

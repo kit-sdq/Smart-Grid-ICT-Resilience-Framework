@@ -52,6 +52,43 @@ public interface SmartgridoutputPackage extends EPackage {
     SmartgridoutputPackage eINSTANCE = smartgridoutput.impl.SmartgridoutputPackageImpl.init();
 
     /**
+     * The meta object id for the '{@link smartgridoutput.Identifier <em>Identifier</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see smartgridoutput.Identifier
+     * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getIdentifier()
+     * @generated
+     */
+    int IDENTIFIER = 1;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IDENTIFIER__ID = 0;
+
+    /**
+     * The number of structural features of the '<em>Identifier</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IDENTIFIER_FEATURE_COUNT = 1;
+
+    /**
+     * The number of operations of the '<em>Identifier</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IDENTIFIER_OPERATION_COUNT = 0;
+
+    /**
      * The meta object id for the '{@link smartgridoutput.impl.ScenarioResultImpl <em>Scenario Result</em>}' class.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @see smartgridoutput.impl.ScenarioResultImpl
@@ -61,13 +98,22 @@ public interface SmartgridoutputPackage extends EPackage {
     int SCENARIO_RESULT = 0;
 
     /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCENARIO_RESULT__ID = IDENTIFIER__ID;
+
+    /**
      * The feature id for the '<em><b>States</b></em>' containment reference list. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
      * @generated
      * @ordered
      */
-    int SCENARIO_RESULT__STATES = 0;
+    int SCENARIO_RESULT__STATES = IDENTIFIER_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Clusters</b></em>' containment reference list. <!--
@@ -76,7 +122,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_RESULT__CLUSTERS = 1;
+    int SCENARIO_RESULT__CLUSTERS = IDENTIFIER_FEATURE_COUNT + 1;
 
     /**
      * The feature id for the '<em><b>Scenario</b></em>' reference.
@@ -85,7 +131,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_RESULT__SCENARIO = 2;
+    int SCENARIO_RESULT__SCENARIO = IDENTIFIER_FEATURE_COUNT + 2;
 
     /**
      * The feature id for the '<em><b>Input</b></em>' reference.
@@ -94,7 +140,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_RESULT__INPUT = 3;
+    int SCENARIO_RESULT__INPUT = IDENTIFIER_FEATURE_COUNT + 3;
 
     /**
      * The number of structural features of the '<em>Scenario Result</em>' class. <!--
@@ -103,7 +149,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_RESULT_FEATURE_COUNT = 4;
+    int SCENARIO_RESULT_FEATURE_COUNT = IDENTIFIER_FEATURE_COUNT + 4;
 
     /**
      * The number of operations of the '<em>Scenario Result</em>' class.
@@ -112,7 +158,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_RESULT_OPERATION_COUNT = 0;
+    int SCENARIO_RESULT_OPERATION_COUNT = IDENTIFIER_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link smartgridoutput.impl.EntityStateImpl <em>Entity State</em>}' class.
@@ -121,7 +167,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getEntityState()
      * @generated
      */
-    int ENTITY_STATE = 1;
+    int ENTITY_STATE = 2;
 
     /**
      * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -158,7 +204,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getOn()
      * @generated
      */
-    int ON = 8;
+    int ON = 9;
 
     /**
      * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -212,7 +258,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getOnline()
      * @generated
      */
-    int ONLINE = 2;
+    int ONLINE = 3;
 
     /**
      * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -266,7 +312,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getDefect()
      * @generated
      */
-    int DEFECT = 3;
+    int DEFECT = 4;
 
     /**
      * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -302,7 +348,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getNoPower()
      * @generated
      */
-    int NO_POWER = 4;
+    int NO_POWER = 5;
 
     /**
      * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -338,7 +384,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getOffline()
      * @generated
      */
-    int OFFLINE = 6;
+    int OFFLINE = 7;
 
     /**
      * The number of structural features of the '<em>Offline</em>' class.
@@ -365,7 +411,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getNoUplink()
      * @generated
      */
-    int NO_UPLINK = 5;
+    int NO_UPLINK = 6;
 
     /**
      * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -419,7 +465,7 @@ public interface SmartgridoutputPackage extends EPackage {
      * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getCluster()
      * @generated
      */
-    int CLUSTER = 7;
+    int CLUSTER = 8;
 
     /**
      * The feature id for the '<em><b>Control Center Count</b></em>' attribute.
@@ -517,6 +563,27 @@ public interface SmartgridoutputPackage extends EPackage {
      * @generated
      */
     EReference getScenarioResult_Input();
+
+    /**
+     * Returns the meta object for class '{@link smartgridoutput.Identifier <em>Identifier</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Identifier</em>'.
+     * @see smartgridoutput.Identifier
+     * @generated
+     */
+    EClass getIdentifier();
+
+    /**
+     * Returns the meta object for the attribute '{@link smartgridoutput.Identifier#getId <em>Id</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Id</em>'.
+     * @see smartgridoutput.Identifier#getId()
+     * @see #getIdentifier()
+     * @generated
+     */
+    EAttribute getIdentifier_Id();
 
     /**
      * Returns the meta object for class '{@link smartgridoutput.EntityState <em>Entity State</em>}'.
@@ -719,6 +786,24 @@ public interface SmartgridoutputPackage extends EPackage {
          * @generated
          */
         EReference SCENARIO_RESULT__INPUT = eINSTANCE.getScenarioResult_Input();
+
+        /**
+         * The meta object literal for the '{@link smartgridoutput.Identifier <em>Identifier</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see smartgridoutput.Identifier
+         * @see smartgridoutput.impl.SmartgridoutputPackageImpl#getIdentifier()
+         * @generated
+         */
+        EClass IDENTIFIER = eINSTANCE.getIdentifier();
+
+        /**
+         * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute IDENTIFIER__ID = eINSTANCE.getIdentifier_Id();
 
         /**
          * The meta object literal for the '{@link smartgridoutput.impl.EntityStateImpl <em>Entity State</em>}' class.

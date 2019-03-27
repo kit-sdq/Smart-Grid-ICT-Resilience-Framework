@@ -16,6 +16,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -52,10 +53,33 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
         if (itemPropertyDescriptors == null) {
             super.getPropertyDescriptors(object);
 
+            addIdPropertyDescriptor(object);
             addScenarioPropertyDescriptor(object);
             addInputPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
+    }
+
+    /**
+     * This adds a property descriptor for the Id feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addIdPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_Identifier_id_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_Identifier_id_feature", "_UI_Identifier_type"),
+                 SmartgridoutputPackage.Literals.IDENTIFIER__ID,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
     }
 
     /**
@@ -151,7 +175,10 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
      */
     @Override
     public String getText(Object object) {
-        return getString("_UI_ScenarioResult_type");
+        String label = ((ScenarioResult)object).getId();
+        return label == null || label.length() == 0 ?
+            getString("_UI_ScenarioResult_type") :
+            getString("_UI_ScenarioResult_type") + " " + label;
     }
 
     /**
@@ -165,6 +192,9 @@ public class ScenarioResultItemProvider extends ItemProviderAdapter
         updateChildren(notification);
 
         switch (notification.getFeatureID(ScenarioResult.class)) {
+            case SmartgridoutputPackage.SCENARIO_RESULT__ID:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+                return;
             case SmartgridoutputPackage.SCENARIO_RESULT__STATES:
             case SmartgridoutputPackage.SCENARIO_RESULT__CLUSTERS:
                 fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

@@ -33,6 +33,7 @@ import smartgridtopo.SmartGridTopology;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link smartgridinput.impl.ScenarioStateImpl#getId <em>Id</em>}</li>
  *   <li>{@link smartgridinput.impl.ScenarioStateImpl#getEntityStates <em>Entity States</em>}</li>
  *   <li>{@link smartgridinput.impl.ScenarioStateImpl#getPowerStates <em>Power States</em>}</li>
  *   <li>{@link smartgridinput.impl.ScenarioStateImpl#getScenario <em>Scenario</em>}</li>
@@ -41,6 +42,26 @@ import smartgridtopo.SmartGridTopology;
  * @generated
  */
 public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements ScenarioState {
+    /**
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
+    protected static final String ID_EDEFAULT = "0";
+
+    /**
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
+    protected String id = ID_EDEFAULT;
+
     /**
      * The cached value of the '{@link #getEntityStates() <em>Entity States</em>}' containment reference list.
      * <!-- begin-user-doc -->
@@ -88,6 +109,27 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
     @Override
     protected EClass eStaticClass() {
         return SmartgridinputPackage.Literals.SCENARIO_STATE;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setId(String newId) {
+        String oldId = id;
+        id = newId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SmartgridinputPackage.SCENARIO_STATE__ID, oldId, id));
     }
 
     /**
@@ -176,6 +218,8 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                return getId();
             case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
                 return getEntityStates();
             case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
@@ -196,6 +240,9 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                setId((String)newValue);
+                return;
             case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
                 getEntityStates().clear();
                 getEntityStates().addAll((Collection<? extends EntityState>)newValue);
@@ -219,6 +266,9 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                setId(ID_EDEFAULT);
+                return;
             case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
                 getEntityStates().clear();
                 return;
@@ -240,6 +290,8 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
+            case SmartgridinputPackage.SCENARIO_STATE__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
             case SmartgridinputPackage.SCENARIO_STATE__ENTITY_STATES:
                 return entityStates != null && !entityStates.isEmpty();
             case SmartgridinputPackage.SCENARIO_STATE__POWER_STATES:
@@ -248,6 +300,22 @@ public class ScenarioStateImpl extends MinimalEObjectImpl.Container implements S
                 return scenario != null;
         }
         return super.eIsSet(featureID);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
+
+        StringBuilder result = new StringBuilder(super.toString());
+        result.append(" (id: ");
+        result.append(id);
+        result.append(')');
+        return result.toString();
     }
 
 } //ScenarioStateImpl

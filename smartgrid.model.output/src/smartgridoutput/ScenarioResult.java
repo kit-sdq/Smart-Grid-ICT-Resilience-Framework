@@ -3,8 +3,6 @@
 package smartgridoutput;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-
 import smartgridinput.ScenarioState;
 import smartgridtopo.SmartGridTopology;
 
@@ -26,7 +24,7 @@ import smartgridtopo.SmartGridTopology;
  * @model
  * @generated
  */
-public interface ScenarioResult extends EObject {
+public interface ScenarioResult extends Identifier {
     /**
      * Returns the value of the '<em><b>States</b></em>' containment reference list.
      * The list contents are of type {@link smartgridoutput.EntityState}.

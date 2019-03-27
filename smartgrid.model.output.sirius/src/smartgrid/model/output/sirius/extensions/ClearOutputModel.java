@@ -1,11 +1,5 @@
 package smartgrid.model.output.sirius.extensions;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -22,8 +16,6 @@ import org.eclipse.sirius.viewpoint.description.DescriptionFactory;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
-import smartgridtopo.SmartGridTopology;
-
 public class ClearOutputModel extends AbstractHandler {
 
     @Override
@@ -32,14 +24,12 @@ public class ClearOutputModel extends AbstractHandler {
         DDiagramEditor editor = (DDiagramEditor) part;
         DSemanticDiagram rep = (DSemanticDiagram) editor.getRepresentation();
         
-        String path = "/Users/mazenebada/runtime-New_configuration(2)/Sirius/";
-        path += "topology" + ((SmartGridTopology)rep.getTarget()).getId() + ".txt";
         
         URI sessionResourceURI = getCurrentUri();
         Session createdSession = SessionManager.INSTANCE.getExistingSession(sessionResourceURI);
         final TransactionalEditingDomain domain = createdSession.getTransactionalEditingDomain();
 
-        final String uri = "";
+        final String emptyID = "";
             final RecordingCommand c = new RecordingCommand(domain) {
                 @Override
                 protected void doExecute() {
@@ -49,12 +39,12 @@ public class ClearOutputModel extends AbstractHandler {
                         outputModel = DescriptionFactory.eINSTANCE.createDAnnotation();
                         outputModel.setSource("attached");
                         rep.getEAnnotations().add(outputModel);
-                        outputModel.getDetails().put("output", uri);
+                        outputModel.getDetails().put("output", emptyID);
                     } else {
                         if (outputModel.getDetails().containsKey("output")) {
                             outputModel.getDetails().removeKey("output");
                         }
-                        outputModel.getDetails().put("output", uri);
+                        outputModel.getDetails().put("output", emptyID);
                     }
                 }
             };

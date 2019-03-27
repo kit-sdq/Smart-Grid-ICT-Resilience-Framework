@@ -3,9 +3,6 @@
 package smartgridinput;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
-
 import smartgridtopo.SmartGridTopology;
 
 /**
@@ -26,7 +23,7 @@ import smartgridtopo.SmartGridTopology;
  * @model
  * @generated
  */
-public interface ScenarioState extends EObject {
+public interface ScenarioState extends Identifier {
     /**
      * Returns the value of the '<em><b>Entity States</b></em>' containment reference list.
      * The list contents are of type {@link smartgridinput.EntityState}.

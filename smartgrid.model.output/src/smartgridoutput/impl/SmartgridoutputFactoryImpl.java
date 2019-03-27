@@ -2,6 +2,8 @@
  */
 package smartgridoutput.impl;
 
+import java.util.Random;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -68,14 +70,25 @@ public class SmartgridoutputFactoryImpl extends EFactoryImpl implements Smartgri
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * @generated
+     * @generated NOT
      */
     @Override
     public ScenarioResult createScenarioResult() {
         ScenarioResultImpl scenarioResult = new ScenarioResultImpl();
+        scenarioResult.setId(generateRandom());
         return scenarioResult;
     }
 
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated NOT
+     */
+    private String generateRandom() {
+        Random rand = new Random();
+        return Integer.toString(rand.nextInt(10000000));
+    }
+    
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated

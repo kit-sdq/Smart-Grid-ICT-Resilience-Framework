@@ -5,6 +5,7 @@ package smartgridoutput.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import smartgridoutput.*;
 import smartgridoutput.Cluster;
 import smartgridoutput.Defect;
 import smartgridoutput.EntityState;
@@ -69,6 +70,13 @@ public class SmartgridoutputSwitch<T> extends Switch<T> {
             case SmartgridoutputPackage.SCENARIO_RESULT: {
                 ScenarioResult scenarioResult = (ScenarioResult)theEObject;
                 T result = caseScenarioResult(scenarioResult);
+                if (result == null) result = caseIdentifier(scenarioResult);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case SmartgridoutputPackage.IDENTIFIER: {
+                Identifier identifier = (Identifier)theEObject;
+                T result = caseIdentifier(identifier);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -144,6 +152,21 @@ public class SmartgridoutputSwitch<T> extends Switch<T> {
      * @generated
      */
     public T caseScenarioResult(ScenarioResult object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Identifier</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Identifier</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseIdentifier(Identifier object) {
         return null;
     }
 

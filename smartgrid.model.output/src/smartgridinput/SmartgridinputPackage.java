@@ -57,6 +57,43 @@ public interface SmartgridinputPackage extends EPackage {
     SmartgridinputPackage eINSTANCE = smartgridinput.impl.SmartgridinputPackageImpl.init();
 
     /**
+     * The meta object id for the '{@link smartgridinput.Identifier <em>Identifier</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see smartgridinput.Identifier
+     * @see smartgridinput.impl.SmartgridinputPackageImpl#getIdentifier()
+     * @generated
+     */
+    int IDENTIFIER = 1;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IDENTIFIER__ID = 0;
+
+    /**
+     * The number of structural features of the '<em>Identifier</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IDENTIFIER_FEATURE_COUNT = 1;
+
+    /**
+     * The number of operations of the '<em>Identifier</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IDENTIFIER_OPERATION_COUNT = 0;
+
+    /**
      * The meta object id for the '{@link smartgridinput.impl.ScenarioStateImpl <em>Scenario State</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -67,13 +104,22 @@ public interface SmartgridinputPackage extends EPackage {
     int SCENARIO_STATE = 0;
 
     /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCENARIO_STATE__ID = IDENTIFIER__ID;
+
+    /**
      * The feature id for the '<em><b>Entity States</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int SCENARIO_STATE__ENTITY_STATES = 0;
+    int SCENARIO_STATE__ENTITY_STATES = IDENTIFIER_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Power States</b></em>' containment reference list.
@@ -82,7 +128,7 @@ public interface SmartgridinputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_STATE__POWER_STATES = 1;
+    int SCENARIO_STATE__POWER_STATES = IDENTIFIER_FEATURE_COUNT + 1;
 
     /**
      * The feature id for the '<em><b>Scenario</b></em>' reference.
@@ -91,7 +137,7 @@ public interface SmartgridinputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_STATE__SCENARIO = 2;
+    int SCENARIO_STATE__SCENARIO = IDENTIFIER_FEATURE_COUNT + 2;
 
     /**
      * The number of structural features of the '<em>Scenario State</em>' class.
@@ -100,7 +146,7 @@ public interface SmartgridinputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_STATE_FEATURE_COUNT = 3;
+    int SCENARIO_STATE_FEATURE_COUNT = IDENTIFIER_FEATURE_COUNT + 3;
 
     /**
      * The number of operations of the '<em>Scenario State</em>' class.
@@ -109,7 +155,7 @@ public interface SmartgridinputPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int SCENARIO_STATE_OPERATION_COUNT = 0;
+    int SCENARIO_STATE_OPERATION_COUNT = IDENTIFIER_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link smartgridinput.impl.EntityStateImpl <em>Entity State</em>}' class.
@@ -119,7 +165,7 @@ public interface SmartgridinputPackage extends EPackage {
      * @see smartgridinput.impl.SmartgridinputPackageImpl#getEntityState()
      * @generated
      */
-    int ENTITY_STATE = 1;
+    int ENTITY_STATE = 2;
 
     /**
      * The feature id for the '<em><b>Is Destroyed</b></em>' attribute.
@@ -174,7 +220,7 @@ public interface SmartgridinputPackage extends EPackage {
      * @see smartgridinput.impl.SmartgridinputPackageImpl#getPowerState()
      * @generated
      */
-    int POWER_STATE = 2;
+    int POWER_STATE = 3;
 
     /**
      * The feature id for the '<em><b>Owner</b></em>' reference.
@@ -255,6 +301,27 @@ public interface SmartgridinputPackage extends EPackage {
      * @generated
      */
     EReference getScenarioState_Scenario();
+
+    /**
+     * Returns the meta object for class '{@link smartgridinput.Identifier <em>Identifier</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Identifier</em>'.
+     * @see smartgridinput.Identifier
+     * @generated
+     */
+    EClass getIdentifier();
+
+    /**
+     * Returns the meta object for the attribute '{@link smartgridinput.Identifier#getId <em>Id</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Id</em>'.
+     * @see smartgridinput.Identifier#getId()
+     * @see #getIdentifier()
+     * @generated
+     */
+    EAttribute getIdentifier_Id();
 
     /**
      * Returns the meta object for class '{@link smartgridinput.EntityState <em>Entity State</em>}'.
@@ -387,6 +454,24 @@ public interface SmartgridinputPackage extends EPackage {
          * @generated
          */
         EReference SCENARIO_STATE__SCENARIO = eINSTANCE.getScenarioState_Scenario();
+
+        /**
+         * The meta object literal for the '{@link smartgridinput.Identifier <em>Identifier</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see smartgridinput.Identifier
+         * @see smartgridinput.impl.SmartgridinputPackageImpl#getIdentifier()
+         * @generated
+         */
+        EClass IDENTIFIER = eINSTANCE.getIdentifier();
+
+        /**
+         * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute IDENTIFIER__ID = eINSTANCE.getIdentifier_Id();
 
         /**
          * The meta object literal for the '{@link smartgridinput.impl.EntityStateImpl <em>Entity State</em>}' class.
