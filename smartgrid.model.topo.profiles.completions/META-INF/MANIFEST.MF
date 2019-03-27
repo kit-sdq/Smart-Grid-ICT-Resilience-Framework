@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Profile Completions
-Bundle-SymbolicName: smartgrid.model.topo.profiles.completions;singleton:=true
+Bundle-SymbolicName: deprecated.smartgrid.model.topo.profiles.completions;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: SDQ
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
@@ -11,7 +11,7 @@ Require-Bundle: com.google.guava,
  org.eclipse.xtend.lib.macro,
  org.eclipse.emf.ecore,
  smartgrid.model.topo,
- smartgrid.model.topo.extension,
+ deprecated.smartgrid.model.topo.extension,
  org.palladiosimulator.mdsdprofiles.api,
  org.modelversioning.emfprofile,
  org.apache.log4j
