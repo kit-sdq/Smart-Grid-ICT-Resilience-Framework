@@ -35,4 +35,13 @@
            project="false">
      </wizard>
   </extension>
+  
+  <extension
+         point="org.eclipse.sirius.externalJavaAction">
+<javaActions
+            actionClass="smartgrid.model.topo.sirius.draganddrop.DropMetamodels"
+            id="DropMetamodels">
+</javaActions>
+</extension>
+
 </plugin>

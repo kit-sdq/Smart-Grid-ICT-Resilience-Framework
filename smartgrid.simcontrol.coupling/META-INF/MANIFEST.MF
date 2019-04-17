@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Coupling
-Bundle-SymbolicName: deprecated.smartgrid.simcontrol.coupling
+Bundle-SymbolicName: smartgrid.simcontrol.coupling
 Bundle-Version: 1.0.0.qualifier
 Export-Package: smartgrid.simcontrol.coupling,
  smartgrid.simcontrol.coupling.Exceptions

@@ -215,7 +215,7 @@ public class CheckInput implements IExternalJavaAction {
             if (!objects2.contains(resource)) {
                 boolean found = false;
                 for (Resource objectsResource : objects2){
-                    if (objectsResource.getURI().toString().equals(uri))
+                    if (objectsResource.getURI().toString().equals(uri.toString()))
                         found = true;
                 }
                 if (!found) {

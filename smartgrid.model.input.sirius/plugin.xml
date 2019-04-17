@@ -325,29 +325,4 @@
     </menuContribution>
 </extension>
 
-  <extension
-        point="org.eclipse.ui.navigator.viewer">
-     <viewerActionBinding
-           viewerId="org.eclipse.sirius.ui.tools.views.model.explorer">
-        <includes>
-           <actionExtension
-                 pattern="org.obeonetwork.dsl.uml2.editor.*">
-           </actionExtension>
-        </includes>
-     </viewerActionBinding>
-     <viewerContentBinding
-           viewerId="org.eclipse.sirius.ui.tools.views.model.explorer">
-        <includes>
-           <contentExtension
-                 pattern="org.obeonetwork.dsl.uml2.editor.*">
-           </contentExtension>
-        </includes>
-     </viewerContentBinding>
-     <dragAssistant
-            class="smartgrid.model.input.sirius.draganddrop.DropMetamodels"
-            viewerId="org.eclipse.sirius.ui.tools.views.model.explorer">
-            
-      </dragAssistant>
-  </extension>
-
 </plugin>

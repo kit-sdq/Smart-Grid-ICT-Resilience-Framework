@@ -1,4 +1,4 @@
-package smartgrid.model.input.sirius.draganddrop;
+package smartgrid.model.topo.sirius.draganddrop;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,18 +11,11 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.sirius.tools.api.ui.IExternalJavaAction;
 import org.eclipse.sirius.viewpoint.DResource;
-import org.eclipse.swt.dnd.DragSourceEvent;
-import org.eclipse.swt.dnd.FileTransfer;
-import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.ui.navigator.CommonDragAdapterAssistant;
-
-import smartgrid.mode.input.sirius.help.SiriusHelper;
+import smartgrid.helper.ScenarioModelHelper;
 import smartgridinput.ScenarioState;
 import smartgridtopo.SmartGridTopology;
 
@@ -49,7 +42,7 @@ public class DropMetamodels implements IExternalJavaAction {
             URI uri = URI.createPlatformResourceURI(container.getFullPath().toString(), true);
             
             if (uri.fileExtension().equals(inputExtension)) {
-                ScenarioState state = SiriusHelper.loadInput(uri.toString()) ;
+                ScenarioState state = ScenarioModelHelper.loadInput(uri.toString()) ;
                 String id = state.getId();
                 id = id;
             }   
