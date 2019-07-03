@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Baselib
+Bundle-SymbolicName: smartgrid.simcontrol.test.baselib
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: smartgrid.simcontrol.test.baselib
+Bundle-RequiredExecutionEnvironment: JavaSE-9
+Require-Bundle: smartgrid.model.output,
+ org.eclipse.debug.core,
+ org.eclipse.equinox.registry,
+ smartgrid.simcontrol.coupling
+Export-Package: smartgrid.simcontrol.test.baselib,
+ smartgrid.simcontrol.test.baselib.coupling
