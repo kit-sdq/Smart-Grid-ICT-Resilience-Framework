@@ -10,4 +10,6 @@ Require-Bundle: smartgrid.model.output,
  org.eclipse.equinox.registry,
  smartgrid.simcontrol.baselib,
  org.apache.log4j;bundle-version="1.2.15",
- org.eclipse.debug.core
+ org.eclipse.debug.core,
+ smartgrid.simcontrol.test.baselib
+Import-Package: smartgrid.simcontrol.baselib.coupling
