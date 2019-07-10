@@ -15,7 +15,7 @@
       </launchConfigurationType>
    </extension>
    <extension
-         point="smartgrid.simcontrol.extensionpoints.impactAnalysis">
+         point="smartgrid.simcontrol.test.extensionpoints.impactAnalysis">
       <impactAnalysis
             class="smartgrid.impactanalysis.GraphAnalyzer">
       </impactAnalysis>
