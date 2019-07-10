@@ -11,7 +11,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.helper.TestSimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
 import smartgrid.simcontrol.test.baselib.Constants;
-import smartgrid.simcontrol.test.baselib.coupling.IKritisSimulationWrapper;
 import couplingToICT.PowerDemand;
 import couplingToICT.PowerSpec;
 
@@ -20,7 +19,7 @@ public final class SimulationController {
     private static final Logger LOG = Logger.getLogger(SimulationController.class);
 
     private ReactiveSimulationController reactiveSimControl;
-    private IKritisSimulationWrapper kritisSimulation;
+    //private IKritisSimulationWrapper kritisSimulation;
 
     private int maxTimeSteps;
 
@@ -64,10 +63,10 @@ public final class SimulationController {
             reactiveSimControl.initModelsFromFiles(topoPath, inputPath);
         }
 
-        kritisSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getKritisSimulationExtensions(), Constants.KRITIS_SIMULATION_KEY,
-                IKritisSimulationWrapper.class);
-        kritisSimulation.init(launchConfig);
-        LOG.info("Using KRITIS simulation: " + kritisSimulation.getName());
+        //kritisSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getKritisSimulationExtensions(), Constants.KRITIS_SIMULATION_KEY,
+        //        IKritisSimulationWrapper.class);
+        //kritisSimulation.init(launchConfig);
+        //LOG.info("Using KRITIS simulation: " + kritisSimulation.getName());
     }
 
     public void shutDown() {
