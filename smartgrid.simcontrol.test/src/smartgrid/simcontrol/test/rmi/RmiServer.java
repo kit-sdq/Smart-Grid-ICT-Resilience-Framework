@@ -13,11 +13,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 
+
 import couplingToICT.PowerSpec;
 import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
 import smartgrid.simcontrol.test.ReactiveSimulationController;
 import couplingToICT.SimcontrolInitializationException;
-import couplingToICT.ICTSimulation;
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerDemand;
@@ -148,7 +148,7 @@ public class RmiServer implements ISimulationController {
         if (state != RmiServerState.NOT_INIT) {
             LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
         }
-        state = RmiServerState.ACTIVE;
+        state = RmiServerState.REACTIVE; // TODO change when active mode works
 
     }
 
@@ -178,6 +178,7 @@ public class RmiServer implements ISimulationController {
     public void initTopo(SmartGridTopoContainer topo) {
 
         LOG.info("init topo called remotely");
+        // TODO remote simcontrol aufrufen (dort methode anlegen, die generator aufruft und ergebnisse in instanzvariable speichert)
         BlockingKritisDataExchanger.storeGeoData(topo);
 
     }
@@ -186,9 +187,6 @@ public class RmiServer implements ISimulationController {
     public SmartComponentStateContainer run(PowerAssigned power)
             throws RemoteException, SimcontrolException, InterruptedException {
 
-        // TODO: Reihenfolge Besprechung
-        // if ( runState == RmiServerRunState.TO_MODIFY )
-        // return null;
 
         LOG.info("run was called remotely");
         ArrayList<String> _smartMeterStates = null;
@@ -224,7 +222,7 @@ public class RmiServer implements ISimulationController {
     public Map<String, Map<String, Double>> runAndGetPowerSupplied(
             Map<String, Map<String, PowerSpec>> modifiedCIPowerDemand)
             throws RemoteException, couplingToICT.SimcontrolException, InterruptedException {
-        // TODO Auto-generated method stub
+        LOG.info("broken run was called remotely");
         return null;
     }
 
@@ -275,6 +273,7 @@ public class RmiServer implements ISimulationController {
     @Override
     public couplingToICT.SmartComponentStateContainer getDysfunctSmartComponents()
             throws RemoteException, couplingToICT.SimcontrolException, InterruptedException {
+        LOG.info("Dysfunctional smart components will be returned");
         return reactiveSimControl.getDysfunctionalcomponents();
     }
 
