@@ -12,8 +12,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
-import smartgrid.simcontrol.test.baselib.coupling.IKritisSimulationWrapper;
-import smartgrid.simcontrol.test.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.test.baselib.coupling.ISimulationComponent;
 import smartgrid.simcontrol.test.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
@@ -25,18 +23,6 @@ public class TestSimulationExtensionPointHelper {
     private TestSimulationExtensionPointHelper() {
     }
 
-    public static List<IPowerLoadSimulationWrapper> getPowerLoadSimulationExtensions() throws CoreException {
-        final List<IPowerLoadSimulationWrapper> list = new ArrayList<>();
-        final IConfigurationElement[] elements = registry
-                .getConfigurationElementsFor(Constants.POWER_LOAD_SIMULATION_EXTENSION_POINT);
-        for (final IConfigurationElement element : elements) {
-            final Object o = element.createExecutableExtension("powerLoadSimulation");
-            if (o instanceof IPowerLoadSimulationWrapper) {
-                list.add((IPowerLoadSimulationWrapper) o);
-            }
-        }
-        return list;
-    }
 
     public static List<IAttackerSimulation> getAttackerSimulationExtensions() throws CoreException {
         final List<IAttackerSimulation> list = new ArrayList<>();
@@ -90,18 +76,6 @@ public class TestSimulationExtensionPointHelper {
         return list;
     }
 
-    public static List<IKritisSimulationWrapper> getKritisSimulationExtensions() throws CoreException {
-        final List<IKritisSimulationWrapper> list = new ArrayList<>();
-        final IConfigurationElement[] elements = registry
-                .getConfigurationElementsFor(Constants.KRITIS_SIMULATION_EXTENSION_POINT);
-        for (final IConfigurationElement element : elements) {
-            final Object o = element.createExecutableExtension("class");
-            if (o instanceof IKritisSimulationWrapper) {
-                list.add((IKritisSimulationWrapper) o);
-            }
-        }
-        return list;
-    }
 
     public static boolean isExtensionSelected(final ILaunchConfiguration launchConfig,
             final ISimulationComponent simComponent, final String key) throws CoreException {
