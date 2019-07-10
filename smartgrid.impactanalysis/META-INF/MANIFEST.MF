@@ -10,7 +10,6 @@ Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  org.eclipse.debug.ui,
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.helper;bundle-version="1.0.0",
- smartgrid.simcontrol.baselib,
  smartgrid.model.helper,
  org.apache.log4j;bundle-version="1.2.15",
  smartgrid.model.topo
@@ -19,3 +18,5 @@ Bundle-Vendor: %providerName
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: smartgrid.impactanalysis
+Import-Package: smartgrid.simcontrol.test.baselib,
+ smartgrid.simcontrol.test.baselib.coupling

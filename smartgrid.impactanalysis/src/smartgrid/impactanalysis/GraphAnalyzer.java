@@ -15,8 +15,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.model.helper.input.LoadInputModelConformityHelper;
-import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
+import smartgrid.simcontrol.test.baselib.Constants;
+import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 import smartgridinput.EntityState;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
