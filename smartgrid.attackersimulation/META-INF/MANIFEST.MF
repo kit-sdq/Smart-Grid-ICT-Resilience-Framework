@@ -9,6 +9,8 @@ Require-Bundle: org.eclipse.debug.core;bundle-version="3.9.1",
  smartgrid.model.output;bundle-version="1.0.0",
  smartgrid.helper;bundle-version="1.0.0",
  org.eclipse.core.runtime;bundle-version="3.10.0",
- smartgrid.simcontrol.baselib,
  org.apache.log4j;bundle-version="1.2.15"
 Export-Package: smartgrid.attackersimulation
+Import-Package: 
+ smartgrid.simcontrol.test.baselib,
+ smartgrid.simcontrol.test.baselib.coupling

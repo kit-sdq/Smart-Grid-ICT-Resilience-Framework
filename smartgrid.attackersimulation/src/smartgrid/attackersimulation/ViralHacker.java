@@ -11,9 +11,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ScenarioModelHelper;
-import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.HackingStyle;
-import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
+import smartgrid.simcontrol.test.baselib.Constants;
+import smartgrid.simcontrol.test.baselib.HackingStyle;
+import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.Cluster;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
