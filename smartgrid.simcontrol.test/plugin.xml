@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
- <extension-point id="smartgrid.simcontrol.extensionpoints.terminationCondition" name="terminationCondition" schema="schema/smartgrid.simcontrol.extensionpoints.terminationCondition.exsd"/>
-   <extension-point id="smartgrid.simcontrol.extensionpoints.timeProgressor" name="timeProgressor" schema="schema/smartgrid.simcontrol.extensionpoints.timeProgressor.exsd"/>
-   <extension-point id="smartgrid.simcontrol.extensionpoints.powerLoadSimulation" name="powerLoadSimulation" schema="schema/smartgrid.simcontrol.extensionpoints.powerLoadSimulation.exsd"/>
-   <extension-point id="smartgrid.simcontrol.extensionpoints.impactAnalysis" name="impactAnalysis" schema="schema/smartgrid.simcontrol.extensionpoints.impactAnalysis.exsd"/>
-   <extension-point id="smartgrid.simcontrol.extensionpoints.attackerSimulation" name="attackerSimulation" schema="schema/smartgrid.simcontrol.extensionpoints.attackerSimulation.exsd"/>
-   <extension-point id="smartgrid.simcontrol.extensionpoints.inputGenerator" name="inputGenerator" schema="schema/smartgrid.simcontrol.extensionpoints.inputGenerator.exsd"/>
-   <extension-point id="smartgrid.simucontrol.extensionpoints.kritisSimulation" name="kritisSimulation" schema="schema/smartgrid.simucontrol.extensionpoints.kritissimulation.exsd"/>
+ <extension-point id="smartgrid.simcontrol.test.extensionpoints.terminationCondition" name="terminationCondition" schema="schema/smartgrid.simcontrol.test.extensionpoints.terminationCondition.exsd"/>
+   <extension-point id="smartgrid.simcontrol.test.extensionpoints.timeProgressor" name="timeProgressor" schema="schema/smartgrid.simcontrol.test.extensionpoints.timeProgressor.exsd"/>
+   <extension-point id="smartgrid.simcontrol.test.extensionpoints.powerLoadSimulation" name="powerLoadSimulation" schema="schema/smartgrid.simcontrol.test.extensionpoints.powerLoadSimulation.exsd"/>
+   <extension-point id="smartgrid.simcontrol.test.extensionpoints.impactAnalysis" name="impactAnalysis" schema="schema/smartgrid.simcontrol.test.extensionpoints.impactAnalysis.exsd"/>
+   <extension-point id="smartgrid.simcontrol.test.extensionpoints.attackerSimulation" name="attackerSimulation" schema="schema/smartgrid.simcontrol.test.extensionpoints.attackerSimulation.exsd"/>
+   <extension-point id="smartgrid.simcontrol.test.extensionpoints.inputGenerator" name="inputGenerator" schema="schema/smartgrid.simcontrol.test.extensionpoints.inputGenerator.exsd"/>
+   <extension-point id="smartgrid.simucontrol.test.extensionpoints.kritisSimulation" name="kritisSimulation" schema="schema/smartgrid.simucontrol.test.extensionpoints.kritissimulation.exsd"/>
    
    <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="smartgrid.simcontrol.SimcontroLaunchConfigurationDelegate"
+            delegate="smartgrid.simcontrol.test.SimcontroLaunchConfigurationDelegate"
             delegateDescription="Delegate to start the Simcontroller"
             delegateName="SimcontrolDelegate"
-            id="smartgrid.simcontrol.SimcontrolLaunchConfigurationType"
+            id="smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType"
             modes="run,debug"
             name="SimControl">
             delegate= "org.eclipse.jdt.internal.launching.JavaLocalApplicationLaunchConfigurationDelegate" 
