@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RMI Test
-Bundle-SymbolicName: smartgrid.simcontrol.test
+Bundle-SymbolicName: smartgrid.simcontrol.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: smartgrid.simcontrol.test
 Bundle-RequiredExecutionEnvironment: JavaSE-9
@@ -11,11 +11,6 @@ Import-Package: org.apache.log4j;version="1.2.15",
  org.osgi.framework;version="1.9.0",
  smartgrid.helper,
  smartgrid.log4j,
- smartgrid.model.generation,
- smartgrid.simcontrol.baselib,
- smartgrid.simcontrol.baselib.coupling,
- smartgrid.simcontrol.coupling,
- smartgrid.simcontrol.coupling.Exceptions,
  smartgridinput,
  smartgridoutput,
  smartgridtopo
@@ -29,4 +24,5 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  smartgrid.model.topo,
  smartgrid.simcontrol.test.baselib;bundle-version="1.0.0",
  smartgrid.simcontrol.test.baselib,
- smartgrid.model.test.generation
+ smartgrid.model.test.generation,
+ couplingSGDummy;bundle-version="1.0.0"

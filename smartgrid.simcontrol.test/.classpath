@@ -11,6 +11,5 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/couplingSGDummy"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
