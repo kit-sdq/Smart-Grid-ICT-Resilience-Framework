@@ -23,11 +23,9 @@ import smartgrid.log4j.LoggingInitializer;
 import smartgrid.model.test.generation.DefaultInputGenerator;
 import smartgrid.model.test.generation.ITopoGenerator;
 import smartgrid.model.test.generation.TrivialTopoGenerator;
-import smartgrid.simcontrol.coupling.SmartMeterState;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
-import smartgrid.simcontrol.test.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.test.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
 import couplingToICT.PowerAssigned;
@@ -54,7 +52,7 @@ public final class ReactiveSimulationController {
 
     private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
-    private IPowerLoadSimulationWrapper powerLoadSimulation;
+//    private IPowerLoadSimulationWrapper powerLoadSimulation;
     private IImpactAnalysis impactAnalsis;
     private IAttackerSimulation attackerSimulation;
     private ITerminationCondition terminationCondition;
@@ -343,13 +341,13 @@ public final class ReactiveSimulationController {
         }
 
         // To-do at some point, IIP might want some init data
-        final List<IPowerLoadSimulationWrapper> power = TestSimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
-        for (final IPowerLoadSimulationWrapper e : power) {
+        //final List<IPowerLoadSimulationWrapper> power = TestSimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
+        //for (final IPowerLoadSimulationWrapper e : power) {
 
-            if (e.getName().equals(Constants.IIP_OPF_NAME)) {
-                powerLoadSimulation = e;
-            }
-        }
+        //    if (e.getName().equals(Constants.IIP_OPF_NAME)) {
+        //        powerLoadSimulation = e;
+        //    }
+        //}
 
         // To-do init! (with number of iterations)
         final List<ITerminationCondition> termination = TestSimulationExtensionPointHelper.getTerminationConditionExtensions();
@@ -377,7 +375,7 @@ public final class ReactiveSimulationController {
             }
         }
 
-        LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
+        //LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
         LOG.info("Using impact analysis: " + impactAnalsis.getName());
         LOG.info("Using attacker simulation: " + attackerSimulation.getName());
         LOG.info("Using termination condition: " + terminationCondition.getName());
@@ -388,8 +386,8 @@ public final class ReactiveSimulationController {
 
         attackerSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_KEY,
                 IAttackerSimulation.class);
-        powerLoadSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getPowerLoadSimulationExtensions(), Constants.POWER_LOAD_SIMULATION_KEY,
-                IPowerLoadSimulationWrapper.class);
+        //powerLoadSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getPowerLoadSimulationExtensions(), Constants.POWER_LOAD_SIMULATION_KEY,
+        //        IPowerLoadSimulationWrapper.class);
         terminationCondition = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getTerminationConditionExtensions(),
                 Constants.TERMINATION_CONDITION_SIMULATION_KEY, ITerminationCondition.class);
         impactAnalsis = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(), Constants.IMPACT_ANALYSIS_SIMULATION_KEY,
@@ -397,26 +395,26 @@ public final class ReactiveSimulationController {
         timeProgressor = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
                 ITimeProgressor.class);
 
-        powerLoadSimulation.init(launchConfig);
+        //powerLoadSimulation.init(launchConfig);
         impactAnalsis.init(launchConfig);
         attackerSimulation.init(launchConfig);
         terminationCondition.init(launchConfig);
         timeProgressor.init(launchConfig);
 
-        LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
+        //LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
         LOG.info("Using impact analysis: " + impactAnalsis.getName());
         LOG.info("Using attacker simulation: " + attackerSimulation.getName());
         LOG.info("Using termination condition: " + terminationCondition.getName());
         LOG.info("Using time progressor: " + timeProgressor.getName());
 
         // get topology data if needed
-        boolean generateTopo = launchConfig.getAttribute(Constants.TOPO_GENERATION_KEY, false);
-        boolean usingPowerLoadWrapper = powerLoadSimulation.getName().equals(Constants.IIP_OPF_NAME);
-        boolean needTopoData = generateTopo || usingPowerLoadWrapper;
-        if (needTopoData) {
-            topoData = BlockingKritisDataExchanger.getTopoData();
-            if (usingPowerLoadWrapper)
-                powerLoadSimulation.initData(topoData);
-        }
+//        boolean generateTopo = launchConfig.getAttribute(Constants.TOPO_GENERATION_KEY, false);
+////        boolean usingPowerLoadWrapper = powerLoadSimulation.getName().equals(Constants.IIP_OPF_NAME);
+//        boolean needTopoData = generateTopo || usingPowerLoadWrapper;
+//        if (needTopoData) {
+//            topoData = BlockingKritisDataExchanger.getTopoData();
+//            if (usingPowerLoadWrapper)
+////                powerLoadSimulation.initData(topoData);
+//        }
     }
 }
