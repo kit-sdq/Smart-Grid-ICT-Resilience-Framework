@@ -11,7 +11,7 @@ import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpec;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
-import smartgrid.simcontrol.coupling.Exceptions.SimcontrolException;
+import couplingToICT.SimcontrolException;
 
 /**
  * This is basically an exchanger for two different data types.
