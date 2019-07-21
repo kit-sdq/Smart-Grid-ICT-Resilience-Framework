@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.modelversioning.emfprofileapplication.EMFProfileApplicationPackage;
 
 import smartgrid.impactanalysis.GraphAnalyzer;
-import smartgrid.simcontrol.baselib.Constants;
+import smartgrid.simcontrol.test.baselib.Constants;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputPackage;
 import smartgridoutput.Defect;
