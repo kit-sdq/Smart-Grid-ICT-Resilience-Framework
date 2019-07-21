@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.PlatformUI;
 import org.modelversioning.emfprofileapplication.EMFProfileApplicationPackage;
 
-import smartgrid.simcontrol.baselib.Constants;
+import smartgrid.simcontrol.test.baselib.Constants;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputPackage;
 import smartgridtopo.SmartGridTopology;
