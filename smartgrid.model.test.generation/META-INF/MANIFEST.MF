@@ -8,5 +8,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-9
 Require-Bundle: org.apache.log4j,
  smartgrid.model.topo,
  smartgrid.model.output,
- smartgrid.helper
+ smartgrid.helper,
+ couplingSG;bundle-version="1.0.0"
 Export-Package: smartgrid.model.test.generation
