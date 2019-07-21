@@ -1,17 +1,18 @@
-package smartgrid.simcontrol.ui.toolbar;
+package smartgrid.simcontrol.test.ui.toolbar;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 
-import smartgrid.simcontrol.rmi.BlockingKritisDataExchanger;
-import smartgrid.simcontrol.rmi.RmiServer;
+//import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
+//import smartgrid.simcontrol.rmi.RmiServer;
 
 public class InterruptButtonHandler extends AbstractHandler {
 
     @Override
     public Object execute(ExecutionEvent event) {
-        RmiServer.resetState();
-        BlockingKritisDataExchanger.freeAll();
+//        RmiServer.resetState();
+//        BlockingKritisDataExchanger.freeAll();
+    	//TODO
 
         /* This code shows a popup that is not really necessary anymore */
 //        boolean threadsFreed = BlockingKritisDataExchanger.freeAll();

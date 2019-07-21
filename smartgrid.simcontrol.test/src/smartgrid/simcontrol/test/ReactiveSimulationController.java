@@ -323,12 +323,14 @@ public final class ReactiveSimulationController {
 
     public void loadDefaultAnalyses() throws CoreException {
 
-        final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
+
+    	final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
         for (final IAttackerSimulation e : attack) {
+
 
             if (e.getName().equals("No Attack Simulation")) {
                 attackerSimulation = e;
-            }
+            } 
         }
 
         // To-do at some point, IIP might want some init data
@@ -367,10 +369,22 @@ public final class ReactiveSimulationController {
         }
 
         //LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
-        LOG.info("Using impact analysis: " + impactAnalsis.getName());
-        LOG.info("Using attacker simulation: " + attackerSimulation.getName());
-        LOG.info("Using termination condition: " + terminationCondition.getName());
-        LOG.info("Using time progressor: " + timeProgressor.getName());
+        if (impactAnalsis != null)
+        	LOG.info("Using impact analysis: " + impactAnalsis.getName());
+        else
+        	LOG.warn("No Impact Analysis exists");
+        if (attackerSimulation != null)
+        	LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+        else
+        	LOG.warn("No Attacker Simulation exists");
+        if (terminationCondition != null)
+        	LOG.info("Using termination condition: " + terminationCondition.getName());
+        else
+        	LOG.warn("No Termination condition exists");
+        if (timeProgressor != null)
+        	LOG.info("Using time progressor: " + timeProgressor.getName());
+        else
+        	LOG.warn("No Time Progresser exists");
     }
 
     public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException, InterruptedException {
@@ -412,14 +426,18 @@ public final class ReactiveSimulationController {
 
     public void initTopo(SmartGridTopoContainer topoContainer) {
         // generate and persist topo
+    	LOG.info("Topo will be generated");
         ITopoGenerator generator = new TrivialTopoGenerator();
         topo = generator.generateTopo(topoContainer);
         FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.pathSeparator+"generated.smartgridtopo");
-
+        LOG.info("Topo is generated");
+        
         // generate and persist input
+        LOG.info("Input will be generated");
         DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
         initialState = defaultInputGenerator.generateInput(topo);
         FileSystemHelper.saveToFileSystem(initialState, workingDirPath + File.pathSeparator+"generated.smartgridinput");
         impactInput = initialState;
+        LOG.info("Input is generated");
     }
 }

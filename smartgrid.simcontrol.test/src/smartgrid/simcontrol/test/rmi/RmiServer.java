@@ -137,8 +137,34 @@ public class RmiServer implements ISimulationController {
         if (state != RmiServerState.NOT_INIT) {
             LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
         }
-        state = RmiServerState.REACTIVE; // TODO change when active mode works
+        state = RmiServerState.ACTIVE; 
+        
+     // TODO remove when active mode works
+        try {
+			temp_initReactive();
+		} catch (SimcontrolInitializationException e) {
+			e.printStackTrace();
+		} 
+        
+    }
+    
+    private void temp_initReactive() throws SimcontrolInitializationException {
+    	LOG.info("temp init reactive called remotely");
+    	state = RmiServerState.REACTIVE;
+    	reactiveSimControl = new ReactiveSimulationController();
+    	String outputPath = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/";
+    	reactiveSimControl.init(outputPath);
+    	
+    	try {
+            // To-do initiator (KRITIS Sim) should be able to choose analyses
+            // To-do initiator should send init data
+            reactiveSimControl.loadDefaultAnalyses();
+        } catch (CoreException e) {
+            throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
+                    e);
+        }
 
+    	LOG.info("temp init successfuly done");
     }
 
     @Override
@@ -166,17 +192,21 @@ public class RmiServer implements ISimulationController {
     @Override
     public void initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
 
-        LOG.info("init topo called remotely");
         
-        if (state == RmiServerState.ACTIVE) {
-        	BlockingKritisDataExchanger.storeGeoData(topo);
-        } else if (state == RmiServerState.REACTIVE) {
-            reactiveSimControl.initTopo(topo);
+        if (topo == null) {
+        	LOG.info("Topo Container is null");
         } else {
-            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
-            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+	        if (state == RmiServerState.ACTIVE) {
+	        	LOG.info("init topo called remotely (Active)");
+	        	BlockingKritisDataExchanger.storeGeoData(topo);
+	        } else if (state == RmiServerState.REACTIVE) {
+	        	LOG.info("init topo called remotely (ReActive)");
+	            reactiveSimControl.initTopo(topo);
+	        } else {
+	            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
+	            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+	        }
         }
-        
 
     }
 

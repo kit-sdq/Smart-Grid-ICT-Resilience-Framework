@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":smartgrid.simcontrol.coupling.IPowerLoadSimulation"/>
+                  <meta.attribute kind="java" basedOn=":smartgrid.simcontrol.test.coupling.IPowerLoadSimulation"/>
                </appinfo>
             </annotation>
          </attribute>

@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":smartgrid.simcontrol.baselib.coupling.IImpactAnalysis"/>
+                  <meta.attribute kind="java" basedOn=":smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis"/>
                </appinfo>
             </annotation>
          </attribute>

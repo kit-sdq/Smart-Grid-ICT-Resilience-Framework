@@ -1,19 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: RMI Test
+Bundle-Name: Simcontrol
 Bundle-SymbolicName: smartgrid.simcontrol.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Automatic-Module-Name: smartgrid.simcontrol.test
-Bundle-RequiredExecutionEnvironment: JavaSE-9
-Import-Package: org.apache.log4j;version="1.2.15",
- org.eclipse.emf.ecore.util,
- org.eclipse.ui,
- org.osgi.framework;version="1.9.0",
- smartgrid.helper,
- smartgrid.log4j,
- smartgridinput,
- smartgridoutput,
- smartgridtopo
+Bundle-Activator: smartgrid.simcontrol.test.Activator
 Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.ui;bundle-version="3.109.100",
  org.eclipse.core.runtime,
@@ -22,7 +12,13 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  smartgrid.model.input,
  smartgrid.model.output,
  smartgrid.model.topo,
+ smartgrid.helper;bundle-version="1.0.0",
+ org.apache.log4j;bundle-version="1.2.15",
  smartgrid.simcontrol.test.baselib;bundle-version="1.0.0",
- smartgrid.simcontrol.test.baselib,
  smartgrid.model.test.generation,
  couplingSG;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: smartgrid.simcontrol.test.rmi

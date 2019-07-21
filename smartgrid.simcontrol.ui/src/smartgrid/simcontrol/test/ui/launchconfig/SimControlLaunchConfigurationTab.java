@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.ui.launchconfig;
+package smartgrid.simcontrol.test.ui.launchconfig;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -30,22 +30,22 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import smartgrid.helper.SimulationExtensionPointHelper;
-import smartgrid.simcontrol.baselib.Constants;
-import smartgrid.simcontrol.baselib.GenerationStyle;
-import smartgrid.simcontrol.baselib.HackingStyle;
-import smartgrid.simcontrol.baselib.coupling.IAttackerSimulation;
-import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
-import smartgrid.simcontrol.baselib.coupling.IKritisSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.IPowerLoadSimulationWrapper;
-import smartgrid.simcontrol.baselib.coupling.ISimulationComponent;
-import smartgrid.simcontrol.baselib.coupling.ITerminationCondition;
-import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
+import smartgrid.simcontrol.test.baselib.Constants;
+import smartgrid.simcontrol.test.baselib.GenerationStyle;
+import smartgrid.simcontrol.test.baselib.HackingStyle;
+import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
+import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
+//import smartgrid.simcontrol.test.baselib.coupling.IKritisSimulationWrapper;
+//import smartgrid.simcontrol.test.baselib.coupling.IPowerLoadSimulationWrapper;
+import smartgrid.simcontrol.test.baselib.coupling.ISimulationComponent;
+import smartgrid.simcontrol.test.baselib.coupling.ITerminationCondition;
+import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
 
 public class SimControlLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 
     private static final Logger LOG = Logger.getLogger(SimControlLaunchConfigurationTab.class);
 
-    private String noHackingChoice = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages")
+    private String noHackingChoice = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages")
             .getString("SimControlLaunchConfigurationTab.NoHackingChoiceLabel.text");
 
     private String[] localHackingStyles = new String[] {noHackingChoice, "BFS_HACKING", "DFS_HACKING", "FULLY_MESHED_HACKING"};
@@ -105,7 +105,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         Group inputGroup = new Group(container, SWT.NONE);
 
-        inputGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.group.text"));
+        inputGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.group.text"));
 
         inputTextbox = new Text(inputGroup, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         inputTextbox.setTouchEnabled(true);
@@ -113,73 +113,73 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         inputTextbox.setBounds(10, 22, 553, 41);
         inputTextbox.addModifyListener(e -> propertyChanged());
         inputTextbox.setEditable(true);
-        inputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
+        inputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
         selectInputPathButton = new org.eclipse.swt.widgets.Button(inputGroup, SWT.TOGGLE);
         selectInputPathButton.setTouchEnabled(true);
         selectInputPathButton.setBounds(569, 22, 146, 32);
 
-        selectInputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectInputPathButton.text"));
+        selectInputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.SelectInputPathButton.text"));
 
         topologyTextbox = new Text(inputGroup, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         topologyTextbox.setTouchEnabled(true);
         topologyTextbox.setBounds(10, 69, 553, 41);
         topologyTextbox.addModifyListener(e -> propertyChanged());
         topologyTextbox.setEditable(true);
-        topologyTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        topologyTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.inputTextbox.text")); //$NON-NLS-1$
 
         selectTopologyPathButton = new org.eclipse.swt.widgets.Button(inputGroup, SWT.TOGGLE);
         selectTopologyPathButton.setTouchEnabled(true);
         selectTopologyPathButton.setBounds(569, 69, 146, 32);
-        selectTopologyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectTopologyPathButton.text"));
+        selectTopologyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.SelectTopologyPathButton.text"));
 
         final Group outputGroup = new Group(container, SWT.NONE);
 
-        outputGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpOutputFiles.text"));
+        outputGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.grpOutputFiles.text"));
         final org.eclipse.swt.widgets.Button SelectOutputPathButton = new org.eclipse.swt.widgets.Button(outputGroup, SWT.TOGGLE);
         SelectOutputPathButton.setTouchEnabled(true);
         SelectOutputPathButton.setBounds(569, 22, 145, 32);
-        SelectOutputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.SelectOutputPathButton.text"));
+        SelectOutputPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.SelectOutputPathButton.text"));
 
         outputTextbox = new Text(outputGroup, SWT.READ_ONLY | SWT.H_SCROLL | SWT.CANCEL);
         outputTextbox.setTouchEnabled(true);
         outputTextbox.setEditable(true);
         outputTextbox.setBounds(10, 22, 553, 41);
         outputTextbox.addModifyListener(e -> propertyChanged());
-        outputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
+        outputTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.inputTextbox.text"));
 
         final Group grpAnalyses = new Group(container, SWT.NONE);
-        grpAnalyses.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        grpAnalyses.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.grpAnalyses.text"));
 
         final Label lblNewLabel = new Label(grpAnalyses, SWT.NONE);
         lblNewLabel.setBounds(10, 24, 156, 23);
-        lblNewLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        lblNewLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.lblNewLabel.text_1")); //$NON-NLS-1$
 
         final Label lblKritisSimulation = new Label(grpAnalyses, SWT.NONE);
         lblKritisSimulation.setBounds(10, 53, 137, 23);
-        lblKritisSimulation.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        lblKritisSimulation.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.lblKritisSimulation.text")); //$NON-NLS-1$
 
         final Label lblImpactAnalysis = new Label(grpAnalyses, SWT.NONE);
         lblImpactAnalysis.setBounds(10, 82, 137, 23);
-        lblImpactAnalysis.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        lblImpactAnalysis.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.lblImpactAnalysis.text")); //$NON-NLS-1$
 
         final Label lblCyberAttackSimulation = new Label(grpAnalyses, SWT.NONE);
         lblCyberAttackSimulation.setBounds(10, 111, 137, 23);
-        lblCyberAttackSimulation.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        lblCyberAttackSimulation.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.lblCyberAttackSimulation.text")); //$NON-NLS-1$
 
         final Label lblTerminationCondition = new Label(grpAnalyses, SWT.NONE);
         lblTerminationCondition.setBounds(10, 140, 137, 23);
-        lblTerminationCondition.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        lblTerminationCondition.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.lblTerminationCondition.text")); //$NON-NLS-1$
 
         final Label lblProgressor = new Label(grpAnalyses, SWT.NONE);
         lblProgressor.setBounds(10, 169, 137, 23);
-        lblProgressor.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        lblProgressor.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.lblProgressor.text")); //$NON-NLS-1$
 
         comboPowerLoadSimulation = new Combo(grpAnalyses, SWT.READ_ONLY);
@@ -281,16 +281,16 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             }
         });
         copyPathButton.setBounds(569, 60, 145, 32);
-        copyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        copyPathButton.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.copyPathButton.text"));
         RowLayout rl_optionsGroup = new RowLayout(SWT.VERTICAL);
         rl_optionsGroup.fill = true;
         optionsGroup.setLayout(rl_optionsGroup);
-        optionsGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        optionsGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.OptionsGroup.text")); //$NON-NLS-1$
 
         ignoreLogicalConCheckBox = new Button(optionsGroup, SWT.CHECK | SWT.CENTER);
-        ignoreLogicalConCheckBox.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.ignoreLogicalConButton.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
+        ignoreLogicalConCheckBox.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.ignoreLogicalConButton.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
         ignoreLogicalConCheckBox.setAlignment(SWT.LEFT);
         ignoreLogicalConCheckBox.setTouchEnabled(true);
 
@@ -315,7 +315,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 }
             }
         });
-        ignoreLogicalConCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        ignoreLogicalConCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.ignoreLogicalConButton.text")); //$NON-NLS-1$
 
         completionCheckBox = new Button(optionsGroup, SWT.CHECK);
@@ -326,7 +326,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 propertyChanged();
             }
         });
-        completionCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        completionCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton.text")); //$NON-NLS-1$ //$NON-NLS-2$
 
         generateTopoCheckBox = new Button(optionsGroup, SWT.CHECK);
         generateTopoCheckBox.setTouchEnabled(true);
@@ -341,18 +341,18 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
                 }
             }
         });
-        generateTopoCheckBox.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnGenerateTopo.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
-        generateTopoCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        generateTopoCheckBox.setToolTipText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.btnGenerateTopo.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
+        generateTopoCheckBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.btnCheckButton_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
 
         cyberAttackSimulationGroup = new Group(optionsGroup, SWT.NONE);
-        cyberAttackSimulationGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.grpCyberAttackSimulation.text"));
+        cyberAttackSimulationGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.grpCyberAttackSimulation.text"));
 
         final Composite HackingStyleComposite = new Composite(cyberAttackSimulationGroup, SWT.NONE);
         HackingStyleComposite.setBounds(10, 24, 660, 24);
 
         final Label hackingStyleLabel = new Label(HackingStyleComposite, SWT.NONE);
         hackingStyleLabel.setBounds(0, 0, 131, 24);
-        hackingStyleLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.hackingStyleLabel.text"));
+        hackingStyleLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.hackingStyleLabel.text"));
 
         hackingStyleCombo = new Combo(HackingStyleComposite, SWT.READ_ONLY);
         hackingStyleCombo.setBounds(193, 0, 202, 23);
@@ -370,13 +370,13 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         RootNodeComposite.setBounds(10, 54, 660, 24);
 
         rootNodeTextbox = new Text(RootNodeComposite, SWT.BORDER);
-        rootNodeTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        rootNodeTextbox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.inputTextbox.text")); //$NON-NLS-1$
         rootNodeTextbox.setBounds(193, 0, 202, 24);
 
         final Label rootNodeLabel = new Label(RootNodeComposite, SWT.NONE);
         rootNodeLabel.setBounds(0, 0, 147, 24);
-        rootNodeLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        rootNodeLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.rootNodeLabel.text")); //$NON-NLS-1$
 
         final Composite hackingSpeedComposite = new Composite(cyberAttackSimulationGroup, SWT.NONE);
@@ -384,7 +384,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         final Label labelHackingSpeed = new Label(hackingSpeedComposite, SWT.NONE);
         labelHackingSpeed.setBounds(0, 0, 147, 24);
-        labelHackingSpeed.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        labelHackingSpeed.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.labelHackingSpeed.text")); //$NON-NLS-1$
 
         hackingSpeedText = new Text(hackingSpeedComposite, SWT.BORDER);
@@ -397,21 +397,21 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         hackingStyleCombo.addModifyListener(e4 -> propertyChanged());
         final Group terminationConditionGroup = new Group(optionsGroup, SWT.NONE);
         terminationConditionGroup.setEnabled(true);
-        terminationConditionGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        terminationConditionGroup.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.TerminationCondition.text"));
         terminationConditionGroup.setLayout(null);
 
         final Label timeStepsLabel = new Label(terminationConditionGroup, SWT.NONE);
         timeStepsLabel.setLocation(10, 24);
         timeStepsLabel.setSize(148, 24);
-        timeStepsLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        timeStepsLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.timeStepsLabel.text")); //$NON-NLS-1$
 
         timeStepsTextBox = new Text(terminationConditionGroup, SWT.BORDER);
         timeStepsTextBox.setLocation(203, 24);
         timeStepsTextBox.setSize(202, 24);
         timeStepsTextBox.setTouchEnabled(true);
-        timeStepsTextBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        timeStepsTextBox.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.inputTextbox.text")); //$NON-NLS-1$
 
         iterationCountTextbox = new Text(terminationConditionGroup, SWT.BORDER);
@@ -421,7 +421,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         iterationCountTextbox.setText("2");
         final Label iterationCountLabel = new Label(terminationConditionGroup, SWT.NONE);
         iterationCountLabel.setBounds(10, 54, 121, 24);
-        iterationCountLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.IterationCount.text"));
+        iterationCountLabel.setText(ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.IterationCount.text"));
         iterationCountTextbox.addModifyListener(e6 -> propertyChanged());
         timeStepsTextBox.addModifyListener(e3 -> propertyChanged());
 
@@ -436,7 +436,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             @Override
             public void mouseDown(final MouseEvent e) {
                 // Get Text to show in Open File Dialog from Resource File
-                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_OUTPUT_PATH");
+                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_OUTPUT_PATH");
                 final String outputPath = SimControlLaunchConfigurationTab.this.getDirPath(message);
 
                 if (outputPath != null) {
@@ -457,7 +457,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             @Override
             public void mouseDown(final MouseEvent e) {
                 // Get Text to show in Open File Dialog from Resource File
-                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_INPUT_TOPOLOGY_PATH");
+                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_INPUT_TOPOLOGY_PATH");
                 final String topologyPath = SimControlLaunchConfigurationTab.this.getFilePath(message, Constants.TOPO_EXTENSION);
 
                 if (topologyPath != null) {
@@ -479,7 +479,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             public void mouseDown(final MouseEvent e) {
                 // Get Text to show in Open File Dialog from Resource File
                 // Gets the Filepath
-                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_INPUT_PATH");
+                final String message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages").getString("SimControlLaunchConfigurationTab.OpenFileDialog.SELECT_INPUT_PATH");
                 final String inputPath = SimControlLaunchConfigurationTab.this.getFilePath(message, Constants.INPUT_EXTENSION);
 
                 if (inputPath != null) {
@@ -649,49 +649,49 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
         String Message;
         if (inputBoxEmpty()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.NO_INPUT_PATH"); //$NON-NLS-1$
         } else if (topoBoxEmpty()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.NO_TOPO_PATH"); //$NON-NLS-1$
         } else if (otuputBoxEmpty()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.NO_OUTPUT_PATH"); //$NON-NLS-1$
         } else if (inputExtensionWrong()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_INPUT_EXTENSION"); //$NON-NLS-1$
         } else if (topoExtensionWrong()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_TOPO_EXTENSION"); //$NON-NLS-1$
         } else if (!outputIsParent()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.OutputIsNotParent.text"); //$NON-NLS-1$
         } else if (areOptionsWrong()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.WRONG_OPTIONS"); //$NON-NLS-1$
         } else if (inputNotExists()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.INPUT_PATH"); //$NON-NLS-1$
         } else if (topoNotExists()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.TOPO_PATH"); //$NON-NLS-1$
         } else if (outputNotExists()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.OUTPUT_PATH"); //$NON-NLS-1$
         } else if (hackingEmpty()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.NoHackingChoiceLabel.text"); //$NON-NLS-1$
         } else if (roteIdIsNotNumeric()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.ROOTNODE_NOT_NUMERIC"); //$NON-NLS-1$
         } else if (hackingSpeedIsNotNumeric()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.HACKINGSPEED_NOT_NUMERIC"); //$NON-NLS-1$
         } else if (timeStepsIsNotNumeric()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.TIMESTEPS_NOT_NUMERIC"); //$NON-NLS-1$
         } else if (iterationCountIsNotNumeric()) {
-            Message = ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+            Message = ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                     .getString("SimControlLaunchConfigurationTab.ErrorMessages.ITERATIONS_NOT_NUMERIC"); //$NON-NLS-1$
         } else {
             // everything ok
@@ -715,7 +715,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     @Override
     public String getName() {
         // Read Resource File
-        return ResourceBundle.getBundle("smartgrid.simcontrol.ui.messages") //$NON-NLS-1$
+        return ResourceBundle.getBundle("smartgrid.simcontrol.test.ui.messages") //$NON-NLS-1$
                 .getString("SimControlLaunchConfigurationTab.Tab.RegisterText"); //$NON-NLS-1$
     }
 
@@ -898,12 +898,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
     private void addElementsToCombos() {
 
-        try {
-            final List<IPowerLoadSimulationWrapper> powerLoadExtensions = SimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
-            fillSimulationComboBox(powerLoadExtensions, comboPowerLoadSimulation);
-        } catch (final CoreException e) {
-            LOG.error("Could not read Power Load Simulation extensions.", e);
-        }
+//        try {
+//            final List<IPowerLoadSimulationWrapper> powerLoadExtensions = SimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
+//            fillSimulationComboBox(powerLoadExtensions, comboPowerLoadSimulation);
+//        } catch (final CoreException e) {
+//            LOG.error("Could not read Power Load Simulation extensions.", e);
+//        }
 
         try {
             final List<IAttackerSimulation> attackSimExtensions = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
@@ -912,12 +912,12 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
             LOG.error("Could not read Attack Simulation extensions.", e);
         }
 
-        try {
-            final List<IKritisSimulationWrapper> kritisSimExtensions = SimulationExtensionPointHelper.getKritisSimulationExtensions();
-            fillSimulationComboBox(kritisSimExtensions, comboKritisSimulation);
-        } catch (final CoreException e) {
-            LOG.error("Could not read KRITIS Simulation extensions.", e);
-        }
+//        try {
+//            final List<IKritisSimulationWrapper> kritisSimExtensions = SimulationExtensionPointHelper.getKritisSimulationExtensions();
+//            fillSimulationComboBox(kritisSimExtensions, comboKritisSimulation);
+//        } catch (final CoreException e) {
+//            LOG.error("Could not read KRITIS Simulation extensions.", e);
+//        }
 
         try {
             final List<ITerminationCondition> terminationConditionExtensions = SimulationExtensionPointHelper.getTerminationConditionExtensions();

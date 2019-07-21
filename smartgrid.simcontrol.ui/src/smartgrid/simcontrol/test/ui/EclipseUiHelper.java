@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.ui;
+package smartgrid.simcontrol.test.ui;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;

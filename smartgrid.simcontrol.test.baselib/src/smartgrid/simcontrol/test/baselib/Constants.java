@@ -43,13 +43,13 @@ public final class Constants {
     public static final String DEFAULT_ROOT_NODE_ID = NO_ROOT_NODE_ID; //$NON-NLS-1$
 
     // extension point IDs
-    public static final String ATTACKER_SIMULATION_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.attackerSimulation";
-    public static final String IMPACT_ANALYSIS_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.impactAnalysis";
-    public static final String TERMINATION_CONDITION_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.terminationCondition";
-    public static final String TIME_PROGRESSOR_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.timeProgressor";
-    public static final String POWER_LOAD_SIMULATION_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.powerLoadSimulation";
-    public static final String INPUT_GERNATOR_EXTENSION_POINT = "smartgrid.simcontrol.extensionpoints.inputGenerator";
-    public static final String KRITIS_SIMULATION_EXTENSION_POINT = "smartgrid.simucontrol.extensionpoints.kritisSimulation";
+    public static final String ATTACKER_SIMULATION_EXTENSION_POINT = "smartgrid.simcontrol.test.extensionpoints.attackerSimulation";
+    public static final String IMPACT_ANALYSIS_EXTENSION_POINT = "smartgrid.simcontrol.test.extensionpoints.impactAnalysis";
+    public static final String TERMINATION_CONDITION_EXTENSION_POINT = "smartgrid.simcontrol.test.extensionpoints.terminationCondition";
+    public static final String TIME_PROGRESSOR_EXTENSION_POINT = "smartgrid.simcontrol.test.extensionpoints.timeProgressor";
+    public static final String POWER_LOAD_SIMULATION_EXTENSION_POINT = "smartgrid.simcontrol.test.extensionpoints.powerLoadSimulation";
+    public static final String INPUT_GERNATOR_EXTENSION_POINT = "smartgrid.simcontrol.test.extensionpoints.inputGenerator";
+    public static final String KRITIS_SIMULATION_EXTENSION_POINT = "smartgrid.simucontrol.test.extensionpoints.kritisSimulation";
 
     // extension point keys
     public static final String POWER_LOAD_SIMULATION_KEY = "powerLoadConfiguration";

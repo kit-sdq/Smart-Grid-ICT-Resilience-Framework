@@ -5,9 +5,9 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="smartgrid.simcontrol.ui.launchconfig.AbstractSimcontrolTabGroup"
-            id="smartgrid.simcontrol.ui.AbstractSimcontrolTabGroup"
-            type="smartgrid.simcontrol.SimcontrolLaunchConfigurationType">
+            class="smartgrid.simcontrol.test.ui.launchconfig.AbstractSimcontrolTabGroup"
+            id="smartgrid.simcontrol.test.ui.AbstractSimcontrolTabGroup"
+            type="smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType">
             
             <launchMode 
                   mode="debug"
@@ -26,9 +26,9 @@
             allPopups="false"
             locationURI="toolbar:org.eclipse.ui.main.toolbar">
          <toolbar
-               id="smartgrid.simcontrol.ui.toolbar">
+               id="smartgrid.simcontrol.test.ui.toolbar">
             <command
-                  commandId="smartgrid.simcontrol.ui.interruptCommand"
+                  commandId="smartgrid.simcontrol.test.ui.interruptCommand"
                   icon="icons/skull.gif"
                   style="push">
             </command>
@@ -38,8 +38,8 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="smartgrid.simcontrol.ui.toolbar.InterruptButtonHandler"
-            id="smartgrid.simcontrol.ui.interruptCommand"
+            defaultHandler="smartgrid.simcontrol.test.ui.toolbar.InterruptButtonHandler"
+            id="smartgrid.simcontrol.test.ui.interruptCommand"
             name="Free all Simulations">
       </command>
    </extension>
