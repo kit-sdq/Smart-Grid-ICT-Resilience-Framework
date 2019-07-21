@@ -16,13 +16,13 @@ import org.modelversioning.emfprofileapplication.EMFProfileApplicationPackage;
 import smartgrid.attackersimulation.LocalHacker;
 import smartgrid.attackersimulation.ViralHacker;
 import smartgrid.impactanalysis.GraphAnalyzer;
-import smartgrid.simcontrol.baselib.Constants;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputPackage;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartgridtopoPackage;
+import smartgrid.simcontrol.test.baselib.Constants;
 
 /**
  * Class contains helping methods for the Hacking-testing classes
