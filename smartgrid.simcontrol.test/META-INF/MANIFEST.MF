@@ -25,4 +25,4 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  smartgrid.simcontrol.test.baselib;bundle-version="1.0.0",
  smartgrid.simcontrol.test.baselib,
  smartgrid.model.test.generation,
- couplingSGDummy;bundle-version="1.0.0"
+ couplingSG;bundle-version="1.0.0"

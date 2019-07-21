@@ -21,6 +21,7 @@ import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerDemand;
+import couplingToICT.PowerInfeed;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.SimcontrolException;
@@ -175,72 +176,44 @@ public class RmiServer implements ISimulationController {
     }
 
     @Override
-    public void initTopo(SmartGridTopoContainer topo) {
+    public void initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
 
         LOG.info("init topo called remotely");
-        // TODO remote simcontrol aufrufen (dort methode anlegen, die generator aufruft und ergebnisse in instanzvariable speichert)
-        BlockingKritisDataExchanger.storeGeoData(topo);
-
-    }
-
-
-    public SmartComponentStateContainer run(PowerAssigned power)
-            throws RemoteException, SimcontrolException, InterruptedException {
-
-
-        LOG.info("run was called remotely");
-        ArrayList<String> _smartMeterStates = null;
-        ArrayList<String> _iedStates = null;
-
-        SmartComponentStateContainer StateContainer = new SmartComponentStateContainer(_smartMeterStates, _iedStates);
-
+        
         if (state == RmiServerState.ACTIVE) {
-            try {
-                StateContainer = BlockingKritisDataExchanger.bufferPAgetSCSC(power);
-            } catch (InterruptedException e) {
-                throw e;
-            } catch (Throwable e) {
-                resetState();
-                BlockingKritisDataExchanger.freeAll();
-                LOG.info(
-                        "The stored exception that originally occured in SimControl was passed to the remote KRITIS simulation. The RMI server and data exchange are now reset.");
-                throw new SimcontrolException(
-                        "There was an exception in SimControl. The RMI server has now been reset to 'uninitialized'.",
-                        e);
-            }
+        	BlockingKritisDataExchanger.storeGeoData(topo);
         } else if (state == RmiServerState.REACTIVE) {
-            StateContainer = reactiveSimControl.run_new(power);
+            reactiveSimControl.initTopo(topo);
         } else {
             LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
             throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
         }
+        
 
-        return StateContainer;
     }
 
+
     @Override
-    public Map<String, Map<String, Double>> runAndGetPowerSupplied(
-            Map<String, Map<String, PowerSpec>> modifiedCIPowerDemand)
-            throws RemoteException, couplingToICT.SimcontrolException, InterruptedException {
-        LOG.info("broken run was called remotely");
+    public PowerInfeed getModifiedInfeedPowerSpec(PowerInfeed CIPowerInfeed) throws RemoteException, SimcontrolException, InterruptedException {
+        LOG.info("getModifiedInfeedPowerSpec (not defined yet) was called remotely");
         return null;
     }
 
     @Override
-    public Map<String, Map<String, PowerSpec>> getModifiedPowerSpec(Map<String, Map<String, PowerSpec>> CIPowerDemand, PowerAssigned power)
+    public PowerDemand getModifiedPowerSpec(PowerDemand CIPowerDemand, PowerAssigned power)
             throws RemoteException, couplingToICT.SimcontrolException, InterruptedException {
-        
-        // die run Methode 
-        
+                
         LOG.info("run was called remotely");
-        ArrayList<String> _smartMeterStates = null;
-        ArrayList<String> _iedStates = null;
-
-        SmartComponentStateContainer StateContainer = new SmartComponentStateContainer(_smartMeterStates, _iedStates);
+        
+        PowerDemand powerDemand = null;
 
         if (state == RmiServerState.ACTIVE) {
             try {
-                StateContainer = BlockingKritisDataExchanger.bufferPAgetSCSC(power);
+            	//buffer pA und pD
+                BlockingKritisDataExchanger.bufferPDAndPA(power, CIPowerDemand);
+                
+                //get Modified Power Demand
+                powerDemand = BlockingKritisDataExchanger.getModifiedPowerDemand();
             } catch (InterruptedException e) {
                 throw e;
             } catch (Throwable e) {
@@ -253,28 +226,39 @@ public class RmiServer implements ISimulationController {
                         e);
             }
         } else if (state == RmiServerState.REACTIVE) {
-            StateContainer = reactiveSimControl.run_new(power);
+        	//run
+            reactiveSimControl.run(power);
+            
+            // Modify demand
+            powerDemand = reactiveSimControl.modifyPowerDemand(CIPowerDemand);
         } else {
             LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
             throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
         }
-        
-        // Modify demand
-        
-        PowerDemand powerDemand = reactiveSimControl.modifyPowerDemand(CIPowerDemand);
-        runState = RmiServerRunState.UPDATED;
-        
-        LinkedHashMap<String, HashMap<String, PowerSpec>> powerdemandsLinkedMap = powerDemand.getPowerDemands();
-        Map<String,Map<String, PowerSpec>> powerDemands = new LinkedHashMap< String, Map<String, PowerSpec>>(powerdemandsLinkedMap);
-        
-        return powerDemands;
+    
+        return powerDemand;
     }
 
     @Override
     public couplingToICT.SmartComponentStateContainer getDysfunctSmartComponents()
             throws RemoteException, couplingToICT.SimcontrolException, InterruptedException {
         LOG.info("Dysfunctional smart components will be returned");
-        return reactiveSimControl.getDysfunctionalcomponents();
+
+        if (state == RmiServerState.ACTIVE) {
+        	try {
+				return BlockingKritisDataExchanger.getSCSC();
+			} catch (Throwable e) {
+				throw new SimcontrolException(
+                        "There was an exception in SimControl. The dysfunctionalSmartComponents are not defined.",
+                        e);
+			}
+        } else if (state == RmiServerState.REACTIVE) {
+            return reactiveSimControl.getDysfunctionalcomponents();
+        } else {
+            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
+            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+        }
+        
     }
 
 }

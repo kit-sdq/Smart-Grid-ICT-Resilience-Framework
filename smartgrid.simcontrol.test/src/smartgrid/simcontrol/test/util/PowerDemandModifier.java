@@ -7,5 +7,5 @@ import couplingToICT.PowerSpec;
 
 public interface PowerDemandModifier {
     
-    public PowerDemand modifyPowerDemand(Map<String, Map<String, PowerSpec>> powerDemand);
+    public PowerDemand modifyPowerDemand(PowerDemand powerDemand);
 }

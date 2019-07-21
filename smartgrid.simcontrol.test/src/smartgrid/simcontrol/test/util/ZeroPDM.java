@@ -10,10 +10,11 @@ import couplingToICT.PowerSpec;
 public class ZeroPDM implements PowerDemandModifier {
 
     @Override
-    public PowerDemand modifyPowerDemand(Map<String, Map<String, PowerSpec>> oldPowerDemandsHashMap) {
+    public PowerDemand modifyPowerDemand(PowerDemand powerDemand) {
 
         
         LinkedHashMap<String, HashMap<String, PowerSpec>> newPowerDemandsHashMap = new LinkedHashMap<String, HashMap<String,PowerSpec>>();
+        LinkedHashMap<String, HashMap<String, PowerSpec>> oldPowerDemandsHashMap = powerDemand.getPowerDemands();
         
         for (String powerDistrictId : oldPowerDemandsHashMap.keySet()) {
             

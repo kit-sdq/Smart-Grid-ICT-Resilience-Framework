@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import couplingToICT.PowerAssigned;
+import couplingToICT.PowerDemand;
 import couplingToICT.PowerSpec;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
@@ -22,7 +23,7 @@ public class BlockingKritisDataExchanger {
 
     private static final Logger LOG = Logger.getLogger(BlockingKritisDataExchanger.class);
 
-    private static Map<String, Map<String, PowerSpec>> bufferedDemand;
+    
     private static Thread kritisThread;
 
     private static Map<String, Map<String, Double>> bufferedPower;
@@ -33,116 +34,38 @@ public class BlockingKritisDataExchanger {
 
     private static SmartComponentStateContainer scsc;
     
-
     private static PowerAssigned bufferedPowerAssigned;
     
-    /**
-     * Buffers the power supply and retrieves the demanded power. Waits if no demand is buffered.
-     * This method should only be called from the coupling thread.
-     * 
-     * @param power
-     *            supply that was determined by the OPF analysis. Cannot be null.
-     * @return the demanded power that was buffered by the KRITIS simulation
-     * @throws InterruptedException
-     *             if the simulation is interrupted by the user
-     */
-    public static synchronized Map<String, Map<String, PowerSpec>> bufferSupplyGetDemand(Map<String, Map<String, Double>> power) throws InterruptedException {
-        assert bufferedPower == null;
-        assert power != null;
-
-        // provide own data
-        bufferedPower = power;
-        couplingThread = Thread.currentThread();
-        BlockingKritisDataExchanger.class.notifyAll();
-
-        // wait for data
-        while (bufferedDemand == null) {
-            LOG.info("SimControl is waiting for data of Kritis simulation.");
-            BlockingKritisDataExchanger.class.wait();
-        }
-
-        // consume data
-        Map<String, Map<String, PowerSpec>> tempDemand = bufferedDemand;
-        bufferedDemand = null;
-        couplingThread = null;
-        LOG.info("SimControl has finished its exchange.");
-        return tempDemand;
-    }
-
-    /**
-     * Buffers the power demand and retrieves the power supply. Waits if no demand is buffered. This
-     * method should only be called from the coupling thread.
-     * 
-     * @param demand
-     *            the requested power from the KRITIS simulation. Cannot be null.
-     * @return supply that was determined by the OPF analysis
-     * @throws InterruptedException
-     *             if the simulation is interrupted by the user
-     * @throws Throwable
-     */
-    public static synchronized Map<String, Map<String, Double>> bufferDemandGetSupply(Map<String, Map<String, PowerSpec>> demand) throws Throwable {
-        assert bufferedDemand == null;
-
-        if (demand == null) {
-            throw new SimcontrolException("Power demand cannot be null.");
-        }
-        hasExceptionOccured();
-
-        // provide own data
-        bufferedDemand = demand;
-        kritisThread = Thread.currentThread();
-        BlockingKritisDataExchanger.class.notifyAll();
-
-        // wait for data
-        while (bufferedPower == null) {
-            hasExceptionOccured();
-            LOG.info("The Kritis simulation is waiting for data of SimControl.");
-            BlockingKritisDataExchanger.class.wait();
-        }
-
-        hasExceptionOccured();
-
-        // consume data
-        Map<String, Map<String, Double>> tempPower = bufferedPower;
-        bufferedPower = null;
-        kritisThread = null;
-        LOG.info("The Kritis simulation has finished its exchange.");
-        return tempPower;
-    }
+    private static PowerDemand bufferedDemand;
     
+    private static PowerDemand modifiedDemand;
+    
+   
     
     /**
      * @author Mazen Ebada
-     * @param power
+     * @param powerAssigned
      * @return
      * @throws Throwable
      */
-    public static synchronized SmartComponentStateContainer bufferPAgetSCSC(PowerAssigned power) throws Throwable {
+    public synchronized static void bufferPDAndPA(PowerAssigned powerAssigned, PowerDemand powerDemand) throws Throwable {
         
         assert bufferedPower == null;
-        assert power != null;
+        assert powerAssigned != null;
         
+        assert bufferedDemand == null;
+        assert powerDemand != null;
         
-        bufferedPowerAssigned = power;
+        bufferedPowerAssigned = powerAssigned;
+        bufferedDemand = powerDemand;
+        
         couplingThread = Thread.currentThread();
         BlockingKritisDataExchanger.class.notifyAll();
+        
 
-        // wait for data
-        while (scsc == null) {
-            LOG.info("SimControl is waiting for the smart component state container.");
-            BlockingKritisDataExchanger.class.wait();
-        }
-        
-        // consume data
-        SmartComponentStateContainer tempStateContainer = scsc;
-        scsc = null;
-        couplingThread = null;
-        LOG.info("SimControl has finished its exchange.");
-        
-        return tempStateContainer;
     }
     
-    public PowerAssigned getPowerAssigned() throws Throwable {
+    public static PowerAssigned getPowerAssigned() throws Throwable {
         
         couplingThread = Thread.currentThread();
         
@@ -157,9 +80,61 @@ public class BlockingKritisDataExchanger {
         
     }
     
-    public void storeSCSC (SmartComponentStateContainer smartComponentStateContainer) {
+	public static PowerDemand getBufferedPowerDemand() throws Throwable {
+	        
+	        couplingThread = Thread.currentThread();
+	        
+	        // wait for data
+	        while (bufferedDemand == null) {
+	            LOG.info("SimControl is waiting for the bufferedDemand.");
+	            BlockingKritisDataExchanger.class.wait();
+	        }
+	        couplingThread = null;
+	        
+	        return bufferedDemand;
+	        
+	    }
+	
+	public static PowerDemand getModifiedPowerDemand() throws Throwable {
+	    
+	    couplingThread = Thread.currentThread();
+	    
+	    // wait for data
+	    while (modifiedDemand == null) {
+	        LOG.info("SimControl is waiting for the modifiedDemand.");
+	        BlockingKritisDataExchanger.class.wait();
+	    }
+	    couplingThread = null;
+	    
+	    return modifiedDemand;
+	    
+	}
+    
+	public static SmartComponentStateContainer getSCSC() throws Throwable {
+	    
+	    couplingThread = Thread.currentThread();
+	    
+	    // wait for data
+	    while (scsc == null) {
+	        LOG.info("SimControl is waiting for the scsc.");
+	        BlockingKritisDataExchanger.class.wait();
+	    }
+	    couplingThread = null;
+	    
+	    return scsc;
+	    
+	}
+
+    public static void storeSCSC (SmartComponentStateContainer smartComponentStateContainer) {
         couplingThread = Thread.currentThread();
         scsc = smartComponentStateContainer;
+        BlockingKritisDataExchanger.class.notifyAll();
+
+    }
+    
+    public static void storeModifiedDemand (PowerDemand newModifiedPowerDemand) {
+        couplingThread = Thread.currentThread();
+        modifiedDemand = newModifiedPowerDemand;
         BlockingKritisDataExchanger.class.notifyAll();
 
     }

@@ -10,12 +10,13 @@ import couplingToICT.PowerSpec;
 public class MaxPDM implements PowerDemandModifier {
 
     @Override
-    public PowerDemand modifyPowerDemand(Map<String, Map<String, PowerSpec>> oldPowerDemandsHashMap) {
+    public PowerDemand modifyPowerDemand(PowerDemand powerDemand) {
 
         
         LinkedHashMap<String, HashMap<String, PowerSpec>> newPowerDemandsHashMap = new LinkedHashMap<String, HashMap<String,PowerSpec>>();
+        LinkedHashMap<String, HashMap<String, PowerSpec>> oldPowerDemandsHashMap = powerDemand.getPowerDemands();
         
-        double maxOptDemand = getMaxOptDemand(oldPowerDemandsHashMap);
+        double maxOptDemand = getMaxOptDemand(powerDemand);
         
         for (String powerDistrictId : oldPowerDemandsHashMap.keySet()) {
             
@@ -51,8 +52,9 @@ public class MaxPDM implements PowerDemandModifier {
         return newPowerDemand;
     }
 
-    private double getMaxOptDemand(Map<String, Map<String, PowerSpec>> oldPowerDemandsHashMap) {
+    private double getMaxOptDemand(PowerDemand powerDemand) {
         double maxOptDemand = 0;
+        LinkedHashMap<String, HashMap<String, PowerSpec>> oldPowerDemandsHashMap = powerDemand.getPowerDemands();
         
         for (String powerDistrictId : oldPowerDemandsHashMap.keySet()) {
             Map<String, PowerSpec> oldSmartMeterPowerSpecs = oldPowerDemandsHashMap.get(powerDistrictId);
