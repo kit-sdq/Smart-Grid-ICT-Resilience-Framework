@@ -16,7 +16,6 @@ import org.eclipse.swt.widgets.Text;
  */
 public class SiriusCreateNewSmartgridDiagramPage extends WizardPage {
 
-    private Text projectName;
     private Text topologyName;
 
     public SiriusCreateNewSmartgridDiagramPage() {

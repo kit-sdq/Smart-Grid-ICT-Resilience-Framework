@@ -53,7 +53,7 @@ public class Tarjan {
                         visited[m] = true;
                         nodesToCheck.add(m);
 
-                        unprogressedNodes.remove(new Integer(m));
+                        unprogressedNodes.remove(m);
                     }
                 }
             }

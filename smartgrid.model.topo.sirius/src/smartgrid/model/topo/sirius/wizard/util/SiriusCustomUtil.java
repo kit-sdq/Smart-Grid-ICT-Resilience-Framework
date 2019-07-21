@@ -30,6 +30,7 @@ import org.eclipse.sirius.viewpoint.description.Viewpoint;
  * @author Amine Kechaou
  *
  */
+@SuppressWarnings("restriction")
 public class SiriusCustomUtil {
     
     public static URI getRepresentationsURI(IProject project) {
@@ -44,7 +45,6 @@ public class SiriusCustomUtil {
             if (selectedViewpoints.contains(v))
                 viewpoints.remove(v);
         }
-        @SuppressWarnings("restriction")
         final Command command = new ChangeViewpointSelectionCommand(session, selectionCallback, viewpoints, new HashSet<Viewpoint>(), createRepresentation, SubMonitor.convert(monitor));
         domain.getCommandStack().execute(command);
     }

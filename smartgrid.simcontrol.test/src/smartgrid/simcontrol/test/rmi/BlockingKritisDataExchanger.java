@@ -1,18 +1,13 @@
 package smartgrid.simcontrol.test.rmi;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerDemand;
-import couplingToICT.PowerSpec;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
-import couplingToICT.SimcontrolException;
 
 /**
  * This is basically an exchanger for two different data types.
@@ -137,13 +132,6 @@ public class BlockingKritisDataExchanger {
         modifiedDemand = newModifiedPowerDemand;
         BlockingKritisDataExchanger.class.notifyAll();
 
-    }
-
-    private static void hasExceptionOccured() throws Throwable {
-        if (storedException != null) {
-            LOG.info("Passing exception to KRITIS simulation.");
-            throw storedException;
-        }
     }
 
     public static synchronized void storeException(Throwable e) {

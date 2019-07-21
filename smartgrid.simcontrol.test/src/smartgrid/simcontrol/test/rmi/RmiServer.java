@@ -5,16 +5,11 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 
 
-import couplingToICT.PowerSpec;
 import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
 import smartgrid.simcontrol.test.ReactiveSimulationController;
 import couplingToICT.SimcontrolInitializationException;
@@ -22,7 +17,6 @@ import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerDemand;
 import couplingToICT.PowerInfeed;
-import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.SimcontrolException;
 
@@ -87,12 +81,6 @@ public class RmiServer implements ISimulationController {
             instance = null;
         }
     }
-
-    private enum RmiServerRunState {
-        TO_MODIFY, UPDATED
-    }
-
-    private RmiServerRunState runState = RmiServerRunState.TO_MODIFY;
 
     /**
      * Binds the server to port 1099 ({@link java.rmi.registry.Registry.REGISTRY_PORT}).

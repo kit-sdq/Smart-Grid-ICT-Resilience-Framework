@@ -14,7 +14,6 @@ import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
@@ -30,10 +29,8 @@ import smartgrid.simcontrol.test.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerDemand;
-import couplingToICT.PowerSpec;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
-import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
 import smartgrid.simcontrol.test.util.MaxPDM;
 import smartgrid.simcontrol.test.util.PowerDemandModificationTypes;
 import smartgrid.simcontrol.test.util.PowerDemandModifier;
@@ -61,15 +58,14 @@ public final class ReactiveSimulationController {
     private String workingDirPath;
     private SmartGridTopology topo;
     private ScenarioState initialState;
-    private SmartGridTopoContainer topoData;
 
     private FileAppender fileAppender;
 
     // Simulation State
     private int timeStep;
-    private ScenarioState impactInputOld;
+    //private ScenarioState impactInputOld;
     private ScenarioState impactInput;
-    private ScenarioResult impactResultOld;
+    //private ScenarioResult impactResultOld;
     
     private PowerDemandModificationTypes powerDemandModificationType = PowerDemandModificationTypes.MAX_DEMAND;
 
@@ -115,7 +111,6 @@ public final class ReactiveSimulationController {
     public SmartComponentStateContainer run(PowerAssigned power) {
 
         Map<String,Map<String, Double>> powerSupply;
-        SmartComponentStateContainer StateContainer;
         
         LOG.info("Starting time step " + timeStep);
 
@@ -128,7 +123,7 @@ public final class ReactiveSimulationController {
 
 
         // copy the input
-        impactInputOld = EcoreUtil.copy(impactInput);
+        //impactInputOld = EcoreUtil.copy(impactInput);
 
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
         

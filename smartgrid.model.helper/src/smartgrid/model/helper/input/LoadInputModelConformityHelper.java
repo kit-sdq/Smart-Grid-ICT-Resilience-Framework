@@ -35,7 +35,8 @@ public class LoadInputModelConformityHelper {
         return false;
     }
 
-    private static boolean compareAndCountEntityStates(final List<EntityState> states, final List<NetworkEntity> entities) {
+    @SuppressWarnings("unused")
+	private static boolean compareAndCountEntityStates(final List<EntityState> states, final List<NetworkEntity> entities) {
         boolean result = true;
 
         final List<EntityState> noZombies = getListWithoutZombies(states);
@@ -72,7 +73,8 @@ public class LoadInputModelConformityHelper {
         return noZombies;
     }
 
-    private static boolean compareAndCountPowerStates(final List<PowerState> states, final List<PowerGridNode> current) {
+    @SuppressWarnings("unused")
+	private static boolean compareAndCountPowerStates(final List<PowerState> states, final List<PowerGridNode> current) {
         boolean result = true;
 
         final List<PowerState> noZombies = getListWithoutZombiesPower(states);
