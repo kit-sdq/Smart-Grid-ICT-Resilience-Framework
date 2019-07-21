@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Baselibary
-Bundle-SymbolicName: smartgrid.simcontrol.baselib
+Bundle-SymbolicName: deprecated.smartgrid.simcontrol.baselib
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: smartgrid.simcontrol.baselib,
@@ -16,4 +16,4 @@ Require-Bundle: smartgrid.model.output,
  smartgrid.model.input,
  org.eclipse.debug.core,
  org.eclipse.equinox.registry,
- smartgrid.simcontrol.coupling;bundle-version="1.0.0"
+ deprecated.smartgrid.simcontrol.coupling;bundle-version="1.0.0"
