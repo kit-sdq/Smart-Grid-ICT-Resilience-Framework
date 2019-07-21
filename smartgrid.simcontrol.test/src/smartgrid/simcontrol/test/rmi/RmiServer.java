@@ -152,8 +152,10 @@ public class RmiServer implements ISimulationController {
     	LOG.info("temp init reactive called remotely");
     	state = RmiServerState.REACTIVE;
     	reactiveSimControl = new ReactiveSimulationController();
-    	String outputPath = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/";
-    	reactiveSimControl.init(outputPath);
+    	
+    	//TODO : outputPath eindeutig?
+    	//String outputPath = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/";
+    	//reactiveSimControl.init(outputPath);
     	
     	try {
             // To-do initiator (KRITIS Sim) should be able to choose analyses
