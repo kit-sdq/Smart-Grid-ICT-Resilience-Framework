@@ -5,4 +5,4 @@
  * @author Christian
  *
  */
-package smartgrid.simcontrol.mocks;
+package smartgrid.simcontrol.test.mocks;

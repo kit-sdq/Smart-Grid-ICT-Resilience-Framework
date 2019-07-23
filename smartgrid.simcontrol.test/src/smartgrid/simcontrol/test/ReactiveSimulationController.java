@@ -52,7 +52,6 @@ public final class ReactiveSimulationController {
 //    private IPowerLoadSimulationWrapper powerLoadSimulation;
     private IImpactAnalysis impactAnalsis;
     private IAttackerSimulation attackerSimulation;
-    private ITerminationCondition terminationCondition;
     private ITimeProgressor timeProgressor;
 
     private String workingDirPath;
@@ -326,32 +325,11 @@ public final class ReactiveSimulationController {
 
     	final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
         for (final IAttackerSimulation e : attack) {
-
-
             if (e.getName().equals("No Attack Simulation")) {
                 attackerSimulation = e;
             } 
         }
 
-        // To-do at some point, IIP might want some init data
-        //final List<IPowerLoadSimulationWrapper> power = TestSimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
-        //for (final IPowerLoadSimulationWrapper e : power) {
-
-        //    if (e.getName().equals(Constants.IIP_OPF_NAME)) {
-        //        powerLoadSimulation = e;
-        //    }
-        //}
-
-        // To-do init! (with number of iterations)
-        final List<ITerminationCondition> termination = TestSimulationExtensionPointHelper.getTerminationConditionExtensions();
-        for (final ITerminationCondition e : termination) {
-
-            if (e.getName().equals("Iteration Count")) {
-                terminationCondition = e;
-            }
-        }
-
-        // To-do init?
         final List<IImpactAnalysis> impact = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
         for (final IImpactAnalysis e : impact) {
 
@@ -368,23 +346,12 @@ public final class ReactiveSimulationController {
             }
         }
 
-        //LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
-        if (impactAnalsis != null)
-        	LOG.info("Using impact analysis: " + impactAnalsis.getName());
-        else
-        	LOG.warn("No Impact Analysis exists");
-        if (attackerSimulation != null)
-        	LOG.info("Using attacker simulation: " + attackerSimulation.getName());
-        else
-        	LOG.warn("No Attacker Simulation exists");
-        if (terminationCondition != null)
-        	LOG.info("Using termination condition: " + terminationCondition.getName());
-        else
-        	LOG.warn("No Termination condition exists");
-        if (timeProgressor != null)
-        	LOG.info("Using time progressor: " + timeProgressor.getName());
-        else
-        	LOG.warn("No Time Progresser exists");
+        assert impactAnalsis != null;
+    	LOG.info("Using impact analysis: " + impactAnalsis.getName());
+        assert attackerSimulation != null;
+    	LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+        assert timeProgressor != null;
+    	LOG.info("Using time progressor: " + timeProgressor.getName());
     }
 
     public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException, InterruptedException {
@@ -393,8 +360,8 @@ public final class ReactiveSimulationController {
                 IAttackerSimulation.class);
         //powerLoadSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getPowerLoadSimulationExtensions(), Constants.POWER_LOAD_SIMULATION_KEY,
         //        IPowerLoadSimulationWrapper.class);
-        terminationCondition = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getTerminationConditionExtensions(),
-                Constants.TERMINATION_CONDITION_SIMULATION_KEY, ITerminationCondition.class);
+        //terminationCondition = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getTerminationConditionExtensions(),
+        //        Constants.TERMINATION_CONDITION_SIMULATION_KEY, ITerminationCondition.class);
         impactAnalsis = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(), Constants.IMPACT_ANALYSIS_SIMULATION_KEY,
                 IImpactAnalysis.class);
         timeProgressor = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
@@ -403,13 +370,13 @@ public final class ReactiveSimulationController {
         //powerLoadSimulation.init(launchConfig);
         impactAnalsis.init(launchConfig);
         attackerSimulation.init(launchConfig);
-        terminationCondition.init(launchConfig);
+        //terminationCondition.init(launchConfig);
         timeProgressor.init(launchConfig);
 
         //LOG.info("Using power load simulation: " + powerLoadSimulation.getName());
         LOG.info("Using impact analysis: " + impactAnalsis.getName());
         LOG.info("Using attacker simulation: " + attackerSimulation.getName());
-        LOG.info("Using termination condition: " + terminationCondition.getName());
+        //LOG.info("Using termination condition: " + terminationCondition.getName());
         LOG.info("Using time progressor: " + timeProgressor.getName());
 
         // get topology data if needed

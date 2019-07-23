@@ -1,8 +1,8 @@
-package smartgrid.simcontrol.mocks;
+package smartgrid.simcontrol.test.mocks;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.coupling.IImpactAnalysis;
+import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 import smartgridinput.ScenarioState;
 import smartgridoutput.Cluster;
 import smartgridoutput.Online;

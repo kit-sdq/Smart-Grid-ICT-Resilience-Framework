@@ -139,7 +139,7 @@ public class RmiServer implements ISimulationController {
         }
         state = RmiServerState.ACTIVE; 
         
-     // TODO remove when active mode works
+     // TODO HACK until active mode works
         try {
 			temp_initReactive();
 		} catch (SimcontrolInitializationException e) {
@@ -148,14 +148,16 @@ public class RmiServer implements ISimulationController {
         
     }
     
+
+    // TODO HACK until active mode works
     private void temp_initReactive() throws SimcontrolInitializationException {
     	LOG.info("temp init reactive called remotely");
     	state = RmiServerState.REACTIVE;
     	reactiveSimControl = new ReactiveSimulationController();
     	
     	//TODO : outputPath eindeutig?
-    	//String outputPath = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/";
-    	//reactiveSimControl.init(outputPath);
+    	String outputPath = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/";
+    	reactiveSimControl.init(outputPath);
     	
     	try {
             // To-do initiator (KRITIS Sim) should be able to choose analyses
@@ -216,7 +218,7 @@ public class RmiServer implements ISimulationController {
     @Override
     public PowerInfeed getModifiedInfeedPowerSpec(PowerInfeed CIPowerInfeed) throws RemoteException, SimcontrolException, InterruptedException {
         LOG.info("getModifiedInfeedPowerSpec (not defined yet) was called remotely");
-        return null;
+        return CIPowerInfeed;
     }
 
     @Override

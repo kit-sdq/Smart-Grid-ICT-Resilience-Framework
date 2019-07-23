@@ -2,39 +2,39 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="smartgrid.simcontrol.extensionpoints.powerLoadSimulation">
+         point="smartgrid.simcontrol.test.extensionpoints.powerLoadSimulation">
       <powerLoadSimulation
-            powerLoadSimulation="smartgrid.simcontrol.mocks.PowerLoadSimulationMock">
+            powerLoadSimulation="smartgrid.simcontrol.test.mocks.PowerLoadSimulationMock">
       </powerLoadSimulation>
    </extension>
    <extension
-         point="smartgrid.simcontrol.extensionpoints.terminationCondition">
+         point="smartgrid.simcontrol.test.extensionpoints.terminationCondition">
       <terminationCondition
-            class="smartgrid.simcontrol.mocks.IterationCountTerminationCondition">
+            class="smartgrid.simcontrol.test.mocks.IterationCountTerminationCondition">
       </terminationCondition>
    </extension>
    <extension
-         point="smartgrid.simcontrol.extensionpoints.timeProgressor">
+         point="smartgrid.simcontrol.test.extensionpoints.timeProgressor">
       <timeProgressor
-            class="smartgrid.simcontrol.mocks.NoOperationTimeProgressor">
+            class="smartgrid.simcontrol.test.mocks.NoOperationTimeProgressor">
       </timeProgressor>
    </extension>
    <extension
-         point="smartgrid.simucontrol.extensionpoints.kritisSimulation">
+         point="smartgrid.simucontrol.test.extensionpoints.kritisSimulation">
       <KritisSimulation
-            class="smartgrid.simcontrol.mocks.KritisSimulationMock">
+            class="smartgrid.simcontrol.test.mocks.KritisSimulationMock">
       </KritisSimulation>
    </extension>
    <extension
-         point="smartgrid.simcontrol.extensionpoints.impactAnalysis">
+         point="smartgrid.simcontrol.test.extensionpoints.impactAnalysis">
       <impactAnalysis
-            class="smartgrid.simcontrol.mocks.ImpactAnalysisMock">
+            class="smartgrid.simcontrol.test.mocks.ImpactAnalysisMock">
       </impactAnalysis>
    </extension>
    <extension
-         point="smartgrid.simcontrol.extensionpoints.attackerSimulation">
+         point="smartgrid.simcontrol.test.extensionpoints.attackerSimulation">
       <AttackerSimulation
-            class="smartgrid.simcontrol.mocks.NoAttackerSimulation">
+            class="smartgrid.simcontrol.test.mocks.NoAttackerSimulation">
       </AttackerSimulation>
    </extension>
 

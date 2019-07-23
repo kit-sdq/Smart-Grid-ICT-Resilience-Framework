@@ -1,8 +1,8 @@
-package smartgrid.simcontrol.mocks;
+package smartgrid.simcontrol.test.mocks;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.simcontrol.baselib.coupling.ITimeProgressor;
+import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
 
 public class NoOperationTimeProgressor implements ITimeProgressor {
 
