@@ -1,5 +1,6 @@
 package smartgrid.impactanalysis;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,7 +54,13 @@ public class Tarjan {
                         visited[m] = true;
                         nodesToCheck.add(m);
 
-                        unprogressedNodes.remove(m);
+                        int removeIndex = -1;
+                        for (int k = 0; k< unprogressedNodes.size(); k++) {
+                        	if (unprogressedNodes.get(k) == m)
+                        		removeIndex = k;
+                        }
+                        if (removeIndex != -1)
+                        	unprogressedNodes.remove(removeIndex);
                     }
                 }
             }
