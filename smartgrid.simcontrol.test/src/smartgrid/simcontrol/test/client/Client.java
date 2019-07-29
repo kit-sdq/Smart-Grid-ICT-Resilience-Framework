@@ -12,8 +12,8 @@ import org.apache.log4j.Logger;
 
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
-import couplingToICT.PowerDemand;
 import couplingToICT.PowerSpec;
+import couplingToICT.PowerSpecContainer;
 import couplingToICT.SimcontrolException;
 import couplingToICT.SmartComponentGeoData;
 import couplingToICT.SmartGridTopoContainer;
@@ -34,8 +34,9 @@ public class Client {
 		LinkedHashMap<String, Map<String, SmartComponentGeoData>> _smartMeterContainer = null;
 		SmartGridTopoContainer topoContainer = new SmartGridTopoContainer(_smartMeterContainer, _iedContainer);
 		
-		LinkedHashMap<String, HashMap<String, PowerSpec>> _powerDemands = new LinkedHashMap<String, HashMap<String,PowerSpec>>();
-		PowerDemand powerDemand = new PowerDemand(_powerDemands );
+		LinkedHashMap<String, Map<String, PowerSpec>> _powerDemands = new LinkedHashMap<String, Map<String,PowerSpec>>();
+		LinkedHashMap<String, Map<String, PowerSpec>> _powerInfeeds = new LinkedHashMap<String, Map<String,PowerSpec>>();
+		PowerSpecContainer powerSpecs = new PowerSpecContainer(_powerDemands ,_powerInfeeds );
 		
 		LinkedHashMap<String, HashMap<String, Double>> _powerAssigned = new LinkedHashMap<String, HashMap<String,Double>>();;
 		PowerAssigned powerAssigned = new PowerAssigned(_powerAssigned);
@@ -51,7 +52,7 @@ public class Client {
 			e.printStackTrace();
 		} 
 		try {
-			connector.getModifiedPowerSpec(powerDemand, powerAssigned);
+			connector.getModifiedPowerSpec(powerSpecs, powerAssigned);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

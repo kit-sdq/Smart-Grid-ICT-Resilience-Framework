@@ -13,10 +13,10 @@ import org.eclipse.core.runtime.CoreException;
 import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
 import smartgrid.simcontrol.test.ReactiveSimulationController;
 import couplingToICT.SimcontrolInitializationException;
+import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
-import couplingToICT.PowerDemand;
-import couplingToICT.PowerInfeed;
+import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.SimcontrolException;
 
@@ -214,55 +214,8 @@ public class RmiServer implements ISimulationController {
 
     }
 
-
     @Override
-    public PowerInfeed getModifiedInfeedPowerSpec(PowerInfeed CIPowerInfeed) throws RemoteException, SimcontrolException, InterruptedException {
-        LOG.info("getModifiedInfeedPowerSpec (not defined yet) was called remotely");
-        return CIPowerInfeed;
-    }
-
-    @Override
-    public PowerDemand getModifiedPowerSpec(PowerDemand CIPowerDemand, PowerAssigned power)
-            throws RemoteException, couplingToICT.SimcontrolException, InterruptedException {
-                
-        LOG.info("run was called remotely");
-        
-        PowerDemand powerDemand = null;
-
-        if (state == RmiServerState.ACTIVE) {
-            try {
-            	//buffer pA und pD
-                BlockingKritisDataExchanger.bufferPDAndPA(power, CIPowerDemand);
-                
-                //get Modified Power Demand
-                powerDemand = BlockingKritisDataExchanger.getModifiedPowerDemand();
-            } catch (InterruptedException e) {
-                throw e;
-            } catch (Throwable e) {
-                resetState();
-                BlockingKritisDataExchanger.freeAll();
-                LOG.info(
-                        "The stored exception that originally occured in SimControl was passed to the remote KRITIS simulation. The RMI server and data exchange are now reset.");
-                throw new SimcontrolException(
-                        "There was an exception in SimControl. The RMI server has now been reset to 'uninitialized'.",
-                        e);
-            }
-        } else if (state == RmiServerState.REACTIVE) {
-        	//run
-            reactiveSimControl.run(power);
-            
-            // Modify demand
-            powerDemand = reactiveSimControl.modifyPowerDemand(CIPowerDemand);
-        } else {
-            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
-            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
-        }
-    
-        return powerDemand;
-    }
-
-    @Override
-    public couplingToICT.SmartComponentStateContainer getDysfunctSmartComponents()
+    public SmartComponentStateContainer getDysfunctSmartComponents()
             throws RemoteException, couplingToICT.SimcontrolException, InterruptedException {
         LOG.info("Dysfunctional smart components will be returned");
 
@@ -282,5 +235,44 @@ public class RmiServer implements ISimulationController {
         }
         
     }
+
+	@Override
+	public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned SMPowerAssigned)
+			throws RemoteException, SimcontrolException, InterruptedException {
+		LOG.info("run was called remotely");
+        
+		PowerSpecContainer powerSpecContainer = null;
+
+        if (state == RmiServerState.ACTIVE) {
+            try {
+            	//buffer pA und pD
+                BlockingKritisDataExchanger.bufferPSAndPA(powerSpecs, SMPowerAssigned);
+                
+                //get Modified Power Demand
+                powerSpecContainer = BlockingKritisDataExchanger.getModifiedPowerSpecs();
+            } catch (InterruptedException e) {
+                throw e;
+            } catch (Throwable e) {
+                resetState();
+                BlockingKritisDataExchanger.freeAll();
+                LOG.info(
+                        "The stored exception that originally occured in SimControl was passed to the remote KRITIS simulation. The RMI server and data exchange are now reset.");
+                throw new SimcontrolException(
+                        "There was an exception in SimControl. The RMI server has now been reset to 'uninitialized'.",
+                        e);
+            }
+        } else if (state == RmiServerState.REACTIVE) {
+        	//run
+            reactiveSimControl.run(SMPowerAssigned);
+            
+            // Modify demand
+            powerSpecContainer = reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
+        } else {
+            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
+            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+        }
+    
+        return powerSpecContainer;
+	}
 
 }

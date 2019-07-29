@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import couplingToICT.PowerAssigned;
-import couplingToICT.PowerDemand;
+import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 
@@ -31,28 +31,27 @@ public class BlockingKritisDataExchanger {
     
     private static PowerAssigned bufferedPowerAssigned;
     
-    private static PowerDemand bufferedDemand;
+    private static PowerSpecContainer bufferedPowerSpecs;
     
-    private static PowerDemand modifiedDemand;
+    private static PowerSpecContainer modifiedPowerSpecs;
     
    
     
     /**
      * @author Mazen Ebada
-     * @param powerAssigned
      * @return
      * @throws Throwable
      */
-    public synchronized static void bufferPDAndPA(PowerAssigned powerAssigned, PowerDemand powerDemand) throws Throwable {
+    public synchronized static void bufferPSAndPA(PowerSpecContainer powerSpecs, PowerAssigned powerAssigned) throws Throwable {
         
         assert bufferedPower == null;
         assert powerAssigned != null;
         
-        assert bufferedDemand == null;
-        assert powerDemand != null;
+        assert bufferedPowerSpecs == null;
+        assert powerSpecs != null;
         
         bufferedPowerAssigned = powerAssigned;
-        bufferedDemand = powerDemand;
+        bufferedPowerSpecs = powerSpecs;
         
         couplingThread = Thread.currentThread();
         BlockingKritisDataExchanger.class.notifyAll();
@@ -75,33 +74,33 @@ public class BlockingKritisDataExchanger {
         
     }
     
-	public static PowerDemand getBufferedPowerDemand() throws Throwable {
+	public static PowerSpecContainer getBufferedPowerSpecs() throws Throwable {
 	        
 	        couplingThread = Thread.currentThread();
 	        
 	        // wait for data
-	        while (bufferedDemand == null) {
-	            LOG.info("SimControl is waiting for the bufferedDemand.");
+	        while (bufferedPowerSpecs == null) {
+	            LOG.info("SimControl is waiting for the bufferedPowerSpecs.");
 	            BlockingKritisDataExchanger.class.wait();
 	        }
 	        couplingThread = null;
 	        
-	        return bufferedDemand;
+	        return bufferedPowerSpecs;
 	        
 	    }
 	
-	public static PowerDemand getModifiedPowerDemand() throws Throwable {
+	public static PowerSpecContainer getModifiedPowerSpecs() throws Throwable {
 	    
 	    couplingThread = Thread.currentThread();
 	    
 	    // wait for data
-	    while (modifiedDemand == null) {
-	        LOG.info("SimControl is waiting for the modifiedDemand.");
+	    while (modifiedPowerSpecs == null) {
+	        LOG.info("SimControl is waiting for the modifiedPowerSpecs.");
 	        BlockingKritisDataExchanger.class.wait();
 	    }
 	    couplingThread = null;
 	    
-	    return modifiedDemand;
+	    return modifiedPowerSpecs;
 	    
 	}
     
@@ -127,9 +126,9 @@ public class BlockingKritisDataExchanger {
 
     }
     
-    public static void storeModifiedDemand (PowerDemand newModifiedPowerDemand) {
+    public static void storeModifiedPowerSpecs (PowerSpecContainer powerSpecContainer) {
         couplingThread = Thread.currentThread();
-        modifiedDemand = newModifiedPowerDemand;
+        modifiedPowerSpecs = powerSpecContainer;
         BlockingKritisDataExchanger.class.notifyAll();
 
     }
@@ -187,7 +186,10 @@ public class BlockingKritisDataExchanger {
         }
 
         // clear all buffered data
-        bufferedDemand = null;
+        bufferedPowerSpecs = null;
+        modifiedPowerSpecs = null;
+        scsc = null;
+        bufferedPowerAssigned = null;
         bufferedPower = null;
         bufferedTopoData = null;
         storedException = null;

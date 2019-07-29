@@ -10,7 +10,7 @@ import smartgrid.log4j.LoggingInitializer;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
 import couplingToICT.PowerAssigned;
-import couplingToICT.PowerDemand;
+import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 
@@ -26,19 +26,20 @@ public final class SimulationController {
     public void run() throws InterruptedException {
         PowerAssigned powerAssigned;
 		try {
+			powerAssigned = null;
 			powerAssigned = BlockingKritisDataExchanger.getPowerAssigned();
 
 			SmartComponentStateContainer scsc = null;
 	        // one iteration computes one timestep
 	        for (int timeStep = 0; timeStep < maxTimeSteps; timeStep++) {
-	        	scsc = reactiveSimControl.run(powerAssigned); //TODO
+	        	scsc = reactiveSimControl.run(powerAssigned); 
 	        }
 	        
 	        BlockingKritisDataExchanger.storeSCSC(scsc);
 	        
-	        PowerDemand bufferedDemand = BlockingKritisDataExchanger.getBufferedPowerDemand();
-	        PowerDemand modifiedDemand = reactiveSimControl.modifyPowerDemand(bufferedDemand);
-	        BlockingKritisDataExchanger.storeModifiedDemand(modifiedDemand);
+	        PowerSpecContainer bufferedPowerSpecs = BlockingKritisDataExchanger.getBufferedPowerSpecs();
+	        PowerSpecContainer modifiedPowerSpecs = reactiveSimControl.modifyPowerSpecContainer(bufferedPowerSpecs);
+	        BlockingKritisDataExchanger.storeModifiedPowerSpecs(modifiedPowerSpecs);
 	        
 	        LOG.info("Coupled simulation terminated internally");
 	        reactiveSimControl.shutDown();

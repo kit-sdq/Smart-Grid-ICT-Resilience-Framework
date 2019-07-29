@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,16 +26,16 @@ import smartgrid.model.test.generation.TrivialTopoGenerator;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
-import smartgrid.simcontrol.test.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
 import couplingToICT.PowerAssigned;
-import couplingToICT.PowerDemand;
+import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
-import smartgrid.simcontrol.test.util.MaxPDM;
-import smartgrid.simcontrol.test.util.PowerDemandModificationTypes;
-import smartgrid.simcontrol.test.util.PowerDemandModifier;
-import smartgrid.simcontrol.test.util.ZeroPDM;
+import smartgrid.simcontrol.test.util.DoublePSM;
+import smartgrid.simcontrol.test.util.MaxPSM;
+import smartgrid.simcontrol.test.util.PowerSpecsModificationTypes;
+import smartgrid.simcontrol.test.util.PowerSpecsModifier;
+import smartgrid.simcontrol.test.util.ZeroPSM;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
 import smartgridoutput.EntityState;
@@ -49,7 +50,7 @@ public final class ReactiveSimulationController {
 
     private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
-//    private IPowerLoadSimulationWrapper powerLoadSimulation;
+
     private IImpactAnalysis impactAnalsis;
     private IAttackerSimulation attackerSimulation;
     private ITimeProgressor timeProgressor;
@@ -64,11 +65,13 @@ public final class ReactiveSimulationController {
     private int timeStep;
     //private ScenarioState impactInputOld;
     private ScenarioState impactInput;
-    //private ScenarioResult impactResultOld;
     
-    private PowerDemandModificationTypes powerDemandModificationType = PowerDemandModificationTypes.MAX_DEMAND;
+    private ScenarioResult impactResult;
+    
+    private PowerSpecsModificationTypes powerDemandModificationType = PowerSpecsModificationTypes.DOUBLE_MODIFIER;
 
-    private PowerDemand powerDemand;
+    private PowerSpecContainer powerSpecContainer;
+    
     private SmartComponentStateContainer dysfunctionalcomponents;
 
 
@@ -84,32 +87,52 @@ public final class ReactiveSimulationController {
         timeStep = 0;
     }
 
-    public PowerDemand getPowerDemand() {
-        return powerDemand;
+    public PowerSpecContainer getPowerSpecContainer() {
+        return powerSpecContainer;
     }
 
-    public void setPowerDemand(PowerDemand powerDemand) {
-        this.powerDemand = powerDemand;
+    public void setPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
+        this.powerSpecContainer = powerSpecContainer;
     }
     
-    public PowerDemand modifyPowerDemand(PowerDemand givenPowerDemand) {
+    public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
         
-        //modify the powerdemand
-        PowerDemandModifier pDemandModifier = null;
-        if (powerDemandModificationType == PowerDemandModificationTypes.MAX_DEMAND) {
-            pDemandModifier = new MaxPDM();
-        } else if (powerDemandModificationType == PowerDemandModificationTypes.ZERO_DEMAND) {
-            pDemandModifier = new ZeroPDM();
+    	HashSet<String> hackedSmartMeters = getHackedSmartMeters();
+    	
+        //modify the powerSpecs
+        PowerSpecsModifier pDemandModifier = null;
+        if (powerDemandModificationType == PowerSpecsModificationTypes.MAX_MODIFIER) {
+            pDemandModifier = new MaxPSM();
+        } else if (powerDemandModificationType == PowerSpecsModificationTypes.ZERO_MODIFIER) {
+            pDemandModifier = new ZeroPSM();
+        } else if (powerDemandModificationType == PowerSpecsModificationTypes.DOUBLE_MODIFIER) {
+            pDemandModifier = new DoublePSM();
         }
-        powerDemand = pDemandModifier.modifyPowerDemand(givenPowerDemand);
+        
+        this.powerSpecContainer = pDemandModifier.modifyPowerSpecs(powerSpecContainer, hackedSmartMeters);
         
         //give back the powerdemand
-        return powerDemand;
+        return this.powerSpecContainer;
     }
     
-    public SmartComponentStateContainer run(PowerAssigned power) {
+    private HashSet<String> getHackedSmartMeters() {
 
-        Map<String,Map<String, Double>> powerSupply;
+		HashSet<String> hackedSmartMeters = new HashSet<String>();
+		if (impactResult != null) {
+			for (EntityState state : impactResult.getStates()) {
+				 if (state.getOwner() instanceof SmartMeter && state instanceof On
+						 && ((On)state).isIsHacked()) {
+					 hackedSmartMeters.add(state.getOwner().getId());
+				 }
+			}
+		} 
+		
+		return hackedSmartMeters;
+	}
+
+	public SmartComponentStateContainer run(PowerAssigned power) {
+
+        Map<String,Map<String, Double>> powerSupply = null;;
         
         LOG.info("Starting time step " + timeStep);
 
@@ -117,9 +140,10 @@ public final class ReactiveSimulationController {
         final String timeStepPath = new File(workingDirPath +File.separator +  "Zeitschritt " + timeStep).getPath();
  
         // get power supply
-        LinkedHashMap<String, HashMap<String, Double>> powerAssignedMap = power.getPowerAssigned();
-        powerSupply = new LinkedHashMap< String, Map<String, Double>>(powerAssignedMap);
-
+        if (power != null) {
+	        LinkedHashMap<String, HashMap<String, Double>> powerAssignedMap = power.getPowerAssigned();
+	        powerSupply = new LinkedHashMap< String, Map<String, Double>>(powerAssignedMap);
+        }
 
         // copy the input
         //impactInputOld = EcoreUtil.copy(impactInput);
@@ -134,6 +158,7 @@ public final class ReactiveSimulationController {
         FileSystemHelper.saveToFileSystem(impactInput, inputFile);
 
         impactResult = attackerSimulation.run(topo, impactResult);
+        this.impactResult = impactResult;
         
         // save attack result to file
         final String attackResultFile = new File(timeStepPath + File.separator+"AttackerSimulationResult.smartgridoutput").getPath();

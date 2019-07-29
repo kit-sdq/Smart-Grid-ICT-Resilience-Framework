@@ -7,11 +7,13 @@ package smartgrid.simcontrol.test.util;
  * @author Mazen
  *
  */
-public enum PowerDemandModificationTypes {
+public enum PowerSpecsModificationTypes {
  
-    MAX_DEMAND,
+    MAX_MODIFIER,
  
-    ZERO_DEMAND
+    ZERO_MODIFIER,
+    
+    DOUBLE_MODIFIER
     
     
 
