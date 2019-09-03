@@ -1,5 +1,9 @@
 package smartgrid.simcontrol.test.rmi;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -14,6 +18,7 @@ import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
 import smartgrid.simcontrol.test.ReactiveSimulationController;
 import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartComponentStateContainer;
+import couplingToICT.AttackerSimulationsTypes;
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
@@ -162,6 +167,7 @@ public class RmiServer implements ISimulationController {
     	try {
             // To-do initiator (KRITIS Sim) should be able to choose analyses
             // To-do initiator should send init data
+    		reactiveSimControl.loadAttackerSimulationType(AttackerSimulationsTypes.NO_ATTACK_SIMULATION);
             reactiveSimControl.loadDefaultAnalyses();
         } catch (CoreException e) {
             throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
@@ -169,6 +175,30 @@ public class RmiServer implements ISimulationController {
         }
 
     	LOG.info("temp init successfuly done");
+    }
+    
+    
+    public void initReactive(String outputPath, String topoPath, String inputStatePath, AttackerSimulationsTypes attackerType) throws SimcontrolException {
+        LOG.info("init reactive called remotely");
+        if (state != RmiServerState.NOT_INIT) {
+            LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
+        }
+        state = RmiServerState.REACTIVE;
+
+        
+        reactiveSimControl = new ReactiveSimulationController();
+        reactiveSimControl.init(outputPath);
+        reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath); // To-do conditional auto
+                                                                         // generation
+        try {
+            // To-do initiator (KRITIS Sim) should be able to choose analyses
+            // To-do initiator should send init data
+        	reactiveSimControl.loadAttackerSimulationType(attackerType);
+            reactiveSimControl.loadDefaultAnalyses();
+        } catch (CoreException e) {
+            throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
+                    e);
+        }
     }
 
     @Override
@@ -186,6 +216,7 @@ public class RmiServer implements ISimulationController {
         try {
             // To-do initiator (KRITIS Sim) should be able to choose analyses
             // To-do initiator should send init data
+        	reactiveSimControl.loadAttackerSimulationType(AttackerSimulationsTypes.NO_ATTACK_SIMULATION);
             reactiveSimControl.loadDefaultAnalyses();
         } catch (CoreException e) {
             throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
@@ -195,7 +226,17 @@ public class RmiServer implements ISimulationController {
 
     @Override
     public void initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
-
+//    	String path = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/outputTopoContainer";
+//        try {
+//			ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
+//			objectOutputStream.writeObject(topo);
+//			objectOutputStream.close();
+//		} catch (FileNotFoundException e1) {
+//			e1.printStackTrace();
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
+//        
         
         if (topo == null) {
         	LOG.info("Topo Container is null");
@@ -240,13 +281,25 @@ public class RmiServer implements ISimulationController {
 	public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned SMPowerAssigned)
 			throws RemoteException, SimcontrolException, InterruptedException {
 		LOG.info("run was called remotely");
-        
+		
+//		String path = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/outputPowerAssigned";
+//        try {
+//			ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
+//			objectOutputStream.writeObject(powerSpecs);
+//			objectOutputStream.close();
+//		} catch (FileNotFoundException e1) {
+//			e1.printStackTrace();
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
 		PowerSpecContainer powerSpecContainer = null;
 
         if (state == RmiServerState.ACTIVE) {
             try {
             	//buffer pA und pD
                 BlockingKritisDataExchanger.bufferPSAndPA(powerSpecs, SMPowerAssigned);
+                
+                //es fehlt die init & run 
                 
                 //get Modified Power Demand
                 powerSpecContainer = BlockingKritisDataExchanger.getModifiedPowerSpecs();
@@ -267,6 +320,7 @@ public class RmiServer implements ISimulationController {
             
             // Modify demand
             powerSpecContainer = reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
+            powerSpecContainer = powerSpecs;
         } else {
             LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
             throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);

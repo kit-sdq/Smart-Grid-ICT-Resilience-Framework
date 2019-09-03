@@ -1,5 +1,11 @@
 package smartgrid.simcontrol.test.client;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -12,10 +18,8 @@ import org.apache.log4j.Logger;
 
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
-import couplingToICT.PowerSpec;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SimcontrolException;
-import couplingToICT.SmartComponentGeoData;
 import couplingToICT.SmartGridTopoContainer;
 
 public class Client {
@@ -27,17 +31,31 @@ public class Client {
 	static ISimulationController connector;
 	
 	
-	public static void main(String[] args) throws RemoteException, SimcontrolException {
+	public static void main(String[] args) throws SimcontrolException, IOException, ClassNotFoundException {
+		
+		String path = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/outputTopoContainer";
+		ObjectInputStream objectInputStream =
+			    new ObjectInputStream(new FileInputStream(path));
+		SmartGridTopoContainer topoContainer = (SmartGridTopoContainer) objectInputStream.readObject();
+	    objectInputStream.close();
+	    
+	    String path2 = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/outputPowerAssigned";
+		ObjectInputStream objectInputStream2 =
+			    new ObjectInputStream(new FileInputStream(path2));
+		PowerSpecContainer powerSpec = (PowerSpecContainer) objectInputStream2.readObject();
+		objectInputStream2.close();
+		
+		
 		BasicConfigurator.configure();
 		
-		LinkedHashMap<String, Map<String, SmartComponentGeoData>> _iedContainer = null;
-		LinkedHashMap<String, Map<String, SmartComponentGeoData>> _smartMeterContainer = null;
-		SmartGridTopoContainer topoContainer = new SmartGridTopoContainer(_smartMeterContainer, _iedContainer);
-		
-		LinkedHashMap<String, Map<String, PowerSpec>> _powerDemands = new LinkedHashMap<String, Map<String,PowerSpec>>();
-		LinkedHashMap<String, Map<String, PowerSpec>> _powerInfeeds = new LinkedHashMap<String, Map<String,PowerSpec>>();
-		PowerSpecContainer powerSpecs = new PowerSpecContainer(_powerDemands ,_powerInfeeds );
-		
+//		LinkedHashMap<String, Map<String, SmartComponentGeoData>> _iedContainer = null;
+//		LinkedHashMap<String, Map<String, SmartComponentGeoData>> _smartMeterContainer = null;
+//		SmartGridTopoContainer topoContainer = new SmartGridTopoContainer(_smartMeterContainer, _iedContainer);
+//		
+//		LinkedHashMap<String, Map<String, PowerSpec>> _powerDemands = new LinkedHashMap<String, Map<String,PowerSpec>>();
+//		LinkedHashMap<String, Map<String, PowerSpec>> _powerInfeeds = new LinkedHashMap<String, Map<String,PowerSpec>>();
+//		PowerSpecContainer powerSpecs = new PowerSpecContainer(_powerDemands ,_powerInfeeds );
+//		
 		LinkedHashMap<String, HashMap<String, Double>> _powerAssigned = new LinkedHashMap<String, HashMap<String,Double>>();;
 		PowerAssigned powerAssigned = new PowerAssigned(_powerAssigned);
 
@@ -52,7 +70,7 @@ public class Client {
 			e.printStackTrace();
 		} 
 		try {
-			connector.getModifiedPowerSpec(powerSpecs, powerAssigned);
+			connector.getModifiedPowerSpec(powerSpec, powerAssigned);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -19,6 +19,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.TestSimulationExtensionPointHelper;
+import smartgrid.impactanalysis.GraphAnalyzer;
 import smartgrid.log4j.LoggingInitializer;
 import smartgrid.model.test.generation.DefaultInputGenerator;
 import smartgrid.model.test.generation.ITopoGenerator;
@@ -27,6 +28,7 @@ import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
+import couplingToICT.AttackerSimulationsTypes;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartComponentStateContainer;
@@ -45,6 +47,7 @@ import smartgridoutput.ScenarioResult;
 import smartgridtopo.NetworkEntity;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
+import smartgrid.impactanalysis.GraphAnalyzer;
 
 public final class ReactiveSimulationController {
 
@@ -132,10 +135,14 @@ public final class ReactiveSimulationController {
 
 	public SmartComponentStateContainer run(PowerAssigned power) {
 
+		try {
         Map<String,Map<String, Double>> powerSupply = null;;
         
         LOG.info("Starting time step " + timeStep);
 
+        topo.setId("testID");
+        LOG.info(topo.getId());
+        
         // Generates Path with default System separators
         final String timeStepPath = new File(workingDirPath +File.separator +  "Zeitschritt " + timeStep).getPath();
  
@@ -148,8 +155,10 @@ public final class ReactiveSimulationController {
         // copy the input
         //impactInputOld = EcoreUtil.copy(impactInput);
 
+        LOG.info("Starting Impact Analysis");
         ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
         
+        LOG.info("Converting input for impact analysis (With power supply)");
         // convert input for impact analysis
         updateImactAnalysisInput(impactInput, impactResult, powerSupply);
 
@@ -157,6 +166,7 @@ public final class ReactiveSimulationController {
         final String inputFile = new File(timeStepPath + File.separator+"PowerLoadResult.smartgridinput").getPath();
         FileSystemHelper.saveToFileSystem(impactInput, inputFile);
 
+        LOG.info("Starting Attacker Simulation");
         impactResult = attackerSimulation.run(topo, impactResult);
         this.impactResult = impactResult;
         
@@ -164,6 +174,7 @@ public final class ReactiveSimulationController {
         final String attackResultFile = new File(timeStepPath + File.separator+"AttackerSimulationResult.smartgridoutput").getPath();
         FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
         
+        LOG.info("Collecting dysfunctionalComponents");
         //get smartmeters
         dysfunctionalcomponents = generateSCSC(impactResult);
         // Save Result
@@ -180,7 +191,10 @@ public final class ReactiveSimulationController {
         timeStep++;
 
         LOG.info("Finished time step " + timeStep);
-
+		} catch (Exception e) {
+			LOG.info(e);
+			e.printStackTrace();
+		}
         return dysfunctionalcomponents;
     }
 
@@ -345,21 +359,51 @@ public final class ReactiveSimulationController {
         return initialPath;
     }
 
-    public void loadDefaultAnalyses() throws CoreException {
-
-
+    public void loadAttackerSimulationType(AttackerSimulationsTypes type) throws CoreException {
+    	String attackerName = "No Attack Simulation";
+    	switch (type){
+    	case NO_ATTACK_SIMULATION:
+    		attackerName = "No Attack Simulation";
+    		break;
+    	case LOCAL_HACKER:
+    		attackerName = "Local Hacker";
+    		break;
+    	case VIRAL_HACKER:
+    		attackerName = "Viral Hacker";
+    		break;
+    	default:
+    		attackerName = "No Attack Simulation";
+    		
+    	}
+    	
     	final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
         for (final IAttackerSimulation e : attack) {
-            if (e.getName().equals("No Attack Simulation")) {
+            if (e.getName().equals(attackerName)) {
                 attackerSimulation = e;
             } 
         }
+        
+        assert attackerSimulation != null;
+    	LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+    	
+    }
+    public void loadDefaultAnalyses() throws CoreException {
+
+
+//    	final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
+//        for (final IAttackerSimulation e : attack) {
+//            if (e.getName().equals("No Attack Simulation")) {
+//                attackerSimulation = e;
+//            } 
+//        }
 
         final List<IImpactAnalysis> impact = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
         for (final IImpactAnalysis e : impact) {
 
             if (e.getName().equals("Graph Analyzer Impact Analysis")) {
                 impactAnalsis = e;
+                //TODO: bessere Möglichkeit?
+                ((GraphAnalyzer) impactAnalsis).initForTesting(true);
             }
         }
 
@@ -373,8 +417,8 @@ public final class ReactiveSimulationController {
 
         assert impactAnalsis != null;
     	LOG.info("Using impact analysis: " + impactAnalsis.getName());
-        assert attackerSimulation != null;
-    	LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+//        assert attackerSimulation != null;
+//    	LOG.info("Using attacker simulation: " + attackerSimulation.getName());
         assert timeProgressor != null;
     	LOG.info("Using time progressor: " + timeProgressor.getName());
     }
@@ -418,7 +462,6 @@ public final class ReactiveSimulationController {
 
     public void initTopo(SmartGridTopoContainer topoContainer) {
         // generate and persist topo
-    	LOG.info("Topo will be generated");
         ITopoGenerator generator = new TrivialTopoGenerator();
         topo = generator.generateTopo(topoContainer);
         FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.pathSeparator+"generated.smartgridtopo");
