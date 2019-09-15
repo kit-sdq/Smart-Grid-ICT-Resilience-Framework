@@ -148,8 +148,26 @@ public class RmiServer implements ISimulationController {
 
     @Override
     public void initActive() {
-    	//test
-	      Map<InitializationMapKeys,String> initMap = new HashMap<InitializationMapKeys,String>();
+	     
+        LOG.info("init active called remotely");
+        if (state != RmiServerState.NOT_INIT) {
+            LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
+        }
+        state = RmiServerState.ACTIVE; 
+        
+     // TODO HACK until active mode works
+        try {
+			temp_initReactive();
+		} catch (SimcontrolInitializationException e) {
+			e.printStackTrace();
+		} 
+        
+    }
+    
+
+    //TODO: For Testing
+    private void testInitReactiveWithMap() {
+    	 Map<InitializationMapKeys,String> initMap = new HashMap<InitializationMapKeys,String>();
 	      initMap.put(InitializationMapKeys.INPUT_PATH_KEY, "");
 	      initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/");
 	      initMap.put(InitializationMapKeys.TOPO_PATH_KEY, "");
@@ -170,22 +188,7 @@ public class RmiServer implements ISimulationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	      
-        LOG.info("init active called remotely");
-        if (state != RmiServerState.NOT_INIT) {
-            LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
-        }
-        state = RmiServerState.ACTIVE; 
-        
-     // TODO HACK until active mode works
-        try {
-			temp_initReactive();
-		} catch (SimcontrolInitializationException e) {
-			e.printStackTrace();
-		} 
-        
     }
-    
-
     // TODO HACK until active mode works
     private void temp_initReactive() throws SimcontrolInitializationException {
     	LOG.info("temp init reactive called remotely");
@@ -220,15 +223,17 @@ public class RmiServer implements ISimulationController {
     	String outputPath = "";
     	String topoPath = "";
     	String inputStatePath = "";
-    	Boolean ignoreLogicalConnections = false;
-    	AttackerSimulationsTypes attackerType = AttackerSimulationsTypes.NO_ATTACK_SIMULATION;
-    	HackingStyle hackingStype = null;
+    	String ignoreLogicalConnections = "false";
+    	String attackerType = AttackerSimulationsTypes.NO_ATTACK_SIMULATION.getDescription();
+    	String hackingStype = null;
     	int HackingSpeed = 1;
     	Boolean generateTopo = false;
     	int timeSteps = 1;
-    	PowerSpecsModificationTypes powerSpecsModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER;
+    	String powerSpecsModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.getDescription();
     	String wurzelNode = "";
-    	
+    	String impactAnalysis = "Graph Analyzer Impact Analysis";
+    	String timeProgresser = "No Operation";
+    			
     	//createLaunhConfig
         final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
         final ILaunchConfigurationType type = manager
@@ -244,13 +249,13 @@ public class RmiServer implements ISimulationController {
     		} else if (key.equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
     			outputPath =  initMap.get(key);
     		} else if (key.equals(InitializationMapKeys.IGNORE_LOC_CON_KEY)) {
-    			ignoreLogicalConnections =  Boolean.valueOf(initMap.get(key));
+    			ignoreLogicalConnections =  initMap.get(key);
     		} else if (key.equals(InitializationMapKeys.ATTACKER_SIMULATION_KEY)) {
-    			attackerType =  AttackerSimulationsTypes.valueOf(initMap.get(key));
+    			attackerType =  AttackerSimulationsTypes.valueOf(initMap.get(key)).getDescription();
     		} else if (key.equals(InitializationMapKeys.HACKING_STYLE_KEY)
     				&& initMap.get(InitializationMapKeys.ATTACKER_SIMULATION_KEY) != null
     				&& AttackerSimulationsTypes.valueOf(initMap.get(InitializationMapKeys.ATTACKER_SIMULATION_KEY)) != (AttackerSimulationsTypes.NO_ATTACK_SIMULATION)) {
-    			hackingStype =  HackingStyle.valueOf(initMap.get(key));
+    			hackingStype =  HackingStyle.valueOf(initMap.get(key)).getDescription();
     		} else if (key.equals(InitializationMapKeys.HACKING_SPEED_KEY)) {
     			HackingSpeed =  Integer.valueOf(initMap.get(key));
     		} else if (key.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
@@ -258,30 +263,32 @@ public class RmiServer implements ISimulationController {
     		} else if (key.equals(InitializationMapKeys.TIME_STEPS_KEY)) {
     			timeSteps = Integer.valueOf(initMap.get(key));
     		} else if (key.equals(InitializationMapKeys.POWER_MODIFY_KEY)) {
-    			powerSpecsModificationType =  PowerSpecsModificationTypes.valueOf(initMap.get(key));
+    			powerSpecsModificationType =  PowerSpecsModificationTypes.valueOf(initMap.get(key)).getDescription();
     		} else if (key.equals(InitializationMapKeys.ROOT_NODE_ID_KEY)) {
     			wurzelNode = initMap.get(key);
     		} 
     	}
         
-        workingCopy.setAttribute(InitializationMapKeys.INPUT_PATH_KEY.toString(), inputStatePath);
-        workingCopy.setAttribute(InitializationMapKeys.TOPO_PATH_KEY.toString(), topoPath);
-        workingCopy.setAttribute(InitializationMapKeys.OUTPUT_PATH_KEY.toString(), outputPath);
-        workingCopy.setAttribute(InitializationMapKeys.IGNORE_LOC_CON_KEY.toString(), ignoreLogicalConnections);
-        workingCopy.setAttribute(InitializationMapKeys.ATTACKER_SIMULATION_KEY.toString(), attackerType);
+        workingCopy.setAttribute(InitializationMapKeys.INPUT_PATH_KEY.getDescription(), inputStatePath);
+        workingCopy.setAttribute(InitializationMapKeys.TOPO_PATH_KEY.getDescription(), topoPath);
+        workingCopy.setAttribute(InitializationMapKeys.OUTPUT_PATH_KEY.getDescription(), outputPath);
+        workingCopy.setAttribute(InitializationMapKeys.IGNORE_LOC_CON_KEY.getDescription(), ignoreLogicalConnections);
+        workingCopy.setAttribute(InitializationMapKeys.ATTACKER_SIMULATION_KEY.getDescription(), attackerType);
         if (hackingStype != null) {
-        workingCopy.setAttribute(InitializationMapKeys.HACKING_STYLE_KEY.toString(), hackingStype);
+        workingCopy.setAttribute(InitializationMapKeys.HACKING_STYLE_KEY.getDescription(), hackingStype);
         }
-        workingCopy.setAttribute(InitializationMapKeys.HACKING_SPEED_KEY.toString(), HackingSpeed);
-        workingCopy.setAttribute(InitializationMapKeys.TOPO_GENERATION_KEY.toString(), generateTopo);
-        workingCopy.setAttribute(InitializationMapKeys.TIME_STEPS_KEY.toString(), timeSteps);
-        workingCopy.setAttribute(InitializationMapKeys.POWER_MODIFY_KEY.toString(), powerSpecsModificationType);
-        workingCopy.setAttribute(InitializationMapKeys.ROOT_NODE_ID_KEY.toString(), wurzelNode);
+        workingCopy.setAttribute(InitializationMapKeys.HACKING_SPEED_KEY.getDescription(), HackingSpeed);
+        workingCopy.setAttribute(InitializationMapKeys.TOPO_GENERATION_KEY.getDescription(), generateTopo);
+        workingCopy.setAttribute(InitializationMapKeys.TIME_STEPS_KEY.getDescription(), timeSteps);
+        workingCopy.setAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), powerSpecsModificationType);
+        workingCopy.setAttribute(InitializationMapKeys.ROOT_NODE_ID_KEY.getDescription(), wurzelNode);
+        workingCopy.setAttribute(InitializationMapKeys.IMPACT_ANALYSIS_SIMULATION_KEY.getDescription(), impactAnalysis);
+        workingCopy.setAttribute(InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY.getDescription(), timeProgresser);
         
         //create launch configuration
         final ILaunchConfiguration config = workingCopy.doSave();
         
-
+        Map<String, Object> map = config.getAttributes();
         try {
 			reactiveSimControl.loadCustomUserAnalysis(config);
 		} catch (InterruptedException e) {
@@ -302,7 +309,7 @@ public class RmiServer implements ISimulationController {
         reactiveSimControl.init(outputPath);
         reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
         try {
-        	reactiveSimControl.loadAttackerSimulationType(AttackerSimulationsTypes.NO_ATTACK_SIMULATION);
+        	reactiveSimControl.loadDefaultAnalyses();
         } catch (CoreException e) {
             throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
                     e);

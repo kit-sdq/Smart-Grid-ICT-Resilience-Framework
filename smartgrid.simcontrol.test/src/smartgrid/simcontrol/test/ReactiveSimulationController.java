@@ -32,7 +32,7 @@ import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
-import initializer.AttackerSimulationsTypes;
+import initializer.InitializationMapKeys;
 import initializer.PowerSpecsModificationTypes;
 import smartgrid.simcontrol.test.util.DoublePSM;
 import smartgrid.simcontrol.test.util.MaxPSM;
@@ -70,7 +70,7 @@ public final class ReactiveSimulationController {
     
     private ScenarioResult impactResult;
     
-    private PowerSpecsModificationTypes powerDemandModificationType = PowerSpecsModificationTypes.DOUBLE_MODIFIER;
+    private PowerSpecsModificationTypes powerDemandModificationType;
 
     private PowerSpecContainer powerSpecContainer;
     
@@ -345,29 +345,7 @@ public final class ReactiveSimulationController {
         }
         return initialPath;
     }
-
-    public void loadAttackerSimulationType(AttackerSimulationsTypes type) throws CoreException {
-    	String attackerName = "No Attack Simulation";
-    	switch (type){
-    	case NO_ATTACK_SIMULATION:
-    		attackerName = "No Attack Simulation";
-    		break;
-    	case LOCAL_HACKER:
-    		attackerName = "Local Hacker";
-    		break;
-    	case VIRAL_HACKER:
-    		attackerName = "Viral Hacker";
-    		break;
-    	default:
-    		attackerName = "No Attack Simulation";
-    		
-    	}
-    	
-    	
         
-
-    	
-    }
     public void loadDefaultAnalyses() throws CoreException {
 
         final List<IImpactAnalysis> impact = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
@@ -400,6 +378,8 @@ public final class ReactiveSimulationController {
     	LOG.info("Using time progressor: " + timeProgressor.getName());
         assert attackerSimulation != null;
     	LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+    	
+    	this.powerDemandModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER;
     }
 
     public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException, InterruptedException {
@@ -419,6 +399,11 @@ public final class ReactiveSimulationController {
         LOG.info("Using attacker simulation: " + attackerSimulation.getName());
         LOG.info("Using time progressor: " + timeProgressor.getName());
 
+        if (!launchConfig.getAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), "").equals("")) {
+        	String powerModificationString = launchConfig.getAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(),"");
+        	PowerSpecsModificationTypes powerSpecsModificationType = PowerSpecsModificationTypes.valueOf(powerModificationString);
+        	this.powerDemandModificationType = powerSpecsModificationType;
+        }
     }
 
 
