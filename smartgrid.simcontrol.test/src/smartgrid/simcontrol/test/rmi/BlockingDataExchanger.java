@@ -1,11 +1,11 @@
 package smartgrid.simcontrol.test.rmi;
 
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
+import couplingToICT.SimcontrolException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 
@@ -14,14 +14,12 @@ import couplingToICT.SmartGridTopoContainer;
  * 
  * @author Mazen
  */
-public class BlockingKritisDataExchanger {
+public class BlockingDataExchanger {
 
-    private static final Logger LOG = Logger.getLogger(BlockingKritisDataExchanger.class);
+    private static final Logger LOG = Logger.getLogger(BlockingDataExchanger.class);
 
     
     private static Thread kritisThread;
-
-    private static Map<String, Map<String, Double>> bufferedPower;
     
     private static Thread couplingThread;
 
@@ -35,117 +33,142 @@ public class BlockingKritisDataExchanger {
     
     private static PowerSpecContainer modifiedPowerSpecs;
     
-   
     
     /**
      * @author Mazen Ebada
      * @return
-     * @throws Throwable
+     * @throws SimcontrolException 
      */
-    public synchronized static void bufferPSAndPA(PowerSpecContainer powerSpecs, PowerAssigned powerAssigned) throws Throwable {
+    public synchronized static void bufferPSAndPA(PowerSpecContainer powerSpecs, PowerAssigned powerAssigned) throws InterruptedException, SimcontrolException {
         
-        assert bufferedPower == null;
-        assert powerAssigned != null;
-        
-        assert bufferedPowerSpecs == null;
-        assert powerSpecs != null;
+    	if (bufferedPowerAssigned != null) {
+            LOG.warn("There was already power Assigned present. This data is now overwritten.");
+        }
+
+    	if (bufferedPowerSpecs != null) {
+            LOG.warn("There was already power Specs present. This data is now overwritten.");
+        }
+
+        if (powerAssigned == null) {
+        	throw new SimcontrolException("The given power assigned is empty.");
+        }
+        if (powerSpecs == null) {
+        	throw new SimcontrolException("The given power spec container is empty.");
+        }
         
         bufferedPowerAssigned = powerAssigned;
         bufferedPowerSpecs = powerSpecs;
         
         couplingThread = Thread.currentThread();
-        BlockingKritisDataExchanger.class.notifyAll();
-        
-
+        BlockingDataExchanger.class.notifyAll();
     }
     
-    public static PowerAssigned getPowerAssigned() throws Throwable {
+    public static synchronized PowerAssigned getPowerAssigned() throws InterruptedException {
         
         couplingThread = Thread.currentThread();
         
         // wait for data
         while (bufferedPowerAssigned == null) {
             LOG.info("SimControl is waiting for the PowerAssigned.");
-            BlockingKritisDataExchanger.class.wait();
+            BlockingDataExchanger.class.wait();
         }
+        PowerAssigned tempPowerAssigned = bufferedPowerAssigned;
+        
+        bufferedPowerAssigned = null;
         couplingThread = null;
         
-        return bufferedPowerAssigned;
+        return tempPowerAssigned;
         
     }
     
-	public static PowerSpecContainer getBufferedPowerSpecs() throws Throwable {
+	public static synchronized PowerSpecContainer getBufferedPowerSpecs() throws InterruptedException {
 	        
 	        couplingThread = Thread.currentThread();
 	        
 	        // wait for data
 	        while (bufferedPowerSpecs == null) {
 	            LOG.info("SimControl is waiting for the bufferedPowerSpecs.");
-	            BlockingKritisDataExchanger.class.wait();
+	            BlockingDataExchanger.class.wait();
 	        }
+	        PowerSpecContainer tempPowerSpecContainer = bufferedPowerSpecs;
+	        bufferedPowerSpecs = null;
 	        couplingThread = null;
 	        
-	        return bufferedPowerSpecs;
+	        return tempPowerSpecContainer;
 	        
 	    }
 	
-	public static PowerSpecContainer getModifiedPowerSpecs() throws Throwable {
+	public static synchronized PowerSpecContainer getModifiedPowerSpecs() throws InterruptedException {
 	    
 	    couplingThread = Thread.currentThread();
 	    
 	    // wait for data
 	    while (modifiedPowerSpecs == null) {
-	        LOG.info("SimControl is waiting for the modifiedPowerSpecs.");
-	        BlockingKritisDataExchanger.class.wait();
+	        LOG.info("SimControl is waiting for the modified PowerSpecs.");
+	        BlockingDataExchanger.class.wait();
 	    }
+	    
+	    PowerSpecContainer tempModifiedPowerSpecs = modifiedPowerSpecs;
+	    
+	    modifiedPowerSpecs = null;
 	    couplingThread = null;
 	    
-	    return modifiedPowerSpecs;
+	    return tempModifiedPowerSpecs;
 	    
 	}
     
-	public static SmartComponentStateContainer getSCSC() throws Throwable {
+	public static synchronized SmartComponentStateContainer getSCSC() throws InterruptedException {
 	    
 	    couplingThread = Thread.currentThread();
 	    
 	    // wait for data
 	    while (scsc == null) {
 	        LOG.info("SimControl is waiting for the scsc.");
-	        BlockingKritisDataExchanger.class.wait();
+	        BlockingDataExchanger.class.wait();
 	    }
+	    SmartComponentStateContainer tempSCSC = scsc;
+	    
+	    scsc = null;
 	    couplingThread = null;
 	    
-	    return scsc;
+	    return tempSCSC;
 	    
 	}
 
-    public static void storeSCSC (SmartComponentStateContainer smartComponentStateContainer) {
+    public static synchronized void storeSCSC (SmartComponentStateContainer smartComponentStateContainer) {
+    	if (scsc != null) {
+            LOG.warn("There was already smart Component State Container present. This data is now overwritten.");
+        }
         couplingThread = Thread.currentThread();
         scsc = smartComponentStateContainer;
-        BlockingKritisDataExchanger.class.notifyAll();
+        BlockingDataExchanger.class.notifyAll();
+        
 
     }
     
-    public static void storeModifiedPowerSpecs (PowerSpecContainer powerSpecContainer) {
+    public static synchronized void storeModifiedPowerSpecs (PowerSpecContainer powerSpecContainer) {
+    	if (modifiedPowerSpecs != null) {
+            LOG.warn("There was already modified Power Specs present. This data is now overwritten.");
+        }
         couplingThread = Thread.currentThread();
         modifiedPowerSpecs = powerSpecContainer;
-        BlockingKritisDataExchanger.class.notifyAll();
+        BlockingDataExchanger.class.notifyAll();
 
     }
 
     public static synchronized void storeException(Throwable e) {
         storedException = e;
-        BlockingKritisDataExchanger.class.notifyAll();
+        BlockingDataExchanger.class.notifyAll();
     }
 
     private static SmartGridTopoContainer bufferedTopoData;
 
-    public static synchronized void storeGeoData(SmartGridTopoContainer topoData) {
+    public static synchronized void storeTopoData(SmartGridTopoContainer topoData) {
         if (bufferedTopoData != null) {
-            LOG.error("There was already geo data present. This data is now overwritten.");
+            LOG.warn("There was already geo data present. This data is now overwritten.");
         }
-        BlockingKritisDataExchanger.bufferedTopoData = topoData;
-        BlockingKritisDataExchanger.class.notifyAll();
+        BlockingDataExchanger.bufferedTopoData = topoData;
+        BlockingDataExchanger.class.notifyAll();
     }
 
     public static synchronized SmartGridTopoContainer getTopoData() throws InterruptedException {
@@ -154,7 +177,7 @@ public class BlockingKritisDataExchanger {
         // wait for data
         while (bufferedTopoData == null) {
             LOG.info("SimControl is waiting for topo data from the Kritis simulation.");
-            BlockingKritisDataExchanger.class.wait();
+            BlockingDataExchanger.class.wait();
         }
 
         // consume data
@@ -190,7 +213,6 @@ public class BlockingKritisDataExchanger {
         modifiedPowerSpecs = null;
         scsc = null;
         bufferedPowerAssigned = null;
-        bufferedPower = null;
         bufferedTopoData = null;
         storedException = null;
         LOG.info("All data was cleared.");

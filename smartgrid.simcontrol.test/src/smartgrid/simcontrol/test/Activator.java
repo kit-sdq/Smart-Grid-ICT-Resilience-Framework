@@ -4,7 +4,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
+import smartgrid.simcontrol.test.rmi.BlockingDataExchanger;
 import smartgrid.simcontrol.test.rmi.RmiServer;
 
 /**
@@ -45,7 +45,7 @@ public class Activator extends AbstractUIPlugin {
     @Override
     public void stop(final BundleContext context) throws Exception {
         plugin = null;
-        BlockingKritisDataExchanger.freeAll();
+        BlockingDataExchanger.freeAll();
         RmiServer.shutDown();
         super.stop(context);
     }

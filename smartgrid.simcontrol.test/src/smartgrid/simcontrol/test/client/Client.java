@@ -21,6 +21,7 @@ import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SimcontrolException;
 import couplingToICT.SmartGridTopoContainer;
+import smartgrid.simcontrol.test.baselib.Constants;
 
 public class Client {
 
@@ -101,7 +102,6 @@ public class Client {
 	      
 	      connector = (ISimulationController) registry.lookup(lookupName);
 	      connector.initActive();
-	      
 	      LOG.debug("RMI connector activated (" + lookupName + ")");
 	    } catch (Exception e) {
 	      LOG.error("Failed to connect to RMI server", e);

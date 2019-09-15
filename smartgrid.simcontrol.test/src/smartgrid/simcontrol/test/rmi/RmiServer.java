@@ -9,20 +9,30 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchConfigurationType;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.core.ILaunchManager;
 
-
-import smartgrid.simcontrol.test.rmi.BlockingKritisDataExchanger;
+import smartgrid.simcontrol.test.baselib.Constants;
+import smartgrid.simcontrol.test.rmi.BlockingDataExchanger;
 import smartgrid.simcontrol.test.ReactiveSimulationController;
 import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartComponentStateContainer;
-import couplingToICT.AttackerSimulationsTypes;
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartGridTopoContainer;
+import initializer.AttackerSimulationsTypes;
+import initializer.HackingStyle;
+import initializer.InitializationMapKeys;
+import initializer.PowerSpecsModificationTypes;
 import couplingToICT.SimcontrolException;
 
 /**
@@ -33,7 +43,7 @@ import couplingToICT.SimcontrolException;
  * 
  * In <b>active mode</b>, the {@link SimulationController} has to be started via the
  * {@link SimcontroLaunchConfigurationDelegate}. The simulation coupling and the KRITIS simulation
- * will synchronize and exchange data using the {@link BlockingKritisDataExchanger}.
+ * will synchronize and exchange data using the {@link BlockingDataExchanger}.
  * 
  * In <b>reactive mode</b>, the {@link ReactiveSimulationController} will be used. All control flow
  * will originate from the KRITIS simulation, thus no synchronization is required. However, all
@@ -138,6 +148,28 @@ public class RmiServer implements ISimulationController {
 
     @Override
     public void initActive() {
+    	//test
+	      Map<InitializationMapKeys,String> initMap = new HashMap<InitializationMapKeys,String>();
+	      initMap.put(InitializationMapKeys.INPUT_PATH_KEY, "");
+	      initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/");
+	      initMap.put(InitializationMapKeys.TOPO_PATH_KEY, "");
+	      initMap.put(InitializationMapKeys.TOPO_GENERATION_KEY, Boolean.toString(true));
+	      initMap.put(InitializationMapKeys.IGNORE_LOC_CON_KEY, Boolean.toString(false));
+	      initMap.put(InitializationMapKeys.HACKING_SPEED_KEY, Integer.toString(1));
+	      initMap.put(InitializationMapKeys.TIME_STEPS_KEY, Integer.toString(1));
+	      initMap.put(InitializationMapKeys.ROOT_NODE_ID_KEY, "");
+	      initMap.put(InitializationMapKeys.HACKING_STYLE_KEY, null);
+	      initMap.put(InitializationMapKeys.ATTACKER_SIMULATION_KEY, AttackerSimulationsTypes.NO_ATTACK_SIMULATION.toString());
+	      initMap.put(InitializationMapKeys.POWER_MODIFY_KEY, PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.toString());
+	      
+	      try {
+			initReactive(initMap);
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		} catch (SimcontrolInitializationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	      
         LOG.info("init active called remotely");
         if (state != RmiServerState.NOT_INIT) {
             LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
@@ -160,14 +192,10 @@ public class RmiServer implements ISimulationController {
     	state = RmiServerState.REACTIVE;
     	reactiveSimControl = new ReactiveSimulationController();
     	
-    	//TODO : outputPath eindeutig?
     	String outputPath = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/";
     	reactiveSimControl.init(outputPath);
     	
     	try {
-            // To-do initiator (KRITIS Sim) should be able to choose analyses
-            // To-do initiator should send init data
-    		reactiveSimControl.loadAttackerSimulationType(AttackerSimulationsTypes.NO_ATTACK_SIMULATION);
             reactiveSimControl.loadDefaultAnalyses();
         } catch (CoreException e) {
             throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
@@ -177,30 +205,91 @@ public class RmiServer implements ISimulationController {
     	LOG.info("temp init successfuly done");
     }
     
-    
-    public void initReactive(String outputPath, String topoPath, String inputStatePath, AttackerSimulationsTypes attackerType) throws SimcontrolException {
+    public void initReactive(Map<InitializationMapKeys,String> initMap) throws CoreException, SimcontrolInitializationException {
+    	
         LOG.info("init reactive called remotely");
         if (state != RmiServerState.NOT_INIT) {
             LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
         }
         state = RmiServerState.REACTIVE;
 
-        
         reactiveSimControl = new ReactiveSimulationController();
-        reactiveSimControl.init(outputPath);
-        reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath); // To-do conditional auto
-                                                                         // generation
-        try {
-            // To-do initiator (KRITIS Sim) should be able to choose analyses
-            // To-do initiator should send init data
-        	reactiveSimControl.loadAttackerSimulationType(attackerType);
-            reactiveSimControl.loadDefaultAnalyses();
-        } catch (CoreException e) {
-            throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
-                    e);
+        
+        
+    	//Values in the map
+    	String outputPath = "";
+    	String topoPath = "";
+    	String inputStatePath = "";
+    	Boolean ignoreLogicalConnections = false;
+    	AttackerSimulationsTypes attackerType = AttackerSimulationsTypes.NO_ATTACK_SIMULATION;
+    	HackingStyle hackingStype = null;
+    	int HackingSpeed = 1;
+    	Boolean generateTopo = false;
+    	int timeSteps = 1;
+    	PowerSpecsModificationTypes powerSpecsModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER;
+    	String wurzelNode = "";
+    	
+    	//createLaunhConfig
+        final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
+        final ILaunchConfigurationType type = manager
+                .getLaunchConfigurationType("smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType");
+        final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance");
+        
+        //fill values in the working copy
+        for (InitializationMapKeys key: initMap.keySet()) {
+    		if (key.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
+    			inputStatePath = initMap.get(key);
+    		} else if (key.equals(InitializationMapKeys.TOPO_PATH_KEY)) {
+    			topoPath = initMap.get(key);
+    		} else if (key.equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
+    			outputPath =  initMap.get(key);
+    		} else if (key.equals(InitializationMapKeys.IGNORE_LOC_CON_KEY)) {
+    			ignoreLogicalConnections =  Boolean.valueOf(initMap.get(key));
+    		} else if (key.equals(InitializationMapKeys.ATTACKER_SIMULATION_KEY)) {
+    			attackerType =  AttackerSimulationsTypes.valueOf(initMap.get(key));
+    		} else if (key.equals(InitializationMapKeys.HACKING_STYLE_KEY)
+    				&& initMap.get(InitializationMapKeys.ATTACKER_SIMULATION_KEY) != null
+    				&& AttackerSimulationsTypes.valueOf(initMap.get(InitializationMapKeys.ATTACKER_SIMULATION_KEY)) != (AttackerSimulationsTypes.NO_ATTACK_SIMULATION)) {
+    			hackingStype =  HackingStyle.valueOf(initMap.get(key));
+    		} else if (key.equals(InitializationMapKeys.HACKING_SPEED_KEY)) {
+    			HackingSpeed =  Integer.valueOf(initMap.get(key));
+    		} else if (key.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
+    			generateTopo = Boolean.valueOf(initMap.get(key));
+    		} else if (key.equals(InitializationMapKeys.TIME_STEPS_KEY)) {
+    			timeSteps = Integer.valueOf(initMap.get(key));
+    		} else if (key.equals(InitializationMapKeys.POWER_MODIFY_KEY)) {
+    			powerSpecsModificationType =  PowerSpecsModificationTypes.valueOf(initMap.get(key));
+    		} else if (key.equals(InitializationMapKeys.ROOT_NODE_ID_KEY)) {
+    			wurzelNode = initMap.get(key);
+    		} 
+    	}
+        
+        workingCopy.setAttribute(InitializationMapKeys.INPUT_PATH_KEY.toString(), inputStatePath);
+        workingCopy.setAttribute(InitializationMapKeys.TOPO_PATH_KEY.toString(), topoPath);
+        workingCopy.setAttribute(InitializationMapKeys.OUTPUT_PATH_KEY.toString(), outputPath);
+        workingCopy.setAttribute(InitializationMapKeys.IGNORE_LOC_CON_KEY.toString(), ignoreLogicalConnections);
+        workingCopy.setAttribute(InitializationMapKeys.ATTACKER_SIMULATION_KEY.toString(), attackerType);
+        if (hackingStype != null) {
+        workingCopy.setAttribute(InitializationMapKeys.HACKING_STYLE_KEY.toString(), hackingStype);
         }
-    }
+        workingCopy.setAttribute(InitializationMapKeys.HACKING_SPEED_KEY.toString(), HackingSpeed);
+        workingCopy.setAttribute(InitializationMapKeys.TOPO_GENERATION_KEY.toString(), generateTopo);
+        workingCopy.setAttribute(InitializationMapKeys.TIME_STEPS_KEY.toString(), timeSteps);
+        workingCopy.setAttribute(InitializationMapKeys.POWER_MODIFY_KEY.toString(), powerSpecsModificationType);
+        workingCopy.setAttribute(InitializationMapKeys.ROOT_NODE_ID_KEY.toString(), wurzelNode);
+        
+        //create launch configuration
+        final ILaunchConfiguration config = workingCopy.doSave();
+        
 
+        try {
+			reactiveSimControl.loadCustomUserAnalysis(config);
+		} catch (InterruptedException e) {
+			throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
+                    e);
+		}
+    }
+    
     @Override
     public void initReactive(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
         LOG.info("init reactive called remotely");
@@ -211,18 +300,15 @@ public class RmiServer implements ISimulationController {
 
         reactiveSimControl = new ReactiveSimulationController();
         reactiveSimControl.init(outputPath);
-        reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath); // To-do conditional auto
-                                                                          // generation
+        reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
         try {
-            // To-do initiator (KRITIS Sim) should be able to choose analyses
-            // To-do initiator should send init data
         	reactiveSimControl.loadAttackerSimulationType(AttackerSimulationsTypes.NO_ATTACK_SIMULATION);
-            reactiveSimControl.loadDefaultAnalyses();
         } catch (CoreException e) {
             throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
                     e);
         }
     }
+    
 
     @Override
     public void initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
@@ -239,44 +325,23 @@ public class RmiServer implements ISimulationController {
 //        
         
         if (topo == null) {
-        	LOG.info("Topo Container is null");
+        	LOG.warn("Topo Container is null");
         } else {
 	        if (state == RmiServerState.ACTIVE) {
 	        	LOG.info("init topo called remotely (Active)");
-	        	BlockingKritisDataExchanger.storeGeoData(topo);
+	        	BlockingDataExchanger.storeTopoData(topo);
 	        } else if (state == RmiServerState.REACTIVE) {
 	        	LOG.info("init topo called remotely (ReActive)");
 	            reactiveSimControl.initTopo(topo);
 	        } else {
-	            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
+	            LOG.error(ERROR_SERVER_NOT_INITIALIZED);
 	            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
 	        }
         }
 
     }
 
-    @Override
-    public SmartComponentStateContainer getDysfunctSmartComponents()
-            throws RemoteException, couplingToICT.SimcontrolException, InterruptedException {
-        LOG.info("Dysfunctional smart components will be returned");
-
-        if (state == RmiServerState.ACTIVE) {
-        	try {
-				return BlockingKritisDataExchanger.getSCSC();
-			} catch (Throwable e) {
-				throw new SimcontrolException(
-                        "There was an exception in SimControl. The dysfunctionalSmartComponents are not defined.",
-                        e);
-			}
-        } else if (state == RmiServerState.REACTIVE) {
-            return reactiveSimControl.getDysfunctionalcomponents();
-        } else {
-            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
-            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
-        }
-        
-    }
-
+    
 	@Override
 	public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned SMPowerAssigned)
 			throws RemoteException, SimcontrolException, InterruptedException {
@@ -296,18 +361,17 @@ public class RmiServer implements ISimulationController {
 
         if (state == RmiServerState.ACTIVE) {
             try {
-            	//buffer pA und pD
-                BlockingKritisDataExchanger.bufferPSAndPA(powerSpecs, SMPowerAssigned);
-                
-                //es fehlt die init & run 
+            	//buffer pA und pS
+                BlockingDataExchanger.bufferPSAndPA(powerSpecs, SMPowerAssigned);
                 
                 //get Modified Power Demand
-                powerSpecContainer = BlockingKritisDataExchanger.getModifiedPowerSpecs();
+                powerSpecContainer = BlockingDataExchanger.getModifiedPowerSpecs();
+                
             } catch (InterruptedException e) {
                 throw e;
             } catch (Throwable e) {
                 resetState();
-                BlockingKritisDataExchanger.freeAll();
+                BlockingDataExchanger.freeAll();
                 LOG.info(
                         "The stored exception that originally occured in SimControl was passed to the remote KRITIS simulation. The RMI server and data exchange are now reset.");
                 throw new SimcontrolException(
@@ -320,13 +384,35 @@ public class RmiServer implements ISimulationController {
             
             // Modify demand
             powerSpecContainer = reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
-            powerSpecContainer = powerSpecs;
         } else {
-            LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
+            LOG.error(ERROR_SERVER_NOT_INITIALIZED);
             throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
         }
     
         return powerSpecContainer;
 	}
+	
+	@Override
+    public SmartComponentStateContainer getDysfunctSmartComponents()
+            throws RemoteException, SimcontrolException {
+        LOG.info("Dysfunctional smart components will be returned");
+
+        if (state == RmiServerState.ACTIVE) {
+        	try {
+				return BlockingDataExchanger.getSCSC();
+			} catch (InterruptedException e) {
+				throw new SimcontrolException(
+                        "Execution was manually interrupted while waiting for the smart component states.",
+                        e);
+			}
+        } else if (state == RmiServerState.REACTIVE) {
+            return reactiveSimControl.getDysfunctionalcomponents();
+        } else {
+            LOG.error(ERROR_SERVER_NOT_INITIALIZED);
+            throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+        }
+        
+    }
+
 
 }
