@@ -77,7 +77,7 @@ public class SiriusHelper {
     public static void generateOutput(final String inputPath, final String topoPath, final String outputPath) throws CoreException {
         final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
         final ILaunchConfigurationType type = manager
-                .getLaunchConfigurationType("smartgrid.simcontrol.SimcontrolLaunchConfigurationType");
+                .getLaunchConfigurationType("smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType");
         final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance (Change name in order to save it)");
         workingCopy.setAttribute(Constants.IGNORE_LOC_CON_KEY, "true");
         workingCopy.setAttribute(Constants.INPUT_PATH_KEY, inputPath);
