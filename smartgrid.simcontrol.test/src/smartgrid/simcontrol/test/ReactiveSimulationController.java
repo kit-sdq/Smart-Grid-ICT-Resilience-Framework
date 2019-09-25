@@ -16,6 +16,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import smartgrid.attackersimulation.psm.DoublePSM;
+import smartgrid.attackersimulation.psm.MaxPSM;
+import smartgrid.attackersimulation.psm.PowerSpecsModifier;
+import smartgrid.attackersimulation.psm.ZeroPSM;
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.TestSimulationExtensionPointHelper;
@@ -34,10 +38,6 @@ import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import initializer.InitializationMapKeys;
 import initializer.PowerSpecsModificationTypes;
-import smartgrid.simcontrol.test.util.DoublePSM;
-import smartgrid.simcontrol.test.util.MaxPSM;
-import smartgrid.simcontrol.test.util.PowerSpecsModifier;
-import smartgrid.simcontrol.test.util.ZeroPSM;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
 import smartgridoutput.EntityState;
@@ -99,17 +99,19 @@ public final class ReactiveSimulationController {
     
     public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
         
+    	//TODO:Später wird für PowerDemand und PowerInfeed getrennte Strategien benutzt
+    	//TODO:Später wird das abhängig von powerDemandModificationType
     	HashSet<String> hackedSmartMeters = getHackedSmartMeters();
     	
         //modify the powerSpecs
         PowerSpecsModifier pDemandModifier = null;
-        if (powerDemandModificationType == PowerSpecsModificationTypes.MAX_MODIFIER) {
+        if (powerDemandModificationType.equals(PowerSpecsModificationTypes.MAX_MODIFIER)) {
             pDemandModifier = new MaxPSM();
-        } else if (powerDemandModificationType == PowerSpecsModificationTypes.ZERO_MODIFIER) {
+        } else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.ZERO_MODIFIER)) {
             pDemandModifier = new ZeroPSM();
-        } else if (powerDemandModificationType == PowerSpecsModificationTypes.DOUBLE_MODIFIER) {
+        } else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.DOUBLE_MODIFIER)) {
             pDemandModifier = new DoublePSM();
-        } else if (powerDemandModificationType == PowerSpecsModificationTypes.NO_CHANGE_MODIFIER) {
+        } else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.NO_CHANGE_MODIFIER)) {
             return powerSpecContainer;
         }
         

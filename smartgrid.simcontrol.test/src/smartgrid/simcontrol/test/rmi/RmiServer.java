@@ -185,7 +185,6 @@ public class RmiServer implements ISimulationController {
 		} catch (CoreException e1) {
 			e1.printStackTrace();
 		} catch (SimcontrolInitializationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	      
     }
@@ -269,6 +268,12 @@ public class RmiServer implements ISimulationController {
     		} 
     	}
         
+
+    	reactiveSimControl.init(outputPath);
+        if (Boolean.valueOf(generateTopo) == false) {
+            reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
+        }
+        
         workingCopy.setAttribute(InitializationMapKeys.INPUT_PATH_KEY.getDescription(), inputStatePath);
         workingCopy.setAttribute(InitializationMapKeys.TOPO_PATH_KEY.getDescription(), topoPath);
         workingCopy.setAttribute(InitializationMapKeys.OUTPUT_PATH_KEY.getDescription(), outputPath);
@@ -299,21 +304,28 @@ public class RmiServer implements ISimulationController {
     
     @Override
     public void initReactive(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
-        LOG.info("init reactive called remotely");
-        if (state != RmiServerState.NOT_INIT) {
-            LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
-        }
-        state = RmiServerState.REACTIVE;
+    	
+		Map<InitializationMapKeys,String> initMap = new HashMap<InitializationMapKeys,String>();
+		initMap.put(InitializationMapKeys.INPUT_PATH_KEY, inputStatePath);
+		initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, outputPath);
+		initMap.put(InitializationMapKeys.TOPO_PATH_KEY, topoPath);
+		initMap.put(InitializationMapKeys.TOPO_GENERATION_KEY, Boolean.toString(true));
+		initMap.put(InitializationMapKeys.IGNORE_LOC_CON_KEY, Boolean.toString(false));
+		initMap.put(InitializationMapKeys.HACKING_SPEED_KEY, Integer.toString(1));
+		initMap.put(InitializationMapKeys.TIME_STEPS_KEY, Integer.toString(1));
+		initMap.put(InitializationMapKeys.ROOT_NODE_ID_KEY, "");
+		initMap.put(InitializationMapKeys.HACKING_STYLE_KEY, null);
+		initMap.put(InitializationMapKeys.ATTACKER_SIMULATION_KEY, AttackerSimulationsTypes.NO_ATTACK_SIMULATION.toString());
+		initMap.put(InitializationMapKeys.POWER_MODIFY_KEY, PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.toString());
 
-        reactiveSimControl = new ReactiveSimulationController();
-        reactiveSimControl.init(outputPath);
-        reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
-        try {
-        	reactiveSimControl.loadDefaultAnalyses();
-        } catch (CoreException e) {
-            throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
-                    e);
-        }
+		try {
+			initReactive(initMap);
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		} catch (SimcontrolInitializationException e) {
+			e.printStackTrace();
+		}	
+		
     }
     
 
