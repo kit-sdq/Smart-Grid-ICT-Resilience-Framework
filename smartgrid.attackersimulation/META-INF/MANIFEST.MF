@@ -10,7 +10,9 @@ Require-Bundle: org.eclipse.debug.core;bundle-version="3.9.1",
  smartgrid.helper;bundle-version="1.0.0",
  org.eclipse.core.runtime;bundle-version="3.10.0",
  org.apache.log4j;bundle-version="1.2.15"
-Export-Package: smartgrid.attackersimulation
+Export-Package: smartgrid.attackersimulation,
+ smartgrid.attackersimulation.psm
 Import-Package: 
+ couplingToICT,
  smartgrid.simcontrol.test.baselib,
  smartgrid.simcontrol.test.baselib.coupling
