@@ -402,7 +402,8 @@ public class RmiServer implements ISimulationController {
             reactiveSimControl.run(SMPowerAssigned);
             
             // Modify demand
-            powerSpecContainer = reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
+            powerSpecContainer = powerSpecs;
+            //powerSpecContainer = reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
         } else {
             LOG.error(ERROR_SERVER_NOT_INITIALIZED);
             throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
