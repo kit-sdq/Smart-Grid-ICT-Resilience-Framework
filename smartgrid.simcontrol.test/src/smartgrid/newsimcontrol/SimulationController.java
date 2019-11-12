@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.test;
+package smartgrid.newsimcontrol;
 
 
 
@@ -6,13 +6,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import smartgrid.coupling.ICT.PowerAssigned;
+import smartgrid.coupling.ICT.PowerSpecContainer;
+import smartgrid.coupling.ICT.SmartComponentStateContainer;
+import smartgrid.coupling.ICT.SmartGridTopoContainer;
 import smartgrid.log4j.LoggingInitializer;
+import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
 import smartgrid.simcontrol.test.baselib.Constants;
-import smartgrid.simcontrol.test.rmi.BlockingDataExchanger;
-import couplingToICT.PowerAssigned;
-import couplingToICT.PowerSpecContainer;
-import couplingToICT.SmartComponentStateContainer;
-import couplingToICT.SmartGridTopoContainer;
 
 public final class SimulationController {
 

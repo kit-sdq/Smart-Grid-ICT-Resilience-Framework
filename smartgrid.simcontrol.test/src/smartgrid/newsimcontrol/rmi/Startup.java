@@ -1,13 +1,13 @@
 /**
  * 
  */
-package smartgrid.simcontrol.test.rmi;
+package smartgrid.newsimcontrol.rmi;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.IStartup;
 
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.simcontrol.test.rmi.RmiServer;
+import smartgrid.newsimcontrol.rmi.RmiServer;
 
 /**
  * @author mazenebada

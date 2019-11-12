@@ -1,11 +1,11 @@
-package smartgrid.simcontrol.test;
+package smartgrid.newsimcontrol;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.simcontrol.test.rmi.BlockingDataExchanger;
-import smartgrid.simcontrol.test.rmi.RmiServer;
+import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
+import smartgrid.newsimcontrol.rmi.RmiServer;
 
 /**
  * The activator class controls the plug-in life cycle

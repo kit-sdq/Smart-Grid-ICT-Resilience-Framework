@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.test.rmi;
+package smartgrid.newsimcontrol.rmi;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,19 +21,19 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 
 import smartgrid.simcontrol.test.baselib.Constants;
-import smartgrid.simcontrol.test.rmi.BlockingDataExchanger;
-import smartgrid.simcontrol.test.ReactiveSimulationController;
-import couplingToICT.SimcontrolInitializationException;
-import couplingToICT.SmartComponentStateContainer;
-import couplingToICT.ISimulationController;
-import couplingToICT.PowerAssigned;
-import couplingToICT.PowerSpecContainer;
-import couplingToICT.SmartGridTopoContainer;
-import initializer.AttackerSimulationsTypes;
-import initializer.HackingStyle;
-import initializer.InitializationMapKeys;
-import initializer.PowerSpecsModificationTypes;
-import couplingToICT.SimcontrolException;
+import smartgrid.coupling.ICT.ISimulationController;
+import smartgrid.coupling.ICT.PowerAssigned;
+import smartgrid.coupling.ICT.PowerSpecContainer;
+import smartgrid.coupling.ICT.SimcontrolException;
+import smartgrid.coupling.ICT.SimcontrolInitializationException;
+import smartgrid.coupling.ICT.SmartComponentStateContainer;
+import smartgrid.coupling.ICT.SmartGridTopoContainer;
+import smartgrid.coupling.ICT.parameters.AttackerSimulationsTypes;
+import smartgrid.coupling.ICT.parameters.HackingStyle;
+import smartgrid.coupling.ICT.parameters.InitializationMapKeys;
+import smartgrid.coupling.ICT.parameters.PowerSpecsModificationTypes;
+import smartgrid.newsimcontrol.ReactiveSimulationController;
+import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
 
 /**
  * This class acts as RMI Server for the KRITIS simulation of the IKET. The server is always
@@ -166,10 +166,10 @@ public class RmiServer implements ISimulationController {
     
 
     //TODO: For Testing
-    private void testInitReactiveWithMap() {
+    private void testInitReactiveWithMap() throws RemoteException{
     	 Map<InitializationMapKeys,String> initMap = new HashMap<InitializationMapKeys,String>();
 	      initMap.put(InitializationMapKeys.INPUT_PATH_KEY, "");
-	      initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/");
+	      initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, "/home/majuwa/kit/helm/SmartGrid/smartgrid.model.examples");
 	      initMap.put(InitializationMapKeys.TOPO_PATH_KEY, "");
 	      initMap.put(InitializationMapKeys.TOPO_GENERATION_KEY, Boolean.toString(true));
 	      initMap.put(InitializationMapKeys.IGNORE_LOC_CON_KEY, Boolean.toString(false));
@@ -194,7 +194,7 @@ public class RmiServer implements ISimulationController {
     	state = RmiServerState.REACTIVE;
     	reactiveSimControl = new ReactiveSimulationController();
     	
-    	String outputPath = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/";
+    	String outputPath = "/home/majuwa/kit/helm/SmartGrid/smartgrid.model.examples/smartgrid.model.examples/";
     	reactiveSimControl.init(outputPath);
     	
     	try {
@@ -207,7 +207,7 @@ public class RmiServer implements ISimulationController {
     	LOG.info("temp init successfuly done");
     }
     
-    public void initReactive(Map<InitializationMapKeys,String> initMap) throws CoreException, SimcontrolInitializationException {
+    public void initReactive(Map<InitializationMapKeys,String> initMap) throws RemoteException, SimcontrolInitializationException, CoreException {
     	
         LOG.info("init reactive called remotely");
         if (state != RmiServerState.NOT_INIT) {
@@ -303,7 +303,7 @@ public class RmiServer implements ISimulationController {
     }
     
     @Override
-    public void initReactive(String outputPath, String topoPath, String inputStatePath) throws SimcontrolException {
+    public void initReactive(String outputPath, String topoPath, String inputStatePath) throws RemoteException, SimcontrolException {
     	
 		Map<InitializationMapKeys,String> initMap = new HashMap<InitializationMapKeys,String>();
 		initMap.put(InitializationMapKeys.INPUT_PATH_KEY, inputStatePath);

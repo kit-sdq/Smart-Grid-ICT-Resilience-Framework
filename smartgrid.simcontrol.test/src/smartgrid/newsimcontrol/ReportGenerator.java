@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.test;
+package smartgrid.newsimcontrol;
 
 import java.io.File;
 import java.io.FileWriter;

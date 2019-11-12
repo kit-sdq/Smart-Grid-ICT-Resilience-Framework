@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Simcontrol
-Bundle-SymbolicName: smartgrid.simcontrol.test;singleton:=true
+Bundle-SymbolicName: smartgrid.newsimcontrol;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: smartgrid.simcontrol.test.Activator
+Bundle-Activator: smartgrid.newsimcontrol.Activator
 Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.ui;bundle-version="3.109.100",
  org.eclipse.core.runtime,
@@ -16,12 +16,11 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.apache.log4j;bundle-version="1.2.15",
  smartgrid.simcontrol.test.baselib;bundle-version="1.0.0",
  smartgrid.model.test.generation,
- couplingSG;bundle-version="1.0.0",
- smartgrid.impactanalysis
+ smartgrid.impactanalysis,
+ smartgrid.coupling;bundle-version="1.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: smartgrid.simcontrol.test.rmi
-Import-Package: org.junit;version="4.12.0",
- smartgrid.attackersimulation.psm
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: smartgrid.newsimcontrol.rmi
+Import-Package: smartgrid.attackersimulation.psm
