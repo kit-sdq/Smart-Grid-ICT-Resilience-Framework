@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis xmi:id="_RdDzIHyzEeWskIAP1FG4Ig" selectedViews="_TghfsHyzEeWskIAP1FG4Ig" version="11.1.0.201608251200">
+  <viewpoint:DAnalysis uid="_RdDzIHyzEeWskIAP1FG4Ig" selectedViews="_TghfsHyzEeWskIAP1FG4Ig" version="14.1.0.201810161215">
     <semanticResources>model/smartgridinput.ecore</semanticResources>
     <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
     <semanticResources>platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore</semanticResources>
     <semanticResources>model/smartgridinput.ecorediag</semanticResources>
     <semanticResources>model/smartgridinput.genmodel</semanticResources>
     <semanticResources>platform:/resource/smartgrid.model.topo/model/smartgridtopo.genmodel</semanticResources>
-    <ownedViews xmi:type="viewpoint:DView" xmi:id="_TghfsHyzEeWskIAP1FG4Ig">
+    <ownedViews xmi:type="viewpoint:DView" uid="_TghfsHyzEeWskIAP1FG4Ig">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_A4d5cDlLEeeCur8jM1r8aQ" name="smartgridinput class diagram" representation="_Tio_kHyzEeWskIAP1FG4Ig">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_A4d5cDlLEeeCur8jM1r8aQ" name="smartgridinput class diagram" repPath="#_Tio_kHyzEeWskIAP1FG4Ig">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="model/smartgridinput.ecore#/"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_A4d5cTlLEeeCur8jM1r8aQ" name="ecore class diagram" representation="_TjIu0HyzEeWskIAP1FG4Ig">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_A4d5cTlLEeeCur8jM1r8aQ" name="ecore class diagram" repPath="#_TjIu0HyzEeWskIAP1FG4Ig">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_A4d5cjlLEeeCur8jM1r8aQ" name="smartgridtopo class diagram" representation="_Tjde8HyzEeWskIAP1FG4Ig">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_A4d5cjlLEeeCur8jM1r8aQ" name="smartgridtopo class diagram" repPath="#_Tjde8HyzEeWskIAP1FG4Ig">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#/"/>
       </ownedRepresentationDescriptors>
     </ownedViews>
   </viewpoint:DAnalysis>
-  <diagram:DSemanticDiagram xmi:id="_Tio_kHyzEeWskIAP1FG4Ig" name="smartgridinput class diagram">
-    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_Tio_lnyzEeWskIAP1FG4Ig" source="GMF_DIAGRAMS">
+  <diagram:DSemanticDiagram uid="_Tio_kHyzEeWskIAP1FG4Ig" name="smartgridinput class diagram">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_Tio_lnyzEeWskIAP1FG4Ig" source="GMF_DIAGRAMS">
       <data xmi:type="notation:Diagram" xmi:id="_Tio_l3yzEeWskIAP1FG4Ig" type="Sirius" element="_Tio_kHyzEeWskIAP1FG4Ig" measurementUnit="Pixel">
         <children xmi:type="notation:Node" xmi:id="_U8JwMHyzEeWskIAP1FG4Ig" type="2003" element="_U7vggHyzEeWskIAP1FG4Ig">
           <children xmi:type="notation:Node" xmi:id="_U8KXQHyzEeWskIAP1FG4Ig" type="5007"/>
@@ -84,6 +84,14 @@
             <children xmi:type="notation:Node" xmi:id="_C5_sUDlLEeeCur8jM1r8aQ" type="3010" element="_C42c0DlLEeeCur8jM1r8aQ">
               <styles xmi:type="notation:FontStyle" xmi:id="_C5_sUTlLEeeCur8jM1r8aQ" fontName="Segoe UI" fontHeight="8"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_C5_sUjlLEeeCur8jM1r8aQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_EbHGMMQoEemqDOY4H48QWg" type="3010" element="_Ea8uIMQoEemqDOY4H48QWg">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EbHGMcQoEemqDOY4H48QWg" fontName="Sans Serif" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EbHGMsQoEemqDOY4H48QWg"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_EbHGM8QoEemqDOY4H48QWg" type="3010" element="_Ea9VMMQoEemqDOY4H48QWg">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EbHGNMQoEemqDOY4H48QWg" fontName="Sans Serif" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EbHGNcQoEemqDOY4H48QWg"/>
             </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_dCtAknyzEeWskIAP1FG4Ig"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_dCtAk3yzEeWskIAP1FG4Ig"/>
@@ -174,8 +182,8 @@
         </edges>
       </data>
     </ownedAnnotationEntries>
-    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_U7yj0HyzEeWskIAP1FG4Ig" source="DANNOTATION_CUSTOMIZATION_KEY">
-      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_U7yj0XyzEeWskIAP1FG4Ig">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_U7yj0HyzEeWskIAP1FG4Ig" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_U7yj0XyzEeWskIAP1FG4Ig">
         <computedStyleDescriptions xmi:type="style:BundledImageDescription" xmi:id="_U8B0YHyzEeWskIAP1FG4Ig" labelExpression="service:render" labelAlignment="LEFT" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
           <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           <labelFormat>bold</labelFormat>
@@ -203,183 +211,199 @@
         </computedStyleDescriptions>
       </data>
     </ownedAnnotationEntries>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_U7vggHyzEeWskIAP1FG4Ig" name="EntityState" tooltipText="" outgoingEdges="_dCoIEHyzEeWskIAP1FG4Ig" incomingEdges="_U8E3sHyzEeWskIAP1FG4Ig" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_U7vggHyzEeWskIAP1FG4Ig" name="EntityState" tooltipText="" outgoingEdges="_dCoIEHyzEeWskIAP1FG4Ig" incomingEdges="_U8E3sHyzEeWskIAP1FG4Ig" width="12" height="10">
       <target xmi:type="ecore:EClass" href="model/smartgridinput.ecore#//EntityState"/>
       <semanticElements xmi:type="ecore:EClass" href="model/smartgridinput.ecore#//EntityState"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_U7wHkHyzEeWskIAP1FG4Ig" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_U7wHkHyzEeWskIAP1FG4Ig" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_U8BNUHyzEeWskIAP1FG4Ig" name="IsDestroyed : EBoolean = false" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_U8BNUHyzEeWskIAP1FG4Ig" name="IsDestroyed : EBoolean = false" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="model/smartgridinput.ecore#//EntityState/IsDestroyed"/>
         <semanticElements xmi:type="ecore:EAttribute" href="model/smartgridinput.ecore#//EntityState/IsDestroyed"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_U8B0YnyzEeWskIAP1FG4Ig" labelAlignment="LEFT" description="_U8B0YHyzEeWskIAP1FG4Ig">
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_U8B0YnyzEeWskIAP1FG4Ig" labelAlignment="LEFT" description="_U8B0YHyzEeWskIAP1FG4Ig">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_U8B0ZnyzEeWskIAP1FG4Ig" name="IsHacked : EBoolean = false" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_U8B0ZnyzEeWskIAP1FG4Ig" name="IsHacked : EBoolean = false" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="model/smartgridinput.ecore#//EntityState/IsHacked"/>
         <semanticElements xmi:type="ecore:EAttribute" href="model/smartgridinput.ecore#//EntityState/IsHacked"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_U8DCgHyzEeWskIAP1FG4Ig" labelAlignment="LEFT" description="_U8B0YHyzEeWskIAP1FG4Ig">
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_U8DCgHyzEeWskIAP1FG4Ig" labelAlignment="LEFT" description="_U8B0YHyzEeWskIAP1FG4Ig">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_U7wuoHyzEeWskIAP1FG4Ig" name="PowerState" tooltipText="" outgoingEdges="_b5iZEHyzEeWskIAP1FG4Ig" incomingEdges="_U8GF1nyzEeWskIAP1FG4Ig" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_U7wuoHyzEeWskIAP1FG4Ig" name="PowerState" tooltipText="" outgoingEdges="_b5iZEHyzEeWskIAP1FG4Ig" incomingEdges="_U8GF1nyzEeWskIAP1FG4Ig" width="12" height="10">
       <target xmi:type="ecore:EClass" href="model/smartgridinput.ecore#//PowerState"/>
       <semanticElements xmi:type="ecore:EClass" href="model/smartgridinput.ecore#//PowerState"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_U7xVsHyzEeWskIAP1FG4Ig" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_U7xVsHyzEeWskIAP1FG4Ig" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_U8DChHyzEeWskIAP1FG4Ig" name="PowerOutage : EBoolean = false" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_U8DChHyzEeWskIAP1FG4Ig" name="PowerOutage : EBoolean = false" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="model/smartgridinput.ecore#//PowerState/PowerOutage"/>
         <semanticElements xmi:type="ecore:EAttribute" href="model/smartgridinput.ecore#//PowerState/PowerOutage"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_U8DplHyzEeWskIAP1FG4Ig" labelAlignment="LEFT" description="_U8B0YHyzEeWskIAP1FG4Ig">
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_U8DplHyzEeWskIAP1FG4Ig" labelAlignment="LEFT" description="_U8B0YHyzEeWskIAP1FG4Ig">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_U7x8wHyzEeWskIAP1FG4Ig" name="ScenarioState" tooltipText="" outgoingEdges="_U8E3sHyzEeWskIAP1FG4Ig _U8GF1nyzEeWskIAP1FG4Ig" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_U7x8wHyzEeWskIAP1FG4Ig" name="ScenarioState" tooltipText="" outgoingEdges="_U8E3sHyzEeWskIAP1FG4Ig _U8GF1nyzEeWskIAP1FG4Ig" width="12" height="10">
       <target xmi:type="ecore:EClass" href="model/smartgridinput.ecore#//ScenarioState"/>
       <semanticElements xmi:type="ecore:EClass" href="model/smartgridinput.ecore#//ScenarioState"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_Z-4qQHyzEeWskIAP1FG4Ig" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_Z-4qQHyzEeWskIAP1FG4Ig" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_C4vIEDlLEeeCur8jM1r8aQ" name=" Scenario : SmartGridTopology" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_C4vIEDlLEeeCur8jM1r8aQ" name=" Scenario : SmartGridTopology" tooltipText="">
         <target xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//ScenarioState/Scenario"/>
         <semanticElements xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//ScenarioState/Scenario"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_C40noDlLEeeCur8jM1r8aQ" labelAlignment="LEFT" color="114,159,207">
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_C40noDlLEeeCur8jM1r8aQ" labelAlignment="LEFT" color="114,159,207">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_U8E3sHyzEeWskIAP1FG4Ig" name="[0..*] EntityStates" sourceNode="_U7x8wHyzEeWskIAP1FG4Ig" targetNode="_U7vggHyzEeWskIAP1FG4Ig">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_U8E3sHyzEeWskIAP1FG4Ig" name="[0..*] EntityStates" sourceNode="_U7x8wHyzEeWskIAP1FG4Ig" targetNode="_U7vggHyzEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//ScenarioState/EntityStates"/>
       <semanticElements xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//ScenarioState/EntityStates"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_U8GF0HyzEeWskIAP1FG4Ig" description="_U8Few3yzEeWskIAP1FG4Ig" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_U8GF0nyzEeWskIAP1FG4Ig" showIcon="false">
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_U8GF0HyzEeWskIAP1FG4Ig" description="_U8Few3yzEeWskIAP1FG4Ig" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_U8GF0nyzEeWskIAP1FG4Ig" showIcon="false">
           <customFeatures>labelSize</customFeatures>
         </centerLabelStyle>
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_U8GF1HyzEeWskIAP1FG4Ig" showIcon="false" labelColor="39,76,114">
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_U8GF1HyzEeWskIAP1FG4Ig" showIcon="false" labelColor="39,76,114">
           <customFeatures>labelSize</customFeatures>
         </endLabelStyle>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_U8GF1nyzEeWskIAP1FG4Ig" name="[0..*] PowerStates" sourceNode="_U7x8wHyzEeWskIAP1FG4Ig" targetNode="_U7wuoHyzEeWskIAP1FG4Ig">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_U8GF1nyzEeWskIAP1FG4Ig" name="[0..*] PowerStates" sourceNode="_U7x8wHyzEeWskIAP1FG4Ig" targetNode="_U7wuoHyzEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//ScenarioState/PowerStates"/>
       <semanticElements xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//ScenarioState/PowerStates"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_U8Gs5nyzEeWskIAP1FG4Ig" description="_U8Few3yzEeWskIAP1FG4Ig" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_U8Gs6HyzEeWskIAP1FG4Ig" showIcon="false">
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_U8Gs5nyzEeWskIAP1FG4Ig" description="_U8Few3yzEeWskIAP1FG4Ig" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_U8Gs6HyzEeWskIAP1FG4Ig" showIcon="false">
           <customFeatures>labelSize</customFeatures>
         </centerLabelStyle>
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_U8Gs6nyzEeWskIAP1FG4Ig" showIcon="false" labelColor="39,76,114">
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_U8Gs6nyzEeWskIAP1FG4Ig" showIcon="false" labelColor="39,76,114">
           <customFeatures>labelSize</customFeatures>
         </endLabelStyle>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_b5NB4HyzEeWskIAP1FG4Ig" name="PowerGridNode" tooltipText="" incomingEdges="_b5iZEHyzEeWskIAP1FG4Ig _dCpWMHyzEeWskIAP1FG4Ig" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_b5NB4HyzEeWskIAP1FG4Ig" name="PowerGridNode" tooltipText="" incomingEdges="_b5iZEHyzEeWskIAP1FG4Ig _dCpWMHyzEeWskIAP1FG4Ig" width="12" height="10">
       <target xmi:type="ecore:EClass" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//PowerGridNode"/>
       <semanticElements xmi:type="ecore:EClass" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//PowerGridNode"/>
-      <decorations xmi:type="viewpoint:Decoration" xmi:id="_b5fVwHyzEeWskIAP1FG4Ig">
+      <decorations xmi:type="viewpoint:Decoration" uid="_b5fVwHyzEeWskIAP1FG4Ig">
         <description xmi:type="description:SemanticBasedDecoration" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='External']"/>
       </decorations>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_b5No8HyzEeWskIAP1FG4Ig" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_b5No8HyzEeWskIAP1FG4Ig" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_b5iZEHyzEeWskIAP1FG4Ig" name="[1..1] Owner" sourceNode="_U7wuoHyzEeWskIAP1FG4Ig" targetNode="_b5NB4HyzEeWskIAP1FG4Ig">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_b5iZEHyzEeWskIAP1FG4Ig" name="[1..1] Owner" sourceNode="_U7wuoHyzEeWskIAP1FG4Ig" targetNode="_b5NB4HyzEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//PowerState/Owner"/>
       <semanticElements xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//PowerState/Owner"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_b5jAJnyzEeWskIAP1FG4Ig" description="_b5jAInyzEeWskIAP1FG4Ig" routingStyle="manhattan" strokeColor="0,0,0">
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_b5jAKHyzEeWskIAP1FG4Ig" showIcon="false">
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_b5jAJnyzEeWskIAP1FG4Ig" description="_b5jAInyzEeWskIAP1FG4Ig" routingStyle="manhattan" strokeColor="0,0,0">
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_b5jAKHyzEeWskIAP1FG4Ig" showIcon="false">
           <customFeatures>labelSize</customFeatures>
           <labelFormat>bold</labelFormat>
         </centerLabelStyle>
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_b5jAKnyzEeWskIAP1FG4Ig" showIcon="false" labelColor="39,76,114">
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_b5jAKnyzEeWskIAP1FG4Ig" showIcon="false" labelColor="39,76,114">
           <customFeatures>labelSize</customFeatures>
         </endLabelStyle>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_dCbTwHyzEeWskIAP1FG4Ig" name="NetworkEntity" tooltipText="" outgoingEdges="_dCpWMHyzEeWskIAP1FG4Ig" incomingEdges="_dCoIEHyzEeWskIAP1FG4Ig" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_dCbTwHyzEeWskIAP1FG4Ig" name="NetworkEntity" tooltipText="" outgoingEdges="_dCpWMHyzEeWskIAP1FG4Ig" incomingEdges="_dCoIEHyzEeWskIAP1FG4Ig" width="12" height="10">
       <target xmi:type="ecore:EClass" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity"/>
       <semanticElements xmi:type="ecore:EClass" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity"/>
-      <decorations xmi:type="viewpoint:Decoration" xmi:id="_dClr0HyzEeWskIAP1FG4Ig">
+      <decorations xmi:type="viewpoint:Decoration" uid="_dClr0HyzEeWskIAP1FG4Ig">
         <description xmi:type="description:SemanticBasedDecoration" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='External']"/>
       </decorations>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_dCb60HyzEeWskIAP1FG4Ig" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" borderSize="1" borderSizeComputationExpression="1" borderColor="125,125,125" backgroundStyle="Liquid" foregroundColor="228,228,228">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_dCb60HyzEeWskIAP1FG4Ig" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" borderSize="1" borderSizeComputationExpression="1" borderColor="125,125,125" backgroundStyle="Liquid" foregroundColor="228,228,228">
         <labelFormat>italic</labelFormat>
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@conditionnalStyles.1/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_C42c0DlLEeeCur8jM1r8aQ" name=" LinkedBy : PhysicalConnection" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_C42c0DlLEeeCur8jM1r8aQ" name=" LinkedBy : PhysicalConnection" tooltipText="">
         <target xmi:type="ecore:EReference" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity/LinkedBy"/>
         <semanticElements xmi:type="ecore:EReference" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity/LinkedBy"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_C43D4DlLEeeCur8jM1r8aQ" labelAlignment="LEFT" color="114,159,207">
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_C43D4DlLEeeCur8jM1r8aQ" labelAlignment="LEFT" color="114,159,207">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>
       </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_Ea8uIMQoEemqDOY4H48QWg" name="xCoord : EDouble = 0.0" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity/xCoord"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity/xCoord"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_Ea8uIcQoEemqDOY4H48QWg" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_Ea9VMMQoEemqDOY4H48QWg" name="yCoord : EDouble = 0.0" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity/yCoord"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity/yCoord"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_Ea98QMQoEemqDOY4H48QWg" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_dCoIEHyzEeWskIAP1FG4Ig" name="[1..1] Owner" sourceNode="_U7vggHyzEeWskIAP1FG4Ig" targetNode="_dCbTwHyzEeWskIAP1FG4Ig">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_dCoIEHyzEeWskIAP1FG4Ig" name="[1..1] Owner" sourceNode="_U7vggHyzEeWskIAP1FG4Ig" targetNode="_dCbTwHyzEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//EntityState/Owner"/>
       <semanticElements xmi:type="ecore:EReference" href="model/smartgridinput.ecore#//EntityState/Owner"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_dCovJnyzEeWskIAP1FG4Ig" description="_b5jAInyzEeWskIAP1FG4Ig" routingStyle="manhattan" strokeColor="0,0,0">
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_dCovKHyzEeWskIAP1FG4Ig" showIcon="false">
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_dCovJnyzEeWskIAP1FG4Ig" description="_b5jAInyzEeWskIAP1FG4Ig" routingStyle="manhattan" strokeColor="0,0,0">
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_dCovKHyzEeWskIAP1FG4Ig" showIcon="false">
           <customFeatures>labelSize</customFeatures>
           <labelFormat>bold</labelFormat>
         </centerLabelStyle>
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_dCovKnyzEeWskIAP1FG4Ig" showIcon="false" labelColor="39,76,114">
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_dCovKnyzEeWskIAP1FG4Ig" showIcon="false" labelColor="39,76,114">
           <customFeatures>labelSize</customFeatures>
         </endLabelStyle>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_dCpWMHyzEeWskIAP1FG4Ig" name="[1..*] ConnectedTo" visible="false" sourceNode="_dCbTwHyzEeWskIAP1FG4Ig" targetNode="_b5NB4HyzEeWskIAP1FG4Ig">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_dCpWMHyzEeWskIAP1FG4Ig" name="[1..*] ConnectedTo" visible="false" sourceNode="_dCbTwHyzEeWskIAP1FG4Ig" targetNode="_b5NB4HyzEeWskIAP1FG4Ig">
       <target xmi:type="ecore:EReference" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity/ConnectedTo"/>
       <semanticElements xmi:type="ecore:EReference" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#//NetworkEntity/ConnectedTo"/>
-      <graphicalFilters xmi:type="diagram:HideFilter" xmi:id="_ebgmkHyzEeWskIAP1FG4Ig"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_A07L1X4qEeWskIAP1FG4Ig" description="_b5jAInyzEeWskIAP1FG4Ig" routingStyle="manhattan" strokeColor="0,0,0">
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_A07L134qEeWskIAP1FG4Ig" showIcon="false">
+      <graphicalFilters xmi:type="diagram:HideFilter" uid="_ebgmkHyzEeWskIAP1FG4Ig"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_A07L1X4qEeWskIAP1FG4Ig" description="_b5jAInyzEeWskIAP1FG4Ig" routingStyle="manhattan" strokeColor="0,0,0">
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_A07L134qEeWskIAP1FG4Ig" showIcon="false">
           <labelFormat>bold</labelFormat>
         </centerLabelStyle>
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_A07L2X4qEeWskIAP1FG4Ig" labelSize="6" showIcon="false" labelColor="39,76,114"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_A07L2X4qEeWskIAP1FG4Ig" labelSize="6" showIcon="false" labelColor="39,76,114"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
     <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
-    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_Tio_lXyzEeWskIAP1FG4Ig"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_Tio_lXyzEeWskIAP1FG4Ig"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer"/>
     <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']"/>
     <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Validation']"/>
     <target xmi:type="ecore:EPackage" href="model/smartgridinput.ecore#/"/>
   </diagram:DSemanticDiagram>
-  <diagram:DSemanticDiagram xmi:id="_TjIu0HyzEeWskIAP1FG4Ig" name="ecore class diagram">
-    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_TjJV5XyzEeWskIAP1FG4Ig" source="GMF_DIAGRAMS">
+  <diagram:DSemanticDiagram uid="_TjIu0HyzEeWskIAP1FG4Ig" name="ecore class diagram">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_TjJV5XyzEeWskIAP1FG4Ig" source="GMF_DIAGRAMS">
       <data xmi:type="notation:Diagram" xmi:id="_TjJV5nyzEeWskIAP1FG4Ig" type="Sirius" element="_TjIu0HyzEeWskIAP1FG4Ig" measurementUnit="Pixel">
         <children xmi:type="notation:Node" xmi:id="_TjJ88HyzEeWskIAP1FG4Ig" type="2001" element="_TjJV4HyzEeWskIAP1FG4Ig">
           <children xmi:type="notation:Node" xmi:id="_TjKkAHyzEeWskIAP1FG4Ig" type="5002">
@@ -395,26 +419,26 @@
         <styles xmi:type="notation:DiagramStyle" xmi:id="_TjJV53yzEeWskIAP1FG4Ig"/>
       </data>
     </ownedAnnotationEntries>
-    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_A7R84DlLEeeCur8jM1r8aQ" source="DANNOTATION_CUSTOMIZATION_KEY">
-      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_A7R84TlLEeeCur8jM1r8aQ"/>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_A7R84DlLEeeCur8jM1r8aQ" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_A7R84TlLEeeCur8jM1r8aQ"/>
     </ownedAnnotationEntries>
-    <ownedDiagramElements xmi:type="diagram:DNode" xmi:id="_TjJV4HyzEeWskIAP1FG4Ig" width="-1" height="-1">
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_TjJV4HyzEeWskIAP1FG4Ig" width="-1" height="-1">
       <target xmi:type="ecore:EPackage" href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <semanticElements xmi:type="ecore:EPackage" href="http://www.eclipse.org/emf/2002/Ecore#/"/>
-      <ownedStyle xmi:type="diagram:WorkspaceImage" xmi:id="_TjJV4XyzEeWskIAP1FG4Ig" showIcon="false" labelPosition="node" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/empty.svg">
+      <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_TjJV4XyzEeWskIAP1FG4Ig" showIcon="false" labelPosition="node" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/empty.svg">
         <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@nodeMappings[name='Empty%20Diagram']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@nodeMappings[name='Empty%20Diagram']"/>
     </ownedDiagramElements>
     <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
-    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_TjJV5HyzEeWskIAP1FG4Ig"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_TjJV5HyzEeWskIAP1FG4Ig"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer"/>
     <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']"/>
     <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Validation']"/>
     <target xmi:type="ecore:EPackage" href="http://www.eclipse.org/emf/2002/Ecore#/"/>
   </diagram:DSemanticDiagram>
-  <diagram:DSemanticDiagram xmi:id="_Tjde8HyzEeWskIAP1FG4Ig" name="smartgridtopo class diagram">
-    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_Tjde9nyzEeWskIAP1FG4Ig" source="GMF_DIAGRAMS">
+  <diagram:DSemanticDiagram uid="_Tjde8HyzEeWskIAP1FG4Ig" name="smartgridtopo class diagram">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_Tjde9nyzEeWskIAP1FG4Ig" source="GMF_DIAGRAMS">
       <data xmi:type="notation:Diagram" xmi:id="_Tjde93yzEeWskIAP1FG4Ig" type="Sirius" element="_Tjde8HyzEeWskIAP1FG4Ig" measurementUnit="Pixel">
         <children xmi:type="notation:Node" xmi:id="_TjeGAHyzEeWskIAP1FG4Ig" type="2001" element="_Tjde8XyzEeWskIAP1FG4Ig">
           <children xmi:type="notation:Node" xmi:id="_TjetEHyzEeWskIAP1FG4Ig" type="5002">
@@ -430,19 +454,19 @@
         <styles xmi:type="notation:DiagramStyle" xmi:id="_Tjde-HyzEeWskIAP1FG4Ig"/>
       </data>
     </ownedAnnotationEntries>
-    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_A7Sj8DlLEeeCur8jM1r8aQ" source="DANNOTATION_CUSTOMIZATION_KEY">
-      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_A7Sj8TlLEeeCur8jM1r8aQ"/>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_A7Sj8DlLEeeCur8jM1r8aQ" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_A7Sj8TlLEeeCur8jM1r8aQ"/>
     </ownedAnnotationEntries>
-    <ownedDiagramElements xmi:type="diagram:DNode" xmi:id="_Tjde8XyzEeWskIAP1FG4Ig" width="-1" height="-1">
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_Tjde8XyzEeWskIAP1FG4Ig" width="-1" height="-1">
       <target xmi:type="ecore:EPackage" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#/"/>
       <semanticElements xmi:type="ecore:EPackage" href="platform:/resource/smartgrid.model.topo/model/smartgridtopo.ecore#/"/>
-      <ownedStyle xmi:type="diagram:WorkspaceImage" xmi:id="_Tjde8nyzEeWskIAP1FG4Ig" showIcon="false" labelPosition="node" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/empty.svg">
+      <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_Tjde8nyzEeWskIAP1FG4Ig" showIcon="false" labelPosition="node" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/empty.svg">
         <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@nodeMappings[name='Empty%20Diagram']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@nodeMappings[name='Empty%20Diagram']"/>
     </ownedDiagramElements>
     <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
-    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_Tjde9XyzEeWskIAP1FG4Ig"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_Tjde9XyzEeWskIAP1FG4Ig"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer"/>
     <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']"/>
     <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Validation']"/>

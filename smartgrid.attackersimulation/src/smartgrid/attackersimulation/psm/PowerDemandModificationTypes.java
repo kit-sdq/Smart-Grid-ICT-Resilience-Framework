@@ -1,7 +1,7 @@
 /**
  *
  */
-package smartgrid.simcontrol.test.util;
+package smartgrid.attackersimulation.psm;
 
 /**
  * @author Mazen

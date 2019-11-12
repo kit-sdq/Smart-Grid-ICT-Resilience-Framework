@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Attackersimulation
 Bundle-SymbolicName: smartgrid.attackersimulation;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.debug.core;bundle-version="3.9.1",
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.model.output;bundle-version="1.0.0",
@@ -13,6 +13,6 @@ Require-Bundle: org.eclipse.debug.core;bundle-version="3.9.1",
 Export-Package: smartgrid.attackersimulation,
  smartgrid.attackersimulation.psm
 Import-Package: 
- couplingToICT,
+ smartgrid.coupling.ICT,
  smartgrid.simcontrol.test.baselib,
  smartgrid.simcontrol.test.baselib.coupling

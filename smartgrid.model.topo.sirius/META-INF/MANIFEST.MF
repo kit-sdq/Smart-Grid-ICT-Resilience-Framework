@@ -26,7 +26,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius.diagram,
  org.eclipse.ui.workbench
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.apache.log4j;version="1.2.15",
  org.eclipse.emf.transaction,
  org.eclipse.sirius.diagram.ui.tools.api.editor;version="2.2.0",

@@ -4,7 +4,7 @@ Bundle-Name: Test
 Bundle-SymbolicName: smartgrid.impactanalysis.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: smartgrid.impactanalysis.test
-Bundle-RequiredExecutionEnvironment: JavaSE-9
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: smartgrid.impactanalysis;bundle-version="1.0.0",
  org.junit;bundle-version="4.12.0",
  smartgrid.model.output;bundle-version="1.0.0",

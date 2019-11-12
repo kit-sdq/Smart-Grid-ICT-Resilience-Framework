@@ -1,11 +1,11 @@
-package smartgrid.simcontrol.test.util;
+package smartgrid.attackersimulation.psm;
 
 import java.util.Map;
 
-import couplingToICT.PowerDemand;
-import couplingToICT.PowerSpec;
+import smartgrid.coupling.ICT.PowerSpec;
+import smartgrid.coupling.ICT.PowerSpecContainer;
 
 public interface PowerDemandModifier {
     
-    public PowerDemand modifyPowerDemand(Map<String, Map<String, PowerSpec>> powerDemand);
+    public PowerSpecContainer modifyPowerDemand(Map<String, Map<String, PowerSpec>> powerDemand);
 }

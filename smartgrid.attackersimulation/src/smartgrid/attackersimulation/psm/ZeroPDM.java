@@ -1,16 +1,16 @@
-package smartgrid.simcontrol.test.util;
+package smartgrid.attackersimulation.psm;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import couplingToICT.PowerDemand;
-import couplingToICT.PowerSpec;
+import smartgrid.coupling.ICT.PowerSpec;
+import smartgrid.coupling.ICT.PowerSpecContainer;
 
 public class ZeroPDM implements PowerDemandModifier {
-
+	@Deprecated
     @Override
-    public PowerDemand modifyPowerDemand(Map<String, Map<String, PowerSpec>> oldPowerDemandsHashMap) {
+    public PowerSpecContainer modifyPowerDemand(Map<String, Map<String, PowerSpec>> oldPowerDemandsHashMap) {
 
         
         LinkedHashMap<String, HashMap<String, PowerSpec>> newPowerDemandsHashMap = new LinkedHashMap<String, HashMap<String,PowerSpec>>();
@@ -44,9 +44,9 @@ public class ZeroPDM implements PowerDemandModifier {
             newPowerDemandsHashMap.put(powerDistrictId, newSmartMeterPowerSpecsHashMap);
         }
         
-        PowerDemand newPowerDemand = new PowerDemand(newPowerDemandsHashMap);
+        //PowerSpecContainer newPowerDemand = new PowerSpecContainer(newPowerDemandsHashMap);
         
-        return newPowerDemand;
+        return null;
     }
 
 

@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.ui,
  smartgrid.model.topo;visibility:=reexport,
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.log4starter
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: smartgridinput,
  smartgridinput.impl,
  smartgridinput.util,

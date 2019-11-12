@@ -6,9 +6,9 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
+import smartgrid.coupling.ICT.SmartComponentGeoData;
+import smartgrid.coupling.ICT.SmartGridTopoContainer;
 import smartgrid.helper.UIDHelper;
-import couplingToICT.SmartComponentGeoData;
-import couplingToICT.SmartGridTopoContainer;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.NetworkNode;
 import smartgridtopo.PowerGridNode;

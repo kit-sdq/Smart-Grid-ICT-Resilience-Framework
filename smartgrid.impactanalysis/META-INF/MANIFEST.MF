@@ -16,7 +16,7 @@ Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: smartgrid.impactanalysis
 Import-Package: smartgrid.simcontrol.test.baselib,
  smartgrid.simcontrol.test.baselib.coupling

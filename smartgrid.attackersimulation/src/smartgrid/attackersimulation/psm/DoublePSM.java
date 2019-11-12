@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import couplingToICT.PowerSpec;
-import couplingToICT.PowerSpecContainer;
+import smartgrid.coupling.ICT.PowerSpec;
+import smartgrid.coupling.ICT.PowerSpecContainer;
 
 public class DoublePSM implements PowerSpecsModifier {
 
