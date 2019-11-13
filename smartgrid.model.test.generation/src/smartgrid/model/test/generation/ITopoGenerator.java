@@ -1,6 +1,6 @@
 package smartgrid.model.test.generation;
 
-import smartgrid.coupling.ICT.SmartGridTopoContainer;
+import couplingToICT.SmartGridTopoContainer;
 import smartgridtopo.SmartGridTopology;
 
 public interface ITopoGenerator {

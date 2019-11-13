@@ -9,5 +9,5 @@ Require-Bundle: org.apache.log4j,
  smartgrid.model.topo,
  smartgrid.model.output,
  smartgrid.helper,
- smartgrid.coupling;bundle-version="1.1.0"
+ couplingSG;bundle-version="1.0.0"
 Export-Package: smartgrid.model.test.generation

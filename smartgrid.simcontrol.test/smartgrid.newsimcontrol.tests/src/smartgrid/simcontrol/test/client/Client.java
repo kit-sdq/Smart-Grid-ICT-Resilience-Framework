@@ -23,19 +23,20 @@ public class Client {
 	private static final Logger LOG = Logger.getLogger(Client.class);
 	static boolean error;
 	static boolean init;
+	private static final String path = "/home/majuwa/tmp/";
 	
 	static ISimulationController connector;
 	
 	
 	public static void main(String[] args) throws SimcontrolException, IOException, ClassNotFoundException {
 		
-		String path = "/home/majuwa/tmp/outputTopoContainer";
+		String path = Client.path + "outputTopoContainer";
 		ObjectInputStream objectInputStream =
 			    new ObjectInputStream(new FileInputStream(path));
 		SmartGridTopoContainer topoContainer = (SmartGridTopoContainer) objectInputStream.readObject();
 	    objectInputStream.close();
 	    
-	    String path2 = "/home/majuwa/tmp/outputPowerAssigned";
+	    String path2 = Client.path + "outputPowerAssigned";
 		ObjectInputStream objectInputStream2 =
 			    new ObjectInputStream(new FileInputStream(path2));
 		PowerSpecContainer powerSpec = (PowerSpecContainer) objectInputStream2.readObject();

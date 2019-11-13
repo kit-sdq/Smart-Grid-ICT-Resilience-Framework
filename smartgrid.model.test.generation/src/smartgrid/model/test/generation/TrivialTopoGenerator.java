@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import smartgrid.coupling.ICT.SmartComponentGeoData;
-import smartgrid.coupling.ICT.SmartGridTopoContainer;
+import couplingToICT.SmartComponentGeoData;
+import couplingToICT.SmartGridTopoContainer;
 import smartgrid.helper.UIDHelper;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.NetworkNode;
