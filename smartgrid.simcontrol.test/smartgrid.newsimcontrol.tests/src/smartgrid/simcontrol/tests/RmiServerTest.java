@@ -15,11 +15,11 @@ import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import smartgrid.coupling.ICT.ISimulationController;
-import smartgrid.coupling.ICT.PowerAssigned;
-import smartgrid.coupling.ICT.PowerSpecContainer;
-import smartgrid.coupling.ICT.SimcontrolException;
-import smartgrid.coupling.ICT.SmartGridTopoContainer;
+import couplingToICT.ISimulationController;
+import couplingToICT.PowerAssigned;
+import couplingToICT.PowerSpecContainer;
+import couplingToICT.SimcontrolException;
+import couplingToICT.SmartGridTopoContainer;
 import smartgrid.simcontrol.test.client.Client;
 
 public class RmiServerTest {

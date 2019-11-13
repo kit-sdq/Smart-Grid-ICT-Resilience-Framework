@@ -1,9 +1,5 @@
 package smartgrid.newsimcontrol.rmi;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -20,20 +16,20 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 
-import smartgrid.simcontrol.test.baselib.Constants;
-import smartgrid.coupling.ICT.ISimulationController;
-import smartgrid.coupling.ICT.PowerAssigned;
-import smartgrid.coupling.ICT.PowerSpecContainer;
-import smartgrid.coupling.ICT.SimcontrolException;
-import smartgrid.coupling.ICT.SimcontrolInitializationException;
-import smartgrid.coupling.ICT.SmartComponentStateContainer;
-import smartgrid.coupling.ICT.SmartGridTopoContainer;
-import smartgrid.coupling.ICT.parameters.AttackerSimulationsTypes;
-import smartgrid.coupling.ICT.parameters.HackingStyle;
-import smartgrid.coupling.ICT.parameters.InitializationMapKeys;
-import smartgrid.coupling.ICT.parameters.PowerSpecsModificationTypes;
+import couplingToICT.ISimulationController;
+import couplingToICT.PowerAssigned;
+import couplingToICT.PowerSpecContainer;
+import couplingToICT.SimcontrolException;
+import couplingToICT.SimcontrolInitializationException;
+import couplingToICT.SmartComponentStateContainer;
+import couplingToICT.SmartGridTopoContainer;
+import initializer.AttackerSimulationsTypes;
+import initializer.HackingStyle;
+import initializer.InitializationMapKeys;
+import initializer.PowerSpecsModificationTypes;
 import smartgrid.newsimcontrol.ReactiveSimulationController;
-import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
+import smartgrid.newsimcontrol.SimcontroLaunchConfigurationDelegate;
+import smartgrid.newsimcontrol.SimulationController;
 
 /**
  * This class acts as RMI Server for the KRITIS simulation of the IKET. The server is always

@@ -2,7 +2,7 @@ package smartgrid.attackersimulation.psm;
 
 import java.util.HashSet;
 
-import smartgrid.coupling.ICT.PowerSpecContainer;
+import couplingToICT.PowerSpecContainer;
 
 public interface PowerSpecsModifier {
     

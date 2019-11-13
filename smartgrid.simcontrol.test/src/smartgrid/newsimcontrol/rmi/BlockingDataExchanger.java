@@ -3,11 +3,11 @@ package smartgrid.newsimcontrol.rmi;
 
 import org.apache.log4j.Logger;
 
-import smartgrid.coupling.ICT.PowerAssigned;
-import smartgrid.coupling.ICT.PowerSpecContainer;
-import smartgrid.coupling.ICT.SimcontrolException;
-import smartgrid.coupling.ICT.SmartComponentStateContainer;
-import smartgrid.coupling.ICT.SmartGridTopoContainer;
+import couplingToICT.PowerAssigned;
+import couplingToICT.PowerSpecContainer;
+import couplingToICT.SimcontrolException;
+import couplingToICT.SmartComponentStateContainer;
+import couplingToICT.SmartGridTopoContainer;
 
 /**
  * This is basically an exchanger for two different data types.

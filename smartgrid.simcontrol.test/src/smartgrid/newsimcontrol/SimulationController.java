@@ -6,10 +6,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import smartgrid.coupling.ICT.PowerAssigned;
-import smartgrid.coupling.ICT.PowerSpecContainer;
-import smartgrid.coupling.ICT.SmartComponentStateContainer;
-import smartgrid.coupling.ICT.SmartGridTopoContainer;
+import couplingToICT.PowerAssigned;
+import couplingToICT.PowerSpecContainer;
+import couplingToICT.SmartComponentStateContainer;
+import couplingToICT.SmartGridTopoContainer;
 import smartgrid.log4j.LoggingInitializer;
 import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
 import smartgrid.simcontrol.test.baselib.Constants;

@@ -12,11 +12,11 @@ import java.util.LinkedHashMap;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
-import smartgrid.coupling.ICT.ISimulationController;
-import smartgrid.coupling.ICT.PowerAssigned;
-import smartgrid.coupling.ICT.PowerSpecContainer;
-import smartgrid.coupling.ICT.SimcontrolException;
-import smartgrid.coupling.ICT.SmartGridTopoContainer;
+import couplingToICT.ISimulationController;
+import couplingToICT.PowerAssigned;
+import couplingToICT.PowerSpecContainer;
+import couplingToICT.SimcontrolException;
+import couplingToICT.SmartGridTopoContainer;
 
 public class Client {
 
@@ -86,7 +86,7 @@ public class Client {
 	      if (System.getSecurityManager() == null) {
 	        System.setSecurityManager(new SecurityManager());
 	      }
-	      //System.setProperty("java.rmi.server.hostname","172.17.5.24");
+	      System.setProperty("java.rmi.server.hostname","localhost");
 
 	      hostName = "localhost";
 	      lookupName = "ISimulationController";

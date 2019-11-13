@@ -8,6 +8,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: smartgrid.model.output,
  org.eclipse.debug.core,
  org.eclipse.equinox.registry,
- smartgrid.coupling;bundle-version="1.1.0"
+ couplingSG;bundle-version="1.0.0"
 Export-Package: smartgrid.simcontrol.test.baselib,
  smartgrid.simcontrol.test.baselib.coupling

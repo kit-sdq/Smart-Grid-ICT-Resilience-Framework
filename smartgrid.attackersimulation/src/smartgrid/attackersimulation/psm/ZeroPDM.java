@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import smartgrid.coupling.ICT.PowerSpec;
-import smartgrid.coupling.ICT.PowerSpecContainer;
+import couplingToICT.PowerSpec;
+import couplingToICT.PowerSpecContainer;
 
 public class ZeroPDM implements PowerDemandModifier {
 	@Deprecated
