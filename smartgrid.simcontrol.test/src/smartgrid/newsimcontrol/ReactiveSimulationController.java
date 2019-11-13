@@ -138,8 +138,7 @@ public final class ReactiveSimulationController {
 
 	public SmartComponentStateContainer run(PowerAssigned power) {
 
-		try {
-        Map<String,Map<String, Double>> powerSupply = null;;
+		Map<String,Map<String, Double>> powerSupply = null;;
         
         LOG.info("Starting time step " + timeStep);
 
@@ -194,10 +193,6 @@ public final class ReactiveSimulationController {
         timeStep++;
 
         LOG.info("Finished time step " + timeStep);
-		} catch (Exception e) {
-			LOG.info(e);
-			e.printStackTrace();
-		}
         return dysfunctionalcomponents;
     }
 

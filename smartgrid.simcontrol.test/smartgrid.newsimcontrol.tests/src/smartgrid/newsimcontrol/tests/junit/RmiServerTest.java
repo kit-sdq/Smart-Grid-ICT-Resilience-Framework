@@ -1,4 +1,4 @@
-package smartgrid.simcontrol.tests;
+package smartgrid.newsimcontrol.tests.junit;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +20,7 @@ import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SimcontrolException;
 import couplingToICT.SmartGridTopoContainer;
-import smartgrid.simcontrol.test.client.Client;
+import smartgrid.newsimcontro.tests.client.Client;
 
 public class RmiServerTest {
 
