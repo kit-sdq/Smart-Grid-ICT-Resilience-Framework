@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/edu.kit.ipd.sdq.smartgrid.feature_1.0.0.qualifier.jar" id="edu.kit.ipd.sdq.smartgrid.feature" version="1.0.0.qualifier">
+      <category name="Smart Grid"/>
+   </feature>
+   <feature id="edu.kit.ipd.sdq.smartgrid.feature.source" version="1.0.0.qualifier">
+      <category name="Smart Grid"/>
+   </feature>
+   <category-def name="Smart Grid" label="Smart Grid">
+      <description>
+         Commons projects containing utility functions for different domains
+      </description>
+   </category-def>
+</site>

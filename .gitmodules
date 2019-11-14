@@ -1,3 +1,6 @@
 [submodule "couplingSG"]
-	path = couplingSG
+	path = bundles/couplingSG
+	url = git@git.scc.kit.edu:hgf-sg-coupling/couplingSG.git
+[submodule "bundles/couplingSG"]
+	path = bundles/couplingSG
 	url = git@git.scc.kit.edu:hgf-sg-coupling/couplingSG.git

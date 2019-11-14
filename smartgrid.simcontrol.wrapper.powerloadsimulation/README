@@ -1,4 +1,0 @@
-To be able to work, the jar of the OPF optimizer has to be included:
-1. Paste the jar into the project's root folder (if the jar is named "smartgrid.simcontrol.iip.jar", the next two steps are not necessary)
-2. Open the "plugin.xml", open the "Runtime" tab: add the jar to the classpath (keep the "update the build path" checkbox enabled).
-3. Open the "Build" tab: add the jar to the binary build
