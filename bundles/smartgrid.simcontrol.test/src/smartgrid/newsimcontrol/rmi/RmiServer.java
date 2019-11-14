@@ -169,7 +169,7 @@ public class RmiServer implements ISimulationController {
 	private void testInitReactiveWithMap() throws RemoteException {
 		Map<InitializationMapKeys, String> initMap = new HashMap<InitializationMapKeys, String>();
 		initMap.put(InitializationMapKeys.INPUT_PATH_KEY, "");
-		initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, "/home/majuwa/kit/helm/SmartGrid/smartgrid.model.examples");
+		initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, "/home/majuwa/git/Smart-Grid-ICT-Resilience-Framework/examples/smartgrid.model.examples");
 		initMap.put(InitializationMapKeys.TOPO_PATH_KEY, "");
 		initMap.put(InitializationMapKeys.TOPO_GENERATION_KEY, Boolean.toString(true));
 		initMap.put(InitializationMapKeys.IGNORE_LOC_CON_KEY, Boolean.toString(false));
@@ -194,7 +194,7 @@ public class RmiServer implements ISimulationController {
 		state = RmiServerState.REACTIVE;
 		reactiveSimControl = new ReactiveSimulationController();
 
-		String outputPath = "/home/majuwa/kit/helm/SmartGrid/smartgrid.model.examples/smartgrid.model.examples/";
+		String outputPath = "/home/majuwa/git/Smart-Grid-ICT-Resilience-Framework/examples/smartgrid.model.examples";
 		reactiveSimControl.init(outputPath);
 
 		try {

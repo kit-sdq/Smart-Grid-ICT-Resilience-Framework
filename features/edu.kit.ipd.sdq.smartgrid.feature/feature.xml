@@ -162,6 +162,12 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+   <plugin
+         id="deprecated.smartgrid.simcontrol.mocks"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 
 

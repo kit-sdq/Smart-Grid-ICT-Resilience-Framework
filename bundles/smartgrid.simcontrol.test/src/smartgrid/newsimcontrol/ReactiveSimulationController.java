@@ -403,7 +403,6 @@ public final class ReactiveSimulationController {
         }
     }
 
-
     public void initTopo(SmartGridTopoContainer topoContainer) {
         // generate and persist topo
         ITopoGenerator generator = new TrivialTopoGenerator();

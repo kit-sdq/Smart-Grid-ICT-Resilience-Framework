@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="smartgrid.simcontrol.test.extensionpoints.powerLoadSimulation">
+      <powerLoadSimulation
+            powerLoadSimulation="smartgrid.simcontrol.test.mocks.PowerLoadSimulationMock">
+      </powerLoadSimulation>
+   </extension>
+   <extension
+         point="smartgrid.simcontrol.test.extensionpoints.terminationCondition">
+      <terminationCondition
+            class="smartgrid.simcontrol.test.mocks.IterationCountTerminationCondition">
+      </terminationCondition>
+   </extension>
+   <extension
+         point="smartgrid.simcontrol.test.extensionpoints.timeProgressor">
+      <timeProgressor
+            class="smartgrid.simcontrol.test.mocks.NoOperationTimeProgressor">
+      </timeProgressor>
+   </extension>
+   <extension
+         point="smartgrid.simucontrol.test.extensionpoints.kritisSimulation">
+      <KritisSimulation
+            class="smartgrid.simcontrol.test.mocks.KritisSimulationMock">
+      </KritisSimulation>
+   </extension>
+   <extension
+         point="smartgrid.simcontrol.test.extensionpoints.impactAnalysis">
+      <impactAnalysis
+            class="smartgrid.simcontrol.test.mocks.ImpactAnalysisMock">
+      </impactAnalysis>
+   </extension>
+   <extension
+         point="smartgrid.simcontrol.test.extensionpoints.attackerSimulation">
+      <AttackerSimulation
+            class="smartgrid.simcontrol.test.mocks.NoAttackerSimulation">
+      </AttackerSimulation>
+   </extension>
+
+</plugin>
