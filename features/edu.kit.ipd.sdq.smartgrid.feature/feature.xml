@@ -36,8 +36,8 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-   <plugin
-         id="smartgrid.attackersimulation.test"
+    <plugin
+         id="smartgrid.helper"
          download-size="0"
          install-size="0"
          version="0.0.0"

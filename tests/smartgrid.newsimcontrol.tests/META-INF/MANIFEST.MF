@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: smartgrid.newsimcontrol.tests
+Bundle-Version: 1.0.0.qualifier
+Export-Package: smartgrid.newsimcontrol.tests.junit
+Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
+ org.junit,
+ couplingSG;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11

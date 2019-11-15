@@ -27,5 +27,17 @@
             class="smartgrid.newsimcontrol.rmi.Startup">
       </startup>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="smartgrid">
+         <property
+               name="appName"
+               value="smartgrid">
+         </property>
+      </product>
+   </extension>
 
 </plugin>
