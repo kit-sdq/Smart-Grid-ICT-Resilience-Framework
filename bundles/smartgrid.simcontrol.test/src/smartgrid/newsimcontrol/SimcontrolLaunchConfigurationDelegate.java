@@ -7,6 +7,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 
+import smartgrid.newsimcontrol.controller.ActiveSimulationController;
 import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
 
 /**
@@ -14,9 +15,9 @@ import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
  *
  * @implements ILaunchConfigurationDelegate
  */
-public class SimcontroLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
+public class SimcontrolLaunchConfigurationDelegate implements ILaunchConfigurationDelegate {
 
-    private static final Logger LOG = Logger.getLogger(SimcontroLaunchConfigurationDelegate.class);
+    private static final Logger LOG = Logger.getLogger(SimcontrolLaunchConfigurationDelegate.class);
 
     private int attempt = 0;
     private int maxAttempts = 5;
@@ -30,7 +31,7 @@ public class SimcontroLaunchConfigurationDelegate implements ILaunchConfiguratio
     @Override
     public void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch, final IProgressMonitor monitor) throws CoreException {
 
-        SimulationController simControl = new SimulationController();
+        ActiveSimulationController simControl = new ActiveSimulationController();
         try {
             simControl.init(configuration);
             simControl.run();

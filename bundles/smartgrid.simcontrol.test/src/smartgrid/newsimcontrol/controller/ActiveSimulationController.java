@@ -1,7 +1,4 @@
-package smartgrid.newsimcontrol;
-
-
-
+package smartgrid.newsimcontrol.controller;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -14,9 +11,10 @@ import smartgrid.log4j.LoggingInitializer;
 import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
 import smartgrid.simcontrol.test.baselib.Constants;
 
-public final class SimulationController {
+// TODO add JavaDoc Description
+public final class ActiveSimulationController {
 
-    private static final Logger LOG = Logger.getLogger(SimulationController.class);
+    private static final Logger LOG = Logger.getLogger(ActiveSimulationController.class);
 
     private ReactiveSimulationController reactiveSimControl;
     //private IKritisSimulationWrapper kritisSimulation;
@@ -24,10 +22,9 @@ public final class SimulationController {
     private int maxTimeSteps;
 
     public void run() throws InterruptedException {
-        PowerAssigned powerAssigned;
         
-		try {
-			powerAssigned = BlockingDataExchanger.getPowerAssigned();
+    	PowerAssigned powerAssigned;
+        powerAssigned = BlockingDataExchanger.getPowerAssigned();
 
 			SmartComponentStateContainer scsc = null;
 			
@@ -37,17 +34,11 @@ public final class SimulationController {
 	        }
 	        
 	        BlockingDataExchanger.storeSCSC(scsc);
-	        
 	        PowerSpecContainer bufferedPowerSpecs = BlockingDataExchanger.getBufferedPowerSpecs();
 	        PowerSpecContainer modifiedPowerSpecs = reactiveSimControl.modifyPowerSpecContainer(bufferedPowerSpecs);
 	        BlockingDataExchanger.storeModifiedPowerSpecs(modifiedPowerSpecs);
-	        
+	
 	        LOG.info("Coupled simulation terminated internally");
-	        
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     }
 
     public void init(final ILaunchConfiguration launchConfig) throws CoreException, InterruptedException {

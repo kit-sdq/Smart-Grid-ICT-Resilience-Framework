@@ -1,5 +1,6 @@
 package smartgrid.newsimcontrol.rmi;
 
+import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -27,9 +28,9 @@ import couplingToICT.initializer.AttackerSimulationsTypes;
 import couplingToICT.initializer.HackingStyle;
 import couplingToICT.initializer.InitializationMapKeys;
 import couplingToICT.initializer.PowerSpecsModificationTypes;
-import smartgrid.newsimcontrol.ReactiveSimulationController;
-import smartgrid.newsimcontrol.SimcontroLaunchConfigurationDelegate;
-import smartgrid.newsimcontrol.SimulationController;
+import smartgrid.newsimcontrol.SimcontrolLaunchConfigurationDelegate;
+import smartgrid.newsimcontrol.controller.ActiveSimulationController;
+import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
 
 /**
  * This class acts as RMI Server for the KRITIS simulation of the IKET. The
@@ -38,8 +39,8 @@ import smartgrid.newsimcontrol.SimulationController;
  * coupling. The server delegates to the simulation coupling either in active or
  * reactive mode.
  * 
- * In <b>active mode</b>, the {@link SimulationController} has to be started via
- * the {@link SimcontroLaunchConfigurationDelegate}. The simulation coupling and
+ * In <b>active mode</b>, the {@link ActiveSimulationController} has to be started via
+ * the {@link SimcontrolLaunchConfigurationDelegate}. The simulation coupling and
  * the KRITIS simulation will synchronize and exchange data using the
  * {@link BlockingDataExchanger}.
  * 
@@ -52,28 +53,16 @@ import smartgrid.newsimcontrol.SimulationController;
  */
 public class RmiServer implements ISimulationController {
 
-	private static final Logger LOG = Logger.getLogger(RmiServer.class);
-
-	private static final String ERROR_SERVER_NOT_INITIALIZED = "The SimControl RMI server is not initialized.";
-	private static final String ERROR_SERVER_ALREADY_INITIALIZED = "The SimControl RMI server is already initialized.";
-
-	private static RmiServer instance;
-
-	private ReactiveSimulationController reactiveSimControl;
-
-	/**
-	 * The registry is used to bind and unbind the server (on start and shutdown).
-	 */
-	private Registry registry;
-
-	/**
-	 * This state of the server enforces a meaningful call sequence protocol.
-	 */
-	private RmiServerState state = RmiServerState.NOT_INIT;
-
 	private enum RmiServerState {
 		NOT_INIT, ACTIVE, REACTIVE;
 	}
+
+	private static final Logger LOG = Logger.getLogger(RmiServer.class);
+	private static final String ERROR_SERVER_NOT_INITIALIZED = "The SimControl RMI server is not initialized.";
+
+	private static final String ERROR_SERVER_ALREADY_INITIALIZED = "The SimControl RMI server is already initialized.";
+
+	private static RmiServer instance;
 
 	public static synchronized void ensureRunning() {
 		if (instance == null) {
@@ -96,55 +85,74 @@ public class RmiServer implements ISimulationController {
 		}
 	}
 
-	/**
-	 * Binds the server to port 1099
-	 * ({@link java.rmi.registry.Registry.REGISTRY_PORT}).
-	 */
-	private void startServer() {
-		try {
-			ISimulationController stub = (ISimulationController) UnicastRemoteObject.exportObject(this, 0);
-			registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-			registry.bind("ISimulationController", stub);
-			LOG.info("RMI server running");
-		} catch (Exception e) {
-			LOG.error("Could not start RMI server", e);
-		}
-	}
+	private ReactiveSimulationController reactiveSimControl;
 
 	/**
-	 * Properly unbinds the server from the port.
+	 * The registry is used to bind and unbind the server (on start and shutdown).
 	 */
-	private void shutDownServer() {
-		if (registry != null) {
+	private Registry registry;
+
+	/**
+	 * This state of the server enforces a meaningful call sequence protocol.
+	 */
+	private RmiServerState state = RmiServerState.NOT_INIT;
+
+	@Override
+	public SmartComponentStateContainer getDysfunctSmartComponents() throws RemoteException, SimcontrolException {
+		LOG.info("Dysfunctional smart components will be returned");
+
+		if (state == RmiServerState.ACTIVE) {
 			try {
-				registry.unbind("ISimulationController");
-				LOG.info("SimControl RMI server shutdown successful");
-			} catch (RemoteException e) {
-				LOG.error("SimControl RMI server shutdown failed", e);
-			} catch (NotBoundException e) {
-				LOG.warn("SimControl RMI server shutdown failed: port was unbound. This is unexpected but harmless.",
-						e);
+				return BlockingDataExchanger.getSCSC();
+			} catch (InterruptedException e) {
+				throw new SimcontrolException(
+						"Execution was manually interrupted while waiting for the smart component states.", e);
 			}
-			registry = null;
+		} else if (state == RmiServerState.REACTIVE) {
+			return reactiveSimControl.getDysfunctionalcomponents();
+		} else {
+			LOG.error(ERROR_SERVER_NOT_INITIALIZED);
+			throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
 		}
+
 	}
 
 	@Override
-	public void terminate() throws SimcontrolException {
-		LOG.info("shutDown was called remotely");
-		if (state == RmiServerState.NOT_INIT) {
-			LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
+	public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned SMPowerAssigned)
+			throws RemoteException, SimcontrolException, InterruptedException {
+		LOG.info("run was called remotely");
+		PowerSpecContainer powerSpecContainer = null;
+
+		if (state == RmiServerState.ACTIVE) {
+			try {
+				// buffer pA und pS
+				BlockingDataExchanger.bufferPSAndPA(powerSpecs, SMPowerAssigned);
+
+				// get Modified Power Demand
+				powerSpecContainer = BlockingDataExchanger.getModifiedPowerSpecs();
+
+			} catch (InterruptedException e) {
+				throw e;
+			} catch (SimcontrolException e) {
+				resetState();
+				BlockingDataExchanger.freeAll();
+				throw new SimcontrolException(
+						"There was an exception in SimControl. The RMI server has now been reset to 'uninitialized'.",
+						e);
+			}
+		} else if (state == RmiServerState.REACTIVE) {
+			// run
+			reactiveSimControl.run(SMPowerAssigned);
+
+			// Modify demand
+			powerSpecContainer = powerSpecs;
+			powerSpecContainer = reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
+		} else {
+			LOG.error(ERROR_SERVER_NOT_INITIALIZED);
 			throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
 		}
-		// shut down if reactive
-		else if (state == RmiServerState.REACTIVE) {
-			reactiveSimControl.shutDown();
-		}
-		// To-do here, the active simcontrol could be shutDown if there was a pointer
-		// (rendezvous
-		// required)
 
-		state = RmiServerState.NOT_INIT;
+		return powerSpecContainer;
 	}
 
 	@Override
@@ -156,55 +164,8 @@ public class RmiServer implements ISimulationController {
 		}
 		state = RmiServerState.ACTIVE;
 
-		// TODO HACK until active mode works
-		try {
-			temp_initReactive();
-		} catch (SimcontrolInitializationException e) {
-			e.printStackTrace();
-		}
+		// TODO fix active mode
 
-	}
-
-	// TODO: For Testing
-	private void testInitReactiveWithMap() throws RemoteException {
-		Map<InitializationMapKeys, String> initMap = new HashMap<InitializationMapKeys, String>();
-		initMap.put(InitializationMapKeys.INPUT_PATH_KEY, "");
-		initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, "/home/majuwa/git/Smart-Grid-ICT-Resilience-Framework/examples/smartgrid.model.examples");
-		initMap.put(InitializationMapKeys.TOPO_PATH_KEY, "");
-		initMap.put(InitializationMapKeys.TOPO_GENERATION_KEY, Boolean.toString(true));
-		initMap.put(InitializationMapKeys.IGNORE_LOC_CON_KEY, Boolean.toString(false));
-		initMap.put(InitializationMapKeys.HACKING_SPEED_KEY, Integer.toString(1));
-		initMap.put(InitializationMapKeys.TIME_STEPS_KEY, Integer.toString(1));
-		initMap.put(InitializationMapKeys.ROOT_NODE_ID_KEY, "");
-		initMap.put(InitializationMapKeys.HACKING_STYLE_KEY, null);
-		initMap.put(InitializationMapKeys.ATTACKER_SIMULATION_KEY,
-				AttackerSimulationsTypes.NO_ATTACK_SIMULATION.toString());
-		initMap.put(InitializationMapKeys.POWER_MODIFY_KEY, PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.toString());
-
-		try {
-			initReactive(initMap);
-		} catch (SimcontrolInitializationException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// TODO HACK until active mode works
-	private void temp_initReactive() throws SimcontrolInitializationException {
-		LOG.info("temp init reactive called remotely");
-		state = RmiServerState.REACTIVE;
-		reactiveSimControl = new ReactiveSimulationController();
-
-		String outputPath = "/home/majuwa/git/Smart-Grid-ICT-Resilience-Framework/examples/smartgrid.model.examples";
-		reactiveSimControl.init(outputPath);
-
-		try {
-			reactiveSimControl.loadDefaultAnalyses();
-		} catch (CoreException e) {
-			throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
-					e);
-		}
-
-		LOG.info("temp init successfuly done");
 	}
 
 	@Override
@@ -220,21 +181,21 @@ public class RmiServer implements ISimulationController {
 		reactiveSimControl = new ReactiveSimulationController();
 
 		// Values in the map
-		String outputPath = "";
+		String outputPath = null;
 		String topoPath = "";
 		String inputStatePath = "";
 		String ignoreLogicalConnections = "false";
 		String attackerType = AttackerSimulationsTypes.NO_ATTACK_SIMULATION.getDescription();
 		String hackingStype = null;
 		int HackingSpeed = 1;
-		Boolean generateTopo = false;
+		boolean generateTopo = false;
 		int timeSteps = 1;
 		String powerSpecsModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.getDescription();
-		String wurzelNode = "";
+		String rootNode = "";
 		String impactAnalysis = "Graph Analyzer Impact Analysis";
 		String timeProgresser = "No Operation";
 
-		// createLaunhConfig
+		// createLaunchConfig
 		final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		final ILaunchConfigurationType type = manager
 				.getLaunchConfigurationType("smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType");
@@ -244,7 +205,7 @@ public class RmiServer implements ISimulationController {
 		} catch (CoreException e1) {
 			throw new SimcontrolInitializationException("Creating eclipse launcher failed", e1);
 		}
-
+		// TODO check if minimal necessary set is in Map
 		// fill values in the working copy
 		for (InitializationMapKeys key : initMap.keySet()) {
 			if (key.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
@@ -271,12 +232,15 @@ public class RmiServer implements ISimulationController {
 			} else if (key.equals(InitializationMapKeys.POWER_MODIFY_KEY)) {
 				powerSpecsModificationType = PowerSpecsModificationTypes.valueOf(initMap.get(key)).getDescription();
 			} else if (key.equals(InitializationMapKeys.ROOT_NODE_ID_KEY)) {
-				wurzelNode = initMap.get(key);
+				rootNode = initMap.get(key);
 			}
 		}
-
+		if (outputPath == null) {
+			outputPath = System.getProperty("java.io.tmpdir");
+			outputPath += File.separator + "smargrid" + System.currentTimeMillis();
+		}
 		reactiveSimControl.init(outputPath);
-		if (Boolean.valueOf(generateTopo) == false) {
+		if (generateTopo == false) {
 			reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
 		}
 
@@ -292,15 +256,12 @@ public class RmiServer implements ISimulationController {
 		workingCopy.setAttribute(InitializationMapKeys.TOPO_GENERATION_KEY.getDescription(), generateTopo);
 		workingCopy.setAttribute(InitializationMapKeys.TIME_STEPS_KEY.getDescription(), timeSteps);
 		workingCopy.setAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), powerSpecsModificationType);
-		workingCopy.setAttribute(InitializationMapKeys.ROOT_NODE_ID_KEY.getDescription(), wurzelNode);
+		workingCopy.setAttribute(InitializationMapKeys.ROOT_NODE_ID_KEY.getDescription(), rootNode);
 		workingCopy.setAttribute(InitializationMapKeys.IMPACT_ANALYSIS_SIMULATION_KEY.getDescription(), impactAnalysis);
 		workingCopy.setAttribute(InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY.getDescription(), timeProgresser);
 		try {
 			// create launch configuration
 			final ILaunchConfiguration config = workingCopy.doSave();
-
-			Map<String, Object> map = config.getAttributes();
-
 			reactiveSimControl.loadCustomUserAnalysis(config);
 		} catch (InterruptedException e) {
 			throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
@@ -327,25 +288,12 @@ public class RmiServer implements ISimulationController {
 		initMap.put(InitializationMapKeys.ATTACKER_SIMULATION_KEY,
 				AttackerSimulationsTypes.NO_ATTACK_SIMULATION.toString());
 		initMap.put(InitializationMapKeys.POWER_MODIFY_KEY, PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.toString());
-
 		initReactive(initMap);
 
 	}
 
 	@Override
 	public void initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
-//    	String path = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/outputTopoContainer";
-//        try {
-//			ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
-//			objectOutputStream.writeObject(topo);
-//			objectOutputStream.close();
-//		} catch (FileNotFoundException e1) {
-//			e1.printStackTrace();
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-//        
-
 		if (topo == null) {
 			LOG.warn("Topo Container is null");
 		} else {
@@ -363,75 +311,56 @@ public class RmiServer implements ISimulationController {
 
 	}
 
-	@Override
-	public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned SMPowerAssigned)
-			throws RemoteException, SimcontrolException, InterruptedException {
-		LOG.info("run was called remotely");
-
-//		String path = "/Users/mazenebada/Hiwi/SmartgridWorkspace/smartgrid.model.examples/outputPowerAssigned";
-//        try {
-//			ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
-//			objectOutputStream.writeObject(powerSpecs);
-//			objectOutputStream.close();
-//		} catch (FileNotFoundException e1) {
-//			e1.printStackTrace();
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-		PowerSpecContainer powerSpecContainer = null;
-
-		if (state == RmiServerState.ACTIVE) {
+	/**
+	 * Properly unbinds the server from the port.
+	 */
+	private void shutDownServer() {
+		if (registry != null) {
 			try {
-				// buffer pA und pS
-				BlockingDataExchanger.bufferPSAndPA(powerSpecs, SMPowerAssigned);
-
-				// get Modified Power Demand
-				powerSpecContainer = BlockingDataExchanger.getModifiedPowerSpecs();
-
-			} catch (InterruptedException e) {
-				throw e;
-			} catch (Throwable e) {
-				resetState();
-				BlockingDataExchanger.freeAll();
-				LOG.info(
-						"The stored exception that originally occured in SimControl was passed to the remote KRITIS simulation. The RMI server and data exchange are now reset.");
-				throw new SimcontrolException(
-						"There was an exception in SimControl. The RMI server has now been reset to 'uninitialized'.",
+				registry.unbind("ISimulationController");
+				LOG.info("SimControl RMI server shutdown successful");
+			} catch (RemoteException e) {
+				LOG.error("SimControl RMI server shutdown failed", e);
+			} catch (NotBoundException e) {
+				LOG.warn("SimControl RMI server shutdown failed: port was unbound. This is unexpected but harmless.",
 						e);
 			}
-		} else if (state == RmiServerState.REACTIVE) {
-			// run
-			reactiveSimControl.run(SMPowerAssigned);
-
-			// Modify demand
-			powerSpecContainer = powerSpecs;
-			// powerSpecContainer = reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
-		} else {
-			LOG.error(ERROR_SERVER_NOT_INITIALIZED);
-			throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
+			registry = null;
 		}
+	}
 
-		return powerSpecContainer;
+	/**
+	 * Binds the server to port 1099
+	 * ({@link java.rmi.registry.Registry.REGISTRY_PORT}).
+	 */
+	private void startServer() {
+		try {
+			// System.setProperty("java.rmi.server.hostname","192.168.178.45");
+			ISimulationController stub = (ISimulationController) UnicastRemoteObject.exportObject(this, 0);
+			registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+			registry.bind("ISimulationController", stub);
+			LOG.info("RMI server running");
+		} catch (Exception e) {
+			LOG.error("Could not start RMI server", e);
+		}
 	}
 
 	@Override
-	public SmartComponentStateContainer getDysfunctSmartComponents() throws RemoteException, SimcontrolException {
-		LOG.info("Dysfunctional smart components will be returned");
-
-		if (state == RmiServerState.ACTIVE) {
-			try {
-				return BlockingDataExchanger.getSCSC();
-			} catch (InterruptedException e) {
-				throw new SimcontrolException(
-						"Execution was manually interrupted while waiting for the smart component states.", e);
-			}
-		} else if (state == RmiServerState.REACTIVE) {
-			return reactiveSimControl.getDysfunctionalcomponents();
-		} else {
-			LOG.error(ERROR_SERVER_NOT_INITIALIZED);
+	public void terminate() throws SimcontrolException {
+		LOG.info("shutDown was called remotely");
+		if (state == RmiServerState.NOT_INIT) {
+			LOG.warn(ERROR_SERVER_NOT_INITIALIZED);
 			throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
 		}
+		// shut down if reactive
+		else if (state == RmiServerState.REACTIVE) {
+			reactiveSimControl.shutDown();
+		}
+		// To-do here, the active simcontrol could be shutDown if there was a pointer
+		// (rendezvous
+		// required)
 
+		state = RmiServerState.NOT_INIT;
 	}
 
 }

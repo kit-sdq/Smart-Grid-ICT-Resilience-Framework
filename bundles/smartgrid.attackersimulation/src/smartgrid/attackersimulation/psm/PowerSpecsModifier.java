@@ -1,11 +1,11 @@
 package smartgrid.attackersimulation.psm;
 
-import java.util.HashSet;
+import java.util.Set;
 
 import couplingToICT.PowerSpecContainer;
 
 public interface PowerSpecsModifier {
     
-    public PowerSpecContainer modifyPowerSpecs(PowerSpecContainer powerSpecContainer, HashSet<String> hackedSmartMeters);
+    public PowerSpecContainer modifyPowerSpecs(PowerSpecContainer powerSpecContainer, Set<String> hackedSmartMeters);
     
 }

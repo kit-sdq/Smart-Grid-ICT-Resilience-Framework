@@ -12,7 +12,7 @@
    <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="smartgrid.newsimcontrol.SimcontroLaunchConfigurationDelegate"
+            delegate="smartgrid.newsimcontrol.SimcontrolLaunchConfigurationDelegate"
             delegateDescription="Delegate to start the Simcontroller"
             delegateName="SimcontrolDelegate"
             id="smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType"

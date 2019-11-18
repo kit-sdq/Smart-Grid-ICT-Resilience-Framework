@@ -6,5 +6,8 @@ Bundle-Version: 1.0.0.qualifier
 Export-Package: smartgrid.newsimcontrol.tests.junit
 Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.junit,
- couplingSG;bundle-version="1.0.0"
+ couplingSG;bundle-version="1.0.0",
+ org.junit,
+ org.junit.jupiter.api,
+ smartgrid.newsimcontrol
 Bundle-RequiredExecutionEnvironment: JavaSE-11

@@ -4,16 +4,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import couplingToICT.PowerSpec;
 import couplingToICT.PowerSpecContainer;
 
 public class DoublePSM implements PowerSpecsModifier {
 
-	HashSet<String> hackedSmartMeters;
+	private Set<String> hackedSmartMeters;
 	
 	@Override
-    public PowerSpecContainer modifyPowerSpecs(PowerSpecContainer powerSpecContainer, HashSet<String> hackedSmartMeters) {
+    public PowerSpecContainer modifyPowerSpecs(PowerSpecContainer powerSpecContainer, Set<String> hackedSmartMeters) {
 
 		this.hackedSmartMeters = hackedSmartMeters;
 		

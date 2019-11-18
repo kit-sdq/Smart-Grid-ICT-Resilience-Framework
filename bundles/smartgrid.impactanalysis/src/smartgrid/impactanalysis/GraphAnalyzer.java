@@ -142,6 +142,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
      * @param ignoreLogicalConnections
      *            whether to ignore logical connections or not
      */
+    @Deprecated
     public void initForTesting(final boolean ignoreLogicalConnections) {
         this.internalMaxID = 0;
         this.powerStates = new HashMap<>();
