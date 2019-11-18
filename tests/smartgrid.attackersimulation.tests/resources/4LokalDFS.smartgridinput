@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#245702078"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#1393836843"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="4LokalDFS.smartgridtopo#333265609"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#119482048"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#435082100"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4LokalDFS.smartgridtopo#1422628217"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#1565650058"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4LokalDFS.smartgridtopo#1216596301"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#1221865866"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4LokalDFS.smartgridtopo#38401727"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#449699814"/>
+  </EntityStates>
+  <EntityStates IsDestroyed="true">
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#54090760"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#1229758823"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#2096886186"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4LokalDFS.smartgridtopo#1650049458"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4LokalDFS.smartgridtopo#1711321592"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4LokalDFS.smartgridtopo#1904711815"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="4LokalDFS.smartgridtopo#42759225"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4LokalDFS.smartgridtopo#323710943"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4LokalDFS.smartgridtopo#1690281041"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4LokalDFS.smartgridtopo#1077467958"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4LokalDFS.smartgridtopo#267750809"/>
+  </PowerStates>
+  <PowerStates PowerOutage="true">
+    <Owner href="4LokalDFS.smartgridtopo#2104146686"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4LokalDFS.smartgridtopo#1423513723"/>
+  </PowerStates>
+  <Scenario href="4LokalDFS.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

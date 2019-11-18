@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3LokalDFS.smartgridtopo#1300266070"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3LokalDFS.smartgridtopo#1114290134"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3LokalDFS.smartgridtopo#1347393527"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3LokalDFS.smartgridtopo#935307198"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3LokalDFS.smartgridtopo#276215558"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3LokalDFS.smartgridtopo#1047253197"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="3LokalDFS.smartgridtopo#1889718248"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3LokalDFS.smartgridtopo#1576793739"/>
+  </PowerStates>
+  <Scenario href="3LokalDFS.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>
