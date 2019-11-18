@@ -50,372 +50,372 @@ import smartgridtopo.SmartMeter;
 
 public final class ReactiveSimulationController {
 
-    private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
+	private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
+	private IImpactAnalysis impactAnalsis;
+	private IAttackerSimulation attackerSimulation;
+	private ITimeProgressor timeProgressor;
 
-    private IImpactAnalysis impactAnalsis;
-    private IAttackerSimulation attackerSimulation;
-    private ITimeProgressor timeProgressor;
+	private String workingDirPath;
+	private SmartGridTopology topo;
+	private ScenarioState initialState;
 
-    private String workingDirPath;
-    private SmartGridTopology topo;
-    private ScenarioState initialState;
+	private FileAppender fileAppender;
 
-    private FileAppender fileAppender;
+	// Simulation State
+	private int timeStep;
+	// private ScenarioState impactInputOld;
+	private ScenarioState impactInput;
 
-    // Simulation State
-    private int timeStep;
-    //private ScenarioState impactInputOld;
-    private ScenarioState impactInput;
-    
-    private ScenarioResult impactResult;
-    
-    private PowerSpecsModificationTypes powerDemandModificationType;
+	private ScenarioResult impactResult;
 
-    private PowerSpecContainer powerSpecContainer;
-    
-    private SmartComponentStateContainer dysfunctionalcomponents;
+	private PowerSpecsModificationTypes powerDemandModificationType;
 
+	private PowerSpecContainer powerSpecContainer;
 
-    public SmartComponentStateContainer getDysfunctionalcomponents() {
-        return dysfunctionalcomponents;
-    }
+	private SmartComponentStateContainer dysfunctionalcomponents;
 
-    public void setDysfunctionalcomponents(SmartComponentStateContainer dysfunctionalcomponents) {
-        this.dysfunctionalcomponents = dysfunctionalcomponents;
-    }
+	public SmartComponentStateContainer getDysfunctionalcomponents() {
+		return dysfunctionalcomponents;
+	}
 
-    public ReactiveSimulationController() {
-        timeStep = 0;
-    }
+	public void setDysfunctionalcomponents(SmartComponentStateContainer dysfunctionalcomponents) {
+		this.dysfunctionalcomponents = dysfunctionalcomponents;
+	}
 
-    public PowerSpecContainer getPowerSpecContainer() {
-        return powerSpecContainer;
-    }
+	public ReactiveSimulationController() {
+		timeStep = 0;
+	}
 
-    public void setPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
-        this.powerSpecContainer = powerSpecContainer;
-    }
-    
-    public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
-        
-    	//TODO:Später wird für PowerDemand und PowerInfeed getrennte Strategien benutzt
-    	//TODO:Später wird das abhängig von powerDemandModificationType
-    	HashSet<String> hackedSmartMeters = getHackedSmartMeters();
-    	
-        //modify the powerSpecs
-        PowerSpecsModifier pDemandModifier = null;
-        if (powerDemandModificationType.equals(PowerSpecsModificationTypes.MAX_MODIFIER)) {
-            pDemandModifier = new MaxPSM();
-        } else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.ZERO_MODIFIER)) {
-            pDemandModifier = new ZeroPSM();
-        } else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.DOUBLE_MODIFIER)) {
-            pDemandModifier = new DoublePSM();
-        } else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.NO_CHANGE_MODIFIER)) {
-            return powerSpecContainer;
-        }
-        
-        this.powerSpecContainer = pDemandModifier.modifyPowerSpecs(powerSpecContainer, hackedSmartMeters);
-        
-        //give back the powerdemand
-        return this.powerSpecContainer;
-    }
-    
-    private HashSet<String> getHackedSmartMeters() {
+	public PowerSpecContainer getPowerSpecContainer() {
+		return powerSpecContainer;
+	}
+
+	public void setPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
+		this.powerSpecContainer = powerSpecContainer;
+	}
+
+	public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
+
+		// TODO:Später wird für PowerDemand und PowerInfeed getrennte Strategien benutzt
+		// TODO:Später wird das abhängig von powerDemandModificationType
+		HashSet<String> hackedSmartMeters = getHackedSmartMeters();
+
+		// modify the powerSpecs
+		PowerSpecsModifier pDemandModifier = null;
+		if (powerDemandModificationType.equals(PowerSpecsModificationTypes.MAX_MODIFIER)) {
+			pDemandModifier = new MaxPSM();
+		} else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.ZERO_MODIFIER)) {
+			pDemandModifier = new ZeroPSM();
+		} else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.DOUBLE_MODIFIER)) {
+			pDemandModifier = new DoublePSM();
+		} else if (powerDemandModificationType.equals(PowerSpecsModificationTypes.NO_CHANGE_MODIFIER)) {
+			return powerSpecContainer;
+		}
+
+		this.powerSpecContainer = pDemandModifier.modifyPowerSpecs(powerSpecContainer, hackedSmartMeters);
+
+		// give back the powerdemand
+		return this.powerSpecContainer;
+	}
+
+	private HashSet<String> getHackedSmartMeters() {
 
 		HashSet<String> hackedSmartMeters = new HashSet<String>();
 		if (impactResult != null) {
 			for (EntityState state : impactResult.getStates()) {
-				 if (state.getOwner() instanceof SmartMeter && state instanceof On
-						 && ((On)state).isIsHacked()) {
-					 hackedSmartMeters.add(state.getOwner().getId());
-				 }
+				if (state.getOwner() instanceof SmartMeter && state instanceof On && ((On) state).isIsHacked()) {
+					hackedSmartMeters.add(state.getOwner().getId());
+				}
 			}
-		} 
-		
+		}
+
 		return hackedSmartMeters;
 	}
 
 	public SmartComponentStateContainer run(PowerAssigned power) {
 
-		Map<String,Map<String, Double>> powerSupply = null;;
-        
-        LOG.info("Starting time step " + timeStep);
+		Map<String, Map<String, Double>> powerSupply = null;
+		;
 
-        topo.setId("testID");
-        LOG.info(topo.getId());
-        
-        // Generates Path with default System separators
-        final String timeStepPath = new File(workingDirPath +File.separator +  "Zeitschritt " + timeStep).getPath();
- 
-        // get power supply
-        if (power != null) {
-	        LinkedHashMap<String, HashMap<String, Double>> powerAssignedMap = power.getPowerAssigned();
-	        powerSupply = new LinkedHashMap< String, Map<String, Double>>(powerAssignedMap);
-        }
+		LOG.info("Starting time step " + timeStep);
 
-        // copy the input
-        //impactInputOld = EcoreUtil.copy(impactInput);
+		topo.setId("testID");
+		LOG.info(topo.getId());
 
-        LOG.info("Starting Impact Analysis");
-        ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
-        
-        LOG.info("Converting input for impact analysis (With power supply)");
-        // convert input for impact analysis
-        updateImactAnalysisInput(impactInput, impactResult, powerSupply);
+		// Generates Path with default System separators
+		final String timeStepPath = new File(workingDirPath + File.separator + "Zeitschritt " + timeStep).getPath();
 
-        // Save input to file
-        final String inputFile = new File(timeStepPath + File.separator+"PowerLoadResult.smartgridinput").getPath();
-        FileSystemHelper.saveToFileSystem(impactInput, inputFile);
+		// get power supply
+		if (power != null) {
+			LinkedHashMap<String, HashMap<String, Double>> powerAssignedMap = power.getPowerAssigned();
+			powerSupply = new LinkedHashMap<String, Map<String, Double>>(powerAssignedMap);
+		}
 
-        LOG.info("Starting Attacker Simulation");
-        impactResult = attackerSimulation.run(topo, impactResult);
-        this.impactResult = impactResult;
-        
-        // save attack result to file
-        final String attackResultFile = new File(timeStepPath + File.separator+"AttackerSimulationResult.smartgridoutput").getPath();
-        FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
-        
-        LOG.info("Collecting dysfunctionalComponents");
-        //get smartmeters
-        dysfunctionalcomponents = generateSCSC(impactResult);
-        // Save Result
-        
-        final String resultFile = new File(timeStepPath + File.separator+"ImpactResult.smartgridoutput").getPath();
-        FileSystemHelper.saveToFileSystem(impactResult, resultFile);
+		// copy the input
+		// impactInputOld = EcoreUtil.copy(impactInput);
 
-        //generate report
-        final File resultReportPath = new File(timeStepPath + File.separator+"ResultReport.csv");
-        ReportGenerator.saveScenarioResult(resultReportPath, impactResult);
+		LOG.info("Starting Impact Analysis");
+		ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
 
-        // modify the scenario between time steps
-        timeProgressor.progress();
-        timeStep++;
+		LOG.info("Converting input for impact analysis (With power supply)");
+		// convert input for impact analysis
+		updateImactAnalysisInput(impactInput, impactResult, powerSupply);
 
-        LOG.info("Finished time step " + timeStep);
-        return dysfunctionalcomponents;
-    }
+		// Save input to file
+		final String inputFile = new File(timeStepPath + File.separator + "PowerLoadResult.smartgridinput").getPath();
+		FileSystemHelper.saveToFileSystem(impactInput, inputFile);
 
-    private SmartComponentStateContainer generateSCSC(ScenarioResult impactResult) {
-        SmartComponentStateContainer StateContainer;
-        ArrayList<String> _smartMeterStates = new ArrayList<String>();
-        ArrayList<String> _iedStates = new ArrayList<String>();
-        
-        for (EntityState state : impactResult.getStates()) {
-            if (state.getOwner() instanceof SmartMeter && state instanceof Offline) {
-                _smartMeterStates.add(state.getOwner().getId());
-            }
-        }
-        StateContainer =  new SmartComponentStateContainer(_smartMeterStates, _iedStates);
-        return StateContainer;
-    }
-    
-    
-    
- 
+		LOG.info("Starting Attacker Simulation");
+		impactResult = attackerSimulation.run(topo, impactResult);
+		this.impactResult = impactResult;
 
-    public void shutDown() {
-        // remove file appender of this run
-        Logger.getRootLogger().removeAppender(fileAppender);
-        fileAppender.close();
-    }
+		// save attack result to file
+		final String attackResultFile = new File(
+				timeStepPath + File.separator + "AttackerSimulationResult.smartgridoutput").getPath();
+		FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
 
-    
-    
-    /**
-     * @param impactInput
-     *            The outdated ImpactAnalysis input data that should be updated
-     * @param impactResult
-     *            The result from the last iteration. This also contains the hacked states, which
-     *            have to be transfered to impactInput
-     * @param powerSupply
-     *            The output of the PowerLoad analysis, which has to be interpreted and transfered
-     *            to impactInput
-     */
-    private static void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult, Map<String, Map<String, Double>> powerSupply) {
+		LOG.info("Collecting dysfunctionalComponents");
+		// get smartmeters
+		dysfunctionalcomponents = generateSCSC(impactResult);
+		// Save Result
 
-        // transfer hacked state into next input
-        for (final EntityState state : impactResult.getStates()) {
-            final boolean hackedState = state instanceof On && ((On) state).isIsHacked();
-            final NetworkEntity owner = state.getOwner();
-            for (final smartgridinput.EntityState inputEntityState : impactInput.getEntityStates()) {
-                if (inputEntityState.getOwner().equals(owner)) {
-                    inputEntityState.setIsHacked(hackedState);
-                    break;
-                }
-            }
-        }
+		final String resultFile = new File(timeStepPath + File.separator + "ImpactResult.smartgridoutput").getPath();
+		FileSystemHelper.saveToFileSystem(impactResult, resultFile);
 
-        if (powerSupply == null) {
-            LOG.error("Power Load Simulation returned null. Power supply remains unchanged.");
-            return;
-        }
+		// generate report
+		final File resultReportPath = new File(timeStepPath + File.separator + "ResultReport.csv");
+		ReportGenerator.saveScenarioResult(resultReportPath, impactResult);
 
-        // transfer power supply state into next input
-        for (final PowerState inputPowerState : impactInput.getPowerStates()) {
-            String prosumerId = getProsumerIdOfInputPowerState(inputPowerState);
+		// modify the scenario between time steps
+		timeProgressor.progress();
+		timeStep++;
 
-            boolean foundSupply = false;
+		LOG.info("Finished time step " + timeStep);
+		return dysfunctionalcomponents;
+	}
 
-            // search this prosumer in the node map
-            for (final Map<String, Double> subNodePowerSupply : powerSupply.values()) {
-                Double supply = subNodePowerSupply.get(prosumerId);
-                if (supply != null) {
-                    inputPowerState.setPowerOutage(isOutage(supply));
-                    foundSupply = true;
-                    break;
-                }
-            }
+	private SmartComponentStateContainer generateSCSC(ScenarioResult impactResult) {
+		SmartComponentStateContainer StateContainer;
+		ArrayList<String> _smartMeterStates = new ArrayList<String>();
+		ArrayList<String> _iedStates = new ArrayList<String>();
 
-            if (!foundSupply) {
-                LOG.error("There is no power supply for CI " + prosumerId + ". Power supply remains unchanged.");
-            }
-        }
-    }
+		for (EntityState state : impactResult.getStates()) {
+			if (state.getOwner() instanceof SmartMeter && state instanceof Offline) {
+				_smartMeterStates.add(state.getOwner().getId());
+			}
+		}
+		StateContainer = new SmartComponentStateContainer(_smartMeterStates, _iedStates);
+		return StateContainer;
+	}
 
-    private static String getProsumerIdOfInputPowerState(final PowerState inputPowerState) {
-        String id = inputPowerState.getOwner().getId();
-        if (id.endsWith("_PGN")) {
-            id = id.substring(0, id.length() - 4);
-        }
-        return id;
-    }
+	public void shutDown() {
+		// remove file appender of this run
+		Logger.getRootLogger().removeAppender(fileAppender);
+		fileAppender.close();
+	}
 
-    public static boolean isOutage(double supply) {
-        // TODO is this really a power outage?
-        return supply == 0.0d;
-    }
+	/**
+	 * @param impactInput  The outdated ImpactAnalysis input data that should be
+	 *                     updated
+	 * @param impactResult The result from the last iteration. This also contains
+	 *                     the hacked states, which have to be transfered to
+	 *                     impactInput
+	 * @param powerSupply  The output of the PowerLoad analysis, which has to be
+	 *                     interpreted and transfered to impactInput
+	 */
+	private static void updateImactAnalysisInput(final ScenarioState impactInput, final ScenarioResult impactResult,
+			Map<String, Map<String, Double>> powerSupply) {
 
-    public void init(String outputPath) {
-        LoggingInitializer.initialize();
+		// transfer hacked state into next input
+		for (final EntityState state : impactResult.getStates()) {
+			final boolean hackedState = state instanceof On && ((On) state).isIsHacked();
+			final NetworkEntity owner = state.getOwner();
+			for (final smartgridinput.EntityState inputEntityState : impactInput.getEntityStates()) {
+				if (inputEntityState.getOwner().equals(owner)) {
+					inputEntityState.setIsHacked(hackedState);
+					break;
+				}
+			}
+		}
 
-        LOG.debug("init reactive launch config");
+		if (powerSupply == null) {
+			LOG.error("Power Load Simulation returned null. Power supply remains unchanged.");
+			return;
+		}
 
-        LOG.info("Output: " + outputPath);
-        workingDirPath = determineWorkingDirPath(outputPath + File.separator +"Analyse");
+		// transfer power supply state into next input
+		for (final PowerState inputPowerState : impactInput.getPowerStates()) {
+			String prosumerId = getProsumerIdOfInputPowerState(inputPowerState);
 
-        // add fileappender for local logs
-        final Logger rootLogger = Logger.getRootLogger();
-        try {
-            Layout layout = ((Appender) rootLogger.getAllAppenders().nextElement()).getLayout();
-            fileAppender = new FileAppender(layout, workingDirPath + File.separator+"log.log");
-            rootLogger.addAppender(fileAppender);
-        } catch (final IOException e) {
-            throw new RuntimeException("Error creating local log appender in the working directory. Most likely there are problems with access rights.");
-        }
+			boolean foundSupply = false;
 
-        // TODO this should be done after models were loaded/generated
-        // TODO read option from launch config
+			// search this prosumer in the node map
+			for (final Map<String, Double> subNodePowerSupply : powerSupply.values()) {
+				Double supply = subNodePowerSupply.get(prosumerId);
+				if (supply != null) {
+					inputPowerState.setPowerOutage(isOutage(supply));
+					foundSupply = true;
+					break;
+				}
+			}
+
+			if (!foundSupply) {
+				LOG.error("There is no power supply for CI " + prosumerId + ". Power supply remains unchanged.");
+			}
+		}
+	}
+
+	private static String getProsumerIdOfInputPowerState(final PowerState inputPowerState) {
+		String id = inputPowerState.getOwner().getId();
+		if (id.endsWith("_PGN")) {
+			id = id.substring(0, id.length() - 4);
+		}
+		return id;
+	}
+
+	public static boolean isOutage(double supply) {
+		// TODO is this really a power outage?
+		return supply == 0.0d;
+	}
+
+	public void init(String outputPath) {
+		LoggingInitializer.initialize();
+
+		LOG.debug("init reactive launch config");
+
+		LOG.info("Output: " + outputPath);
+		workingDirPath = determineWorkingDirPath(outputPath + File.separator + "Analyse");
+
+		// add fileappender for local logs
+		final Logger rootLogger = Logger.getRootLogger();
+		try {
+			Layout layout = ((Appender) rootLogger.getAllAppenders().nextElement()).getLayout();
+			fileAppender = new FileAppender(layout, workingDirPath + File.separator + "log.log");
+			rootLogger.addAppender(fileAppender);
+		} catch (final IOException e) {
+			throw new RuntimeException(
+					"Error creating local log appender in the working directory. Most likely there are problems with access rights.");
+		}
+
+		// TODO this should be done after models were loaded/generated
+		// TODO read option from launch config
 //        //Completion
 //        SmartGridCompletionExecuter completionExecuter = new SmartGridCompletionExecuter();
 //        completionExecuter.executeCompletions(topo);
 //        FileSystemHelper.saveToFileSystem(topo, topoPath + ".completion.smartgridtopo");
-    }
+	}
 
-    public void initModelsFromFiles(String topoPath, String inputStatePath) {
+	public void initModelsFromFiles(String topoPath, String inputStatePath) {
 
-        // load models
-        initialState = ScenarioModelHelper.loadInput(inputStatePath);
-        impactInput = initialState;
-        topo = ScenarioModelHelper.loadScenario(topoPath);
-        LOG.info("Scenario input state: " + inputStatePath);
-        LOG.info("Topology: " + topoPath);
-    }
+		// load models
+		initialState = ScenarioModelHelper.loadInput(inputStatePath);
+		impactInput = initialState;
+		topo = ScenarioModelHelper.loadScenario(topoPath);
+		LOG.info("Scenario input state: " + inputStatePath);
+		LOG.info("Topology: " + topoPath);
+	}
 
-    private String determineWorkingDirPath(String initialPath) {
-        initialPath = removeTrailingSeparator(initialPath);
-        String currentPath = initialPath;
-        int runningNumber = 0;
-        while (new File(currentPath).exists()) {
-            LOG.debug("Exists already: " + currentPath);
+	private String determineWorkingDirPath(String initialPath) {
+		initialPath = removeTrailingSeparator(initialPath);
+		String currentPath = initialPath;
+		int runningNumber = 0;
+		while (new File(currentPath).exists()) {
+			LOG.debug("Exists already: " + currentPath);
 
-            currentPath = initialPath + runningNumber ; // + '\\';
-            runningNumber++;
-        }
-        LOG.info("Working dir is: " + currentPath);
-        return currentPath;
-    }
+			currentPath = initialPath + runningNumber; // + '\\';
+			runningNumber++;
+		}
+		LOG.info("Working dir is: " + currentPath);
+		return currentPath;
+	}
 
-    private String removeTrailingSeparator(String initialPath) {
-        if (initialPath.endsWith(File.pathSeparator)) {
-            return initialPath.substring(0, initialPath.length() - 1);
-        }
-        return initialPath;
-    }
-        
-    public void loadDefaultAnalyses() throws CoreException {
+	private String removeTrailingSeparator(String initialPath) {
+		if (initialPath.endsWith(File.pathSeparator)) {
+			return initialPath.substring(0, initialPath.length() - 1);
+		}
+		return initialPath;
+	}
 
-        final List<IImpactAnalysis> impact = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
-        for (final IImpactAnalysis e : impact) {
+	public void loadDefaultAnalyses() throws CoreException {
 
-            if (e.getName().equals("Graph Analyzer Impact Analysis")) {
-                impactAnalsis = e;
-                ((GraphAnalyzer) impactAnalsis).initForTesting(true);
-            }
-        }
+		final List<IImpactAnalysis> impact = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
+		for (final IImpactAnalysis e : impact) {
 
-        final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
-        for (final IAttackerSimulation e : attack) {
-            if (e.getName().equals("No Attack Simulation")) {
-                attackerSimulation = e;
-            } 
-        }
-        
-        final List<ITimeProgressor> time = TestSimulationExtensionPointHelper.getProgressorExtensions();
-        for (final ITimeProgressor e : time) {
+			if (e.getName().equals("Graph Analyzer Impact Analysis")) {
+				impactAnalsis = e;
+				((GraphAnalyzer) impactAnalsis).initForTesting(true);
+			}
+		}
 
-            if (e.getName().equals("No Operation")) {
-                timeProgressor = e;
-            }
-        }
+		final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
+		for (final IAttackerSimulation e : attack) {
+			if (e.getName().equals("No Attack Simulation")) {
+				attackerSimulation = e;
+			}
+		}
 
-        assert impactAnalsis != null;
-    	LOG.info("Using impact analysis: " + impactAnalsis.getName());
-        assert timeProgressor != null;
-    	LOG.info("Using time progressor: " + timeProgressor.getName());
-        assert attackerSimulation != null;
-    	LOG.info("Using attacker simulation: " + attackerSimulation.getName());
-    	
-    	this.powerDemandModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER;
-    }
+		final List<ITimeProgressor> time = TestSimulationExtensionPointHelper.getProgressorExtensions();
+		for (final ITimeProgressor e : time) {
 
-    public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig) throws CoreException, InterruptedException {
+			if (e.getName().equals("No Operation")) {
+				timeProgressor = e;
+			}
+		}
 
-        attackerSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_KEY,
-                IAttackerSimulation.class);
-        impactAnalsis = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(), Constants.IMPACT_ANALYSIS_SIMULATION_KEY,
-                IImpactAnalysis.class);
-        timeProgressor = TestSimulationExtensionPointHelper.findExtension(launchConfig, TestSimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
-                ITimeProgressor.class);
+		assert impactAnalsis != null;
+		LOG.info("Using impact analysis: " + impactAnalsis.getName());
+		assert timeProgressor != null;
+		LOG.info("Using time progressor: " + timeProgressor.getName());
+		assert attackerSimulation != null;
+		LOG.info("Using attacker simulation: " + attackerSimulation.getName());
 
-        impactAnalsis.init(launchConfig);
-        attackerSimulation.init(launchConfig);
-        timeProgressor.init(launchConfig);
+		this.powerDemandModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER;
+	}
 
-        LOG.info("Using impact analysis: " + impactAnalsis.getName());
-        LOG.info("Using attacker simulation: " + attackerSimulation.getName());
-        LOG.info("Using time progressor: " + timeProgressor.getName());
+	public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig)
+			throws CoreException, InterruptedException {
 
-        if (!launchConfig.getAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), "").equals("")) {
-        	String powerModificationString = launchConfig.getAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(),"");
-        	PowerSpecsModificationTypes powerSpecsModificationType = PowerSpecsModificationTypes.valueOf(powerModificationString);
-        	this.powerDemandModificationType = powerSpecsModificationType;
-        }
-    }
+		attackerSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+				TestSimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_KEY,
+				IAttackerSimulation.class);
+		impactAnalsis = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+				TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(),
+				Constants.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
+		timeProgressor = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+				TestSimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
+				ITimeProgressor.class);
 
-    public void initTopo(SmartGridTopoContainer topoContainer) {
-        // generate and persist topo
-        ITopoGenerator generator = new TrivialTopoGenerator();
-        topo = generator.generateTopo(topoContainer);
-        FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.pathSeparator+"generated.smartgridtopo");
-        LOG.info("Topo is generated");
-        
-        // generate and persist input
-        LOG.info("Input will be generated");
-        DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
-        initialState = defaultInputGenerator.generateInput(topo);
-        FileSystemHelper.saveToFileSystem(initialState, workingDirPath + File.pathSeparator+"generated.smartgridinput");
-        impactInput = initialState;
-        LOG.info("Input is generated");
-    }
+		impactAnalsis.init(launchConfig);
+		attackerSimulation.init(launchConfig);
+		timeProgressor.init(launchConfig);
+
+		LOG.info("Using impact analysis: " + impactAnalsis.getName());
+		LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+		LOG.info("Using time progressor: " + timeProgressor.getName());
+
+		if (!launchConfig.getAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), "").equals("")) {
+			String powerModificationString = launchConfig
+					.getAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), "");
+			PowerSpecsModificationTypes powerSpecsModificationType = PowerSpecsModificationTypes
+					.valueOf(powerModificationString);
+			this.powerDemandModificationType = powerSpecsModificationType;
+		}
+	}
+
+	public void initTopo(SmartGridTopoContainer topoContainer) {
+		// generate and persist topo
+		ITopoGenerator generator = new TrivialTopoGenerator();
+		topo = generator.generateTopo(topoContainer);
+		FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.pathSeparator + "generated.smartgridtopo");
+		LOG.info("Topo is generated");
+		// generate and persist input
+		LOG.info("Input will be generated");
+		DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
+		initialState = defaultInputGenerator.generateInput(topo);
+		FileSystemHelper.saveToFileSystem(initialState,
+				workingDirPath + File.pathSeparator + "generated.smartgridinput");
+		impactInput = initialState;
+		LOG.info("Input is generated");
+	}
 }
