@@ -260,7 +260,7 @@ public final class ReactiveSimulationController {
 			this.powerDemandModificationType = powerSpecsModificationType;
 		}
 	}
-
+	// TODO fix me
 	public void loadDefaultAnalyses() throws CoreException {
 
 		final List<IImpactAnalysis> impact = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
@@ -351,13 +351,11 @@ public final class ReactiveSimulationController {
 		ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
 
 		LOG.info("Converting input for impact analysis (With power supply)");
-		// convert input for impact analysis
-//		updateImactAnalysisInput(impactInput, impactResult, powerSupply);
+		
 
 		// Save input to file
 		final String inputFile = new File(timeStepPath + File.separator + "PowerLoadResult.smartgridinput").getPath();
 		FileSystemHelper.saveToFileSystem(impactInput, inputFile);
-
 		LOG.info("Starting Attacker Simulation");
 		impactResult = attackerSimulation.run(topo, impactResult);
 		this.impactResult = impactResult;
@@ -366,7 +364,10 @@ public final class ReactiveSimulationController {
 		final String attackResultFile = new File(
 				timeStepPath + File.separator + "AttackerSimulationResult.smartgridoutput").getPath();
 		FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
+		
+		updateImactAnalysisInput(impactInput, impactResult, powerSupply); //update for next timestep
 
+		
 		LOG.info("Collecting dysfunctionalComponents");
 		// get smartmeters
 		dysfunctionalcomponents = generateSCSC(impactResult);

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
@@ -19,7 +18,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
-import smartgrid.simcontrol.test.baselib.HackingStyle;
+import smartgrid.simcontrol.test.baselib.HackingType;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.Cluster;
 import smartgridoutput.On;
@@ -41,20 +40,18 @@ public class LocalHacker implements IAttackerSimulation {
 
 	private static final Logger LOG = Logger.getLogger(LocalHacker.class);
 
-	// private Fields
-	private HackingStyle usedHackingStyle;
+	private HackingType hackingTypes;
 	private String rootNodeID; // IDs stay the same over the whole Analysis
 	private On rootNodeState; // Reference Changes between runs!
 	private Map<String, LinkedList<On>> neighborsInClusterMap;
-
 	private int hackingSpeed;
 
 	private boolean firstRun = true;
 	private boolean initDone = false;
 	private boolean ignoreLogicalConnections;
 
-	private SmartGridTopology mySmartGridTopo;
-	private ScenarioResult myScenarioResult;
+	private SmartGridTopology topo;
+	private ScenarioResult scenarioResult;
 
 	/**
 	 * Default constructor is needed by the OSGi framework to be able to use the
@@ -65,46 +62,15 @@ public class LocalHacker implements IAttackerSimulation {
 
 	@Override
 	public void init(final ILaunchConfiguration config) throws CoreException {
-
-		HackingStyle desiredHackingStyle = null;
-		String rootNodeId = null;
-
-		String desiredHackingStyleString;
-		String rootNodeIDString;
-		String hackingSpeedString;
-
-		// Extracting Parameters from Config
-		desiredHackingStyleString = config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.FAIL);
-
-		rootNodeIDString = config.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.FAIL);
-
-		hackingSpeedString = config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.FAIL);
-
-		if (desiredHackingStyleString.equals(Constants.FAIL) || rootNodeIDString.equals(Constants.FAIL)) {
-
-			if (desiredHackingStyleString.equals(Constants.FAIL)) {
-				desiredHackingStyle = HackingStyle.valueOf(Constants.DEFAULT_HACKING_STYLE);
-			}
-			if (rootNodeIDString.equals(Constants.FAIL)) {
-				rootNodeId = Constants.DEFAULT_ROOT_NODE_ID;
-			}
-			if (hackingSpeedString.equals(Constants.FAIL)) {
-				this.hackingSpeed = Integer.parseInt(Constants.DEFAULT_HACKING_SPEED);
-			}
-		} else {
-			desiredHackingStyle = HackingStyle.valueOf(desiredHackingStyleString);
-
-			rootNodeId = rootNodeIDString;
-
-			this.hackingSpeed = Integer.parseInt(hackingSpeedString);
-		}
-
-		// Adding extracted Parameters
-		this.rootNodeID = rootNodeId;
-		this.usedHackingStyle = desiredHackingStyle;
-		this.ignoreLogicalConnections = Boolean.valueOf(config.getAttribute(Constants.IGNORE_LOC_CON_KEY, "false"));
-		LOG.info("Infection root node ID is: " + rootNodeId);
-		LOG.info("Hacking style is: " + desiredHackingStyle);
+		this.rootNodeID = config.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
+		this.hackingSpeed = Integer
+				.parseInt(config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
+		this.hackingTypes = HackingType
+				.valueOf(config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
+		this.ignoreLogicalConnections = Boolean
+				.valueOf(config.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.FALSE));
+		LOG.info("Infection root node ID is: " + rootNodeID);
+		LOG.info("Hacking style is: " + hackingTypes);
 		LOG.info("Hacking speed is: " + this.hackingSpeed);
 
 		this.initDone = true;
@@ -122,15 +88,15 @@ public class LocalHacker implements IAttackerSimulation {
 		assert this.initDone : "Init was not run! Run init() first!";
 
 		// Copy Input in own Variables
-		this.mySmartGridTopo = smartGridTopo;
-		this.myScenarioResult = impactAnalysisOutput;
+		this.topo = smartGridTopo;
+		this.scenarioResult = impactAnalysisOutput;
 
 		if (this.firstRun) {
 			this.setHackingRootOnEntityState();
 			this.neighborsMapInit();
 		} else {
 			// Find Root On Entity using ID I already know
-			this.rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.myScenarioResult);
+			this.rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.scenarioResult);
 		}
 
 		if (this.rootNodeState != null) {
@@ -143,10 +109,10 @@ public class LocalHacker implements IAttackerSimulation {
 			this.hackNext(this.rootNodeState.getBelongsToCluster());
 		}
 		this.firstRun = false;
-		this.myScenarioResult.setScenario(smartGridTopo);
+		this.scenarioResult.setScenario(smartGridTopo);
 
 		LOG.debug("Hacking done");
-		return this.myScenarioResult;
+		return this.scenarioResult;
 	}
 
 	/**
@@ -156,8 +122,7 @@ public class LocalHacker implements IAttackerSimulation {
 	private void neighborsMapInit() {
 		this.neighborsInClusterMap = new HashMap<String, LinkedList<On>>();
 
-		final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper
-				.genNeighborMapbyID(this.mySmartGridTopo);
+		final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper.genNeighborMapbyID(this.topo);
 		for (final String iD : IDtoHisNeighborLinks.keySet()) {
 
 			final LinkedList<On> neighborOnList = new LinkedList<>();
@@ -179,7 +144,7 @@ public class LocalHacker implements IAttackerSimulation {
 	 * @param clusterToHack
 	 */
 	private void hackNext(final Cluster clusterToHack) {
-		switch (this.usedHackingStyle) {
+		switch (this.hackingTypes) {
 		case BFS_HACKING:
 			this.bfsHacking(clusterToHack);
 			break;
@@ -190,7 +155,7 @@ public class LocalHacker implements IAttackerSimulation {
 			this.fullMeshedHacking(clusterToHack);
 			break;
 		default:
-			throw new RuntimeException("Unknown hacking style: " + this.usedHackingStyle);
+			throw new IllegalArgumentException("Unknown hacking style: " + this.hackingTypes);
 
 		}
 
@@ -198,9 +163,10 @@ public class LocalHacker implements IAttackerSimulation {
 
 	/**
 	 * Hacks next Node using BFS as expansion algorithms
+	 * 
 	 * @see https://de.wikipedia.org/wiki/Breitensuche
 	 * 
-	 *  @param cluster Cluster for searching next Attackpath
+	 * @param cluster Cluster for searching next Attackpath
 	 */
 	private void bfsHacking(final Cluster cluster) {
 		var nodes = cluster.getHasEntities();
@@ -213,10 +179,10 @@ public class LocalHacker implements IAttackerSimulation {
 			var node = queue.pop();
 			for (var next : getConnected(cluster, node)) {
 				if (!visited.getOrDefault(next, false)) {
-					if (!next.isIsHacked()) { //hack if not visited
+					if (!next.isIsHacked()) { // hack if not visited
 						next.setIsHacked(true);
 						counterHackoperations++;
-						if(!checkMaxHackingOperations(counterHackoperations))
+						if (!checkMaxHackingOperations(counterHackoperations))
 							break;
 					}
 					queue.push(next);
@@ -227,9 +193,11 @@ public class LocalHacker implements IAttackerSimulation {
 		}
 
 	}
+
 	private boolean checkMaxHackingOperations(int operationCount) {
 		return operationCount < hackingSpeed;
 	}
+
 	private Set<On> getConnected(Cluster cluster, On node) {
 		var rootNode = node.getOwner();
 		Set<NetworkEntity> nextNetworkEntities;
@@ -243,7 +211,7 @@ public class LocalHacker implements IAttackerSimulation {
 			else
 				nextNetworkEntities = new HashSet<NetworkEntity>();
 		}
-		nextNetworkEntities.remove(rootNode); //remove rootNode
+		nextNetworkEntities.remove(rootNode); // remove rootNode
 		return cluster.getHasEntities().stream().filter(nodeState -> nextNetworkEntities.contains(nodeState.getOwner()))
 				.collect(Collectors.toSet());
 	}
@@ -254,21 +222,34 @@ public class LocalHacker implements IAttackerSimulation {
 	 * @param clusterToHack
 	 */
 	private void dfsHacking(final Cluster clusterToHack) {
+//		final int hackCount = 0;
+//		final List<On> visitedNodes = new LinkedList<On>();
+//
+//		final On Node = this.rootNodeState;
+//		visitedNodes.add(Node);
+//		/*
+//		 * Reads from Scenario so this List don't respects changes in States of the
+//		 * Entities --> It's only the "hardwired" logical Connection neighbors
+//		 */
+//		final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper
+//				.genNeighborMapbyID(this.topo);
+//
+//		this.dfs(clusterToHack, Node, IDtoHisNeighborLinks, hackCount, visitedNodes);
+		dfs(clusterToHack, rootNodeState, hackingSpeed);
 
-		final int hackCount = 0;
-		final List<On> visitedNodes = new LinkedList<On>();
+	}
 
-		final On Node = this.rootNodeState;
-		visitedNodes.add(Node);
-		/*
-		 * Reads from Scenario so this List don't respects changes in States of the
-		 * Entities --> It's only the "hardwired" logical Connection neighbors
-		 */
-		final Map<String, LinkedList<String>> IDtoHisNeighborLinks = ScenarioModelHelper
-				.genNeighborMapbyID(this.mySmartGridTopo);
-
-		this.dfs(clusterToHack, Node, IDtoHisNeighborLinks, hackCount, visitedNodes);
-
+	private void dfs(Cluster cluster, On node, int hackCount) {
+		if (!node.isIsHacked()) {
+			node.setIsHacked(true);
+			if (--hackCount <= 0)
+				return;
+		}
+		var stack = new ArrayDeque<On>(getConnected(cluster, node));
+		while (!stack.isEmpty()) {
+			var newNode = stack.pop();
+			dfs(cluster, newNode, hackCount);
+		}
 	}
 
 	/**
@@ -328,30 +309,17 @@ public class LocalHacker implements IAttackerSimulation {
 	 * hack every Node in the the given Cluster without respecting logical
 	 * Connections
 	 *
-	 * @param clusterToHack clusterToHack
+	 * @param cluster clusterToHack
 	 */
-	private void fullMeshedHacking(final Cluster clusterToHack) {
-
-		// getting the nodes in the cluster to hack and making thier order random
-		final LinkedList<On> entitiesInCluster = new LinkedList<On>();
-		entitiesInCluster.addAll(clusterToHack.getHasEntities());
-		Collections.shuffle(entitiesInCluster);
-
-		final Iterator<On> myIter = entitiesInCluster.iterator();
-		int hackedNodesCount = 0;
-
-		do {
-
-			final On currentNode = myIter.next();
-
-			if (!(currentNode.getOwner() instanceof NetworkNode) && !currentNode.isIsHacked()) {
-				LOG.debug("Hacked with Full Meshed Hacking node " + currentNode.getOwner().getId());
-				currentNode.setIsHacked(true);
-				hackedNodesCount++;
-			}
-
-		} while (hackedNodesCount < this.hackingSpeed && myIter.hasNext());
-
+	private void fullMeshedHacking(final Cluster cluster) {
+		var entities = cluster.getHasEntities().stream().unordered().filter(e -> !e.isIsHacked())
+				.collect(Collectors.toCollection(ArrayDeque::new));
+		int hackCounter = 0;
+		while(!entities.isEmpty() && !checkMaxHackingOperations(hackCounter)) {
+			var node = entities.pop();
+			node.setIsHacked(true);
+			hackCounter++;
+		}
 	}
 
 	/**
@@ -361,13 +329,13 @@ public class LocalHacker implements IAttackerSimulation {
 		Cluster myCluster;
 		final Random myRandom = new Random();
 
-		final int clusterCount = this.myScenarioResult.getClusters().size();
+		final int clusterCount = this.scenarioResult.getClusters().size();
 
 		// Choose Random Cluster with Entries
 		do {
 			// [0 - clusterCount) Exclusive upper bound
 			final int myClusterNumber = myRandom.nextInt(clusterCount);
-			myCluster = this.myScenarioResult.getClusters().get(myClusterNumber);
+			myCluster = this.scenarioResult.getClusters().get(myClusterNumber);
 
 		} while (myCluster.getHasEntities().isEmpty()); // Or threshold of Entities in Cluster ?
 
@@ -397,7 +365,7 @@ public class LocalHacker implements IAttackerSimulation {
 			this.chooseRootIDByRandom();
 		} else {
 			// search root node state (if meaningful ID is specified)
-			this.rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.myScenarioResult);
+			this.rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.scenarioResult);
 
 			if (this.rootNodeState != null) {
 				this.rootNodeID = this.rootNodeState.getOwner().getId();
@@ -433,45 +401,4 @@ public class LocalHacker implements IAttackerSimulation {
 		return true;
 	}
 
-	/**
-	 * @return the usedHackingStyle
-	 */
-	public HackingStyle getUsedHackingStyle() {
-		return this.usedHackingStyle;
-	}
-
-	/**
-	 * @param usedHackingStyle the usedHackingStyle to set
-	 */
-	public void setUsedHackingStyle(final HackingStyle usedHackingStyle) {
-		this.usedHackingStyle = usedHackingStyle;
-	}
-
-	/**
-	 * @return the rootNodeID
-	 */
-	public String getRootNodeID() {
-		return this.rootNodeID;
-	}
-
-	/**
-	 * @param rootNodeID the rootNodeID to set
-	 */
-	public void setRootNodeID(final String rootNodeID) {
-		this.rootNodeID = rootNodeID;
-	}
-
-	/**
-	 * @return the hackingSpeed
-	 */
-	public int getHackingSpeed() {
-		return this.hackingSpeed;
-	}
-
-	/**
-	 * @param hackingSpeed the hackingSpeed to set
-	 */
-	public void setHackingSpeed(final int hackingSpeed) {
-		this.hackingSpeed = hackingSpeed;
-	}
 }

@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Text;
 import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.GenerationStyle;
-import smartgrid.simcontrol.test.baselib.HackingStyle;
+import smartgrid.simcontrol.test.baselib.HackingType;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 //import smartgrid.simcontrol.test.baselib.coupling.IKritisSimulationWrapper;
@@ -82,7 +82,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         // Building Items List for hackingStyleCombo
         
               
-        final HackingStyle[] hackingStyles = HackingStyle.values();
+        final HackingType[] hackingStyles = HackingType.values();
         final String[] hackinStyleEnumStrings = new String[hackingStyles.length];
 
         for (int i = 0; i < hackingStyles.length; i++) {
@@ -301,7 +301,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
                 if (ignoreLogicalConCheckBox.getSelection()) {
                     if (!comboAttackSimulation.getText().equals("No Attack Simulation")) {
-                        hackingStyleCombo.setText(HackingStyle.FULLY_MESHED_HACKING.name());
+                        hackingStyleCombo.setText(HackingType.FULLY_MESHED_HACKING.name());
                     }
                     hackingStyleCombo.setEnabled(false);
                 } else {

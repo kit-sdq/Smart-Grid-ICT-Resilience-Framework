@@ -12,7 +12,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
-import smartgrid.simcontrol.test.baselib.HackingStyle;
+import smartgrid.simcontrol.test.baselib.HackingType;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.Cluster;
 import smartgridoutput.On;
@@ -35,7 +35,7 @@ public class ViralHacker implements IAttackerSimulation {
 
     // config variables
     private int hackingSpeed;
-    private HackingStyle usedHackingStyle;
+    private HackingType usedHackingStyle;
 
     /**
      * For ExtensionPoints .. use this together with the init() Method
@@ -61,7 +61,7 @@ public class ViralHacker implements IAttackerSimulation {
         if (hackingStyleString.equals(Constants.FAIL)) {
             hackingStyleString = Constants.DEFAULT_HACKING_STYLE;
         }
-        this.usedHackingStyle = HackingStyle.valueOf(hackingStyleString);
+        this.usedHackingStyle = HackingType.valueOf(hackingStyleString);
 
         LOG.info("Hacking speed is: " + this.hackingSpeed);
         LOG.info("Hacking style is: " + this.usedHackingStyle);
@@ -78,7 +78,7 @@ public class ViralHacker implements IAttackerSimulation {
      */
     public void initForTest(final String hackingStyle, final String hackingspeed) {
         this.hackingSpeed = Integer.parseInt(hackingspeed);
-        this.usedHackingStyle = HackingStyle.valueOf(hackingStyle);
+        this.usedHackingStyle = HackingType.valueOf(hackingStyle);
 
         this.initDone = true;
     }
@@ -89,9 +89,9 @@ public class ViralHacker implements IAttackerSimulation {
         assert this.initDone : "Init wasn't run! Run init first!";
 
         LOG.debug("Start Hacking with Viral Hacker");
-        if (this.usedHackingStyle == HackingStyle.STANDARD_HACKING) {
+        if (this.usedHackingStyle == HackingType.STANDARD_HACKING) {
             this.standardHacking(topo, impactAnalysisOutput);
-        } else if (this.usedHackingStyle == HackingStyle.FULLY_MESHED_HACKING) {
+        } else if (this.usedHackingStyle == HackingType.FULLY_MESHED_HACKING) {
             this.fullMeshedHacking(impactAnalysisOutput);
         } else {
             throw new RuntimeException("Unknown hacking style: " + this.usedHackingStyle);

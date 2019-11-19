@@ -187,7 +187,7 @@ public class RmiServer implements ISimulationController {
 		String ignoreLogicalConnections = "false";
 		String attackerType = AttackerSimulationsTypes.NO_ATTACK_SIMULATION.getDescription();
 		String hackingStype = null;
-		int HackingSpeed = 1;
+		String hackingSpeed = "1";
 		boolean generateTopo = false;
 		int timeSteps = 1;
 		String powerSpecsModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.getDescription();
@@ -224,7 +224,7 @@ public class RmiServer implements ISimulationController {
 							InitializationMapKeys.ATTACKER_SIMULATION_KEY)) != (AttackerSimulationsTypes.NO_ATTACK_SIMULATION)) {
 				hackingStype = HackingStyle.valueOf(initMap.get(key)).getDescription();
 			} else if (key.equals(InitializationMapKeys.HACKING_SPEED_KEY)) {
-				HackingSpeed = Integer.valueOf(initMap.get(key));
+				hackingSpeed = initMap.get(key);
 			} else if (key.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
 				generateTopo = Boolean.valueOf(initMap.get(key));
 			} else if (key.equals(InitializationMapKeys.TIME_STEPS_KEY)) {
@@ -252,7 +252,7 @@ public class RmiServer implements ISimulationController {
 		if (hackingStype != null) {
 			workingCopy.setAttribute(InitializationMapKeys.HACKING_STYLE_KEY.getDescription(), hackingStype);
 		}
-		workingCopy.setAttribute(InitializationMapKeys.HACKING_SPEED_KEY.getDescription(), HackingSpeed);
+		workingCopy.setAttribute(InitializationMapKeys.HACKING_SPEED_KEY.getDescription(), hackingSpeed);
 		workingCopy.setAttribute(InitializationMapKeys.TOPO_GENERATION_KEY.getDescription(), generateTopo);
 		workingCopy.setAttribute(InitializationMapKeys.TIME_STEPS_KEY.getDescription(), timeSteps);
 		workingCopy.setAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), powerSpecsModificationType);

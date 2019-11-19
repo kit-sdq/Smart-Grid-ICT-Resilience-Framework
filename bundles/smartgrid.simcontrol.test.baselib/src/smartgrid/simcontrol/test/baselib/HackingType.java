@@ -7,7 +7,7 @@ package smartgrid.simcontrol.test.baselib;
  * @author Christian
  *
  */
-public enum HackingStyle {
+public enum HackingType {
     /**
      * With this Style the Attacker will hack the Node in an Breadth First Search manner
      */
