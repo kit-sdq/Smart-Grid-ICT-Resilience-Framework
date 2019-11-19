@@ -203,12 +203,6 @@ public final class ReactiveSimulationController {
 			throw new RuntimeException(
 					"Error creating local log appender in the working directory. Most likely there are problems with access rights.");
 		}
-		// TODO this should be done after models were loaded/generated
-		// TODO read option from launch config
-//        //Completion
-//        SmartGridCompletionExecuter completionExecuter = new SmartGridCompletionExecuter();
-//        completionExecuter.executeCompletions(topo);
-//        FileSystemHelper.saveToFileSystem(topo, topoPath + ".completion.smartgridtopo");
 	}
 
 	public void initModelsFromFiles(String topoPath, String inputStatePath) {
@@ -225,14 +219,14 @@ public final class ReactiveSimulationController {
 		// generate and persist topo
 		ITopoGenerator generator = new TrivialTopoGenerator();
 		topo = generator.generateTopo(topoContainer);
-		FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.pathSeparator + "generated.smartgridtopo");
+		FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.separatorChar + "generated.smartgridtopo");
 		LOG.info("Topo is generated");
 		// generate and persist input
 		LOG.info("Input will be generated");
 		DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
 		initialState = defaultInputGenerator.generateInput(topo);
 		FileSystemHelper.saveToFileSystem(initialState,
-				workingDirPath + File.pathSeparator + "generated.smartgridinput");
+				workingDirPath + File.separatorChar + "generated.smartgridinput");
 		impactInput = initialState;
 		LOG.info("Input is generated");
 	}
