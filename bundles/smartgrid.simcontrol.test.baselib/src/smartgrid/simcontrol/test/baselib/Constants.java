@@ -1,5 +1,7 @@
 package smartgrid.simcontrol.test.baselib;
 
+import couplingToICT.initializer.HackingStyle;
+
 public final class Constants {
     // Boolean Strings
     public static final String TRUE = "true"; //$NON-NLS-1$
@@ -35,7 +37,7 @@ public final class Constants {
 
     // local hacker
     public static final String HACKING_STYLE_KEY = "desiredHackingStyle"; //$NON-NLS-1$
-    public static final String DEFAULT_HACKING_STYLE = "BFS_HACKING"; //$NON-NLS-1$
+    public static final String DEFAULT_HACKING_STYLE = HackingStyle.FULLY_MESHED_HACKING.toString(); //$NON-NLS-1$
     public static final String HACKING_SPEED_KEY = "hackingSpeed"; //$NON-NLS-1$
     public static final String DEFAULT_HACKING_SPEED = "1"; //$NON-NLS-1$
     public static final String ROOT_NODE_ID_KEY = "rootNodeID"; //$NON-NLS-1$
