@@ -112,9 +112,9 @@ public class ViralHacker implements IAttackerSimulation {
 
 	@Override
 	public ScenarioResult run(final SmartGridTopology topo, final ScenarioResult scenario) {
-
+		//TODO Handling of no hacked nodes
 		if (!initDone)
-			throw new IllegalStateException("LocalHacker not initialization. Run init()");
+			throw new IllegalStateException("ViralHacker not initialization. Run init()");
 
 		LOG.debug("Start Hacking with Viral Hacker");
 		switch (this.hackingStyle) {
