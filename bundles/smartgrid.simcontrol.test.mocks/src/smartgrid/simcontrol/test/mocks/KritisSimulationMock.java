@@ -1,4 +1,5 @@
 package smartgrid.simcontrol.test.mocks;
+//TODO delete file?
 //package smartgrid.simcontrol.mocks;
 //
 //import java.util.HashMap;

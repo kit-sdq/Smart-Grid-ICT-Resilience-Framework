@@ -17,7 +17,6 @@ public final class ActiveSimulationController {
     private static final Logger LOG = Logger.getLogger(ActiveSimulationController.class);
 
     private ReactiveSimulationController reactiveSimControl;
-    //private IKritisSimulationWrapper kritisSimulation;
 
     private int maxTimeSteps;
 

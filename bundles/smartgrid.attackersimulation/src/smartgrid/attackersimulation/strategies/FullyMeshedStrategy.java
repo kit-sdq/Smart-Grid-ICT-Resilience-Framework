@@ -9,7 +9,6 @@ public class FullyMeshedStrategy extends SingleStepAttackStrategies {
 
 	public FullyMeshedStrategy(int hackingSpeed) {
 		super(true, hackingSpeed);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
