@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -132,6 +134,37 @@ public final class ScenarioModelHelper {
         return foundEntity;
 
     }
+	/**
+	 * Select random root node
+	 */
+	public static String selectRandomRoot(boolean ignoreLogicalConnections, ScenarioResult scenario) {
+		final Random random = new Random();
+		if (ignoreLogicalConnections) {
+			// filter for clusters with elements other than networknode
+			final var clusterList = scenario.getClusters().parallelStream()
+					.filter(e -> !e.getHasEntities().isEmpty() && !e.getHasEntities().stream()
+							.map(nodes -> nodes.getOwner()).allMatch(nodes -> nodes instanceof NetworkNode))
+					.collect(Collectors.toList());
+			final var selectedCluster = clusterList.get(random.nextInt(clusterList.size()));
+			if (selectedCluster == null)
+				throw new IllegalStateException("Cluster can't be null");
+
+			final var listEntities = selectedCluster.getHasEntities().stream().filter(e -> !(e.getOwner() instanceof NetworkNode))
+					.collect(Collectors.toList());
+			return listEntities.get(random.nextInt(listEntities.size())).getOwner().getId();
+
+		} else {
+			final var clusterList = scenario.getClusters().parallelStream()
+					.filter(e -> !e.getHasEntities().isEmpty()).collect(Collectors.toList());
+
+			final var selectedCluster = clusterList.get(random.nextInt(clusterList.size()));
+			if (selectedCluster == null)
+				throw new IllegalStateException("Cluster can't be null");
+
+			final var listEntities = selectedCluster.getHasEntities();
+			return listEntities.get(random.nextInt(listEntities.size())).getOwner().getId();
+		}
+	}
 
     /**
      * Returns the NetworkEntity Id from given On State

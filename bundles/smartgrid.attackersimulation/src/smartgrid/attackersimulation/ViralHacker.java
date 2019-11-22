@@ -9,6 +9,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 
 import smartgrid.attackersimulation.strategies.BFSStrategy;
 import smartgrid.attackersimulation.strategies.FullyMeshedStrategy;
+import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.HackingType;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
@@ -33,6 +34,8 @@ public class ViralHacker implements IAttackerSimulation {
 	private int hackingSpeed;
 	private HackingType hackingStyle;
 	private boolean ignoreLogicalConnections;
+	private boolean firstRun = true;
+	private String rootNode;
 
 	/**
 	 * For ExtensionPoints .. use this together with the init() Method
@@ -99,10 +102,9 @@ public class ViralHacker implements IAttackerSimulation {
 				.parseInt(config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
 		this.ignoreLogicalConnections = Boolean
 				.valueOf(config.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.FALSE));
-
 		this.hackingStyle = HackingType
 				.valueOf(config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
-
+		this.rootNode = config.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
 		LOG.info("Hacking speed is: " + this.hackingSpeed);
 		LOG.info("Hacking style is: " + this.hackingStyle);
 		LOG.debug("Init done");
@@ -112,10 +114,15 @@ public class ViralHacker implements IAttackerSimulation {
 
 	@Override
 	public ScenarioResult run(final SmartGridTopology topo, final ScenarioResult scenario) {
-		//TODO Handling of no hacked nodes
+		// TODO Handling of no hacked nodes
 		if (!initDone)
 			throw new IllegalStateException("ViralHacker not initialization. Run init()");
-
+		if (firstRun) {
+			if(rootNode.equals(Constants.DEFAULT_ROOT_NODE_ID));
+				rootNode = ScenarioModelHelper.selectRandomRoot(this.ignoreLogicalConnections, scenario);
+			var rootState = ScenarioModelHelper.findEntityOnStateFromID(rootNode,scenario);
+			rootState.setIsHacked(true);
+		}
 		LOG.debug("Start Hacking with Viral Hacker");
 		switch (this.hackingStyle) {
 		case STANDARD_HACKING:

@@ -103,7 +103,7 @@ public class LocalHacker implements IAttackerSimulation {
 
 		if (this.rootNodeID.equalsIgnoreCase(Constants.NO_ROOT_NODE_ID)) {
 			LOG.info("No root node specified.");
-			this.selectRandomRoot();
+			rootNodeID = ScenarioModelHelper.selectRandomRoot(ignoreLogicalConnections,this.scenarioResult);
 		}
 		this.rootNodeState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNodeID, this.scenarioResult); // update
 																												// state
@@ -133,36 +133,6 @@ public class LocalHacker implements IAttackerSimulation {
 		return this.scenarioResult;
 	}
 
-	/**
-	 * Select random root node
-	 */
-	private void selectRandomRoot() {
-		final Random random = new Random();
-		if (ignoreLogicalConnections) {
-			// filter for clusters with elements other than networknode
-			final var clusterList = this.scenarioResult.getClusters().parallelStream()
-					.filter(e -> !e.getHasEntities().isEmpty() && !e.getHasEntities().stream()
-							.map(nodes -> nodes.getOwner()).allMatch(nodes -> nodes instanceof NetworkNode))
-					.collect(Collectors.toList());
-			final var selectedCluster = clusterList.get(random.nextInt(clusterList.size()));
-			if (selectedCluster == null)
-				throw new IllegalStateException("Cluster can't be null");
 
-			final var listEntities = selectedCluster.getHasEntities().stream().filter(e -> !(e.getOwner() instanceof NetworkNode))
-					.collect(Collectors.toList());
-			this.rootNodeID = listEntities.get(random.nextInt(listEntities.size())).getOwner().getId();
-
-		} else {
-			final var clusterList = this.scenarioResult.getClusters().parallelStream()
-					.filter(e -> !e.getHasEntities().isEmpty()).collect(Collectors.toList());
-
-			final var selectedCluster = clusterList.get(random.nextInt(clusterList.size()));
-			if (selectedCluster == null)
-				throw new IllegalStateException("Cluster can't be null");
-
-			final var listEntities = selectedCluster.getHasEntities();
-			this.rootNodeID = listEntities.get(random.nextInt(listEntities.size())).getOwner().getId();
-		}
-	}
 
 }

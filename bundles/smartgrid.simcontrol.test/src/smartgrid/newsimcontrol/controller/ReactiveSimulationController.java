@@ -109,7 +109,6 @@ public final class ReactiveSimulationController {
 					break;
 				}
 			}
-
 			if (!foundSupply) {
 				LOG.error("There is no power supply for CI " + prosumerId + ". Power supply remains unchanged.");
 			}
@@ -348,11 +347,8 @@ public final class ReactiveSimulationController {
 		// impactInputOld = EcoreUtil.copy(impactInput);
 
 		LOG.info("Starting Impact Analysis");
-		ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);
-
-		LOG.info("Converting input for impact analysis (With power supply)");
+		ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);		
 		
-
 		// Save input to file
 		final String inputFile = new File(timeStepPath + File.separator + "PowerLoadResult.smartgridinput").getPath();
 		FileSystemHelper.saveToFileSystem(impactInput, inputFile);

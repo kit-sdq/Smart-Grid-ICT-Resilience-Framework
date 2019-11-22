@@ -29,21 +29,29 @@ public class TestClientRMI {
 			System.exit(1);
 		}
 		var powerSpec = createPowerSpecContainer();
-		var map = createTopoMap();
-		var topoContainer = new SmartGridTopoContainer(map, null);
-		LinkedHashMap<String, HashMap<String, Double>> _powerAssigned = new LinkedHashMap<String, HashMap<String, Double>>();
-		;
-		PowerAssigned powerAssigned = new PowerAssigned(_powerAssigned);
+		var topoContainer = new SmartGridTopoContainer(createTopoMap(), null);
+		var powerAssigned = new PowerAssigned(assignPower());
 		try {
 			var connector = initRMIConnection(createDTOMAP(args[0]));
 			connector.initTopo(topoContainer);
 			var test = connector.getModifiedPowerSpec(powerSpec, powerAssigned);
 			connector.getModifiedPowerSpec(test, powerAssigned);
 			connector.terminate();
+			System.out.println("Programm sucessfully executed");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+	private static LinkedHashMap<String, HashMap<String, Double>> assignPower() {
+		var assignment = new LinkedHashMap<String, HashMap<String, Double>>();
+		var districAssignment = new HashMap<String, Double>();
+		districAssignment.put("1234", 1.0);
+		districAssignment.put("234", 1.0);
+		districAssignment.put("34", 1.0);
+		assignment.put("1", districAssignment);
+		return assignment;
+		
 	}
 	private static LinkedHashMap<String, Map<String, SmartComponentGeoData>> createTopoMap() {
 		var smartMeter = new LinkedHashMap<String, Map<String, SmartComponentGeoData>>();
