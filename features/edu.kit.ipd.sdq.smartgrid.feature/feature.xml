@@ -24,12 +24,9 @@
       <import plugin="org.eclipse.xtend.lib.macro"/>
    </requires>
    -->
-   <plugin
-         id="couplingSG"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <includes
+         id="hgf.coupling.couplingSG.feature"
+         version="0.0.0"/>
    <plugin
          id="smartgrid.attackersimulation"
          download-size="0"
