@@ -117,8 +117,7 @@ public final class ScenarioModelHelper {
         for (final smartgridoutput.EntityState currentNode : myScenarioResult.getStates()) {
             // Using only Entities that is On
 
-            if (currentNode.getOwner().getId().equals(entityID) && currentNode instanceof On
-                    && !(currentNode.getOwner() instanceof NetworkNode)) {
+            if (currentNode.getOwner().getId().equals(entityID) && currentNode instanceof On) {
                 foundEntity = (On) currentNode;
                 foundNodeID = true;
                 break;
