@@ -20,7 +20,7 @@ import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SimcontrolException;
 import couplingToICT.SmartGridTopoContainer;
-import smartgrid.newsimcontro.tests.client.Client;
+import smartgrid.newsimcontrol.tests.client.Client;
 
 public class RmiServerTest {
 

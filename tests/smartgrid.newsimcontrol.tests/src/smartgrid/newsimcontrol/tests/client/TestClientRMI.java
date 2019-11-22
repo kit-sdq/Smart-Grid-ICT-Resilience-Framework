@@ -1,4 +1,4 @@
-package smartgrid.newsimcontro.tests.client;
+package smartgrid.newsimcontrol.tests.client;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;

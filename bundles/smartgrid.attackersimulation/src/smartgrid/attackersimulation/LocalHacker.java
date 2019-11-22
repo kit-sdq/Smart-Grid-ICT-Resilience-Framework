@@ -148,7 +148,7 @@ public class LocalHacker implements IAttackerSimulation {
 			if (selectedCluster == null)
 				throw new IllegalStateException("Cluster can't be null");
 
-			final var listEntities = selectedCluster.getHasEntities().stream().filter(e -> !(e instanceof NetworkNode))
+			final var listEntities = selectedCluster.getHasEntities().stream().filter(e -> !(e.getOwner() instanceof NetworkNode))
 					.collect(Collectors.toList());
 			this.rootNodeID = listEntities.get(random.nextInt(listEntities.size())).getOwner().getId();
 

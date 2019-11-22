@@ -1,4 +1,4 @@
-package smartgrid.newsimcontro.tests.client;
+package smartgrid.newsimcontrol.tests.client;
 
 import java.io.FileInputStream;
 import java.io.IOException;
