@@ -7,3 +7,4 @@ Bundle-Vendor: SDQ
 Require-Bundle: org.modelversioning.emfprofile,
  org.modelversioning.emfprofile.registry,
  smartgrid.model.topo
+Bundle-RequiredExecutionEnvironment: JavaSE-11

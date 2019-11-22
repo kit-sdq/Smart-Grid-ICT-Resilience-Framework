@@ -33,6 +33,7 @@ public class DropMetamodels implements IExternalJavaAction {
             return;
         
         SmartGridTopology smartgridtopo = (SmartGridTopology) selections.iterator().next();
+        //TODO remove unnecessary variable ?
         TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(smartgridtopo);
         
         File folder = new File(((DResource) element).getPath());
@@ -44,7 +45,7 @@ public class DropMetamodels implements IExternalJavaAction {
             if (uri.fileExtension().equals(inputExtension)) {
                 ScenarioState state = ScenarioModelHelper.loadInput(uri.toString()) ;
                 String id = state.getId();
-                id = id;
+                id = id; //TODO fix me remove warning 
             }   
         }
             

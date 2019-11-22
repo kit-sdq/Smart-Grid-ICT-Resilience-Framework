@@ -6,8 +6,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.print.attribute.standard.OutputDeviceAssigned;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;

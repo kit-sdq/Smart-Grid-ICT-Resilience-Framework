@@ -1,8 +1,5 @@
 package smartgrid.attackersimulation;
 
-import java.util.Random;
-import java.util.stream.Collectors;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -17,7 +14,6 @@ import smartgrid.simcontrol.test.baselib.HackingType;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
-import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartGridTopology;
 
 /**

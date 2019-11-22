@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
-Bundle-SymbolicName: smartgrid.newsimcontrol.tests
+Bundle-SymbolicName: smartgrid.newsimcontrol.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: smartgrid.newsimcontrol.tests.junit
+Export-Package: smartgrid.newsimcontrol.tests.client;x-internal:=true,
+ smartgrid.newsimcontrol.tests.junit;uses:="couplingToICT"
 Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.junit,
  couplingSG;bundle-version="1.0.0",
@@ -11,3 +12,4 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.junit.jupiter.api,
  smartgrid.newsimcontrol
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: smartgrid.newsimcontrol.tests

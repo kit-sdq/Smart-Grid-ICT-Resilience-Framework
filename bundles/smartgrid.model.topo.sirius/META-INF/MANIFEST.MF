@@ -37,4 +37,5 @@ Import-Package: org.apache.log4j;version="1.2.15",
  smartgrid.helper,
  smartgridinput
 Export-Package: smartgrid.model.topo.sirius
+Automatic-Module-Name: smartgrid.model.topo.sirius
 

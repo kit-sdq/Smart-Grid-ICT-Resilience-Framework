@@ -34,3 +34,4 @@ Import-Package: org.eclipse.debug.core,
  org.modelversioning.emfprofileapplication,
  smartgridinput
 Export-Package: smartgrid.model.input.sirius
+Automatic-Module-Name: smartgrid.model.input.sirius

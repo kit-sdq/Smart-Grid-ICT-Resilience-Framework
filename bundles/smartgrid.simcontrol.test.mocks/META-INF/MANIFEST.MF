@@ -11,3 +11,4 @@ Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  org.apache.log4j,
  smartgrid.simcontrol.test.baselib,
  couplingSG;bundle-version="1.0.0"
+Automatic-Module-Name: deprecated.smartgrid.simcontrol.mocks

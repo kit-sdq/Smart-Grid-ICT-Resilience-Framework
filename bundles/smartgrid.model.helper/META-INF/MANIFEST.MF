@@ -14,3 +14,4 @@ Require-Bundle: smartgrid.model.output,
 Export-Package: smartgrid.model.helper.input,
  smartgrid.model.helper.output,
  smartgrid.model.helper.sirius
+Automatic-Module-Name: smartgrid.model.helper

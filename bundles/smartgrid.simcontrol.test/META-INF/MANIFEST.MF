@@ -22,5 +22,8 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: smartgrid.newsimcontrol.rmi
+Export-Package: smartgrid.newsimcontrol;x-internal:=true,
+ smartgrid.newsimcontrol.controller;x-internal:=true,
+ smartgrid.newsimcontrol.rmi
 Import-Package: smartgrid.attackersimulation.psm
+Automatic-Module-Name: smartgrid.newsimcontrol

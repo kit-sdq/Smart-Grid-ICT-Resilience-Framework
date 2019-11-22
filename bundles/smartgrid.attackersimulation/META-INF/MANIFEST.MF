@@ -12,7 +12,9 @@ Require-Bundle: org.eclipse.debug.core;bundle-version="3.9.1",
  org.apache.log4j;bundle-version="1.2.15",
  couplingSG;bundle-version="1.0.0"
 Export-Package: smartgrid.attackersimulation,
- smartgrid.attackersimulation.psm
+ smartgrid.attackersimulation.psm,
+ smartgrid.attackersimulation.strategies;x-internal:=true
 Import-Package: 
  smartgrid.simcontrol.test.baselib,
  smartgrid.simcontrol.test.baselib.coupling
+Automatic-Module-Name: smartgrid.attackersimulation

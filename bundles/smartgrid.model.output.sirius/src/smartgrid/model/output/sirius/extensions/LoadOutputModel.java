@@ -54,7 +54,7 @@ public class LoadOutputModel extends LoadExtensionModel {
 		dialog.setFilterExtensions(new String[] { "*.smartgridoutput" });
 		dialog.setFilterNames(new String[] { "Output Model" });
 	}
-
+	// TODO fix dead code
 	/**
 	 * Should only be enabled if and when a scenario state is loaded
 	 */

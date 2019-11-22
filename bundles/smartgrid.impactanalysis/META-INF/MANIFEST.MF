@@ -20,3 +20,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: smartgrid.impactanalysis
 Import-Package: smartgrid.simcontrol.test.baselib,
  smartgrid.simcontrol.test.baselib.coupling
+Automatic-Module-Name: smartgrid.impactanalysis
