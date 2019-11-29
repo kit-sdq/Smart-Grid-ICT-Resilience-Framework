@@ -1,6 +1,7 @@
-on: [push]
-
-name: Upload Release
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '15 23 * * 1-5'
 
 jobs:
   build:
