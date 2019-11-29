@@ -18,5 +18,5 @@ Require-Bundle: org.junit;bundle-version="4.12.0",
  smartgrid.attackersimulation;bundle-version="1.0.0",
  smartgrid.impactanalysis,
  smartgrid.simcontrol.test.baselib
-Import-Package: smartgrid.simcontrol.test.baselib
 Export-Package: smartgrid.attackersimulation.test;x-internal:=true
+Import-Package: smartgrid.simcontrol.test.baselib
