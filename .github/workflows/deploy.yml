@@ -25,7 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: https://uploads.github.com/repos/majuwa/Smart-Grid-ICT-Resilience-Framework/releases/21856758/assets{?name,label}
+          upload_url: https://uploads.github.com/repos/kit-sdq/Smart-Grid-ICT-Resilience-Framework/releases/21658915/assets{?name,label}
           asset_path: ./releng/edu.kit.ipd.sdq.smartgrid.updatesite/target/edu.kit.ipd.sdq.smartgrid.updatesite-1.0.0-SNAPSHOT.zip
           asset_name: edu.kit.ipd.sdq.smartgrid.updatesite-1.0.0-SNAPSHOT.zip
           asset_content_type: application/zip
