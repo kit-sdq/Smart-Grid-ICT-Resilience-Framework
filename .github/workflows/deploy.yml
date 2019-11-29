@@ -1,0 +1,32 @@
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '15 23 * * 1-5'
+
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+        with:
+          submodules: true
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: install old maven version
+        run: sudo apt-get install maven
+      - name: Build with Maven
+        run: mvn clean verify
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/kit-sdq/Smart-Grid-ICT-Resilience-Framework/releases/21658915/assets{?name,label}
+          asset_path: ./releng/edu.kit.ipd.sdq.smartgrid.updatesite/target/edu.kit.ipd.sdq.smartgrid.updatesite-1.0.0-SNAPSHOT.zip
+          asset_name: edu.kit.ipd.sdq.smartgrid.updatesite-1.0.0-SNAPSHOT.zip
+          asset_content_type: application/zip
