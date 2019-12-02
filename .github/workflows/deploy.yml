@@ -1,7 +1,12 @@
-on:
-  schedule:
+#on:
+  #schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '15 23 * * 1-5'
+    #- cron:  '15 23 * * 1-5'
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   build:
