@@ -1,6 +1,7 @@
 package smartgrid.model.topo.generator.starstar;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -25,7 +26,7 @@ public class StarStarTopoGenerator extends AbstractTopoGenerator {
     @Override
     public SmartGridTopology generateTopo(SmartGridTopoContainer topoData) {
 
-        LOG.info("Starting generation of trivial ICT topology.");
+        LOG.info("Starting generation of StarStar ICT topology.");
 
         HashMap<String, Map<String, SmartComponentGeoData>> smartMeterGeoData = topoData.getSmartMeterContainer();
 
@@ -40,16 +41,8 @@ public class StarStarTopoGenerator extends AbstractTopoGenerator {
         controlCenter.setId(UIDHelper.generateUID());
         topo.getContainsNE().add(controlCenter);
 
-        // create network node for command center and connect
-        NetworkNode controlCenterNetworkNode = topoFactory.createNetworkNode();
-        controlCenterNetworkNode.setId(UIDHelper.generateUID());
-        controlCenterNetworkNode.setName("NetworkOf_ControlCenter");
-        topo.getContainsNE().add(controlCenterNetworkNode);
-        createPhysicalConnection(topoFactory, topo, controlCenterNetworkNode, controlCenter);
-
-        // keep track of the network node of last iteration so that network nodes can be chained
-        NetworkNode lastNetworkNode = controlCenterNetworkNode;
-
+        HashSet<NetworkNode> networkNodes = new HashSet<NetworkNode>();
+        
         // iterate nodes
         for (Entry<String, Map<String, SmartComponentGeoData>> nodeEntry : smartMeterGeoData.entrySet()) {
 
@@ -57,7 +50,8 @@ public class StarStarTopoGenerator extends AbstractTopoGenerator {
 
             // create network node
             NetworkNode networkNode = topoFactory.createNetworkNode();
-
+            networkNodes.add(networkNode);
+            
             // iterate smart meters
             for (Entry<String, ?> smartMeterEntry : nodeEntry.getValue().entrySet()) {
 
@@ -86,18 +80,19 @@ public class StarStarTopoGenerator extends AbstractTopoGenerator {
                 topo.getContainsNE().add(networkNode);
 
                 // chain the network
-                createPhysicalConnection(topoFactory, topo, lastNetworkNode, networkNode);
-                lastNetworkNode = networkNode;
+                createPhysicalConnection(topoFactory, topo, controlCenter, networkNode);
             } else {
                 LOG.info("Node " + nodeEntry.getKey() + " has no prosumers. I will not create a NetworkNode.");
             }
         }
 
         if (topo.getContainsPGN().size() > 0) {
-            // connect command center and its network node to power
+            // connect command center to power
             PowerGridNode firstNode = topo.getContainsPGN().get(0);
             controlCenter.getConnectedTo().add(firstNode);
-            controlCenterNetworkNode.getConnectedTo().add(firstNode);
+            for (NetworkNode networkNode: networkNodes) {
+            	networkNode.getConnectedTo().add(firstNode);
+            }
         } else {
             LOG.error("The generated topology does not have any power nodes. No meaningful results will be produced.");
         }
