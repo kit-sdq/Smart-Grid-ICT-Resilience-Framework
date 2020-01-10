@@ -12,7 +12,6 @@ import smartgrid.helper.UIDHelper;
 import smartgrid.model.test.generation.AbstractTopoGenerator;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.NetworkEntity;
-import smartgridtopo.NetworkNode;
 import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
@@ -26,7 +25,7 @@ public class RingTopoGenerator extends AbstractTopoGenerator {
     @Override
     public SmartGridTopology generateTopo(SmartGridTopoContainer topoData) {
 
-        LOG.info("Starting generation of trivial ICT topology.");
+        LOG.info("Starting generation of Ring ICT topology.");
 
         HashMap<String, Map<String, SmartComponentGeoData>> smartMeterGeoData = topoData.getSmartMeterContainer();
 
@@ -82,7 +81,7 @@ public class RingTopoGenerator extends AbstractTopoGenerator {
         createPhysicalConnection(topoFactory, topo, controlCenter, lastNode);
 
         if (topo.getContainsPGN().size() > 0) {
-            // connect command center and its network node to power
+            // connect command center to power
             PowerGridNode firstNode = topo.getContainsPGN().get(0);
             controlCenter.getConnectedTo().add(firstNode);
         } else {

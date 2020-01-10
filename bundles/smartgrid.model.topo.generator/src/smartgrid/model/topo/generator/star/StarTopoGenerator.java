@@ -11,7 +11,6 @@ import couplingToICT.SmartGridTopoContainer;
 import smartgrid.helper.UIDHelper;
 import smartgrid.model.test.generation.AbstractTopoGenerator;
 import smartgridtopo.ControlCenter;
-import smartgridtopo.NetworkNode;
 import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
@@ -25,7 +24,7 @@ public class StarTopoGenerator extends AbstractTopoGenerator {
     @Override
     public SmartGridTopology generateTopo(SmartGridTopoContainer topoData) {
 
-        LOG.info("Starting generation of trivial ICT topology.");
+        LOG.info("Starting generation of Star ICT topology.");
 
         HashMap<String, Map<String, SmartComponentGeoData>> smartMeterGeoData = topoData.getSmartMeterContainer();
 
@@ -40,23 +39,10 @@ public class StarTopoGenerator extends AbstractTopoGenerator {
         controlCenter.setId(UIDHelper.generateUID());
         topo.getContainsNE().add(controlCenter);
 
-        // create network node for command center and connect
-        NetworkNode controlCenterNetworkNode = topoFactory.createNetworkNode();
-        controlCenterNetworkNode.setId(UIDHelper.generateUID());
-        controlCenterNetworkNode.setName("NetworkOf_ControlCenter");
-        topo.getContainsNE().add(controlCenterNetworkNode);
-        createPhysicalConnection(topoFactory, topo, controlCenterNetworkNode, controlCenter);
-
-        // keep track of the network node of last iteration so that network nodes can be chained
-        NetworkNode lastNetworkNode = controlCenterNetworkNode;
-
         // iterate nodes
         for (Entry<String, Map<String, SmartComponentGeoData>> nodeEntry : smartMeterGeoData.entrySet()) {
 
             PowerGridNode powerGridNode = null;
-
-            // create network node
-            NetworkNode networkNode = topoFactory.createNetworkNode();
 
             // iterate smart meters
             for (Entry<String, ?> smartMeterEntry : nodeEntry.getValue().entrySet()) {
@@ -75,29 +61,19 @@ public class StarTopoGenerator extends AbstractTopoGenerator {
                 smartMeter.getConnectedTo().add(powerGridNode);
 
                 // connect the smart meter
-                createPhysicalConnection(topoFactory, topo, networkNode, smartMeter);
+                if (powerGridNode != null) {
                 createLogicalConnection(topoFactory, topo, controlCenter, smartMeter);
-            }
-
-            if (powerGridNode != null) {
-                networkNode.getConnectedTo().add(powerGridNode);
-                networkNode.setId(UIDHelper.generateUID());
-                networkNode.setName("NetworkOfNode_" + nodeEntry.getKey());
-                topo.getContainsNE().add(networkNode);
-
-                // chain the network
-                createPhysicalConnection(topoFactory, topo, lastNetworkNode, networkNode);
-                lastNetworkNode = networkNode;
-            } else {
-                LOG.info("Node " + nodeEntry.getKey() + " has no prosumers. I will not create a NetworkNode.");
+                createPhysicalConnection(topoFactory, topo, controlCenter, smartMeter);
+                } else {
+                    LOG.info("Node " + nodeEntry.getKey() + " has no prosumers. I will not create a NetworkNode.");
+                }
+                
             }
         }
-
+     
         if (topo.getContainsPGN().size() > 0) {
-            // connect command center and its network node to power
             PowerGridNode firstNode = topo.getContainsPGN().get(0);
             controlCenter.getConnectedTo().add(firstNode);
-            controlCenterNetworkNode.getConnectedTo().add(firstNode);
         } else {
             LOG.error("The generated topology does not have any power nodes. No meaningful results will be produced.");
         }
