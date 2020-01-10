@@ -102,7 +102,7 @@ public class StarTopoGenerator extends AbstractTopoGenerator {
             LOG.error("The generated topology does not have any power nodes. No meaningful results will be produced.");
         }
 
-        LOG.info("Generation of trivial ICT topology finished.");
+        LOG.info("Generation of Star ICT topology finished.");
 
         return topo;
     }
