@@ -1,4 +1,4 @@
-package smartgrid.model.topo.generator;
+package smartgrid.model.topo.generator.standard;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,12 +13,12 @@ import smartgrid.helper.UIDHelper;
 import smartgrid.model.test.generation.AbstractTopoGenerator;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartgridtopoFactory;
-import smartgrid.model.topo.generator.InternalTopologyGenerator;
-import smartgrid.model.topo.generator.MicroGridsGenerator;
-import smartgrid.model.topo.generator.data.MicroGrid;
-import smartgrid.model.topo.generator.data.PGNWithConnection;
-import smartgrid.model.topo.generator.data.SmartMeter;
-import smartgrid.model.topo.generator.data.SmartMeterAddonData;
+import smartgrid.model.topo.generator.standard.InternalTopologyGenerator;
+import smartgrid.model.topo.generator.standard.MicroGridsGenerator;
+import smartgrid.model.topo.generator.standard.data.MicroGrid;
+import smartgrid.model.topo.generator.standard.data.PGNWithConnection;
+import smartgrid.model.topo.generator.standard.data.SmartMeter;
+import smartgrid.model.topo.generator.standard.data.SmartMeterAddonData;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
 
 /**

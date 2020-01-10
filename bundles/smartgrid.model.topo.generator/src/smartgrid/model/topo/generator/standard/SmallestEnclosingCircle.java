@@ -1,4 +1,4 @@
-package smartgrid.model.topo.generator;
+package smartgrid.model.topo.generator.standard;
 
 /* 
  * Smallest enclosing circle - Library (Java)
@@ -27,8 +27,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import smartgrid.model.topo.generator.Circle;
-import smartgrid.model.topo.generator.Point;
+import smartgrid.model.topo.generator.standard.Circle;
+import smartgrid.model.topo.generator.standard.Point;
 
 
 public final class SmallestEnclosingCircle {

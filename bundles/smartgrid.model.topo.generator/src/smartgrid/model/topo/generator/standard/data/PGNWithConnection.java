@@ -1,9 +1,9 @@
-package smartgrid.model.topo.generator.data;
+package smartgrid.model.topo.generator.standard.data;
 
 import java.util.ArrayList;
 
-import smartgrid.model.topo.generator.data.PGNWithConnection;
-import smartgrid.model.topo.generator.data.SmartMeter;
+import smartgrid.model.topo.generator.standard.data.PGNWithConnection;
+import smartgrid.model.topo.generator.standard.data.SmartMeter;
 
 /**
  * A Power Grid node with a List of connected Smart Meters and a List of

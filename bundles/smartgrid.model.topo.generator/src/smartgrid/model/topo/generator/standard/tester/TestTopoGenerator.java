@@ -1,4 +1,4 @@
-package smartgrid.model.topo.generator.tester;
+package smartgrid.model.topo.generator.standard.tester;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,9 +13,9 @@ import java.util.Random;
 
 import couplingToICT.SmartComponentGeoData;
 import couplingToICT.SmartGridTopoContainer;
-import smartgrid.model.topo.generator.MicroGridsGenerator;
-import smartgrid.model.topo.generator.TopologyGenerator;
-import smartgrid.model.topo.generator.data.SmartMeterAddonData;
+import smartgrid.model.topo.generator.standard.MicroGridsGenerator;
+import smartgrid.model.topo.generator.standard.TopologyGenerator;
+import smartgrid.model.topo.generator.standard.data.SmartMeterAddonData;
 
 public class TestTopoGenerator {
 	

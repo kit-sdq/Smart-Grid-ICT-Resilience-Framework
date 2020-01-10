@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="smartgrid.model.topo.generator.tester.Startup">
+            class="smartgrid.model.topo.generator.standard.tester.Startup">
       </startup>
    </extension>
 </plugin>

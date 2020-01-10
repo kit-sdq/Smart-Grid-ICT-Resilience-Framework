@@ -1,4 +1,4 @@
-package smartgrid.model.topo.generator;
+package smartgrid.model.topo.generator.standard;
 
 import java.util.ArrayList;
 
@@ -9,11 +9,11 @@ import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 import smartgridtopo.SmartgridtopoFactory;
-import smartgrid.model.topo.generator.Point;
-import smartgrid.model.topo.generator.SmallestEnclosingCircle;
-import smartgrid.model.topo.generator.TopologyGenerator;
-import smartgrid.model.topo.generator.data.MicroGrid;
-import smartgrid.model.topo.generator.data.PGNWithConnection;
+import smartgrid.model.topo.generator.standard.Point;
+import smartgrid.model.topo.generator.standard.SmallestEnclosingCircle;
+import smartgrid.model.topo.generator.standard.TopologyGenerator;
+import smartgrid.model.topo.generator.standard.data.MicroGrid;
+import smartgrid.model.topo.generator.standard.data.PGNWithConnection;
 
 /**
  * Implementation of IinternalTopology Generator
@@ -42,7 +42,7 @@ public class InternalTopologyGenerator implements IInternalTopologyGenerator {
             PowerGridNode powerGridNode = topoFactory.createPowerGridNode();
             //setNameAndId(smartMeterEntry, powerGridNode, "_PGN");
             topo.getContainsPGN().add(powerGridNode);
-			for (smartgrid.model.topo.generator.data.SmartMeter sm : pgn.getConnectedSM()) {
+			for (smartgrid.model.topo.generator.standard.data.SmartMeter sm : pgn.getConnectedSM()) {
 				points.add(new Point(sm.getLat(), sm.getLon()));
 				
 

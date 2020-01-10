@@ -1,4 +1,4 @@
-package smartgrid.model.topo.generator.tester;
+package smartgrid.model.topo.generator.standard.tester;
 
 import java.io.BufferedWriter;
 import java.io.File;

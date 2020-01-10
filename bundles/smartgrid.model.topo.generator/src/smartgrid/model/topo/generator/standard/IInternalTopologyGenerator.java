@@ -1,6 +1,6 @@
-package smartgrid.model.topo.generator;
+package smartgrid.model.topo.generator.standard;
 
-import smartgrid.model.topo.generator.data.MicroGrid;
+import smartgrid.model.topo.generator.standard.data.MicroGrid;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartgridtopoFactory;
 

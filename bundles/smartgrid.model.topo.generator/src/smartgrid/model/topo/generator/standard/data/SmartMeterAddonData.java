@@ -1,4 +1,4 @@
-package smartgrid.model.topo.generator.data;
+package smartgrid.model.topo.generator.standard.data;
 
 /**
  * This Class Represents additional Data for the Smart Meters

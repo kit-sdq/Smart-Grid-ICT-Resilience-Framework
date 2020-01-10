@@ -1,11 +1,11 @@
-package smartgrid.model.topo.generator.data;
+package smartgrid.model.topo.generator.standard.data;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import smartgrid.model.topo.generator.data.MicroGrid;
-import smartgrid.model.topo.generator.data.PGNWithConnection;
+import smartgrid.model.topo.generator.standard.data.MicroGrid;
+import smartgrid.model.topo.generator.standard.data.PGNWithConnection;
 import smartgridtopo.NetworkNode;
 
 /**

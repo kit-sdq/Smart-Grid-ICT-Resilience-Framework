@@ -1,14 +1,14 @@
-package smartgrid.model.topo.generator.tester;
+package smartgrid.model.topo.generator.standard.tester;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import smartgrid.model.topo.generator.IMicroGridsGenerator;
-import smartgrid.model.topo.generator.MicroGridsGenerator;
-import smartgrid.model.topo.generator.MicroGridsGeneratorBruteforce;
-import smartgrid.model.topo.generator.TopologyGenerator;
-import smartgrid.model.topo.generator.data.MicroGrid;
-import smartgrid.model.topo.generator.data.SmartMeterAddonData;
+import smartgrid.model.topo.generator.standard.IMicroGridsGenerator;
+import smartgrid.model.topo.generator.standard.MicroGridsGenerator;
+import smartgrid.model.topo.generator.standard.MicroGridsGeneratorBruteforce;
+import smartgrid.model.topo.generator.standard.TopologyGenerator;
+import smartgrid.model.topo.generator.standard.data.MicroGrid;
+import smartgrid.model.topo.generator.standard.data.SmartMeterAddonData;
 
 /**
  * A Class to evaluate the results of the MicroGridGenerator

@@ -1,4 +1,4 @@
-package smartgrid.model.topo.generator;
+package smartgrid.model.topo.generator.standard;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,9 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import smartgrid.model.topo.generator.data.MicroGrid;
-import smartgrid.model.topo.generator.data.PGNWithConnection;
-import smartgrid.model.topo.generator.data.SmartMeter;
+import smartgrid.model.topo.generator.standard.data.MicroGrid;
+import smartgrid.model.topo.generator.standard.data.PGNWithConnection;
+import smartgrid.model.topo.generator.standard.data.SmartMeter;
 
 /**
  * A Class representing a MicroGrid Generator, includes Value Checking of the MicroGrids

@@ -1,9 +1,9 @@
-package smartgrid.model.topo.generator.tester;
+package smartgrid.model.topo.generator.standard.tester;
 
 import java.util.LinkedHashMap;
 
 import couplingToICT.SmartGridTopoContainer;
-import smartgrid.model.topo.generator.data.SmartMeterAddonData;
+import smartgrid.model.topo.generator.standard.data.SmartMeterAddonData;
 
 public class TopologyContainerAddon {
 	SmartGridTopoContainer topo;
