@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2LokalDFS.smartgridtopo#60290462"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2LokalDFS.smartgridtopo#1760136754"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2LokalDFS.smartgridtopo#835768660"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2LokalDFS.smartgridtopo#405101474"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2LokalDFS.smartgridtopo#789750590"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2LokalDFS.smartgridtopo#287949256"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2LokalDFS.smartgridtopo#1589120546"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="2LokalDFS.smartgridtopo#115519003"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2LokalDFS.smartgridtopo#1887980333"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2LokalDFS.smartgridtopo#994351852"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2LokalDFS.smartgridtopo#427756107"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="2LokalDFS.smartgridtopo#1133464030"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="2LokalDFS.smartgridtopo#1636746755"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2LokalDFS.smartgridtopo#1634355941"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2LokalDFS.smartgridtopo#2136121103"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="2LokalDFS.smartgridtopo#33635220"/>
+  </PowerStates>
+  <Scenario href="2LokalDFS.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

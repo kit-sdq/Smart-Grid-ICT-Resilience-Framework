@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartgridtopo:SmartGridTopology xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="97621890" ConnectedTo="1364457444" LinkedBy="//@ContainsPC.1" CommunicatesBy="//@ContainsLC.0"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="349823785" ConnectedTo="1364457444" LinkedBy="//@ContainsPC.0" CommunicatesBy="//@ContainsLC.0 //@ContainsLC.1"/>
+  <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="652603679" ConnectedTo="1364457444" LinkedBy="//@ContainsPC.0 //@ContainsPC.1 //@ContainsPC.2"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="7932686" ConnectedTo="1364457444" LinkedBy="//@ContainsPC.2" CommunicatesBy="//@ContainsLC.1"/>
+  <ContainsPGN id="1364457444"/>
+  <ContainsPC Links="349823785 652603679"/>
+  <ContainsPC Links="652603679 97621890"/>
+  <ContainsPC Links="7932686 652603679"/>
+  <ContainsLC Links="97621890 349823785"/>
+  <ContainsLC Links="349823785 7932686"/>
+</smartgridtopo:SmartGridTopology>

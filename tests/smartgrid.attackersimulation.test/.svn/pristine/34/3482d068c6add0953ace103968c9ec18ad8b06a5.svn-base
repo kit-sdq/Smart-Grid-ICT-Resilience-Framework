@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartgridtopo:SmartGridTopology xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1571125568" ConnectedTo="1314745866" LinkedBy="//@ContainsPC.1" CommunicatesBy="//@ContainsLC.0 //@ContainsLC.1"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="2031923734" ConnectedTo="1097172756" LinkedBy="//@ContainsPC.4" CommunicatesBy="//@ContainsLC.2 //@ContainsLC.3 //@ContainsLC.4"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="908399952" ConnectedTo="1314745866" LinkedBy="//@ContainsPC.2" CommunicatesBy="//@ContainsLC.0 //@ContainsLC.2"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1281830768" ConnectedTo="1488774218" LinkedBy="//@ContainsPC.3" CommunicatesBy="//@ContainsLC.1 //@ContainsLC.3"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1270990099" ConnectedTo="1097172756" LinkedBy="//@ContainsPC.5" CommunicatesBy="//@ContainsLC.4"/>
+  <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="1274867831" ConnectedTo="1488774218" LinkedBy="//@ContainsPC.0 //@ContainsPC.4 //@ContainsPC.5"/>
+  <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="533215684" ConnectedTo="453577218" LinkedBy="//@ContainsPC.0 //@ContainsPC.1 //@ContainsPC.2 //@ContainsPC.3"/>
+  <ContainsPGN id="1488774218"/>
+  <ContainsPGN id="453577218"/>
+  <ContainsPGN id="1314745866"/>
+  <ContainsPGN id="1097172756"/>
+  <ContainsPC Links="1274867831 533215684"/>
+  <ContainsPC Links="533215684 1571125568"/>
+  <ContainsPC Links="533215684 908399952"/>
+  <ContainsPC Links="533215684 1281830768"/>
+  <ContainsPC Links="1274867831 2031923734"/>
+  <ContainsPC Links="1274867831 1270990099"/>
+  <ContainsLC Links="1571125568 908399952"/>
+  <ContainsLC Links="1571125568 1281830768"/>
+  <ContainsLC Links="908399952 2031923734"/>
+  <ContainsLC Links="2031923734 1281830768"/>
+  <ContainsLC Links="2031923734 1270990099"/>
+</smartgridtopo:SmartGridTopology>

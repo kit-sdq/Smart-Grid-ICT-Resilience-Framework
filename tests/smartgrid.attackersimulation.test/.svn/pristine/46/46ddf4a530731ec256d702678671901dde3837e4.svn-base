@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralFM.smartgridtopo#1203320135"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralFM.smartgridtopo#1982613961"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralFM.smartgridtopo#112474108"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="3ViralFM.smartgridtopo#336939794"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralFM.smartgridtopo#1502636071"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralFM.smartgridtopo#2014827777"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralFM.smartgridtopo#29489090"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralFM.smartgridtopo#1063163866"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralFM.smartgridtopo#956186435"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralFM.smartgridtopo#882098380"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralFM.smartgridtopo#1895773290"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3ViralFM.smartgridtopo#3930050"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3ViralFM.smartgridtopo#161457070"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="3ViralFM.smartgridtopo#1723321010"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralFM.smartgridtopo#1490507397"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralFM.smartgridtopo#1692459113"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralFM.smartgridtopo#703052759"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3ViralFM.smartgridtopo#513252408"/>
+  </PowerStates>
+  <Scenario href="3ViralFM.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

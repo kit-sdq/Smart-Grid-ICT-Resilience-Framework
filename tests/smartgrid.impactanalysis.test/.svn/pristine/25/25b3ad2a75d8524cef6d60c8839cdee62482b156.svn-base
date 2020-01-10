@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#1217221686"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#37774625"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#1440717120"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#1142476431"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#1105970345"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#620413295"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#1952784623"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#1568951744"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3_WithLogical.smartgridtopo#2010471697"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3_WithLogical.smartgridtopo#1303549478"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3_WithLogical.smartgridtopo#235533681"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3_WithLogical.smartgridtopo#1307354231"/>
+  </EntityStates>
+  <EntityStates IsDestroyed="true">
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="3_WithLogical.smartgridtopo#2098019971"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#1018271484"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#1409717904"/>
+  </EntityStates>
+  <EntityStates IsDestroyed="true">
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3_WithLogical.smartgridtopo#1493191468"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="3_WithLogical.smartgridtopo#166615372"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="3_WithLogical.smartgridtopo#283827004"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3_WithLogical.smartgridtopo#1602913473"/>
+  </EntityStates>
+  <EntityStates IsDestroyed="true">
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_WithLogical.smartgridtopo#2043798251"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="3_WithLogical.smartgridtopo#1946930165"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3_WithLogical.smartgridtopo#1363595855"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3_WithLogical.smartgridtopo#1237098828"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3_WithLogical.smartgridtopo#1645520532"/>
+  </PowerStates>
+  <PowerStates PowerOutage="true">
+    <Owner href="3_WithLogical.smartgridtopo#2126556207"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3_WithLogical.smartgridtopo#902203586"/>
+  </PowerStates>
+  <Scenario href="3_WithLogical.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#37273049"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#1991897979"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#1220510184"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="3_NoLogical.smartgridtopo#4030863"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#597155272"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#626853164"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:InterCom" href="3_NoLogical.smartgridtopo#72206975"/>
+  </EntityStates>
+  <EntityStates IsDestroyed="true">
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#916126282"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#1351741558"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#267274562"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="3_NoLogical.smartgridtopo#1524293046"/>
+  </EntityStates>
+  <PowerStates PowerOutage="true">
+    <Owner href="3_NoLogical.smartgridtopo#1147554579"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3_NoLogical.smartgridtopo#1941630678"/>
+  </PowerStates>
+  <PowerStates PowerOutage="true">
+    <Owner href="3_NoLogical.smartgridtopo#870682880"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3_NoLogical.smartgridtopo#917231191"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="3_NoLogical.smartgridtopo#263628782"/>
+  </PowerStates>
+  <Scenario href="3_NoLogical.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>
