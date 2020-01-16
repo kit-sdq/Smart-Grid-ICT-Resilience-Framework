@@ -148,7 +148,7 @@
          version="0.0.0"
          unpack="false"/>
    <plugin
-         id="smartgrid.simcontrol.test.baselib"
+         id="smartgrid.newsimcontrol.baselib"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -160,7 +160,7 @@
          version="0.0.0"
          unpack="false"/>
    <plugin
-         id="deprecated.smartgrid.simcontrol.mocks"
+         id="smartgrid.newsimcontrol.mocks"
          download-size="0"
          install-size="0"
          version="0.0.0"

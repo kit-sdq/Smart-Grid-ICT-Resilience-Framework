@@ -259,46 +259,8 @@ public final class ReactiveSimulationController {
 			this.powerDemandModificationType = powerSpecsModificationType;
 		}
 	}
-	// TODO fix me
-	public void loadDefaultAnalyses() throws CoreException {
 
-		final List<IImpactAnalysis> impact = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
-		for (final IImpactAnalysis e : impact) {
-
-			if (e.getName().equals("Graph Analyzer Impact Analysis")) {
-				impactAnalsis = e;
-				((GraphAnalyzer) impactAnalsis).initForTesting(true);
-			}
-		}
-
-		final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
-		for (final IAttackerSimulation e : attack) {
-			if (e.getName().equals("No Attack Simulation")) {
-				attackerSimulation = e;
-			}
-		}
-
-		final List<ITimeProgressor> time = TestSimulationExtensionPointHelper.getProgressorExtensions();
-		for (final ITimeProgressor e : time) {
-
-			if (e.getName().equals("No Operation")) {
-				timeProgressor = e;
-			}
-		}
-
-		assert impactAnalsis != null;
-		LOG.info("Using impact analysis: " + impactAnalsis.getName());
-		assert timeProgressor != null;
-		LOG.info("Using time progressor: " + timeProgressor.getName());
-		assert attackerSimulation != null;
-		LOG.info("Using attacker simulation: " + attackerSimulation.getName());
-
-		this.powerDemandModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER;
-	}
-
-	public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
-		// TODO:Später wird für PowerDemand und PowerInfeed getrennte Strategien benutzt
-		// TODO:Später wird das abhängig von powerDemandModificationType
+	public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) { 
 		var hackedSmartMeters = getHackedSmartMeters();
 
 		// modify the powerSpecs

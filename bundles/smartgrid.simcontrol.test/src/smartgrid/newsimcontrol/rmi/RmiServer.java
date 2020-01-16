@@ -164,8 +164,6 @@ public class RmiServer implements ISimulationController {
 		}
 		state = RmiServerState.ACTIVE;
 
-		// TODO fix active mode
-
 	}
 
 	@Override
@@ -205,7 +203,7 @@ public class RmiServer implements ISimulationController {
 		} catch (CoreException e1) {
 			throw new SimcontrolInitializationException("Creating eclipse launcher failed", e1);
 		}
-		// TODO check if minimal necessary set is in Map
+
 		// fill values in the working copy
 		for (InitializationMapKeys key : initMap.keySet()) {
 			if (key.equals(InitializationMapKeys.INPUT_PATH_KEY)) {

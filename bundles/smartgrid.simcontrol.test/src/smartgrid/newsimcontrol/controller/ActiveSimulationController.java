@@ -11,7 +11,11 @@ import smartgrid.log4j.LoggingInitializer;
 import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
 import smartgrid.simcontrol.test.baselib.Constants;
 
-// TODO add JavaDoc Description
+/**
+ * The active simulation controller is the one which is run using the graphical interface introduced by the eclipse run configurations.
+ * @author mazenebada
+ *
+ */
 public final class ActiveSimulationController {
 
     private static final Logger LOG = Logger.getLogger(ActiveSimulationController.class);
