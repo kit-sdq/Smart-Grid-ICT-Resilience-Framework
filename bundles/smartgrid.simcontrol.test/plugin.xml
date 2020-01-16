@@ -15,7 +15,7 @@
             delegate="smartgrid.newsimcontrol.SimcontrolLaunchConfigurationDelegate"
             delegateDescription="Delegate to start the Simcontroller"
             delegateName="SimcontrolDelegate"
-            id="smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType"
+            id="smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType"
             modes="run,debug"
             name="SimControl">
             delegate= "org.eclipse.jdt.internal.launching.JavaLocalApplicationLaunchConfigurationDelegate" 

@@ -177,7 +177,7 @@ public class Helper {
     protected static void initializeAnalyzer(final GraphAnalyzer analyzer, final String ignore) throws CoreException {
         final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
         final ILaunchConfigurationType type = manager
-                .getLaunchConfigurationType("smartgrid.simcontrol.SimcontrolLaunchConfigurationType");
+                .getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
         final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance");
         workingCopy.setAttribute(Constants.IGNORE_LOC_CON_KEY, ignore);
         final ILaunchConfiguration config = workingCopy.doSave();

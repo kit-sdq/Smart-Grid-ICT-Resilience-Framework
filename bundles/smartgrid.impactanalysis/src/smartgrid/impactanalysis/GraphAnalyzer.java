@@ -296,7 +296,23 @@ public class GraphAnalyzer implements IImpactAnalysis {
         LOG.debug("Validate clusteralgorithm");
 
         this.physicalClusters = Tarjan.getClusters(this.adjacentMatrix, this.internalToExternalID);
-
+        for (final String controlID : this.controlCenters) {
+        	
+            final int internalControlID = this.externalToInternalID.get(controlID);
+            final Double[] connectionAvailable = new Double[this.internalMaxID + 1];
+            for (int i = 0; i < connectionAvailable.length; i++) {
+                connectionAvailable[i] = 0.0;
+            }
+            for (final List<Integer> l : this.physicalClusters) {
+                if (l.contains(internalControlID)) {
+                    for (final Integer n : l) {
+                        connectionAvailable[n] = 1.0;
+                    }
+                }
+            }
+            this.controlCenterConnectivity.put(controlID, connectionAvailable);
+        }
+        
         LOG.debug("End readPhysicalConnections");
     }
 

@@ -56,8 +56,9 @@ public class AnalyzerTestWithLogical {
 
         analyzer = new GraphAnalyzer();
         try {
-            Helper.initializeAnalyzer(analyzer, "false");
-        } catch (final CoreException e) {
+            //Helper.initializeAnalyzer(analyzer, "false");
+        	analyzer.initForTesting(false);
+        } catch (final Exception e) {
             e.printStackTrace();
             fail("Initialization of the graph analyser failed!");
         }
