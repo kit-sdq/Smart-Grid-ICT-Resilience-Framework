@@ -111,9 +111,11 @@ public class ViralHacker implements IAttackerSimulation {
         this.initDone = true;
     }
 
+    /**
+     * Run the attacker simulation. If there is no hacked nodes, it will do nothing
+     */
     @Override
     public ScenarioResult run(final SmartGridTopology topo, final ScenarioResult scenario) {
-        // TODO Handling of no hacked nodes
         if (!this.initDone) {
             throw new IllegalStateException("ViralHacker not initialization. Run init()");
         }

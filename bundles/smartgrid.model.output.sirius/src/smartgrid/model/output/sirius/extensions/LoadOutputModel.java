@@ -2,9 +2,7 @@ package smartgrid.model.output.sirius.extensions;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -28,7 +26,6 @@ import org.eclipse.sirius.diagram.ui.tools.api.editor.DDiagramEditor;
 import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.eclipse.sirius.viewpoint.description.DescriptionFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
@@ -36,14 +33,12 @@ import org.eclipse.ui.PlatformUI;
 import org.modelversioning.emfprofileapplication.EMFProfileApplicationPackage;
 
 import smartgrid.model.helper.sirius.LoadExtensionModel;
-import smartgridinput.ScenarioState;
 import smartgridoutput.ScenarioResult;
 import smartgridoutput.SmartgridoutputPackage;
 import smartgridtopo.SmartGridTopology;
 
 public class LoadOutputModel extends LoadExtensionModel {
 
-	private Session session;
 	protected String outputID;
 
 	public LoadOutputModel() {
@@ -54,41 +49,13 @@ public class LoadOutputModel extends LoadExtensionModel {
 		dialog.setFilterExtensions(new String[] { "*.smartgridoutput" });
 		dialog.setFilterNames(new String[] { "Output Model" });
 	}
-	// TODO fix dead code
+	
 	/**
 	 * Should only be enabled if and when a scenario state is loaded
 	 */
 	@Override
 	public boolean isEnabled() {
-	    if (true)
-	        return true;
-		boolean result = false;
-		if (Display.getDefault() != null) {
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-				    IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			        DDiagramEditor editor = (DDiagramEditor) part;
-					session = editor.getSession();
-				}
-			});
-
-			Collection<Resource> coll = session.getSemanticResources();
-			Iterator<Resource> it = coll.iterator();
-			while (it.hasNext()) {
-				Resource sr = it.next();
-				if (sr.getContents().get(0) instanceof ScenarioState) {
-					result = true;
-					break;
-				}
-			}
-			if (!result) {
-				return false;
-			}
-		}
-
-//		return super.isEnabled();
-		return false;
+	    	return true;
 	}
 	
 	@Override

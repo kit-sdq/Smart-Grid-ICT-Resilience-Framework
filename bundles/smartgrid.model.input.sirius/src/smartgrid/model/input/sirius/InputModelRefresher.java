@@ -266,8 +266,6 @@ public class InputModelRefresher {
             String uriSegments[]= sessionResourceURI.toString().split("/");
             uri = URI.createURI("/"+uriSegments[2]+"/").appendSegment(dialog.getValue() + ".smartgridinput");
         } else {
-            // TODO clear button muss enabled werden -> schwierig -> deshalb custom actions disabled
-            // solange kein input modell geladen ist
             String uriSegments[]= sessionResourceURI.toString().split("/");
             uri = URI.createURI("/"+uriSegments[2]+"/").appendSegment("default.smartgridinput");
             if (doesFileExist(uri.path(), shell)) {

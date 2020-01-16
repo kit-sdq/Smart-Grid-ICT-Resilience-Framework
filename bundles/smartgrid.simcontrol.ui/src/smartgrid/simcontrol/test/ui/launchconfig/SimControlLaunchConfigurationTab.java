@@ -865,7 +865,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
     }
     @SuppressWarnings("unused")
     private boolean areOptionsWrong() {
-        // TODO Add coming checks for the options section of the Ui here
         final boolean timeStepsWrong = !isUInt(timeStepsTextBox.getText());
         final boolean rootNodeWrong = !(isUInt(rootNodeTextbox.getText()) || rootNodeTextbox.getText().equals(Constants.DEFAULT_ROOT_NODE_ID));
 

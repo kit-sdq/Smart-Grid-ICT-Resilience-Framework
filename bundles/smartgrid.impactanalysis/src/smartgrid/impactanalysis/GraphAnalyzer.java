@@ -190,9 +190,9 @@ public class GraphAnalyzer implements IImpactAnalysis {
 
         // Run only if Not Ignore LogicalConnection ^= I want logical
         // Connections
-        // if (!ignoreLogicalConnections) {
+        if (!ignoreLogicalConnections) {
         this.readLogicalConnections(smartGridTopo, impactAnalysisInput);
-        // }//TODO Remove if for rollback
+        }
 
         // Generates Result
         final ScenarioResult result = this.genOutputResult();
@@ -367,7 +367,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
         final ScenarioResult result = factory.createScenarioResult();
         //
 
-        // TODO Remove if/else for rollback
         if (this.ignoreLogicalConnections) {
 
             this.clusterCleaning(factory, result, this.physicalClusters);
