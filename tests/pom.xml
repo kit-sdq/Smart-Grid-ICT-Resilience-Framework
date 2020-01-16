@@ -17,7 +17,7 @@
 		<module>smartgrid.attackersimulation.tests</module>
         -->
         <module>smartgrid.impactanalysis.test</module>
-        <!--<module>smartgrid.newsimcontrol.tests</module>-->
+        <module>smartgrid.newsimcontrol.tests</module>
 	</modules>
 	
 </project>
