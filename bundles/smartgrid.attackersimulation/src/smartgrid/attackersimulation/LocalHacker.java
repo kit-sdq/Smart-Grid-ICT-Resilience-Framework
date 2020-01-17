@@ -128,5 +128,34 @@ public class LocalHacker implements IAttackerSimulation {
         LOG.debug("Hacking done");
         return this.scenarioResult;
     }
+    
+    public void initForTest(String hackingStyle, String hackingSpeed, String rootNode) throws CoreException {
+
+        this.hackingSpeed = Integer
+                .parseInt(hackingSpeed);
+        this.ignoreLogicalConnections = false;
+        final var hackingTypes = HackingType
+                .valueOf(hackingStyle);
+        switch (hackingTypes) {
+        case BFS_HACKING:
+            this.hackingTypes = new BFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
+            break;
+        case DFS_HACKING:
+            this.hackingTypes = new DFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
+            break;
+        case FULLY_MESHED_HACKING:
+            this.hackingTypes = new FullyMeshedStrategy(this.hackingSpeed);
+            this.ignoreLogicalConnections = false;
+            break;
+        default:
+            assert false;
+            break;
+        }
+        this.rootNodeID = rootNode;
+        LOG.info("Hacking speed is: " + this.hackingSpeed);
+        LOG.debug("Init For Testing done");
+
+        this.initDone = true;
+    }
 
 }

@@ -23,7 +23,7 @@ public class FullyMeshedStrategy extends SingleStepAttackStrategies {
         final var entities = cluster.getHasEntities().stream().unordered().filter(e -> !e.isIsHacked())
                 .collect(Collectors.toCollection(ArrayDeque::new));
         int hackCounter = 0;
-        while (!entities.isEmpty() && !this.checkMaxHackingOperations(hackCounter)) {
+        while (!entities.isEmpty() && this.checkMaxHackingOperations(hackCounter)) {
             final var node = entities.pop();
             node.setIsHacked(true);
             hackCounter++;

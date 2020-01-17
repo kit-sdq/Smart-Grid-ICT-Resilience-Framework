@@ -112,16 +112,20 @@ public class ViralHacker implements IAttackerSimulation {
     }
 
     /**
-     * Run the attacker simulation. If there is no hacked nodes, it will do nothing
+     * Run the attacker simulation.
+     * If there is no root node defined, it will pick up any hacked node
+     * if there no hacked nodes it will randomly hack a one and takes it as its root node
      */
     @Override
     public ScenarioResult run(final SmartGridTopology topo, final ScenarioResult scenario) {
         if (!this.initDone) {
             throw new IllegalStateException("ViralHacker not initialization. Run init()");
         }
-        if (this.firstRun) {
-            if (this.rootNode.equals(Constants.DEFAULT_ROOT_NODE_ID)) {
+        if (this.firstRun ) {
+            if (this.rootNode.equals(Constants.DEFAULT_ROOT_NODE_ID) && getHackedNodes(scenario).size() == 0) {
                 this.rootNode = ScenarioModelHelper.selectRandomRoot(this.ignoreLogicalConnections, scenario);
+            } else if (this.rootNode.equals(Constants.DEFAULT_ROOT_NODE_ID) && getHackedNodes(scenario).size() != 0) {
+            	this.rootNode = getHackedNodes(scenario).get(0).getOwner().getId();
             }
             final var rootState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNode, scenario);
             rootState.setIsHacked(true);
@@ -156,5 +160,20 @@ public class ViralHacker implements IAttackerSimulation {
         for (final var rootNode : hackedNodes) {
             strategy.hackNextNode(rootNode);
         }
+    }
+    
+    public void initForTest(String hackingStyle, String hackingSpeed) throws CoreException {
+
+        this.hackingSpeed = Integer
+                .parseInt(hackingSpeed);
+        this.ignoreLogicalConnections = false;
+        this.hackingStyle = HackingType
+                .valueOf(hackingStyle);
+        this.rootNode = Constants.DEFAULT_ROOT_NODE_ID;
+        LOG.info("Hacking speed is: " + this.hackingSpeed);
+        LOG.info("Hacking style is: " + this.hackingStyle);
+        LOG.debug("Init For Testing done");
+
+        this.initDone = true;
     }
 }
