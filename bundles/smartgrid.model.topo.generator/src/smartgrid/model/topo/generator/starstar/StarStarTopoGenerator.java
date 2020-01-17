@@ -40,8 +40,6 @@ public class StarStarTopoGenerator extends AbstractTopoGenerator {
         ControlCenter controlCenter = topoFactory.createControlCenter();
         controlCenter.setId(UIDHelper.generateUID());
         topo.getContainsNE().add(controlCenter);
-
-        HashSet<NetworkNode> networkNodes = new HashSet<NetworkNode>();
         
         // iterate nodes
         for (Entry<String, Map<String, SmartComponentGeoData>> nodeEntry : smartMeterGeoData.entrySet()) {
@@ -50,7 +48,6 @@ public class StarStarTopoGenerator extends AbstractTopoGenerator {
 
             // create network node
             NetworkNode networkNode = topoFactory.createNetworkNode();
-            networkNodes.add(networkNode);
             
             // iterate smart meters
             for (Entry<String, ?> smartMeterEntry : nodeEntry.getValue().entrySet()) {
@@ -90,9 +87,6 @@ public class StarStarTopoGenerator extends AbstractTopoGenerator {
             // connect command center to power
             PowerGridNode firstNode = topo.getContainsPGN().get(0);
             controlCenter.getConnectedTo().add(firstNode);
-            for (NetworkNode networkNode: networkNodes) {
-            	networkNode.getConnectedTo().add(firstNode);
-            }
         } else {
             LOG.error("The generated topology does not have any power nodes. No meaningful results will be produced.");
         }
