@@ -196,7 +196,7 @@ public class RmiServer implements ISimulationController {
 		// createLaunchConfig
 		final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		final ILaunchConfigurationType type = manager
-				.getLaunchConfigurationType("smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType");
+				.getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
 		ILaunchConfigurationWorkingCopy workingCopy = null;
 		try {
 			workingCopy = type.newInstance(null, "testInstance");
