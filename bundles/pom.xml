@@ -32,7 +32,6 @@
         <module>smartgrid.model.topo</module>
         <module>smartgrid.model.topo.edit</module>
         <module>smartgrid.model.topo.editor</module>
-        <module>smartgrid.model.topo.profiles</module>
         <module>smartgrid.model.topo.sirius</module>
         <module>smartgrid.simcontrol.test</module>
         <module>smartgrid.simcontrol.test.baselib</module>
