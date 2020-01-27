@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Appender;
 import org.apache.log4j.FileAppender;
@@ -17,6 +18,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import couplingToICT.ICTElement;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartComponentStateContainer;
@@ -46,7 +48,11 @@ import smartgridoutput.EntityState;
 import smartgridoutput.Offline;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
+import smartgridtopo.ControlCenter;
+import smartgridtopo.GenericController;
+import smartgridtopo.InterCom;
 import smartgridtopo.NetworkEntity;
+import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 
@@ -214,7 +220,7 @@ public final class ReactiveSimulationController {
 		LOG.info("Topology: " + topoPath);
 	}
 
-	public void initTopo(SmartGridTopoContainer topoContainer) {
+	public List<ICTElement> initTopo(SmartGridTopoContainer topoContainer) {
 		// generate and persist topo
 		ITopoGenerator generator = new TrivialTopoGenerator();
 		topo = generator.generateTopo(topoContainer);
@@ -228,6 +234,7 @@ public final class ReactiveSimulationController {
 				workingDirPath + File.separatorChar + "generated.smartgridinput");
 		impactInput = initialState;
 		LOG.info("Input is generated");
+		return topo.getContainsNE().stream().filter(e -> e instanceof NetworkNode || e instanceof ControlCenter || e instanceof InterCom || e instanceof GenericController).map(e-> new ICTElement(e.getId(), e.eClass().toString())).collect(Collectors.toList());
 	}
 
 	public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig)

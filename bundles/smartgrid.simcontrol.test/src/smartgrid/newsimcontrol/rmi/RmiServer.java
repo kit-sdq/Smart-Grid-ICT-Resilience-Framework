@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 
+import couplingToICT.ICTElement;
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
@@ -293,7 +295,7 @@ public class RmiServer implements ISimulationController {
 	}
 
 	@Override
-	public void initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
+	public Collection<ICTElement> initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
 		if (topo == null) {
 			LOG.warn("Topo Container is null");
 		} else {
@@ -302,12 +304,13 @@ public class RmiServer implements ISimulationController {
 				BlockingDataExchanger.storeTopoData(topo);
 			} else if (state == RmiServerState.REACTIVE) {
 				LOG.info("init topo called remotely (ReActive)");
-				reactiveSimControl.initTopo(topo);
+				return reactiveSimControl.initTopo(topo);
 			} else {
 				LOG.error(ERROR_SERVER_NOT_INITIALIZED);
 				throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
 			}
 		}
+		return null;
 
 	}
 
