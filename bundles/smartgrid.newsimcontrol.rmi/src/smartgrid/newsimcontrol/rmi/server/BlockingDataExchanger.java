@@ -1,4 +1,4 @@
-package smartgrid.newsimcontrol.rmi;
+package smartgrid.newsimcontrol.rmi.server;
 
 
 import org.apache.log4j.Logger;

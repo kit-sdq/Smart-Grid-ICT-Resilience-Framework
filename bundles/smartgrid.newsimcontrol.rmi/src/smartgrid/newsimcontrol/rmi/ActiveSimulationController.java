@@ -1,4 +1,4 @@
-package smartgrid.newsimcontrol.controller;
+package smartgrid.newsimcontrol.rmi;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -8,7 +8,8 @@ import couplingToICT.PowerSpecContainer;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
+import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
+import smartgrid.newsimcontrol.rmi.server.BlockingDataExchanger;
 import smartgrid.simcontrol.test.baselib.Constants;
 
 // TODO add JavaDoc Description

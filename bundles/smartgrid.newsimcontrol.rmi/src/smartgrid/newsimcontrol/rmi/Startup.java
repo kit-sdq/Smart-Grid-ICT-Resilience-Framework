@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.ui.IStartup;
 
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.newsimcontrol.rmi.RmiServer;
+import smartgrid.newsimcontrol.rmi.server.RmiServer;
 
 /**
  * @author mazenebada

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1" id="436221">
   <EntityStates>
     <Owner xsi:type="smartgridtopo:ControlCenter" href="example5.smartgridtopo#1802283683"/>
   </EntityStates>
@@ -45,5 +45,5 @@
   <PowerStates>
     <Owner href="example5.smartgridtopo#2104032113"/>
   </PowerStates>
-  <Scenario href="example5.smartgridtopo#/"/>
+  <Scenario href="example5.smartgridtopo#7478945"/>
 </smartgridinput:ScenarioState>

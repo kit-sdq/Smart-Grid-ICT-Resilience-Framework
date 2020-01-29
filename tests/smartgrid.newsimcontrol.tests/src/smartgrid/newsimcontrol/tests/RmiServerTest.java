@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import couplingToICT.SimcontrolException;
 import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartGridTopoContainer;
-import smartgrid.newsimcontrol.rmi.RmiServer;
+import smartgrid.newsimcontrol.rmi.server.RmiServer;
 import smartgrid.newsimcontrol.tests.helpers.InitHelpers;
 
 public class RmiServerTest {
@@ -37,7 +37,7 @@ public class RmiServerTest {
 		var dtoMap = InitHelpers.createDTOMAP(System.getProperty("java.io.tmpdir") + File.separator + System.currentTimeMillis());
 		try {
 			if(server!=null)
-				server.initReactive(dtoMap);
+				server.initConfiguration(dtoMap);
 		} catch (RemoteException | SimcontrolInitializationException e) {
 			fail(e.getMessage());
 		}

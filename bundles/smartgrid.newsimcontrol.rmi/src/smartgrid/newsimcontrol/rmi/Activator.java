@@ -1,11 +1,11 @@
-package smartgrid.newsimcontrol;
+package smartgrid.newsimcontrol.rmi;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
-import smartgrid.newsimcontrol.rmi.RmiServer;
+import smartgrid.newsimcontrol.rmi.server.BlockingDataExchanger;
+import smartgrid.newsimcontrol.rmi.server.RmiServer;
 
 /**
  * The activator class controls the plug-in life cycle

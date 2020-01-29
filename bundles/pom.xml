@@ -37,6 +37,7 @@
         <module>smartgrid.simcontrol.test.baselib</module>
         <module>smartgrid.simcontrol.ui</module>
         <module>smartgrid.simcontrol.test.mocks</module>
+        <module>smartgrid.newsimcontrol.rmi</module>
 	</modules>
 
 </project>

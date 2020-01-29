@@ -4,11 +4,13 @@ Bundle-Name: Tests
 Bundle-SymbolicName: smartgrid.newsimcontrol.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: smartgrid.newsimcontrol.tests;uses:="couplingToICT",
- smartgrid.newsimcontrol.tests.client;x-internal:=true
+ smartgrid.newsimcontrol.tests.client;x-internal:=true,
+ smartgrid.newsimcontrol.tests.helpers
 Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  couplingSG;bundle-version="1.0.0",
  smartgrid.newsimcontrol,
  org.junit,
- org.junit.jupiter.api
+ org.junit.jupiter.api,
+ smartgrid.newsimcontrol.rmi;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: smartgrid.newsimcontrol.tests

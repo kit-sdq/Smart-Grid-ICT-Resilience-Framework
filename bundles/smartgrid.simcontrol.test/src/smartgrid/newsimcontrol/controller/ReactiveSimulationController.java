@@ -2,6 +2,7 @@ package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,10 +18,14 @@ import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.osgi.service.component.annotations.Component;
 
 import couplingToICT.ICTElement;
+import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
+import couplingToICT.SimcontrolException;
+import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
@@ -55,7 +60,7 @@ import smartgridtopo.NetworkEntity;
 import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
-
+@Component
 public final class ReactiveSimulationController {
 
 	private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
@@ -398,4 +403,5 @@ public final class ReactiveSimulationController {
 			fileAppender.close();
 		}
 	}
+
 }

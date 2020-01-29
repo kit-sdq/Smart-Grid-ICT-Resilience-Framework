@@ -1,4 +1,4 @@
-package smartgrid.newsimcontrol.rmi;
+package smartgrid.newsimcontrol.rmi.server;
 
 import java.io.File;
 import java.rmi.NotBoundException;
@@ -19,6 +19,7 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 
 import couplingToICT.ICTElement;
+import couplingToICT.ISimulationControllerRemote;
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
@@ -30,9 +31,9 @@ import couplingToICT.initializer.AttackerSimulationsTypes;
 import couplingToICT.initializer.HackingStyle;
 import couplingToICT.initializer.InitializationMapKeys;
 import couplingToICT.initializer.PowerSpecsModificationTypes;
-import smartgrid.newsimcontrol.SimcontrolLaunchConfigurationDelegate;
-import smartgrid.newsimcontrol.controller.ActiveSimulationController;
 import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
+import smartgrid.newsimcontrol.rmi.ActiveSimulationController;
+import smartgrid.newsimcontrol.rmi.Startup;
 
 /**
  * This class acts as RMI Server for the KRITIS simulation of the IKET. The
@@ -53,7 +54,7 @@ import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
  * 
  * @author Mazen
  */
-public class RmiServer implements ISimulationController {
+public class RmiServer implements ISimulationControllerRemote {
 
 	private enum RmiServerState {
 		NOT_INIT, ACTIVE, REACTIVE;
@@ -158,7 +159,7 @@ public class RmiServer implements ISimulationController {
 	}
 
 	@Override
-	public void initActive() {
+	public void initWithoutConfiguration() {
 
 		LOG.info("init active called remotely");
 		if (state != RmiServerState.NOT_INIT) {
@@ -171,7 +172,7 @@ public class RmiServer implements ISimulationController {
 	}
 
 	@Override
-	public void initReactive(Map<InitializationMapKeys, String> initMap)
+	public void initConfiguration(Map<InitializationMapKeys, String> initMap)
 			throws RemoteException, SimcontrolInitializationException {
 
 		LOG.info("init reactive called remotely");
@@ -273,7 +274,7 @@ public class RmiServer implements ISimulationController {
 		}
 	}
 
-	@Override
+	@Deprecated
 	public void initReactive(String outputPath, String topoPath, String inputStatePath)
 			throws RemoteException, SimcontrolException, SimcontrolInitializationException {
 
@@ -290,7 +291,7 @@ public class RmiServer implements ISimulationController {
 		initMap.put(InitializationMapKeys.ATTACKER_SIMULATION_KEY,
 				AttackerSimulationsTypes.NO_ATTACK_SIMULATION.toString());
 		initMap.put(InitializationMapKeys.POWER_MODIFY_KEY, PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.toString());
-		initReactive(initMap);
+		initConfiguration(initMap);
 
 	}
 
