@@ -70,9 +70,9 @@ public class LokalHakerFullyMeshedTest {
         this.localHacker = new LocalHacker();
 
         // for fast testing
-        localHacker.initForTest("FULLY_MESHED_HACKING", hackingSpeed, rootNode);
+        //localHacker.initForTest("FULLY_MESHED_HACKING", hackingSpeed, rootNode);
 
-        //AttackerHelper.initializeLokalHacker(this.localHacker, "FULLY_MESHED_HACKING", rootNode, hackingSpeed);
+        AttackerHelper.initializeLokalHacker(this.localHacker, "FULLY_MESHED_HACKING", rootNode, hackingSpeed);
     }
 
     /**
@@ -84,9 +84,9 @@ public class LokalHakerFullyMeshedTest {
         ScenarioResult result = null;
         try {
             // for fast testing
-            analyzer.initForTesting(false);
+            //analyzer.initForTesting(false);
 
-            // AttackerHelper.initializeAnalyzer(analyzer, "false");
+            AttackerHelper.initializeAnalyzer(analyzer, "false");
 
             result = analyzer.run(smartGridTopology1, state1);
             this.initializeHacker("349823785", "2");
@@ -110,9 +110,9 @@ public class LokalHakerFullyMeshedTest {
         ScenarioResult result = null;
         try {
             // for fast testing
-            analyzer.initForTesting(false);
+            //analyzer.initForTesting(false);
 
-            // AttackerHelper.initializeAnalyzer(analyzer, "false");
+            AttackerHelper.initializeAnalyzer(analyzer, "false");
 
             result = analyzer.run(smartGridTopology1, state1);
             this.initializeHacker("349823785", "1");
@@ -146,9 +146,9 @@ public class LokalHakerFullyMeshedTest {
         ScenarioResult result = null;
         try {
             // for fast testing
-            analyzer.initForTesting(true);
+            //analyzer.initForTesting(true);
 
-            //AttackerHelper.initializeAnalyzer(analyzer, "true");
+            AttackerHelper.initializeAnalyzer(analyzer, "true");
 
             result = analyzer.run(smartGridTopology2, state2);
             this.initializeHacker("228448021", "2");

@@ -129,6 +129,7 @@ public class LocalHacker implements IAttackerSimulation {
         return this.scenarioResult;
     }
     
+    @Deprecated
     public void initForTest(String hackingStyle, String hackingSpeed, String rootNode) throws CoreException {
 
         this.hackingSpeed = Integer

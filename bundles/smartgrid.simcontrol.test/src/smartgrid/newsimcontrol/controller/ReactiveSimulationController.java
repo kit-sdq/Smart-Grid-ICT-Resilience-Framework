@@ -217,6 +217,7 @@ public final class ReactiveSimulationController {
 	public void initTopo(SmartGridTopoContainer topoContainer) {
 		// generate and persist topo
 		ITopoGenerator generator = new TrivialTopoGenerator();
+		//TODO: Wie soll es hier aussehen?
 		topo = generator.generateTopo(topoContainer);
 		FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.separatorChar + "generated.smartgridtopo");
 		LOG.info("Topo is generated");

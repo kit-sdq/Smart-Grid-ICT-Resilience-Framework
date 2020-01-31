@@ -76,9 +76,9 @@ public class ViralHackerStandardTest {
         this.viralHacker = new ViralHacker();
 
         // for fast testing
-        viralHacker.initForTest("STANDARD_HACKING", hackingSpeed);
+        //viralHacker.initForTest("STANDARD_HACKING", hackingSpeed);
 
-        //AttackerHelper.initializeViralHacker(this.viralHacker, "STANDARD_HACKING", hackingSpeed);
+        AttackerHelper.initializeViralHacker(this.viralHacker, "STANDARD_HACKING", hackingSpeed);
     }
 
     /**
@@ -91,9 +91,9 @@ public class ViralHackerStandardTest {
         ScenarioResult result = null;
         try {
             // for fast testing
-            analyzer.initForTesting(false);
+            //analyzer.initForTesting(false);
 
-            //AttackerHelper.initializeAnalyzer(analyzer, "false");
+            AttackerHelper.initializeAnalyzer(analyzer, "false");
 
             result = analyzer.run(smartGridTopology1, state1);
             this.initializeHacker("1");
@@ -133,9 +133,9 @@ public class ViralHackerStandardTest {
         ScenarioResult result = null;
         try {
             // for fast testing
-            analyzer.initForTesting(false);
+            //analyzer.initForTesting(false);
 
-            //AttackerHelper.initializeAnalyzer(analyzer, "false");
+            AttackerHelper.initializeAnalyzer(analyzer, "false");
 
             result = analyzer.run(smartGridTopology2, state2);
             this.initializeHacker("1");
@@ -190,9 +190,9 @@ public class ViralHackerStandardTest {
         ScenarioResult result = null;
         try {
             // for fast testing
-            analyzer.initForTesting(false);
+            //analyzer.initForTesting(false);
 
-            //AttackerHelper.initializeAnalyzer(analyzer, "false");
+            AttackerHelper.initializeAnalyzer(analyzer, "false");
 
             result = analyzer.run(smartGridTopology3, state3);
             this.initializeHacker("1");
@@ -294,8 +294,8 @@ public class ViralHackerStandardTest {
 
         ScenarioResult result = null;
         try {
-            analyzer.initForTesting(false);
-            //AttackerHelper.initializeAnalyzer(analyzer, "false");
+            //analyzer.initForTesting(false);
+            AttackerHelper.initializeAnalyzer(analyzer, "false");
             result = analyzer.run(smartGridTopology3, state3);
             this.initializeHacker("1");
         } catch (final CoreException e) {

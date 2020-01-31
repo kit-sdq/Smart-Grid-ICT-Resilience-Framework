@@ -162,6 +162,7 @@ public class ViralHacker implements IAttackerSimulation {
         }
     }
     
+    @Deprecated
     public void initForTest(String hackingStyle, String hackingSpeed) throws CoreException {
 
         this.hackingSpeed = Integer

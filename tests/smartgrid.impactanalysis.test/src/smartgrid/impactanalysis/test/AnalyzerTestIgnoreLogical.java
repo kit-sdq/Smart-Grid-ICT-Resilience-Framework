@@ -64,8 +64,8 @@ public class AnalyzerTestIgnoreLogical {
 
         analyzer = new GraphAnalyzer();
         try {
-            //Helper.initializeAnalyzer(analyzer, "true");
-        	analyzer.initForTesting(true);
+            Helper.initializeAnalyzer(analyzer, "true");
+        	//analyzer.initForTesting(true);
         } catch (final Exception e) {
             e.printStackTrace();
             fail("Initialization of the graph analyser failed!");
