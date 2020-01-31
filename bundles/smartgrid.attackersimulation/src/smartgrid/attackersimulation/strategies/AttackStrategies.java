@@ -42,8 +42,12 @@ public abstract class AttackStrategies {
             }
         }
         nextNetworkEntities.remove(rootNode); // remove rootNode
-        return cluster.getHasEntities().stream().filter(nodeState -> nextNetworkEntities.contains(nodeState.getOwner()))
-                .collect(Collectors.toSet());
+        Set<On> conenctedNodes = new HashSet<On>();
+        for (On onEntity : cluster.getHasEntities()) {
+        	if (nextNetworkEntities.contains(onEntity.getOwner())) 
+        		conenctedNodes.add(onEntity);
+        }
+        return conenctedNodes;
     }
 
     protected int getHackingSpeed() {
