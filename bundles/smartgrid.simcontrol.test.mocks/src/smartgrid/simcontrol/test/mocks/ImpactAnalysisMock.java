@@ -1,7 +1,10 @@
 package smartgrid.simcontrol.test.mocks;
 
+import java.util.Map;
+
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 import smartgridinput.ScenarioState;
 import smartgridoutput.Cluster;
@@ -60,6 +63,10 @@ public class ImpactAnalysisMock implements IImpactAnalysis {
 
     @Override
     public void init(final ILaunchConfiguration config) {
+    }
+    
+    @Override
+    public void init(final Map<InitializationMapKeys, String> initMap) {
     }
 
     @Override

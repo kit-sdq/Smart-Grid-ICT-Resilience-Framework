@@ -13,7 +13,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.helper.FileSystemHelper;
+import smartgrid.helper.HashMapHelper;
 import smartgrid.model.helper.input.LoadInputModelConformityHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
@@ -533,5 +535,35 @@ public class GraphAnalyzer implements IImpactAnalysis {
     @Override
     public String getName() {
         return "Graph Analyzer Impact Analysis";
+    }
+    
+    @Override
+    public void init(final Map<InitializationMapKeys, String> initMap) {
+
+        this.internalMaxID = 0;
+        this.powerStates = new HashMap<>();
+        this.entityStates = new HashMap<>();
+        this.controlCenters = new LinkedList<>();
+        this.internalToExternalID = new HashMap<>();
+        this.externalToInternalID = new HashMap<>();
+        this.internalToCluster = new HashMap<>();
+        this.logicalNodes = new LinkedList<>();
+        this.controlCenterConnectivity = new HashMap<>();
+
+        final String ignoreLogicalConnectionsString = HashMapHelper.getAttribute(initMap, InitializationMapKeys.IGNORE_LOC_CON_KEY, Constants.FAIL);
+
+        if (ignoreLogicalConnectionsString.equals(Constants.FAIL)) {
+            // Checks whether DEFAULT_IGNORE_LOC_CON_KEY is true and assigns it
+            this.ignoreLogicalConnections = Constants.TRUE.equals(Constants.DEFAULT_IGNORE_LOC_CON);
+
+        } else {
+            // checks whether ignoreLogicalConnectionsString is true and assigns it
+            this.ignoreLogicalConnections = Constants.TRUE.equals(ignoreLogicalConnectionsString);
+        }
+
+        LOG.info("Ignoring logical connections: " + this.ignoreLogicalConnections);
+
+        LOG.debug("Init done");
+        this.initDone = true;
     }
 }

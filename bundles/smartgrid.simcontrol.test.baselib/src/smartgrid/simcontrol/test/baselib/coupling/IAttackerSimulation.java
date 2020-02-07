@@ -1,8 +1,11 @@
 package smartgrid.simcontrol.test.baselib.coupling;
 
+import java.util.Map;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
 
@@ -10,6 +13,14 @@ public interface IAttackerSimulation extends ISimulationComponent {
 
     public ScenarioResult run(SmartGridTopology smartGridTopo, ScenarioResult impactAnalysisOutput);
 
+    /**
+     * To be used without a launch configuration
+     *
+     * @param config
+     *            behavior for the Attacker as a Map
+     */
+    public void init(final Map<InitializationMapKeys, String> initMap);
+    
     /**
      * If using ExtensionPoints and so 0-parameter Constructor pass the config from Simcontrol UI to
      * this Method to build the desired AttackerSimulation ("Factory Method")
@@ -20,6 +31,7 @@ public interface IAttackerSimulation extends ISimulationComponent {
      * @throws CoreException
      *             If ILaunchConfiguration.getAttribute fails
      */
+    @Deprecated
     public void init(ILaunchConfiguration config) throws CoreException;
 
     /**

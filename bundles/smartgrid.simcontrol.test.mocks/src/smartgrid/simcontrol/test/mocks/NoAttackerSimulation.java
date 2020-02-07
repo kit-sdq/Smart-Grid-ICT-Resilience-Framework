@@ -1,7 +1,10 @@
 package smartgrid.simcontrol.test.mocks;
 
+import java.util.Map;
+
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
@@ -25,6 +28,11 @@ public class NoAttackerSimulation implements IAttackerSimulation {
 
     @Override
     public void init(final ILaunchConfiguration config) {
+        // Nothing to do here
+    }
+    
+    @Override
+    public void init(final Map<InitializationMapKeys, String> initMap) {
         // Nothing to do here
     }
 

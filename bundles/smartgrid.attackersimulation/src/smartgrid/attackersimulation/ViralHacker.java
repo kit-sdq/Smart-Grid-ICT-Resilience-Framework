@@ -1,14 +1,17 @@
 package smartgrid.attackersimulation;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.attackersimulation.strategies.BFSStrategy;
 import smartgrid.attackersimulation.strategies.FullyMeshedStrategy;
+import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.HackingType;
@@ -95,6 +98,7 @@ public class ViralHacker implements IAttackerSimulation {
      * Remark Root NodeIDs {@link smartgrid.simcontrol.baselib.Constants} have to be List of String!
      */
     @Override
+    @Deprecated
     public void init(final ILaunchConfiguration config) throws CoreException {
 
         this.hackingSpeed = Integer
@@ -174,6 +178,30 @@ public class ViralHacker implements IAttackerSimulation {
         LOG.info("Hacking speed is: " + this.hackingSpeed);
         LOG.info("Hacking style is: " + this.hackingStyle);
         LOG.debug("Init For Testing done");
+
+        this.initDone = true;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * <p>
+     *
+     * Remark Root NodeIDs {@link smartgrid.simcontrol.baselib.Constants} have to be List of String!
+     */
+    @Override
+    public void init(final Map<InitializationMapKeys, String> initMap) {
+
+    	this.hackingSpeed = Integer
+                .parseInt(HashMapHelper.getAttribute(initMap, InitializationMapKeys.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
+
+        this.ignoreLogicalConnections = Boolean
+                .valueOf(HashMapHelper.getAttribute(initMap, InitializationMapKeys.IGNORE_LOC_CON_KEY, Constants.FALSE));
+        this.rootNode = HashMapHelper.getAttribute(initMap, InitializationMapKeys.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
+        this.hackingStyle = HackingType
+                .valueOf(HashMapHelper.getAttribute(initMap, InitializationMapKeys.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
+        LOG.info("Hacking speed is: " + this.hackingSpeed);
+        LOG.info("Hacking style is: " + this.hackingStyle);
+        LOG.debug("Init done");
 
         this.initDone = true;
     }

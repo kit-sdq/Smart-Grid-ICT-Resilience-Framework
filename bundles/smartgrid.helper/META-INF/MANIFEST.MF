@@ -11,5 +11,6 @@ Require-Bundle: smartgrid.model.output,
  org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.debug.core,
  smartgrid.newsimcontrol.baselib
-Import-Package: smartgrid.simcontrol.test.baselib.coupling
+Import-Package: couplingToICT.initializer,
+ smartgrid.simcontrol.test.baselib.coupling
 Automatic-Module-Name: smartgrid.helper
