@@ -35,6 +35,7 @@ import smartgrid.attackersimulation.psm.MaxPSM;
 import smartgrid.attackersimulation.psm.PowerSpecsModifier;
 import smartgrid.attackersimulation.psm.ZeroPSM;
 import smartgrid.helper.FileSystemHelper;
+import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.TestSimulationExtensionPointHelper;
 import smartgrid.impactanalysis.GraphAnalyzer;
@@ -273,6 +274,37 @@ public final class ReactiveSimulationController {
 		}
 	}
 
+	public void loadCustomUserAnalysis_new(Map<InitializationMapKeys, String> initMap) {
+
+		//TODO:Types determine without a launchConfig
+		//07.02.2020 to discuss with Maximillian
+//		attackerSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+//				TestSimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_KEY,
+//				IAttackerSimulation.class);
+//		impactAnalsis = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+//				TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(),
+//				Constants.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
+//		timeProgressor = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+//				TestSimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
+//				ITimeProgressor.class);
+
+		impactAnalsis.init(initMap);
+		attackerSimulation.init(initMap);
+		timeProgressor.init(initMap);
+
+		LOG.info("Using impact analysis: " + impactAnalsis.getName());
+		LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+		LOG.info("Using time progressor: " + timeProgressor.getName());
+
+		if (!HashMapHelper.getAttribute(initMap, InitializationMapKeys.POWER_MODIFY_KEY, "").equals("")) {
+			String powerModificationString = HashMapHelper.getAttribute(initMap, InitializationMapKeys.POWER_MODIFY_KEY, "");
+			PowerSpecsModificationTypes powerSpecsModificationType = PowerSpecsModificationTypes
+					.valueOf(powerModificationString);
+			this.powerDemandModificationType = powerSpecsModificationType;
+		}
+	}
+
+	
 	public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) { 
 		var hackedSmartMeters = getHackedSmartMeters();
 

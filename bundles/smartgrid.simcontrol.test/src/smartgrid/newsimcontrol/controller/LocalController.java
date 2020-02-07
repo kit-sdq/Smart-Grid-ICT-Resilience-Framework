@@ -162,4 +162,41 @@ public class LocalController implements ISimulationController {
         return null;
     }
 
+    //@Override
+    public void initConfiguration_new(Map<InitializationMapKeys, String> initMap){
+        reactiveSimControl = new ReactiveSimulationController();
+
+        // Values in the map
+        String outputPath = null;
+        String topoPath = "";
+        String inputStatePath = "";
+        boolean generateTopo = false;
+        
+        // fill values in the working copy
+        for (InitializationMapKeys key : initMap.keySet()) {
+            if (key.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
+                inputStatePath = initMap.get(key);
+            } else if (key.equals(InitializationMapKeys.TOPO_PATH_KEY)) {
+                topoPath = initMap.get(key);
+            } else if (key.equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
+                outputPath = initMap.get(key);
+            } else if (key.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
+                generateTopo = Boolean.valueOf(initMap.get(key));
+            }
+        }
+        if (outputPath == null) {
+            outputPath = System.getProperty("java.io.tmpdir");
+            outputPath += File.separator + "smargrid" + System.currentTimeMillis();
+        }
+        reactiveSimControl.init(outputPath);
+        if (generateTopo == false) {
+            reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
+        }
+       
+        
+	    // create launch configuration
+	    reactiveSimControl.loadCustomUserAnalysis_new(initMap);
+        
+
+    }
 }
