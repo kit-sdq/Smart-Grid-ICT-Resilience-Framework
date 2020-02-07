@@ -5,8 +5,8 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
-import smartgrid.newsimcontrol.rmi.RmiServer;
+import smartgrid.newsimcontrol.rmi.server.BlockingDataExchanger;
+import smartgrid.newsimcontrol.rmi.server.RmiServer;
 import smartgrid.newsimcontrol.ui.EclipseUiHelper;
 
 

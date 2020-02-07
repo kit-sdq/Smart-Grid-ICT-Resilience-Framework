@@ -6,6 +6,7 @@ import java.rmi.registry.LocateRegistry;
 import java.util.HashMap;
 
 import couplingToICT.ISimulationController;
+import couplingToICT.ISimulationControllerRemote;
 import couplingToICT.PowerAssigned;
 import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartGridTopoContainer;
@@ -36,7 +37,7 @@ public class TestClientRMI {
 		}
 
 	}
-	private static ISimulationController initRMIConnection(HashMap<InitializationMapKeys, String> exchangeMap)
+	private static ISimulationControllerRemote initRMIConnection(HashMap<InitializationMapKeys, String> exchangeMap)
 			throws RemoteException, NotBoundException, SimcontrolInitializationException {
 		System.setProperty("java.security.policy", "file:java.policy");
 		if (System.getSecurityManager() == null) {
@@ -44,8 +45,8 @@ public class TestClientRMI {
 		}
 		System.setProperty("java.rmi.server.hostname", "localhost");		
 		var registry = LocateRegistry.getRegistry(hostName);
-		var connector = (ISimulationController) registry.lookup(lookupName);
-		connector.initReactive(exchangeMap);
+		var connector = (ISimulationControllerRemote) registry.lookup(lookupName);
+		connector.initConfiguration(exchangeMap);
 		return connector;
 	}
 }

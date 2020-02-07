@@ -2,6 +2,7 @@ package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Appender;
 import org.apache.log4j.FileAppender;
@@ -16,9 +18,14 @@ import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.osgi.service.component.annotations.Component;
 
+import couplingToICT.ICTElement;
+import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
+import couplingToICT.SimcontrolException;
+import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
@@ -46,10 +53,14 @@ import smartgridoutput.EntityState;
 import smartgridoutput.Offline;
 import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
+import smartgridtopo.ControlCenter;
+import smartgridtopo.GenericController;
+import smartgridtopo.InterCom;
 import smartgridtopo.NetworkEntity;
+import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
-
+@Component
 public final class ReactiveSimulationController {
 
 	private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
@@ -214,7 +225,7 @@ public final class ReactiveSimulationController {
 		LOG.info("Topology: " + topoPath);
 	}
 
-	public void initTopo(SmartGridTopoContainer topoContainer) {
+	public List<ICTElement> initTopo(SmartGridTopoContainer topoContainer) {
 		// generate and persist topo
 		ITopoGenerator generator = new TrivialTopoGenerator();
 		//TODO: Wie soll es hier aussehen?
@@ -229,6 +240,7 @@ public final class ReactiveSimulationController {
 				workingDirPath + File.separatorChar + "generated.smartgridinput");
 		impactInput = initialState;
 		LOG.info("Input is generated");
+		return topo.getContainsNE().stream().filter(e -> e instanceof NetworkNode || e instanceof ControlCenter || e instanceof InterCom || e instanceof GenericController).map(e-> new ICTElement(e.getId(), e.eClass().toString())).collect(Collectors.toList());
 	}
 
 	public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig)
@@ -354,4 +366,5 @@ public final class ReactiveSimulationController {
 			fileAppender.close();
 		}
 	}
+
 }

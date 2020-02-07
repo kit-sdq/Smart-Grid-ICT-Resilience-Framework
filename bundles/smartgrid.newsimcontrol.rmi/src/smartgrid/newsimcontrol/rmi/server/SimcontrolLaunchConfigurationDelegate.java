@@ -1,4 +1,4 @@
-package smartgrid.newsimcontrol;
+package smartgrid.newsimcontrol.rmi.server;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
@@ -7,8 +7,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 
-import smartgrid.newsimcontrol.controller.ActiveSimulationController;
-import smartgrid.newsimcontrol.rmi.BlockingDataExchanger;
+import smartgrid.newsimcontrol.rmi.ActiveSimulationController;
 
 /**
  * This class provides the Delegate for the SimControl Approach of the Smartgrid Analysis'

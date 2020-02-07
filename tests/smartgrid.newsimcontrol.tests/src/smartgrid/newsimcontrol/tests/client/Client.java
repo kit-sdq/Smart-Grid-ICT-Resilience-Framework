@@ -13,6 +13,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import couplingToICT.ISimulationController;
+import couplingToICT.ISimulationControllerRemote;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SimcontrolException;
@@ -28,7 +29,7 @@ public class Client {
 	static boolean init;
 	private static final String path = "/home/majuwa/tmp/";
 	
-	static ISimulationController connector;
+	static ISimulationControllerRemote connector;
 	
 	
 	public static void main(String[] args) throws SimcontrolException, IOException, ClassNotFoundException {
@@ -99,7 +100,7 @@ public class Client {
 	      registry = LocateRegistry.getRegistry(hostName);
 	      //LOG.info("RMI remote connector registry initialised (" + hostName + ")");
 	      
-	      connector = (ISimulationController) registry.lookup(lookupName);
+	      connector = (ISimulationControllerRemote) registry.lookup(lookupName);
 	      var initMap = new HashMap<InitializationMapKeys, String>();
 			initMap.put(InitializationMapKeys.INPUT_PATH_KEY, "");
 			initMap.put(InitializationMapKeys.OUTPUT_PATH_KEY, "/home/majuwa/git/Smart-Grid-ICT-Resilience-Framework/examples/smartgrid.model.examples");
@@ -114,7 +115,7 @@ public class Client {
 					AttackerSimulationsTypes.NO_ATTACK_SIMULATION.toString());
 			initMap.put(InitializationMapKeys.POWER_MODIFY_KEY, PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.toString());
 
-	      connector.initReactive(initMap);
+	      connector.initConfiguration(initMap);
 	      //LOG.debug("RMI connector activated (" + lookupName + ")");
 	    } catch (Exception e) {
 	      //LOG.error("Failed to connect to RMI server", e);

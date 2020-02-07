@@ -1,4 +1,4 @@
-package smartgrid.newsimcontrol.rmi;
+package smartgrid.newsimcontrol.rmi.server;
 
 import java.io.File;
 import java.rmi.NotBoundException;
@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 
+import couplingToICT.ICTElement;
+import couplingToICT.ISimulationControllerRemote;
 import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
@@ -28,9 +31,9 @@ import couplingToICT.initializer.AttackerSimulationsTypes;
 import couplingToICT.initializer.HackingStyle;
 import couplingToICT.initializer.InitializationMapKeys;
 import couplingToICT.initializer.PowerSpecsModificationTypes;
-import smartgrid.newsimcontrol.SimcontrolLaunchConfigurationDelegate;
-import smartgrid.newsimcontrol.controller.ActiveSimulationController;
 import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
+import smartgrid.newsimcontrol.rmi.ActiveSimulationController;
+import smartgrid.newsimcontrol.rmi.Startup;
 
 /**
  * This class acts as RMI Server for the KRITIS simulation of the IKET. The
@@ -51,7 +54,7 @@ import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
  * 
  * @author Mazen
  */
-public class RmiServer implements ISimulationController {
+public class RmiServer implements ISimulationControllerRemote {
 
 	private enum RmiServerState {
 		NOT_INIT, ACTIVE, REACTIVE;
@@ -156,7 +159,7 @@ public class RmiServer implements ISimulationController {
 	}
 
 	@Override
-	public void initActive() {
+	public void initWithoutConfiguration() {
 
 		LOG.info("init active called remotely");
 		if (state != RmiServerState.NOT_INIT) {
@@ -164,10 +167,12 @@ public class RmiServer implements ISimulationController {
 		}
 		state = RmiServerState.ACTIVE;
 
+		// TODO fix active mode
+
 	}
 
 	@Override
-	public void initReactive(Map<InitializationMapKeys, String> initMap)
+	public void initConfiguration(Map<InitializationMapKeys, String> initMap)
 			throws RemoteException, SimcontrolInitializationException {
 
 		LOG.info("init reactive called remotely");
@@ -196,14 +201,14 @@ public class RmiServer implements ISimulationController {
 		// createLaunchConfig
 		final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		final ILaunchConfigurationType type = manager
-				.getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
+				.getLaunchConfigurationType("smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType");
 		ILaunchConfigurationWorkingCopy workingCopy = null;
 		try {
 			workingCopy = type.newInstance(null, "testInstance");
 		} catch (CoreException e1) {
 			throw new SimcontrolInitializationException("Creating eclipse launcher failed", e1);
 		}
-
+		// TODO check if minimal necessary set is in Map
 		// fill values in the working copy
 		for (InitializationMapKeys key : initMap.keySet()) {
 			if (key.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
@@ -269,7 +274,7 @@ public class RmiServer implements ISimulationController {
 		}
 	}
 
-	@Override
+	@Deprecated
 	public void initReactive(String outputPath, String topoPath, String inputStatePath)
 			throws RemoteException, SimcontrolException, SimcontrolInitializationException {
 
@@ -286,12 +291,12 @@ public class RmiServer implements ISimulationController {
 		initMap.put(InitializationMapKeys.ATTACKER_SIMULATION_KEY,
 				AttackerSimulationsTypes.NO_ATTACK_SIMULATION.toString());
 		initMap.put(InitializationMapKeys.POWER_MODIFY_KEY, PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.toString());
-		initReactive(initMap);
+		initConfiguration(initMap);
 
 	}
 
 	@Override
-	public void initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
+	public Collection<ICTElement> initTopo(SmartGridTopoContainer topo) throws SimcontrolException {
 		if (topo == null) {
 			LOG.warn("Topo Container is null");
 		} else {
@@ -300,12 +305,13 @@ public class RmiServer implements ISimulationController {
 				BlockingDataExchanger.storeTopoData(topo);
 			} else if (state == RmiServerState.REACTIVE) {
 				LOG.info("init topo called remotely (ReActive)");
-				reactiveSimControl.initTopo(topo);
+				return reactiveSimControl.initTopo(topo);
 			} else {
 				LOG.error(ERROR_SERVER_NOT_INITIALIZED);
 				throw new SimcontrolException(ERROR_SERVER_NOT_INITIALIZED);
 			}
 		}
+		return null;
 
 	}
 

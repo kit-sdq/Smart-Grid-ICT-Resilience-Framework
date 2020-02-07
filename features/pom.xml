@@ -16,6 +16,7 @@
 	<modules>
 		<module>hgf.coupling.couplingSG.feature</module>
 		<module>edu.kit.ipd.sdq.smartgrid.feature</module>
+        <module>edu.kit.ipd.sdq.smartgrid.rmi.feature</module>
 	</modules>
 
 </project>
