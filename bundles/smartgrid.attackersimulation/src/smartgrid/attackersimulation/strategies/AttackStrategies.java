@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import smartgridoutput.Cluster;
 import smartgridoutput.On;
 import smartgridtopo.CommunicatingEntity;
+import smartgridtopo.LogicalCommunication;
 import smartgridtopo.NetworkEntity;
 
 public abstract class AttackStrategies {
@@ -30,15 +31,23 @@ public abstract class AttackStrategies {
                     .collect(Collectors.toSet());
         } else {
             if (rootNode instanceof CommunicatingEntity) {
-                nextNetworkEntities = ((CommunicatingEntity) rootNode).getCommunicatesBy().stream()
-                        .flatMap(e -> e.getLinks().stream()).distinct().collect(Collectors.toSet());
+            	nextNetworkEntities = new HashSet<>();
+            	for (LogicalCommunication logConn : ((CommunicatingEntity) rootNode).getCommunicatesBy()){
+            		for (CommunicatingEntity networkEntity: logConn.getLinks()) {
+            			nextNetworkEntities.add(networkEntity);
+            		}
+            	}
             } else {
                 nextNetworkEntities = new HashSet<>();
             }
         }
         nextNetworkEntities.remove(rootNode); // remove rootNode
-        return cluster.getHasEntities().stream().filter(nodeState -> nextNetworkEntities.contains(nodeState.getOwner()))
-                .collect(Collectors.toSet());
+        Set<On> conenctedNodes = new HashSet<On>();
+        for (On onEntity : cluster.getHasEntities()) {
+        	if (nextNetworkEntities.contains(onEntity.getOwner())) 
+        		conenctedNodes.add(onEntity);
+        }
+        return conenctedNodes;
     }
 
     protected int getHackingSpeed() {

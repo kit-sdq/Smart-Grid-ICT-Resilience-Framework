@@ -1,7 +1,11 @@
 package smartgrid.simcontrol.test.baselib.coupling;
 
+import java.util.Map;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+
+import couplingToICT.initializer.InitializationMapKeys;
 
 public interface ITimeProgressor extends ISimulationComponent {
 
@@ -18,4 +22,11 @@ public interface ITimeProgressor extends ISimulationComponent {
      *             If ILaunchConfiguration.getAttribute fails
      */
     public void init(ILaunchConfiguration config) throws CoreException;
+    
+    /**
+     * @param config
+     *            behavior for the timeprog. as a map
+     * @return true if Init was successful
+     */
+    public void init(final Map<InitializationMapKeys, String> initMap);
 }

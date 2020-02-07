@@ -1,14 +1,17 @@
 package smartgrid.attackersimulation;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.attackersimulation.strategies.BFSStrategy;
 import smartgrid.attackersimulation.strategies.FullyMeshedStrategy;
+import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.HackingType;
@@ -95,6 +98,7 @@ public class ViralHacker implements IAttackerSimulation {
      * Remark Root NodeIDs {@link smartgrid.simcontrol.baselib.Constants} have to be List of String!
      */
     @Override
+    @Deprecated
     public void init(final ILaunchConfiguration config) throws CoreException {
 
         this.hackingSpeed = Integer
@@ -111,15 +115,21 @@ public class ViralHacker implements IAttackerSimulation {
         this.initDone = true;
     }
 
+    /**
+     * Run the attacker simulation.
+     * If there is no root node defined, it will pick up any hacked node
+     * if there no hacked nodes it will randomly hack a one and takes it as its root node
+     */
     @Override
     public ScenarioResult run(final SmartGridTopology topo, final ScenarioResult scenario) {
-        // TODO Handling of no hacked nodes
         if (!this.initDone) {
             throw new IllegalStateException("ViralHacker not initialization. Run init()");
         }
-        if (this.firstRun) {
-            if (this.rootNode.equals(Constants.DEFAULT_ROOT_NODE_ID)) {
+        if (this.firstRun ) {
+            if (this.rootNode.equals(Constants.DEFAULT_ROOT_NODE_ID) && getHackedNodes(scenario).size() == 0) {
                 this.rootNode = ScenarioModelHelper.selectRandomRoot(this.ignoreLogicalConnections, scenario);
+            } else if (this.rootNode.equals(Constants.DEFAULT_ROOT_NODE_ID) && getHackedNodes(scenario).size() != 0) {
+            	this.rootNode = getHackedNodes(scenario).get(0).getOwner().getId();
             }
             final var rootState = ScenarioModelHelper.findEntityOnStateFromID(this.rootNode, scenario);
             rootState.setIsHacked(true);
@@ -154,5 +164,45 @@ public class ViralHacker implements IAttackerSimulation {
         for (final var rootNode : hackedNodes) {
             strategy.hackNextNode(rootNode);
         }
+    }
+    
+    @Deprecated
+    public void initForTest(String hackingStyle, String hackingSpeed) throws CoreException {
+
+        this.hackingSpeed = Integer
+                .parseInt(hackingSpeed);
+        this.ignoreLogicalConnections = false;
+        this.hackingStyle = HackingType
+                .valueOf(hackingStyle);
+        this.rootNode = Constants.DEFAULT_ROOT_NODE_ID;
+        LOG.info("Hacking speed is: " + this.hackingSpeed);
+        LOG.info("Hacking style is: " + this.hackingStyle);
+        LOG.debug("Init For Testing done");
+
+        this.initDone = true;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * <p>
+     *
+     * Remark Root NodeIDs {@link smartgrid.simcontrol.baselib.Constants} have to be List of String!
+     */
+    @Override
+    public void init(final Map<InitializationMapKeys, String> initMap) {
+
+    	this.hackingSpeed = Integer
+                .parseInt(HashMapHelper.getAttribute(initMap, InitializationMapKeys.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
+
+        this.ignoreLogicalConnections = Boolean
+                .valueOf(HashMapHelper.getAttribute(initMap, InitializationMapKeys.IGNORE_LOC_CON_KEY, Constants.FALSE));
+        this.rootNode = HashMapHelper.getAttribute(initMap, InitializationMapKeys.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
+        this.hackingStyle = HackingType
+                .valueOf(HashMapHelper.getAttribute(initMap, InitializationMapKeys.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
+        LOG.info("Hacking speed is: " + this.hackingSpeed);
+        LOG.info("Hacking style is: " + this.hackingStyle);
+        LOG.debug("Init done");
+
+        this.initDone = true;
     }
 }

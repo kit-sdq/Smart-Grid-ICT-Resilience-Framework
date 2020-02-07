@@ -5,9 +5,9 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="smartgrid.simcontrol.test.ui.launchconfig.AbstractSimcontrolTabGroup"
-            id="smartgrid.simcontrol.test.ui.AbstractSimcontrolTabGroup"
-            type="smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType">
+            class="smartgrid.newsimcontrol.ui.launchconfig.AbstractSimcontrolTabGroup"
+            id="smartgrid.newsimcontrol.ui.AbstractSimcontrolTabGroup"
+            type="smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType">
             
             <launchMode 
                   mode="debug"
@@ -38,7 +38,7 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="smartgrid.simcontrol.test.ui.toolbar.InterruptButtonHandler"
+            defaultHandler="smartgrid.newsimcontrol.ui.toolbar.InterruptButtonHandler"
             id="smartgrid.simcontrol.test.ui.interruptCommand"
             name="Free all Simulations">
       </command>

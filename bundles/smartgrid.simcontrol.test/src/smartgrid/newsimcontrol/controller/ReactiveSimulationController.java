@@ -35,6 +35,7 @@ import smartgrid.attackersimulation.psm.MaxPSM;
 import smartgrid.attackersimulation.psm.PowerSpecsModifier;
 import smartgrid.attackersimulation.psm.ZeroPSM;
 import smartgrid.helper.FileSystemHelper;
+import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.TestSimulationExtensionPointHelper;
 import smartgrid.impactanalysis.GraphAnalyzer;
@@ -228,6 +229,7 @@ public final class ReactiveSimulationController {
 	public List<ICTElement> initTopo(SmartGridTopoContainer topoContainer) {
 		// generate and persist topo
 		ITopoGenerator generator = new TrivialTopoGenerator();
+		//TODO: Wie soll es hier aussehen?
 		topo = generator.generateTopo(topoContainer);
 		FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.separatorChar + "generated.smartgridtopo");
 		LOG.info("Topo is generated");
@@ -271,46 +273,39 @@ public final class ReactiveSimulationController {
 			this.powerDemandModificationType = powerSpecsModificationType;
 		}
 	}
-	// TODO fix me
-	public void loadDefaultAnalyses() throws CoreException {
 
-		final List<IImpactAnalysis> impact = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
-		for (final IImpactAnalysis e : impact) {
+	public void loadCustomUserAnalysis_new(Map<InitializationMapKeys, String> initMap) {
 
-			if (e.getName().equals("Graph Analyzer Impact Analysis")) {
-				impactAnalsis = e;
-				((GraphAnalyzer) impactAnalsis).initForTesting(true);
-			}
-		}
+		//TODO:Types determine without a launchConfig
+		//07.02.2020 to discuss with Maximillian
+//		attackerSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+//				TestSimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_KEY,
+//				IAttackerSimulation.class);
+//		impactAnalsis = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+//				TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(),
+//				Constants.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
+//		timeProgressor = TestSimulationExtensionPointHelper.findExtension(launchConfig,
+//				TestSimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
+//				ITimeProgressor.class);
 
-		final List<IAttackerSimulation> attack = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
-		for (final IAttackerSimulation e : attack) {
-			if (e.getName().equals("No Attack Simulation")) {
-				attackerSimulation = e;
-			}
-		}
+		impactAnalsis.init(initMap);
+		attackerSimulation.init(initMap);
+		timeProgressor.init(initMap);
 
-		final List<ITimeProgressor> time = TestSimulationExtensionPointHelper.getProgressorExtensions();
-		for (final ITimeProgressor e : time) {
-
-			if (e.getName().equals("No Operation")) {
-				timeProgressor = e;
-			}
-		}
-
-		assert impactAnalsis != null;
 		LOG.info("Using impact analysis: " + impactAnalsis.getName());
-		assert timeProgressor != null;
-		LOG.info("Using time progressor: " + timeProgressor.getName());
-		assert attackerSimulation != null;
 		LOG.info("Using attacker simulation: " + attackerSimulation.getName());
+		LOG.info("Using time progressor: " + timeProgressor.getName());
 
-		this.powerDemandModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER;
+		if (!HashMapHelper.getAttribute(initMap, InitializationMapKeys.POWER_MODIFY_KEY, "").equals("")) {
+			String powerModificationString = HashMapHelper.getAttribute(initMap, InitializationMapKeys.POWER_MODIFY_KEY, "");
+			PowerSpecsModificationTypes powerSpecsModificationType = PowerSpecsModificationTypes
+					.valueOf(powerModificationString);
+			this.powerDemandModificationType = powerSpecsModificationType;
+		}
 	}
 
-	public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) {
-		// TODO:Später wird für PowerDemand und PowerInfeed getrennte Strategien benutzt
-		// TODO:Später wird das abhängig von powerDemandModificationType
+	
+	public PowerSpecContainer modifyPowerSpecContainer(PowerSpecContainer powerSpecContainer) { 
 		var hackedSmartMeters = getHackedSmartMeters();
 
 		// modify the powerSpecs

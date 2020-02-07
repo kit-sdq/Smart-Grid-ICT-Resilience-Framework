@@ -1,13 +1,17 @@
 package smartgrid.attackersimulation;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.attackersimulation.strategies.BFSStrategy;
 import smartgrid.attackersimulation.strategies.DFSStrategy;
 import smartgrid.attackersimulation.strategies.FullyMeshedStrategy;
 import smartgrid.attackersimulation.strategies.SingleStepAttackStrategies;
+import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.HackingType;
@@ -63,6 +67,7 @@ public class LocalHacker implements IAttackerSimulation {
     }
 
     @Override
+    @Deprecated
     public void init(final ILaunchConfiguration config) throws CoreException {
 
         this.hackingSpeed = Integer
@@ -127,6 +132,65 @@ public class LocalHacker implements IAttackerSimulation {
 
         LOG.debug("Hacking done");
         return this.scenarioResult;
+    }
+    
+    @Deprecated
+    public void initForTest(String hackingStyle, String hackingSpeed, String rootNode) throws CoreException {
+
+        this.hackingSpeed = Integer
+                .parseInt(hackingSpeed);
+        this.ignoreLogicalConnections = false;
+        final var hackingTypes = HackingType
+                .valueOf(hackingStyle);
+        switch (hackingTypes) {
+        case BFS_HACKING:
+            this.hackingTypes = new BFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
+            break;
+        case DFS_HACKING:
+            this.hackingTypes = new DFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
+            break;
+        case FULLY_MESHED_HACKING:
+            this.hackingTypes = new FullyMeshedStrategy(this.hackingSpeed);
+            this.ignoreLogicalConnections = false;
+            break;
+        default:
+            assert false;
+            break;
+        }
+        this.rootNodeID = rootNode;
+        LOG.info("Hacking speed is: " + this.hackingSpeed);
+        LOG.debug("Init For Testing done");
+
+        this.initDone = true;
+    }
+    
+    @Override
+    public void init(final Map<InitializationMapKeys, String> initMap){
+
+        this.hackingSpeed = Integer
+                .parseInt(HashMapHelper.getAttribute(initMap, InitializationMapKeys.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
+
+        this.ignoreLogicalConnections = Boolean
+                .valueOf(HashMapHelper.getAttribute(initMap, InitializationMapKeys.IGNORE_LOC_CON_KEY, Constants.FALSE));
+        this.rootNodeID = HashMapHelper.getAttribute(initMap, InitializationMapKeys.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
+        final var hackingTypes = HackingType
+                .valueOf(HashMapHelper.getAttribute(initMap, InitializationMapKeys.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
+        switch (hackingTypes) {
+        case BFS_HACKING:
+            this.hackingTypes = new BFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
+            break;
+        case DFS_HACKING:
+            this.hackingTypes = new DFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
+            break;
+        case FULLY_MESHED_HACKING:
+            this.hackingTypes = new FullyMeshedStrategy(this.hackingSpeed);
+            this.ignoreLogicalConnections = false;
+            break;
+        default:
+            assert false;
+            break;
+        }
+        this.initDone = true;
     }
 
 }
