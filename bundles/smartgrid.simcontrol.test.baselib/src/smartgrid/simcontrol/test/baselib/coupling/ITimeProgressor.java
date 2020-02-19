@@ -2,8 +2,6 @@ package smartgrid.simcontrol.test.baselib.coupling;
 
 import java.util.Map;
 
-import org.eclipse.core.runtime.CoreException;
-
 import couplingToICT.initializer.InitializationMapKeys;
 
 public interface ITimeProgressor extends ISimulationComponent {

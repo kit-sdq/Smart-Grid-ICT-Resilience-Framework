@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.ui,
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.log4starter
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: smartgridinput,
+Export-Package: smartgrid.model.output,
+ smartgridinput,
  smartgridinput.impl,
  smartgridinput.util,
  smartgridoutput,

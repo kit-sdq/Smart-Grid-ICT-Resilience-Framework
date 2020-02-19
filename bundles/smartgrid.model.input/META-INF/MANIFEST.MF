@@ -14,7 +14,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.edit,
  smartgrid.log4starter
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: smartgridinput,
+Export-Package: smartgrid.input,
+ smartgridinput,
  smartgridinput.impl,
- smartgridinput.util
+ smartgridinput.util,
+ smartgridinput.validation
 Bundle-ActivationPolicy: lazy

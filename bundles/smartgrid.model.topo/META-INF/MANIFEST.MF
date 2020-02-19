@@ -9,7 +9,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: smartgridtopo,
  smartgridtopo.impl,
- smartgridtopo.util
+ smartgridtopo.util,
+ smartgridtopo.validation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

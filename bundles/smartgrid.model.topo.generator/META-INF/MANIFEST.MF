@@ -4,7 +4,7 @@ Bundle-Name: Generator
 Bundle-SymbolicName: smartgrid.model.topo.generator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: smartgrid.model.topo.generator
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: smartgrid.helper,
  smartgrid.model.topo,
  smartgrid.model.test.generation,

@@ -1,10 +1,8 @@
 package smartgrid.newsimcontrol.tests;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
-import java.rmi.RemoteException;
 
 import org.apache.log4j.BasicConfigurator;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import couplingToICT.SimcontrolException;
-import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartGridTopoContainer;
 import smartgrid.newsimcontrol.rmi.server.RmiServer;
 import smartgrid.newsimcontrol.tests.helpers.InitHelpers;

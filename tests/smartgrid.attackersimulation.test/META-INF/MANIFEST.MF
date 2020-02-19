@@ -16,3 +16,4 @@ Require-Bundle: org.junit;bundle-version="4.12.0",
  smartgrid.attackersimulation;bundle-version="1.0.0",
  smartgrid.impactanalysis
 Import-Package: couplingToICT.initializer
+Export-Package: smartgrid.attackersimulation.test

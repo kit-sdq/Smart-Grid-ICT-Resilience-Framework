@@ -12,11 +12,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchConfigurationType;
-import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.core.ILaunchManager;
 
 import couplingToICT.ICTElement;
 import couplingToICT.ISimulationControllerRemote;
@@ -28,7 +23,6 @@ import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.AttackerSimulationsTypes;
-import couplingToICT.initializer.HackingStyle;
 import couplingToICT.initializer.InitializationMapKeys;
 import couplingToICT.initializer.PowerSpecsModificationTypes;
 import smartgrid.newsimcontrol.controller.ReactiveSimulationController;

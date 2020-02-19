@@ -10,3 +10,4 @@ Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  smartgrid.newsimcontrol.baselib,
  couplingSG;bundle-version="1.0.0"
 Automatic-Module-Name: deprecated.smartgrid.simcontrol.mocks
+Export-Package: smartgrid.simcontrol.test.mocks

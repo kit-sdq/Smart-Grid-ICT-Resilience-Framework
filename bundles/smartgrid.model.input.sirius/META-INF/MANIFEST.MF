@@ -33,5 +33,12 @@ Import-Package: org.eclipse.debug.core,
  org.eclipse.emf.common.ui,
  org.modelversioning.emfprofileapplication,
  smartgridinput
-Export-Package: smartgrid.model.input.sirius
+Export-Package: smartgrid,
+ smartgrid.mode.input.sirius.help,
+ smartgrid.model,
+ smartgrid.model.input,
+ smartgrid.model.input.sirius,
+ smartgrid.model.input.sirius.commands,
+ smartgrid.model.input.sirius.services,
+ smartgrid.model.input.sirius.test
 Automatic-Module-Name: smartgrid.model.input.sirius

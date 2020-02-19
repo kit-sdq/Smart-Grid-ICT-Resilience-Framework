@@ -1,7 +1,6 @@
 package smartgrid.model.topo.generator.starstar;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 

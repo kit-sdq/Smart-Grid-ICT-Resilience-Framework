@@ -74,9 +74,9 @@ public class ViralHackerFullyMeshedTest {
         this.viralHacker = new ViralHacker();
 
         // for fast testing
-        viralHacker.initForTest("FULLY_MESHED_HACKING", hackingSpeed);
+        //viralHacker.initForTest("FULLY_MESHED_HACKING", hackingSpeed);
 
-        //AttackerHelper.initializeViralHacker(this.viralHacker, "FULLY_MESHED_HACKING", hackingSpeed);
+        AttackerHelper.initializeViralHacker(this.viralHacker, "FULLY_MESHED_HACKING", hackingSpeed);
     }
 
     /**
