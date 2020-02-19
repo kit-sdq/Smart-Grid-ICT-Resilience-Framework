@@ -172,107 +172,44 @@ public class RmiServer implements ISimulationControllerRemote {
 	}
 
 	@Override
-	public void initConfiguration(Map<InitializationMapKeys, String> initMap)
-			throws RemoteException, SimcontrolInitializationException {
+    public void initConfiguration(Map<InitializationMapKeys, String> initMap){
+        reactiveSimControl = new ReactiveSimulationController();
 
-		LOG.info("init reactive called remotely");
-		if (state != RmiServerState.NOT_INIT) {
-			LOG.warn(ERROR_SERVER_ALREADY_INITIALIZED);
-		}
-		state = RmiServerState.REACTIVE;
-
-		reactiveSimControl = new ReactiveSimulationController();
-
-		// Values in the map
-		String outputPath = null;
-		String topoPath = "";
-		String inputStatePath = "";
-		String ignoreLogicalConnections = "false";
-		String attackerType = AttackerSimulationsTypes.NO_ATTACK_SIMULATION.getDescription();
-		String hackingStype = null;
-		String hackingSpeed = "1";
-		boolean generateTopo = false;
-		int timeSteps = 1;
-		String powerSpecsModificationType = PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.getDescription();
-		String rootNode = "";
-		String impactAnalysis = "Graph Analyzer Impact Analysis";
-		String timeProgresser = "No Operation";
-
-		// createLaunchConfig
-		final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
-		final ILaunchConfigurationType type = manager
-				.getLaunchConfigurationType("smartgrid.simcontrol.test.SimcontrolLaunchConfigurationType");
-		ILaunchConfigurationWorkingCopy workingCopy = null;
-		try {
-			workingCopy = type.newInstance(null, "testInstance");
-		} catch (CoreException e1) {
-			throw new SimcontrolInitializationException("Creating eclipse launcher failed", e1);
-		}
-		// TODO check if minimal necessary set is in Map
-		// fill values in the working copy
-		for (InitializationMapKeys key : initMap.keySet()) {
-			if (key.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
-				inputStatePath = initMap.get(key);
-			} else if (key.equals(InitializationMapKeys.TOPO_PATH_KEY)) {
-				topoPath = initMap.get(key);
-			} else if (key.equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
-				outputPath = initMap.get(key);
-			} else if (key.equals(InitializationMapKeys.IGNORE_LOC_CON_KEY)) {
-				ignoreLogicalConnections = initMap.get(key);
-			} else if (key.equals(InitializationMapKeys.ATTACKER_SIMULATION_KEY)) {
-				attackerType = AttackerSimulationsTypes.valueOf(initMap.get(key)).getDescription();
-			} else if (key.equals(InitializationMapKeys.HACKING_STYLE_KEY)
-					&& initMap.get(InitializationMapKeys.ATTACKER_SIMULATION_KEY) != null
-					&& AttackerSimulationsTypes.valueOf(initMap.get(
-							InitializationMapKeys.ATTACKER_SIMULATION_KEY)) != (AttackerSimulationsTypes.NO_ATTACK_SIMULATION)) {
-				hackingStype = HackingStyle.valueOf(initMap.get(key)).getDescription();
-			} else if (key.equals(InitializationMapKeys.HACKING_SPEED_KEY)) {
-				hackingSpeed = initMap.get(key);
-			} else if (key.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
-				generateTopo = Boolean.valueOf(initMap.get(key));
-			} else if (key.equals(InitializationMapKeys.TIME_STEPS_KEY)) {
-				timeSteps = Integer.valueOf(initMap.get(key));
-			} else if (key.equals(InitializationMapKeys.POWER_MODIFY_KEY)) {
-				powerSpecsModificationType = PowerSpecsModificationTypes.valueOf(initMap.get(key)).getDescription();
-			} else if (key.equals(InitializationMapKeys.ROOT_NODE_ID_KEY)) {
-				rootNode = initMap.get(key);
-			}
-		}
-		if (outputPath == null) {
-			outputPath = System.getProperty("java.io.tmpdir");
-			outputPath += File.separator + "smargrid" + System.currentTimeMillis();
-		}
-		reactiveSimControl.init(outputPath);
-		if (generateTopo == false) {
-			reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
-		}
-
-		workingCopy.setAttribute(InitializationMapKeys.INPUT_PATH_KEY.getDescription(), inputStatePath);
-		workingCopy.setAttribute(InitializationMapKeys.TOPO_PATH_KEY.getDescription(), topoPath);
-		workingCopy.setAttribute(InitializationMapKeys.OUTPUT_PATH_KEY.getDescription(), outputPath);
-		workingCopy.setAttribute(InitializationMapKeys.IGNORE_LOC_CON_KEY.getDescription(), ignoreLogicalConnections);
-		workingCopy.setAttribute(InitializationMapKeys.ATTACKER_SIMULATION_KEY.getDescription(), attackerType);
-		if (hackingStype != null) {
-			workingCopy.setAttribute(InitializationMapKeys.HACKING_STYLE_KEY.getDescription(), hackingStype);
-		}
-		workingCopy.setAttribute(InitializationMapKeys.HACKING_SPEED_KEY.getDescription(), hackingSpeed);
-		workingCopy.setAttribute(InitializationMapKeys.TOPO_GENERATION_KEY.getDescription(), generateTopo);
-		workingCopy.setAttribute(InitializationMapKeys.TIME_STEPS_KEY.getDescription(), timeSteps);
-		workingCopy.setAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), powerSpecsModificationType);
-		workingCopy.setAttribute(InitializationMapKeys.ROOT_NODE_ID_KEY.getDescription(), rootNode);
-		workingCopy.setAttribute(InitializationMapKeys.IMPACT_ANALYSIS_SIMULATION_KEY.getDescription(), impactAnalysis);
-		workingCopy.setAttribute(InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY.getDescription(), timeProgresser);
-		try {
-			// create launch configuration
-			final ILaunchConfiguration config = workingCopy.doSave();
-			reactiveSimControl.loadCustomUserAnalysis(config);
-		} catch (InterruptedException e) {
-			throw new SimcontrolInitializationException("Simcontrol failed to initialize all simulation components.",
-					e);
+        // Values in the map
+        String outputPath = null;
+        String topoPath = "";
+        String inputStatePath = "";
+        boolean generateTopo = false;
+        
+        // fill values in the working copy
+        for (InitializationMapKeys key : initMap.keySet()) {
+            if (key.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
+                inputStatePath = initMap.get(key);
+            } else if (key.equals(InitializationMapKeys.TOPO_PATH_KEY)) {
+                topoPath = initMap.get(key);
+            } else if (key.equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
+                outputPath = initMap.get(key);
+            } else if (key.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
+                generateTopo = Boolean.valueOf(initMap.get(key));
+            }
+        }
+        if (outputPath == null) {
+            outputPath = System.getProperty("java.io.tmpdir");
+            outputPath += File.separator + "smargrid" + System.currentTimeMillis();
+        }
+        reactiveSimControl.init(outputPath);
+        if (generateTopo == false) {
+            reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
+        }
+       
+        try {
+			reactiveSimControl.loadCustomUserAnalysis(initMap);
 		} catch (CoreException e) {
-			throw new SimcontrolInitializationException("Creating eclipse launcher failed", e);
+			LOG.error("Error while intializing the simulations");
 		}
-	}
+        
+
+    }
 
 	@Deprecated
 	public void initReactive(String outputPath, String topoPath, String inputStatePath)

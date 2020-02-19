@@ -1,11 +1,8 @@
 package smartgrid.attackersimulation.test;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchConfigurationType;
-import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.core.ILaunchManager;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -13,6 +10,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.modelversioning.emfprofileapplication.EMFProfileApplicationPackage;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.attackersimulation.LocalHacker;
 import smartgrid.attackersimulation.ViralHacker;
 import smartgrid.impactanalysis.GraphAnalyzer;
@@ -22,7 +20,6 @@ import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartgridtopoPackage;
-import smartgrid.simcontrol.test.baselib.Constants;
 
 /**
  * Class contains helping methods for the Hacking-testing classes
@@ -82,14 +79,16 @@ public class AttackerHelper {
      * @throws CoreException
      *             coreException
      */
-    protected static void initializeAnalyzer(final GraphAnalyzer analyzer, final String ignore) throws CoreException {
-        final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
-        final ILaunchConfigurationType type = manager
-                .getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
-        final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance");
-        workingCopy.setAttribute(Constants.IGNORE_LOC_CON_KEY, ignore);
-        final ILaunchConfiguration config = workingCopy.doSave();
-        analyzer.init(config);
+    protected static void initializeAnalyzer(final GraphAnalyzer analyzer, final String ignore) {
+//      final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
+//      final ILaunchConfigurationType type = manager
+//              .getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
+//      final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance");
+//      workingCopy.setAttribute(Constants.IGNORE_LOC_CON_KEY, ignore);
+//      final ILaunchConfiguration config = workingCopy.doSave();
+      Map<InitializationMapKeys, String> initMap = new HashMap<InitializationMapKeys, String>();
+      initMap.put(InitializationMapKeys.IGNORE_LOC_CON_KEY, ignore);
+      analyzer.init(initMap);
 
     }
 
@@ -108,16 +107,12 @@ public class AttackerHelper {
      *             coreException
      */
     protected static void initializeLokalHacker(final LocalHacker haker, final String hackingStyle,
-            final String rootNode, final String hackingSpeed) throws CoreException {
-        final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
-        final ILaunchConfigurationType type = manager
-                .getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
-        final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance");
-        workingCopy.setAttribute(Constants.HACKING_STYLE_KEY, hackingStyle);
-        workingCopy.setAttribute(Constants.HACKING_SPEED_KEY, hackingSpeed);
-        workingCopy.setAttribute(Constants.ROOT_NODE_ID_KEY, rootNode);
-        final ILaunchConfiguration config = workingCopy.doSave();
-        haker.init(config);
+            final String rootNode, final String hackingSpeed) {
+        Map<InitializationMapKeys, String> initMap = new HashMap<InitializationMapKeys, String>();
+        initMap.put(InitializationMapKeys.HACKING_STYLE_KEY, hackingStyle);
+        initMap.put(InitializationMapKeys.HACKING_SPEED_KEY, hackingSpeed);
+        initMap.put(InitializationMapKeys.ROOT_NODE_ID_KEY, rootNode);
+        haker.init(initMap);
     }
 
     /**
@@ -133,15 +128,13 @@ public class AttackerHelper {
      *             coreException
      */
     protected static void initializeViralHacker(final ViralHacker haker, final String hackingStyle,
-            final String hackingSpeed) throws CoreException {
-        final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
-        final ILaunchConfigurationType type = manager
-                .getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
-        final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance");
-        workingCopy.setAttribute(Constants.HACKING_STYLE_KEY, hackingStyle);
-        workingCopy.setAttribute(Constants.HACKING_SPEED_KEY, hackingSpeed);
-        final ILaunchConfiguration config = workingCopy.doSave();
-        haker.init(config);
+            final String hackingSpeed) {
+
+        Map<InitializationMapKeys, String> initMap = new HashMap<InitializationMapKeys, String>();
+        initMap.put(InitializationMapKeys.HACKING_STYLE_KEY, hackingStyle);
+        initMap.put(InitializationMapKeys.HACKING_SPEED_KEY, hackingSpeed);
+        haker.init(initMap);
+        
     }
 
     /**

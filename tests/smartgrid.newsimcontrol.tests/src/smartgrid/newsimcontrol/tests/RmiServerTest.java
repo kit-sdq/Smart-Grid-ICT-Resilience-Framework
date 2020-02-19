@@ -35,12 +35,8 @@ public class RmiServerTest {
 	@DisplayName("Sample Init Reactive")
 	void initReactive() {
 		var dtoMap = InitHelpers.createDTOMAP(System.getProperty("java.io.tmpdir") + File.separator + System.currentTimeMillis());
-		try {
-			if(server!=null)
-				server.initConfiguration(dtoMap);
-		} catch (RemoteException | SimcontrolInitializationException e) {
-			fail(e.getMessage());
-		}
+		if(server!=null)
+			server.initConfiguration(dtoMap);
 	}
 
 }

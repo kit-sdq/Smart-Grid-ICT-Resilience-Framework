@@ -5,7 +5,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.eclipse.core.runtime.CoreException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

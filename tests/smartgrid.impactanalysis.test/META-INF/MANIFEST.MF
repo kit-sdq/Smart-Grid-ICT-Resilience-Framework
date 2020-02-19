@@ -12,7 +12,5 @@ Require-Bundle: smartgrid.impactanalysis;bundle-version="1.0.0",
  org.eclipse.emf.ecore.xmi,
  smartgrid.model.helper;bundle-version="1.0.0",
  org.modelversioning.emfprofile,
- org.eclipse.debug.core,
- org.eclipse.core.runtime;bundle-version="3.13.0",
  org.apache.log4j;bundle-version="1.2.15"
-Import-Package: smartgrid.simcontrol.test.baselib
+Import-Package: couplingToICT.initializer

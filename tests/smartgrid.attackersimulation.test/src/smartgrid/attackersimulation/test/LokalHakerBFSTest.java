@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-import org.eclipse.core.runtime.CoreException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -74,10 +73,10 @@ public class LokalHakerBFSTest {
      *            the root node
      * @param hackingSpeed
      *            the hacking speed
-     * @throws CoreException
+     * @
      *             cException
      */
-    private void initializeHacker(final String rootNode, final String hackingSpeed) throws CoreException {
+    private void initializeHacker(final String rootNode, final String hackingSpeed)  {
         this.localHacker = new LocalHacker();
 
         // only for fast testing
@@ -102,7 +101,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology1, state1);
             this.initializeHacker("1975215759", "1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -131,7 +130,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology2, state2);
             this.initializeHacker("1393481011", "1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -166,7 +165,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology2, state2);
             this.initializeHacker("1393481011", "3");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -197,7 +196,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology3, state3);
             this.initializeHacker("1747919629", "1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -234,7 +233,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology3, state3);
             this.initializeHacker("1747919629", "3");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -267,7 +266,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology4, state4);
             this.initializeHacker("482167018", "1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -347,7 +346,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology4, state4);
             this.initializeHacker("482167018", "8");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -382,7 +381,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology4, state4);
             this.initializeHacker("123", "8");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -413,7 +412,7 @@ public class LokalHakerBFSTest {
 
             result = analyzer.run(smartGridTopology4, state4);
             this.initializeHacker("", "8");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 

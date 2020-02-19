@@ -2,7 +2,6 @@ package smartgrid.simcontrol.test.mocks;
 
 import java.util.Map;
 
-import org.eclipse.debug.core.ILaunchConfiguration;
 
 import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
@@ -18,11 +17,6 @@ public class NoOperationTimeProgressor implements ITimeProgressor {
     public void progress() {
     }
 
-    @Override
-    public void init(final ILaunchConfiguration config) {
-        // Nothing to do here..
-    }
-    
     @Override
     public void init(final Map<InitializationMapKeys, String> initMap) {
         // Nothing to do here..

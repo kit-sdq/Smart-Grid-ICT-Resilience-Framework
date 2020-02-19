@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-import org.eclipse.core.runtime.CoreException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -68,10 +67,10 @@ public class ViralHackerFullyMeshedTest {
      *
      * @param hackingSpeed
      *            hackingSpeed
-     * @throws CoreException
-     *             coreException
+     * @throws Exception
+     *             Exception
      */
-    private void initializeHacker(final String hackingSpeed) throws CoreException {
+    private void initializeHacker(final String hackingSpeed) throws Exception {
         this.viralHacker = new ViralHacker();
 
         // for fast testing
@@ -93,7 +92,7 @@ public class ViralHackerFullyMeshedTest {
 
             result = analyzer.run(smartGridTopology1, state1);
             this.initializeHacker("1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -133,7 +132,7 @@ public class ViralHackerFullyMeshedTest {
 
             result = analyzer.run(smartGridTopology2, state2);
             this.initializeHacker("1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -176,7 +175,7 @@ public class ViralHackerFullyMeshedTest {
 
             result = analyzer.run(smartGridTopology3, state3);
             this.initializeHacker("1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -239,7 +238,7 @@ public class ViralHackerFullyMeshedTest {
 
             result = analyzer.run(smartGridTopology3, state3);
             this.initializeHacker("3");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -281,7 +280,7 @@ public class ViralHackerFullyMeshedTest {
 
             result = analyzer.run(smartGridTopology3, state3);
             this.initializeHacker("1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
