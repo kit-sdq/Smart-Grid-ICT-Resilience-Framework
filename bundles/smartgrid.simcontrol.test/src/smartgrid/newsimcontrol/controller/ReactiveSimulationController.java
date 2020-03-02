@@ -32,7 +32,7 @@ import smartgrid.attackersimulation.psm.ZeroPSM;
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
-import smartgrid.helper.TestSimulationExtensionPointHelper;
+import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
 import smartgrid.model.test.generation.DefaultInputGenerator;
 import smartgrid.model.test.generation.ITopoGenerator;
@@ -241,14 +241,14 @@ public final class ReactiveSimulationController {
 
 		//TODO:Types determine without a launchConfig
 		//07.02.2020 to discuss with Maximillian
-		attackerSimulation = TestSimulationExtensionPointHelper.findExtension(initMap,
-				TestSimulationExtensionPointHelper.getAttackerSimulationExtensions(), InitializationMapKeys.ATTACKER_SIMULATION_KEY,
+		attackerSimulation = SimulationExtensionPointHelper.findExtension(initMap,
+				SimulationExtensionPointHelper.getAttackerSimulationExtensions(), InitializationMapKeys.ATTACKER_SIMULATION_KEY,
 				IAttackerSimulation.class);
-		impactAnalsis = TestSimulationExtensionPointHelper.findExtension(initMap,
-				TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(),
+		impactAnalsis = SimulationExtensionPointHelper.findExtension(initMap,
+				SimulationExtensionPointHelper.getImpactAnalysisExtensions(),
 				InitializationMapKeys.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
-		timeProgressor = TestSimulationExtensionPointHelper.findExtension(initMap,
-				TestSimulationExtensionPointHelper.getProgressorExtensions(), InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY,
+		timeProgressor = SimulationExtensionPointHelper.findExtension(initMap,
+				SimulationExtensionPointHelper.getProgressorExtensions(), InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY,
 				ITimeProgressor.class);
 
 		impactAnalsis.init(initMap);

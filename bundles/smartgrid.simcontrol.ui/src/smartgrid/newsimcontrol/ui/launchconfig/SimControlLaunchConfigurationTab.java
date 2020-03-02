@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import smartgrid.helper.TestSimulationExtensionPointHelper;
+import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.GenerationStyle;
 import smartgrid.simcontrol.test.baselib.HackingType;
@@ -215,7 +215,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         comboAttackSimulation.addModifyListener(e -> {
 
             try {
-                final List<IAttackerSimulation> list = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
+                final List<IAttackerSimulation> list = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
                 IAttackerSimulation sim = null;
                 for (final IAttackerSimulation attack : list) {
                     if (attack.getName().equals(getSelectionOfComboBox(comboAttackSimulation))) {
@@ -896,21 +896,21 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
 
         try {
-            final List<IAttackerSimulation> attackSimExtensions = TestSimulationExtensionPointHelper.getAttackerSimulationExtensions();
+            final List<IAttackerSimulation> attackSimExtensions = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
             fillSimulationComboBox(attackSimExtensions, comboAttackSimulation);
         } catch (final CoreException e) {
             LOG.error("Could not read Attack Simulation extensions.", e);
         }
         
         try {
-            final List<ITimeProgressor> progressorExtensions = TestSimulationExtensionPointHelper.getProgressorExtensions();
+            final List<ITimeProgressor> progressorExtensions = SimulationExtensionPointHelper.getProgressorExtensions();
             fillSimulationComboBox(progressorExtensions, comboProgressor);
         } catch (final CoreException e) {
             LOG.error("Could not read Time Progressor extensions.", e);
         }
 
         try {
-            final List<IImpactAnalysis> impactAnalysisExtensions = TestSimulationExtensionPointHelper.getImpactAnalysisExtensions();
+            final List<IImpactAnalysis> impactAnalysisExtensions = SimulationExtensionPointHelper.getImpactAnalysisExtensions();
             fillSimulationComboBox(impactAnalysisExtensions, comboImpactAnalysis);
         } catch (final CoreException e) {
             LOG.error("Could not read Impact Analysis extensions.", e);
