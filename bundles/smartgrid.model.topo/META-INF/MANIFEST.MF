@@ -11,7 +11,6 @@ Export-Package: smartgridtopo,
  smartgridtopo.impl,
  smartgridtopo.util,
  smartgridtopo.validation
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11

@@ -4,7 +4,6 @@ Bundle-Name: Simcontrol
 Bundle-SymbolicName: smartgrid.newsimcontrol;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
- org.eclipse.ui;bundle-version="3.109.100",
  smartgrid.log4starter;bundle-version="1.0.0",
  smartgrid.model.input,
  smartgrid.model.output,
