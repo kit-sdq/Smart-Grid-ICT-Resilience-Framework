@@ -8,9 +8,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-Activator: smartgrid.model.output.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  smartgrid.model.topo;visibility:=reexport,
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.log4starter

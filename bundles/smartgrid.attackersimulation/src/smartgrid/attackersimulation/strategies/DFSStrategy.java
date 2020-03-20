@@ -1,7 +1,6 @@
 package smartgrid.attackersimulation.strategies;
 
 import java.util.ArrayDeque;
-import java.util.stream.Collectors;
 
 import smartgridoutput.Cluster;
 import smartgridoutput.On;

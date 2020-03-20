@@ -10,9 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
 
-import couplingToICT.ISimulationController;
 import couplingToICT.ISimulationControllerRemote;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
@@ -24,7 +22,6 @@ import couplingToICT.initializer.PowerSpecsModificationTypes;
 
 public class Client {
 
-	private static final Logger LOG = Logger.getLogger(Client.class);
 	static boolean error;
 	static boolean init;
 	private static final String path = "/home/majuwa/tmp/";

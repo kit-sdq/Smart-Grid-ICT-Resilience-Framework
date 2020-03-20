@@ -3,8 +3,6 @@ package smartgrid.attackersimulation;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.ILaunchConfiguration;
 
 import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.attackersimulation.strategies.BFSStrategy;
@@ -66,36 +64,7 @@ public class LocalHacker implements IAttackerSimulation {
         return "Local Hacker";
     }
 
-    @Override
-    @Deprecated
-    public void init(final ILaunchConfiguration config) throws CoreException {
-
-        this.hackingSpeed = Integer
-                .parseInt(config.getAttribute(Constants.HACKING_SPEED_KEY, Constants.DEFAULT_HACKING_SPEED));
-
-        this.ignoreLogicalConnections = Boolean
-                .valueOf(config.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.FALSE));
-        this.rootNodeID = config.getAttribute(Constants.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
-        final var hackingTypes = HackingType
-                .valueOf(config.getAttribute(Constants.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
-        switch (hackingTypes) {
-        case BFS_HACKING:
-            this.hackingTypes = new BFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
-            break;
-        case DFS_HACKING:
-            this.hackingTypes = new DFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
-            break;
-        case FULLY_MESHED_HACKING:
-            this.hackingTypes = new FullyMeshedStrategy(this.hackingSpeed);
-            this.ignoreLogicalConnections = false;
-            break;
-        default:
-            assert false;
-            break;
-        }
-        this.initDone = true;
-    }
-
+   
     /**
      * setting the Root node
      */
@@ -135,7 +104,7 @@ public class LocalHacker implements IAttackerSimulation {
     }
     
     @Deprecated
-    public void initForTest(String hackingStyle, String hackingSpeed, String rootNode) throws CoreException {
+    public void initForTest(String hackingStyle, String hackingSpeed, String rootNode) {
 
         this.hackingSpeed = Integer
                 .parseInt(hackingSpeed);

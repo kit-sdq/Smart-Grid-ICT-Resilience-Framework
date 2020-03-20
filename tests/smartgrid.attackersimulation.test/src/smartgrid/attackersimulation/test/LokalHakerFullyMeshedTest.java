@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-import org.eclipse.core.runtime.CoreException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -63,10 +62,10 @@ public class LokalHakerFullyMeshedTest {
      *            the root node
      * @param hackingSpeed
      *            the hacking speed
-     * @throws CoreException
-     *             coreException
+     * @throws Exception
+     *             Exception
      */
-    private void initializeHacker(final String rootNode, final String hackingSpeed) throws CoreException {
+    private void initializeHacker(final String rootNode, final String hackingSpeed) throws Exception {
         this.localHacker = new LocalHacker();
 
         // for fast testing
@@ -90,7 +89,7 @@ public class LokalHakerFullyMeshedTest {
 
             result = analyzer.run(smartGridTopology1, state1);
             this.initializeHacker("349823785", "2");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -116,7 +115,7 @@ public class LokalHakerFullyMeshedTest {
 
             result = analyzer.run(smartGridTopology1, state1);
             this.initializeHacker("349823785", "1");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 
@@ -152,7 +151,7 @@ public class LokalHakerFullyMeshedTest {
 
             result = analyzer.run(smartGridTopology2, state2);
             this.initializeHacker("228448021", "2");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Failed to initialize the launch configuration");
         }
 

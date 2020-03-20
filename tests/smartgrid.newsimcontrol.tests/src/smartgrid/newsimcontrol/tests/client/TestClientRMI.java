@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.HashMap;
 
-import couplingToICT.ISimulationController;
 import couplingToICT.ISimulationControllerRemote;
 import couplingToICT.PowerAssigned;
 import couplingToICT.SimcontrolInitializationException;

@@ -7,14 +7,13 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  smartgrid.model.topo;visibility:=reexport,
  org.eclipse.emf.edit,
  smartgrid.log4starter
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: smartgridinput,
  smartgridinput.impl,
- smartgridinput.util
+ smartgridinput.util,
+ smartgridinput.validation
 Bundle-ActivationPolicy: lazy

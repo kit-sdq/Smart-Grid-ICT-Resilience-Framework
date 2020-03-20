@@ -6,13 +6,9 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchConfigurationType;
-import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -20,8 +16,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.modelversioning.emfprofileapplication.EMFProfileApplicationPackage;
 
+import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.impactanalysis.GraphAnalyzer;
-import smartgrid.simcontrol.test.baselib.Constants;
 import smartgridinput.ScenarioState;
 import smartgridinput.SmartgridinputPackage;
 import smartgridoutput.Defect;
@@ -174,14 +170,16 @@ public class Helper {
      * @throws CoreException
      *             coreException
      */
-    protected static void initializeAnalyzer(final GraphAnalyzer analyzer, final String ignore) throws CoreException {
-        final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
-        final ILaunchConfigurationType type = manager
-                .getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
-        final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance");
-        workingCopy.setAttribute(Constants.IGNORE_LOC_CON_KEY, ignore);
-        final ILaunchConfiguration config = workingCopy.doSave();
-        analyzer.init(config);
+    public static void initializeAnalyzer(final GraphAnalyzer analyzer, final String ignore) {
+//        final ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
+//        final ILaunchConfigurationType type = manager
+//                .getLaunchConfigurationType("smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType");
+//        final ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testInstance");
+//        workingCopy.setAttribute(Constants.IGNORE_LOC_CON_KEY, ignore);
+//        final ILaunchConfiguration config = workingCopy.doSave();
+        Map<InitializationMapKeys, String> initMap = new HashMap<InitializationMapKeys, String>();
+        initMap.put(InitializationMapKeys.IGNORE_LOC_CON_KEY, ignore);
+        analyzer.init(initMap);
 
     }
 

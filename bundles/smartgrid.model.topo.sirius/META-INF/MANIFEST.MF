@@ -36,6 +36,10 @@ Import-Package: org.apache.log4j;version="1.2.15",
  org.eclipse.ui.wizards.newresource,
  smartgrid.helper,
  smartgridinput
-Export-Package: smartgrid.model.topo.sirius
+Export-Package: smartgrid.model.topo.sirius,
+ smartgrid.model.topo.sirius.service,
+ smartgrid.model.topo.sirius.wizard,
+ smartgrid.model.topo.sirius.wizard.page,
+ smartgrid.model.topo.sirius.wizard.util
 Automatic-Module-Name: smartgrid.model.topo.sirius
 

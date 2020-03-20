@@ -21,5 +21,6 @@ Require-Bundle: smartgrid.newsimcontrol;bundle-version="1.0.0",
  smartgrid.impactanalysis,
  couplingSG;bundle-version="1.0.0"
 Export-Package: smartgrid.newsimcontrol.rmi,
+ smartgrid.newsimcontrol.rmi.helper,
  smartgrid.newsimcontrol.rmi.server
 Automatic-Module-Name: smartgrid.newsimcontrol.rmi

@@ -6,12 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-// import org.eclipse.emf.common.util.URI;
-// import org.eclipse.emf.ecore.resource.Resource;
-// import org.eclipse.emf.ecore.resource.ResourceSet;
-// import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.ILaunchConfiguration;
 
 import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.helper.FileSystemHelper;
@@ -106,36 +100,6 @@ public class GraphAnalyzer implements IImpactAnalysis {
         this.initDone = true;
         // Do it always with logical Connection
         this.ignoreLogicalConnections = false;
-    }
-
-    @Override
-    public void init(final ILaunchConfiguration config) throws CoreException {
-
-        this.internalMaxID = 0;
-        this.powerStates = new HashMap<>();
-        this.entityStates = new HashMap<>();
-        this.controlCenters = new LinkedList<>();
-        this.internalToExternalID = new HashMap<>();
-        this.externalToInternalID = new HashMap<>();
-        this.internalToCluster = new HashMap<>();
-        this.logicalNodes = new LinkedList<>();
-        this.controlCenterConnectivity = new HashMap<>();
-
-        final String ignoreLogicalConnectionsString = config.getAttribute(Constants.IGNORE_LOC_CON_KEY, Constants.FAIL);
-
-        if (ignoreLogicalConnectionsString.equals(Constants.FAIL)) {
-            // Checks whether DEFAULT_IGNORE_LOC_CON_KEY is true and assigns it
-            this.ignoreLogicalConnections = Constants.TRUE.equals(Constants.DEFAULT_IGNORE_LOC_CON);
-
-        } else {
-            // checks whether ignoreLogicalConnectionsString is true and assigns it
-            this.ignoreLogicalConnections = Constants.TRUE.equals(ignoreLogicalConnectionsString);
-        }
-
-        LOG.info("Ignoring logical connections: " + this.ignoreLogicalConnections);
-
-        LOG.debug("Init done");
-        this.initDone = true;
     }
 
     /**

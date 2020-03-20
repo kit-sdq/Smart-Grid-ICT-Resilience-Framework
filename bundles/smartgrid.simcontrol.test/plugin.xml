@@ -10,24 +10,6 @@
    <extension-point id="smartgrid.simucontrol.test.extensionpoints.kritisSimulation" name="kritisSimulation" schema="schema/smartgrid.simucontrol.test.extensionpoints.kritissimulation.exsd"/>
    
    <extension
-         point="org.eclipse.debug.core.launchConfigurationTypes">
-      <launchConfigurationType
-            delegate="smartgrid.newsimcontrol.SimcontrolLaunchConfigurationDelegate"
-            delegateDescription="Delegate to start the Simcontroller"
-            delegateName="SimcontrolDelegate"
-            id="smartgrid.newsimcontrol.SimcontrolLaunchConfigurationType"
-            modes="run,debug"
-            name="SimControl">
-            delegate= "org.eclipse.jdt.internal.launching.JavaLocalApplicationLaunchConfigurationDelegate" 
-      </launchConfigurationType>
-   </extension>
-   <extension
-         point="org.eclipse.ui.startup">
-      <startup
-            class="smartgrid.newsimcontrol.rmi.Startup">
-      </startup>
-   </extension>
-   <extension
          id="product"
          point="org.eclipse.core.runtime.products">
       <product

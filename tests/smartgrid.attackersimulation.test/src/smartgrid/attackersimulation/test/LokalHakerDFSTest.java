@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-import org.eclipse.core.runtime.CoreException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -76,10 +75,10 @@ public class LokalHakerDFSTest {
      *            the root node
      * @param hackingSpeed
      *            the hacking speed
-     * @throws CoreException
-     *             coreException
+     * @throws Exception
+     *             Exception
      */
-    private void initializeHacker(final String rootNode, final String hackingSpeed) throws CoreException {
+    private void initializeHacker(final String rootNode, final String hackingSpeed) throws Exception {
         this.localHacker = new LocalHacker();
 
         // for fast testing
@@ -96,7 +95,7 @@ public class LokalHakerDFSTest {
         for (int i = 0; i < 10; i++) {
             try {
                 this.testExample1();
-            } catch (final CoreException e) {
+            } catch (final Exception e) {
                 fail("Couldn't initialize the SimControl launch configuration");
             }
         }
@@ -105,10 +104,10 @@ public class LokalHakerDFSTest {
     /**
      * simple model with one cluster testing simply ( not deeply ) DFS.
      *
-     * @throws CoreException
-     *             coreException
+     * @throws Exception
+     *             Exception
      */
-    public void testExample1() throws CoreException {
+    public void testExample1() throws Exception {
 
         // for fast testing
         //analyzer.initForTesting(false);
@@ -144,7 +143,7 @@ public class LokalHakerDFSTest {
         for (int i = 0; i < 10; i++) {
             try {
                 this.testExample2();
-            } catch (final CoreException e) {
+            } catch (final Exception e) {
                 fail("Couldn't initialize the SimControl launch configuration");
             }
         }
@@ -153,10 +152,10 @@ public class LokalHakerDFSTest {
     /**
      * here the DFS is deeply tested with all posible cases
      *
-     * @throws CoreException
-     *             coreException
+     * @throws Exception
+     *             Exception
      */
-    public void testExample2() throws CoreException {
+    public void testExample2() throws Exception {
         // for fast testing
         //analyzer.initForTesting(false);
         AttackerHelper.initializeAnalyzer(analyzer, "false");
@@ -315,7 +314,7 @@ public class LokalHakerDFSTest {
         for (int i = 0; i < 10; i++) {
             try {
                 this.testExample3();
-            } catch (final CoreException e) {
+            } catch (final Exception e) {
                 fail("Couldn't initialize the SimControl launch configuration");
             }
         }
@@ -325,10 +324,10 @@ public class LokalHakerDFSTest {
      * testing simply DFS with a special case where there is already one hacked node in addition to
      * the root node
      *
-     * @throws CoreException
-     *             coreException
+     * @throws Exception
+     *             Exception
      */
-    public void testExample3() throws CoreException {
+    public void testExample3() throws Exception {
 
         // for fast testing
         //analyzer.initForTesting(false);
@@ -374,7 +373,7 @@ public class LokalHakerDFSTest {
         for (int i = 0; i < 10; i++) {
             try {
                 this.testExample4();
-            } catch (final CoreException e) {
+            } catch (final Exception e) {
                 fail("Couldn't initialize the SimControl launch configuration");
             }
         }
@@ -384,10 +383,10 @@ public class LokalHakerDFSTest {
      * complex model contatining loops of nodes to be tested, also containing destroyed nodes and
      * power outage
      *
-     * @throws CoreException
-     *             coreException
+     * @throws Exception
+     *             Exception
      */
-    public void testExample4() throws CoreException {
+    public void testExample4() throws Exception {
 
         // for fast testing
         //analyzer.initForTesting(false);
@@ -465,7 +464,7 @@ public class LokalHakerDFSTest {
 
             result = analyzer.run(smartGridTopology4, state4);
             this.initializeHacker("245702078", "7");
-        } catch (final CoreException e) {
+        } catch (final Exception e) {
             fail("Couldn't initialize the SimControl launch configuration");
         }
 

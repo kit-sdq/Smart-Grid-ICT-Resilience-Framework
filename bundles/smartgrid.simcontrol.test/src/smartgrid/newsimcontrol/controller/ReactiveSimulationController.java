@@ -2,7 +2,6 @@ package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,15 +16,11 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.ILaunchConfiguration;
 import org.osgi.service.component.annotations.Component;
 
 import couplingToICT.ICTElement;
-import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
-import couplingToICT.SimcontrolException;
-import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
@@ -37,14 +32,12 @@ import smartgrid.attackersimulation.psm.ZeroPSM;
 import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
-import smartgrid.helper.TestSimulationExtensionPointHelper;
-import smartgrid.impactanalysis.GraphAnalyzer;
+import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
 import smartgrid.model.test.generation.DefaultInputGenerator;
 import smartgrid.model.test.generation.ITopoGenerator;
 import smartgrid.model.test.generation.TrivialTopoGenerator;
 import smartgrid.newsimcontrol.ReportGenerator;
-import smartgrid.simcontrol.test.baselib.Constants;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
@@ -244,49 +237,19 @@ public final class ReactiveSimulationController {
 		return topo.getContainsNE().stream().filter(e -> e instanceof NetworkNode || e instanceof ControlCenter || e instanceof InterCom || e instanceof GenericController).map(e-> new ICTElement(e.getId(), e.eClass().toString())).collect(Collectors.toList());
 	}
 
-	public void loadCustomUserAnalysis(final ILaunchConfiguration launchConfig)
-			throws CoreException, InterruptedException {
-
-		attackerSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig,
-				TestSimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_KEY,
-				IAttackerSimulation.class);
-		impactAnalsis = TestSimulationExtensionPointHelper.findExtension(launchConfig,
-				TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(),
-				Constants.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
-		timeProgressor = TestSimulationExtensionPointHelper.findExtension(launchConfig,
-				TestSimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
-				ITimeProgressor.class);
-
-		impactAnalsis.init(launchConfig);
-		attackerSimulation.init(launchConfig);
-		timeProgressor.init(launchConfig);
-
-		LOG.info("Using impact analysis: " + impactAnalsis.getName());
-		LOG.info("Using attacker simulation: " + attackerSimulation.getName());
-		LOG.info("Using time progressor: " + timeProgressor.getName());
-
-		if (!launchConfig.getAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), "").equals("")) {
-			String powerModificationString = launchConfig
-					.getAttribute(InitializationMapKeys.POWER_MODIFY_KEY.getDescription(), "");
-			PowerSpecsModificationTypes powerSpecsModificationType = PowerSpecsModificationTypes
-					.valueOf(powerModificationString);
-			this.powerDemandModificationType = powerSpecsModificationType;
-		}
-	}
-
-	public void loadCustomUserAnalysis_new(Map<InitializationMapKeys, String> initMap) {
+	public void loadCustomUserAnalysis(Map<InitializationMapKeys, String> initMap) throws CoreException{
 
 		//TODO:Types determine without a launchConfig
 		//07.02.2020 to discuss with Maximillian
-//		attackerSimulation = TestSimulationExtensionPointHelper.findExtension(launchConfig,
-//				TestSimulationExtensionPointHelper.getAttackerSimulationExtensions(), Constants.ATTACKER_SIMULATION_KEY,
-//				IAttackerSimulation.class);
-//		impactAnalsis = TestSimulationExtensionPointHelper.findExtension(launchConfig,
-//				TestSimulationExtensionPointHelper.getImpactAnalysisExtensions(),
-//				Constants.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
-//		timeProgressor = TestSimulationExtensionPointHelper.findExtension(launchConfig,
-//				TestSimulationExtensionPointHelper.getProgressorExtensions(), Constants.TIME_PROGRESSOR_SIMULATION_KEY,
-//				ITimeProgressor.class);
+		attackerSimulation = SimulationExtensionPointHelper.findExtension(initMap,
+				SimulationExtensionPointHelper.getAttackerSimulationExtensions(), InitializationMapKeys.ATTACKER_SIMULATION_KEY,
+				IAttackerSimulation.class);
+		impactAnalsis = SimulationExtensionPointHelper.findExtension(initMap,
+				SimulationExtensionPointHelper.getImpactAnalysisExtensions(),
+				InitializationMapKeys.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
+		timeProgressor = SimulationExtensionPointHelper.findExtension(initMap,
+				SimulationExtensionPointHelper.getProgressorExtensions(), InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY,
+				ITimeProgressor.class);
 
 		impactAnalsis.init(initMap);
 		attackerSimulation.init(initMap);

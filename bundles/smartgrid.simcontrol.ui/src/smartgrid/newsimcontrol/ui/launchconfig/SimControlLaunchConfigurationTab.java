@@ -36,7 +36,6 @@ import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 //import smartgrid.simcontrol.test.baselib.coupling.IKritisSimulationWrapper;
 //import smartgrid.simcontrol.test.baselib.coupling.IPowerLoadSimulationWrapper;
 import smartgrid.simcontrol.test.baselib.coupling.ISimulationComponent;
-import smartgrid.simcontrol.test.baselib.coupling.ITerminationCondition;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
 
 public class SimControlLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
@@ -895,12 +894,6 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
     private void addElementsToCombos() {
 
-//        try {
-//            final List<IPowerLoadSimulationWrapper> powerLoadExtensions = SimulationExtensionPointHelper.getPowerLoadSimulationExtensions();
-//            fillSimulationComboBox(powerLoadExtensions, comboPowerLoadSimulation);
-//        } catch (final CoreException e) {
-//            LOG.error("Could not read Power Load Simulation extensions.", e);
-//        }
 
         try {
             final List<IAttackerSimulation> attackSimExtensions = SimulationExtensionPointHelper.getAttackerSimulationExtensions();
@@ -908,21 +901,7 @@ public class SimControlLaunchConfigurationTab extends AbstractLaunchConfiguratio
         } catch (final CoreException e) {
             LOG.error("Could not read Attack Simulation extensions.", e);
         }
-
-//        try {
-//            final List<IKritisSimulationWrapper> kritisSimExtensions = SimulationExtensionPointHelper.getKritisSimulationExtensions();
-//            fillSimulationComboBox(kritisSimExtensions, comboKritisSimulation);
-//        } catch (final CoreException e) {
-//            LOG.error("Could not read KRITIS Simulation extensions.", e);
-//        }
-
-        try {
-            final List<ITerminationCondition> terminationConditionExtensions = SimulationExtensionPointHelper.getTerminationConditionExtensions();
-            fillSimulationComboBox(terminationConditionExtensions, comboTerminationCondition);
-        } catch (final CoreException e) {
-            LOG.error("Could not read Termination Condition extensions.", e);
-        }
-
+        
         try {
             final List<ITimeProgressor> progressorExtensions = SimulationExtensionPointHelper.getProgressorExtensions();
             fillSimulationComboBox(progressorExtensions, comboProgressor);
