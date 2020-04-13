@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
 
-public class GetDysSmartComponentsCommand extends ControllerComand {
+public class GetDysSmartComponentsCommand extends ControllerCommand {
 
 	public GetDysSmartComponentsCommand(LocalController controller) {
 		super(controller);

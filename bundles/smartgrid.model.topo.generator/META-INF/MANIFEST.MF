@@ -10,7 +10,6 @@ Require-Bundle: smartgrid.helper,
  smartgrid.model.test.generation,
  couplingSG;bundle-version="1.0.0",
  org.apache.log4j,
- org.eclipse.ui.workbench,
  org.eclipse.osgi
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy

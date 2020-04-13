@@ -8,7 +8,7 @@ import couplingToICT.SimcontrolException;
 import couplingToICT.SmartGridTopoContainer;
 import smartgrid.newsimcontrol.controller.LocalController;
 
-public class GetModifiedPowerspecsCommand extends ControllerComand {
+public class GetModifiedPowerspecsCommand extends ControllerCommand {
 
 	public GetModifiedPowerspecsCommand(LocalController controller) {
 		super(controller);

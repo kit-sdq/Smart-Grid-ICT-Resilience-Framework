@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius.diagram.ui,
  smartgrid.model.helper;bundle-version="1.0.0",
  smartgrid.model.input.sirius;bundle-version="1.0.0",
- smartgrid.model.input
+ smartgrid.model.input,
+ smartgrid.helper;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.eclipse.core.resources,

@@ -25,7 +25,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius.diagram,
  smartgrid.impactanalysis,
  org.eclipse.ui.navigator;bundle-version="3.7.100",
- smartgrid.newsimcontrol.baselib;bundle-version="1.0.0"
+ smartgrid.newsimcontrol.baselib;bundle-version="1.0.0",
+ smartgrid.helper;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.eclipse.debug.core,

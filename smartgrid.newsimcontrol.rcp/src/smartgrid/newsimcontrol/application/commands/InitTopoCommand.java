@@ -6,7 +6,7 @@ import couplingToICT.SimcontrolException;
 import couplingToICT.SmartGridTopoContainer;
 import smartgrid.newsimcontrol.controller.LocalController;
 
-public class InitTopoCommand extends ControllerComand {
+public class InitTopoCommand extends ControllerCommand {
 
 	public InitTopoCommand(LocalController controller) {
 		super(controller);

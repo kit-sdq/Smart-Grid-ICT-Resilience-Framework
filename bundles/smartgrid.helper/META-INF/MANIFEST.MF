@@ -4,7 +4,9 @@ Bundle-Name: Helper
 Bundle-SymbolicName: smartgrid.helper
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: smartgrid.helper
+Export-Package: smartgrid.helper,
+ smartgrid.model.helper.input,
+ smartgrid.model.helper.output
 Require-Bundle: smartgrid.model.output,
  smartgrid.model.input,
  org.eclipse.equinox.registry,

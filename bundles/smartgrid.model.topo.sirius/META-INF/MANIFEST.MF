@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jface,
  org.eclipse.equinox.registry,
  org.eclipse.sirius.diagram,
- org.eclipse.ui.workbench
+ org.eclipse.ui.workbench,
+ smartgrid.helper;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.apache.log4j;version="1.2.15",

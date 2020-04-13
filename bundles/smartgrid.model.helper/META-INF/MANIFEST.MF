@@ -7,11 +7,9 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: smartgrid.model.output,
  smartgrid.model.input,
  org.eclipse.swt,
- org.eclipse.sirius.diagram.ui,
  org.eclipse.core.commands,
  org.eclipse.ui.workbench,
- org.eclipse.emf.transaction
-Export-Package: smartgrid.model.helper.input,
- smartgrid.model.helper.output,
- smartgrid.model.helper.sirius
+ org.eclipse.emf.transaction,
+ org.eclipse.sirius.diagram.ui;bundle-version="6.2.3"
+Export-Package: smartgrid.model.helper.sirius
 Automatic-Module-Name: smartgrid.model.helper

@@ -7,19 +7,19 @@ import java.rmi.RemoteException;
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
 
-public abstract class ControllerComand {
+public abstract class ControllerCommand {
 
 	LocalController controller; 
 	
-	public ControllerComand(LocalController controller) {
+	public ControllerCommand(LocalController controller) {
 		this.controller = controller;
 	}
 	
 	public Object execute(String[] args) throws SimcontrolException, RemoteException, InterruptedException {
-		if (!checkArguments(args))
+		if (checkArguments(args))
 			return doCommand(args);
 		else 
-			throw new SimcontrolException("The arguments for this command are not in the right form.");
+			return null;
 	}
 	
 	public abstract boolean allow();
@@ -42,7 +42,7 @@ public abstract class ControllerComand {
             return obj;
  
         } catch (Exception ex) {
-            ex.printStackTrace();
+        	System.out.println("The Object can't be read from the file: " + filepath);
             return null;
         }
     }
