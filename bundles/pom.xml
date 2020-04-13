@@ -39,6 +39,7 @@
         <module>smartgrid.simcontrol.test.mocks</module>
         <module>smartgrid.newsimcontrol.rmi</module>
         <module>smartgrid.newsimcontrol.rcp</module>
+        <module>smartgrid.model.topo.generator</module>
 	</modules>
 
 </project>
