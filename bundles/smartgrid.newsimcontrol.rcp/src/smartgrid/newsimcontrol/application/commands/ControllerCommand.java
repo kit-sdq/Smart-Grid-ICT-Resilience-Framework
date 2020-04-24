@@ -6,12 +6,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.apache.log4j.Logger;
+
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
+import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
 
 public abstract class ControllerCommand {
 
 	LocalController controller; 
+	protected static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
+
 	
 	public ControllerCommand(LocalController controller) {
 		this.controller = controller;
@@ -41,6 +46,7 @@ public abstract class ControllerCommand {
             return obj;
 
         } catch (IOException|ClassNotFoundException ex) {
+        	LOG.error("The input can't be read from the filepath: " + filepath);
             return null;
         }
     }
@@ -55,6 +61,7 @@ public abstract class ControllerCommand {
             objectOut.close();
  
         } catch (IOException ex) {
+        	LOG.error("The output can't be saved to the filepath: " + filepath);
             ex.printStackTrace();
         }
     }

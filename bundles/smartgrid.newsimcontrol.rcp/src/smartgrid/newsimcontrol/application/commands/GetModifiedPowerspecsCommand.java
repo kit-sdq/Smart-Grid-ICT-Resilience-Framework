@@ -18,8 +18,11 @@ public class GetModifiedPowerspecsCommand extends ControllerCommand {
 
 	@Override
 	public boolean checkArguments(String[] args) {
-		if (args.length != 4)
+		if (args.length != 4) {
+        	LOG.error("The correct number of arguments isn't correct."
+        			+ "For further info see the readme file");
 			return false;
+		}
 		Object obj1 = ReadObjectFromFile(args[0]);
 		Object obj2 = ReadObjectFromFile(args[1]);
 		Object obj3 = ReadObjectFromFile(args[2]);
@@ -35,7 +38,7 @@ public class GetModifiedPowerspecsCommand extends ControllerCommand {
 		PowerSpecContainer powerSpecs = (PowerSpecContainer)ReadObjectFromFile(args[0]);
 		PowerAssigned SMPowerAssigned = (PowerAssigned)ReadObjectFromFile(args[1]);
 		WriteObjectToFile(controller.getModifiedPowerSpec(powerSpecs, SMPowerAssigned), args[3]);
-		
+		WriteObjectToFile(controller, args[0]);
 	}
 
 }

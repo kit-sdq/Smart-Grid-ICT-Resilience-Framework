@@ -18,8 +18,11 @@ public class InitTopoCommand extends ControllerCommand {
 
 	@Override
 	public boolean checkArguments(String[] args) {
-		if (args.length != 3)
+		if (args.length != 3) {
+        	LOG.error("The correct number of arguments isn't correct."
+        			+ "For further info see the readme file");
 			return false;
+		}
 		Object obj = ReadObjectFromFile(args[0]);
 		if (! (obj instanceof LocalController)) 
 			return false;
@@ -34,7 +37,7 @@ public class InitTopoCommand extends ControllerCommand {
 		this.controller = (LocalController) ReadObjectFromFile(args[0]);
 		SmartGridTopoContainer topologyContainer = (SmartGridTopoContainer)ReadObjectFromFile(args[1]);
 		WriteObjectToFile(controller.initTopo(topologyContainer), args[2]);
-		
+		WriteObjectToFile(controller, args[0]);
 	}
 
 }

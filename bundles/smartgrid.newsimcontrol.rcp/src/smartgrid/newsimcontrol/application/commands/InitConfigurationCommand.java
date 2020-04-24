@@ -20,7 +20,8 @@ public class InitConfigurationCommand extends ControllerCommand {
 	@Override
 	public boolean checkArguments(String[] args) {
 		if (args.length != 2) {
-			System.out.println("The correct number of arguments for the command init_config is 2.");
+        	LOG.error("The correct number of arguments isn't correct."
+        			+ "For further info see the readme file");
 			return false;
 		}
 		Object obj = ReadObjectFromFile(args[1]);
