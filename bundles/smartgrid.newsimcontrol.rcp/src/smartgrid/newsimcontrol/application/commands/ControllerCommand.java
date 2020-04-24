@@ -1,8 +1,10 @@
 package smartgrid.newsimcontrol.application.commands;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.rmi.RemoteException;
+import java.io.ObjectOutputStream;
 
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
@@ -15,18 +17,16 @@ public abstract class ControllerCommand {
 		this.controller = controller;
 	}
 	
-	public Object execute(String[] args) throws SimcontrolException, RemoteException, InterruptedException {
+	public void execute(String[] args) throws SimcontrolException, InterruptedException {
 		if (checkArguments(args))
-			return doCommand(args);
-		else 
-			return null;
+			doCommand(args);
 	}
 	
 	public abstract boolean allow();
 	
 	public abstract boolean checkArguments(String[] args);
 	
-	public abstract Object doCommand(String[] args) throws RemoteException, SimcontrolException, InterruptedException;
+	public abstract void doCommand(String[] args) throws SimcontrolException, InterruptedException;
 	
 	public Object ReadObjectFromFile(String filepath) {
 		 
@@ -37,13 +37,25 @@ public abstract class ControllerCommand {
  
             Object obj = objectIn.readObject();
  
-            System.out.println("The Object has been read from the file");
             objectIn.close();
             return obj;
- 
-        } catch (Exception ex) {
-        	System.out.println("The Object can't be read from the file: " + filepath);
+
+        } catch (IOException|ClassNotFoundException ex) {
             return null;
+        }
+    }
+	
+	public void WriteObjectToFile(Object serObj, String filepath) {
+		 
+        try {
+ 
+            FileOutputStream fileOut = new FileOutputStream(filepath);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(serObj);
+            objectOut.close();
+ 
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 

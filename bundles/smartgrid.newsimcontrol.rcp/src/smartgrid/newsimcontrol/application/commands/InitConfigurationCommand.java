@@ -1,6 +1,5 @@
 package smartgrid.newsimcontrol.application.commands;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
 import couplingToICT.SimcontrolException;
@@ -20,11 +19,11 @@ public class InitConfigurationCommand extends ControllerCommand {
 
 	@Override
 	public boolean checkArguments(String[] args) {
-		if (args.length != 1) {
-			System.out.println("The correct number of arguments for the command init_config is 1.");
+		if (args.length != 2) {
+			System.out.println("The correct number of arguments for the command init_config is 2.");
 			return false;
 		}
-		Object obj = ReadObjectFromFile(args[0]);
+		Object obj = ReadObjectFromFile(args[1]);
 		if (obj instanceof Map<?,?>) {
 			return true;
 		}
@@ -34,11 +33,11 @@ public class InitConfigurationCommand extends ControllerCommand {
 	}
 
 	@Override
-	public Object doCommand(String[] args) throws RemoteException, SimcontrolException {
+	public void doCommand(String[] args) throws SimcontrolException {
 		System.out.println("Doing the command: INIT_CONFIG");
-		Map<InitializationMapKeys, String> topologyContainer = (Map<InitializationMapKeys, String>)ReadObjectFromFile(args[0]);
+		Map<InitializationMapKeys, String> topologyContainer = (Map<InitializationMapKeys, String>) ReadObjectFromFile(args[1]);
 		controller.initConfiguration(topologyContainer);
-		return null;
+		WriteObjectToFile(controller, args[0]);
 	}
 
 }

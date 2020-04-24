@@ -1,8 +1,6 @@
 package smartgrid.newsimcontrol.rcp;
 
-import java.rmi.RemoteException;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -21,7 +19,6 @@ import smartgrid.newsimcontrol.controller.LocalController;
 public class SmartgridRCPApplication implements IApplication {
 
 	LocalController controller;
-	Scanner scan;
 	String test = "";
 	
 	@Override
@@ -29,69 +26,38 @@ public class SmartgridRCPApplication implements IApplication {
 		
 		System.out.println("RCP starting");
 		
-//		String[] arguments = (String[] )context.getArguments().get(IApplicationContext.APPLICATION_ARGS);
-//		
-//		System.out.println("Arguments:");
-//		for(var argument : arguments) {
-//			System.out.println(argument);
-//		}
-//		
-//		System.out.println("");
-//		
-//		if (arguments.length == 0) {
-//			System.out.println("Please write the name of the method to be run.");
-//			return IApplication.EXIT_OK;
-//		} else {
-//			this.controller = new LocalController();
-//			this.scan = new Scanner(System.in);
-//			
-//			ControllerCommand cCommand = getCommand(arguments[0]);
-//			applyArguments(cCommand, arguments);
-//		}
+		String[] arguments = (String[] )context.getArguments().get(IApplicationContext.APPLICATION_ARGS);
 		
-		this.controller = new LocalController();
-		this.scan = new Scanner(System.in);
-		return askForInput();
+		System.out.println("");
+		
+		if (arguments.length == 0) {
+			System.out.println("Please write the name of the method to be run.");
+			return IApplication.EXIT_OK;
+		} else {
+			ControllerCommand cCommand = getCommand(arguments[0]);
+			applyArguments(cCommand, arguments);
+		}
+		
+		return IApplication.EXIT_OK;
 	}
 
 	@Override
 	public void stop() {
 	}
 	
-	private Object askForInput() throws RemoteException, SimcontrolException, InterruptedException {
-		
-		System.out.println("Enter a new command to be run:");
-		String commandLine = scan.nextLine();
-		
-		if (commandLine.toUpperCase().equals("EXIT")){
-			scan.close();
-			System.out.println("The program will end.");
-			return IApplication.EXIT_OK;
-		} else {
-			System.out.println(commandLine);
-			String[] arguments = commandLine.split(" ");
-			ControllerCommand cCommand = getCommand(arguments[0]);
-			if (cCommand == null) {
-				scan.close();
-				return IApplication.EXIT_OK;
-			}
-			applyArguments(cCommand, arguments);
-			return askForInput();
-		}
-	}
-	
-	private ControllerCommand getCommand(String commandString) throws RemoteException, SimcontrolException, InterruptedException {
+	private ControllerCommand getCommand(String commandString) throws SimcontrolException, InterruptedException {
 		SimControlCommands command = null;
 		ControllerCommand cCommand = null;
 		
 		try {
-			command = SimControlCommands.valueOf(commandString);
-		} catch(Exception e) {
+			command = SimControlCommandFromValue(commandString);
+		} catch(IllegalArgumentException e) {
 			System.out.println("The entered command can't be recognized. The program will end.");
 			return null;
 		}
 		switch (command) {
 			case INIT_CONFIG:
+				this.controller = new LocalController();
 				cCommand = new InitConfigurationCommand(controller);
 				break;
 			case INIT_TOPO:
@@ -110,10 +76,19 @@ public class SmartgridRCPApplication implements IApplication {
 		return cCommand;
 	}
 	
-	private void applyArguments(ControllerCommand cCommand, String[] arguments) throws RemoteException, SimcontrolException, InterruptedException {
+	private void applyArguments(ControllerCommand cCommand, String[] arguments) throws SimcontrolException, InterruptedException {
 		String[] arguments2 = Arrays.copyOfRange(arguments, 1, arguments.length);
 
 		if (cCommand.allow())
 			cCommand.execute(arguments2);
 	}
+	
+	public static SimControlCommands SimControlCommandFromValue(String text) { 
+     for (SimControlCommands comm : SimControlCommands.values()) { 
+       if (String.valueOf(comm).equals(text)) { 
+         return comm; 
+       } 
+     } 
+     throw new IllegalArgumentException();
+   } 
 }

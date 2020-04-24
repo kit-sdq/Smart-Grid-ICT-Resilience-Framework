@@ -1,4 +1,4 @@
-package smartgrid.model.topo.generator.star;
+package smartgrid.model.topo.generator.trivial;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,20 +11,21 @@ import couplingToICT.SmartGridTopoContainer;
 import smartgrid.helper.UIDHelper;
 import smartgrid.model.topo.generator.AbstractTopoGenerator;
 import smartgridtopo.ControlCenter;
+import smartgridtopo.NetworkEntity;
 import smartgridtopo.PowerGridNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 import smartgridtopo.SmartgridtopoFactory;
 import smartgridtopo.impl.SmartgridtopoPackageImpl;
 
-public class StarTopoGenerator extends AbstractTopoGenerator {
+public class RingTopoGenerator extends AbstractTopoGenerator {
 
-    private static final Logger LOG = Logger.getLogger(StarTopoGenerator.class);
+    private static final Logger LOG = Logger.getLogger(RingTopoGenerator.class);
 
     @Override
     public SmartGridTopology generateTopo(SmartGridTopoContainer topoData) {
 
-        LOG.info("Starting generation of Star ICT topology.");
+        LOG.info("Starting generation of Ring ICT topology.");
 
         HashMap<String, Map<String, SmartComponentGeoData>> smartMeterGeoData = topoData.getSmartMeterContainer();
 
@@ -38,6 +39,9 @@ public class StarTopoGenerator extends AbstractTopoGenerator {
         ControlCenter controlCenter = topoFactory.createControlCenter();
         controlCenter.setId(UIDHelper.generateUID());
         topo.getContainsNE().add(controlCenter);
+
+        // keep track of the last node of last iteration so that network nodes can be chained
+        NetworkEntity lastNode = controlCenter;
 
         // iterate nodes
         for (Entry<String, Map<String, SmartComponentGeoData>> nodeEntry : smartMeterGeoData.entrySet()) {
@@ -61,24 +65,30 @@ public class StarTopoGenerator extends AbstractTopoGenerator {
                 smartMeter.getConnectedTo().add(powerGridNode);
 
                 // connect the smart meter
-                if (powerGridNode != null) {
                 createLogicalConnection(topoFactory, topo, controlCenter, smartMeter);
-                createPhysicalConnection(topoFactory, topo, controlCenter, smartMeter);
+                
+                if (powerGridNode != null) {
+                    // chain the network
+                    createPhysicalConnection(topoFactory, topo, lastNode, smartMeter);
+                    lastNode = smartMeter;
                 } else {
                     LOG.info("Node " + nodeEntry.getKey() + " has no prosumers. I will not create a NetworkNode.");
                 }
-                
             }
         }
-     
+        
+        createLogicalConnection(topoFactory, topo, controlCenter, (SmartMeter)lastNode);
+        createPhysicalConnection(topoFactory, topo, controlCenter, lastNode);
+
         if (topo.getContainsPGN().size() > 0) {
+            // connect command center to power
             PowerGridNode firstNode = topo.getContainsPGN().get(0);
             controlCenter.getConnectedTo().add(firstNode);
         } else {
             LOG.error("The generated topology does not have any power nodes. No meaningful results will be produced.");
         }
 
-        LOG.info("Generation of Star ICT topology finished.");
+        LOG.info("Generation of Ring ICT topology finished.");
 
         return topo;
     }

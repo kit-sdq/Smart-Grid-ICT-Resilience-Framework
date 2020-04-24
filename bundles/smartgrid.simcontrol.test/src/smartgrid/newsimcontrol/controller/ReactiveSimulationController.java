@@ -35,12 +35,12 @@ import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
 import smartgrid.log4j.LoggingInitializer;
-import smartgrid.model.test.generation.DefaultInputGenerator;
-import smartgrid.model.test.generation.ITopoGenerator;
-import smartgrid.model.test.generation.TrivialTopoGenerator;
+import smartgrid.model.topo.generator.DefaultInputGenerator;
+import smartgrid.model.topo.generator.ITopoGenerator;
 import smartgrid.model.topo.generator.ring.RingTopoGenerator;
 import smartgrid.model.topo.generator.star.StarTopoGenerator;
 import smartgrid.model.topo.generator.starstar.StarStarTopoGenerator;
+import smartgrid.model.topo.generator.trivial.TrivialTopoGenerator;
 import smartgrid.newsimcontrol.ReportGenerator;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
@@ -225,6 +225,13 @@ public final class ReactiveSimulationController {
 		LOG.info("Topology: " + topoPath);
 	}
 
+	/**
+	 * A method to generate a toplogy from a toplogy container
+	 * the style of generation is defined in the initialization map
+	 * if no style is defined, so the trivial one will be used.
+	 * @param topoContainer the container of the to be generated topology
+	 * @return
+	 */
 	public List<ICTElement> initTopo(SmartGridTopoContainer topoContainer) {
 		// generate and persist topo
 		ITopoGenerator generator;
@@ -252,7 +259,6 @@ public final class ReactiveSimulationController {
 		FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.separatorChar + "generated.smartgridtopo");
 		LOG.info("Topo is generated");
 		// generate and persist input
-		LOG.info("Input will be generated");
 		DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
 		initialState = defaultInputGenerator.generateInput(topo);
 		FileSystemHelper.saveToFileSystem(initialState,

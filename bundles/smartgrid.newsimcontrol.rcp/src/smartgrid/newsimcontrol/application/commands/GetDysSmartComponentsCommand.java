@@ -1,6 +1,5 @@
 package smartgrid.newsimcontrol.application.commands;
 
-import java.rmi.RemoteException;
 
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
@@ -18,15 +17,17 @@ public class GetDysSmartComponentsCommand extends ControllerCommand {
 
 	@Override
 	public boolean checkArguments(String[] args) {
-		if (args.length != 0)
+		if (args.length != 2)
 			return false;
-		else
-			return true;
+		Object obj = ReadObjectFromFile(args[0]);
+		if (! (obj instanceof LocalController)) 
+			return false;
+		return true;
 	}
 
 	@Override
-	public Object doCommand(String[] args) throws RemoteException, SimcontrolException, InterruptedException {
-		return controller.getDysfunctSmartComponents();
+	public void doCommand(String[] args) throws SimcontrolException, InterruptedException {
+		WriteObjectToFile(controller.getDysfunctSmartComponents(), args[1]);
 		
 	}
 

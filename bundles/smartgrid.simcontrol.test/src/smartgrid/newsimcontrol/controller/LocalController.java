@@ -1,7 +1,6 @@
 package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
-import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -34,20 +33,20 @@ public class LocalController implements ISimulationController {
 
     @Override
     public SmartComponentStateContainer getDysfunctSmartComponents()
-            throws RemoteException, SimcontrolException, InterruptedException {
+            throws SimcontrolException, InterruptedException {
         return reactiveSimControl.getDysfunctionalcomponents();
     }
 
     @Override
     public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned SMPowerAssigned)
-            throws RemoteException, SimcontrolException, InterruptedException {
+            throws SimcontrolException, InterruptedException {
         reactiveSimControl.run(SMPowerAssigned);
         return reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
     }
 
     @Override
     public Collection<ICTElement> initTopo(SmartGridTopoContainer topologyContainer)
-            throws RemoteException, SimcontrolException {
+            throws SimcontrolException {
         if (topologyContainer == null) {
             LOG.warn("Topo Container is null");
         } else {

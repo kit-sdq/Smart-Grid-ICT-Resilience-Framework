@@ -1,11 +1,8 @@
 package smartgrid.newsimcontrol.application.commands;
 
-import java.rmi.RemoteException;
-
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SimcontrolException;
-import couplingToICT.SmartGridTopoContainer;
 import smartgrid.newsimcontrol.controller.LocalController;
 
 public class GetModifiedPowerspecsCommand extends ControllerCommand {
@@ -21,21 +18,23 @@ public class GetModifiedPowerspecsCommand extends ControllerCommand {
 
 	@Override
 	public boolean checkArguments(String[] args) {
-		if (args.length != 2)
+		if (args.length != 4)
 			return false;
 		Object obj1 = ReadObjectFromFile(args[0]);
 		Object obj2 = ReadObjectFromFile(args[1]);
-		if (obj1 instanceof PowerSpecContainer && obj2 instanceof PowerAssigned) 
+		Object obj3 = ReadObjectFromFile(args[2]);
+		if (obj1 instanceof LocalController && obj2 instanceof PowerSpecContainer && obj3 instanceof PowerAssigned) 
 			return true;
 		else
 			return false;
 	}
 
 	@Override
-	public Object doCommand(String[] args) throws RemoteException, SimcontrolException, InterruptedException {
+	public void doCommand(String[] args) throws SimcontrolException, InterruptedException {
+		this.controller = (LocalController)ReadObjectFromFile(args[0]);
 		PowerSpecContainer powerSpecs = (PowerSpecContainer)ReadObjectFromFile(args[0]);
 		PowerAssigned SMPowerAssigned = (PowerAssigned)ReadObjectFromFile(args[1]);
-		return controller.getModifiedPowerSpec(powerSpecs, SMPowerAssigned);
+		WriteObjectToFile(controller.getModifiedPowerSpec(powerSpecs, SMPowerAssigned), args[3]);
 		
 	}
 

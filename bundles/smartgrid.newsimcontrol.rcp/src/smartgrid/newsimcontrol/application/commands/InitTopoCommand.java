@@ -1,6 +1,5 @@
 package smartgrid.newsimcontrol.application.commands;
 
-import java.rmi.RemoteException;
 
 import couplingToICT.SimcontrolException;
 import couplingToICT.SmartGridTopoContainer;
@@ -19,19 +18,22 @@ public class InitTopoCommand extends ControllerCommand {
 
 	@Override
 	public boolean checkArguments(String[] args) {
-		if (args.length != 1)
+		if (args.length != 3)
 			return false;
 		Object obj = ReadObjectFromFile(args[0]);
-		if (obj instanceof SmartGridTopoContainer) 
-			return true;
-		else
+		if (! (obj instanceof LocalController)) 
 			return false;
+		obj = ReadObjectFromFile(args[1]);
+		if (! (obj instanceof SmartGridTopoContainer)) 
+			return false;
+		return true;
 	}
 
 	@Override
-	public Object doCommand(String[] args) throws RemoteException, SimcontrolException {
-		SmartGridTopoContainer topologyContainer = (SmartGridTopoContainer)ReadObjectFromFile(args[0]);
-		return controller.initTopo(topologyContainer);
+	public void doCommand(String[] args) throws SimcontrolException {
+		this.controller = (LocalController) ReadObjectFromFile(args[0]);
+		SmartGridTopoContainer topologyContainer = (SmartGridTopoContainer)ReadObjectFromFile(args[1]);
+		WriteObjectToFile(controller.initTopo(topologyContainer), args[2]);
 		
 	}
 

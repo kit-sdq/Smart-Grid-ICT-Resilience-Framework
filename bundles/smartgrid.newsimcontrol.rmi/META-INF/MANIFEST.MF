@@ -17,7 +17,7 @@ Require-Bundle: smartgrid.newsimcontrol;bundle-version="1.0.0",
  smartgrid.helper;bundle-version="1.0.0",
  org.apache.log4j;bundle-version="1.2.15",
  smartgrid.newsimcontrol.baselib;bundle-version="1.0.0",
- smartgrid.model.test.generation,
+ smartgrid.model.topo.generator,
  smartgrid.impactanalysis,
  couplingSG;bundle-version="1.0.0"
 Export-Package: smartgrid.newsimcontrol.rmi,
