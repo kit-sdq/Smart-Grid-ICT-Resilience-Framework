@@ -1,4 +1,4 @@
-package smartgrid.model.test.generation;
+package smartgrid.model.topo.generator;
 
 import couplingToICT.SmartGridTopoContainer;
 import smartgridtopo.SmartGridTopology;

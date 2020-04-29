@@ -28,7 +28,6 @@
         <module>smartgrid.model.output.edit</module>
         <module>smartgrid.model.output.editor</module>
         <module>smartgrid.model.output.sirius</module>
-        <module>smartgrid.model.test.generation</module>
         <module>smartgrid.model.topo</module>
         <module>smartgrid.model.topo.edit</module>
         <module>smartgrid.model.topo.editor</module>
@@ -38,6 +37,8 @@
         <module>smartgrid.simcontrol.ui</module>
         <module>smartgrid.simcontrol.test.mocks</module>
         <module>smartgrid.newsimcontrol.rmi</module>
+        <module>smartgrid.newsimcontrol.rcp</module>
+        <module>smartgrid.model.topo.generator</module>
 	</modules>
 
 </project>

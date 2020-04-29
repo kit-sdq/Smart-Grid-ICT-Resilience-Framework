@@ -20,3 +20,11 @@ This part of the framework covers analyses of the ICT aspects of the Smart Grid.
 ### Running
 * an example for the usage of the RMI interface can be found under `smartgrid.newsimcontrol.tests.client.TestClientRMI`
 * the rmi server starts automatically with eclipse
+
+### Running using command line
+* the commands which are given to the command line differ from the regular ones used that they must have as a first parameter an ID in the form of a filepath which will be used to apply all the commands to the same controller. They must have also a filepath where the return object (if exists) should be saved.
+* The syntax of the commands should be like:
+    * INIT_CONFIG   idfilepath   filepath(InitializationMap)
+    * INIT_TOPO   idfilepath   filepath(TopologyContainer)   returnpath
+    * GET_MODIFIED_POWERSPECS   idfilepath   filepath(Powerspecs)   filepath(PowerAssigned)   returnpath
+    * GET_DYS_COMPONENTS   idfilepath   returnpath

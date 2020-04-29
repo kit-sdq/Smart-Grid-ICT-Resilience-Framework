@@ -6,7 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.helper;bundle-version="1.0.0",
- smartgrid.model.helper,
  org.apache.log4j;bundle-version="1.2.15",
  smartgrid.model.topo
 Bundle-ActivationPolicy: lazy

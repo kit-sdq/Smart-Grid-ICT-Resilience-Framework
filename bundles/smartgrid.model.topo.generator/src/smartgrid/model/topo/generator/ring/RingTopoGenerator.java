@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import couplingToICT.SmartComponentGeoData;
 import couplingToICT.SmartGridTopoContainer;
 import smartgrid.helper.UIDHelper;
-import smartgrid.model.test.generation.AbstractTopoGenerator;
+import smartgrid.model.topo.generator.AbstractTopoGenerator;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.NetworkEntity;
 import smartgridtopo.PowerGridNode;

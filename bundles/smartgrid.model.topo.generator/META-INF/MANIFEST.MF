@@ -7,13 +7,14 @@ Automatic-Module-Name: smartgrid.model.topo.generator
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: smartgrid.helper,
  smartgrid.model.topo,
- smartgrid.model.test.generation,
  couplingSG;bundle-version="1.0.0",
  org.apache.log4j,
- org.eclipse.ui.workbench,
- org.eclipse.osgi
+ org.eclipse.osgi,
+ smartgrid.model.output
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
-Export-Package: smartgrid.model.topo.generator.ring,
+Export-Package: smartgrid.model.topo.generator,
+ smartgrid.model.topo.generator.ring,
  smartgrid.model.topo.generator.star,
- smartgrid.model.topo.generator.starstar
+ smartgrid.model.topo.generator.starstar,
+ smartgrid.model.topo.generator.trivial

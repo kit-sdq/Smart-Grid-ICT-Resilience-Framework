@@ -1,4 +1,4 @@
-package smartgrid.model.test.generation;
+package smartgrid.model.topo.generator.trivial;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import couplingToICT.SmartComponentGeoData;
 import couplingToICT.SmartGridTopoContainer;
 import smartgrid.helper.UIDHelper;
+import smartgrid.model.topo.generator.AbstractTopoGenerator;
 import smartgridtopo.ControlCenter;
 import smartgridtopo.NetworkNode;
 import smartgridtopo.PowerGridNode;

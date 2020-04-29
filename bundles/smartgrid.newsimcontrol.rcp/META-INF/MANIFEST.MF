@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rcp
+Bundle-SymbolicName: smartgrid.newsimcontrol.rcp;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: smartgrid.newsimcontrol.rcp
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-Activator: smartgrid.newsimcontrol.rcp.Activator
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.16.0",
+ smartgrid.newsimcontrol,
+ couplingSG,
+ org.apache.log4j
+Export-Package: smartgrid.newsimcontrol.rcp
