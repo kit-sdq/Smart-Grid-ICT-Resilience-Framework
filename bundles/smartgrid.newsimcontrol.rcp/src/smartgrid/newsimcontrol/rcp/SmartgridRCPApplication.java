@@ -31,7 +31,7 @@ public class SmartgridRCPApplication implements IApplication {
 		System.out.println("");
 		
 		if (arguments.length == 0) {
-			System.out.println("Please write the name of the method to be run.");
+			System.out.println("The name of the method to be run should be given with its arguments.");
 			return IApplication.EXIT_OK;
 		} else {
 			ControllerCommand cCommand = getCommand(arguments[0]);
@@ -90,5 +90,23 @@ public class SmartgridRCPApplication implements IApplication {
        } 
      } 
      throw new IllegalArgumentException();
-   } 
+    } 
+	
+	public void startTest(String commandArg) throws SimcontrolException, InterruptedException {
+		
+		System.out.println("RCP starting");
+		
+		String[] arguments = commandArg.split(" ");
+		
+		System.out.println("");
+		
+		if (arguments.length == 0) {
+			System.out.println("Please write the name of the method to be run.");
+		} else {
+			ControllerCommand cCommand = getCommand(arguments[0]);
+			applyArguments(cCommand, arguments);
+		}
+	}
+	
+
 }

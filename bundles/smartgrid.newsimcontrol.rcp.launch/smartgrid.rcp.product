@@ -3,11 +3,12 @@
 
 <product name="smartgrid.newsimcontrol.rcp.product" uid="smartgrid.newsimcontrol.rcp.product" id="smartgrid.newsimcontrol.rcp.testProduct" application="smartgrid.newsimcontrol.rcp.application" version="1.0.0.0" useFeatures="false" includeLaunchers="true">
 
+
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <programArgs>-consoleLog -application smartgrid.newsimcontrol.rcp.application
+      <programArgs>-consoleLog -application smartgrid.newsimcontrol.rcp.application INIT_CONFIG f1 f2
       </programArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
@@ -15,15 +16,18 @@
 
    <windowImages/>
 
+
    <launcher>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
 
+
    <vm>
       <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-13</linux>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
