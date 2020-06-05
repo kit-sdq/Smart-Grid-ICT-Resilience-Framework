@@ -2,7 +2,6 @@ package smartgrid.newsimcontrol.tests.rcp;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -48,7 +47,10 @@ public class RCPCall {
 	
 	//count
 	static int controllerCount = 0; //For every test case a new controller
-
+	
+	//helper
+	private static String OS = System.getProperty("os.name").toLowerCase();
+	private static String rcpPath = "/Users/mazenebada/Hiwi/eclipse/MacOS/eclipse";
 
 	public static void main(String[] args) throws SimcontrolException, InterruptedException, IOException {
 		init_objects();
@@ -115,14 +117,24 @@ public class RCPCall {
 	}
 	
 	public static void runCommand(String commandArguments) throws SimcontrolException, InterruptedException, IOException {
+		
 		//TODO: to be tested
-		String command = "-consoleLog -application smartgrid.newsimcontrol.rcp.application";
-		command += " " + commandArguments;
-		//Runtime.getRuntime().exec("java -jar product.jar " + commandArguments);
+		String command = "";
+		if (OS.contains("mac")) {
+			command= rcpPath + " " + commandArguments;
+		} else if (OS.contains("nix") || OS.contains("nux") || OS.contains("aix")) {
+			command = rcpPath + " " + commandArguments;
+		} else if (OS.contains("win")) {
+			command = "cmd /c dir " + rcpPath + " " + commandArguments;
+		}
+		
+		Runtime.getRuntime().exec(command);
 		
 		//eclipse Datei exportiert in einem "Eclipse" Order 
-		//TODO: Test method: to be removed
-		SmartgridRCPApplication testApp = new SmartgridRCPApplication();
-		testApp.startTest(commandArguments);
+		//TODO: Test method: to be removed	
+		//String command = "-consoleLog -application smartgrid.newsimcontrol.rcp.application";
+		//command += " " + commandArguments;
+		//SmartgridRCPApplication testApp = new SmartgridRCPApplication();
+		//testApp.startTest(commandArguments);
 	}
 }

@@ -92,6 +92,13 @@ public class SmartgridRCPApplication implements IApplication {
      throw new IllegalArgumentException();
     } 
 	
+	/**
+	 * Test Method
+	 * would be removed
+	 * @param commandArg
+	 * @throws SimcontrolException
+	 * @throws InterruptedException
+	 */
 	public void startTest(String commandArg) throws SimcontrolException, InterruptedException {
 		
 		System.out.println("RCP starting");

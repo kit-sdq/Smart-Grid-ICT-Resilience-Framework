@@ -2,6 +2,7 @@ package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,6 +27,8 @@ import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
 import couplingToICT.initializer.PowerSpecsModificationTypes;
 import couplingToICT.initializer.TopoGenerationStyle;
+import smartgrid.attackersimulation.LocalHacker;
+import smartgrid.attackersimulation.ViralHacker;
 import smartgrid.attackersimulation.psm.DoublePSM;
 import smartgrid.attackersimulation.psm.MaxPSM;
 import smartgrid.attackersimulation.psm.PowerSpecsModifier;
@@ -34,6 +37,7 @@ import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
+import smartgrid.impactanalysis.GraphAnalyzer;
 import smartgrid.log4j.LoggingInitializer;
 import smartgrid.model.topo.generator.DefaultInputGenerator;
 import smartgrid.model.topo.generator.ITopoGenerator;
@@ -45,6 +49,8 @@ import smartgrid.newsimcontrol.ReportGenerator;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
+import smartgrid.simcontrol.test.mocks.NoAttackerSimulation;
+import smartgrid.simcontrol.test.mocks.NoOperationTimeProgressor;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
 import smartgridoutput.EntityState;
@@ -59,8 +65,9 @@ import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 @Component
-public final class ReactiveSimulationController {
+public final class ReactiveSimulationController implements Serializable {
 
+    private static final long serialVersionUID = -2017777780321879024L;
 	private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
 	private static String getProsumerIdOfInputPowerState(final PowerState inputPowerState) {
@@ -270,8 +277,11 @@ public final class ReactiveSimulationController {
 
 	public void loadCustomUserAnalysis(Map<InitializationMapKeys, String> initMap) throws CoreException{
 
-		//TODO:Types determine without a launchConfig
-		//07.02.2020 to discuss with Maximillian
+		//TODO:BEGIN:
+		//Mazen:05.06.2020:Ad-hock till solving the problem with the registers
+		//Disadvantages: 1. Dummy , 2. Must edited at every new simulation, 3.many not needed imports and dependencies
+		
+		/*
 		attackerSimulation = SimulationExtensionPointHelper.findExtension(initMap,
 				SimulationExtensionPointHelper.getAttackerSimulationExtensions(), InitializationMapKeys.ATTACKER_SIMULATION_KEY,
 				IAttackerSimulation.class);
@@ -280,8 +290,28 @@ public final class ReactiveSimulationController {
 				InitializationMapKeys.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
 		timeProgressor = SimulationExtensionPointHelper.findExtension(initMap,
 				SimulationExtensionPointHelper.getProgressorExtensions(), InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY,
-				ITimeProgressor.class);
-
+				ITimeProgressor.class);*/
+		
+		String attackerSimulationKey = HashMapHelper.getAttribute(initMap, InitializationMapKeys.ATTACKER_SIMULATION_KEY, "");
+		switch(attackerSimulationKey) {
+			case "No Attack Simulation":
+				attackerSimulation = new NoAttackerSimulation();
+				break;
+			case "Local Hacker":
+				attackerSimulation = new LocalHacker();
+				break;
+			case "Viral Hacker":
+				attackerSimulation = new ViralHacker();
+				break;
+			default:
+				attackerSimulation = new NoAttackerSimulation();
+				break;
+		}
+		
+		impactAnalsis = new GraphAnalyzer();
+		timeProgressor = new NoOperationTimeProgressor();
+		//TODO:END
+		
 		impactAnalsis.init(initMap);
 		attackerSimulation.init(initMap);
 		timeProgressor.init(initMap);

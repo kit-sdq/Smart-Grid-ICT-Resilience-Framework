@@ -1,6 +1,7 @@
 package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
@@ -27,7 +28,9 @@ import couplingToICT.initializer.InitializationMapKeys;
 //TODO Refactor to remove Code-Duplicates from RmiServer
 
 @Component
-public class LocalController implements ISimulationController {
+public class LocalController implements ISimulationController, Serializable{
+
+    private static final long serialVersionUID = -2017777785321879024L;
     private static final Logger LOG = Logger.getLogger(LocalController.class);
     private ReactiveSimulationController reactiveSimControl;
 
