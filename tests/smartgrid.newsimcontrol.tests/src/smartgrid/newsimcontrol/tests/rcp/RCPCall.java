@@ -53,9 +53,13 @@ public class RCPCall {
 	private static String rcpPath = "/Users/mazenebada/Hiwi/eclipse/MacOS/eclipse";
 
 	public static void main(String[] args) throws SimcontrolException, InterruptedException, IOException {
+		
+		//TODO: The correct working directory should be given here
+		System.setProperty("java.io.tmpdir", "/Users/mazenebada/rcpRun");
 		init_objects();
 		init_values();
-		initConfig();
+		runCommands();
+		collectObjects();
 	}
 
 	public static void init_objects() {
@@ -68,7 +72,7 @@ public class RCPCall {
 	}
 	
 	public static void init_values(){
-		
+		//Shouldn't be changed
 		BasicConfigurator.resetConfiguration();
 		BasicConfigurator.configure();
 		
@@ -91,27 +95,17 @@ public class RCPCall {
 
 	}
 	
-	public static void initConfig() throws SimcontrolException, InterruptedException, IOException {
+	public static void runCommands() throws SimcontrolException, InterruptedException, IOException {
 		String command;
 		
-		//1. Init Configuration
-		command = "INIT_CONFIG";
-		command += " " + controllerFilePath + " " + dtoMapFilePath;
+		//1. Init Topo
+		command = "INIT_TOPO";
+		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + ictElementsFilePath;
 		runCommand(command);
 		
-		//2. Init Topo
-		command = "INIT_CONFIG";
-		command += " " + controllerFilePath + " " + topoContainerFilepath + " " + smartCompStateContainerFilePath;
-		runCommand(command);
-		
-		//3. Get Modified PowerSpecs
+		//2. Get Modified PowerSpecs
 		command = "GET_MODIFIED_POWERSPECS";
-		command += " " + controllerFilePath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath;
-		runCommand(command);
-		
-		//4. Get Dysfunctional components
-		command = "GET_DYS_COMPONENTS";
-		command += " " + controllerFilePath + " " + smartCompStateContainerFilePath;
+		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
 		runCommand(command);
 
 	}
@@ -131,10 +125,14 @@ public class RCPCall {
 		Runtime.getRuntime().exec(command);
 		
 		//eclipse Datei exportiert in einem "Eclipse" Order 
-		//TODO: Test method: to be removed	
-		//String command = "-consoleLog -application smartgrid.newsimcontrol.rcp.application";
-		//command += " " + commandArguments;
+		//TODO: Test method: to be removed
 		//SmartgridRCPApplication testApp = new SmartgridRCPApplication();
 		//testApp.startTest(commandArguments);
+	}
+	
+	public static void collectObjects() {
+		ictElements = (Collection<ICTElement>) TestHelper.ReadObjectFromFile(ictElementsFilePath);
+		powerSpecModified = (PowerSpecContainer) TestHelper.ReadObjectFromFile(powerSpecModifiedFilePath);
+		smartCompStateContainer = (SmartComponentStateContainer) TestHelper.ReadObjectFromFile(smartCompStateContainerFilePath);
 	}
 }

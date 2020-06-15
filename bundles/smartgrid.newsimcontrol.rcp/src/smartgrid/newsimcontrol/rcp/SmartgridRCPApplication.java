@@ -7,9 +7,7 @@ import org.eclipse.equinox.app.IApplicationContext;
 
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.application.commands.ControllerCommand;
-import smartgrid.newsimcontrol.application.commands.GetDysSmartComponentsCommand;
 import smartgrid.newsimcontrol.application.commands.GetModifiedPowerspecsCommand;
-import smartgrid.newsimcontrol.application.commands.InitConfigurationCommand;
 import smartgrid.newsimcontrol.application.commands.InitTopoCommand;
 import smartgrid.newsimcontrol.controller.LocalController;
 
@@ -18,7 +16,7 @@ import smartgrid.newsimcontrol.controller.LocalController;
  */
 public class SmartgridRCPApplication implements IApplication {
 
-	LocalController controller;
+	LocalController controller = new LocalController();;
 	String test = "";
 	
 	@Override
@@ -56,15 +54,8 @@ public class SmartgridRCPApplication implements IApplication {
 			return null;
 		}
 		switch (command) {
-			case INIT_CONFIG:
-				this.controller = new LocalController();
-				cCommand = new InitConfigurationCommand(controller);
-				break;
 			case INIT_TOPO:
 				cCommand = new InitTopoCommand(controller);
-				break;
-			case GET_DYS_COMPONENTS:
-				cCommand = new GetDysSmartComponentsCommand(controller);
 				break;
 			case GET_MODIFIED_POWERSPECS:
 				cCommand = new GetModifiedPowerspecsCommand(controller);
