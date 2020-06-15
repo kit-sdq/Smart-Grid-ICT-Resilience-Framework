@@ -82,40 +82,31 @@ public class TestRCPCall {
 		//controller
 		controllerFilePath = System.getProperty("java.io.tmpdir") + File.separator + "controller" + controllerCount + "-" + System.currentTimeMillis();
 		
+
+		ictElements = (Collection<ICTElement>) TestHelper.ReadObjectFromFile(ictElementsFilePath);
+		powerSpecModified = (PowerSpecContainer) TestHelper.ReadObjectFromFile(powerSpecModifiedFilePath);
+		smartCompStateContainer = (SmartComponentStateContainer) TestHelper.ReadObjectFromFile(smartCompStateContainerFilePath);
 		
 	}
 	
 	
 	
 	@Test
-	@DisplayName("simple Iteration over the four commands")
-	void initConfig() throws SimcontrolException, InterruptedException {
+	@DisplayName("simple Iteration over the commands")
+	void runCommands() throws SimcontrolException, InterruptedException {
 		String command;
 		
 
 	   
-		IExtensionRegistry registry = RegistryFactory.getRegistry();
-		
-		//1. Init Configuration
-		command = "INIT_CONFIG";
-		command += " " + controllerFilePath + " " + dtoMapFilePath;
+		//1. Init Topo
+		command = "INIT_TOPO";
+		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + ictElementsFilePath;
 		runCommand(command);
 		
-		//2. Init Topo
-		command = "INIT_CONFIG";
-		command += " " + controllerFilePath + " " + topoContainerFilepath + " " + smartCompStateContainerFilePath;
-		runCommand(command);
-		
-		//3. Get Modified PowerSpecs
+		//2. Get Modified PowerSpecs
 		command = "GET_MODIFIED_POWERSPECS";
-		command += " " + controllerFilePath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath;
+		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
 		runCommand(command);
-		
-		//4. Get Dysfunctional components
-		command = "GET_DYS_COMPONENTS";
-		command += " " + controllerFilePath + " " + smartCompStateContainerFilePath;
-		runCommand(command);
-
 	}
 	
 	void runCommand(String commandArguments) throws SimcontrolException, InterruptedException {
