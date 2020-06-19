@@ -280,7 +280,7 @@ public final class ReactiveSimulationController implements Serializable {
 		//Mazen:05.06.2020:Ad-hock till solving the problem with the registers
 		//Disadvantages: 1. Dummy , 2. Must edited at every new simulation, 3.many not needed imports and dependencies
 		
-		/*
+		
 		attackerSimulation = SimulationExtensionPointHelper.findExtension(initMap,
 				SimulationExtensionPointHelper.getAttackerSimulationExtensions(), InitializationMapKeys.ATTACKER_SIMULATION_KEY,
 				IAttackerSimulation.class);
@@ -289,23 +289,23 @@ public final class ReactiveSimulationController implements Serializable {
 				InitializationMapKeys.IMPACT_ANALYSIS_SIMULATION_KEY, IImpactAnalysis.class);
 		timeProgressor = SimulationExtensionPointHelper.findExtension(initMap,
 				SimulationExtensionPointHelper.getProgressorExtensions(), InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY,
-				ITimeProgressor.class);*/
+				ITimeProgressor.class);
 		
-		String attackerSimulationKey = HashMapHelper.getAttribute(initMap, InitializationMapKeys.ATTACKER_SIMULATION_KEY, "");
-		switch(attackerSimulationKey) {
-			case "No Attack Simulation":
-				attackerSimulation = new NoAttackerSimulation();
-				break;
-			case "Local Hacker":
-				attackerSimulation = new LocalHacker();
-				break;
-			case "Viral Hacker":
-				attackerSimulation = new ViralHacker();
-				break;
-			default:
-				attackerSimulation = new NoAttackerSimulation();
-				break;
-		}
+//		String attackerSimulationKey = HashMapHelper.getAttribute(initMap, InitializationMapKeys.ATTACKER_SIMULATION_KEY, "");
+//		switch(attackerSimulationKey) {
+//			case "No Attack Simulation":
+//				attackerSimulation = new NoAttackerSimulation();
+//				break;
+//			case "Local Hacker":
+//				attackerSimulation = new LocalHacker();
+//				break;
+//			case "Viral Hacker":
+//				attackerSimulation = new ViralHacker();
+//				break;
+//			default:
+//				attackerSimulation = new NoAttackerSimulation();
+//				break;
+//		}
 		
 		impactAnalsis = new GraphAnalyzer();
 		timeProgressor = new NoOperationTimeProgressor();

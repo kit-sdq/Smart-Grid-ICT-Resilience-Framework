@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.16.0",
  couplingSG,
  org.apache.log4j
 Export-Package: smartgrid.newsimcontrol.rcp
+Bundle-ActivationPolicy: lazy

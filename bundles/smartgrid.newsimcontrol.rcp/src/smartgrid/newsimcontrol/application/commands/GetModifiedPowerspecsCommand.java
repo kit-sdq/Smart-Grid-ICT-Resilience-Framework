@@ -1,18 +1,20 @@
 package smartgrid.newsimcontrol.application.commands;
 
+import java.rmi.RemoteException;
 import java.util.Map;
 
+import couplingToICT.ISimulationController;
 import couplingToICT.PowerAssigned;
 import couplingToICT.PowerSpecContainer;
 import couplingToICT.SimcontrolException;
+import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
-import smartgrid.newsimcontrol.controller.LocalController;
 
 public class GetModifiedPowerspecsCommand extends ControllerCommand {
 
-	public GetModifiedPowerspecsCommand(LocalController controller) {
+	public GetModifiedPowerspecsCommand(ISimulationController controller) {
 		super(controller);
 	}
 
@@ -43,23 +45,62 @@ public class GetModifiedPowerspecsCommand extends ControllerCommand {
 	public void doCommand(String[] args) throws SimcontrolException, InterruptedException {
 		LOG.info("Initializing the local controller");
 		Map<InitializationMapKeys, String> initMap = (Map<InitializationMapKeys, String>) ReadObjectFromFile(args[0]);
-		controller.initConfiguration(initMap);
+		try {
+            controller.initConfiguration(initMap);
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SimcontrolInitializationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 		
 		LOG.info("Initializing the topology");
 		SmartGridTopoContainer topologyContainer = (SmartGridTopoContainer)ReadObjectFromFile(args[1]);
-		controller.initTopo(topologyContainer);
+		try {
+            controller.initTopo(topologyContainer);
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SimcontrolException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 		
 		LOG.info("Running the simulations and saving the modified powerspecContainer");
 		PowerSpecContainer powerSpecs = (PowerSpecContainer)ReadObjectFromFile(args[2]);
 		PowerAssigned SMPowerAssigned = (PowerAssigned)ReadObjectFromFile(args[3]);
 		PowerSpecContainer powerSpecsModified;
-		powerSpecsModified = controller.getModifiedPowerSpec(powerSpecs, SMPowerAssigned);
-		WriteObjectToFile(powerSpecsModified, args[4]);
+		try {
+            powerSpecsModified = controller.getModifiedPowerSpec(powerSpecs, SMPowerAssigned);
+            WriteObjectToFile(powerSpecsModified, args[4]);
+        } catch (RemoteException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        } catch (SimcontrolException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        } catch (InterruptedException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
 		
 		LOG.info("Saving the dysfunctional smartcomponents");
 		SmartComponentStateContainer scsc;
-		scsc = controller.getDysfunctSmartComponents();
-		WriteObjectToFile(scsc, args[5]);
+		try {
+            scsc = controller.getDysfunctSmartComponents();
+            WriteObjectToFile(scsc, args[5]);
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SimcontrolException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+	
 		
 	}
 

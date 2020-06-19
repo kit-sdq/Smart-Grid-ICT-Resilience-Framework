@@ -50,12 +50,12 @@ public class RCPCall {
 	
 	//helper
 	private static String OS = System.getProperty("os.name").toLowerCase();
-	private static String rcpPath = "/Users/mazenebada/Hiwi/eclipse/MacOS/eclipse";
+	private static String rcpPath = "/home/majuwa/tmp/workspace-helmholtz-new/eclipse/eclipse";
 
 	public static void main(String[] args) throws SimcontrolException, InterruptedException, IOException {
 		
 		//TODO: The correct working directory should be given here
-		System.setProperty("java.io.tmpdir", "/Users/mazenebada/rcpRun");
+		System.setProperty("java.io.tmpdir", "/home/majuwa/tmp/helm");
 		init_objects();
 		init_values();
 		runCommands();

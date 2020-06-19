@@ -16,7 +16,6 @@ import smartgrid.newsimcontrol.controller.LocalController;
  */
 public class SmartgridRCPApplication implements IApplication {
 
-	LocalController controller = new LocalController();;
 	String test = "";
 	
 	@Override
@@ -53,6 +52,7 @@ public class SmartgridRCPApplication implements IApplication {
 			System.out.println("The entered command can't be recognized. The program will end.");
 			return null;
 		}
+		var controller = Activator.getInstance().getController();
 		switch (command) {
 			case INIT_TOPO:
 				cCommand = new InitTopoCommand(controller);

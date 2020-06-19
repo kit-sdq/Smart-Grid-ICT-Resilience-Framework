@@ -8,17 +8,18 @@ import java.io.ObjectOutputStream;
 
 import org.apache.log4j.Logger;
 
+import couplingToICT.ISimulationController;
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
 import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
 
 public abstract class ControllerCommand {
 
-	LocalController controller; 
+	ISimulationController controller; 
 	protected static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
 	
-	public ControllerCommand(LocalController controller) {
+	public ControllerCommand(ISimulationController controller) {
 		this.controller = controller;
 	}
 	

@@ -10,6 +10,6 @@ Require-Bundle: smartgrid.model.output,
  org.eclipse.core.commands,
  org.eclipse.ui.workbench,
  org.eclipse.emf.transaction,
- org.eclipse.sirius.diagram.ui;bundle-version="6.2.3"
+ org.eclipse.sirius.diagram.ui
 Export-Package: smartgrid.model.helper.sirius
 Automatic-Module-Name: smartgrid.model.helper
