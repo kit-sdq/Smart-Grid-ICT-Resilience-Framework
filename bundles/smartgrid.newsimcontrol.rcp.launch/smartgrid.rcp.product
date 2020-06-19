@@ -61,11 +61,11 @@
       <plugin id="smartgrid.log4starter"/>
       <plugin id="smartgrid.model.input"/>
       <plugin id="smartgrid.model.output"/>
-      <plugin id="smartgrid.model.test.generation"/>
       <plugin id="smartgrid.model.topo"/>
       <plugin id="smartgrid.model.topo.generator"/>
       <plugin id="smartgrid.newsimcontrol"/>
       <plugin id="smartgrid.newsimcontrol.baselib"/>
+      <plugin id="smartgrid.newsimcontrol.mocks"/>
       <plugin id="smartgrid.newsimcontrol.rcp"/>
    </plugins>
 
