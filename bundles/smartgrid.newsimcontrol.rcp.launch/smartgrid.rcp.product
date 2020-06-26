@@ -7,7 +7,7 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-consoleLog -application smartgrid.newsimcontrol.rcp.application GET_MODIFIED_POWERSPECS /Users/mazenebada/rcpRun/dtoMap-1593144161091 /Users/mazenebada/rcpRun/topoContainer-1593144161091 /Users/mazenebada/rcpRun/powerSpec-1593144161091 /Users/mazenebada/rcpRun/powerAssigned-1593144161091 /Users/mazenebada/rcpRun/modifiedPowerSpecs-1593144161091 /Users/mazenebada/rcpRun/dys-1593144161091
+      <programArgs>-consoleLog -application smartgrid.newsimcontrol.rcp.application
       </programArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
