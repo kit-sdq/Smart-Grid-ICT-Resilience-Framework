@@ -20,6 +20,10 @@ import smartgrid.newsimcontrol.tests.helpers.TestHelper;
 
 public class RCPCall {
 
+	//Directory
+	//TODO: The correct working directory should be given here
+	static String path = "/Users/mazenebada/rcpRun";
+	
 	//inputs
 	static PowerSpecContainer powerSpec;
 	static SmartGridTopoContainer topoContainer;
@@ -32,10 +36,10 @@ public class RCPCall {
 	static SmartComponentStateContainer smartCompStateContainer;
 	
 	//inputs
-	static String powerSpecFilepath = System.getProperty("java.io.tmpdir") + File.separator + "powerSpec-" + System.currentTimeMillis();
-	static String topoContainerFilepath = System.getProperty("java.io.tmpdir") + File.separator + "topoContainer-" + System.currentTimeMillis();
-	static String powerASsignedFilepath = System.getProperty("java.io.tmpdir") + File.separator + "powerAssigned-" + System.currentTimeMillis();
-	static String dtoMapFilePath = System.getProperty("java.io.tmpdir") + File.separator + "dtoMap-" + System.currentTimeMillis();
+	static String powerSpecFilepath = path + File.separator + "powerSpec-" + System.currentTimeMillis();
+	static String topoContainerFilepath = path + File.separator + "topoContainer-" + System.currentTimeMillis();
+	static String powerASsignedFilepath = path + File.separator + "powerAssigned-" + System.currentTimeMillis();
+	static String dtoMapFilePath = path + File.separator + "dtoMap-" + System.currentTimeMillis();
 	
 	//outputs
 	static String ictElementsFilePath;
@@ -54,8 +58,6 @@ public class RCPCall {
 
 	public static void main(String[] args) throws SimcontrolException, InterruptedException, IOException {
 		
-		//TODO: The correct working directory should be given here
-		System.setProperty("java.io.tmpdir", "/home/majuwa/tmp/helm");
 		init_objects();
 		init_values();
 		runCommands();
@@ -67,7 +69,7 @@ public class RCPCall {
 		powerSpec = InitHelpers.createPowerSpecContainer();
 		topoContainer = new SmartGridTopoContainer(InitHelpers.createTopoMap(), null);
 		powerAssigned = new PowerAssigned(InitHelpers.assignPower());
-		dtoMap = InitHelpers.createDTOMAP(System.getProperty("java.io.tmpdir") + File.separator + "output-" + System.currentTimeMillis());
+		dtoMap = InitHelpers.createDTOMAP(path + File.separator + "output-" + System.currentTimeMillis());
 		
 	}
 	
@@ -86,12 +88,12 @@ public class RCPCall {
 		TestHelper.WriteObjectToFile(dtoMap, dtoMapFilePath);
 				
 		//outputs
-		ictElementsFilePath = System.getProperty("java.io.tmpdir") + File.separator + "icts" + controllerCount + "-" + System.currentTimeMillis();
-		powerSpecModifiedFilePath = System.getProperty("java.io.tmpdir") + File.separator + "powerSpecModified" + controllerCount + "-" + System.currentTimeMillis();
-		smartCompStateContainerFilePath = System.getProperty("java.io.tmpdir") + File.separator + "smartCompStateContainer" + controllerCount +"-" + System.currentTimeMillis();
+		ictElementsFilePath = path + File.separator + "icts" + controllerCount + "-" + System.currentTimeMillis();
+		powerSpecModifiedFilePath = path + File.separator + "powerSpecModified" + controllerCount + "-" + System.currentTimeMillis();
+		smartCompStateContainerFilePath = path + File.separator + "smartCompStateContainer" + controllerCount +"-" + System.currentTimeMillis();
 		
 		//controller
-		controllerFilePath = System.getProperty("java.io.tmpdir") + File.separator + "controller" + controllerCount + "-" + System.currentTimeMillis();
+		controllerFilePath = path + File.separator + "controller" + controllerCount + "-" + System.currentTimeMillis();
 
 	}
 	

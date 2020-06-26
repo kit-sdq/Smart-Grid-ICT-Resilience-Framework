@@ -3,6 +3,8 @@
 <plugin>
    
    <extension
+         id="smartgrid.simcontrol.test.extensionpoints.impactAnalysis"
+         name="impactAnalysis"
          point="smartgrid.simcontrol.test.extensionpoints.impactAnalysis">
       <impactAnalysis
             class="smartgrid.impactanalysis.GraphAnalyzer">

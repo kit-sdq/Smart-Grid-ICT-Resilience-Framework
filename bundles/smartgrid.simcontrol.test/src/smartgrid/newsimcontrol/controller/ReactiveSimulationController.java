@@ -263,12 +263,12 @@ public final class ReactiveSimulationController implements Serializable {
 		}
 		topo = generator.generateTopo(topoContainer);
 		//TODO: Wie soll es hier aussehen?
-		//FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.separatorChar + "generated.smartgridtopo");
+		FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.separatorChar + "generated.smartgridtopo");
 		LOG.info("Topo is generated");
 		// generate and persist input
 		DefaultInputGenerator defaultInputGenerator = new DefaultInputGenerator();
 		initialState = defaultInputGenerator.generateInput(topo);
-		//FileSystemHelper.saveToFileSystem(initialState, workingDirPath + File.separatorChar + "generated.smartgridinput");
+		FileSystemHelper.saveToFileSystem(initialState, workingDirPath + File.separatorChar + "generated.smartgridinput");
 		impactInput = initialState;
 		LOG.info("Input is generated");
 		return topo.getContainsNE().stream().filter(e -> e instanceof NetworkNode || e instanceof ControlCenter || e instanceof InterCom || e instanceof GenericController).map(e-> new ICTElement(e.getId(), e.eClass().toString())).collect(Collectors.toList());
@@ -307,8 +307,8 @@ public final class ReactiveSimulationController implements Serializable {
 //				break;
 //		}
 		
-		impactAnalsis = new GraphAnalyzer();
-		timeProgressor = new NoOperationTimeProgressor();
+		//impactAnalsis = new GraphAnalyzer();
+		//timeProgressor = new NoOperationTimeProgressor();
 		//TODO:END
 		
 		impactAnalsis.init(initMap);
@@ -388,7 +388,7 @@ public final class ReactiveSimulationController implements Serializable {
 		
 		// Save input to file
 		final String inputFile = new File(timeStepPath + File.separator + "PowerLoadResult.smartgridinput").getPath();
-		//FileSystemHelper.saveToFileSystem(impactInput, inputFile);
+		FileSystemHelper.saveToFileSystem(impactInput, inputFile);
 		LOG.info("Starting Attacker Simulation");
 		impactResult = attackerSimulation.run(topo, impactResult);
 		this.impactResult = impactResult;
@@ -396,7 +396,7 @@ public final class ReactiveSimulationController implements Serializable {
 		// save attack result to file
 		final String attackResultFile = new File(
 				timeStepPath + File.separator + "AttackerSimulationResult.smartgridoutput").getPath();
-		//FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
+		FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
 		
 		updateImactAnalysisInput(impactInput, impactResult, powerSupply); //update for next timestep
 
@@ -407,7 +407,7 @@ public final class ReactiveSimulationController implements Serializable {
 		// Save Result
 
 		final String resultFile = new File(timeStepPath + File.separator + "ImpactResult.smartgridoutput").getPath();
-		//FileSystemHelper.saveToFileSystem(impactResult, resultFile);
+		FileSystemHelper.saveToFileSystem(impactResult, resultFile);
 
 		// generate report
 		final File resultReportPath = new File(timeStepPath + File.separator + "ResultReport.csv");
