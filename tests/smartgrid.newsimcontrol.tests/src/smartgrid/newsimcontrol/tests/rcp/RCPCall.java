@@ -121,7 +121,7 @@ public class RCPCall {
 		} else if (OS.contains("nix") || OS.contains("nux") || OS.contains("aix")) {
 			command = rcpPath + " " + commandArguments;
 		} else if (OS.contains("win")) {
-			command = "cmd /c dir " + rcpPath + " " + commandArguments;
+			command = "cmd /c " + rcpPath + " " + commandArguments;
 		}
 		
 		var process = Runtime.getRuntime().exec(command);
