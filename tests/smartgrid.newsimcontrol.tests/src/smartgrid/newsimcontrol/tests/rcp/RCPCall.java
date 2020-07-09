@@ -22,7 +22,7 @@ public class RCPCall {
 
 	//Directory
 	//TODO: The correct working directory should be given here
-	static String path = "/Users/mazenebada/rcpRun";
+	static String path = "/home/majuwa/tmp/workspace-helmholtz-new/workdir";
 	
 	//inputs
 	static PowerSpecContainer powerSpec;
@@ -124,8 +124,15 @@ public class RCPCall {
 			command = "cmd /c dir " + rcpPath + " " + commandArguments;
 		}
 		
-		Runtime.getRuntime().exec(command);
-		
+		var process = Runtime.getRuntime().exec(command);
+		while(process.isAlive()) {
+		      try {
+		            Thread.sleep(1000); //the runtime call is executed in parralel it might take some time to 
+		        } catch (InterruptedException e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+		        }
+		}		
 		//eclipse Datei exportiert in einem "Eclipse" Order 
 		//TODO: Test method: to be removed
 		//SmartgridRCPApplication testApp = new SmartgridRCPApplication();
@@ -133,6 +140,7 @@ public class RCPCall {
 	}
 	
 	public static void collectObjects() {
+
 		ictElements = (Collection<ICTElement>) TestHelper.ReadObjectFromFile(ictElementsFilePath);
 		powerSpecModified = (PowerSpecContainer) TestHelper.ReadObjectFromFile(powerSpecModifiedFilePath);
 		smartCompStateContainer = (SmartComponentStateContainer) TestHelper.ReadObjectFromFile(smartCompStateContainerFilePath);
