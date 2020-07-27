@@ -30,6 +30,8 @@ public class InitHelpers {
 		initMap.put(InitializationMapKeys.HACKING_STYLE_KEY, HackingStyle.BFS_HACKING.toString());
 		initMap.put(InitializationMapKeys.ATTACKER_SIMULATION_KEY, AttackerSimulationsTypes.LOCAL_HACKER.toString());
 		initMap.put(InitializationMapKeys.POWER_MODIFY_KEY, PowerSpecsModificationTypes.NO_CHANGE_MODIFIER.toString());
+		initMap.put(InitializationMapKeys.IMPACT_ANALYSIS_SIMULATION_KEY, "Graph Analyzer Impact Analysis");
+		initMap.put(InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY, "No Operation");
 		return initMap;
 	}
 
