@@ -139,6 +139,7 @@ public final class ReactiveSimulationController implements Serializable {
 
 	// private ScenarioState impactInputOld;
 	private ScenarioState impactInput;
+
 	private ScenarioResult impactResult;
 
 	private ScenarioState initialState;
@@ -442,4 +443,11 @@ public final class ReactiveSimulationController implements Serializable {
 		this.topo = topo;
 	}
 
+
+	public ScenarioState getImpactInput() {
+		return impactInput;
+	}
+	public void setImpactInput(ScenarioState impactInput) {
+		this.impactInput = impactInput;
+	}
 }

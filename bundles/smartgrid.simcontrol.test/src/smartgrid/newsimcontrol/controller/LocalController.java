@@ -112,6 +112,20 @@ public class LocalController implements ISimulationController{
         return reactiveSimControl.getInitialState();
     }
     
+    public void SetTopo(SmartGridTopology topo)
+            throws SimcontrolException, InterruptedException {
+    	reactiveSimControl.setTopo(topo);
+    }
+    
+    public void SetInitalState(ScenarioState initialState)
+            throws SimcontrolException, InterruptedException {
+    	reactiveSimControl.setInitialState(initialState);
+    }
+    
+    public void setImpactInput(ScenarioState impactInput)
+            throws SimcontrolException, InterruptedException {
+    	reactiveSimControl.setImpactInput(impactInput);
+    }
     
     
 }

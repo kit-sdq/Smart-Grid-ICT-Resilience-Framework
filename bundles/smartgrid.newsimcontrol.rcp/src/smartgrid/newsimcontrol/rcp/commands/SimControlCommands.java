@@ -1,4 +1,4 @@
-package smartgrid.newsimcontrol.rcp;
+package smartgrid.newsimcontrol.rcp.commands;
 
 public enum SimControlCommands {
 

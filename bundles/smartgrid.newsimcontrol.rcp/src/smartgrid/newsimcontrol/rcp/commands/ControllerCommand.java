@@ -1,4 +1,4 @@
-package smartgrid.newsimcontrol.application.commands;
+package smartgrid.newsimcontrol.rcp.commands;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,11 +15,11 @@ import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
 
 public abstract class ControllerCommand {
 
-	ISimulationController controller; 
+	LocalController controller; 
 	protected static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
 	
-	public ControllerCommand(ISimulationController controller) {
+	public ControllerCommand(LocalController controller) {
 		this.controller = controller;
 	}
 	

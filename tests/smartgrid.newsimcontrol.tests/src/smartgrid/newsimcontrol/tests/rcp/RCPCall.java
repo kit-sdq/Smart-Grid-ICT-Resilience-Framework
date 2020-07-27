@@ -45,6 +45,8 @@ public class RCPCall {
 	static String ictElementsFilePath;
 	static String powerSpecModifiedFilePath;
 	static String smartCompStateContainerFilePath;
+	static String topoPath;
+	static String inputPath;
 	
 	//controller
 	static String controllerFilePath;
@@ -91,6 +93,8 @@ public class RCPCall {
 		ictElementsFilePath = path + File.separator + "icts" + controllerCount + "-" + System.currentTimeMillis();
 		powerSpecModifiedFilePath = path + File.separator + "powerSpecModified" + controllerCount + "-" + System.currentTimeMillis();
 		smartCompStateContainerFilePath = path + File.separator + "smartCompStateContainer" + controllerCount +"-" + System.currentTimeMillis();
+		topoPath = path + File.separator + "topo" + controllerCount + "-" + System.currentTimeMillis();
+		inputPath = path + File.separator + "input" + controllerCount + "-" + System.currentTimeMillis();
 		
 		//controller
 		controllerFilePath = path + File.separator + "controller" + controllerCount + "-" + System.currentTimeMillis();
@@ -102,12 +106,12 @@ public class RCPCall {
 		
 		//1. Init Topo
 		command = "INIT_TOPO";
-		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + ictElementsFilePath;
+		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + ictElementsFilePath + " " + topoPath + " " + inputPath;
 		runCommand(command);
 		
 		//2. Get Modified PowerSpecs
 		command = "GET_MODIFIED_POWERSPECS";
-		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
+		command += " " + dtoMapFilePath + " " + topoPath + " " + inputPath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
 		runCommand(command);
 
 	}

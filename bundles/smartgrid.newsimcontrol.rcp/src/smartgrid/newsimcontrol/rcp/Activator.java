@@ -2,20 +2,19 @@ package smartgrid.newsimcontrol.rcp;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-
-import couplingToICT.ISimulationController;
+import smartgrid.newsimcontrol.controller.LocalController;
 
 public class Activator implements BundleActivator {
 
 	private static Activator activator;
 	
-	private ISimulationController controller;
+	private LocalController controller;
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		// TODO Auto-generated method stub
 		Activator.activator = this;
-		var reference = context.getServiceReference(ISimulationController.class);
+		var reference = context.getServiceReference(LocalController.class);
 		controller = context.getService(reference);
 	}
 
@@ -29,7 +28,7 @@ public class Activator implements BundleActivator {
 		return Activator.activator;
 	}
 	
-	public ISimulationController getController() {
+	public LocalController getController() {
 	    return controller;
 	}
 

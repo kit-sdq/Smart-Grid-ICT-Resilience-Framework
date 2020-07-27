@@ -6,10 +6,10 @@ import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
 import couplingToICT.SimcontrolException;
-import smartgrid.newsimcontrol.application.commands.ControllerCommand;
-import smartgrid.newsimcontrol.application.commands.GetModifiedPowerspecsCommand;
-import smartgrid.newsimcontrol.application.commands.InitTopoCommand;
-import smartgrid.newsimcontrol.controller.LocalController;
+import smartgrid.newsimcontrol.rcp.commands.ControllerCommand;
+import smartgrid.newsimcontrol.rcp.commands.GetModifiedPowerspecsCommand;
+import smartgrid.newsimcontrol.rcp.commands.InitTopoCommand;
+import smartgrid.newsimcontrol.rcp.commands.SimControlCommands;
 
 /**
  * This class controls all aspects of the application's execution

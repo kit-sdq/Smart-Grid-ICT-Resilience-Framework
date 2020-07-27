@@ -1,21 +1,19 @@
-package smartgrid.newsimcontrol.application.commands;
+package smartgrid.newsimcontrol.rcp.commands;
 
 
-import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Map;
 
 import couplingToICT.ICTElement;
-import couplingToICT.ISimulationController;
 import couplingToICT.SimcontrolException;
-import couplingToICT.SimcontrolInitializationException;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
 import smartgrid.newsimcontrol.controller.LocalController;
+import smartgrid.newsimcontrol.rcp.helper.EObjectsHelper;
 
 public class InitTopoCommand extends ControllerCommand {
 
-	public InitTopoCommand(ISimulationController controller) {
+	public InitTopoCommand(LocalController controller) {
 		super(controller);
 	}
 
@@ -26,7 +24,7 @@ public class InitTopoCommand extends ControllerCommand {
 
 	@Override
 	public boolean checkArguments(String[] args) {
-		if (args.length != 3) {
+		if (args.length != 5) {
         	LOG.error("The correct number of arguments isn't correct."
         			+ "For further info see the readme file");
 			return false;
@@ -44,15 +42,8 @@ public class InitTopoCommand extends ControllerCommand {
 	public void doCommand(String[] args) throws SimcontrolException {
 		LOG.info("Initializing the local controller");
 		Map<InitializationMapKeys, String> initMap = (Map<InitializationMapKeys, String>) ReadObjectFromFile(args[0]);
-		try {
-            controller.initConfiguration(initMap);
-        } catch (RemoteException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SimcontrolInitializationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		controller.initConfiguration(initMap);
+        
 		
 		LOG.info("Initializing the topology");
 		SmartGridTopoContainer topologyContainer = (SmartGridTopoContainer)ReadObjectFromFile(args[1]);
@@ -60,13 +51,17 @@ public class InitTopoCommand extends ControllerCommand {
 		try {
             ictElements = controller.initTopo(topologyContainer);
             WriteObjectToFile(ictElements, args[2]);
-        } catch (RemoteException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (SimcontrolException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+		
+		try {
+			EObjectsHelper.saveToFileSystem(controller.getTopo(), args[3]);
+			EObjectsHelper.saveToFileSystem(controller.getInitalState(), args[4]);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		
 	}

@@ -9,6 +9,12 @@ Bundle-Activator: smartgrid.newsimcontrol.rcp.Activator
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.16.0",
  smartgrid.newsimcontrol,
  couplingSG,
- org.apache.log4j
+ org.apache.log4j,
+ org.eclipse.emf.ecore,
+ smartgrid.model.topo,
+ smartgrid.model.output,
+ org.modelversioning.emfprofile,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.osgi
 Export-Package: smartgrid.newsimcontrol.rcp
 Bundle-ActivationPolicy: lazy
