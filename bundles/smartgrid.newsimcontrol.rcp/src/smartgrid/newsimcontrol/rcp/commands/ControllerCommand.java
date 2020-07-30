@@ -1,4 +1,4 @@
-package smartgrid.newsimcontrol.application.commands;
+package smartgrid.newsimcontrol.rcp.commands;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 
 import org.apache.log4j.Logger;
 
+import couplingToICT.ISimulationController;
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
 import smartgrid.newsimcontrol.controller.ReactiveSimulationController;

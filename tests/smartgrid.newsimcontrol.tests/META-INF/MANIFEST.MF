@@ -11,6 +11,8 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  smartgrid.newsimcontrol,
  org.junit,
  org.junit.jupiter.api,
- smartgrid.newsimcontrol.rmi;bundle-version="1.0.0"
+ smartgrid.newsimcontrol.rmi;bundle-version="1.0.0",
+ smartgrid.newsimcontrol.rcp,
+ org.eclipse.equinox.registry
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: smartgrid.newsimcontrol.tests

@@ -1,19 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: ImpactAnalysis
 Bundle-SymbolicName: smartgrid.impactanalysis;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: smartgrid.model.output;bundle-version="1.0.0",
  smartgrid.model.input;bundle-version="1.0.0",
  smartgrid.helper;bundle-version="1.0.0",
  org.apache.log4j;bundle-version="1.2.15",
- smartgrid.model.topo
-Bundle-ActivationPolicy: lazy
-Bundle-Vendor: %providerName
-Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+ smartgrid.model.topo,
+ couplingSG;bundle-version="1.0.0"
 Export-Package: smartgrid.impactanalysis
-Import-Package: couplingToICT.initializer,
- smartgrid.simcontrol.test.baselib,
+Import-Package: smartgrid.simcontrol.test.baselib,
  smartgrid.simcontrol.test.baselib.coupling
 Automatic-Module-Name: smartgrid.impactanalysis

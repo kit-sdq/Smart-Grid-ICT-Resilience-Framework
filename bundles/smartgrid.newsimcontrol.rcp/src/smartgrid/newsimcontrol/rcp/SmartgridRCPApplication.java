@@ -6,19 +6,16 @@ import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
 import couplingToICT.SimcontrolException;
-import smartgrid.newsimcontrol.application.commands.ControllerCommand;
-import smartgrid.newsimcontrol.application.commands.GetDysSmartComponentsCommand;
-import smartgrid.newsimcontrol.application.commands.GetModifiedPowerspecsCommand;
-import smartgrid.newsimcontrol.application.commands.InitConfigurationCommand;
-import smartgrid.newsimcontrol.application.commands.InitTopoCommand;
-import smartgrid.newsimcontrol.controller.LocalController;
+import smartgrid.newsimcontrol.rcp.commands.ControllerCommand;
+import smartgrid.newsimcontrol.rcp.commands.GetModifiedPowerspecsCommand;
+import smartgrid.newsimcontrol.rcp.commands.InitTopoCommand;
+import smartgrid.newsimcontrol.rcp.commands.SimControlCommands;
 
 /**
  * This class controls all aspects of the application's execution
  */
 public class SmartgridRCPApplication implements IApplication {
 
-	LocalController controller;
 	String test = "";
 	
 	@Override
@@ -31,7 +28,7 @@ public class SmartgridRCPApplication implements IApplication {
 		System.out.println("");
 		
 		if (arguments.length == 0) {
-			System.out.println("Please write the name of the method to be run.");
+			System.out.println("The name of the method to be run should be given with its arguments.");
 			return IApplication.EXIT_OK;
 		} else {
 			ControllerCommand cCommand = getCommand(arguments[0]);
@@ -55,16 +52,10 @@ public class SmartgridRCPApplication implements IApplication {
 			System.out.println("The entered command can't be recognized. The program will end.");
 			return null;
 		}
+		var controller = Activator.getInstance().getController();
 		switch (command) {
-			case INIT_CONFIG:
-				this.controller = new LocalController();
-				cCommand = new InitConfigurationCommand(controller);
-				break;
 			case INIT_TOPO:
 				cCommand = new InitTopoCommand(controller);
-				break;
-			case GET_DYS_COMPONENTS:
-				cCommand = new GetDysSmartComponentsCommand(controller);
 				break;
 			case GET_MODIFIED_POWERSPECS:
 				cCommand = new GetModifiedPowerspecsCommand(controller);
@@ -90,5 +81,30 @@ public class SmartgridRCPApplication implements IApplication {
        } 
      } 
      throw new IllegalArgumentException();
-   } 
+    } 
+	
+	/**
+	 * Test Method
+	 * would be removed
+	 * @param commandArg
+	 * @throws SimcontrolException
+	 * @throws InterruptedException
+	 */
+	public void startTest(String commandArg) throws SimcontrolException, InterruptedException {
+		
+		System.out.println("RCP starting");
+		
+		String[] arguments = commandArg.split(" ");
+		
+		System.out.println("");
+		
+		if (arguments.length == 0) {
+			System.out.println("Please write the name of the method to be run.");
+		} else {
+			ControllerCommand cCommand = getCommand(arguments[0]);
+			applyArguments(cCommand, arguments);
+		}
+	}
+	
+
 }

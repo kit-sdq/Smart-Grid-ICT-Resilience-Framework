@@ -1,6 +1,10 @@
 package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
@@ -16,6 +20,8 @@ import couplingToICT.SimcontrolException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
+import smartgridinput.ScenarioState;
+import smartgridtopo.SmartGridTopology;
 
 
 /**
@@ -27,7 +33,8 @@ import couplingToICT.initializer.InitializationMapKeys;
 //TODO Refactor to remove Code-Duplicates from RmiServer
 
 @Component
-public class LocalController implements ISimulationController {
+public class LocalController implements ISimulationController{
+
     private static final Logger LOG = Logger.getLogger(LocalController.class);
     private ReactiveSimulationController reactiveSimControl;
 
@@ -94,4 +101,31 @@ public class LocalController implements ISimulationController {
         
 
     }
+    
+    public SmartGridTopology getTopo()
+            throws SimcontrolException, InterruptedException {
+        return reactiveSimControl.getTopo();
+    }
+    
+    public ScenarioState getInitalState()
+            throws SimcontrolException, InterruptedException {
+        return reactiveSimControl.getInitialState();
+    }
+    
+    public void SetTopo(SmartGridTopology topo)
+            throws SimcontrolException, InterruptedException {
+    	reactiveSimControl.setTopo(topo);
+    }
+    
+    public void SetInitalState(ScenarioState initialState)
+            throws SimcontrolException, InterruptedException {
+    	reactiveSimControl.setInitialState(initialState);
+    }
+    
+    public void setImpactInput(ScenarioState impactInput)
+            throws SimcontrolException, InterruptedException {
+    	reactiveSimControl.setImpactInput(impactInput);
+    }
+    
+    
 }
