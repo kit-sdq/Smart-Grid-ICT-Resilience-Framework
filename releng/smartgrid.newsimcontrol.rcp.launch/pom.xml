@@ -8,11 +8,11 @@
         <artifactId>products</artifactId>
         <version>4.3.0-SNAPSHOT</version>
     </parent>
-    <artifactId>smartgrid.rcp,product</artifactId>
+    <artifactId>smartgrid.rcp.product</artifactId>
     <packaging>eclipse-repository</packaging>
 
     <properties>
-        <product.id>smartgrid.rcp,product</product.id>
+        <product.id>smartgrid.rcp.product</product.id>
     </properties>
     
 
