@@ -13,7 +13,7 @@
     <packaging>eclipse-repository</packaging>
 
     <properties>
-        <product.id>smartgrid.rcp.product</product.id>
+        <product.id>smartgrid.newsimcontrol.rcp.product</product.id>
     </properties>
     
 
