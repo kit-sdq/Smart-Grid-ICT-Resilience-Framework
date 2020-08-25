@@ -24,7 +24,7 @@ public class Client {
 
 	static boolean error;
 	static boolean init;
-	private static final String path = "/home/majuwa/tmp/";
+	private static final String path = "/users/mazenebada/tmp/";
 	
 	static ISimulationControllerRemote connector;
 	
