@@ -4,7 +4,6 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import couplingToICT.ISimulationController;
-import smartgrid.newsimcontrol.controller.LocalController;
 
 public class Activator implements BundleActivator {
 

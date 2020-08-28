@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import org.apache.log4j.BasicConfigurator;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.RegistryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,6 +50,7 @@ public class TestRCPCall {
 	//count
 	int controllerCount = 0; //For every test case a new controller
 	
+	@SuppressWarnings("unchecked")
 	@BeforeEach
 	void init_testCase(){
 		

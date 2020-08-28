@@ -2,7 +2,6 @@ package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,8 +26,6 @@ import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
 import couplingToICT.initializer.PowerSpecsModificationTypes;
 import couplingToICT.initializer.TopoGenerationStyle;
-import smartgrid.attackersimulation.LocalHacker;
-import smartgrid.attackersimulation.ViralHacker;
 import smartgrid.attackersimulation.psm.DoublePSM;
 import smartgrid.attackersimulation.psm.MaxPSM;
 import smartgrid.attackersimulation.psm.PowerSpecsModifier;
@@ -37,7 +34,6 @@ import smartgrid.helper.FileSystemHelper;
 import smartgrid.helper.HashMapHelper;
 import smartgrid.helper.ScenarioModelHelper;
 import smartgrid.helper.SimulationExtensionPointHelper;
-import smartgrid.impactanalysis.GraphAnalyzer;
 import smartgrid.log4j.LoggingInitializer;
 import smartgrid.model.topo.generator.DefaultInputGenerator;
 import smartgrid.model.topo.generator.ITopoGenerator;
@@ -49,8 +45,6 @@ import smartgrid.newsimcontrol.ReportGenerator;
 import smartgrid.simcontrol.test.baselib.coupling.IAttackerSimulation;
 import smartgrid.simcontrol.test.baselib.coupling.IImpactAnalysis;
 import smartgrid.simcontrol.test.baselib.coupling.ITimeProgressor;
-import smartgrid.simcontrol.test.mocks.NoAttackerSimulation;
-import smartgrid.simcontrol.test.mocks.NoOperationTimeProgressor;
 import smartgridinput.PowerState;
 import smartgridinput.ScenarioState;
 import smartgridoutput.EntityState;
@@ -65,9 +59,8 @@ import smartgridtopo.NetworkNode;
 import smartgridtopo.SmartGridTopology;
 import smartgridtopo.SmartMeter;
 @Component
-public final class ReactiveSimulationController implements Serializable {
+public final class ReactiveSimulationController {
 
-    private static final long serialVersionUID = -2017777780321879024L;
 	private static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
 
 	private static String getProsumerIdOfInputPowerState(final PowerState inputPowerState) {

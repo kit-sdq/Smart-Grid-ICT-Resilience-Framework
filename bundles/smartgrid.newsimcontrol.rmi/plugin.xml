@@ -16,7 +16,7 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="smartgrid.newsimcontrol.rmi.server.Startup">
+            class="smartgrid.newsimcontrol.rmi.Startup">
       </startup>
    </extension>
 </plugin>

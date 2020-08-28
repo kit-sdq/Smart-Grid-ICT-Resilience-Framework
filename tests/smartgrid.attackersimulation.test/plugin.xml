@@ -3,6 +3,12 @@
 <plugin>
    <extension
          point="smartgrid.simcontrol.test.extensionpoints.attackerSimulation">
+      <AttackerSimulation
+            class="smartgrid.attackersimulation.LocalHacker">
+      </AttackerSimulation>
+      <AttackerSimulation
+            class="smartgrid.attackersimulation.ViralHacker">
+      </AttackerSimulation>
    </extension>
 
 </plugin>
