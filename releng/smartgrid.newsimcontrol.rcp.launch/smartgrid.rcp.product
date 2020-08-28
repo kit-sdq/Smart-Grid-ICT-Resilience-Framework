@@ -3,7 +3,6 @@
 
 <product name="smartgrid.newsimcontrol.rcp.product" uid="smartgrid.newsimcontrol.rcp.product" id="smartgrid.newsimcontrol.rcp.testProduct" application="smartgrid.newsimcontrol.rcp.application" version="1.0.0.0" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -16,18 +15,15 @@
 
    <windowImages/>
 
-
    <launcher>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
 
-
    <vm>
       <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11</linux>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -41,7 +37,6 @@
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.runtime"/>
