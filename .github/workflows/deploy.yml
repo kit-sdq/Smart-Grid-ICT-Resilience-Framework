@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./releng/smartgrid.newsimcontrol.rcp.launch/target/smartgrid.rcp.product-1.0.0-SNAPSHOT.zip
+          asset_path: ./releng/smartgrid.newsimcontrol.rcp.launch/target/targetPlatformRepository/smartgrid.rcp.product-1.0.0-SNAPSHOT.zip
           asset_name: smartgrid.rcp.product-1.0.0-SNAPSHOT.zip
           asset_content_type: application/zip
 
