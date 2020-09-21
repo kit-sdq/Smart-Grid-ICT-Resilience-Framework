@@ -25,13 +25,27 @@ jobs:
         run: sudo apt-get install maven
       - name: Build with Maven
         run: mvn clean verify
+      - name: get version
+        id: vars
+        run: echo ::set-output name=version::${GITHUB_REF:11}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
       - name: Upload Release Asset
-        id: upload-release-asset 
+        id: upload-release-asset
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: https://uploads.github.com/repos/kit-sdq/Smart-Grid-ICT-Resilience-Framework/releases/21658915/assets{?name,label}
-          asset_path: ./releng/edu.kit.ipd.sdq.smartgrid.updatesite/target/edu.kit.ipd.sdq.smartgrid.updatesite-1.0.0-SNAPSHOT.zip
-          asset_name: edu.kit.ipd.sdq.smartgrid.updatesite-1.0.0-SNAPSHOT.zip
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./releng/smartgrid.newsimcontrol.rcp.launch/target/smartgrid.rcp.product-1.0.0-SNAPSHOT.zip
+          asset_name: smartgrid.rcp.product-1.0.0-SNAPSHOT.zip
           asset_content_type: application/zip
+
