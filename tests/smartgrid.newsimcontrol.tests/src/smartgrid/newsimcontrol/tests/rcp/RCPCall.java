@@ -14,7 +14,6 @@ import couplingToICT.SimcontrolException;
 import couplingToICT.SmartComponentStateContainer;
 import couplingToICT.SmartGridTopoContainer;
 import couplingToICT.initializer.InitializationMapKeys;
-import smartgrid.newsimcontrol.rcp.SmartgridRCPApplication;
 import smartgrid.newsimcontrol.tests.helpers.InitHelpers;
 import smartgrid.newsimcontrol.tests.helpers.TestHelper;
 
@@ -143,6 +142,7 @@ public class RCPCall {
 		//testApp.startTest(commandArguments);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static void collectObjects() {
 
 		ictElements = (Collection<ICTElement>) TestHelper.ReadObjectFromFile(ictElementsFilePath);

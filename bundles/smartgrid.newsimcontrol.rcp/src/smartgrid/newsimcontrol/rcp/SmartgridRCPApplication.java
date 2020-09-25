@@ -6,6 +6,7 @@ import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
 import couplingToICT.SimcontrolException;
+import smartgrid.newsimcontrol.controller.LocalController;
 import smartgrid.newsimcontrol.rcp.commands.ControllerCommand;
 import smartgrid.newsimcontrol.rcp.commands.GetModifiedPowerspecsCommand;
 import smartgrid.newsimcontrol.rcp.commands.InitTopoCommand;
@@ -52,7 +53,7 @@ public class SmartgridRCPApplication implements IApplication {
 			System.out.println("The entered command can't be recognized. The program will end.");
 			return null;
 		}
-		var controller = Activator.getInstance().getController();
+		var controller = (LocalController) Activator.getInstance().getController();
 		switch (command) {
 			case INIT_TOPO:
 				cCommand = new InitTopoCommand(controller);
