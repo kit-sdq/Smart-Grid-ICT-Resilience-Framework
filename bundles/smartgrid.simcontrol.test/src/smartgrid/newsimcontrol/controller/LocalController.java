@@ -57,7 +57,7 @@ public class LocalController implements ISimulationController{
         } else {
             return reactiveSimControl.initTopo(topologyContainer);
         }
-        return new LinkedList<ICTElement>();
+        return new LinkedList<>();
     }
 
     @Override
@@ -72,14 +72,14 @@ public class LocalController implements ISimulationController{
         
         // fill values in the working copy
         for (Entry<InitializationMapKeys, String> entry : initMap.entrySet()) {
-            if (entry.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
-                inputStatePath = initMap.get(entry);
-            } else if (entry.equals(InitializationMapKeys.TOPO_PATH_KEY)) {
-                topoPath = initMap.get(entry);
-            } else if (entry.equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
-                outputPath = initMap.get(entry);
-            } else if (entry.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
-                generateTopo = Boolean.valueOf(initMap.get(entry));
+            if (entry.getKey().equals(InitializationMapKeys.INPUT_PATH_KEY)) {
+                inputStatePath = entry.getValue();
+            } else if (entry.getKey().equals(InitializationMapKeys.TOPO_PATH_KEY)) {
+                topoPath = entry.getValue();
+            } else if (entry.getKey().equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
+                outputPath = entry.getValue();
+            } else if (entry.getKey().equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
+                generateTopo = Boolean.valueOf(entry.getValue());
             }
         }
         if (outputPath == null) {
