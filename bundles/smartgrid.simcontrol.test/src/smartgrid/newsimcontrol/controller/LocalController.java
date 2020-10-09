@@ -2,7 +2,9 @@ package smartgrid.newsimcontrol.controller;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
@@ -41,9 +43,9 @@ public class LocalController implements ISimulationController{
     }
 
     @Override
-    public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned SMPowerAssigned)
+    public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned sMPowerAssigned)
             throws SimcontrolException, InterruptedException {
-        reactiveSimControl.run(SMPowerAssigned);
+        reactiveSimControl.run(sMPowerAssigned);
         return reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
     }
 
@@ -55,7 +57,7 @@ public class LocalController implements ISimulationController{
         } else {
             return reactiveSimControl.initTopo(topologyContainer);
         }
-        return null;
+        return new LinkedList<ICTElement>();
     }
 
     @Override
@@ -69,15 +71,15 @@ public class LocalController implements ISimulationController{
         boolean generateTopo = false;
         
         // fill values in the working copy
-        for (InitializationMapKeys key : initMap.keySet()) {
-            if (key.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
-                inputStatePath = initMap.get(key);
-            } else if (key.equals(InitializationMapKeys.TOPO_PATH_KEY)) {
-                topoPath = initMap.get(key);
-            } else if (key.equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
-                outputPath = initMap.get(key);
-            } else if (key.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
-                generateTopo = Boolean.valueOf(initMap.get(key));
+        for (Entry<InitializationMapKeys, String> entry : initMap.entrySet()) {
+            if (entry.equals(InitializationMapKeys.INPUT_PATH_KEY)) {
+                inputStatePath = initMap.get(entry);
+            } else if (entry.equals(InitializationMapKeys.TOPO_PATH_KEY)) {
+                topoPath = initMap.get(entry);
+            } else if (entry.equals(InitializationMapKeys.OUTPUT_PATH_KEY)) {
+                outputPath = initMap.get(entry);
+            } else if (entry.equals(InitializationMapKeys.TOPO_GENERATION_KEY)) {
+                generateTopo = Boolean.valueOf(initMap.get(entry));
             }
         }
         if (outputPath == null) {
@@ -85,7 +87,7 @@ public class LocalController implements ISimulationController{
             outputPath += File.separator + "smargrid" + System.currentTimeMillis();
         }
         reactiveSimControl.init(outputPath);
-        if (generateTopo == false) {
+        if (!generateTopo) {
             reactiveSimControl.initModelsFromFiles(topoPath, inputStatePath);
         }
        
@@ -98,28 +100,23 @@ public class LocalController implements ISimulationController{
 
     }
     
-    public SmartGridTopology getTopo()
-            throws SimcontrolException, InterruptedException {
+    public SmartGridTopology getTopo() {
         return reactiveSimControl.getTopo();
     }
     
-    public ScenarioState getInitalState()
-            throws SimcontrolException, InterruptedException {
+    public ScenarioState getInitalState(){
         return reactiveSimControl.getInitialState();
     }
     
-    public void SetTopo(SmartGridTopology topo)
-            throws SimcontrolException, InterruptedException {
+    public void setTopo(SmartGridTopology topo) {
     	reactiveSimControl.setTopo(topo);
     }
     
-    public void SetInitalState(ScenarioState initialState)
-            throws SimcontrolException, InterruptedException {
+    public void setInitalState(ScenarioState initialState) {
     	reactiveSimControl.setInitialState(initialState);
     }
     
-    public void setImpactInput(ScenarioState impactInput)
-            throws SimcontrolException, InterruptedException {
+    public void setImpactInput(ScenarioState impactInput) {
     	reactiveSimControl.setImpactInput(impactInput);
     }
     

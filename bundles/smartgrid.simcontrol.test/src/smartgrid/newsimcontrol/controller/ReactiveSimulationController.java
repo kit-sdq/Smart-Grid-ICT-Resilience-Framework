@@ -71,7 +71,6 @@ public final class ReactiveSimulationController {
 		return id;
 	}
 	public static boolean isOutage(double supply) {
-		// TODO is this really a power outage?
 		return supply == 0.0d;
 	}
 	/**
@@ -130,7 +129,6 @@ public final class ReactiveSimulationController {
 
 	private IImpactAnalysis impactAnalsis;
 
-	// private ScenarioState impactInputOld;
 	private ScenarioState impactInput;
 
 	private ScenarioResult impactResult;
@@ -161,7 +159,7 @@ public final class ReactiveSimulationController {
 		while (new File(currentPath).exists()) {
 			LOG.debug("Exists already: " + currentPath);
 
-			currentPath = initialPath + runningNumber; // + '\\';
+			currentPath = initialPath + runningNumber;
 			runningNumber++;
 		}
 		LOG.info("Working dir is: " + currentPath);
@@ -256,7 +254,6 @@ public final class ReactiveSimulationController {
 			}
 		}
 		topo = generator.generateTopo(topoContainer);
-		//TODO: Wie soll es hier aussehen?
 		FileSystemHelper.saveToFileSystem(topo, workingDirPath + File.separatorChar + "generated.smartgridtopo");
 		LOG.info("Topo is generated");
 		// generate and persist input
@@ -270,11 +267,6 @@ public final class ReactiveSimulationController {
 
 	public void loadCustomUserAnalysis(Map<InitializationMapKeys, String> initMap) throws CoreException{
 
-		//TODO:BEGIN:
-		//Mazen:05.06.2020:Ad-hock till solving the problem with the registers
-		//Disadvantages: 1. Dummy , 2. Must edited at every new simulation, 3.many not needed imports and dependencies
-		
-		
 		attackerSimulation = SimulationExtensionPointHelper.findExtension(initMap,
 				SimulationExtensionPointHelper.getAttackerSimulationExtensions(), InitializationMapKeys.ATTACKER_SIMULATION_KEY,
 				IAttackerSimulation.class);
@@ -284,26 +276,6 @@ public final class ReactiveSimulationController {
 		timeProgressor = SimulationExtensionPointHelper.findExtension(initMap,
 				SimulationExtensionPointHelper.getProgressorExtensions(), InitializationMapKeys.TIME_PROGRESSOR_SIMULATION_KEY,
 				ITimeProgressor.class);
-		
-//		String attackerSimulationKey = HashMapHelper.getAttribute(initMap, InitializationMapKeys.ATTACKER_SIMULATION_KEY, "");
-//		switch(attackerSimulationKey) {
-//			case "No Attack Simulation":
-//				attackerSimulation = new NoAttackerSimulation();
-//				break;
-//			case "Local Hacker":
-//				attackerSimulation = new LocalHacker();
-//				break;
-//			case "Viral Hacker":
-//				attackerSimulation = new ViralHacker();
-//				break;
-//			default:
-//				attackerSimulation = new NoAttackerSimulation();
-//				break;
-//		}
-		
-		//impactAnalsis = new GraphAnalyzer();
-		//timeProgressor = new NoOperationTimeProgressor();
-		//TODO:END
 		
 		impactAnalsis.init(initMap);
 		attackerSimulation.init(initMap);
@@ -322,9 +294,9 @@ public final class ReactiveSimulationController {
 		
 		if (!HashMapHelper.getAttribute(initMap, InitializationMapKeys.TOPO_GENERATION_STYLE, "").equals("")) {
 			String topoGenerationString = HashMapHelper.getAttribute(initMap, InitializationMapKeys.TOPO_GENERATION_STYLE, "");
-			TopoGenerationStyle topoGenerationStyle = TopoGenerationStyle
+			TopoGenerationStyle currenttopoGenerationStyle = TopoGenerationStyle
 					.valueOf(topoGenerationString);
-			this.topoGenerationStyle = topoGenerationStyle;
+			this.topoGenerationStyle = currenttopoGenerationStyle;
 		}
 	}
 
@@ -371,41 +343,38 @@ public final class ReactiveSimulationController {
 		// get power supply
 		if (power != null) {
 			LinkedHashMap<String, HashMap<String, Double>> powerAssignedMap = power.getPowerAssigned();
-			powerSupply = new LinkedHashMap<String, Map<String, Double>>(powerAssignedMap);
+			powerSupply = new LinkedHashMap<>(powerAssignedMap);
 		}
 
-		// copy the input
-		// impactInputOld = EcoreUtil.copy(impactInput);
-
 		LOG.info("Starting Impact Analysis");
-		ScenarioResult impactResult = impactAnalsis.run(topo, impactInput);		
+		ScenarioResult currentimpactResult = impactAnalsis.run(topo, impactInput);		
 		
 		// Save input to file
 		final String inputFile = new File(timeStepPath + File.separator + "PowerLoadResult.smartgridinput").getPath();
 		FileSystemHelper.saveToFileSystem(impactInput, inputFile);
 		LOG.info("Starting Attacker Simulation");
-		impactResult = attackerSimulation.run(topo, impactResult);
-		this.impactResult = impactResult;
+		currentimpactResult = attackerSimulation.run(topo, currentimpactResult);
+		this.impactResult = currentimpactResult;
 
 		// save attack result to file
 		final String attackResultFile = new File(
 				timeStepPath + File.separator + "AttackerSimulationResult.smartgridoutput").getPath();
-		FileSystemHelper.saveToFileSystem(impactResult, attackResultFile);
+		FileSystemHelper.saveToFileSystem(currentimpactResult, attackResultFile);
 		
-		updateImactAnalysisInput(impactInput, impactResult, powerSupply); //update for next timestep
+		updateImactAnalysisInput(impactInput, currentimpactResult, powerSupply); //update for next timestep
 
 		
 		LOG.info("Collecting dysfunctionalComponents");
 		// get smartmeters
-		dysfunctionalcomponents = generateSCSC(impactResult);
+		dysfunctionalcomponents = generateSCSC(currentimpactResult);
 		// Save Result
 
 		final String resultFile = new File(timeStepPath + File.separator + "ImpactResult.smartgridoutput").getPath();
-		FileSystemHelper.saveToFileSystem(impactResult, resultFile);
+		FileSystemHelper.saveToFileSystem(currentimpactResult, resultFile);
 
 		// generate report
 		final File resultReportPath = new File(timeStepPath + File.separator + "ResultReport.csv");
-		ReportGenerator.saveScenarioResult(resultReportPath, impactResult);
+		ReportGenerator.saveScenarioResult(resultReportPath, currentimpactResult);
 
 		// modify the scenario between time steps
 		timeProgressor.progress();

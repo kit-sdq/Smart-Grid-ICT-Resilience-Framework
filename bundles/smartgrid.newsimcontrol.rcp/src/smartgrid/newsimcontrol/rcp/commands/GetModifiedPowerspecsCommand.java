@@ -53,8 +53,8 @@ public class GetModifiedPowerspecsCommand extends ControllerCommand {
 		LOG.info("Initializing the topology");
 		SmartGridTopology topo = EObjectsHelper.loadTopology(args[1]);
 		ScenarioState state = EObjectsHelper.loadInput(args[2]);
-		controller.SetTopo(topo);
-		controller.SetInitalState(state);
+		controller.setTopo(topo);
+		controller.setInitalState(state);
 		controller.setImpactInput(state);
 		
 		LOG.info("Running the simulations and saving the modified powerspecContainer");
@@ -65,10 +65,8 @@ public class GetModifiedPowerspecsCommand extends ControllerCommand {
             powerSpecsModified = controller.getModifiedPowerSpec(powerSpecs, SMPowerAssigned);
             WriteObjectToFile(powerSpecsModified, args[5]);
         } catch (SimcontrolException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         } catch (InterruptedException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
 		

@@ -11,17 +11,26 @@ import smartgridoutput.On;
 import smartgridoutput.ScenarioResult;
 
 public class ReportGenerator {
-    public static void saveScenarioResult(File resultFile, ScenarioResult scenarioResult) {
+	
+	static final  String TOTAL = "Total";
+    static final  String HACKED_TITLE = "Hacked";
+    
+    /**
+     * Saves scenario result
+     * @param resultFile resultFile
+     * @param scenarioResult scenarioResult
+     */
+    public static void saveScenarioResult(final File resultFile, final ScenarioResult scenarioResult) {
         try {
             if (resultFile.exists()) {
                 return;
             }
             resultFile.createNewFile();
-            FileWriter fw = new FileWriter(resultFile);
+            final FileWriter fileWriter = new FileWriter(resultFile);
 
-            fw.write(getScenarioResultStats(scenarioResult));
+            fileWriter.write(getScenarioResultStats(scenarioResult));
 
-            fw.close();
+            fileWriter.close();
         } catch (IOException e) {
             System.err.print("Could not write ScenarioResult report to " + resultFile.getAbsolutePath());
         }
@@ -33,14 +42,13 @@ public class ReportGenerator {
      * @return String of stats in CSV format
      */
     private static String getScenarioResultStats(ScenarioResult scenarioResult) {
-        final String total = "Total";
+
         String headlines = "";
         String content = "";
-        String hackedTitle = "Hacked";
 
         Map<String, Integer> stats = new HashMap<>();
-        stats.put("Total", 0);
-        stats.put(hackedTitle, 0);
+        stats.put(TOTAL, 0);
+        stats.put(HACKED_TITLE, 0);
 
         for (EntityState state : scenarioResult.getStates()) {
             String name = state.getClass().getSimpleName();
@@ -51,10 +59,10 @@ public class ReportGenerator {
             
             //Count hacked
 			if(state instanceof On && ((On)state).isIsHacked()){
-				stats.replace(hackedTitle, stats.get(hackedTitle) + 1);
+				stats.replace(HACKED_TITLE, stats.get(HACKED_TITLE) + 1);
 			}
             //Count Total
-            stats.replace(total, stats.get(total).intValue() + 1);
+            stats.replace(TOTAL, stats.get(TOTAL).intValue() + 1);
         }
         for (String key : stats.keySet()) {
             if (content != "" && headlines != "") {
