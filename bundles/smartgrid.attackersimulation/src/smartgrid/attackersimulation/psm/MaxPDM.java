@@ -45,12 +45,8 @@ public class MaxPDM implements PowerDemandModifier {
             
             newPowerDemandsHashMap.put(powerDistrictId, newSmartMeterPowerSpecsHashMap);
         }
-        
-//        PowerDemand newPowerDemand = new PowerDemand(newPowerDemandsHashMap);
-//        
-//        return newPowerDemand;
+       
         throw new UnsupportedOperationException();
-       // return null;
     }
 
     private double getMaxOptDemand(Map<String, Map<String, PowerSpec>> oldPowerDemandsHashMap) {
@@ -60,9 +56,9 @@ public class MaxPDM implements PowerDemandModifier {
             Map<String, PowerSpec> oldSmartMeterPowerSpecs = oldPowerDemandsHashMap.get(powerDistrictId);
             for (String smartMeterID : oldSmartMeterPowerSpecs.keySet()) {
                 PowerSpec powerSpec = oldSmartMeterPowerSpecs.get(smartMeterID);
-                double _optDemand = powerSpec.getOptDemand();
-                if (_optDemand > maxOptDemand)
-                    maxOptDemand = _optDemand;
+                double optDemand = powerSpec.getOptDemand();
+                if (optDemand > maxOptDemand)
+                    maxOptDemand = optDemand;
             }
         }
         return maxOptDemand;

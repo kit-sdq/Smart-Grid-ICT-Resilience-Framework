@@ -109,9 +109,9 @@ public class LocalHacker implements IAttackerSimulation {
         this.hackingSpeed = Integer
                 .parseInt(hackingSpeed);
         this.ignoreLogicalConnections = false;
-        final var hackingTypes = HackingType
+        final var hackingType = HackingType
                 .valueOf(hackingStyle);
-        switch (hackingTypes) {
+        switch (hackingType) {
         case BFS_HACKING:
             this.hackingTypes = new BFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
             break;
@@ -120,7 +120,6 @@ public class LocalHacker implements IAttackerSimulation {
             break;
         case FULLY_MESHED_HACKING:
             this.hackingTypes = new FullyMeshedStrategy(this.hackingSpeed);
-            this.ignoreLogicalConnections = false;
             break;
         default:
             assert false;
@@ -142,9 +141,9 @@ public class LocalHacker implements IAttackerSimulation {
         this.ignoreLogicalConnections = Boolean
                 .valueOf(HashMapHelper.getAttribute(initMap, InitializationMapKeys.IGNORE_LOC_CON_KEY, Constants.FALSE));
         this.rootNodeID = HashMapHelper.getAttribute(initMap, InitializationMapKeys.ROOT_NODE_ID_KEY, Constants.DEFAULT_ROOT_NODE_ID);
-        final var hackingTypes = HackingType
+        final var hackingType = HackingType
                 .valueOf(HashMapHelper.getAttribute(initMap, InitializationMapKeys.HACKING_STYLE_KEY, Constants.DEFAULT_HACKING_STYLE));
-        switch (hackingTypes) {
+        switch (hackingType) {
         case BFS_HACKING:
             this.hackingTypes = new BFSStrategy(this.ignoreLogicalConnections, this.hackingSpeed);
             break;

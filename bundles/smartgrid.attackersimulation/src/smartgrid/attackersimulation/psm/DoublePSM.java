@@ -3,6 +3,7 @@ package smartgrid.attackersimulation.psm;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import couplingToICT.PowerSpec;
@@ -23,36 +24,35 @@ public class DoublePSM implements PowerSpecsModifier {
         LinkedHashMap<String, Map<String, PowerSpec>> oldPowerInfeedHashMap = powerSpecContainer.getPowerDemand();
         LinkedHashMap<String, Map<String, PowerSpec>> newPowerInfeedHashMap = modifyPowerInfeed(oldPowerInfeedHashMap);
         
-        PowerSpecContainer newPowerSpecContainer = new PowerSpecContainer(newPowerDemandsHashMap, newPowerInfeedHashMap);
+        return new PowerSpecContainer(newPowerDemandsHashMap, newPowerInfeedHashMap);
         
-        return newPowerSpecContainer;
     }
 	
 	 private  LinkedHashMap<String, Map<String, PowerSpec>> modifyPowerDemand(LinkedHashMap<String, Map<String, PowerSpec>> oldPowerDemandsHashMap) {
-	    	LinkedHashMap<String, Map<String, PowerSpec>> newPowerDemandsHashMap = new LinkedHashMap<String, Map<String,PowerSpec>>();
+	    	LinkedHashMap<String, Map<String, PowerSpec>> newPowerDemandsHashMap = new LinkedHashMap<>();
 	    	
 	        
-	        for (String powerDistrictId : oldPowerDemandsHashMap.keySet()) {
+	        for (String powerDistrictIdString : oldPowerDemandsHashMap.keySet()) {
 	            
-	            Map<String, PowerSpec> oldSmartMeterPowerSpecs = oldPowerDemandsHashMap.get(powerDistrictId);
-	            HashMap<String, PowerSpec> newSmartMeterPowerSpecsHashMap = new HashMap<String, PowerSpec>();
+	            Map<String, PowerSpec> oldSmartMeterPowerSpecs = oldPowerDemandsHashMap.get(powerDistrictIdString);
+	            HashMap<String, PowerSpec> newSmartMeterPowerSpecsHashMap = new HashMap<>();
 	            
 	            for (String smartMeterID : oldSmartMeterPowerSpecs.keySet()) {
 	                PowerSpec powerSpec = oldSmartMeterPowerSpecs.get(smartMeterID);
 	                
 	                if (hackedSmartMeters.contains(smartMeterID)) {
-	                	String _ciType = powerSpec.getCiType();
-		                String _ciName = powerSpec.getCiName();
-		                String _ciSmartID = powerSpec.getCiSmartID();
-		                String _ciID = powerSpec.getCiID();
-		                int _powerDistrictId = powerSpec.getPowerDistrictId();
-		                int _aggregation = powerSpec.getAggregation();
-		                double _minReqDemand = powerSpec.getMinReqDemand();
-		                double _criticality = powerSpec.getCriticality();
-		                double _optDemand = 2 * powerSpec.getOptDemand();
+	                	String ciType = powerSpec.getCiType();
+		                String ciName = powerSpec.getCiName();
+		                String ciSmartID = powerSpec.getCiSmartID();
+		                String ciID = powerSpec.getCiID();
+		                int powerDistrictId = powerSpec.getPowerDistrictId();
+		                int aggregation = powerSpec.getAggregation();
+		                double minReqDemand = powerSpec.getMinReqDemand();
+		                double criticality = powerSpec.getCriticality();
+		                double optDemand = 2 * powerSpec.getOptDemand();
 		                
-		                PowerSpec newPowerSpec =  new PowerSpec(_ciType, _ciName, _ciID, 
-		                        _ciSmartID, _powerDistrictId, _aggregation, _optDemand, _minReqDemand, _criticality);
+		                PowerSpec newPowerSpec =  new PowerSpec(ciType, ciName, ciID, 
+		                        ciSmartID, powerDistrictId, aggregation, optDemand, minReqDemand, criticality);
 		                
 		                newSmartMeterPowerSpecsHashMap.put(smartMeterID, newPowerSpec);
 	                } else {
@@ -61,48 +61,48 @@ public class DoublePSM implements PowerSpecsModifier {
 	                
 	            }
 	            
-	            newPowerDemandsHashMap.put(powerDistrictId, newSmartMeterPowerSpecsHashMap);
+	            newPowerDemandsHashMap.put(powerDistrictIdString, newSmartMeterPowerSpecsHashMap);
 	        }
 
 	    	return newPowerDemandsHashMap;
 	    }
 	 
 	 private  LinkedHashMap<String, Map<String, PowerSpec>> modifyPowerInfeed(LinkedHashMap<String, Map<String, PowerSpec>> oldPowerInfeedHashMap) {
-	    	LinkedHashMap<String, Map<String, PowerSpec>> newPowerInfeedHashMap = new LinkedHashMap<String, Map<String,PowerSpec>>();
+	    	LinkedHashMap<String, Map<String, PowerSpec>> newPowerInfeedHashMap = new LinkedHashMap<>();
 	    	
 	        
-	        for (String powerDistrictId : oldPowerInfeedHashMap.keySet()) {
+	        for (String powerDistrictIdString : oldPowerInfeedHashMap.keySet()) {
 	            
-	            Map<String, PowerSpec> oldSmartMeterPowerSpecs = oldPowerInfeedHashMap.get(powerDistrictId);
-	            HashMap<String, PowerSpec> newSmartMeterPowerSpecsHashMap = new HashMap<String, PowerSpec>();
+	            Map<String, PowerSpec> oldSmartMeterPowerSpecs = oldPowerInfeedHashMap.get(powerDistrictIdString);
+	            HashMap<String, PowerSpec> newSmartMeterPowerSpecsHashMap = new HashMap<>();
 	            
-	            for (String smartMeterID : oldSmartMeterPowerSpecs.keySet()) {
-	                PowerSpec powerSpec = oldSmartMeterPowerSpecs.get(smartMeterID);
+	            for (Entry<String, PowerSpec> smartMeterIDEntry : oldSmartMeterPowerSpecs.entrySet()) {
+	                PowerSpec powerSpec = smartMeterIDEntry.getValue();
 	                
-	                if (hackedSmartMeters.contains(smartMeterID)) {
-	                	String _ciType = powerSpec.getCiType();
-		                String _ciName = powerSpec.getCiName();
-		                String _ciSmartID = powerSpec.getCiSmartID();
-		                String _ciID = powerSpec.getCiID();
-		                int _powerDistrictId = powerSpec.getPowerDistrictId();
-		                int _aggregation = powerSpec.getAggregation();
-		                double _minReqDemand = powerSpec.getMinReqDemand();
-		                double _criticality = powerSpec.getCriticality();
-		                double _optDemand = powerSpec.getOptDemand();
+	                if (hackedSmartMeters.contains(smartMeterIDEntry.getKey())) {
+	                	String ciType = powerSpec.getCiType();
+		                String ciName = powerSpec.getCiName();
+		                String ciSmartID = powerSpec.getCiSmartID();
+		                String ciID = powerSpec.getCiID();
+		                int powerDistrictId = powerSpec.getPowerDistrictId();
+		                int aggregation = powerSpec.getAggregation();
+		                double minReqDemand = powerSpec.getMinReqDemand();
+		                double criticality = powerSpec.getCriticality();
+		                double optDemand = powerSpec.getOptDemand();
 		                
-		                PowerSpec newPowerSpec =  new PowerSpec(_ciType, _ciName, _ciID, 
-		                        _ciSmartID, _powerDistrictId, _aggregation, _optDemand, _minReqDemand, _criticality);
+		                PowerSpec newPowerSpec =  new PowerSpec(ciType, ciName, ciID, 
+		                        ciSmartID, powerDistrictId, aggregation, optDemand, minReqDemand, criticality);
 		                
 		                newPowerSpec.setMaxPowerInfeed(2 * powerSpec.getMaxPowerInfeed());
 		                
-		                newSmartMeterPowerSpecsHashMap.put(smartMeterID, newPowerSpec);
+		                newSmartMeterPowerSpecsHashMap.put(smartMeterIDEntry.getKey(), newPowerSpec);
 	                } else {
-	            		newSmartMeterPowerSpecsHashMap.put(smartMeterID, powerSpec);
+	            		newSmartMeterPowerSpecsHashMap.put(smartMeterIDEntry.getKey(), powerSpec);
 	            	}
 	                
 	            }
 	            
-	            newPowerInfeedHashMap.put(powerDistrictId, newSmartMeterPowerSpecsHashMap);
+	            newPowerInfeedHashMap.put(powerDistrictIdString, newSmartMeterPowerSpecsHashMap);
 	        }
 
 	    	return newPowerInfeedHashMap;

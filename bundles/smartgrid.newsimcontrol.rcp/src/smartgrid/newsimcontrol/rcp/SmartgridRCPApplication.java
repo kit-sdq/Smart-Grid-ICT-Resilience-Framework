@@ -2,8 +2,10 @@ package smartgrid.newsimcontrol.rcp;
 
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+
 
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
@@ -16,20 +18,19 @@ import smartgrid.newsimcontrol.rcp.commands.SimControlCommands;
  * This class controls all aspects of the application's execution
  */
 public class SmartgridRCPApplication implements IApplication {
-
+	protected static final Logger LOG = Logger.getLogger(SmartgridRCPApplication.class);
 	String test = "";
 	
 	@Override
 	public Object start(IApplicationContext context) throws Exception {
 		
-		System.out.println("RCP starting");
+		LOG.info("RCP starting");
 		
 		String[] arguments = (String[] )context.getArguments().get(IApplicationContext.APPLICATION_ARGS);
 		
-		System.out.println("");
 		
 		if (arguments.length == 0) {
-			System.out.println("The name of the method to be run should be given with its arguments.");
+			LOG.error("The name of the method to be run should be given with its arguments.");
 			return IApplication.EXIT_OK;
 		} else {
 			ControllerCommand cCommand = getCommand(arguments[0]);
@@ -41,16 +42,17 @@ public class SmartgridRCPApplication implements IApplication {
 
 	@Override
 	public void stop() {
+		//same as parent
 	}
 	
-	private ControllerCommand getCommand(String commandString) throws SimcontrolException, InterruptedException {
+	private ControllerCommand getCommand(String commandString) {
 		SimControlCommands command = null;
 		ControllerCommand cCommand = null;
 		
 		try {
-			command = SimControlCommandFromValue(commandString);
+			command = simControlCommandFromValue(commandString);
 		} catch(IllegalArgumentException e) {
-			System.out.println("The entered command can't be recognized. The program will end.");
+			LOG.error("The entered command can't be recognized. The program will end.");
 			return null;
 		}
 		var controller = (LocalController) Activator.getInstance().getController();
@@ -63,7 +65,7 @@ public class SmartgridRCPApplication implements IApplication {
 				break;
 			default:
 				cCommand = null;
-				System.out.println("The entered command can't be recognized. The program will end.");
+				LOG.error("The entered command can't be recognized. The program will end.");
 		}
 		return cCommand;
 	}
@@ -75,7 +77,7 @@ public class SmartgridRCPApplication implements IApplication {
 			cCommand.execute(arguments2);
 	}
 	
-	public static SimControlCommands SimControlCommandFromValue(String text) { 
+	public static SimControlCommands simControlCommandFromValue(String text) { 
      for (SimControlCommands comm : SimControlCommands.values()) { 
        if (String.valueOf(comm).equals(text)) { 
          return comm; 
@@ -93,14 +95,12 @@ public class SmartgridRCPApplication implements IApplication {
 	 */
 	public void startTest(String commandArg) throws SimcontrolException, InterruptedException {
 		
-		System.out.println("RCP starting");
+		LOG.info("RCP starting");
 		
 		String[] arguments = commandArg.split(" ");
-		
-		System.out.println("");
-		
+				
 		if (arguments.length == 0) {
-			System.out.println("Please write the name of the method to be run.");
+			LOG.error("Please write the name of the method to be run.");
 		} else {
 			ControllerCommand cCommand = getCommand(arguments[0]);
 			applyArguments(cCommand, arguments);

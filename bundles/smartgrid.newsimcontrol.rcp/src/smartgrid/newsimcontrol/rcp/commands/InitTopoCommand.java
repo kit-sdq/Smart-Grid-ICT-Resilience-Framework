@@ -29,10 +29,10 @@ public class InitTopoCommand extends ControllerCommand {
         			+ "For further info see the readme file");
 			return false;
 		}
-		Object obj = ReadObjectFromFile(args[0]);
+		Object obj = readObjectFromFile(args[0]);
 		if (! (obj instanceof Map<?,?>)) 
 			return false;
-		obj = ReadObjectFromFile(args[1]);
+		obj = readObjectFromFile(args[1]);
 		return (obj instanceof SmartGridTopoContainer);
 	}
 
@@ -40,16 +40,16 @@ public class InitTopoCommand extends ControllerCommand {
 	public void doCommand(String[] args) throws SimcontrolException {
 		LOG.info("Initializing the local controller");
 		@SuppressWarnings("unchecked")
-		Map<InitializationMapKeys, String> initMap = (Map<InitializationMapKeys, String>) ReadObjectFromFile(args[0]);
+		Map<InitializationMapKeys, String> initMap = (Map<InitializationMapKeys, String>) readObjectFromFile(args[0]);
 		controller.initConfiguration(initMap);
         
 		
 		LOG.info("Initializing the topology");
-		SmartGridTopoContainer topologyContainer = (SmartGridTopoContainer)ReadObjectFromFile(args[1]);
+		SmartGridTopoContainer topologyContainer = (SmartGridTopoContainer)readObjectFromFile(args[1]);
 		Collection<ICTElement> ictElements; 
 		try {
             ictElements = controller.initTopo(topologyContainer);
-            WriteObjectToFile(ictElements, args[2]);
+            writeObjectToFile(ictElements, args[2]);
         } catch (SimcontrolException e) {
             e.printStackTrace();
         }

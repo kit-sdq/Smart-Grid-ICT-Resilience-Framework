@@ -13,16 +13,9 @@ public class Activator implements BundleActivator {
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
-		// TODO Auto-generated method stub
 		Activator.activator = this;
 		var reference = context.getServiceReference(ISimulationController.class);
 		controller = context.getService(reference);
-	}
-
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		// TODO Auto-generated method stub
-
 	}
 	
 	public static Activator getInstance() {
@@ -31,6 +24,12 @@ public class Activator implements BundleActivator {
 	
 	public ISimulationController getController() {
 	    return controller;
+	}
+
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		//same as parent
+		
 	}
 
 

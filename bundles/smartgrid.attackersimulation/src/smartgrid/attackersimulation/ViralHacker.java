@@ -68,8 +68,8 @@ public class ViralHacker implements IAttackerSimulation {
     private void fullyMeshedHacking(final ScenarioResult scenario) {
         final var hackedNodes = this.getHackedNodes(scenario);
         final var strategy = new FullyMeshedStrategy(this.hackingSpeed);
-        for (final var rootNode : hackedNodes) {
-            strategy.hackNextNode(rootNode);
+        for (final var rootNodeItem : hackedNodes) {
+            strategy.hackNextNode(rootNodeItem);
         }
     }
 
