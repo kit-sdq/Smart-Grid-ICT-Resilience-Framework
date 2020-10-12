@@ -33,9 +33,7 @@ public class InitTopoCommand extends ControllerCommand {
 		if (! (obj instanceof Map<?,?>)) 
 			return false;
 		obj = ReadObjectFromFile(args[1]);
-		if (! (obj instanceof SmartGridTopoContainer)) 
-			return false;
-		return true;
+		return (obj instanceof SmartGridTopoContainer);
 	}
 
 	@Override
@@ -53,16 +51,11 @@ public class InitTopoCommand extends ControllerCommand {
             ictElements = controller.initTopo(topologyContainer);
             WriteObjectToFile(ictElements, args[2]);
         } catch (SimcontrolException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 		
-		try {
-			EObjectsHelper.saveToFileSystem(controller.getTopo(), args[3]);
-			EObjectsHelper.saveToFileSystem(controller.getInitalState(), args[4]);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		EObjectsHelper.saveToFileSystem(controller.getTopo(), args[3]);
+		EObjectsHelper.saveToFileSystem(controller.getInitalState(), args[4]);
 		
 		
 	}
