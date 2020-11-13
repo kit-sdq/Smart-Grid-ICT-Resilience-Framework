@@ -1,0 +1,8 @@
+/* AUTOMATICALLY GENERATED ON Sun Jul 21 18:53:59 CEST 2019*/
+/* DO NOT EDIT */
+
+grant {
+  permission java.security.AllPermission;
+  permission java.net.SocketPermission "localhost", "connect, resolve";
+};
+

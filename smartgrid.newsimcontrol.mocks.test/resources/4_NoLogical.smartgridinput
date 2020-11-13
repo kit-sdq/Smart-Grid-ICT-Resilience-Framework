@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ASCII"?>
+<smartgridinput:ScenarioState xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridinput="http://sdq.ipd.uka.de/smartgridinput/1.0" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#1097902931"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#1231486690"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#232749360"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#488152030"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#1413469946"/>
+  </EntityStates>
+  <EntityStates IsDestroyed="true">
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#396231478"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4_NoLogical.smartgridtopo#178393972"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="4_NoLogical.smartgridtopo#8923687"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#1897141063"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#1415741033"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4_NoLogical.smartgridtopo#938529206"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4_NoLogical.smartgridtopo#533916285"/>
+  </EntityStates>
+  <EntityStates IsDestroyed="true">
+    <Owner xsi:type="smartgridtopo:ControlCenter" href="4_NoLogical.smartgridtopo#154207266"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#815303806"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#997339913"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4_NoLogical.smartgridtopo#589523860"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#285709648"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4_NoLogical.smartgridtopo#756445555"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:SmartMeter" href="4_NoLogical.smartgridtopo#1905232316"/>
+  </EntityStates>
+  <EntityStates>
+    <Owner xsi:type="smartgridtopo:NetworkNode" href="4_NoLogical.smartgridtopo#2106276510"/>
+  </EntityStates>
+  <PowerStates>
+    <Owner href="4_NoLogical.smartgridtopo#1157360199"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4_NoLogical.smartgridtopo#1919554292"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4_NoLogical.smartgridtopo#604525416"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4_NoLogical.smartgridtopo#1092438896"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4_NoLogical.smartgridtopo#1577202450"/>
+  </PowerStates>
+  <PowerStates PowerOutage="true">
+    <Owner href="4_NoLogical.smartgridtopo#2134045192"/>
+  </PowerStates>
+  <PowerStates>
+    <Owner href="4_NoLogical.smartgridtopo#1060768660"/>
+  </PowerStates>
+  <Scenario href="4_NoLogical.smartgridtopo#/"/>
+</smartgridinput:ScenarioState>

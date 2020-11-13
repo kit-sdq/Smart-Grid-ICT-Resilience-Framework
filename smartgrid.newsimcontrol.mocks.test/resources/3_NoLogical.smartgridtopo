@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartgridtopo:SmartGridTopology xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smartgridtopo="http://sdq.ipd.uka.de/smartgridtopo/1.1">
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="37273049" ConnectedTo="1941630678" LinkedBy="//@ContainsPC.1"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1991897979" ConnectedTo="1941630678" LinkedBy="//@ContainsPC.0"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1220510184" ConnectedTo="870682880" LinkedBy="//@ContainsPC.2"/>
+  <ContainsNE xsi:type="smartgridtopo:NetworkNode" id="4030863" ConnectedTo="1147554579" LinkedBy="//@ContainsPC.0 //@ContainsPC.1 //@ContainsPC.2"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="597155272" ConnectedTo="917231191" LinkedBy="//@ContainsPC.3"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="626853164" ConnectedTo="917231191" LinkedBy="//@ContainsPC.4"/>
+  <ContainsNE xsi:type="smartgridtopo:InterCom" id="72206975" ConnectedTo="917231191" LinkedBy="//@ContainsPC.3 //@ContainsPC.4 //@ContainsPC.5 //@ContainsPC.7"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="916126282" ConnectedTo="263628782" LinkedBy="//@ContainsPC.7 //@ContainsPC.8"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1351741558" ConnectedTo="263628782" LinkedBy="//@ContainsPC.5 //@ContainsPC.6"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="267274562" ConnectedTo="263628782" LinkedBy="//@ContainsPC.6"/>
+  <ContainsNE xsi:type="smartgridtopo:SmartMeter" id="1524293046" ConnectedTo="263628782" LinkedBy="//@ContainsPC.8"/>
+  <ContainsPGN id="1147554579"/>
+  <ContainsPGN id="1941630678"/>
+  <ContainsPGN id="870682880"/>
+  <ContainsPGN id="917231191"/>
+  <ContainsPGN id="263628782"/>
+  <ContainsPC Links="4030863 1991897979"/>
+  <ContainsPC Links="4030863 37273049"/>
+  <ContainsPC Links="4030863 1220510184"/>
+  <ContainsPC Links="72206975 597155272"/>
+  <ContainsPC Links="72206975 626853164"/>
+  <ContainsPC Links="72206975 1351741558"/>
+  <ContainsPC Links="267274562 1351741558"/>
+  <ContainsPC Links="72206975 916126282"/>
+  <ContainsPC Links="916126282 1524293046"/>
+</smartgridtopo:SmartGridTopology>

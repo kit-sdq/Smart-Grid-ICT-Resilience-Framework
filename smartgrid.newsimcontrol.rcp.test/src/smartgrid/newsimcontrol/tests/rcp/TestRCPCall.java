@@ -22,6 +22,8 @@ import smartgrid.newsimcontrol.tests.helpers.TestHelper;
 
 public class TestRCPCall {
 	
+	static String dirProperty = System.getProperty("java.io.tmpdir");
+	
 	//inputs
 	PowerSpecContainer powerSpec;
 	SmartGridTopoContainer topoContainer;
@@ -34,10 +36,10 @@ public class TestRCPCall {
 	SmartComponentStateContainer smartCompStateContainer;
 	
 	//inputs
-	String powerSpecFilepath = System.getProperty("java.io.tmpdir") + File.separator + "powerSpec-" + System.currentTimeMillis();
-	String topoContainerFilepath = System.getProperty("java.io.tmpdir") + File.separator + "topoContainer-" + System.currentTimeMillis();
-	String powerASsignedFilepath = System.getProperty("java.io.tmpdir") + File.separator + "powerAssigned-" + System.currentTimeMillis();
-	String dtoMapFilePath = System.getProperty("java.io.tmpdir") + File.separator + "dtoMap-" + System.currentTimeMillis();
+	String powerSpecFilepath = dirProperty + File.separator + "powerSpec-" + System.currentTimeMillis();
+	String topoContainerFilepath = dirProperty + File.separator + "topoContainer-" + System.currentTimeMillis();
+	String powerASsignedFilepath = dirProperty + File.separator + "powerAssigned-" + System.currentTimeMillis();
+	String dtoMapFilePath = dirProperty + File.separator + "dtoMap-" + System.currentTimeMillis();
 	
 	//outputs
 	String ictElementsFilePath;
@@ -52,12 +54,11 @@ public class TestRCPCall {
 	
 	@SuppressWarnings("unchecked")
 	@BeforeEach
-	void init_testCase(){
+	void initTestCase(){
 		
 
 		BasicConfigurator.resetConfiguration();
 		BasicConfigurator.configure();
-		//System.setProperty("java.io.tmpdir", "/users/mazenebada/rcpTest");
 		
 		//count
 		controllerCount ++;
@@ -66,7 +67,7 @@ public class TestRCPCall {
 		powerSpec = InitHelpers.createPowerSpecContainer();
 		topoContainer = new SmartGridTopoContainer(InitHelpers.createTopoMap(), null);
 		powerAssigned = new PowerAssigned(InitHelpers.assignPower());
-		dtoMap = InitHelpers.createDTOMAP(System.getProperty("java.io.tmpdir") + File.separator + "output-" + System.currentTimeMillis());
+		dtoMap = InitHelpers.createDTOMAP(dirProperty + File.separator + "output-" + System.currentTimeMillis());
 		
 		TestHelper.WriteObjectToFile(powerSpec, powerSpecFilepath);	
 		TestHelper.WriteObjectToFile(topoContainer, topoContainerFilepath);
@@ -74,12 +75,12 @@ public class TestRCPCall {
 		TestHelper.WriteObjectToFile(dtoMap, dtoMapFilePath);
 				
 		//outputs
-		ictElementsFilePath = System.getProperty("java.io.tmpdir") + File.separator + "icts" + controllerCount + "-" + System.currentTimeMillis();
-		powerSpecModifiedFilePath = System.getProperty("java.io.tmpdir") + File.separator + "powerSpecModified" + controllerCount + "-" + System.currentTimeMillis();
-		smartCompStateContainerFilePath = System.getProperty("java.io.tmpdir") + File.separator + "smartCompStateContainer" + controllerCount +"-" + System.currentTimeMillis();
+		ictElementsFilePath = dirProperty + File.separator + "icts" + controllerCount + "-" + System.currentTimeMillis();
+		powerSpecModifiedFilePath = dirProperty + File.separator + "powerSpecModified" + controllerCount + "-" + System.currentTimeMillis();
+		smartCompStateContainerFilePath = dirProperty + File.separator + "smartCompStateContainer" + controllerCount +"-" + System.currentTimeMillis();
 		
 		//controller
-		controllerFilePath = System.getProperty("java.io.tmpdir") + File.separator + "controller" + controllerCount + "-" + System.currentTimeMillis();
+		controllerFilePath = dirProperty + File.separator + "controller" + controllerCount + "-" + System.currentTimeMillis();
 		
 
 		ictElements = (Collection<ICTElement>) TestHelper.ReadObjectFromFile(ictElementsFilePath);
@@ -94,8 +95,6 @@ public class TestRCPCall {
 	@DisplayName("simple Iteration over the commands")
 	void runCommands() throws SimcontrolException, InterruptedException {
 		String command;
-		
-
 	   
 		//1. Init Topo
 		command = "INIT_TOPO";
@@ -109,9 +108,6 @@ public class TestRCPCall {
 	}
 	
 	void runCommand(String commandArguments) throws SimcontrolException, InterruptedException {
-		//TODO
-		//String command = "-consoleLog -application smartgrid.newsimcontrol.rcp.application";
-		//command += " " + commandArguments;
 		SmartgridRCPApplication testApp = new SmartgridRCPApplication();
 		testApp.startTest(commandArguments);
 	}

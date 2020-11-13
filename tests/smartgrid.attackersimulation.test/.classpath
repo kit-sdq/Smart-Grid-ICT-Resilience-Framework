@@ -4,11 +4,16 @@
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="couplingSGDummy/**"/>
+			<accessrule kind="accessible" pattern="CouplingToICT/**"/>
+		</accessrules>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins">
 		<accessrules>
 			<accessrule kind="accessible" pattern="smartgrid/simcontrol/test/baselib/**"/>
 			<accessrule kind="accessible" pattern="couplingToICT/initializer/InitializationMapKeys"/>
+			<accessrule kind="accessible" pattern="couplingToICT/**"/>
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>

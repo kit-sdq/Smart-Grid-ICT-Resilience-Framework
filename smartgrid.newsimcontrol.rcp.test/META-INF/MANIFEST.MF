@@ -3,9 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tests
 Bundle-SymbolicName: smartgrid.newsimcontrol.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: smartgrid.newsimcontrol.tests;uses:="couplingToICT",
- smartgrid.newsimcontrol.tests.client;x-internal:=true,
- smartgrid.newsimcontrol.tests.helpers
+Export-Package: smartgrid.newsimcontrol.tests.helpers,
+ smartgrid.newsimcontrol.tests.rcp
 Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  couplingSG;bundle-version="1.0.0",
  smartgrid.newsimcontrol,
