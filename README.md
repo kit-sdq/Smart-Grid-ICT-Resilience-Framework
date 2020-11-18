@@ -26,4 +26,7 @@ This part of the framework covers analyses of the ICT aspects of the Smart Grid.
 * The syntax of the commands should be like:
     * INIT_TOPO   filepath(InitializationMap)   filepath(TopologyContainer)   returnpath(ICTElements) returnpath(Topology) returnpath(ScenarioState)
     * GET_MODIFIED_POWERSPECS   filepath(InitializationMap)   filepath(Topology) filepath(ScenarioState)  filepath(Powerspecs)   filepath(PowerAssigned)   returnpath(ModifiedPowerSpec)   returnpath(Dysfunctional smartcomponents)
+* The functionality of the two commands is as follows defined:
+    * INIT_TOPO This command initalizes a topology with an initalization map (the first parameter) creating a topology, a scenario state and returning a list of ICT elements. The return parameters of this command are the path to the list of this ICT elements, the created topology and the created scenario state. These pathes are needed for the second step, sothat we don't need to rund the topo generation another time.
+    * GET_MODIFIED_POWERSPECS This command takes as parameters the initalization map, the path to the topology, the path to the scenario state, the path to the powerspecs and the path of the powerAssigned. It runs the impact analysis and the attacker simulation and list the hacked elements from the result to be involved in the modification process of the powerspecs. The second step is to modify the powerspecs given using the strategy defined in the initialization map.
 
