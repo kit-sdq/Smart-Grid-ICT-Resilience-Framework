@@ -30,7 +30,7 @@ public class BFSStrategy extends SingleStepAttackStrategies {
         while (!queue.isEmpty() && this.checkMaxHackingOperations(counterHackoperations)) {
             final var node = queue.pop();
             for (final var next : this.getConnected(cluster, node)) {
-                if (!visited.getOrDefault(next, false)) {
+                if (!visited.getOrDefault(next, Boolean.FALSE)) {
                     if (!next.isIsHacked()) { // hack if not visited
                         next.setIsHacked(true);
                         counterHackoperations++;

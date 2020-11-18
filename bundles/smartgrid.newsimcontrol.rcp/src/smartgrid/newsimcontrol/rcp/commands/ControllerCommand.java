@@ -10,12 +10,11 @@ import org.apache.log4j.Logger;
 
 import couplingToICT.SimcontrolException;
 import smartgrid.newsimcontrol.controller.LocalController;
-import smartgrid.newsimcontrol.controller.ReactiveSimulationController;
 
 public abstract class ControllerCommand {
 
 	LocalController controller; 
-	protected static final Logger LOG = Logger.getLogger(ReactiveSimulationController.class);
+	protected static final Logger LOG = Logger.getLogger(ControllerCommand.class);
 
 	
 	public ControllerCommand(LocalController controller) {
@@ -33,7 +32,7 @@ public abstract class ControllerCommand {
 	
 	public abstract void doCommand(String[] args) throws SimcontrolException, InterruptedException;
 	
-	public Object ReadObjectFromFile(String filepath) {
+	public Object readObjectFromFile(String filepath) {
 		 
         try {
  
@@ -51,7 +50,7 @@ public abstract class ControllerCommand {
         }
     }
 	
-	public void WriteObjectToFile(Object serObj, String filepath) {
+	public void writeObjectToFile(Object serObj, String filepath) {
 		 
         try {
  

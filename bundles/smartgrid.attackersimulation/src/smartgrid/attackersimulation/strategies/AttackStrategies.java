@@ -42,7 +42,7 @@ public abstract class AttackStrategies {
             }
         }
         nextNetworkEntities.remove(rootNode); // remove rootNode
-        Set<On> conenctedNodes = new HashSet<On>();
+        Set<On> conenctedNodes = new HashSet<>();
         for (On onEntity : cluster.getHasEntities()) {
         	if (nextNetworkEntities.contains(onEntity.getOwner())) 
         		conenctedNodes.add(onEntity);

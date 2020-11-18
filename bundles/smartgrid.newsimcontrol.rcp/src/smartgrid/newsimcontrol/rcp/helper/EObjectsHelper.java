@@ -20,6 +20,10 @@ import smartgridtopo.SmartgridtopoPackage;
 
 public class EObjectsHelper {
 
+	private EObjectsHelper() {
+		
+	}
+	
 	private static final Logger LOG = Logger.getLogger(EObjectsHelper.class);
 
     /**
@@ -44,7 +48,7 @@ public class EObjectsHelper {
         resource.getContents().add(result);
 
         try {
-            resource.save(Collections.EMPTY_MAP);
+            resource.save(Collections.emptyMap());
         } catch (final IOException e) {
             LOG.error("Could not save to file.", e);
         }
