@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Test
-Bundle-SymbolicName: smartgrid.impactanalysis.test;singleton:=true
+Bundle-SymbolicName: smartgrid.newsimcontrol.mocks.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: smartgrid.impactanalysis.test
 Bundle-RequiredExecutionEnvironment: JavaSE-11
