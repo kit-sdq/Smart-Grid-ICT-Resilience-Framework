@@ -14,8 +14,8 @@
 	<name>Releng Modules</name>
 
 	<modules>
-        <!--<module>edu.kit.ipd.sdq.smartgrid.updatesite</module>-->
-        <!--<module>smartgrid.newsimcontrol.rcp.launch</module>-->
+        <module>edu.kit.ipd.sdq.smartgrid.updatesite</module>
+        <module>smartgrid.newsimcontrol.rcp.launch</module>
         <module>smartgrid.newsimcontrol.sirius.product</module>
     </modules>
 

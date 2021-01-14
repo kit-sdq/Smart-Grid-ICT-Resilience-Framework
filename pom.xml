@@ -33,7 +33,7 @@
 			<id>Eclipse 4.13 (2019-09)</id>
 			<layout>p2</layout>
 			<!--<url>http://download.eclipse.org/releases/2019-09</url>-->
-			<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/2019-09/</url>
+			<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/2020-09/</url>
 		</repository>
 		<repository>
 			<id>Eclipse 4.13 Updates</id>
@@ -46,18 +46,8 @@
 			<url>https://updatesite.palladio-simulator.com/palladio-build-updatesite/nightly/</url>
 		</repository>
         <repository>
-          <id>eclipse-repo</id>
-          <url>http://download.eclipse.org/releases/neon</url>
-          <layout>p2</layout>
-        </repository>
-        <repository>
           <id>eclipse-Equinox</id>
-          <url>http://download.eclipse.org/releases/2019-12</url>
-          <layout>p2</layout>
-        </repository>
-        <repository>
-          <id>eclipse-Felix</id>
-          <url>http://download.eclipse.org/releases/2019-09/201909181001</url>
+          <url>http://download.eclipse.org/releases/2020-09</url>
           <layout>p2</layout>
         </repository>
         
@@ -71,29 +61,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 			</plugin>
-			<!--
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-toolchains-plugin</artifactId>
-				<version>3.0.0</version>
-		<executions>
-  			<execution>
-    			<phase>validate</phase>
-    			<goals>
-	      			<goal>toolchain</goal>
-    			</goals>
-  			</execution>
-		</executions>
-		<configuration>
-  			<toolchains>
-	    		<jdk>
-	      			<version>11</version>
-      				<vendor>oracle</vendor>
-    			</jdk>
-			</toolchains>
-		</configuration>
-	</plugin>-->
-			
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
@@ -110,7 +77,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
