@@ -66,7 +66,7 @@ public class RCPCall {
 	}
 
 	public static void init_objects() {
-		//TODO: The correct objects must be given here
+		//TODO: Try different strategies and different topology generators 
 		powerSpec = InitHelpers.createPowerSpecContainer();
 		topoContainer = new SmartGridTopoContainer(InitHelpers.createTopoMap(), null);
 		powerAssigned = new PowerAssigned(InitHelpers.assignPower());

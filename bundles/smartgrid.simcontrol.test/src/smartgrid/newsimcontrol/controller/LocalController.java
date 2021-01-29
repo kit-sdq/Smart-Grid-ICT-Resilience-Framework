@@ -45,7 +45,8 @@ public class LocalController implements ISimulationController{
     @Override
     public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned sMPowerAssigned)
             throws SimcontrolException, InterruptedException {
-        reactiveSimControl.run(sMPowerAssigned);
+    	//TODO Check PowerSpecs wegen PowerdistrictId, smartID
+    	reactiveSimControl.run(sMPowerAssigned);
         return reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
     }
 

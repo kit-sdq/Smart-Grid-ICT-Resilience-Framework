@@ -3,6 +3,7 @@ package smartgrid.newsimcontrol.tests.helpers;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 import couplingToICT.PowerSpec;
 import couplingToICT.PowerSpecContainer;
@@ -13,6 +14,12 @@ import couplingToICT.initializer.InitializationMapKeys;
 import couplingToICT.initializer.PowerSpecsModificationTypes;
 
 public class InitHelpers {
+	
+	public static int NO_OF_POWER_DISTRICTS_POWER_INFEED = 100;
+	public static int NO_OF_POWER_DISTRICTS_POWER_DEMAND = 100;
+	public static int NO_OF_POWER_SPECS_POWER_DEMAND = 100;
+	public static int NO_OF_POWER_SPECS_POWER_INFEED = 100;
+	
 	private InitHelpers() {
 		assert false;
 	}
@@ -36,21 +43,102 @@ public class InitHelpers {
 	}
 
 	public static PowerSpecContainer createPowerSpecContainer() {
-		var powerDemanMap = new LinkedHashMap<String, Map<String, PowerSpec>>();
+		var powerDemandMap = getPowerDemandMap();
+		var powerInfeedMap = getPowerInfeedMap();
+		
+		return new PowerSpecContainer(powerDemandMap, powerInfeedMap);
+	
+	}
+	
+	public static LinkedHashMap<String, Map<String, PowerSpec>> getPowerDemandMap(){
+		var powerDemandMap = new LinkedHashMap<String, Map<String, PowerSpec>>();
+		
+		String powerDistrictId;
+		HashMap<String, PowerSpec> powerDistrictPowerDemand;
+		
+		for (int i=0; i<NO_OF_POWER_DISTRICTS_POWER_DEMAND; i++) {
+			powerDistrictId = createRandomPowerDistrictId();
+			powerDistrictPowerDemand = createRandomPowerDistrictPowerInfeed();
+			powerDemandMap.put(powerDistrictId, powerDistrictPowerDemand);
+		}
+		
+		return powerDemandMap;
+	}
+	
+	public static LinkedHashMap<String, Map<String, PowerSpec>> getPowerInfeedMap(){
+		var powerInfeedMap = new LinkedHashMap<String, Map<String, PowerSpec>>();
+		
+		String powerDistrictId;
+		HashMap<String, PowerSpec> powerDistrictPowerInfeed;
+		
+		for (int i=0; i<NO_OF_POWER_DISTRICTS_POWER_INFEED; i++) {
+			powerDistrictId = createRandomPowerDistrictId();
+			powerDistrictPowerInfeed = createRandomPowerDistrictPowerInfeed();
+			powerInfeedMap.put(powerDistrictId, powerDistrictPowerInfeed);
+		}
+		
+		return powerInfeedMap;
+	}
+	
+	public static HashMap<String, PowerSpec> createRandomPowerDistrictPowerInfeed(){
 		var map = new HashMap<String, PowerSpec>();
 		
-		var powerspec = new PowerSpec("Smart-Meter", "Test", "1234", "1234", 1, 1.0, 1.0, 1.0);
-		map.put("1234", powerspec);
+		PowerSpec powerspec;
+		String smartID;
+		for (int i=0; i<NO_OF_POWER_SPECS_POWER_INFEED; i++) {
+			powerspec = createRandomPowerSpec();
+			smartID = createRandomSmartId();
+			map.put(smartID, powerspec);
+		}
 		
-		powerspec = new PowerSpec("Smart-Meter", "Medicine", "234", "234", 1, 1.0, 1.0, 1.0);
-		map.put("234", powerspec);
-		
-		powerspec = new PowerSpec("Smart-Meter", "Important", "34", "34", 1, 1.0, 1.0, 1.0);
-		map.put("34", powerspec);
-		
-		powerDemanMap.put("1", map);
-		return new PowerSpecContainer(powerDemanMap, null);
+		return map;
+	}
 	
+	public static HashMap<String, PowerSpec> createRandomPowerDistrictPowerDemand(){
+		var map = new HashMap<String, PowerSpec>();
+		
+		PowerSpec powerspec;
+		String smartID;
+		for (int i=0; i<NO_OF_POWER_SPECS_POWER_DEMAND; i++) {
+			powerspec = createRandomPowerSpec();
+			smartID = createRandomSmartId();
+			map.put(smartID, powerspec);
+		}
+		
+		return map;
+	}
+	
+	public static PowerSpec createRandomPowerSpec(String powerDistrictId, String smartID) {
+		return null;
+		//TODO
+	}
+	
+	public static PowerSpec createRandomPowerSpec() {
+		//TODO SmartId, PowerDistrictId als Parameter bekommen
+		Random rand = new Random();
+		String ciType = "SmartMeter" + Integer.toString(rand.nextInt(10000000)); // CI, owner type
+		String ciOwner = "Owner" + Integer.toString(rand.nextInt(10000000)); // CI, owner name
+		String ciID = Integer.toString(rand.nextInt(10000000)); // CI, owner id
+		String ciSmartID = Integer.toString(rand.nextInt(10000000)); // Smart meter agent-ID
+		int powerDistrictId = rand.nextInt(10000000);// determined by the Smart Grid scenario
+		double optDemand = rand.nextInt(20); // optimal demand
+		double minReqDemand = rand.nextInt(20); // Minimum required power
+		double criticality = rand.nextInt(20); // 1, if e.g. human casualties (has to be // supplied)
+		double maxPowerInfeed = rand.nextInt(20);// maximum power infeed by generators or storages
+		
+		var powerspec = new PowerSpec(ciType, ciOwner, ciID, ciSmartID, powerDistrictId, optDemand, minReqDemand, criticality);
+		powerspec.setMaxPowerInfeed(maxPowerInfeed);
+		return powerspec;
+	}
+	
+	public static String createRandomSmartId() {
+		Random rand = new Random();
+		return Integer.toString(rand.nextInt(10000000));
+	}
+	
+	public static String createRandomPowerDistrictId() {
+		Random rand = new Random();
+		return Integer.toString(rand.nextInt(10000000));
 	}
 
 	public static LinkedHashMap<String, Map<String, SmartComponentGeoData>> createTopoMap() {
