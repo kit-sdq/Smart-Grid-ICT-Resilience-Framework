@@ -17,11 +17,11 @@
          id="testProduct"
          point="org.eclipse.core.runtime.products">
       <product
-            application="smartgrid.newsimcontrol.rcp.application"
-            name="smartgrid.newsimcontrol.rcp.product">
+            application="org.eclipse.ui.ide.workbench"
+            name="Sirius.Product">
          <property
                name="appName"
-               value="smartgrid.newsimcontrol.rcp.product">
+               value="Sirius.Product">
          </property>
       </product>
    </extension>

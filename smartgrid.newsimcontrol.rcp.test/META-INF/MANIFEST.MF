@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
-Bundle-SymbolicName: smartgrid.newsimcontrol.tests;singleton:=true
+Bundle-SymbolicName: smartgrid.newsimcontrol.rcp.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: smartgrid.newsimcontrol.tests.helpers,
  smartgrid.newsimcontrol.tests.rcp
