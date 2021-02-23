@@ -30,15 +30,15 @@
 	<repositories>
 		<!-- If you adjust a repository here, please also adjust the repository in the b3 aggregator. -->
 		<repository>
-			<id>Eclipse 4.13 (2019-12)</id>
+			<id>Eclipse 4.18 (2020-12)</id>
 			<layout>p2</layout>
 			<!--<url>http://download.eclipse.org/releases/2019-12</url>-->
 			<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/2020-12/</url>
 		</repository>
 		<repository>
-			<id>Eclipse 4.13 Updates</id>
+			<id>Eclipse 4.18 Updates</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/eclipse/updates/4.13</url>
+			<url>http://download.eclipse.org/eclipse/updates/4.18</url>
 		</repository>
 		<repository>
 			<id>Palladio</id>
