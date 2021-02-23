@@ -19,6 +19,7 @@ public class InitHelpers {
 	public static int NO_OF_POWER_DISTRICTS_POWER_DEMAND = 100;
 	public static int NO_OF_POWER_SPECS_POWER_DEMAND = 100;
 	public static int NO_OF_POWER_SPECS_POWER_INFEED = 100;
+	private static PowerSpecContainer powerSpecContainer;
 	
 	private InitHelpers() {
 		assert false;
@@ -46,7 +47,8 @@ public class InitHelpers {
 		var powerDemandMap = getPowerDemandMap();
 		var powerInfeedMap = getPowerInfeedMap();
 		
-		return new PowerSpecContainer(powerDemandMap, powerInfeedMap);
+		powerSpecContainer = new PowerSpecContainer(powerDemandMap, powerInfeedMap);
+		return powerSpecContainer;
 	
 	}
 	
@@ -58,7 +60,7 @@ public class InitHelpers {
 		
 		for (int i=0; i<NO_OF_POWER_DISTRICTS_POWER_DEMAND; i++) {
 			powerDistrictId = createRandomPowerDistrictId();
-			powerDistrictPowerDemand = createRandomPowerDistrictPowerInfeed();
+			powerDistrictPowerDemand = createRandomPowerDistrictPowerDemand(powerDistrictId);
 			powerDemandMap.put(powerDistrictId, powerDistrictPowerDemand);
 		}
 		
@@ -73,54 +75,49 @@ public class InitHelpers {
 		
 		for (int i=0; i<NO_OF_POWER_DISTRICTS_POWER_INFEED; i++) {
 			powerDistrictId = createRandomPowerDistrictId();
-			powerDistrictPowerInfeed = createRandomPowerDistrictPowerInfeed();
+			powerDistrictPowerInfeed = createRandomPowerDistrictPowerInfeed(powerDistrictId);
 			powerInfeedMap.put(powerDistrictId, powerDistrictPowerInfeed);
 		}
 		
 		return powerInfeedMap;
 	}
 	
-	public static HashMap<String, PowerSpec> createRandomPowerDistrictPowerInfeed(){
+	public static HashMap<String, PowerSpec> createRandomPowerDistrictPowerInfeed(String powerDistrictId){
 		var map = new HashMap<String, PowerSpec>();
 		
 		PowerSpec powerspec;
 		String smartID;
 		for (int i=0; i<NO_OF_POWER_SPECS_POWER_INFEED; i++) {
-			powerspec = createRandomPowerSpec();
 			smartID = createRandomSmartId();
+			powerspec = createRandomPowerSpec(smartID, powerDistrictId);
 			map.put(smartID, powerspec);
 		}
 		
 		return map;
 	}
 	
-	public static HashMap<String, PowerSpec> createRandomPowerDistrictPowerDemand(){
+	public static HashMap<String, PowerSpec> createRandomPowerDistrictPowerDemand(String powerDistrictId){
 		var map = new HashMap<String, PowerSpec>();
 		
 		PowerSpec powerspec;
 		String smartID;
 		for (int i=0; i<NO_OF_POWER_SPECS_POWER_DEMAND; i++) {
-			powerspec = createRandomPowerSpec();
 			smartID = createRandomSmartId();
+			powerspec = createRandomPowerSpec(smartID, powerDistrictId);
 			map.put(smartID, powerspec);
 		}
 		
 		return map;
 	}
 	
-	public static PowerSpec createRandomPowerSpec(String powerDistrictId, String smartID) {
-		return null;
-		//TODO
-	}
 	
-	public static PowerSpec createRandomPowerSpec() {
-		//TODO SmartId, PowerDistrictId als Parameter bekommen
+	public static PowerSpec createRandomPowerSpec(String smartID, String powerDistrictId2) {
 		Random rand = new Random();
 		String ciType = "SmartMeter" + Integer.toString(rand.nextInt(10000000)); // CI, owner type
 		String ciOwner = "Owner" + Integer.toString(rand.nextInt(10000000)); // CI, owner name
 		String ciID = Integer.toString(rand.nextInt(10000000)); // CI, owner id
-		String ciSmartID = Integer.toString(rand.nextInt(10000000)); // Smart meter agent-ID
-		int powerDistrictId = rand.nextInt(10000000);// determined by the Smart Grid scenario
+		String ciSmartID = smartID; //Integer.toString(rand.nextInt(10000000)); // Smart meter agent-ID
+		int powerDistrictId = Integer.valueOf(powerDistrictId2); //rand.nextInt(10000000);// determined by the Smart Grid scenario
 		double optDemand = rand.nextInt(20); // optimal demand
 		double minReqDemand = rand.nextInt(20); // Minimum required power
 		double criticality = rand.nextInt(20); // 1, if e.g. human casualties (has to be // supplied)
@@ -144,41 +141,72 @@ public class InitHelpers {
 	public static LinkedHashMap<String, Map<String, SmartComponentGeoData>> createTopoMap() {
 		var smartMeter = new LinkedHashMap<String, Map<String, SmartComponentGeoData>>();
 	
-		// insert powerDistrict 1
-		var district = new HashMap<String, SmartComponentGeoData>();
-	
-		var geodata = new SmartComponentGeoData();
-		geodata.setPowerDistrictId(1);
-		geodata.setCompName("Test");
-		geodata.setCompType("1234");
-		district.put("1234", geodata);
-	
-		geodata = new SmartComponentGeoData();
-		geodata.setPowerDistrictId(1);
-		geodata.setCompName("Medicine");
-		geodata.setCompType("234");
-		district.put("234", geodata);
-	
-		geodata = new SmartComponentGeoData();
-		geodata.setPowerDistrictId(1);
-		geodata.setCompName("Important");
-		geodata.setCompType("34");
-		district.put("34", geodata);
-	
-		smartMeter.put("1", district);
+		var powerDemandMap = powerSpecContainer.getPowerDemand();
+		var powerInfeedMap = powerSpecContainer.getPowerInfeed();
+		
+		
+		for (String powerDistrictId: powerDemandMap.keySet()) {
+			var district = new HashMap<String, SmartComponentGeoData>();
+			int count = 0;
+			for(String smartId : powerDemandMap.get(powerDistrictId).keySet()) {
+				var geodata = new SmartComponentGeoData();
+				geodata.setCompName("testComp" + powerDistrictId + count);
+				geodata.setCompType("testCompType" + powerDistrictId + count);
+				geodata.setPowerDistrictId(Integer.valueOf(powerDistrictId));
+				district.put(smartId, geodata);
+				count ++;
+			}
+			smartMeter.put(powerDistrictId, district);
+		}
+		
+		for (String powerDistrictId: powerInfeedMap.keySet()) {
+			var district = new HashMap<String, SmartComponentGeoData>();
+			int count = 0;
+			for(String smartId : powerInfeedMap.get(powerDistrictId).keySet()) {
+				var geodata = new SmartComponentGeoData();
+				geodata.setCompName("testComp" + powerDistrictId + count);
+				geodata.setCompType("testCompType" + powerDistrictId + count);
+				geodata.setPowerDistrictId(Integer.valueOf(powerDistrictId));
+				district.put(smartId, geodata);
+				count ++;
+			}
+			smartMeter.put(powerDistrictId, district);
+		}
+		
 	
 		return smartMeter;
 	}
 
 	public static LinkedHashMap<String, HashMap<String, Double>> assignPower() {
 		var assignment = new LinkedHashMap<String, HashMap<String, Double>>();
-		var districAssignment = new HashMap<String, Double>();
-		districAssignment.put("1234", 1.0);
-		districAssignment.put("234", 1.0);
-		districAssignment.put("34", 1.0);
-		assignment.put("1", districAssignment);
+		
+		var powerDemandMap = powerSpecContainer.getPowerDemand();
+		var powerInfeedMap = powerSpecContainer.getPowerInfeed();
+		
+		
+		for (String powerDistrictId: powerDemandMap.keySet()) {
+			var singleAssignment = new HashMap<String, Double>();
+			for(String smartId : powerDemandMap.get(powerDistrictId).keySet()) {
+				singleAssignment.put(smartId, generateRandomPower());
+			}
+			assignment.put(powerDistrictId, singleAssignment);
+		}
+		
+		for (String powerDistrictId: powerInfeedMap.keySet()) {
+			var singleAssignment = new HashMap<String, Double>();
+			for(String smartId : powerInfeedMap.get(powerDistrictId).keySet()) {
+				singleAssignment.put(smartId, generateRandomPower());
+			}
+			assignment.put(powerDistrictId, singleAssignment);
+		}
+		
 		return assignment;
 		
+	}
+
+	private static Double generateRandomPower() {
+		Random rand = new Random();
+		return rand.nextDouble() * 10;
 	}
 
 }
