@@ -5,6 +5,12 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import org.apache.log4j.BasicConfigurator;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,39 +28,44 @@ import smartgrid.newsimcontrol.tests.helpers.TestHelper;
 
 public class TestRCPCall {
 	
-	static String dirProperty = System.getProperty("java.io.tmpdir");
+	static String dirProperty = "C:\\Users\\mazen\\TestFolder";//System.getProperty("java.io.tmpdir");
 	
 	//inputs
-	PowerSpecContainer powerSpec;
-	SmartGridTopoContainer topoContainer;
-	PowerAssigned powerAssigned;
-	HashMap<InitializationMapKeys, String> dtoMap;
+	static PowerSpecContainer powerSpec;
+	static SmartGridTopoContainer topoContainer;
+	static PowerAssigned powerAssigned;
+	static HashMap<InitializationMapKeys, String> dtoMap;
 	
 	//outputs
-	Collection<ICTElement> ictElements;
-	PowerSpecContainer powerSpecModified;
-	SmartComponentStateContainer smartCompStateContainer;
+	static Collection<ICTElement> ictElements;
+	static PowerSpecContainer powerSpecModified;
+	static SmartComponentStateContainer smartCompStateContainer;
 	
 	//inputs
-	String powerSpecFilepath = dirProperty + File.separator + "powerSpec-" + System.currentTimeMillis();
-	String topoContainerFilepath = dirProperty + File.separator + "topoContainer-" + System.currentTimeMillis();
-	String powerASsignedFilepath = dirProperty + File.separator + "powerAssigned-" + System.currentTimeMillis();
-	String dtoMapFilePath = dirProperty + File.separator + "dtoMap-" + System.currentTimeMillis();
+	static String powerSpecFilepath = dirProperty + File.separator + "powerSpec-" + System.currentTimeMillis();
+	static String topoContainerFilepath = dirProperty + File.separator + "topoContainer-" + System.currentTimeMillis();
+	static String powerASsignedFilepath = dirProperty + File.separator + "powerAssigned-" + System.currentTimeMillis();
+	static String dtoMapFilePath = dirProperty + File.separator + "dtoMap-" + System.currentTimeMillis();
 	
 	//outputs
-	String ictElementsFilePath;
-	String powerSpecModifiedFilePath;
-	String smartCompStateContainerFilePath;
+	static String ictElementsFilePath;
+	static String powerSpecModifiedFilePath;
+	static String smartCompStateContainerFilePath;
+	static String topoPath;
+	static String inputPath;
 	
 	//controller
-	String controllerFilePath;
+	static String controllerFilePath;
 	
 	//count
-	int controllerCount = 0; //For every test case a new controller
+	static int controllerCount = 0; //For every test case a new controller
 	
-	@SuppressWarnings("unchecked")
-	@BeforeEach
-	void initTestCase(){
+	//helper
+		private static String OS = System.getProperty("os.name").toLowerCase();
+		private static String rcpPath = "/home/majuwa/tmp/workspace-helmholtz-new/eclipse/eclipse";
+	
+	@Before
+	static void initTestCase(){
 		
 
 		BasicConfigurator.resetConfiguration();
@@ -64,10 +75,12 @@ public class TestRCPCall {
 		controllerCount ++;
 		
 		//inputs
-		powerSpec = InitHelpers.createPowerSpecContainer();
-		topoContainer = new SmartGridTopoContainer(InitHelpers.createTopoMap(), null);
-		powerAssigned = new PowerAssigned(InitHelpers.assignPower());
-		dtoMap = InitHelpers.createDTOMAP(dirProperty + File.separator + "output-" + System.currentTimeMillis());
+		//use an instance instead of the class to track the ids and the districts created
+		InitHelpers initHelper = new InitHelpers();
+		powerSpec = initHelper.createPowerSpecContainer();
+		topoContainer = new SmartGridTopoContainer(initHelper.createTopoMap(), null);
+		powerAssigned = new PowerAssigned(initHelper.assignPower());
+		dtoMap = initHelper.createDTOMAP(dirProperty + File.separator + "output-" + System.currentTimeMillis());
 		
 		TestHelper.WriteObjectToFile(powerSpec, powerSpecFilepath);	
 		TestHelper.WriteObjectToFile(topoContainer, topoContainerFilepath);
@@ -78,15 +91,11 @@ public class TestRCPCall {
 		ictElementsFilePath = dirProperty + File.separator + "icts" + controllerCount + "-" + System.currentTimeMillis();
 		powerSpecModifiedFilePath = dirProperty + File.separator + "powerSpecModified" + controllerCount + "-" + System.currentTimeMillis();
 		smartCompStateContainerFilePath = dirProperty + File.separator + "smartCompStateContainer" + controllerCount +"-" + System.currentTimeMillis();
+		topoPath = dirProperty + File.separator + "topo" + controllerCount + "-" + System.currentTimeMillis();
+		inputPath = dirProperty + File.separator + "input" + controllerCount + "-" + System.currentTimeMillis();
 		
 		//controller
 		controllerFilePath = dirProperty + File.separator + "controller" + controllerCount + "-" + System.currentTimeMillis();
-		
-
-		ictElements = (Collection<ICTElement>) TestHelper.ReadObjectFromFile(ictElementsFilePath);
-		powerSpecModified = (PowerSpecContainer) TestHelper.ReadObjectFromFile(powerSpecModifiedFilePath);
-		smartCompStateContainer = (SmartComponentStateContainer) TestHelper.ReadObjectFromFile(smartCompStateContainerFilePath);
-		
 	}
 	
 	
@@ -96,15 +105,19 @@ public class TestRCPCall {
 	void runCommands() throws SimcontrolException, InterruptedException {
 		String command;
 	   
+		initTestCase();
+		
 		//1. Init Topo
 		command = "INIT_TOPO";
-		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + ictElementsFilePath;
+		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + ictElementsFilePath + " " + topoPath + " " + inputPath;
 		runCommand(command);
 		
 		//2. Get Modified PowerSpecs
 		command = "GET_MODIFIED_POWERSPECS";
-		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
+		command += " " + dtoMapFilePath + " " + topoPath + " " + inputPath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
 		runCommand(command);
+		
+		collectObjects();
 	}
 	
 	void runCommand(String commandArguments) throws SimcontrolException, InterruptedException {
@@ -112,5 +125,15 @@ public class TestRCPCall {
 		testApp.startTest(commandArguments);
 	}
 	
+	@AfterClass
+	public static void collectObjects() {
 
+		try {
+		ictElements = (Collection<ICTElement>) TestHelper.ReadObjectFromFile(ictElementsFilePath);
+		powerSpecModified = (PowerSpecContainer) TestHelper.ReadObjectFromFile(powerSpecModifiedFilePath);
+		smartCompStateContainer = (SmartComponentStateContainer) TestHelper.ReadObjectFromFile(smartCompStateContainerFilePath);
+		} catch (Exception e) {
+			//don't do any thing
+		}
+		}
 }

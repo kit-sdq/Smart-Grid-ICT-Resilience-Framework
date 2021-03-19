@@ -55,7 +55,7 @@ public class SmartgridRCPApplication implements IApplication {
 			LOG.error("The entered command can't be recognized. The program will end.");
 			return null;
 		}
-		var controller = (LocalController) Activator.getInstance().getController();
+		var controller = new LocalController(); //(LocalController) Activator.getInstance().getController();
 		switch (command) {
 			case INIT_TOPO:
 				cCommand = new InitTopoCommand(controller);

@@ -32,11 +32,10 @@ public class GetModifiedPowerspecsCommand extends ControllerCommand {
 			return false;
 		}
 		Object obj1 = readObjectFromFile(args[0]);
-		Object obj2 = readObjectFromFile(args[1]);
-		Object obj3 = readObjectFromFile(args[2]);
-		Object obj4 = readObjectFromFile(args[3]);
-		return (obj1 instanceof Map<?,?> && obj2 instanceof SmartGridTopoContainer 
-				&& obj3 instanceof PowerSpecContainer && obj4 instanceof PowerAssigned);
+		Object obj2 = readObjectFromFile(args[3]);
+		Object obj3 = readObjectFromFile(args[4]);
+		return (obj1 instanceof Map<?,?> && obj2 instanceof PowerSpecContainer 
+				&& obj3 instanceof PowerAssigned);
 	}
 
 	@Override

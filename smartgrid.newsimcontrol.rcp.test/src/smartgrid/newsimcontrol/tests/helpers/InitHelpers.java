@@ -15,14 +15,13 @@ import couplingToICT.initializer.PowerSpecsModificationTypes;
 
 public class InitHelpers {
 	
-	public static int NO_OF_POWER_DISTRICTS_POWER_INFEED = 100;
-	public static int NO_OF_POWER_DISTRICTS_POWER_DEMAND = 100;
-	public static int NO_OF_POWER_SPECS_POWER_DEMAND = 100;
-	public static int NO_OF_POWER_SPECS_POWER_INFEED = 100;
+	public static int NO_OF_POWER_DISTRICTS_POWER_INFEED = 5;
+	public static int NO_OF_POWER_DISTRICTS_POWER_DEMAND = 5;
+	public static int NO_OF_POWER_SPECS_POWER_DEMAND = 5;
+	public static int NO_OF_POWER_SPECS_POWER_INFEED = 5;
 	private static PowerSpecContainer powerSpecContainer;
 	
-	private InitHelpers() {
-		assert false;
+	public InitHelpers() {
 	}
 
 	public static HashMap<InitializationMapKeys, String> createDTOMAP(String path) {
