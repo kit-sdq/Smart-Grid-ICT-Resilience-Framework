@@ -28,7 +28,7 @@ import smartgrid.newsimcontrol.tests.helpers.TestHelper;
 
 public class TestRCPCall {
 	
-	static String dirProperty = "C:\\Users\\mazen\\TestFolder";//System.getProperty("java.io.tmpdir");
+	static String dirProperty = "C:\\Users\\mazen\\TestFolder";// + "\\" + System.currentTimeMillis();//System.getProperty("java.io.tmpdir");
 	
 	//inputs
 	static PowerSpecContainer powerSpec;
@@ -59,10 +59,11 @@ public class TestRCPCall {
 	
 	//count
 	static int controllerCount = 0; //For every test case a new controller
+	static int interationCount = 3;
 	
 	//helper
-		private static String OS = System.getProperty("os.name").toLowerCase();
-		private static String rcpPath = "/home/majuwa/tmp/workspace-helmholtz-new/eclipse/eclipse";
+	private static String OS = System.getProperty("os.name").toLowerCase();
+	private static String rcpPath = "/home/majuwa/tmp/workspace-helmholtz-new/eclipse/eclipse";
 	
 	@Before
 	static void initTestCase(){
@@ -91,8 +92,8 @@ public class TestRCPCall {
 		ictElementsFilePath = dirProperty + File.separator + "icts" + controllerCount + "-" + System.currentTimeMillis();
 		powerSpecModifiedFilePath = dirProperty + File.separator + "powerSpecModified" + controllerCount + "-" + System.currentTimeMillis();
 		smartCompStateContainerFilePath = dirProperty + File.separator + "smartCompStateContainer" + controllerCount +"-" + System.currentTimeMillis();
-		topoPath = dirProperty + File.separator + "topo" + controllerCount + "-" + System.currentTimeMillis();
-		inputPath = dirProperty + File.separator + "input" + controllerCount + "-" + System.currentTimeMillis();
+		topoPath = dirProperty + File.separator + "topo" + controllerCount + "-" + System.currentTimeMillis() +".smartgridtopo";
+		inputPath = dirProperty + File.separator + "input" + controllerCount + "-" + System.currentTimeMillis() +".smartgridinput";
 		
 		//controller
 		controllerFilePath = dirProperty + File.separator + "controller" + controllerCount + "-" + System.currentTimeMillis();
@@ -102,25 +103,49 @@ public class TestRCPCall {
 	
 	@Test
 	@DisplayName("simple Iteration over the commands")
-	void runCommands() throws SimcontrolException, InterruptedException {
+    void runCommands() throws SimcontrolException, InterruptedException {
 		String command;
-	   
+		
+		long start = System.currentTimeMillis();
+		
 		initTestCase();
+
+		long end = System.currentTimeMillis();
+		long elapsedTime = end - start;
+		System.out.println("Time for initialization:" + elapsedTime);
+		
+		
 		
 		//1. Init Topo
+		start = System.currentTimeMillis();
+		
 		command = "INIT_TOPO";
 		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + ictElementsFilePath + " " + topoPath + " " + inputPath;
 		runCommand(command);
 		
+		end = System.currentTimeMillis();
+		elapsedTime = end - start;
+		System.out.println("Time for init Topo:" + elapsedTime);
+		
+		
 		//2. Get Modified PowerSpecs
-		command = "GET_MODIFIED_POWERSPECS";
-		command += " " + dtoMapFilePath + " " + topoPath + " " + inputPath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
-		runCommand(command);
+		for (int i=0; i<interationCount; i++) {
+			start = System.currentTimeMillis();
+			
+			command = "GET_MODIFIED_POWERSPECS";
+			command += " " + dtoMapFilePath + " " + topoPath + " " + inputPath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
+			runCommand(command);
+			
+			end = System.currentTimeMillis();
+			elapsedTime = end - start;
+			System.out.println("Time for iteration 1:" + elapsedTime);
+		}
+		
 		
 		collectObjects();
 	}
 	
-	void runCommand(String commandArguments) throws SimcontrolException, InterruptedException {
+    void runCommand(String commandArguments) throws SimcontrolException, InterruptedException {
 		SmartgridRCPApplication testApp = new SmartgridRCPApplication();
 		testApp.startTest(commandArguments);
 	}

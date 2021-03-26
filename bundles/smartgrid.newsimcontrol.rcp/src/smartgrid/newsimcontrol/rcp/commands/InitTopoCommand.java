@@ -56,6 +56,7 @@ public class InitTopoCommand extends ControllerCommand {
 		
 		EObjectsHelper.saveToFileSystem(controller.getTopo(), args[3]);
 		EObjectsHelper.saveToFileSystem(controller.getInitalState(), args[4]);
+		EObjectsHelper.saveToFileSystem(controller.getInitalState(), args[4] + "original");
 		
 		
 	}

@@ -36,12 +36,7 @@ public class LocalController implements ISimulationController{
     private static final Logger LOG = Logger.getLogger(LocalController.class);
     private ReactiveSimulationController reactiveSimControl;
 
-    @Override
-    public SmartComponentStateContainer getDysfunctSmartComponents()
-            throws SimcontrolException, InterruptedException {
-        return reactiveSimControl.getDysfunctionalcomponents();
-    }
-
+    //1
     @Override
     public PowerSpecContainer getModifiedPowerSpec(PowerSpecContainer powerSpecs, PowerAssigned sMPowerAssigned)
             throws SimcontrolException, InterruptedException {
@@ -49,6 +44,15 @@ public class LocalController implements ISimulationController{
     	reactiveSimControl.run(sMPowerAssigned);
         return reactiveSimControl.modifyPowerSpecContainer(powerSpecs);
     }
+    
+    //2
+    @Override
+    public SmartComponentStateContainer getDysfunctSmartComponents()
+            throws SimcontrolException, InterruptedException {
+        return reactiveSimControl.getDysfunctionalcomponents();
+    }
+
+    
 
     @Override
     public Collection<ICTElement> initTopo(SmartGridTopoContainer topologyContainer)

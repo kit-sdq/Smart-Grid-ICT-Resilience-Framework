@@ -60,6 +60,8 @@ public class GetModifiedPowerspecsCommand extends ControllerCommand {
 		try {
             powerSpecsModified = controller.getModifiedPowerSpec(powerSpecs, sMPowerAssigned);
             writeObjectToFile(powerSpecsModified, args[5]);
+            EObjectsHelper.saveToFileSystem(topo, args[1]);
+            EObjectsHelper.saveToFileSystem(state, args[2]);
     		LOG.info("Saving the dysfunctional smartcomponents");
     		SmartComponentStateContainer scsc;
 		    scsc = controller.getDysfunctSmartComponents();
