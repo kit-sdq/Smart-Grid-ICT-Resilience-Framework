@@ -258,7 +258,7 @@ public class GraphAnalyzer implements IImpactAnalysis {
         }
 
         // Building physical Cluster
-        LOG.debug(Matrix.toString(this.adjacentMatrix));
+        //LOG.debug(Matrix.toString(this.adjacentMatrix));
         LOG.debug("Validate clusteralgorithm");
 
         this.physicalClusters = Tarjan.getClusters(this.adjacentMatrix, this.internalToExternalID);

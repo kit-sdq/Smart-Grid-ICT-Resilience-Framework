@@ -66,12 +66,14 @@ public class RCPCall {
 	}
 
 	public static void init_objects() {
-		//TODO: The correct objects must be given here
-		powerSpec = InitHelpers.createPowerSpecContainer();
-		topoContainer = new SmartGridTopoContainer(InitHelpers.createTopoMap(), null);
-		powerAssigned = new PowerAssigned(InitHelpers.assignPower());
-		dtoMap = InitHelpers.createDTOMAP(path + File.separator + "output-" + System.currentTimeMillis());
-		
+		//inputs
+		//use an instance instead of the class to track the ids and the districts created
+		InitHelpers initHelper = new InitHelpers();
+		powerSpec = initHelper.createPowerSpecContainer();
+		topoContainer = new SmartGridTopoContainer(initHelper.createTopoMap(), null);
+		powerAssigned = new PowerAssigned(initHelper.assignPower());
+		dtoMap = initHelper.createDTOMAP(path + File.separator + "output-" + System.currentTimeMillis());
+				
 	}
 	
 	public static void init_values(){
