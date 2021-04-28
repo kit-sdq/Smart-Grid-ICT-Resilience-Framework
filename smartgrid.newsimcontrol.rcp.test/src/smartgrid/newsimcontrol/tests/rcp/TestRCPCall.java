@@ -1,6 +1,7 @@
 package smartgrid.newsimcontrol.tests.rcp;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -28,7 +29,7 @@ import smartgrid.newsimcontrol.tests.helpers.TestHelper;
 
 public class TestRCPCall {
 	
-	static String dirProperty = "C:\\Users\\mazen\\TestFolder";// + "\\" + System.currentTimeMillis();//System.getProperty("java.io.tmpdir");
+	static String dirProperty = System.getProperty("java.io.tmpdir") + "/" + "helm";
 	
 	//inputs
 	static PowerSpecContainer powerSpec;
@@ -63,7 +64,16 @@ public class TestRCPCall {
 	
 	//helper
 	private static String OS = System.getProperty("os.name").toLowerCase();
-	private static String rcpPath = "/home/majuwa/tmp/workspace-helmholtz-new/eclipse/eclipse";
+	private static String rcpPath = "PATH_TO_EXECUTABLE";
+	
+	public static void main(String args[]) {
+		try {
+			new TestRCPCall().runCommands();
+		} catch (SimcontrolException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	@Before
 	static void initTestCase(){
@@ -121,7 +131,12 @@ public class TestRCPCall {
 		
 		command = "INIT_TOPO";
 		command += " " + dtoMapFilePath + " " + topoContainerFilepath + " " + ictElementsFilePath + " " + topoPath + " " + inputPath;
-		runCommand(command);
+		try {
+			runCommand(command);
+		} catch (SimcontrolException | InterruptedException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		end = System.currentTimeMillis();
 		elapsedTime = end - start;
@@ -134,7 +149,18 @@ public class TestRCPCall {
 			
 			command = "GET_MODIFIED_POWERSPECS";
 			command += " " + dtoMapFilePath + " " + topoPath + " " + inputPath + " " + powerSpecFilepath + " " + powerASsignedFilepath + " " + powerSpecModifiedFilePath + " " + smartCompStateContainerFilePath;
-			runCommand(command);
+			try {
+				runCommand(command);
+			} catch (SimcontrolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			end = System.currentTimeMillis();
 			elapsedTime = end - start;
@@ -145,9 +171,25 @@ public class TestRCPCall {
 		collectObjects();
 	}
 	
-    void runCommand(String commandArguments) throws SimcontrolException, InterruptedException {
-		SmartgridRCPApplication testApp = new SmartgridRCPApplication();
-		testApp.startTest(commandArguments);
+    void runCommand(String commandArguments) throws SimcontrolException, InterruptedException, IOException {
+		String command = "";
+		if (OS.contains("mac")) {
+			command= rcpPath + " " + commandArguments;
+		} else if (OS.contains("nix") || OS.contains("nux") || OS.contains("aix")) {
+			command = rcpPath + " " + commandArguments;
+		} else if (OS.contains("win")) {
+			command = "cmd /c " + rcpPath + " " + commandArguments;
+		}
+		
+		var process = Runtime.getRuntime().exec(command);
+		while(process.isAlive()) {
+		      try {
+		            Thread.sleep(1000); //the runtime call is executed in parralel it might take some time to 
+		        } catch (InterruptedException e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+		        }
+		}	
 	}
 	
 	@AfterClass

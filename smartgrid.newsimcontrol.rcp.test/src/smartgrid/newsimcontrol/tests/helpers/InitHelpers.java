@@ -15,10 +15,10 @@ import couplingToICT.initializer.PowerSpecsModificationTypes;
 
 public class InitHelpers {
 	
-	public static int NO_OF_POWER_DISTRICTS_POWER_INFEED = 10;
-	public static int NO_OF_POWER_DISTRICTS_POWER_DEMAND = 10;
-	public static int NO_OF_POWER_SPECS_POWER_DEMAND = 1000;
-	public static int NO_OF_POWER_SPECS_POWER_INFEED = 1000;
+	public static int NO_OF_POWER_DISTRICTS_POWER_INFEED = 1;
+	public static int NO_OF_POWER_DISTRICTS_POWER_DEMAND = 1;
+	public static int NO_OF_POWER_SPECS_POWER_DEMAND = 100;
+	public static int NO_OF_POWER_SPECS_POWER_INFEED = 100;
 	private static PowerSpecContainer powerSpecContainer;
 	
 	public InitHelpers() {
